@@ -1,0 +1,19 @@
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  border-width: 4px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: transparent transparent transparent #aaaaaa;
+  pointer-events: none;
+}
+
+.spinner:global {
+  animation: spin 1s ease infinite;
+}

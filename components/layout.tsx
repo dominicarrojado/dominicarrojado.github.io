@@ -1,72 +1,90 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link';
+import { MAIN_TITLE, MAIN_URL } from '../lib/constants';
 
-const name = 'Dominic Arrojado';
-export const siteTitle = 'Next.js Sample Website';
+function Layout({
+  path = '',
+  title,
+  description,
+  imageUrl,
+  imageWidth,
+  imageHeight,
+  children,
+}: {
+  path: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  imageWidth: number;
+  imageHeight: number;
+  children: ReactNode;
+}) {
+  const isIndex = path === '/';
+  const metaUrl = isIndex ? MAIN_URL : `${MAIN_URL}${path}`;
+  const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
 
-function Layout({ children, home }: { children: ReactNode; home?: boolean }) {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.location.hostname !== 'localhost') {
+                (function (w, d, s, l, i) {
+                  w[l] = w[l] || [];
+                  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                  var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                  j.async = true;
+                  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                  f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-TSMLTPT');
+              }
+            `,
+          }}
+        />
+
+        <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
         <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1"
         />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={metaUrl} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={metaUrl} />
+        <meta property="og:site_name" content={metaTitle} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:secure_url" content={imageUrl} />
+        <meta property="og:image:width" content={`${imageWidth}`} />
+        <meta property="og:image:height" content={`${imageHeight}`} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:image" content={imageUrl} />
+        <link rel="manifest" href="/manifest.json" />
+        <title>{metaTitle}</title>
       </Head>
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
-    </div>
+      <noscript
+        dangerouslySetInnerHTML={{
+          __html: `
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-TSMLTPT"
+              height="0"
+              width="0"
+              style="display: none; visibility: hidden"
+            ></iframe>
+          `,
+        }}
+      />
+      {children}
+    </>
   );
 }
 

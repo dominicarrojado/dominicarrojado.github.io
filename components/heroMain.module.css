@@ -1,0 +1,158 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 100px 0;
+  background-color: #2c2c34;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/bg/pattern.png');
+  background-repeat: repeat;
+  background-position: center 0;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.5s linear, transform 0.4s cubic-bezier(0, 0, 0, 1);
+}
+
+.heroBg:global {
+  animation: slide 200s linear infinite;
+}
+
+.heroBgShow {
+  opacity: 1;
+}
+
+.heroWrapper {
+  width: 100%;
+  margin-top: -80px;
+  text-align: center;
+  z-index: 2;
+}
+
+.heroLogoContainer {
+  position: relative;
+  display: inline-flex;
+}
+
+.heroLogoContainer::before,
+.heroLogoContainer::after {
+  position: absolute;
+  top: -20px;
+  color: #ffffff;
+  font-size: 300px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeIn 0.2s linear 0 ease-in;
+  transition: opacity 1.25s linear, transform 0.75s ease-in-out;
+}
+
+.heroLogoContainer::before {
+  content: '<';
+  left: -130px;
+  transform: translateX(15px);
+}
+
+.heroLogoContainer::after {
+  content: '>';
+  right: -130px;
+  transform: translateX(-15px);
+}
+
+.heroLogoTagsShow::before,
+.heroLogoTagsShow::after {
+  opacity: 0.4;
+  transform: translateX(0);
+}
+
+.heroLogo {
+  width: 340px;
+  height: 340px;
+  color: #ffffff;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 1.25s linear, transform 0.75s ease-in-out;
+  animation: fadeIn 0.2s linear 0 ease-in;
+}
+
+.heroLogoShow {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.heroDescContainer {
+  overflow: hidden;
+}
+
+.heroDesc {
+  margin: 20px 0 0;
+  font-size: 23px;
+  font-weight: 300;
+  color: #ffffff;
+  transform: translateY(100%);
+  transition: transform 0.4s linear;
+}
+
+.heroDescShow {
+  transform: translateY(0);
+}
+
+.scrollDownBtnContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: opacity 0.5s linear, transform 0.5s ease-in-out;
+  z-index: 2;
+}
+
+.scrollDownBtnShow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scrollDownBtn {
+  composes: btnText from './buttonText.module.css', btnTextWhite from './buttonText.module.css';
+  margin-bottom: 5px;
+  color: #666666;
+  font-size: 14px;
+  transition: margin-bottom 0.2s linear;
+}
+
+.scrollDownBtn:hover {
+  padding-top: 15px;
+  margin-bottom: 0;
+}
+
+.arrowDownIcon {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 7px auto 10px;
+  color: #666666;
+  transition: color 0.1s ease-in-out;
+}
+
+.arrowDownIcon:global {
+  animation: bounce 2s ease infinite;
+}
+
+.arrowDownIcon:hover {
+  color: #ffffff;
+  animation: none;
+}
