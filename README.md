@@ -1,3 +1,9 @@
+# Dominic Arrojado
+
+> :warning: **NOTE**: Still work in progress!
+
+My personal website which highlights the projects I've done.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
