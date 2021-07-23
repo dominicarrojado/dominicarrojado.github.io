@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { MAIN_TITLE, MAIN_URL } from '../lib/constants';
 
 function Layout({
-  path = '',
+  path,
   title,
   description,
   imageUrl,
@@ -26,6 +26,7 @@ function Layout({
   return (
     <>
       <Head>
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -44,6 +45,7 @@ function Layout({
             `,
           }}
         />
+        {/* End Google Tag Manager */}
 
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
@@ -71,6 +73,8 @@ function Layout({
         <link rel="manifest" href="/manifest.json" />
         <title>{metaTitle}</title>
       </Head>
+
+      {/* Google Tag Manager */}
       <noscript
         dangerouslySetInnerHTML={{
           __html: `
@@ -83,6 +87,8 @@ function Layout({
           `,
         }}
       />
+      {/* End Google Tag Manager */}
+
       {children}
     </>
   );

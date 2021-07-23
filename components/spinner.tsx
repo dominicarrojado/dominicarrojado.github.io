@@ -1,7 +1,21 @@
-import styles from './spinner.module.css';
+import cn from 'classnames';
+import { HTMLProps } from 'react';
 
-function Spinner() {
-  return <div className={styles.spinner}></div>;
+function Spinner({
+  color,
+  className,
+}: HTMLProps<HTMLDivElement> & { color: string; className: string }) {
+  return (
+    <div
+      className={cn(
+        'border-transparent rounded-full',
+        'animate-spin',
+        className
+      )}
+      style={{ borderRightColor: color }}
+      data-testid="spinner"
+    />
+  );
 }
 
 export default Spinner;

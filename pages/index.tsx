@@ -1,11 +1,8 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
 import Layout from '../components/layout';
-import Date from '../components/date';
-import utilStyles from '../styles/utils.module.css';
-import { MAIN_TITLE } from '../lib/constants';
 import HeroMain from '../components/heroMain';
+import AboutMe from '../components/aboutMe';
+import { MAIN_TITLE } from '../lib/constants';
 
 function Home() {
   return (
@@ -18,6 +15,7 @@ function Home() {
       imageHeight={2}
     >
       <HeroMain />
+      <AboutMe />
     </Layout>
   );
 }

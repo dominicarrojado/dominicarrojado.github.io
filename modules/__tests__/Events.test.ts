@@ -1,9 +1,10 @@
+import { getFakeWord } from '../../lib/test-helpers';
 import Events from '../Events';
 
 describe('Events module', () => {
   it('can store events', () => {
     const events = new Events();
-    const event = 'test';
+    const event = getFakeWord();
     const callback = jest.fn();
 
     events.on(event, callback);
@@ -13,7 +14,7 @@ describe('Events module', () => {
 
   it('can remove events', () => {
     const events = new Events();
-    const event = 'test';
+    const event = getFakeWord();
     const callback = jest.fn();
     const callback2 = jest.fn();
 
@@ -28,8 +29,8 @@ describe('Events module', () => {
 
   it('can emit events', () => {
     const events = new Events();
-    const event = 'test';
-    const event2 = 'test2';
+    const event = getFakeWord();
+    const event2 = getFakeWord();
     const callback = jest.fn();
     const callback2 = jest.fn();
 
