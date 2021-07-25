@@ -18,15 +18,19 @@ function Tooltip({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [shouldShow, setShouldShow] = useState(false);
+  const [shouldDisplay, setShouldDisplay] = useState(false);
   const [style, setStyle] = useState<CSSProperties>({});
+  const isTop = position === 'top';
+  const isBottom = position === 'bottom';
+  const isRight = position === 'right';
+  const isLeft = position === 'left';
   const repositionTooltip = useCallback(() => {
     const containerEl = getRefValue(containerRef);
     const wrapperEl = getRefValue(wrapperRef);
     const newStyle: CSSProperties = {};
 
     // center align tooltip based on position
-    if (position === 'right' || position === 'left') {
+    if (isRight || isLeft) {
       newStyle.top =
         (wrapperEl.offsetHeight / 2 - containerEl.offsetHeight / 2) * -1;
     } else {
@@ -35,11 +39,9 @@ function Tooltip({
     }
 
     setStyle(newStyle);
-  }, [position]);
-  const showTooltip = () => {
-    setShouldShow(true);
-  };
-  const hideTooltip = () => setShouldShow(false);
+  }, [isRight, isLeft]);
+  const showTooltip = () => setShouldDisplay(true);
+  const hideTooltip = () => setShouldDisplay(false);
 
   useEffect(() => {
     repositionTooltip();
@@ -59,15 +61,15 @@ function Tooltip({
           'transform transition duration-300',
           'lg:text-base',
           {
-            ['opacity-0']: !shouldShow,
-            ['bottom-full']: position === 'top',
-            ['top-full']: position === 'bottom',
-            ['left-full']: position === 'right',
-            ['right-full']: position === 'left',
-            ['translate-y-2']: position === 'top' && !shouldShow,
-            ['-translate-y-2']: position === 'bottom' && !shouldShow,
-            ['-translate-x-2']: position === 'right' && !shouldShow,
-            ['translate-x-2']: position === 'left' && !shouldShow,
+            ['opacity-0']: !shouldDisplay,
+            ['bottom-full']: isTop,
+            ['top-full']: isBottom,
+            ['left-full']: isRight,
+            ['right-full']: isLeft,
+            ['translate-y-2']: isTop && !shouldDisplay,
+            ['-translate-y-2']: isBottom && !shouldDisplay,
+            ['-translate-x-2']: isRight && !shouldDisplay,
+            ['translate-x-2']: isLeft && !shouldDisplay,
           }
         )}
         style={style}

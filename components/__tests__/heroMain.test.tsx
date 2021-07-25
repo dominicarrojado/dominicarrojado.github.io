@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { config } from 'react-transition-group';
-import * as imports from '../../lib/imports';
 import Window from '../../modules/Window';
-import HeroMain, { ScrollDownButton } from '../heroMain';
+import * as imports from '../../lib/imports';
+import HeroMain from '../heroMain';
 
 config.disabled = true; // disable react-transitions-group transitions
 
@@ -126,7 +126,11 @@ describe('<ScrollDownButton />', () => {
   it('should handle undefined MoveTo', () => {
     jest.spyOn(imports, 'getMoveTo').mockResolvedValue(undefined);
 
-    const { container } = render(<ScrollDownButton shouldShow />);
+    const { container } = render(<HeroMain />);
+
+    act(() => {
+      Window.emit('load');
+    });
 
     expect(container).toBeInTheDocument();
   });

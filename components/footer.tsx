@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
+import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import Tooltip from './tooltip';
@@ -87,6 +88,8 @@ function Quotes() {
 }
 
 function Social() {
+  const [isMounted, setIsMounted] = useState(false);
+  const [windowLoaded, setWindowLoaded] = useState(Window.loaded);
   const [copiedItem, setCopiedItem] = useState('');
   const copyUrl = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -110,6 +113,19 @@ function Social() {
       }
     });
   };
+  const shouldDisplay = isMounted && windowLoaded;
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    const windowOnLoad = () => setWindowLoaded(true);
+
+    Window.on('load', windowOnLoad);
+
+    return () => {
+      Window.off('load', windowOnLoad);
+    };
+  }, []);
 
   return (
     <ul
@@ -118,11 +134,23 @@ function Social() {
         'lg:fixed lg:bottom-0 lg:right-0 lg:mt-0 lg:mb-3 lg:mr-7 lg:z-40'
       )}
     >
-      {SOCIAL_LINKS.map((social) => {
+      {SOCIAL_LINKS.map((social, idx) => {
         const { name } = social;
 
         return (
-          <li key={name} className="inline-flex">
+          <li
+            key={name}
+            className={cn(
+              'inline-flex',
+              'transform transition ease-in-out duration-500',
+              {
+                ['opacity-0 translate-y-full']: !shouldDisplay,
+              }
+            )}
+            style={{
+              transitionDelay: `${(idx + 1) * 150 + 1250}ms`,
+            }}
+          >
             <a
               href={social.url}
               rel="noopener noreferrer nofollow"

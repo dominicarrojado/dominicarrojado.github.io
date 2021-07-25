@@ -10,12 +10,14 @@ import Spinner from './spinner';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
 export default function HeroMain() {
+  const [isMounted, setIsMounted] = useState(false);
   const [windowLoaded, setWindowLoaded] = useState(Window.loaded);
+  const shouldDisplay = isMounted && windowLoaded;
 
   useEffect(() => {
-    const windowOnLoad = async () => {
-      setWindowLoaded(true);
-    };
+    setIsMounted(true);
+
+    const windowOnLoad = () => setWindowLoaded(true);
 
     Window.on('load', windowOnLoad);
 
@@ -29,28 +31,23 @@ export default function HeroMain() {
       className="relative flex flex-col items-center justify-center overflow-hidden min-h-full py-24"
       style={{ backgroundColor: '#2c2c34' }}
     >
-      <Loader shouldShow={!windowLoaded} />
-      <Background shouldShow={windowLoaded} />
+      <Loader shouldDisplay={!shouldDisplay} />
+      <Background shouldDisplay={shouldDisplay} />
       <div className="w-full -mt-16 text-center z-10">
-        <Logo shouldShow={windowLoaded} />
-        <Title shouldShow={windowLoaded} />
+        <Logo shouldDisplay={shouldDisplay} />
+        <Title shouldDisplay={shouldDisplay} />
       </div>
-      <ScrollDownButton shouldShow={windowLoaded} />
+      <ScrollDownButton shouldDisplay={shouldDisplay} />
     </section>
   );
 }
 
-function Loader({ shouldShow }: { shouldShow: boolean }) {
+function Loader({ shouldDisplay }: { shouldDisplay: boolean }) {
   const spinnerRef = useRef<HTMLDivElement>(null);
-  const [shouldRender, setShouldRender] = useState(false);
-
-  useEffect(() => {
-    setShouldRender(true);
-  }, []);
 
   return (
     <Transition
-      in={shouldRender && shouldShow}
+      in={shouldDisplay && shouldDisplay}
       nodeRef={spinnerRef}
       timeout={1000}
       mountOnEnter
@@ -76,14 +73,14 @@ function Loader({ shouldShow }: { shouldShow: boolean }) {
   );
 }
 
-function Background({ shouldShow }: { shouldShow: boolean }) {
+function Background({ shouldDisplay }: { shouldDisplay: boolean }) {
   return (
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
         'animate-slide transition-opacity duration-500',
         {
-          ['opacity-0']: !shouldShow,
+          ['opacity-0']: !shouldDisplay,
         }
       )}
       style={{ backgroundImage: "url('/images/bg/pattern.png')" }}
@@ -92,7 +89,7 @@ function Background({ shouldShow }: { shouldShow: boolean }) {
   );
 }
 
-function Logo({ shouldShow }: { shouldShow: boolean }) {
+function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
   const titleRef = useRef<HTMLDivElement>(null);
   const opacity = useScrollOpacityEffect(titleRef);
 
@@ -106,8 +103,8 @@ function Logo({ shouldShow }: { shouldShow: boolean }) {
           'md:top-0 md:-left-32 md:text-11xl',
           'xl:-top-5 xl:-left-44 xl:text-12xl',
           {
-            [!shouldShow ? 'opacity-0' : 'opacity-40']: true,
-            ['translate-x-3']: !shouldShow,
+            [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
+            ['translate-x-3']: !shouldDisplay,
           }
         )}
         data-testid="logo-part-1"
@@ -121,8 +118,8 @@ function Logo({ shouldShow }: { shouldShow: boolean }) {
           'md:w-80 md:h-80',
           'xl:w-96 xl:h-96',
           {
-            ['opacity-0']: !shouldShow,
-            ['-translate-y-4']: !shouldShow,
+            ['opacity-0']: !shouldDisplay,
+            ['-translate-y-4']: !shouldDisplay,
           }
         )}
         data-testid="logo"
@@ -135,8 +132,8 @@ function Logo({ shouldShow }: { shouldShow: boolean }) {
           'md:top-0 md:-right-32 md:text-11xl',
           'xl:-top-5 xl:-right-44 xl:text-12xl',
           {
-            [!shouldShow ? 'opacity-0' : 'opacity-40']: true,
-            ['-translate-x-3']: !shouldShow,
+            [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
+            ['-translate-x-3']: !shouldDisplay,
           }
         )}
         data-testid="logo-part-2"
@@ -147,7 +144,7 @@ function Logo({ shouldShow }: { shouldShow: boolean }) {
   );
 }
 
-function Title({ shouldShow }: { shouldShow: boolean }) {
+function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
   const titleRef = useRef<HTMLDivElement>(null);
   const opacity = useScrollOpacityEffect(titleRef);
 
@@ -161,8 +158,8 @@ function Title({ shouldShow }: { shouldShow: boolean }) {
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
           {
-            ['opacity-0']: !shouldShow,
-            ['translate-y-full']: !shouldShow,
+            ['opacity-0']: !shouldDisplay,
+            ['translate-y-full']: !shouldDisplay,
           }
         )}
         data-testid="title"
@@ -173,13 +170,13 @@ function Title({ shouldShow }: { shouldShow: boolean }) {
   );
 }
 
-export function ScrollDownButton({ shouldShow }: { shouldShow: boolean }) {
+function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
   const btnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     let unregisterTrigger: () => void | undefined;
 
-    if (shouldShow) {
+    if (shouldDisplay) {
       (async function registerMoveToTrigger() {
         const MoveTo = await getMoveTo();
 
@@ -200,7 +197,7 @@ export function ScrollDownButton({ shouldShow }: { shouldShow: boolean }) {
         unregisterTrigger();
       }
     };
-  }, [shouldShow]);
+  }, [shouldDisplay]);
 
   return (
     <div
@@ -208,8 +205,8 @@ export function ScrollDownButton({ shouldShow }: { shouldShow: boolean }) {
         'absolute bottom-0 left-0 w-full z-10 text-center',
         'transform transition duration-1000',
         {
-          ['opacity-0']: !shouldShow,
-          ['-translate-y-3']: !shouldShow,
+          ['opacity-0']: !shouldDisplay,
+          ['-translate-y-3']: !shouldDisplay,
         }
       )}
       data-testid="scroll-down-btn"

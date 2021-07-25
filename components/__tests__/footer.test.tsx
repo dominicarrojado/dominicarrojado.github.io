@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import Window from '../../modules/Window';
 import * as dom from '../../lib/dom';
 import { Social } from '../../lib/types';
 import { QUOTES, SOCIAL_LINKS } from '../../lib/constants';
@@ -94,8 +95,38 @@ describe('<Footer />', () => {
   });
 
   describe('<Social />', () => {
+    const resetWindowStates = () => {
+      Window.loaded = false;
+    };
+
+    beforeEach(() => {
+      resetWindowStates();
+    });
+
     afterEach(() => {
       jest.restoreAllMocks();
+    });
+
+    it('should be hidden when window is NOT loaded', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const tooltipEl = screen.queryByText(social.title);
+        const listItemEl = tooltipEl?.closest('li') as HTMLLIElement;
+
+        expect(listItemEl).toHaveClass('opacity-0');
+      });
+    });
+
+    it('should be hidden when window is loaded', () => {
+      act(() => {
+        Window.emit('load');
+      });
+
+      SOCIAL_LINKS.forEach((social) => {
+        const tooltipEl = screen.queryByText(social.title);
+        const listItemEl = tooltipEl?.closest('li') as HTMLLIElement;
+
+        expect(listItemEl).not.toHaveClass('opacity-0');
+      });
     });
 
     it('should handle normal links', () => {
