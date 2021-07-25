@@ -41,6 +41,7 @@ export default function HeroMain() {
 }
 
 function Loader({ shouldShow }: { shouldShow: boolean }) {
+  const spinnerRef = useRef<HTMLDivElement>(null);
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -50,12 +51,14 @@ function Loader({ shouldShow }: { shouldShow: boolean }) {
   return (
     <Transition
       in={shouldRender && shouldShow}
+      nodeRef={spinnerRef}
       timeout={1000}
       mountOnEnter
       unmountOnExit
     >
       {(state) => (
         <Spinner
+          ref={spinnerRef}
           className={cn(
             'absolute inset-0 m-auto w-8 h-8 border-2',
             'transition-opacity duration-1000',
@@ -90,7 +93,7 @@ function Background({ shouldShow }: { shouldShow: boolean }) {
 }
 
 function Logo({ shouldShow }: { shouldShow: boolean }) {
-  const titleRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -145,7 +148,7 @@ function Logo({ shouldShow }: { shouldShow: boolean }) {
 }
 
 function Title({ shouldShow }: { shouldShow: boolean }) {
-  const titleRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -171,7 +174,7 @@ function Title({ shouldShow }: { shouldShow: boolean }) {
 }
 
 export function ScrollDownButton({ shouldShow }: { shouldShow: boolean }) {
-  const btnRef = useRef<HTMLAnchorElement | null>(null);
+  const btnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     let unregisterTrigger: () => void | undefined;

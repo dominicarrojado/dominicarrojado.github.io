@@ -1,5 +1,3 @@
-import React from 'react';
-
 // TODO
 function AboutMe() {
   return (

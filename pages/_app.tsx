@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import Window from '../modules/Window';
 import '../styles/global.css';

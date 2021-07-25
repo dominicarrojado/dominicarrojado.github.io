@@ -1,7 +1,7 @@
 import { getMoveTo } from '../imports';
 
 describe('test', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.restoreAllMocks();
   });
 

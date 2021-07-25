@@ -48,7 +48,7 @@ describe('hooks utilities', () => {
   describe('useScrollOpacityEffect()', () => {
     const pageYOffsetOrig = window.pageYOffset;
 
-    beforeEach(() => {
+    afterEach(() => {
       jest.restoreAllMocks();
 
       setReadOnlyProperty(window, 'pageYOffset', pageYOffsetOrig);

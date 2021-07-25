@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Head from 'next/head';
+import Footer from './footer';
 import { MAIN_TITLE, MAIN_URL } from '../lib/constants';
 
 function Layout({
@@ -90,6 +91,8 @@ function Layout({
       {/* End Google Tag Manager */}
 
       {children}
+
+      <Footer />
     </>
   );
 }

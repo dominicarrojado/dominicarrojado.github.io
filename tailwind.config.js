@@ -22,10 +22,10 @@ module.exports = {
       keyframes: {
         slide: {
           '0%': {
-            'background-position': 'center 0',
+            'background-position': 'center 3240px',
           },
           '100%': {
-            'background-position': 'center 3240px',
+            'background-position': 'center 0',
           },
         },
       },

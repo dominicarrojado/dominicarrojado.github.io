@@ -1,12 +1,13 @@
 import cn from 'classnames';
-import { HTMLProps } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 
-function Spinner({
-  color,
-  className,
-}: HTMLProps<HTMLDivElement> & { color: string; className: string }) {
-  return (
+const Spinner = forwardRef(
+  (
+    { className, color }: { className?: string; color: string },
+    ref: ForwardedRef<HTMLDivElement>
+  ) => (
     <div
+      ref={ref}
       className={cn(
         'border-transparent rounded-full',
         'animate-spin',
@@ -15,7 +16,9 @@ function Spinner({
       style={{ borderRightColor: color }}
       data-testid="spinner"
     />
-  );
-}
+  )
+);
+
+Spinner.displayName = 'Spinner';
 
 export default Spinner;

@@ -119,7 +119,7 @@ describe('<HeroMain />', () => {
 });
 
 describe('<ScrollDownButton />', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.restoreAllMocks();
   });
 
