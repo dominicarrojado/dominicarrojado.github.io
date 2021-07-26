@@ -6,7 +6,11 @@ module.exports = {
       sans: ['Roboto', 'Arial', 'sans-serif'],
     },
     extend: {
+      backgroundColor: {
+        'gray-1000': '#2c2c34',
+      },
       fontSize: {
+        '3xs': '.55rem',
         '2xs': '.65rem',
         '10xl': '14rem',
         '11xl': '18rem',

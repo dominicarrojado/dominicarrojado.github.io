@@ -70,18 +70,23 @@
       url('/fonts/Roboto-BoldItalic.woff') format('woff');
   }
 
-  * {
-    @apply font-light;
-    @apply leading-snug;
+  *,
+  ::after,
+  ::before {
     @apply box-border;
     @apply antialiased;
-
-    letter-spacing: 1px;
   }
 
   html,
   body,
   #__next {
     @apply h-full;
+  }
+
+  body {
+    @apply font-light;
+    @apply leading-snug;
+
+    letter-spacing: 1px;
   }
 }

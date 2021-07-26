@@ -131,7 +131,7 @@ function Social() {
     <ul
       className={cn(
         'mt-10 text-center',
-        'lg:fixed lg:bottom-0 lg:right-0 lg:mt-0 lg:mb-3 lg:mr-7 lg:z-40'
+        'lg:fixed lg:bottom-3 lg:right-7 lg:mt-0 lg:z-40'
       )}
     >
       {SOCIAL_LINKS.map((social, idx) => {
@@ -155,7 +155,7 @@ function Social() {
               href={social.url}
               rel="noopener noreferrer nofollow"
               target="_blank"
-              className="group relative inline-flex p-4 cursor-pointer"
+              className="group relative inline-flex p-4 cursor-pointer outline-none"
               onClick={
                 social.copyOnClick ? (e) => copyUrl(e, social) : undefined
               }

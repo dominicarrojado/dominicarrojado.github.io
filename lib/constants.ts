@@ -53,3 +53,22 @@ export const QUOTES: Array<Quote> = [
   },
 ];
 export const QUOTES_LENGTH = QUOTES.length;
+
+export const MENU_ITEMS = [
+  {
+    path: '/',
+    title: 'Home',
+  },
+  {
+    path: '/about-me',
+    title: 'About Me',
+  },
+  {
+    path: '/posts',
+    title: 'Blog',
+  },
+  {
+    path: '/testimonials',
+    title: 'Testimonials',
+  },
+];

@@ -27,10 +27,7 @@ export default function HeroMain() {
   }, []);
 
   return (
-    <section
-      className="relative flex flex-col items-center justify-center overflow-hidden min-h-full py-24"
-      style={{ backgroundColor: '#2c2c34' }}
-    >
+    <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-24">
       <Loader shouldDisplay={!shouldDisplay} />
       <Background shouldDisplay={shouldDisplay} />
       <div className="w-full -mt-16 text-center z-10">
@@ -43,11 +40,16 @@ export default function HeroMain() {
 }
 
 function Loader({ shouldDisplay }: { shouldDisplay: boolean }) {
+  const [isMounted, setIsMounted] = useState(false);
   const spinnerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <Transition
-      in={shouldDisplay && shouldDisplay}
+      in={isMounted && shouldDisplay}
       nodeRef={spinnerRef}
       timeout={1000}
       mountOnEnter
@@ -225,13 +227,13 @@ function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
           )}
         >
           Scroll Down
-          <div className="absolute bottom-0 left-0 w-full border-b border-gray-600 z-0"></div>
+          <div className="absolute bottom-0 left-0 w-full border-b border-gray-600 z-0" />
           <div
             className={cn(
               'absolute bottom-0 left-0 w-0 border-b border-white z-10',
               'transition-all group-hover:w-full'
             )}
-          ></div>
+          />
         </div>
         <SvgArrowDown
           className={cn(

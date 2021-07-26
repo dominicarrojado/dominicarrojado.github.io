@@ -1,29 +1,9 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import Header from './header';
 import Footer from './footer';
-import { MAIN_TITLE, MAIN_URL } from '../lib/constants';
 
-function Layout({
-  path,
-  title,
-  description,
-  imageUrl,
-  imageWidth,
-  imageHeight,
-  children,
-}: {
-  path: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  imageWidth: number;
-  imageHeight: number;
-  children: ReactNode;
-}) {
-  const isIndex = path === '/';
-  const metaUrl = isIndex ? MAIN_URL : `${MAIN_URL}${path}`;
-  const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
-
+function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Head>
@@ -55,24 +35,7 @@ function Layout({
           content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1"
         />
         <meta name="theme-color" content="#000000" />
-        <meta name="description" content={description} />
-        <link rel="canonical" href={metaUrl} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={metaUrl} />
-        <meta property="og:site_name" content={metaTitle} />
-        <meta property="og:image" content={imageUrl} />
-        <meta property="og:image:secure_url" content={imageUrl} />
-        <meta property="og:image:width" content={`${imageWidth}`} />
-        <meta property="og:image:height" content={`${imageHeight}`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:image" content={imageUrl} />
         <link rel="manifest" href="/manifest.json" />
-        <title>{metaTitle}</title>
       </Head>
 
       {/* Google Tag Manager */}
@@ -89,6 +52,8 @@ function Layout({
         }}
       />
       {/* End Google Tag Manager */}
+
+      <Header />
 
       {children}
 

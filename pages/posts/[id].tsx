@@ -1,9 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { getAllPostIds, getPostData } from '../../lib/posts';
-import Layout from '../../components/layout';
 import Date from '../../components/date';
-import utilStyles from '../../styles/utils.module.css';
 
 function Post({
   postData,
@@ -11,18 +9,21 @@ function Post({
   postData: { title: string; date: string; contentHtml: string };
 }) {
   return (
-    <Layout>
+    <div className="p-12">
       <Head>
         <title>{postData.title}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
+        <h1 className="text-3xl font-bold">{postData.title}</h1>
+        <div className="mt-2 text-gray-700">
           <Date dateString={postData.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
+        <div
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          className="mt-6 leading-7"
+        ></div>
       </article>
-    </Layout>
+    </div>
   );
 }
 

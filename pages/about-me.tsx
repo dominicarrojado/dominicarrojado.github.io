@@ -1,9 +1,9 @@
-function Posts() {
+function AboutMe() {
   return (
     <div className="min-h-full flex items-center justify-center">
-      <h1>Posts</h1>
+      <h1>About Me</h1>
     </div>
   );
 }
 
-export default Posts;
+export default AboutMe;
