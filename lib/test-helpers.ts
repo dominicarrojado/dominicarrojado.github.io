@@ -1,3 +1,4 @@
+import { fireEvent } from '@testing-library/react';
 import faker from 'faker';
 
 export function setReadOnlyProperty<
@@ -9,6 +10,19 @@ export function setReadOnlyProperty<
     value,
     configurable: true,
   });
+}
+
+export function fireEventTransitionEnd(
+  element: HTMLElement,
+  propertyName?: string
+) {
+  const transitionEndEvent = new Event('transitionend', {
+    bubbles: true,
+    cancelable: false,
+  });
+  (transitionEndEvent as any).propertyName = propertyName;
+
+  fireEvent(element, transitionEndEvent);
 }
 
 export function getFakeString() {
@@ -41,4 +55,12 @@ export function getFakeDirectoryPath() {
 
 export function getFakeImageUrl() {
   return faker.image.imageUrl();
+}
+
+export function getFakeDomainWord() {
+  return faker.internet.domainWord();
+}
+
+export function getFakeUrl() {
+  return faker.internet.url();
 }

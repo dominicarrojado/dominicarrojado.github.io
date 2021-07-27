@@ -1,10 +1,16 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import cn from 'classnames';
-import Window from '../modules/Window';
-import { getRefValue } from '../lib/hooks';
+import { getRefValue, useWindowLoaded } from '../lib/hooks';
 import { copyTextToClipboard } from '../lib/dom';
+import { trackEvent } from '../lib/google-analytics';
 import Tooltip from './tooltip';
-import { Social as SocialItem } from '../lib/types';
+import { GoogleAnalyticsEvents, Social } from '../lib/types';
 import {
   QUOTES,
   QUOTES_INTERVAL,
@@ -16,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="py-20 px-6 bg-gray-100">
       <Quotes />
-      <Social />
+      <SocialItems />
       <Credits />
     </footer>
   );
@@ -87,45 +93,52 @@ function Quotes() {
   );
 }
 
-function Social() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [windowLoaded, setWindowLoaded] = useState(Window.loaded);
+function SocialItems() {
+  const isBtnClickedRef: MutableRefObject<Record<string, boolean>> = useRef({});
+  const shouldDisplay = useWindowLoaded();
   const [copiedItem, setCopiedItem] = useState('');
-  const copyUrl = (
+  const socialOnMouseLeave = (social: Social) => {
+    const socialName = social.name;
+
+    if (!getRefValue(isBtnClickedRef)[socialName]) {
+      trackEvent({
+        socialName,
+        event: GoogleAnalyticsEvents.SOCIAL_HOVER,
+        hoverText: social.title,
+        hoverUrl: social.url,
+      });
+    }
+  };
+  const socialOnClick = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    social: SocialItem
+    social: Social
   ) => {
+    const socialName = social.name;
+
+    isBtnClickedRef.current[socialName] = true;
+
+    trackEvent({
+      socialName,
+      event: GoogleAnalyticsEvents.SOCIAL_CLICK,
+      linkText: social.title,
+      linkUrl: social.url,
+    });
+
+    if (!social.shouldCopyOnClick) {
+      return;
+    }
+
     const textToCopy = social.url.replace('mailto:', '');
     const copied = copyTextToClipboard(textToCopy);
 
-    if (copied) {
-      e.preventDefault();
-      setCopiedItem(social.name);
+    if (!copied) {
+      return;
     }
+
+    e.preventDefault();
+    setCopiedItem(social.name);
   };
-  const onMouseEnter = (name: string) => {
-    // display title again if it was "Copied!" on mouse enter
-    setCopiedItem((copiedItem) => {
-      if (name === copiedItem) {
-        return '';
-      } else {
-        return copiedItem;
-      }
-    });
-  };
-  const shouldDisplay = isMounted && windowLoaded;
-
-  useEffect(() => {
-    setIsMounted(true);
-
-    const windowOnLoad = () => setWindowLoaded(true);
-
-    Window.on('load', windowOnLoad);
-
-    return () => {
-      Window.off('load', windowOnLoad);
-    };
-  }, []);
+  const tooltipOnHidden = () => setCopiedItem('');
 
   return (
     <ul
@@ -142,9 +155,9 @@ function Social() {
             key={name}
             className={cn(
               'inline-flex',
-              'transform transition ease-in-out duration-500',
+              'lg:transform lg:transition lg:ease-in-out lg:duration-500',
               {
-                ['opacity-0 translate-y-full']: !shouldDisplay,
+                ['lg:opacity-0 lg:translate-y-full']: !shouldDisplay,
               }
             )}
             style={{
@@ -156,20 +169,18 @@ function Social() {
               rel="noopener noreferrer nofollow"
               target="_blank"
               className="group relative inline-flex p-4 cursor-pointer outline-none"
-              onClick={
-                social.copyOnClick ? (e) => copyUrl(e, social) : undefined
-              }
-              onMouseEnter={() => onMouseEnter(social.name)}
+              onMouseLeave={() => socialOnMouseLeave(social)}
+              onClick={(e) => socialOnClick(e, social)}
             >
               {social.icon({
                 className: cn(
-                  'w-8 h-8 text-gray-300',
+                  'w-8 h-8 text-gray-400',
                   'transition-colors',
-                  'group-hover:text-gray-400',
+                  'group-hover:text-gray-500',
                   'xl:w-9 xl:h-9'
                 ),
               })}
-              <Tooltip>
+              <Tooltip onHidden={tooltipOnHidden}>
                 {name !== copiedItem ? social.title : 'Copied!'}
               </Tooltip>
             </a>

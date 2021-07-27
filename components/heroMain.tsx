@@ -1,30 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
-import { getRefValue, useScrollOpacityEffect } from '../lib/hooks';
+import {
+  getRefValue,
+  useScrollOpacityEffect,
+  useWindowLoaded,
+} from '../lib/hooks';
 import { getMoveTo } from '../lib/imports';
-import Window from '../modules/Window';
+import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgArrowDown from './svgArrowDown';
 import Spinner from './spinner';
+import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
 export default function HeroMain() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [windowLoaded, setWindowLoaded] = useState(Window.loaded);
-  const shouldDisplay = isMounted && windowLoaded;
-
-  useEffect(() => {
-    setIsMounted(true);
-
-    const windowOnLoad = () => setWindowLoaded(true);
-
-    Window.on('load', windowOnLoad);
-
-    return () => {
-      Window.off('load', windowOnLoad);
-    };
-  }, []);
+  const shouldDisplay = useWindowLoaded();
 
   return (
     <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-24">
@@ -173,7 +164,26 @@ function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
 }
 
 function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
+  const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
+  const isBtnClickedRef = useRef(false);
+  const btnOnMouseLeave = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    if (!getRefValue(isBtnClickedRef)) {
+      trackEvent({
+        event: GoogleAnalyticsEvents.SCROLL_HOVER,
+        hoverText: text,
+      });
+    }
+  };
+  const btnOnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    isBtnClickedRef.current = true;
+    trackEvent({
+      event: GoogleAnalyticsEvents.SCROLL_CLICK,
+      linkText: text,
+    });
+  };
 
   useEffect(() => {
     let unregisterTrigger: () => void | undefined;
@@ -217,6 +227,8 @@ function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
         ref={btnRef}
         href="#about-me"
         className="group relative inline-flex flex-col items-center pb-1 outline-none"
+        onMouseLeave={btnOnMouseLeave}
+        onClick={btnOnClick}
       >
         <div
           className={cn(
@@ -226,7 +238,7 @@ function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
             'xl:mb-2 xl:text-lg'
           )}
         >
-          Scroll Down
+          {text}
           <div className="absolute bottom-0 left-0 w-full border-b border-gray-600 z-0" />
           <div
             className={cn(

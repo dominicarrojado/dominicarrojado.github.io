@@ -1,7 +1,11 @@
 import { cloneElement } from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import * as Link from 'next/link';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
+import * as Link from 'next/link';
+import Window from '../../modules/Window';
+import { fireEventTransitionEnd, getFakeWord } from '../../lib/test-helpers';
+import * as ga from '../../lib/google-analytics';
+import * as dom from '../../lib/dom';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
 import Header from '../header';
 
@@ -112,11 +116,140 @@ describe('<Header />', () => {
     });
   });
 
+  describe('<Button />', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should NOT be clickable by default', () => {
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      expect(btnEl).toHaveClass('pointer-events-none');
+    });
+
+    it('should NOT be clickable on transition end of other prop name', () => {
+      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEventTransitionEnd(btnTextEl, getFakeWord());
+
+      expect(btnEl).toHaveClass('pointer-events-none');
+    });
+
+    it('should NOT be clickable on transition end of opacity', () => {
+      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEventTransitionEnd(btnTextEl, 'opacity');
+
+      expect(btnEl).not.toHaveClass('pointer-events-none');
+    });
+
+    it('should be hidden when window is NOT loaded', () => {
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+      const stacks = btnEl.querySelectorAll('div');
+
+      expect(btnTextEl).toHaveClass('opacity-0');
+
+      stacks.forEach((stack) => {
+        expect(stack).toHaveClass('opacity-0');
+      });
+    });
+
+    it('should display when window is loaded', () => {
+      act(() => {
+        Window.emit('load');
+      });
+
+      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+      const stacks = btnEl.querySelectorAll('div');
+
+      stacks.forEach((stack) => {
+        expect(stack).not.toHaveClass('opacity-0');
+      });
+    });
+
+    it('should track as hover if NOT clicked', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.mouseLeave(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'header_btn_hover',
+        hoverText: 'Menu',
+      });
+    });
+
+    it('should track menu click', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'header_btn_click',
+        linkText: 'Menu',
+      });
+    });
+
+    it('should track close click', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      trackEventSpy.mockClear();
+
+      fireEvent.click(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'header_btn_click',
+        linkText: 'Close',
+      });
+    });
+
+    it('should NOT track as hover if clicked', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      trackEventSpy.mockClear();
+
+      fireEvent.mouseLeave(btnEl);
+
+      expect(trackEventSpy).not.toBeCalled();
+    });
+  });
+
   describe('<MenuItems />', () => {
     MENU_ITEMS.forEach((menu) => {
       describe(`menu item (${menu.title}) on click`, () => {
         beforeEach(() => {
-          let btnTextEl = screen.queryByText('Menu');
+          act(() => {
+            Window.emit('load');
+          });
+
+          let btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
+
+          // triggered because it has different transition style than initial load
+          fireEventTransitionEnd(btnTextEl, 'opacity');
+
           const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
 
           // open menu
@@ -159,6 +292,152 @@ describe('<Header />', () => {
             expect(listEl).toHaveClass('opacity-0');
           });
         });
+      });
+    });
+  });
+
+  describe('<Social />', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should handle normal links', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        if (social.shouldCopyOnClick) {
+          return;
+        }
+
+        const copyTextToClipboardMock = jest.spyOn(dom, 'copyTextToClipboard');
+
+        const { title } = social;
+        const copySuccessText = 'Copied!';
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        expect(copyTextToClipboardMock).not.toBeCalled();
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
+
+        copyTextToClipboardMock.mockClear();
+      });
+    });
+
+    it('should handle copy text if available', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        if (!social.shouldCopyOnClick) {
+          return;
+        }
+
+        const copyTextToClipboardMock = jest
+          .spyOn(dom, 'copyTextToClipboard')
+          .mockReturnValue(true);
+
+        const { title } = social;
+        const textToCopy = social.url.replace('mailto:', '');
+        const copySuccessText = 'Copied!';
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        // expect text to be copied on click
+        fireEvent.click(anchorEl);
+
+        expect(copyTextToClipboardMock).toBeCalledTimes(1);
+        expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
+        expect(screen.queryByText(copySuccessText)).toBeInTheDocument();
+
+        // expect "Copied!" to be hidden on mouse leave
+        fireEvent.mouseLeave(anchorEl);
+
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
+
+        copyTextToClipboardMock.mockClear();
+      });
+    });
+
+    it('should handle copy text if unavailable', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        if (!social.shouldCopyOnClick) {
+          return;
+        }
+
+        const copyTextToClipboardMock = jest
+          .spyOn(dom, 'copyTextToClipboard')
+          .mockReturnValue(false);
+
+        const { title } = social;
+        const textToCopy = social.url.replace('mailto:', '');
+        const copySuccessText = 'Copied!';
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        expect(copyTextToClipboardMock).toBeCalledTimes(1);
+        expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
+
+        copyTextToClipboardMock.mockClear();
+      });
+    });
+
+    it('should track as hover if NOT clicked', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        const { title } = social;
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        fireEvent.mouseLeave(anchorEl);
+
+        expect(trackEventSpy).toHaveBeenCalledTimes(1);
+        expect(trackEventSpy).toBeCalledWith({
+          event: 'social_hover',
+          socialName: social.name,
+          hoverText: title,
+          hoverUrl: social.url,
+        });
+
+        trackEventSpy.mockClear();
+      });
+    });
+
+    it('should track click', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
+
+        const { title } = social;
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        expect(trackEventSpy).toHaveBeenCalledTimes(1);
+        expect(trackEventSpy).toBeCalledWith({
+          event: 'social_click',
+          socialName: social.name,
+          linkText: title,
+          linkUrl: social.url,
+        });
+
+        trackEventSpy.mockClear();
+      });
+    });
+
+    it('should NOT track as hover if clicked', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
+
+        const { title } = social;
+        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        trackEventSpy.mockClear();
+
+        fireEvent.mouseLeave(anchorEl);
+
+        expect(trackEventSpy).not.toBeCalled();
       });
     });
   });

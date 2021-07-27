@@ -1,7 +1,12 @@
-import { useMemo, useRef, useState } from 'react';
+import { MutableRefObject, TransitionEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition, Transition } from 'react-transition-group';
+import { getRefValue, useWindowLoaded } from '../lib/hooks';
+import { copyTextToClipboard } from '../lib/dom';
+import { trackEvent } from '../lib/google-analytics';
+import Tooltip from './tooltip';
+import { GoogleAnalyticsEvents, Social } from '../lib/types';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../lib/constants';
 
 function Header() {
@@ -14,7 +19,7 @@ function Header() {
       <header className={cn('fixed top-4 right-4 z-50', 'md:top-5 md:right-6')}>
         <Button isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       </header>
-      <MenuBackground shouldDisplay={isMenuOpen} />
+      <MenuBackground isMenuOpen={isMenuOpen} />
       <div
         className={cn('fixed inset-0 z-40 overflow-y-auto overflow-x-hidden', {
           'w-0 h-0 pointer-events-none': !isMenuOpen,
@@ -22,15 +27,9 @@ function Header() {
         data-testid="menu-container"
       >
         <div className="flex justify-center items-center min-h-full">
-          <div
-            className={cn(
-              'py-10 transform',
-              'sm:-translate-x-12',
-              'md:-translate-x-1/2'
-            )}
-          >
-            <MenuItems shouldDisplay={isMenuOpen} closeMenu={closeMenu} />
-            <Social shouldDisplay={isMenuOpen} />
+          <div className="py-10">
+            <MenuItems isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
+            <SocialItems isMenuOpen={isMenuOpen} />
           </div>
         </div>
       </div>
@@ -46,59 +45,112 @@ function Button({
   toggleMenu: () => void;
 }) {
   const textRef = useRef<HTMLDivElement>(null);
-  const stacks = useMemo(() => ['top', 'middle', 'bottom'], []);
+  const isBtnClickedRef = useRef(false);
+  const stacks = Array.from(Array(3).keys());
+  const shouldDisplay = useWindowLoaded();
+  const [animationDone, setAnimationDone] = useState(false);
+  const text = !isMenuOpen ? 'Menu' : 'Close';
+  const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
+    if (e.propertyName === 'opacity') {
+      setAnimationDone(true);
+    }
+  };
+  const btnOnMouseLeave = () => {
+    if (!getRefValue(isBtnClickedRef)) {
+      trackEvent({
+        event: GoogleAnalyticsEvents.HEADER_BTN_HOVER,
+        hoverText: text,
+      });
+    }
+  };
+  const btnOnClick = () => {
+    isBtnClickedRef.current = true;
+    toggleMenu();
+    trackEvent({
+      event: GoogleAnalyticsEvents.HEADER_BTN_CLICK,
+      linkText: text,
+    });
+  };
 
   return (
     <button
       className={cn(
-        'group relative flex items-center flex-col rounded pt-3 pb-2 px-4 outline-none'
+        'group relative flex items-center flex-col rounded pt-3 pb-2 px-4 outline-none',
+        {
+          'pointer-events-none': !animationDone,
+        }
       )}
-      onClick={toggleMenu}
+      onMouseLeave={btnOnMouseLeave}
+      onClick={btnOnClick}
     >
       {stacks.map((stack) => {
-        const isTop = stack === 'top';
-        const isMid = stack === 'middle';
-        const isBottom = stack === 'bottom';
+        const isTop = stack === 0;
+        const isMid = stack === 1;
+        const isBottom = stack === 2;
 
         return (
           <div
             key={stack}
             className={cn(
-              'w-6 h-0.5 bg-gray-300 rounded',
-              'transform transition duration-500',
-              'group-hover:bg-gray-400',
+              'w-6 h-0.5 bg-gray-400 rounded',
+              'transform transition',
+              'group-hover:bg-gray-500',
               'md:w-7 md:h-1',
               'xl:w-8',
-              {
-                'mt-1.5': !isTop,
-                'translate-y-2 -rotate-45 md:translate-y-3':
-                  isTop && isMenuOpen,
-                '-translate-y-2 rotate-45': isBottom && isMenuOpen,
-                'translate-x-7 opacity-0': isMid && isMenuOpen,
-              }
+              { 'mt-1.5': !isTop },
+              !animationDone
+                ? {
+                    'duration-1000': true,
+                    'opacity-0': !shouldDisplay,
+                    'translate-x-1/2': (isTop || isBottom) && !shouldDisplay,
+                    '-translate-x-1/2': isMid && !shouldDisplay,
+                  }
+                : {
+                    'duration-300': true,
+                    'translate-y-2 -rotate-45 md:translate-y-3':
+                      isTop && isMenuOpen,
+                    '-translate-y-2 rotate-45': isBottom && isMenuOpen,
+                    'translate-x-7 opacity-0': isMid && isMenuOpen,
+                  }
             )}
+            style={
+              !animationDone
+                ? {
+                    transitionDelay: `${stack * 150 + 500}ms`,
+                  }
+                : undefined
+            }
           />
         );
       })}
       <SwitchTransition>
-        <Transition key={isMenuOpen as any} nodeRef={textRef} timeout={100}>
+        <Transition key={text} nodeRef={textRef} timeout={100}>
           {(state) => (
             <div
               ref={textRef}
               className={cn(
-                'mt-1.5 text-gray-300 text-3xs font-normal uppercase',
+                'mt-1.5 text-gray-400 text-3xs font-normal uppercase select-none',
                 'transform transition-all',
-                'group-hover:text-gray-400',
+                'group-hover:text-gray-500',
                 'md:mt-2 md:text-2xs',
                 'xl:text-xs',
-                {
-                  [state === 'entered'
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 -translate-y-3']: true,
-                }
+                !animationDone
+                  ? {
+                      'duration-700 delay-1000': true,
+                      [shouldDisplay
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-3']: true,
+                    }
+                  : {
+                      'duration-150': true,
+                      [state === 'entered'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-3']: true,
+                    }
               )}
+              onTransitionEnd={!animationDone ? onTransitionEnd : undefined}
             >
-              {!isMenuOpen ? 'Menu' : 'Close'}
+              {text}
             </div>
           )}
         </Transition>
@@ -107,14 +159,14 @@ function Button({
   );
 }
 
-function MenuBackground({ shouldDisplay }: { shouldDisplay: boolean }) {
+function MenuBackground({ isMenuOpen }: { isMenuOpen: boolean }) {
   return (
     <div
       className={cn(
         'fixed top-0 right-0 w-full h-full bg-gray-1000 z-30',
         'transition-all duration-500',
         {
-          ['opacity-0 pointer-events-none']: !shouldDisplay,
+          ['opacity-0 pointer-events-none']: !isMenuOpen,
         }
       )}
       data-testid="menu-background"
@@ -123,10 +175,10 @@ function MenuBackground({ shouldDisplay }: { shouldDisplay: boolean }) {
 }
 
 function MenuItems({
-  shouldDisplay,
+  isMenuOpen,
   closeMenu,
 }: {
-  shouldDisplay: boolean;
+  isMenuOpen: boolean;
   closeMenu: () => void;
 }) {
   return (
@@ -141,13 +193,13 @@ function MenuItems({
             'md:mb-14',
             'xl:mb-16',
             {
-              [!shouldDisplay
+              [!isMenuOpen
                 ? 'opacity-0 transition-transform translate-x-1/3 duration-300'
                 : 'opacity-100 transition translate-x-0 duration-700']: true,
             }
           )}
           style={
-            shouldDisplay
+            isMenuOpen
               ? { transitionDelay: `${(idx + 1) * 75 + 100}ms` }
               : undefined
           }
@@ -155,7 +207,7 @@ function MenuItems({
           <Link href={item.path}>
             <a
               className={cn(
-                'group relative pb-2 text-3xl text-gray-300 outline-none',
+                'group relative pb-2 text-3xl text-gray-300 outline-none select-none',
                 'transition-colors hover:text-white',
                 'sm:text-4xl',
                 'md:text-5xl',
@@ -179,7 +231,53 @@ function MenuItems({
   );
 }
 
-function Social({ shouldDisplay }: { shouldDisplay: boolean }) {
+function SocialItems({ isMenuOpen }: { isMenuOpen: boolean }) {
+  const isBtnClickedRef: MutableRefObject<Record<string, boolean>> = useRef({});
+  const [copiedItem, setCopiedItem] = useState('');
+  const socialOnMouseLeave = (social: Social) => {
+    setCopiedItem('');
+
+    const socialName = social.name;
+
+    if (!getRefValue(isBtnClickedRef)[socialName]) {
+      trackEvent({
+        socialName,
+        event: GoogleAnalyticsEvents.SOCIAL_HOVER,
+        hoverText: social.title,
+        hoverUrl: social.url,
+      });
+    }
+  };
+  const socialOnClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    social: Social
+  ) => {
+    const socialName = social.name;
+
+    isBtnClickedRef.current[socialName] = true;
+
+    trackEvent({
+      socialName,
+      event: GoogleAnalyticsEvents.SOCIAL_CLICK,
+      linkText: social.title,
+      linkUrl: social.url,
+    });
+
+    if (!social.shouldCopyOnClick) {
+      return;
+    }
+
+    const textToCopy = social.url.replace('mailto:', '');
+    const copied = copyTextToClipboard(textToCopy);
+
+    if (!copied) {
+      return;
+    }
+
+    e.preventDefault();
+    setCopiedItem(social.name);
+  };
+
   return (
     <ul
       className={cn(
@@ -193,12 +291,12 @@ function Social({ shouldDisplay }: { shouldDisplay: boolean }) {
         <li
           key={social.name}
           className={cn('transform', {
-            [!shouldDisplay
+            [!isMenuOpen
               ? 'opacity-0 transition-transform translate-y-1/2 duration-300'
               : 'opacity-100 transition translate-y-0 duration-500']: true,
           })}
           style={
-            shouldDisplay
+            isMenuOpen
               ? { transitionDelay: `${(idx + 1) * 75 + 300}ms` }
               : undefined
           }
@@ -213,6 +311,8 @@ function Social({ shouldDisplay }: { shouldDisplay: boolean }) {
               'sm:p-5',
               'md:p-6'
             )}
+            onMouseLeave={() => socialOnMouseLeave(social)}
+            onClick={(e) => socialOnClick(e, social)}
           >
             {social.icon({
               className: cn(
@@ -222,6 +322,14 @@ function Social({ shouldDisplay }: { shouldDisplay: boolean }) {
                 'md:w-11 md:h-11'
               ),
             })}
+            <Transition
+              in={social.name === copiedItem}
+              timeout={300}
+              mountOnEnter
+              unmountOnExit
+            >
+              {(state) => <Tooltip show={state === 'entered'}>Copied!</Tooltip>}
+            </Transition>
           </a>
         </li>
       ))}

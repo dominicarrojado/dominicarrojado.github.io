@@ -44,7 +44,7 @@ describe('Events module', () => {
     expect(callback2).toBeCalledTimes(1);
   });
 
-  it('should handle remove events but event does not exist', () => {
+  it('should handle remove events but event does NOT exist', () => {
     const events = new Events();
 
     expect(() => {
@@ -52,7 +52,7 @@ describe('Events module', () => {
     }).not.toThrowError();
   });
 
-  it('should handle remove events but callback does not exist', () => {
+  it('should handle remove events but callback does NOT exist', () => {
     const events = new Events();
     const event = 'test';
     const callback = jest.fn();
@@ -68,7 +68,7 @@ describe('Events module', () => {
     expect(callback).toBeCalledTimes(1);
   });
 
-  it('should handle emit events but event does not exist', () => {
+  it('should handle emit events but event does NOT exist', () => {
     const events = new Events();
 
     expect(() => {

@@ -4,7 +4,7 @@ import Window from '../modules/Window';
 import Layout from '../components/layout';
 import '../styles/global.css';
 
-function App({ Component, router, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     Window.init();
   }, []);

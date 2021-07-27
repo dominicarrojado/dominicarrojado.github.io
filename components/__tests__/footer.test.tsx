@@ -1,7 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Window from '../../modules/Window';
+import { fireEventTransitionEnd } from '../../lib/test-helpers';
 import * as dom from '../../lib/dom';
+import * as ga from '../../lib/google-analytics';
 import { Social } from '../../lib/types';
 import { QUOTES, SOCIAL_LINKS } from '../../lib/constants';
 import Footer from '../footer';
@@ -95,14 +97,6 @@ describe('<Footer />', () => {
   });
 
   describe('<Social />', () => {
-    const resetWindowStates = () => {
-      Window.loaded = false;
-    };
-
-    beforeEach(() => {
-      resetWindowStates();
-    });
-
     afterEach(() => {
       jest.restoreAllMocks();
     });
@@ -112,11 +106,11 @@ describe('<Footer />', () => {
         const tooltipEl = screen.queryByText(social.title);
         const listItemEl = tooltipEl?.closest('li') as HTMLLIElement;
 
-        expect(listItemEl).toHaveClass('opacity-0');
+        expect(listItemEl).toHaveClass('lg:opacity-0');
       });
     });
 
-    it('should be hidden when window is loaded', () => {
+    it('should display when window is loaded', () => {
       act(() => {
         Window.emit('load');
       });
@@ -131,14 +125,14 @@ describe('<Footer />', () => {
 
     it('should handle normal links', () => {
       SOCIAL_LINKS.forEach((social) => {
-        if (social.copyOnClick) {
+        if (social.shouldCopyOnClick) {
           return;
         }
 
         const copyTextToClipboardMock = jest.spyOn(dom, 'copyTextToClipboard');
 
         const { title } = social;
-        const copiedText = 'Copied!';
+        const copySuccessText = 'Copied!';
         const tooltipEl = screen.queryByText(title);
         const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
 
@@ -146,7 +140,7 @@ describe('<Footer />', () => {
 
         expect(copyTextToClipboardMock).not.toBeCalled();
         expect(screen.queryByText(title)).toBeInTheDocument();
-        expect(screen.queryByText(copiedText)).not.toBeInTheDocument();
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
 
         copyTextToClipboardMock.mockClear();
       });
@@ -154,13 +148,13 @@ describe('<Footer />', () => {
 
     it('should handle copy text if available', () => {
       const socialNoCopy = SOCIAL_LINKS.find(
-        (social) => !social.copyOnClick
+        (social) => !social.shouldCopyOnClick
       ) as Social;
       const otherTooltipEl = screen.queryByText(socialNoCopy?.title);
       const otherAnchorEl = otherTooltipEl?.closest('a') as HTMLAnchorElement;
 
       SOCIAL_LINKS.forEach((social) => {
-        if (!social.copyOnClick) {
+        if (!social.shouldCopyOnClick) {
           return;
         }
 
@@ -170,8 +164,8 @@ describe('<Footer />', () => {
 
         const { title } = social;
         const textToCopy = social.url.replace('mailto:', '');
-        const copiedText = 'Copied!';
-        const tooltipEl = screen.queryByText(title);
+        const copySuccessText = 'Copied!';
+        const tooltipEl = screen.queryByText(title) as HTMLDivElement;
         const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
 
         // expect text to be copied on click
@@ -180,19 +174,19 @@ describe('<Footer />', () => {
         expect(copyTextToClipboardMock).toBeCalledTimes(1);
         expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
         expect(screen.queryByText(title)).not.toBeInTheDocument();
-        expect(screen.queryByText(copiedText)).toBeInTheDocument();
+        expect(screen.queryByText(copySuccessText)).toBeInTheDocument();
 
         // expect "Copied!" to remain displayed on mouse enter of other element
         fireEvent.mouseEnter(otherAnchorEl);
 
         expect(screen.queryByText(title)).not.toBeInTheDocument();
-        expect(screen.queryByText(copiedText)).toBeInTheDocument();
+        expect(screen.queryByText(copySuccessText)).toBeInTheDocument();
 
         // expect "Copied!" to be hidden on mouse enter of same element
-        fireEvent.mouseEnter(anchorEl);
+        fireEventTransitionEnd(tooltipEl, 'opacity');
 
         expect(screen.queryByText(title)).toBeInTheDocument();
-        expect(screen.queryByText(copiedText)).not.toBeInTheDocument();
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
 
         copyTextToClipboardMock.mockClear();
       });
@@ -200,7 +194,7 @@ describe('<Footer />', () => {
 
     it('should handle copy text if unavailable', () => {
       SOCIAL_LINKS.forEach((social) => {
-        if (!social.copyOnClick) {
+        if (!social.shouldCopyOnClick) {
           return;
         }
 
@@ -210,7 +204,7 @@ describe('<Footer />', () => {
 
         const { title } = social;
         const textToCopy = social.url.replace('mailto:', '');
-        const copiedText = 'Copied!';
+        const copySuccessText = 'Copied!';
         const tooltipEl = screen.queryByText(title);
         const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
 
@@ -219,9 +213,75 @@ describe('<Footer />', () => {
         expect(copyTextToClipboardMock).toBeCalledTimes(1);
         expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
         expect(screen.queryByText(title)).toBeInTheDocument();
-        expect(screen.queryByText(copiedText)).not.toBeInTheDocument();
+        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
 
         copyTextToClipboardMock.mockClear();
+      });
+    });
+
+    it('should track as hover if NOT clicked', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        const socialTitle = social.title;
+        const tooltipEl = screen.queryByText(socialTitle);
+        const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
+
+        fireEvent.mouseLeave(anchorEl);
+
+        expect(trackEventSpy).toHaveBeenCalledTimes(1);
+        expect(trackEventSpy).toBeCalledWith({
+          event: 'social_hover',
+          socialName: social.name,
+          hoverText: socialTitle,
+          hoverUrl: social.url,
+        });
+
+        trackEventSpy.mockClear();
+      });
+    });
+
+    it('should track click', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
+
+        const socialTitle = social.title;
+        const tooltipEl = screen.queryByText(socialTitle);
+        const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        expect(trackEventSpy).toHaveBeenCalledTimes(1);
+        expect(trackEventSpy).toBeCalledWith({
+          event: 'social_click',
+          socialName: social.name,
+          linkText: socialTitle,
+          linkUrl: social.url,
+        });
+
+        trackEventSpy.mockClear();
+      });
+    });
+
+    it('should NOT track as hover if clicked', () => {
+      SOCIAL_LINKS.forEach((social) => {
+        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
+
+        const socialTitle = social.title;
+        const tooltipEl = screen.queryByText(socialTitle);
+        const anchorEl = tooltipEl?.closest('a') as HTMLAnchorElement;
+
+        fireEvent.click(anchorEl);
+
+        trackEventSpy.mockClear();
+
+        fireEvent.mouseLeave(anchorEl);
+
+        expect(trackEventSpy).not.toBeCalled();
       });
     });
   });

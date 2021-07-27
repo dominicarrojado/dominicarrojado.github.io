@@ -6,12 +6,33 @@ export enum SocialName {
   EMAIL = 'email',
 }
 
+export enum TooltipPosition {
+  TOP = 'top',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+}
+
+export enum GoogleAnalyticsEvents {
+  HEADER_BTN_HOVER = 'header_btn_hover',
+  HEADER_BTN_CLICK = 'header_btn_click',
+  SCROLL_HOVER = 'scroll_hover',
+  SCROLL_CLICK = 'scroll_click',
+  SOCIAL_HOVER = 'social_hover',
+  SOCIAL_CLICK = 'social_click',
+  PROJECT_HOVER = 'project_hover',
+  PROJECT_CLICK = 'project_click',
+  PROJECT_INFO_HOVER = 'project_info_hover',
+  GIF_AUTO_PLAY_START = 'gif_auto_play_start',
+  GIF_AUTO_PLAY_CANCEL = 'gif_auto_play_cancel',
+}
+
 export type Social = {
   name: SocialName;
   title: string;
   url: string;
   icon: (props: HTMLAttributes<SVGElement>) => ReactNode;
-  copyOnClick: boolean;
+  shouldCopyOnClick: boolean;
 };
 
 export type Quote = {

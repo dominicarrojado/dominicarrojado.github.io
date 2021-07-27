@@ -18,6 +18,24 @@ export function useStateRef<S>(
   return [state, setState, ref];
 }
 
+export function useWindowLoaded() {
+  const [windowLoaded, setWindowLoaded] = useState(false);
+
+  useEffect(() => {
+    setWindowLoaded(Window.loaded);
+
+    const windowOnLoad = () => setWindowLoaded(true);
+
+    Window.on('load', windowOnLoad);
+
+    return () => {
+      Window.off('load', windowOnLoad);
+    };
+  }, []);
+
+  return windowLoaded;
+}
+
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
   const [opacity, setOpacity] = useState(1);
 

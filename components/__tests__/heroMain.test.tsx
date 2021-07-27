@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { config } from 'react-transition-group';
 import Window from '../../modules/Window';
 import * as imports from '../../lib/imports';
+import * as ga from '../../lib/google-analytics';
 import HeroMain from '../heroMain';
 
 config.disabled = true; // disable react-transitions-group transitions
@@ -62,7 +63,7 @@ describe('<HeroMain />', () => {
       expect(scrollDownBtnEl).toHaveClass('opacity-0');
     });
 
-    it('should not import MoveTo', () => {
+    it('should NOT import MoveTo', () => {
       const getMoveToSpy = jest.spyOn(imports, 'getMoveTo');
 
       expect(getMoveToSpy).not.toBeCalled();
@@ -133,5 +134,56 @@ describe('<ScrollDownButton />', () => {
     });
 
     expect(container).toBeInTheDocument();
+  });
+
+  describe('analytics', () => {
+    beforeEach(() => {
+      render(<HeroMain />);
+    });
+
+    it('should track as hover if NOT clicked', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnEl = screen.queryByText('Scroll Down');
+      const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
+
+      fireEvent.mouseLeave(anchorEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'scroll_hover',
+        hoverText: 'Scroll Down',
+      });
+    });
+
+    it('should track click', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnEl = screen.queryByText('Scroll Down');
+      const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
+
+      fireEvent.click(anchorEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'scroll_click',
+        linkText: 'Scroll Down',
+      });
+    });
+
+    it('should NOT track as hover if clicked', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnEl = screen.queryByText('Scroll Down');
+      const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
+
+      fireEvent.click(anchorEl);
+
+      trackEventSpy.mockClear();
+
+      fireEvent.mouseLeave(anchorEl);
+
+      expect(trackEventSpy).not.toBeCalled();
+    });
   });
 });

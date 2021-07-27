@@ -5,25 +5,33 @@ import {
   useState,
   useEffect,
   useCallback,
+  TransitionEvent,
 } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
+import { TooltipPosition } from '../lib/types';
 
 function Tooltip({
-  position = 'top',
+  position = TooltipPosition.TOP,
+  show,
+  className,
+  onHidden,
   children,
 }: {
-  position?: 'top' | 'bottom' | 'right' | 'left';
+  position?: TooltipPosition;
+  show?: boolean;
+  className?: string;
+  onHidden?: () => void;
   children: ReactNode;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [shouldDisplay, setShouldDisplay] = useState(false);
+  const [shouldDisplay, setShouldDisplay] = useState(show);
   const [style, setStyle] = useState<CSSProperties>({});
-  const isTop = position === 'top';
-  const isBottom = position === 'bottom';
-  const isRight = position === 'right';
-  const isLeft = position === 'left';
+  const isTop = position === TooltipPosition.TOP;
+  const isRight = position === TooltipPosition.RIGHT;
+  const isBottom = position === TooltipPosition.BOTTOM;
+  const isLeft = position === TooltipPosition.LEFT;
   const repositionTooltip = useCallback(() => {
     const containerEl = getRefValue(containerRef);
     const wrapperEl = getRefValue(wrapperRef);
@@ -42,17 +50,36 @@ function Tooltip({
   }, [isRight, isLeft]);
   const showTooltip = () => setShouldDisplay(true);
   const hideTooltip = () => setShouldDisplay(false);
+  const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
+    if (
+      e.propertyName === 'opacity' &&
+      !shouldDisplay &&
+      typeof onHidden === 'function'
+    ) {
+      onHidden();
+    }
+  };
+
+  useEffect(() => {
+    if (typeof show === 'boolean') {
+      if (show) {
+        showTooltip();
+      } else {
+        hideTooltip();
+      }
+    }
+  }, [show]);
 
   useEffect(() => {
     repositionTooltip();
-  }, [children, repositionTooltip]);
+  }, [show, children, repositionTooltip]);
 
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 m-auto z-50"
-      onMouseEnter={showTooltip}
-      onMouseLeave={hideTooltip}
+      className={cn('absolute inset-0 m-auto z-50', className)}
+      onMouseEnter={typeof show === 'undefined' ? showTooltip : undefined}
+      onMouseLeave={typeof show === 'undefined' ? hideTooltip : undefined}
     >
       <div
         ref={wrapperRef}
@@ -73,6 +100,7 @@ function Tooltip({
           }
         )}
         style={style}
+        onTransitionEnd={onTransitionEnd}
       >
         {children}
       </div>

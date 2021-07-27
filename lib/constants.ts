@@ -13,21 +13,21 @@ export const SOCIAL_LINKS: Array<Social> = [
     title: 'Connect with me @ LinkedIn!',
     url: 'https://www.linkedin.com/in/dominic-arrojado-75ba03a9/',
     icon: SvgLinkedIn,
-    copyOnClick: false,
+    shouldCopyOnClick: false,
   },
   {
     name: SocialName.GITHUB,
     title: 'Follow me @ GitHub!',
     url: 'https://github.com/dominicarrojado/',
     icon: SvgGitHub,
-    copyOnClick: false,
+    shouldCopyOnClick: false,
   },
   {
     name: SocialName.EMAIL,
     title: 'Email me!',
     url: 'mailto:dominicarrojado@gmail.com',
     icon: SvgEnvelope,
-    copyOnClick: true,
+    shouldCopyOnClick: true,
   },
 ];
 

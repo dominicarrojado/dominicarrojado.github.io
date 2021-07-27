@@ -1,6 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { getFakeNumber, getFakeSentence } from '../../lib/test-helpers';
+import {
+  fireEventTransitionEnd,
+  getFakeNumber,
+  getFakeSentence,
+  getFakeWord,
+} from '../../lib/test-helpers';
 import * as hooks from '../../lib/hooks';
+import { TooltipPosition } from '../../lib/types';
 import Tooltip from '../tooltip';
 
 describe('<Tooltip />', () => {
@@ -8,14 +14,14 @@ describe('<Tooltip />', () => {
     it('should render text', () => {
       const text = getFakeSentence();
 
-      render(<Tooltip position="top">{text}</Tooltip>);
+      render(<Tooltip position={TooltipPosition.TOP}>{text}</Tooltip>);
 
       expect(screen.queryByText(text)).toBeInTheDocument();
     });
   });
 
-  describe('y positions', () => {
-    const positions: Array<'top' | 'bottom'> = ['top', 'bottom'];
+  describe('position prop (top, bottom)', () => {
+    const positions = [TooltipPosition.TOP, TooltipPosition.BOTTOM];
 
     afterEach(() => {
       jest.restoreAllMocks();
@@ -68,8 +74,8 @@ describe('<Tooltip />', () => {
     });
   });
 
-  describe('x positions', () => {
-    const positions: Array<'right' | 'left'> = ['right', 'left'];
+  describe('position prop (right, left)', () => {
+    const positions = [TooltipPosition.RIGHT, TooltipPosition.LEFT];
 
     afterEach(() => {
       jest.restoreAllMocks();
@@ -120,6 +126,98 @@ describe('<Tooltip />', () => {
 
         unmount();
       });
+    });
+  });
+
+  describe('show prop', () => {
+    it('should display tooltip if show is true', () => {
+      const text = getFakeSentence();
+
+      render(<Tooltip show={true}>{text}</Tooltip>);
+
+      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+
+      expect(wrapperEl).not.toHaveClass('opacity-0');
+    });
+
+    it('should NOT hide tooltip on mouse leave if show is true', () => {
+      const text = getFakeSentence();
+
+      render(<Tooltip show={true}>{text}</Tooltip>);
+
+      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+      const containerEl = wrapperEl.parentElement as HTMLDivElement;
+
+      fireEvent.mouseLeave(containerEl);
+
+      expect(wrapperEl).not.toHaveClass('opacity-0');
+    });
+
+    it('should hide tooltip if show is false', () => {
+      const text = getFakeSentence();
+
+      render(<Tooltip show={false}>{text}</Tooltip>);
+
+      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+
+      expect(wrapperEl).toHaveClass('opacity-0');
+    });
+
+    it('should NOT display tooltip on mouse enter if show is false', () => {
+      const text = getFakeSentence();
+
+      render(<Tooltip show={false}>{text}</Tooltip>);
+
+      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+      const containerEl = wrapperEl.parentElement as HTMLDivElement;
+
+      fireEvent.mouseEnter(containerEl);
+
+      expect(wrapperEl).toHaveClass('opacity-0');
+    });
+  });
+
+  describe('className prop', () => {
+    it('should add class', () => {
+      const text = getFakeSentence();
+      const className = getFakeWord();
+
+      render(<Tooltip className={className}>{text}</Tooltip>);
+
+      const wrapperEl = screen.queryByText(text);
+      const containerEl = wrapperEl?.parentElement as HTMLDivElement;
+
+      expect(containerEl).toHaveClass(className);
+    });
+  });
+
+  describe('onHidden prop', () => {
+    it('should trigger on transition end of opacity', () => {
+      const onHiddenMock = jest.fn();
+
+      const text = getFakeSentence();
+
+      render(<Tooltip onHidden={onHiddenMock}>{text}</Tooltip>);
+
+      const tooltipEl = screen.queryByText(text) as HTMLDivElement;
+
+      fireEventTransitionEnd(tooltipEl, 'opacity');
+
+      expect(onHiddenMock).toBeCalledTimes(1);
+    });
+
+    it('should NOT trigger on transition end of other prop name', () => {
+      const onHiddenMock = jest.fn();
+
+      const text = getFakeSentence();
+
+      render(<Tooltip onHidden={onHiddenMock}>{text}</Tooltip>);
+
+      const tooltipEl = screen.queryByText(text) as HTMLDivElement;
+
+      fireEventTransitionEnd(tooltipEl, getFakeWord());
+
+      expect(onHiddenMock).not.toBeCalled();
     });
   });
 });
