@@ -6,6 +6,9 @@ module.exports = {
       sans: ['Roboto', 'Arial', 'sans-serif'],
     },
     extend: {
+      letterSpacing: {
+        px: '1px',
+      },
       backgroundColor: {
         'gray-1000': '#2c2c34',
       },
@@ -15,6 +18,11 @@ module.exports = {
         '10xl': '14rem',
         '11xl': '18rem',
         '12xl': '24rem',
+      },
+      transitionProperty: {
+        width: 'width',
+        height: 'height',
+        'transform-opacity-color': 'transform, opacity, color',
       },
       transitionDuration: {
         1250: '1250ms',

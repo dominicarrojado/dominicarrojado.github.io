@@ -1,5 +1,12 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
+export enum Route {
+  HOME = '/',
+  ABOUT_ME = '/about-me',
+  PROJECTS = '/projects',
+  POSTS = '/posts',
+}
+
 export enum SocialName {
   LINKEDIN = 'linkedin',
   GITHUB = 'github',
@@ -26,6 +33,8 @@ export enum GoogleAnalyticsEvents {
   GIF_AUTO_PLAY_START = 'gif_auto_play_start',
   GIF_AUTO_PLAY_CANCEL = 'gif_auto_play_cancel',
 }
+
+export type Nullish<T> = T | null | undefined;
 
 export type Social = {
   name: SocialName;

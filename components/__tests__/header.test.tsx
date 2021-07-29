@@ -13,6 +13,7 @@ config.disabled = true; // disable react-transitions-group transitions
 
 describe('<Header />', () => {
   beforeEach(() => {
+    // need to mock <Link /> if you need to fire "click" event as it will throw an error
     jest
       .spyOn(Link, 'default')
       .mockImplementation(
@@ -21,6 +22,10 @@ describe('<Header />', () => {
       );
 
     render(<Header />);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('content', () => {
@@ -117,10 +122,6 @@ describe('<Header />', () => {
   });
 
   describe('<Button />', () => {
-    afterEach(() => {
-      jest.restoreAllMocks();
-    });
-
     it('should NOT be clickable by default', () => {
       const btnTextEl = screen.queryByText('Menu');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
@@ -297,10 +298,6 @@ describe('<Header />', () => {
   });
 
   describe('<Social />', () => {
-    afterEach(() => {
-      jest.restoreAllMocks();
-    });
-
     it('should handle normal links', () => {
       SOCIAL_LINKS.forEach((social) => {
         if (social.shouldCopyOnClick) {

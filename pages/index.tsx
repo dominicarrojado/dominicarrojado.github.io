@@ -1,7 +1,10 @@
 import { GetStaticProps } from 'next';
 import SeoTags from '../components/seoTags';
 import HeroMain from '../components/heroMain';
-import AboutMe from '../components/aboutMe';
+import AboutMeSection from '../components/aboutMeSection';
+import FeaturedProjectsSection from '../components/featuredProjectsSection';
+import BlogSection from '../components/blogSection';
+import TestimonialsSection from '../components/testimonialsSection';
 import { MAIN_TITLE } from '../lib/constants';
 
 function Home() {
@@ -16,7 +19,10 @@ function Home() {
         imageHeight={0}
       />
       <HeroMain />
-      <AboutMe />
+      <AboutMeSection />
+      <FeaturedProjectsSection />
+      <BlogSection />
+      <TestimonialsSection />
     </>
   );
 }

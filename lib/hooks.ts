@@ -42,6 +42,11 @@ export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
   useEffect(() => {
     const windowOnScroll = () => {
       const element = getRefValue(ref);
+
+      if (!element) {
+        return;
+      }
+
       const { offsetTop, offsetHeight } = element;
       const newOpacity = Math.max(
         1 - window.pageYOffset / (offsetTop + offsetHeight),

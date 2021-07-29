@@ -75,13 +75,14 @@ function Button({
   return (
     <button
       className={cn(
-        'group relative flex items-center flex-col rounded pt-3 pb-2 px-4 outline-none',
+        'group relative flex items-center flex-col rounded pt-3 pb-2 px-4',
         {
           'pointer-events-none': !animationDone,
         }
       )}
       onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}
+      tabIndex={1}
     >
       {stacks.map((stack) => {
         const isTop = stack === 0;
@@ -130,7 +131,7 @@ function Button({
               ref={textRef}
               className={cn(
                 'mt-1.5 text-gray-400 text-3xs font-normal uppercase select-none',
-                'transform transition-all',
+                'transform transition-transform-opacity-color',
                 'group-hover:text-gray-500',
                 'md:mt-2 md:text-2xs',
                 'xl:text-xs',
@@ -164,7 +165,7 @@ function MenuBackground({ isMenuOpen }: { isMenuOpen: boolean }) {
     <div
       className={cn(
         'fixed top-0 right-0 w-full h-full bg-gray-1000 z-30',
-        'transition-all duration-500',
+        'transition-opacity duration-500',
         {
           ['opacity-0 pointer-events-none']: !isMenuOpen,
         }
@@ -187,11 +188,11 @@ function MenuItems({
         <li
           key={idx}
           className={cn(
-            'block mb-9',
+            'flex mb-8',
             'transform',
-            'sm:mb-12',
-            'md:mb-14',
-            'xl:mb-16',
+            'sm:mb-10',
+            'md:mb-12',
+            'xl:mb-14',
             {
               [!isMenuOpen
                 ? 'opacity-0 transition-transform translate-x-1/3 duration-300'
@@ -207,20 +208,20 @@ function MenuItems({
           <Link href={item.path}>
             <a
               className={cn(
-                'group relative pb-2 text-3xl text-gray-300 outline-none select-none',
-                'transition-colors hover:text-white',
+                'group relative pb-2 text-3xl text-gray-300 select-none',
+                'transition-colors duration-300 hover:text-white focus:text-white',
                 'sm:text-4xl',
-                'md:text-5xl',
-                'xl:text-6xl'
+                'md:pb-3 md:text-5xl',
+                'xl:pb-4 xl:text-6xl'
               )}
               onClick={closeMenu}
             >
               {item.title}
-              <div className="absolute bottom-0 left-0 w-full border-b-2 border-gray-600 z-0" />
+              <div className="absolute bottom-0 left-0 w-full h-px bg-white bg-opacity-20 z-0" />
               <div
                 className={cn(
-                  'absolute bottom-0 left-0 w-0 border-b-2 border-white z-10',
-                  'transition-all group-hover:w-full'
+                  'absolute bottom-0 left-0 w-0 h-px bg-white z-10',
+                  'transition-width duration-300 group-hover:w-full'
                 )}
               />
             </a>
@@ -306,18 +307,14 @@ function SocialItems({ isMenuOpen }: { isMenuOpen: boolean }) {
             title={social.title}
             rel="noopener noreferrer nofollow"
             target="_blank"
-            className={cn(
-              'flex items-center p-4 outline-none',
-              'sm:p-5',
-              'md:p-6'
-            )}
+            className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
             onMouseLeave={() => socialOnMouseLeave(social)}
             onClick={(e) => socialOnClick(e, social)}
           >
             {social.icon({
               className: cn(
                 'w-9 h-9 text-gray-300',
-                'transition-colors hover:text-white',
+                'transition-colors hover:text-white focus:text-white',
                 'sm:w-10 sm:h-10',
                 'md:w-11 md:h-11'
               ),

@@ -62,8 +62,8 @@ function Quotes() {
   return (
     <ul
       className={cn(
-        'relative text-gray-500 text-center overflow-hidden',
-        'transition-all duration-1000',
+        'relative text-center overflow-hidden',
+        'transition-height duration-1000',
         'sm:text-lg',
         'xl:text-xl'
       )}
@@ -168,9 +168,10 @@ function SocialItems() {
               href={social.url}
               rel="noopener noreferrer nofollow"
               target="_blank"
-              className="group relative inline-flex p-4 cursor-pointer outline-none"
+              className="group relative inline-flex p-4 cursor-pointer"
               onMouseLeave={() => socialOnMouseLeave(social)}
               onClick={(e) => socialOnClick(e, social)}
+              tabIndex={idx + 3}
             >
               {social.icon({
                 className: cn(

@@ -77,6 +77,10 @@
     @apply antialiased;
   }
 
+  *:focus {
+    @apply outline-none;
+  }
+
   html,
   body,
   #__next {
@@ -84,9 +88,59 @@
   }
 
   body {
+    @apply text-gray-500;
     @apply font-light;
-    @apply leading-snug;
+    @apply text-base sm:text-lg xl:text-xl;
+    @apply tracking-px;
+    @apply leading-normal;
+  }
 
-    letter-spacing: 1px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-gray-800;
+  }
+
+  p a {
+    @apply relative;
+    @apply inline-block;
+    @apply transition-colors;
+    @apply duration-300;
+  }
+
+  p a:hover {
+    @apply text-black;
+  }
+
+  p a::before,
+  p a::after {
+    @apply absolute;
+    @apply bottom-0;
+    @apply left-0;
+    @apply w-full;
+    @apply h-px;
+    @apply bg-black;
+    @apply z-0;
+
+    content: '';
+  }
+
+  p a::before {
+    @apply w-full;
+    @apply bg-opacity-20;
+  }
+
+  p a::after {
+    @apply w-0;
+    @apply bg-opacity-30;
+    @apply transition-width;
+    @apply duration-300;
+  }
+
+  p a:hover::after {
+    @apply w-full;
   }
 }

@@ -18,7 +18,7 @@ export default function HeroMain() {
   const shouldDisplay = useWindowLoaded();
 
   return (
-    <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-24">
+    <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-32">
       <Loader shouldDisplay={!shouldDisplay} />
       <Background shouldDisplay={shouldDisplay} />
       <div className="w-full -mt-16 text-center z-10">
@@ -178,6 +178,7 @@ function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
     }
   };
   const btnOnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.currentTarget.blur();
     isBtnClickedRef.current = true;
     trackEvent({
       event: GoogleAnalyticsEvents.SCROLL_CLICK,
@@ -226,31 +227,32 @@ function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
       <a
         ref={btnRef}
         href="#about-me"
-        className="group relative inline-flex flex-col items-center pb-1 outline-none"
+        className="group relative inline-flex flex-col items-center pb-1"
         onMouseLeave={btnOnMouseLeave}
         onClick={btnOnClick}
+        tabIndex={2}
       >
         <div
           className={cn(
             'relative inline-flex pt-1 pb-0.5 text-gray-400 text-2xs select-none',
-            'transform transition-all group-hover:translate-y-0.5 group-hover:text-white',
+            'transform transition duration-300 group-hover:translate-y-0.5  group-hover:text-white',
             'md:mb-1 md:text-sm md:group-hover:translate-y-1',
             'xl:mb-2 xl:text-lg'
           )}
         >
           {text}
-          <div className="absolute bottom-0 left-0 w-full border-b border-gray-600 z-0" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-white bg-opacity-20 z-0" />
           <div
             className={cn(
-              'absolute bottom-0 left-0 w-0 border-b border-white z-10',
-              'transition-all group-hover:w-full'
+              'absolute bottom-0 left-0 w-0 h-px bg-white z-10',
+              'transition-width duration-300 group-hover:w-full'
             )}
           />
         </div>
         <SvgArrowDown
           className={cn(
             'inline-flex mt-2 w-3 h-3 text-gray-600',
-            'animate-bounce transition-colors group-hover:text-white',
+            'animate-bounce transition-colors duration-300 group-hover:text-white',
             'md:w-4 md:h-4',
             'xl:w-5 xl:h-5'
           )}

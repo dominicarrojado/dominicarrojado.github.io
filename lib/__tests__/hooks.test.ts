@@ -59,9 +59,8 @@ describe('hooks utilities', () => {
         offsetTop: getFakeNumber(),
         offsetHeight: getFakeNumber(),
       } as HTMLElement;
-      const hook = renderHook(() =>
-        useScrollOpacityEffect({ current: element })
-      );
+      const elementRef = { current: element };
+      const hook = renderHook(() => useScrollOpacityEffect(elementRef));
 
       expect(hook.result.current).toBe(1);
     });
@@ -74,19 +73,33 @@ describe('hooks utilities', () => {
       const offsetTop = getFakeNumber();
       const offsetHeight = getFakeNumber();
       const element = { offsetTop, offsetHeight } as HTMLElement;
+      const elementRef = { current: element };
       const expectedOpacity = Math.max(
         1 - pageYOffset / (offsetTop + offsetHeight),
         0
       );
-      const hook = renderHook(() =>
-        useScrollOpacityEffect({ current: element })
-      );
+      const hook = renderHook(() => useScrollOpacityEffect(elementRef));
 
       act(() => {
         Window.emit('scroll');
       });
 
       expect(hook.result.current).toBe(expectedOpacity);
+    });
+
+    it('should handle element NOT found', () => {
+      const pageYOffset = getFakeNumber();
+
+      setReadOnlyProperty(window, 'pageYOffset', pageYOffset);
+
+      const elementRef = { current: null };
+      const hook = renderHook(() => useScrollOpacityEffect(elementRef));
+
+      act(() => {
+        Window.emit('scroll');
+      });
+
+      expect(hook.result.current).toBe(1);
     });
 
     it('should destroy listener on unmount', () => {

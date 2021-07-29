@@ -1,6 +1,6 @@
-import { HTMLAttributes } from 'react';
+import { SVGProps } from 'react';
 
-function SvgLogo(props: HTMLAttributes<SVGElement>) {
+function SvgLogo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

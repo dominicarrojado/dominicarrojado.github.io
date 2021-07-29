@@ -1,7 +1,7 @@
 import SvgEnvelope from '../components/svgEnvelope';
 import SvgGitHub from '../components/svgGitHub';
 import SvgLinkedIn from '../components/svgLinkedIn';
-import { Quote, Social, SocialName } from './types';
+import { Quote, Route, Social, SocialName } from './types';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
@@ -56,19 +56,19 @@ export const QUOTES_LENGTH = QUOTES.length;
 
 export const MENU_ITEMS = [
   {
-    path: '/',
+    path: Route.HOME,
     title: 'Home',
   },
   {
-    path: '/about-me',
+    path: Route.ABOUT_ME,
     title: 'About Me',
   },
   {
-    path: '/posts',
-    title: 'Blog',
+    path: Route.PROJECTS,
+    title: 'Projects',
   },
   {
-    path: '/testimonials',
-    title: 'Testimonials',
+    path: Route.POSTS,
+    title: 'Blog',
   },
 ];

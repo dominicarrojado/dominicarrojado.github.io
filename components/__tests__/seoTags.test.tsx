@@ -17,6 +17,10 @@ describe('<SeoTags />', () => {
       .mockImplementation(({ children }) => <>{children}</>);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   describe('path is index', () => {
     const path = '/';
     const title = getFakeSentence();
