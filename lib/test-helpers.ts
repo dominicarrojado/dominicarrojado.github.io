@@ -90,3 +90,18 @@ export function getFakeDomainWord() {
 export function getFakeUrl() {
   return faker.internet.url();
 }
+
+export function getFakeUuid() {
+  return faker.datatype.uuid();
+}
+
+export function getFakeDate() {
+  const datePast = faker.date.past();
+  const year = datePast.getFullYear();
+  let month: string | number = datePast.getMonth() + 1;
+  month = month < 10 ? `0${month}` : month;
+  let day: string | number = datePast.getDate();
+  day = day < 10 ? `0${day}` : day;
+
+  return `${year}-${month}-${day}`;
+}

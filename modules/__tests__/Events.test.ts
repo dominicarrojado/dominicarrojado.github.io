@@ -1,4 +1,4 @@
-import { getFakeWord } from '../../lib/test-helpers';
+import { getFakeDomainWord, getFakeWord } from '../../lib/test-helpers';
 import Events from '../Events';
 
 describe('Events module', () => {
@@ -30,7 +30,7 @@ describe('Events module', () => {
   it('can emit events', () => {
     const events = new Events();
     const event = getFakeWord();
-    const event2 = getFakeWord();
+    const event2 = getFakeDomainWord();
     const callback = jest.fn();
     const callback2 = jest.fn();
 

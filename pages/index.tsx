@@ -1,13 +1,15 @@
 import { GetStaticProps } from 'next';
+import { getLatestPostsData } from '../lib/posts';
 import SeoTags from '../components/seoTags';
 import HeroMain from '../components/heroMain';
 import AboutMeSection from '../components/aboutMeSection';
 import ProjectsSection from '../components/projectsSection';
-import BlogSection from '../components/blogSection';
+import PostsSection from '../components/postsSection';
 import TestimonialsSection from '../components/testimonialsSection';
+import { Post } from '../lib/types';
 import { MAIN_TITLE } from '../lib/constants';
 
-function Home() {
+function Home({ latestPosts }: { latestPosts: Array<Post> }) {
   return (
     <>
       {/* TODO: update SEO tags later */}
@@ -22,7 +24,7 @@ function Home() {
       <HeroMain />
       <AboutMeSection />
       <ProjectsSection />
-      <BlogSection />
+      <PostsSection latestPosts={latestPosts} />
       <TestimonialsSection />
     </>
   );
@@ -30,7 +32,9 @@ function Home() {
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: {},
+    props: {
+      latestPosts: getLatestPostsData(),
+    },
   };
 };
 

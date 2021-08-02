@@ -10,7 +10,7 @@ import { BEST_PROJECTS } from '../lib/constants';
 
 function ProjectsSection() {
   return (
-    <Section id="best-projects">
+    <Section id="projects">
       <SectionTitle>Featured Projects</SectionTitle>
       <SectionContent>A selection of projects I've done so far.</SectionContent>
       <ul

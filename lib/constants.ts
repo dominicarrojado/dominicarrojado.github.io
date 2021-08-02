@@ -6,6 +6,7 @@ import { Quote, Route, Social, SocialName, Project } from './types';
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
 export const SCROLL_DOWN_DURATION = 1500;
+export const POSTS_DISPLAY_LATEST_MAX = 4;
 
 export const FONTS = [
   'Roboto-Light',

@@ -20,6 +20,10 @@ export enum TooltipPosition {
   LEFT = 'left',
 }
 
+export enum PostCategory {
+  TECHNOLOGY = 'technology',
+}
+
 export enum GoogleAnalyticsEvents {
   HEADER_BTN_HOVER = 'header_btn_hover',
   HEADER_BTN_CLICK = 'header_btn_click',
@@ -61,4 +65,12 @@ export type Social = {
 export type Quote = {
   quote: string;
   author: string;
+};
+
+export type Post = {
+  id: string;
+  title: string;
+  category: PostCategory;
+  date: string;
+  excerpt: string;
 };

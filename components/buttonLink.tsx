@@ -1,17 +1,17 @@
-import { ForwardedRef, forwardRef, HTMLProps } from 'react';
+import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
 import SvgChevronRight from './svgChevronRight';
 
-const AnchorLink = forwardRef(
+const ButtonLink = forwardRef(
   (
-    { children, ...props }: HTMLProps<HTMLAnchorElement>,
-    ref: ForwardedRef<HTMLAnchorElement>
+    { children, ...props }: HTMLAttributes<HTMLButtonElement>,
+    ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
-      <a
+      <button
         ref={ref}
         className={cn(
-          'group inline-flex items-center font-normal select-none',
+          'group inline-block items-center font-normal select-none',
           'transition-colors duration-300 hover:text-black group-hover:text-black'
         )}
         {...props}
@@ -19,17 +19,17 @@ const AnchorLink = forwardRef(
         {children}
         <SvgChevronRight
           className={cn(
-            'inline-block w-3 h-3 ml-1 text-black opacity-30',
+            'inline-block w-3 h-3 -mt-px ml-1 text-black opacity-30',
             'transform transition duration-300 group-hover:translate-x-1.5 group-hover:opacity-100',
             'sm:w-4 sm:h-4',
-            'xl:w-5 xl:h-5'
+            'xl:w-5 xl:h-5 xl:-mt-1'
           )}
         />
-      </a>
+      </button>
     );
   }
 );
 
-AnchorLink.displayName = 'AnchorLink';
+ButtonLink.displayName = 'ButtonLink';
 
-export default AnchorLink;
+export default ButtonLink;
