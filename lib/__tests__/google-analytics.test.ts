@@ -8,7 +8,7 @@ import {
   setReadOnlyProperty,
 } from '../test-helpers';
 
-describe('google-analytics utils', () => {
+describe('google-analytics utilities', () => {
   describe('trackEvent()', () => {
     const dataLayerOrig = window.dataLayer;
     const locationOrig = window.location;

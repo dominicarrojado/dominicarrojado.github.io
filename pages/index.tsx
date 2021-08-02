@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import SeoTags from '../components/seoTags';
 import HeroMain from '../components/heroMain';
 import AboutMeSection from '../components/aboutMeSection';
-import FeaturedProjectsSection from '../components/featuredProjectsSection';
+import ProjectsSection from '../components/projectsSection';
 import BlogSection from '../components/blogSection';
 import TestimonialsSection from '../components/testimonialsSection';
 import { MAIN_TITLE } from '../lib/constants';
@@ -20,7 +20,7 @@ function Home() {
       />
       <HeroMain />
       <AboutMeSection />
-      <FeaturedProjectsSection />
+      <ProjectsSection />
       <BlogSection />
       <TestimonialsSection />
     </>

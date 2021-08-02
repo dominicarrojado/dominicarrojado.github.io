@@ -1,5 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
 import Window from '../../modules/Window';
 import * as imports from '../../lib/imports';

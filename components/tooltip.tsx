@@ -77,14 +77,14 @@ function Tooltip({
   return (
     <div
       ref={containerRef}
-      className={cn('absolute inset-0 m-auto z-50', className)}
+      className="absolute inset-0 m-auto z-50"
       onMouseEnter={typeof show === 'undefined' ? showTooltip : undefined}
       onMouseLeave={typeof show === 'undefined' ? hideTooltip : undefined}
     >
       <div
         ref={wrapperRef}
         className={cn(
-          'absolute max-w-xs bg-black py-1.5 px-3 text-center text-white text-sm whitespace-nowrap pointer-events-none',
+          'absolute bg-black py-2 px-4 text-center text-white text-sm whitespace-nowrap pointer-events-none',
           'transform transition duration-300',
           'lg:text-base',
           {
@@ -97,7 +97,8 @@ function Tooltip({
             ['-translate-y-2']: isBottom && !shouldDisplay,
             ['-translate-x-2']: isRight && !shouldDisplay,
             ['translate-x-2']: isLeft && !shouldDisplay,
-          }
+          },
+          className
         )}
         style={style}
         onTransitionEnd={onTransitionEnd}

@@ -2,10 +2,6 @@ import { getFakeWord } from '../../lib/test-helpers';
 import Events from '../Events';
 
 describe('Events module', () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
   it('can store events', () => {
     const events = new Events();
     const event = getFakeWord();

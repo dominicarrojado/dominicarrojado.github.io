@@ -2,12 +2,17 @@ import { MutableRefObject, TransitionEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition, Transition } from 'react-transition-group';
-import { getRefValue, useWindowLoaded } from '../lib/hooks';
+import { getRefValue } from '../lib/hooks';
+import { useWindowLoaded } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import Tooltip from './tooltip';
 import { GoogleAnalyticsEvents, Social } from '../lib/types';
-import { MENU_ITEMS, SOCIAL_LINKS } from '../lib/constants';
+import {
+  EXTERNAL_LINK_ATTRIBUTES,
+  MENU_ITEMS,
+  SOCIAL_LINKS,
+} from '../lib/constants';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -305,8 +310,7 @@ function SocialItems({ isMenuOpen }: { isMenuOpen: boolean }) {
           <a
             href={social.url}
             title={social.title}
-            rel="noopener noreferrer nofollow"
-            target="_blank"
+            {...EXTERNAL_LINK_ATTRIBUTES}
             className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
             onMouseLeave={() => socialOnMouseLeave(social)}
             onClick={(e) => socialOnClick(e, social)}

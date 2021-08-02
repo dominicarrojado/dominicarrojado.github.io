@@ -6,7 +6,7 @@ describe('Window module', () => {
     Window.loaded = false;
   };
 
-  beforeEach(() => {
+  afterEach(() => {
     resetWindowStates();
   });
 

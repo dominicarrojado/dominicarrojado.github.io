@@ -4,6 +4,7 @@ import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import AnchorLink from './anchorLink';
 import { Route } from '../lib/types';
+import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
 
 function AboutMeSection() {
   return (
@@ -20,8 +21,7 @@ function AboutMeSection() {
           I'm currently based in Singapore and working at{' '}
           <a
             href="https://www.propertyguru.com.sg/mortgage"
-            rel="noopener noreferrer nofollow"
-            target="_blank"
+            {...EXTERNAL_LINK_ATTRIBUTES}
           >
             PropertyGuru
           </a>{' '}

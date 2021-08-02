@@ -36,6 +36,20 @@ export enum GoogleAnalyticsEvents {
 
 export type Nullish<T> = T | null | undefined;
 
+export type ProjectLink = {
+  title: string;
+  url: string;
+};
+
+export type Project = {
+  title: string;
+  description: string;
+  links: Array<ProjectLink>;
+  imageUrl: string;
+  gifUrl: string;
+  isBest?: boolean;
+};
+
 export type Social = {
   name: SocialName;
   title: string;

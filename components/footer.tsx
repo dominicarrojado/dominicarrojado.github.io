@@ -6,12 +6,14 @@ import React, {
   useState,
 } from 'react';
 import cn from 'classnames';
-import { getRefValue, useWindowLoaded } from '../lib/hooks';
+import { getRefValue } from '../lib/hooks';
+import { useWindowLoaded } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import Tooltip from './tooltip';
 import { GoogleAnalyticsEvents, Social } from '../lib/types';
 import {
+  EXTERNAL_LINK_ATTRIBUTES,
   QUOTES,
   QUOTES_INTERVAL,
   QUOTES_LENGTH,
@@ -166,8 +168,7 @@ function SocialItems() {
           >
             <a
               href={social.url}
-              rel="noopener noreferrer nofollow"
-              target="_blank"
+              {...EXTERNAL_LINK_ATTRIBUTES}
               className="group relative inline-flex p-4 cursor-pointer"
               onMouseLeave={() => socialOnMouseLeave(social)}
               onClick={(e) => socialOnClick(e, social)}

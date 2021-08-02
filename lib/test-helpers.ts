@@ -2,6 +2,11 @@ import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
 import { Nullish } from './types';
 
+type GetFakeNumber = {
+  (max?: number): number;
+  (options?: { min?: number; max?: number; precision?: number }): number;
+};
+
 export function setReadOnlyProperty<
   O extends Record<string, any>,
   K extends keyof O,
@@ -42,6 +47,10 @@ export function fireEventTransitionEnd(
   fireEvent(element, transitionEndEvent);
 }
 
+export function getFakeBoolean() {
+  return faker.datatype.boolean();
+}
+
 export function getFakeString() {
   return faker.datatype.string();
 }
@@ -62,8 +71,8 @@ export function getFakeColor() {
   return faker.internet.color();
 }
 
-export function getFakeNumber() {
-  return faker.datatype.number();
+export function getFakeNumber<T = GetFakeNumber>(data?: T) {
+  return faker.datatype.number(data);
 }
 
 export function getFakeDirectoryPath() {

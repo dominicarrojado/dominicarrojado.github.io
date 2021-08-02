@@ -184,10 +184,9 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip className={className}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text);
-      const containerEl = wrapperEl?.parentElement as HTMLDivElement;
+      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
 
-      expect(containerEl).toHaveClass(className);
+      expect(wrapperEl).toHaveClass(className);
     });
   });
 

@@ -1,5 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import Window from '../../modules/Window';
 import { fireEventTransitionEnd } from '../../lib/test-helpers';
 import * as dom from '../../lib/dom';

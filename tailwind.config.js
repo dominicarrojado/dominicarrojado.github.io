@@ -9,6 +9,12 @@ module.exports = {
       letterSpacing: {
         px: '1px',
       },
+      minWidth: {
+        11: '2.75rem',
+      },
+      minHeight: {
+        24: '6rem',
+      },
       backgroundColor: {
         'gray-1000': '#2c2c34',
       },
@@ -26,6 +32,10 @@ module.exports = {
       },
       transitionDuration: {
         1250: '1250ms',
+      },
+      boxShadow: {
+        '3xl':
+          '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)',
       },
       animation: {
         slide: 'slide 200s linear infinite',
@@ -46,6 +56,7 @@ module.exports = {
   variants: {
     extend: {
       width: ['group-hover'],
+      margin: ['first'],
       translate: ['group-hover'],
     },
   },

@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
-import {
-  getRefValue,
-  useScrollOpacityEffect,
-  useWindowLoaded,
-} from '../lib/hooks';
+import { getRefValue } from '../lib/hooks';
+import { useScrollOpacityEffect, useWindowLoaded } from '../lib/custom-hooks';
 import { getMoveTo } from '../lib/imports';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';

@@ -1,6 +1,6 @@
 import { getMoveTo } from '../imports';
 
-describe('test', () => {
+describe('imports utilities', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });

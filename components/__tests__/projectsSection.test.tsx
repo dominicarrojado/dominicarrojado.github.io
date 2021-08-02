@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import FeaturedProjectsSection from '../featuredProjectsSection';
+import { PROJECTS } from '../../lib/constants';
+import ProjectsSection from '../projectsSection';
 
-describe('<FeaturedProjectsSection />', () => {
+describe('<ProjectsSection />', () => {
   beforeEach(() => {
-    render(<FeaturedProjectsSection />);
+    render(<ProjectsSection />);
   });
 
   it('should have expected title', () => {
@@ -16,6 +17,18 @@ describe('<FeaturedProjectsSection />', () => {
     const content = "A selection of projects I've done so far.";
 
     expect(screen.queryByText(content)).toBeInTheDocument();
+  });
+
+  it('should display best projects only', () => {
+    PROJECTS.forEach((project) => {
+      const projectEl = screen.queryByText(project.title);
+
+      if (project.isBest) {
+        expect(projectEl).toBeInTheDocument();
+      } else {
+        expect(projectEl).not.toBeInTheDocument();
+      }
+    });
   });
 
   it('should have expected anchor', () => {

@@ -11,7 +11,7 @@ const AnchorLink = forwardRef(
       <a
         ref={ref}
         className={cn(
-          'group inline-block items-center font-normal',
+          'group inline-block items-center font-normal select-none',
           'transition-colors duration-300 hover:text-black'
         )}
         {...props}
