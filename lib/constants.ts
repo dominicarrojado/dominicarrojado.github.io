@@ -7,6 +7,16 @@ export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
 export const SCROLL_DOWN_DURATION = 1500;
 
+export const FONTS = [
+  'Roboto-Light',
+  'Roboto-LightItalic',
+  'Roboto-Regular',
+  'Roboto-Italic',
+  'Roboto-Medium',
+  'Roboto-MediumItalic',
+  'Roboto-Bold',
+  'Roboto-BoldItalic',
+];
 export const EXTERNAL_LINK_ATTRIBUTES = {
   rel: 'noopener noreferrer nofollow',
   target: '_blank',

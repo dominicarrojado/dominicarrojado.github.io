@@ -10,6 +10,7 @@ import { MAIN_TITLE } from '../lib/constants';
 function Home() {
   return (
     <>
+      {/* TODO: update SEO tags later */}
       <SeoTags
         path="/"
         title={MAIN_TITLE}

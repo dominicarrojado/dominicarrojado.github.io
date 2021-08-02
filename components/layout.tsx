@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import PreLoadTags from './preLoadTags';
 import Header from './header';
 import Footer from './footer';
 
@@ -36,6 +37,8 @@ function Layout({ children }: { children: ReactNode }) {
         />
         <meta name="theme-color" content="#000000" />
         <link rel="manifest" href="/manifest.json" />
+
+        <PreLoadTags />
       </Head>
 
       {/* Google Tag Manager */}
