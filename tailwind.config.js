@@ -12,6 +12,9 @@ module.exports = {
       minWidth: {
         11: '2.75rem',
       },
+      maxWidth: {
+        'screen-3xl': '2880px',
+      },
       minHeight: {
         24: '6rem',
       },
