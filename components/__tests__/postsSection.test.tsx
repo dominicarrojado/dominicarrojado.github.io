@@ -6,6 +6,7 @@ import {
   getFakeUuid,
   getFakeWord,
 } from '../../lib/test-helpers';
+import * as PostItem from '../postItem';
 import { Post } from '../../lib/types';
 import PostsSection from '../postsSection';
 
@@ -26,18 +27,25 @@ describe('<PostsSection />', () => {
       excerpt: getFakeSentences(),
     },
   ] as Array<Post>;
-
-  beforeEach(() => {
+  const renderComponent = () => {
     render(<PostsSection latestPosts={latestPosts} />);
+  };
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   it('should have expected title', () => {
+    renderComponent();
+
     const titleEl = screen.queryByText('Blog');
 
     expect(titleEl?.tagName).toBe('H2');
   });
 
   it('should have expected content', () => {
+    renderComponent();
+
     const content =
       'A place to share my knowledge and learnings from my web development experiences.';
 
@@ -45,14 +53,20 @@ describe('<PostsSection />', () => {
   });
 
   it('should display latest posts', () => {
-    latestPosts.forEach((post) => {
-      const titleEl = screen.queryByText(post.title);
+    const postItemSpy = jest.spyOn(PostItem, 'default');
 
-      expect(titleEl).toBeInTheDocument();
+    renderComponent();
+
+    expect(postItemSpy).toBeCalledTimes(latestPosts.length);
+
+    latestPosts.forEach((post, idx) => {
+      expect(postItemSpy).toHaveBeenNthCalledWith(idx + 1, { post }, {});
     });
   });
 
   it('should have expected anchor', () => {
+    renderComponent();
+
     const anchorEl = screen.queryByText('See All Blog');
 
     expect(anchorEl?.tagName).toBe('A');

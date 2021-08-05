@@ -25,6 +25,7 @@ describe('posts utilities', () => {
 
       expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
 
+      // expect sorting is correct
       let minDate = Infinity;
 
       latestPosts.forEach((post) => {
@@ -53,6 +54,7 @@ describe('posts utilities', () => {
         ])
       );
 
+      // expect sorting is correct
       let minDate = Infinity;
 
       sortedPosts.forEach((post) => {

@@ -105,3 +105,15 @@ export function getFakeDate() {
 
   return `${year}-${month}-${day}`;
 }
+
+export function getFakeName() {
+  return faker.name.findName();
+}
+
+export function getFakeJobTitle() {
+  return faker.name.jobTitle();
+}
+
+export function getFakeCompanyName() {
+  return faker.company.companyName();
+}

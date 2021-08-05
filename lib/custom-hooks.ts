@@ -32,6 +32,38 @@ export function useWindowLoaded() {
   return isWindowLoaded;
 }
 
+export function useWindowSize() {
+  const windowWidthRef = useRef(0);
+  const windowHeightRef = useRef(0);
+  const [windowWidth, _setWindowWidth] = useState(0);
+  const [windowHeight, _setWindowHeight] = useState(0);
+  const setWidth = (value: number) => {
+    windowWidthRef.current = value;
+    _setWindowWidth(value);
+  };
+  const setHeight = (value: number) => {
+    windowHeightRef.current = value;
+    _setWindowHeight(value);
+  };
+
+  useEffect(() => {
+    const windowOnResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+
+    windowOnResize();
+
+    Window.on('resize', windowOnResize);
+
+    return () => {
+      Window.off('resize', windowOnResize);
+    };
+  });
+
+  return { windowWidth, windowHeight, windowWidthRef, windowHeightRef };
+}
+
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
   const [opacity, setOpacity] = useState(1);
 

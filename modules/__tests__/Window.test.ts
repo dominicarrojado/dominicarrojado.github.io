@@ -46,4 +46,15 @@ describe('Window module', () => {
 
     expect(onScroll).toBeCalled();
   });
+
+  it('should dispatch resize event', () => {
+    const onResize = jest.fn();
+
+    Window.init();
+    Window.on('resize', onResize);
+
+    window.dispatchEvent(new Event('resize'));
+
+    expect(onResize).toBeCalled();
+  });
 });

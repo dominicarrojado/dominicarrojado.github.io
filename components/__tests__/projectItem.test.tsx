@@ -215,10 +215,10 @@ describe('<ProjectItem />', () => {
     };
 
     afterEach(() => {
+      jest.restoreAllMocks();
+
       setReadOnlyProperty(window, 'innerHeight', windowHeightOrig);
       setReadOnlyProperty(window, 'pageYOffset', windowPageYOffset);
-
-      jest.restoreAllMocks();
     });
 
     it('should NOT display GIF by default', () => {

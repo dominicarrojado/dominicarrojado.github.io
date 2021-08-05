@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function copyTextToClipboard(text: string) {
   // create input text and append to body
   const input = document.createElement('input');
@@ -24,4 +26,14 @@ export function copyTextToClipboard(text: string) {
   document.body.removeChild(input);
 
   return copied;
+}
+
+export function getTouchEventData(
+  e:
+    | TouchEvent
+    | MouseEvent
+    | React.TouchEvent<HTMLElement>
+    | React.MouseEvent<HTMLElement>
+) {
+  return 'changedTouches' in e ? e.changedTouches[0] : e;
 }

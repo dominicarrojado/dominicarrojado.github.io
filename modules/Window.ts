@@ -16,6 +16,7 @@ class Window extends Events {
     }
 
     window.addEventListener('scroll', (e) => this.emit('scroll', e));
+    window.addEventListener('resize', (e) => this.emit('resize', e));
   };
 
   _onLoad = () => {

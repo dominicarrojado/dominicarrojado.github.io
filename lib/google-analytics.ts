@@ -74,6 +74,10 @@ type EventGifAutoPlayCancel = {
   gifCancelProgress: number;
 };
 
+type EventTestimonialsSwipe = {
+  event: GoogleAnalyticsEvents.TESTIMONIALS_SWIPE;
+};
+
 export function trackEvent(
   data:
     | EventHeaderMenuHover
@@ -87,6 +91,7 @@ export function trackEvent(
     | EventProjectInfoHover
     | EventGifAutoPlayStart
     | EventGifAutoPlayCancel
+    | EventTestimonialsSwipe
 ) {
   if (checkIsLocalhost()) {
     return;

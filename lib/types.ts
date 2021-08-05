@@ -36,6 +36,7 @@ export enum GoogleAnalyticsEvents {
   PROJECT_INFO_HOVER = 'project_info_hover',
   GIF_AUTO_PLAY_START = 'gif_auto_play_start',
   GIF_AUTO_PLAY_CANCEL = 'gif_auto_play_cancel',
+  TESTIMONIALS_SWIPE = 'testimonials_swipe',
 }
 
 export type Nullish<T> = T | null | undefined;
@@ -73,4 +74,12 @@ export type Post = {
   category: PostCategory;
   date: string;
   excerpt: string;
+};
+
+export type Testimonial = {
+  order: number;
+  name: string;
+  jobTitle: string;
+  companyName: string;
+  contentHtml: string;
 };

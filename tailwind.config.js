@@ -40,6 +40,10 @@ module.exports = {
         '3xl':
           '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)',
       },
+      cursor: {
+        grab: 'grab',
+        grabbing: 'grabbing',
+      },
       animation: {
         slide: 'slide 200s linear infinite',
         spin: 'spin 1s ease infinite',
@@ -61,6 +65,8 @@ module.exports = {
       width: ['group-hover'],
       margin: ['first'],
       translate: ['group-hover'],
+      rotate: ['even', 'odd'],
+      cursor: ['active'],
     },
   },
   plugins: [],

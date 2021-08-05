@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import * as customHooks from '../../lib/custom-hooks';
 import * as HeroMain from '../../components/heroMain';
 import * as SeoTags from '../../components/seoTags';
 import * as AboutMeSection from '../../components/aboutMeSection';
@@ -7,13 +8,22 @@ import * as PostsSection from '../../components/postsSection';
 import * as TestimonialsSection from '../../components/testimonialsSection';
 import { MAIN_TITLE, POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
 import Index, { getStaticProps } from '../index';
+import { Post, Testimonial } from '../../lib/types';
 
 describe('<Index />', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  it('should render expected components', () => {
+  it('should render expected components', async () => {
+    // mock to prevent re-render of testimonials section
+    jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
+      windowWidth: 0,
+      windowHeight: 0,
+      windowWidthRef: { current: 0 },
+      windowHeightRef: { current: 0 },
+    });
+
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroMainSpy = jest.spyOn(HeroMain, 'default');
     const aboutMeSectionSpy = jest.spyOn(AboutMeSection, 'default');
@@ -21,7 +31,38 @@ describe('<Index />', () => {
     const postsSectionSpy = jest.spyOn(PostsSection, 'default');
     const testimonialsSectionSpy = jest.spyOn(TestimonialsSection, 'default');
 
-    render(<Index latestPosts={[]} />);
+    const staticProps = (await getStaticProps({})) as any;
+
+    expect(staticProps).toEqual({
+      props: {
+        latestPosts: expect.arrayContaining([
+          {
+            id: expect.any(String),
+            title: expect.any(String),
+            category: expect.any(String),
+            date: expect.any(String),
+            excerpt: expect.any(String),
+          },
+        ]),
+        testimonials: expect.arrayContaining([
+          {
+            order: expect.any(Number),
+            name: expect.any(String),
+            jobTitle: expect.any(String),
+            companyName: expect.any(String),
+            contentHtml: expect.any(String),
+          },
+        ]),
+      },
+    });
+
+    const latestPosts = staticProps.props.latestPosts as Array<Post>;
+
+    expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
+
+    const testimonials = staticProps.props.testimonials as Array<Testimonial>;
+
+    render(<Index latestPosts={latestPosts} testimonials={testimonials} />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
 
@@ -44,29 +85,5 @@ describe('<Index />', () => {
     expect(projectsSectionSpy).toBeCalledTimes(1);
     expect(postsSectionSpy).toBeCalledTimes(1);
     expect(testimonialsSectionSpy).toBeCalledTimes(1);
-  });
-});
-
-describe('getStaticProps()', () => {
-  it('should return expected value', async () => {
-    const staticProps = await getStaticProps({});
-
-    expect(staticProps).toEqual({
-      props: {
-        latestPosts: expect.arrayContaining([
-          {
-            id: expect.any(String),
-            title: expect.any(String),
-            category: expect.any(String),
-            date: expect.any(String),
-            excerpt: expect.any(String),
-          },
-        ]),
-      },
-    });
-
-    const { latestPosts } = (staticProps as any).props;
-
-    expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
   });
 });
