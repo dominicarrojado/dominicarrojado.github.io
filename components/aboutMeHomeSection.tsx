@@ -6,7 +6,7 @@ import AnchorLink from './anchorLink';
 import { Route } from '../lib/types';
 import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
 
-function AboutMeSection() {
+function AboutMeHomeSection() {
   return (
     <Section id="about-me" className="bg-gray-100">
       <div className="max-w-5xl mx-auto">
@@ -37,4 +37,4 @@ function AboutMeSection() {
   );
 }
 
-export default AboutMeSection;
+export default AboutMeHomeSection;

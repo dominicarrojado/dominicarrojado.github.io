@@ -8,9 +8,9 @@ import {
 } from '../../lib/test-helpers';
 import * as PostItem from '../postItem';
 import { Post } from '../../lib/types';
-import PostsSection from '../postsSection';
+import PostsHomeSection from '../postsHomeSection';
 
-describe('<PostsSection />', () => {
+describe('<PostsHomeSection />', () => {
   const latestPosts = [
     {
       id: getFakeUuid(),
@@ -28,7 +28,7 @@ describe('<PostsSection />', () => {
     },
   ] as Array<Post>;
   const renderComponent = () => {
-    render(<PostsSection latestPosts={latestPosts} />);
+    render(<PostsHomeSection latestPosts={latestPosts} />);
   };
 
   afterEach(() => {

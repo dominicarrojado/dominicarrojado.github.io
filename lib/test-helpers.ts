@@ -1,6 +1,7 @@
 import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
 import { Nullish } from './types';
+import { ROUTES } from './constants';
 
 type GetFakeNumber = {
   (max?: number): number;
@@ -116,4 +117,12 @@ export function getFakeJobTitle() {
 
 export function getFakeCompanyName() {
   return faker.company.companyName();
+}
+
+export function getRandomRoute() {
+  return ROUTES[getFakeNumber(ROUTES.length - 1)];
+}
+
+export function getFakeJson() {
+  return JSON.parse(faker.datatype.json()) as Record<string, any>;
 }

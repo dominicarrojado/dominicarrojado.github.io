@@ -4,10 +4,10 @@ import Section from './section';
 import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import AnchorLink from './anchorLink';
-import { Post, Route } from '../lib/types';
 import PostItem from './postItem';
+import { Post, Route } from '../lib/types';
 
-function PostsSection({ latestPosts }: { latestPosts: Array<Post> }) {
+function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
   return (
     <Section id="posts" className="bg-gray-100">
       <SectionTitle>Blog</SectionTitle>
@@ -37,4 +37,4 @@ function PostsSection({ latestPosts }: { latestPosts: Array<Post> }) {
   );
 }
 
-export default PostsSection;
+export default PostsHomeSection;

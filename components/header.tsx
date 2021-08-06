@@ -1,27 +1,44 @@
-import { MutableRefObject, TransitionEvent, useRef, useState } from 'react';
+import {
+  MutableRefObject,
+  TransitionEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition, Transition } from 'react-transition-group';
+import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useWindowLoaded, useWindowSize } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import Tooltip from './tooltip';
-import { GoogleAnalyticsEvents, Social } from '../lib/types';
+import SvgLogo from './svgLogo';
+import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
 import {
   EXTERNAL_LINK_ATTRIBUTES,
   MENU_ITEMS,
   SOCIAL_LINKS,
 } from '../lib/constants';
 
-function Header() {
+function Header({ route }: { route: Route }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((isOpen) => !isOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
-      <header className={cn('fixed top-4 right-4 z-50', 'md:top-5 md:right-6')}>
+      <header
+        className={cn(
+          'fixed top-3 right-1 z-50',
+          'sm:top-3 sm:right-2',
+          'md:top-6 md:right-4',
+          'lg:right-6',
+          'xl:top-7'
+        )}
+      >
+        <Logo route={route} closeMenu={closeMenu} />
         <Button isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       </header>
       <MenuBackground isMenuOpen={isMenuOpen} />
@@ -39,6 +56,66 @@ function Header() {
         </div>
       </div>
     </>
+  );
+}
+
+function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
+  const isWindowLoaded = useWindowLoaded();
+  const { windowHeightRef } = useWindowSize();
+  const [animationDone, setAnimationDone] = useState(false);
+  const [isPastHeroSection, setIsPastHeroSection] = useState(false);
+  const onTransitionEnd = (e: TransitionEvent<HTMLAnchorElement>) => {
+    if (e.propertyName === 'opacity') {
+      setAnimationDone(true);
+    }
+  };
+  const withAnimationDelay = route !== Route.HOME && !animationDone;
+  const shouldDisplay =
+    isWindowLoaded && (route !== Route.HOME || isPastHeroSection);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsPastHeroSection(window.pageYOffset >= getRefValue(windowHeightRef));
+    };
+
+    Window.on('scroll', onScroll);
+
+    return () => {
+      Window.off('scroll', onScroll);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <Link href={Route.HOME}>
+      <a
+        className={cn(
+          'group fixed top-3.5 left-3.5 flex shadow-3xl border border-white bg-gray-1000 bg-opacity-90 z-50 p-1.5',
+          'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
+          'sm:top-4 sm:left-4',
+          'md:top-6 md:left-7 md:border-2',
+          'xl:top-5 xl:left-9 xl:p-2',
+          {
+            ['delay-700']: withAnimationDelay,
+            ['opacity-0 -translate-y-full']: !shouldDisplay,
+          }
+        )}
+        onClick={closeMenu}
+        onTransitionEnd={onTransitionEnd}
+        data-testid="logo"
+      >
+        <SvgLogo
+          className={cn(
+            'w-7 h-7 text-white',
+            'transition-colors duration-300',
+            'sm:w-8 sm:h-8',
+            'md:w-10 md:h-10',
+            'xl:w-11 xl:h-11'
+          )}
+        />
+      </a>
+    </Link>
   );
 }
 
@@ -172,7 +249,7 @@ function MenuBackground({ isMenuOpen }: { isMenuOpen: boolean }) {
         'fixed top-0 right-0 w-full h-full bg-gray-1000 z-30',
         'transition-opacity duration-500',
         {
-          ['opacity-0 pointer-events-none']: !isMenuOpen,
+          ['opacity-0 pointer-events-none delay-100']: !isMenuOpen,
         }
       )}
       data-testid="menu-background"

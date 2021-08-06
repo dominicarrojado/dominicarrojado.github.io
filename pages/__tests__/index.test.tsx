@@ -1,22 +1,22 @@
 import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
-import * as HeroMain from '../../components/heroMain';
 import * as SeoTags from '../../components/seoTags';
-import * as AboutMeSection from '../../components/aboutMeSection';
-import * as ProjectsSection from '../../components/projectsSection';
-import * as PostsSection from '../../components/postsSection';
-import * as TestimonialsSection from '../../components/testimonialsSection';
+import * as HeroMain from '../../components/heroMain';
+import * as AboutMeHomeSection from '../../components/aboutMeHomeSection';
+import * as ProjectsHomeSection from '../../components/projectsHomeSection';
+import * as PostsHomeSection from '../../components/postsHomeSection';
+import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
 import { MAIN_TITLE, POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
-import Index, { getStaticProps } from '../index';
 import { Post, Testimonial } from '../../lib/types';
+import Home, { getStaticProps } from '../index';
 
-describe('<Index />', () => {
+describe('<Home />', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
   it('should render expected components', async () => {
-    // mock to prevent re-render of testimonials section
+    // mock to prevent re-render of testimonials home section
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,
       windowHeight: 0,
@@ -26,10 +26,13 @@ describe('<Index />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroMainSpy = jest.spyOn(HeroMain, 'default');
-    const aboutMeSectionSpy = jest.spyOn(AboutMeSection, 'default');
-    const projectsSectionSpy = jest.spyOn(ProjectsSection, 'default');
-    const postsSectionSpy = jest.spyOn(PostsSection, 'default');
-    const testimonialsSectionSpy = jest.spyOn(TestimonialsSection, 'default');
+    const aboutMeHomeSectionSpy = jest.spyOn(AboutMeHomeSection, 'default');
+    const projectsHomeSectionSpy = jest.spyOn(ProjectsHomeSection, 'default');
+    const postsHomeSectionSpy = jest.spyOn(PostsHomeSection, 'default');
+    const testimonialsHomeSectionSpy = jest.spyOn(
+      TestimonialsHomeSection,
+      'default'
+    );
 
     const staticProps = (await getStaticProps({})) as any;
 
@@ -62,7 +65,7 @@ describe('<Index />', () => {
 
     const testimonials = staticProps.props.testimonials as Array<Testimonial>;
 
-    render(<Index latestPosts={latestPosts} testimonials={testimonials} />);
+    render(<Home latestPosts={latestPosts} testimonials={testimonials} />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
 
@@ -81,9 +84,9 @@ describe('<Index />', () => {
     );
 
     expect(heroMainSpy).toBeCalledTimes(1);
-    expect(aboutMeSectionSpy).toBeCalledTimes(1);
-    expect(projectsSectionSpy).toBeCalledTimes(1);
-    expect(postsSectionSpy).toBeCalledTimes(1);
-    expect(testimonialsSectionSpy).toBeCalledTimes(1);
+    expect(aboutMeHomeSectionSpy).toBeCalledTimes(1);
+    expect(projectsHomeSectionSpy).toBeCalledTimes(1);
+    expect(postsHomeSectionSpy).toBeCalledTimes(1);
+    expect(testimonialsHomeSectionSpy).toBeCalledTimes(1);
   });
 });

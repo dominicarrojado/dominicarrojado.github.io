@@ -3,8 +3,9 @@ import Head from 'next/head';
 import PreLoadTags from './preLoadTags';
 import Header from './header';
 import Footer from './footer';
+import { Route } from '../lib/types';
 
-function Layout({ children }: { children: ReactNode }) {
+function Layout({ route, children }: { route: Route; children: ReactNode }) {
   return (
     <>
       <Head>
@@ -56,7 +57,7 @@ function Layout({ children }: { children: ReactNode }) {
       />
       {/* End Google Tag Manager */}
 
-      <Header />
+      <Header route={route} />
 
       {children}
 

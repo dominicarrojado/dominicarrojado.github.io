@@ -12,24 +12,24 @@ import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
 export default function HeroMain() {
-  const shouldDisplay = useWindowLoaded();
-
   return (
     <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-32">
-      <Loader shouldDisplay={!shouldDisplay} />
-      <Background shouldDisplay={shouldDisplay} />
+      <Loader />
+      <Background />
       <div className="w-full -mt-16 text-center z-10">
-        <Logo shouldDisplay={shouldDisplay} />
-        <Title shouldDisplay={shouldDisplay} />
+        <Logo />
+        <Title />
       </div>
-      <ScrollDownButton shouldDisplay={shouldDisplay} />
+      <ScrollDownButton />
     </section>
   );
 }
 
-function Loader({ shouldDisplay }: { shouldDisplay: boolean }) {
-  const [isMounted, setIsMounted] = useState(false);
+function Loader() {
   const spinnerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const isWindowLoaded = useWindowLoaded();
+  const shouldDisplay = isMounted && !isWindowLoaded;
 
   useEffect(() => {
     setIsMounted(true);
@@ -37,7 +37,7 @@ function Loader({ shouldDisplay }: { shouldDisplay: boolean }) {
 
   return (
     <Transition
-      in={isMounted && shouldDisplay}
+      in={shouldDisplay}
       nodeRef={spinnerRef}
       timeout={1000}
       mountOnEnter
@@ -63,12 +63,14 @@ function Loader({ shouldDisplay }: { shouldDisplay: boolean }) {
   );
 }
 
-function Background({ shouldDisplay }: { shouldDisplay: boolean }) {
+function Background() {
+  const shouldDisplay = useWindowLoaded();
+
   return (
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
-        'animate-slide transition-opacity duration-500',
+        'animate-slide transition-opacity duration-1250',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -79,8 +81,9 @@ function Background({ shouldDisplay }: { shouldDisplay: boolean }) {
   );
 }
 
-function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
+function Logo() {
   const titleRef = useRef<HTMLDivElement>(null);
+  const shouldDisplay = useWindowLoaded();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -93,8 +96,7 @@ function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
           'md:top-0 md:-left-32 md:text-11xl',
           'xl:-top-5 xl:-left-44 xl:text-12xl',
           {
-            [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
-            ['translate-x-3']: !shouldDisplay,
+            [!shouldDisplay ? 'opacity-0 translate-x-3' : 'opacity-40']: true,
           }
         )}
         data-testid="logo-part-1"
@@ -108,8 +110,7 @@ function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
           'md:w-80 md:h-80',
           'xl:w-96 xl:h-96',
           {
-            ['opacity-0']: !shouldDisplay,
-            ['-translate-y-4']: !shouldDisplay,
+            ['opacity-0 -translate-y-4']: !shouldDisplay,
           }
         )}
         data-testid="logo"
@@ -122,8 +123,7 @@ function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
           'md:top-0 md:-right-32 md:text-11xl',
           'xl:-top-5 xl:-right-44 xl:text-12xl',
           {
-            [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
-            ['-translate-x-3']: !shouldDisplay,
+            [!shouldDisplay ? 'opacity-0 -translate-x-3' : 'opacity-40']: true,
           }
         )}
         data-testid="logo-part-2"
@@ -134,8 +134,9 @@ function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
   );
 }
 
-function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
+function Title() {
   const titleRef = useRef<HTMLDivElement>(null);
+  const shouldDisplay = useWindowLoaded();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -148,8 +149,7 @@ function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
           {
-            ['opacity-0']: !shouldDisplay,
-            ['translate-y-full']: !shouldDisplay,
+            ['opacity-0 translate-y-full']: !shouldDisplay,
           }
         )}
         data-testid="title"
@@ -160,10 +160,11 @@ function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
   );
 }
 
-function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
+function ScrollDownButton() {
   const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
   const isBtnClickedRef = useRef(false);
+  const shouldDisplay = useWindowLoaded();
   const btnOnMouseLeave = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {

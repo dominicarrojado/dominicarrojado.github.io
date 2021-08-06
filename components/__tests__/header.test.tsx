@@ -3,15 +3,25 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
 import * as Link from 'next/link';
 import Window from '../../modules/Window';
-import { fireEventTransitionEnd, getFakeWord } from '../../lib/test-helpers';
+import {
+  fireEventTransitionEnd,
+  getFakeWord,
+  getRandomRoute,
+  setReadOnlyProperty,
+} from '../../lib/test-helpers';
 import * as ga from '../../lib/google-analytics';
 import * as dom from '../../lib/dom';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
+import { Route } from '../../lib/types';
 import Header from '../header';
 
 config.disabled = true; // disable react-transitions-group transitions
 
 describe('<Header />', () => {
+  const renderComponent = (route: Route) => {
+    render(<Header route={route} />);
+  };
+
   beforeEach(() => {
     // need to mock <Link /> if you need to fire "click" event as it will throw an error
     jest
@@ -20,8 +30,6 @@ describe('<Header />', () => {
         ({ href, children }) =>
           (<>{cloneElement(children as any, { href })}</>) as any
       );
-
-    render(<Header />);
   });
 
   afterEach(() => {
@@ -29,6 +37,10 @@ describe('<Header />', () => {
   });
 
   describe('content', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
     it('should have expected menu items', () => {
       MENU_ITEMS.forEach((menu) => {
         const anchorEl = screen.queryByText(menu.title);
@@ -51,6 +63,10 @@ describe('<Header />', () => {
   });
 
   describe('menu is NOT opened', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
     it('should have expected button text', () => {
       const text = 'Menu';
 
@@ -60,7 +76,7 @@ describe('<Header />', () => {
     it('should hide menu background', () => {
       const menuBackgroundEl = screen.queryByTestId('menu-background');
 
-      expect(menuBackgroundEl).toHaveClass('opacity-0');
+      expect(menuBackgroundEl).toHaveClass('opacity-0 delay-100');
     });
 
     it('should hide the menu items', () => {
@@ -84,6 +100,8 @@ describe('<Header />', () => {
 
   describe('menu is opened', () => {
     beforeEach(() => {
+      renderComponent(getRandomRoute());
+
       const btnTextEl = screen.queryByText('Menu');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
 
@@ -99,7 +117,7 @@ describe('<Header />', () => {
     it('should display menu background', () => {
       const menuBackgroundEl = screen.queryByTestId('menu-background');
 
-      expect(menuBackgroundEl).not.toHaveClass('opacity-0');
+      expect(menuBackgroundEl).not.toHaveClass('opacity-0 delay-100');
     });
 
     it('should display the menu items', () => {
@@ -121,7 +139,114 @@ describe('<Header />', () => {
     });
   });
 
+  describe('<Logo />', () => {
+    describe('home route', () => {
+      const windowPageYOffset = window.pageYOffset;
+
+      beforeEach(() => {
+        renderComponent(Route.HOME);
+      });
+
+      afterEach(() => {
+        setReadOnlyProperty(window, 'pageYOffset', windowPageYOffset);
+      });
+
+      it('should NOT display logo by default', () => {
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).toHaveClass('opacity-0');
+      });
+
+      it('should NOT display logo on window load', () => {
+        act(() => {
+          Window.emit('load');
+        });
+
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).toHaveClass('opacity-0');
+      });
+
+      it('should display logo on scroll past hero section (window height)', () => {
+        act(() => {
+          Window.emit('load');
+
+          setReadOnlyProperty(window, 'pageYOffset', window.innerHeight);
+          Window.emit('scroll');
+        });
+
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).not.toHaveClass('opacity-0');
+      });
+
+      it('should NOT have animation delay by default', () => {
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).not.toHaveClass('delay-700');
+      });
+    });
+
+    describe('other routes except home', () => {
+      const getRandomRouteExceptHome = (): Route => {
+        const route = getRandomRoute();
+
+        if (route === Route.HOME) {
+          return getRandomRouteExceptHome();
+        }
+
+        return route;
+      };
+
+      beforeEach(() => {
+        renderComponent(getRandomRouteExceptHome());
+      });
+
+      it('should NOT display logo by default', () => {
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).toHaveClass('opacity-0');
+      });
+
+      it('should display logo on window load', () => {
+        act(() => {
+          Window.emit('load');
+        });
+
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).not.toHaveClass('opacity-0');
+      });
+
+      it('should have animation delay by default', () => {
+        const logoEl = screen.queryByTestId('logo');
+
+        expect(logoEl).toHaveClass('delay-700');
+      });
+
+      it('should NOT have animation delay by default on transition end of opacity', () => {
+        const logoEl = screen.queryByTestId('logo') as HTMLAnchorElement;
+
+        fireEventTransitionEnd(logoEl, 'opacity');
+
+        expect(logoEl).not.toHaveClass('delay-700');
+      });
+
+      it('should have animation delay on transition end of other prop name', () => {
+        const logoEl = screen.queryByTestId('logo') as HTMLAnchorElement;
+
+        fireEventTransitionEnd(logoEl, getFakeWord());
+
+        expect(logoEl).toHaveClass('delay-700');
+      });
+    });
+  });
+
   describe('<Button />', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
     it('should NOT be clickable by default', () => {
       const btnTextEl = screen.queryByText('Menu');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
@@ -239,6 +364,10 @@ describe('<Header />', () => {
   });
 
   describe('<MenuItems />', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
     MENU_ITEMS.forEach((menu) => {
       describe(`menu item (${menu.title}) on click`, () => {
         beforeEach(() => {
@@ -298,6 +427,10 @@ describe('<Header />', () => {
   });
 
   describe('<Social />', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
     it('should handle normal links', () => {
       SOCIAL_LINKS.forEach((social) => {
         if (social.shouldCopyOnClick) {

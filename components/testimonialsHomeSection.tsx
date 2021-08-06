@@ -11,7 +11,7 @@ import TestimonialItem from './testimonialItem';
 import SvgTouch from './svgTouch';
 import { GoogleAnalyticsEvents, Testimonial } from '../lib/types';
 
-function TestimonialsSection({
+function TestimonialsHomeSection({
   testimonials,
 }: {
   testimonials: Array<Testimonial>;
@@ -155,4 +155,4 @@ function TestimonialsSection({
   );
 }
 
-export default TestimonialsSection;
+export default TestimonialsHomeSection;

@@ -84,7 +84,7 @@ function Tooltip({
       <div
         ref={wrapperRef}
         className={cn(
-          'absolute bg-black py-2 px-4 text-center text-white text-sm whitespace-nowrap pointer-events-none',
+          'absolute bg-black py-2 px-4 text-center text-white text-sm font-normal whitespace-nowrap pointer-events-none',
           'transform transition duration-300',
           'lg:text-base',
           {

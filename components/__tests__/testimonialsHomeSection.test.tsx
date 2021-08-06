@@ -11,9 +11,9 @@ import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
 import * as TestimonialItem from '../testimonialItem';
 import { Testimonial } from '../../lib/types';
-import TestimonialsSection from '../testimonialsSection';
+import TestimonialsHomeSection from '../testimonialsHomeSection';
 
-describe('<TestimonialsSection />', () => {
+describe('<TestimonialsHomeSection />', () => {
   const testimonials = [
     {
       order: getFakeNumber(),
@@ -32,7 +32,7 @@ describe('<TestimonialsSection />', () => {
   ] as Array<Testimonial>;
   const testimonialsLen = testimonials.length;
   const renderComponent = () => {
-    render(<TestimonialsSection testimonials={testimonials} />);
+    render(<TestimonialsHomeSection testimonials={testimonials} />);
   };
   const windowWidthOrig = window.innerWidth;
 
@@ -60,7 +60,7 @@ describe('<TestimonialsSection />', () => {
   });
 
   it('should display testimonials', () => {
-    // mock to prevent re-render of testimonials section
+    // mock to prevent re-render of testimonials home section
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,
       windowHeight: 0,

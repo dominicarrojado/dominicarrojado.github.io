@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { queryByTextIgnoreHTML } from '../../lib/test-helpers';
-import AboutMeSection from '../aboutMeSection';
+import AboutMeHomeSection from '../aboutMeHomeSection';
 
-describe('<AboutMeSection />', () => {
+describe('<AboutMeHomeSection />', () => {
   beforeEach(() => {
-    render(<AboutMeSection />);
+    render(<AboutMeHomeSection />);
   });
 
   it('should have expected title', () => {

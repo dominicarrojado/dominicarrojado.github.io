@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import * as Head from 'next/head';
-import { getFakeSentence } from '../../lib/test-helpers';
+import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
 import * as PreLoadTags from '../preLoadTags';
 import * as Header from '../header';
 import * as Footer from '../footer';
@@ -14,7 +14,7 @@ describe('<Layout />', () => {
   it('should render children', () => {
     const text = getFakeSentence();
 
-    render(<Layout>{text}</Layout>);
+    render(<Layout route={getRandomRoute()}>{text}</Layout>);
 
     expect(screen.queryByText(text)).toBeInTheDocument();
   });
@@ -27,7 +27,7 @@ describe('<Layout />', () => {
     const headerSpy = jest.spyOn(Header, 'default');
     const footerSpy = jest.spyOn(Footer, 'default');
 
-    render(<Layout>{getFakeSentence()}</Layout>);
+    render(<Layout route={getRandomRoute()}>{getFakeSentence()}</Layout>);
 
     expect(preLoadTagsSpy).toBeCalledTimes(1);
     expect(headSpy).toBeCalledTimes(1);
