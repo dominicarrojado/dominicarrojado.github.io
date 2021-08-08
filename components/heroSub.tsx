@@ -119,8 +119,7 @@ function Desc({ children }: { children: ReactNode }) {
         className={cn(
           'font-light text-white',
           'transform transition duration-1000 delay-300',
-          'md:text-2xl',
-          'xl:text-3xl',
+          'xl:text-2xl',
           {
             ['opacity-0 translate-y-full']: !shouldDisplay,
           }

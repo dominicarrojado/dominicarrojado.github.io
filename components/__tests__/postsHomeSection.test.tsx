@@ -60,7 +60,11 @@ describe('<PostsHomeSection />', () => {
     expect(postItemSpy).toBeCalledTimes(latestPosts.length);
 
     latestPosts.forEach((post, idx) => {
-      expect(postItemSpy).toHaveBeenNthCalledWith(idx + 1, { post }, {});
+      expect(postItemSpy).toHaveBeenNthCalledWith(
+        idx + 1,
+        expect.objectContaining({ post }),
+        {}
+      );
     });
   });
 

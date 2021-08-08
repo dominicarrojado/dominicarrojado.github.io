@@ -10,7 +10,7 @@ import TestimonialsHomeSection from '../components/testimonialsHomeSection';
 import { Post, Route, Testimonial } from '../lib/types';
 import { MAIN_TITLE } from '../lib/constants';
 
-function Home({
+export default function Home({
   latestPosts,
   testimonials,
 }: {
@@ -45,5 +45,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-export default Home;

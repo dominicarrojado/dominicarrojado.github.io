@@ -3,10 +3,6 @@ import { getFakeSentence } from '../../lib/test-helpers';
 import AnchorLink from '../anchorLink';
 
 describe('<AnchorLink />', () => {
-  beforeEach(() => {
-    render(<AnchorLink />);
-  });
-
   it('should render children', () => {
     const text = getFakeSentence();
 

@@ -1,11 +1,11 @@
 import cn from 'classnames';
-import React, { useEffect, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Transition } from 'react-transition-group';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
-import { useDownloadGif, useMounted } from '../lib/custom-hooks';
+import { useDownloadGif, useMounted, useWindowSize } from '../lib/custom-hooks';
 import { checkIsUrlInternal } from '../lib/location';
 import AnchorLink from './anchorLink';
 import Spinner from './spinner';
@@ -19,15 +19,25 @@ import {
 } from '../lib/types';
 import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
 
-export default function ProjectItem({ project }: { project: Project }) {
+export default function ProjectItem({
+  project,
+  className,
+  style,
+}: {
+  project: Project;
+  className?: string;
+  style?: CSSProperties;
+}) {
   return (
     <li
       className={cn(
         'flex flex-col items-center mt-16 first:mt-0',
         'sm:mt-24',
         'lg:mt-48 lg:flex-row',
-        'xl:mt-52'
+        'xl:mt-52',
+        className
       )}
+      style={style}
     >
       <ImageContainer
         imageUrl={project.imageUrl}
@@ -54,7 +64,7 @@ function ImageContainer({
   title: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState(0);
+  const { windowHeight } = useWindowSize();
   const [isScrolling, setIsScrolling] = useState(false);
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [isImgInView, setIsImgInView] = useState(false);
@@ -99,8 +109,6 @@ function ImageContainer({
   useEffect(() => {
     let timeout: number;
 
-    setWindowHeight(window.innerHeight);
-
     const onScroll = () => {
       const { pageYOffset, innerHeight } = window;
       const containerEl = getRefValue(containerRef);
@@ -108,6 +116,7 @@ function ImageContainer({
       setIsScrolling(true);
 
       if (
+        pageYOffset !== 0 && // to prevent showing GIF when switching to projects page
         containerEl &&
         containerEl.offsetTop >= pageYOffset &&
         containerEl.offsetTop + containerEl.offsetHeight <=

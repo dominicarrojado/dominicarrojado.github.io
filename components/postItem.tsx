@@ -1,27 +1,41 @@
+import { CSSProperties } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import Date from './date';
 import ButtonLink from './buttonLink';
 import { Post, Route } from '../lib/types';
 
-function PostItem({ post }: { post: Post }) {
+function PostItem({
+  post,
+  className,
+  style,
+  anchorClassName,
+}: {
+  post: Post;
+  className?: string;
+  style?: CSSProperties;
+  anchorClassName?: string;
+}) {
   return (
     <li
       className={cn(
         'mt-4 first:mt-0 select-none',
         'sm:mt-6',
         'md:mt-8',
-        'xl:mt-10'
+        'xl:mt-10',
+        className
       )}
+      style={style}
     >
       <Link href={`${Route.POSTS}/${post.id}`} passHref>
         <a
           className={cn(
-            'group flex w-full shadow-md bg-white py-6 px-4',
+            'group flex w-full shadow-md py-6 px-4',
             'transition-shadow duration-300 hover:shadow-xl',
             'sm:px-6',
             'md:p-8',
-            'xl:p-10'
+            'xl:p-10',
+            anchorClassName
           )}
         >
           <article className="flex flex-col w-full">

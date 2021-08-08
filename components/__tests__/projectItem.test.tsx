@@ -264,12 +264,12 @@ describe('<ProjectItem />', () => {
         );
 
       // mock HTML properties that makes image to be in view
-      setReadOnlyProperty(window, 'pageYOffset', 0);
-      setReadOnlyProperty(window, 'innerHeight', 1);
+      setReadOnlyProperty(window, 'pageYOffset', 1);
+      setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({
-        offsetTop: 0,
-        offsetHeight: 1,
+        offsetTop: 1,
+        offsetHeight: 2,
       });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');

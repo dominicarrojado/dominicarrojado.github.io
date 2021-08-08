@@ -1,6 +1,8 @@
+import { CSSProperties } from 'react';
 import { render, screen } from '@testing-library/react';
 import {
   getFakeDate,
+  getFakeNumber,
   getFakeSentence,
   getFakeSentences,
   getFakeUuid,
@@ -17,51 +19,98 @@ describe('<PostItem />', () => {
     date: getFakeDate(),
     excerpt: getFakeSentences(),
   } as Post;
+  const renderComponent = (props: {
+    className?: string;
+    style?: CSSProperties;
+    anchorClassName?: string;
+  }) => {
+    render(<PostItem post={post} {...props} />);
+  };
 
-  beforeEach(() => {
-    render(<PostItem post={post} />);
+  describe('content', () => {
+    beforeEach(() => {
+      renderComponent({});
+    });
+
+    it('should have expected url', () => {
+      const titleEl = screen.queryByText(post.title);
+      const anchorEl = titleEl?.closest('a') as HTMLAnchorElement;
+
+      expect(anchorEl).toHaveAttribute('href', `/posts/${post.id}`);
+      expect(anchorEl).not.toHaveAttribute('rel');
+      expect(anchorEl).not.toHaveAttribute('target');
+    });
+
+    it('should render the date', () => {
+      const date = new Date(post.date);
+      const formattedDate = `${getMonthName(
+        date.getMonth()
+      )} ${date.getDate()}, ${date.getFullYear()}`;
+
+      expect(screen.queryByText(formattedDate)).toBeInTheDocument();
+    });
+
+    it('should render the category', () => {
+      const categoryEl = screen.queryByText(post.category);
+
+      expect(categoryEl).toBeInTheDocument();
+    });
+
+    it('should render the title', () => {
+      const titleEl = screen.queryByText(post.title);
+
+      expect(titleEl?.tagName).toBe('H3');
+    });
+
+    it('should render the excerpt', () => {
+      const excerptEl = screen.queryByText(post.excerpt);
+
+      expect(excerptEl?.tagName).toBe('P');
+    });
+
+    it('should render the button', () => {
+      const btnEl = screen.queryByText('Read More');
+
+      expect(btnEl?.tagName).toBe('BUTTON');
+    });
   });
 
-  it('should have expected url', () => {
-    const titleEl = screen.queryByText(post.title);
-    const anchorEl = titleEl?.closest('a') as HTMLAnchorElement;
+  describe('other props', () => {
+    it('should accept className prop', () => {
+      const className = getFakeWord();
 
-    expect(anchorEl).toHaveAttribute('href', `/posts/${post.id}`);
-    expect(anchorEl).not.toHaveAttribute('rel');
-    expect(anchorEl).not.toHaveAttribute('target');
-  });
+      renderComponent({ className });
 
-  it('should render the date', () => {
-    const date = new Date(post.date);
-    const formattedDate = `${getMonthName(
-      date.getMonth()
-    )} ${date.getDate()}, ${date.getFullYear()}`;
+      const titleEl = screen.queryByText(post.title);
+      const listEl = titleEl?.closest('li') as HTMLLIElement;
 
-    expect(screen.queryByText(formattedDate)).toBeInTheDocument();
-  });
+      expect(listEl).toHaveClass(className);
+    });
 
-  it('should render the category', () => {
-    const categoryEl = screen.queryByText(post.category);
+    it('should accept style prop', () => {
+      const style = {
+        width: `${getFakeNumber()}px`,
+        height: `${getFakeNumber()}px`,
+      };
 
-    expect(categoryEl).toBeInTheDocument();
-  });
+      renderComponent({ style });
 
-  it('should render the title', () => {
-    const titleEl = screen.queryByText(post.title);
+      const titleEl = screen.queryByText(post.title);
+      const listEl = titleEl?.closest('li') as HTMLLIElement;
 
-    expect(titleEl?.tagName).toBe('H3');
-  });
+      expect(listEl).toHaveStyle(style);
+    });
 
-  it('should render the excerpt', () => {
-    const excerptEl = screen.queryByText(post.excerpt);
+    it('should accept anchorClassName prop', () => {
+      const anchorClassName = getFakeWord();
 
-    expect(excerptEl?.tagName).toBe('P');
-  });
+      renderComponent({ anchorClassName });
 
-  it('should render the button', () => {
-    const btnEl = screen.queryByText('Read More');
+      const titleEl = screen.queryByText(post.title);
+      const anchorEl = titleEl?.closest('a') as HTMLAnchorElement;
 
-    expect(btnEl?.tagName).toBe('BUTTON');
+      expect(anchorEl).toHaveClass(anchorClassName);
+    });
   });
 });
 

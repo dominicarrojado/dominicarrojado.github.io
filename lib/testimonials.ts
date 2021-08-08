@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
 import html from 'remark-html';
+import { sortArrayByKeys } from './array';
 import { Testimonial } from './types';
 
 const testimonialsDir = path.join(process.cwd(), 'testimonials');
@@ -38,12 +39,5 @@ export async function getAllTestimonialsData() {
 
   await Promise.all(promises);
 
-  // sort testimonials by order
-  return testimonials.sort(({ order: a }, { order: b }) => {
-    if (a < b) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
+  return sortArrayByKeys(testimonials, { order: 1 });
 }

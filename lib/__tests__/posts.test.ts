@@ -1,9 +1,17 @@
+import {
+  getFakeDate,
+  getFakeSentence,
+  getFakeSentences,
+  getFakeUuid,
+  getFakeWord,
+} from '../test-helpers';
+import { Post } from '../types';
 import { POSTS_DISPLAY_LATEST_MAX } from '../constants';
 import {
   getAllPostIds,
+  getAllPostsData,
   getLatestPostsData,
   getPostData,
-  getSortedPostsData,
 } from '../posts';
 
 describe('posts utilities', () => {
@@ -36,13 +44,58 @@ describe('posts utilities', () => {
         minDate = date;
       });
     });
+
+    it('should handle posts less than max', () => {
+      const posts = [
+        {
+          id: getFakeUuid(),
+          title: getFakeSentence(),
+          category: getFakeWord(),
+          date: getFakeDate(),
+          excerpt: getFakeSentences(),
+        },
+      ] as Array<Post>;
+
+      const latestPosts = getLatestPostsData(posts);
+
+      expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
+    });
+
+    it('should handle posts more than max', () => {
+      const posts = [];
+
+      for (let i = 0; i < POSTS_DISPLAY_LATEST_MAX + 1; i++) {
+        posts.push({
+          id: getFakeUuid(),
+          title: getFakeSentence(),
+          category: getFakeWord(),
+          date: getFakeDate(),
+          excerpt: getFakeSentences(),
+        } as Post);
+      }
+
+      // sort by date
+      posts.sort(({ date: a }, { date: b }) => {
+        if (a < b) {
+          return 1;
+        } else if (a > b) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+
+      const latestPosts = getLatestPostsData(posts);
+
+      expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
+    });
   });
 
-  describe('getSortedPostsData()', () => {
+  describe('getAllPostsData()', () => {
     it('should return expected value', () => {
-      const sortedPosts = getSortedPostsData();
+      const posts = getAllPostsData();
 
-      expect(sortedPosts).toEqual(
+      expect(posts).toEqual(
         expect.arrayContaining([
           {
             id: expect.any(String),
@@ -57,7 +110,7 @@ describe('posts utilities', () => {
       // expect sorting is correct
       let minDate = Infinity;
 
-      sortedPosts.forEach((post) => {
+      posts.forEach((post) => {
         const date = new Date(post.date).getTime();
 
         expect(date).toBeLessThanOrEqual(minDate);

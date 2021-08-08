@@ -3,22 +3,30 @@ import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
 import html from 'remark-html';
+import { sortArrayByKeys } from './array';
 import { POSTS_DISPLAY_LATEST_MAX } from './constants';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export function getLatestPostsData() {
-  const posts = getSortedPostsData().filter(
-    (_post, idx) => idx < POSTS_DISPLAY_LATEST_MAX
-  );
+export function getLatestPostsData(posts = getAllPostsData()) {
+  const postsLen = posts.length;
+  const latestPosts = [];
 
-  return posts;
+  for (let i = 0; i < postsLen; i++) {
+    if (i >= POSTS_DISPLAY_LATEST_MAX) {
+      break;
+    }
+
+    latestPosts.push(posts[i]);
+  }
+
+  return latestPosts;
 }
 
-export function getSortedPostsData() {
+export function getAllPostsData() {
   // get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  const posts = fileNames.map((fileName) => {
     // remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
 
@@ -35,16 +43,7 @@ export function getSortedPostsData() {
     };
   });
 
-  // sort posts by date
-  return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
-      return 1;
-    } else if (a > b) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+  return sortArrayByKeys(posts, { date: -1 });
 }
 
 export function getAllPostIds() {

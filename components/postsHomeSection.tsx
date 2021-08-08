@@ -23,7 +23,7 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
         )}
       >
         {latestPosts.map((post, idx) => (
-          <PostItem key={idx} post={post} />
+          <PostItem key={idx} post={post} anchorClassName="bg-white" />
         ))}
       </ul>
       <div
