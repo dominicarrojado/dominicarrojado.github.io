@@ -7,6 +7,7 @@ import {
   getFakeSentences,
   getFakeUuid,
   getFakeWord,
+  getMonthName,
 } from '../../lib/test-helpers';
 import { Post } from '../../lib/types';
 import PostItem from '../postItem';
@@ -113,22 +114,3 @@ describe('<PostItem />', () => {
     });
   });
 });
-
-function getMonthName(monthIdx: number) {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  return months[monthIdx];
-}

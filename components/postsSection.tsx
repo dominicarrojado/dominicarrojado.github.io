@@ -29,12 +29,11 @@ function PostsSection({ posts }: { posts: Array<Post> }) {
               key={idx}
               post={post}
               className={cn('transform transition duration-700', {
-                'opacity-0 translate-y-10 absolute select-none pointer-events-none':
-                  !shouldDisplay,
+                'opacity-0 translate-y-10': !shouldDisplay,
               })}
               style={{
                 transitionDelay: !isOlder
-                  ? `${idx * 150 + 700}ms`
+                  ? `${idx * 150 + 1500}ms`
                   : `${(idx - POSTS_DISPLAY_LATEST_MAX) * 150}ms`,
               }}
               anchorClassName="bg-gray-100"

@@ -18,7 +18,7 @@ function ProjectsSection() {
               ['transform opacity-0 translate-y-10']: !shouldDisplay,
             })}
             style={{
-              transitionDelay: `${idx * 150 + 700}ms`,
+              transitionDelay: `${idx * 150 + 1500}ms`,
             }}
           />
         ))}

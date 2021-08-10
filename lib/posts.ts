@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
-import html from 'remark-html';
+import remarkHtml from 'remark-html';
+import remarkExternalLinks from 'remark-external-links';
 import { sortArrayByKeys } from './array';
 import { POSTS_DISPLAY_LATEST_MAX } from './constants';
 
@@ -65,7 +66,11 @@ export async function getPostData(id: string) {
 
   // use remark to convert markdown into HTML string
   const processedContent = await remark()
-    .use(html)
+    .use(remarkExternalLinks, {
+      target: '_blank',
+      rel: ['noopener noreferrer nofollow'],
+    })
+    .use(remarkHtml)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
@@ -73,6 +78,17 @@ export async function getPostData(id: string) {
   return {
     id,
     contentHtml,
+    ...getAdjacentPosts(id),
     ...(matterResult.data as { date: string; title: string }),
+  };
+}
+
+// get previous/next of post via postId
+export function getAdjacentPosts(postId: string, posts = getAllPostsData()) {
+  const postIdx = posts.findIndex((item) => item.id === postId);
+
+  return {
+    previousPost: posts[postIdx + 1] || null,
+    nextPost: posts[postIdx - 1] || null,
   };
 }

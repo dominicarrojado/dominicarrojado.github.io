@@ -22,7 +22,7 @@ const AnchorLink = forwardRef(
             'inline-block w-3 h-3 ml-1 text-black opacity-30',
             'transform transition duration-300 group-hover:translate-x-1.5 group-hover:opacity-100',
             'sm:w-4 sm:h-4',
-            'xl:w-5 xl:h-5'
+            'xl:w-5 xl:h-5 xl:ml-2'
           )}
         />
       </a>

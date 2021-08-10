@@ -6,8 +6,8 @@ import * as AboutMeHomeSection from '../../components/aboutMeHomeSection';
 import * as ProjectsHomeSection from '../../components/projectsHomeSection';
 import * as PostsHomeSection from '../../components/postsHomeSection';
 import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
-import { MAIN_TITLE, POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
 import { Post, Testimonial } from '../../lib/types';
+import { MAIN_TITLE, POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
 import Home, { getStaticProps } from '../index';
 
 describe('<Home />', () => {
@@ -16,6 +16,9 @@ describe('<Home />', () => {
   });
 
   it('should render expected components', async () => {
+    // mock to prevent re-render of hero section
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     // mock to prevent re-render of testimonials home section
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,

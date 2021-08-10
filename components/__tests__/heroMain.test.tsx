@@ -28,6 +28,12 @@ describe('<HeroMain />', () => {
   });
 
   describe('window is NOT loaded', () => {
+    it('should display container', () => {
+      const containerEl = screen.queryByTestId('container');
+
+      expect(containerEl).toHaveClass('translate-y-0');
+    });
+
     it('should display spinner', () => {
       const spinnerEl = screen.queryByTestId('spinner');
 
@@ -74,6 +80,12 @@ describe('<HeroMain />', () => {
       act(() => {
         Window.emit('load');
       });
+    });
+
+    it('should display container', () => {
+      const containerEl = screen.queryByTestId('container');
+
+      expect(containerEl).toHaveClass('translate-y-0');
     });
 
     it('should hide spinner', () => {

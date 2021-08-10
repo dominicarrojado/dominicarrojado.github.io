@@ -130,11 +130,12 @@
   p a::after {
     @apply absolute;
     @apply bottom-0;
-    @apply left-0;
+    @apply right-0;
     @apply w-full;
     @apply h-px;
     @apply bg-black;
     @apply z-0;
+    @apply pointer-events-none;
 
     content: '';
   }
@@ -146,12 +147,13 @@
 
   p a::after {
     @apply w-0;
-    @apply bg-opacity-30;
     @apply transition-width;
-    @apply duration-300;
+    @apply duration-500;
   }
 
   p a:hover::after {
+    @apply right-auto;
+    @apply left-0;
     @apply w-full;
   }
 }

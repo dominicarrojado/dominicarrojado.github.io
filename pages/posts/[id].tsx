@@ -1,29 +1,25 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import Head from 'next/head';
 import { getAllPostIds, getPostData } from '../../lib/posts';
-import Date from '../../components/date';
+import SeoTags from '../../components/seoTags';
+import HeroSub from '../../components/heroSub';
+import PostContent from '../../components/postContent';
+import { PostData } from '../../lib/types';
 
-function Post({
-  postData,
-}: {
-  postData: { title: string; date: string; contentHtml: string };
-}) {
+function Post({ postData }: { postData: PostData }) {
   return (
-    <div className="p-12">
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
-      <article>
-        <h1 className="text-3xl font-bold">{postData.title}</h1>
-        <div className="mt-2 text-gray-700">
-          <Date dateString={postData.date} />
-        </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-          className="mt-6 leading-7"
-        ></div>
-      </article>
-    </div>
+    <>
+      {/* TODO: update SEO tags later */}
+      <SeoTags
+        path={`/posts/${postData.id}`}
+        title={postData.title}
+        description={postData.excerpt}
+        imageUrl=""
+        imageWidth={0}
+        imageHeight={0}
+      />
+      <HeroSub title={postData.title} description={postData.excerpt} />
+      <PostContent postData={postData} />
+    </>
   );
 }
 

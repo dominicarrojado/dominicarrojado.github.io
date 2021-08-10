@@ -4,10 +4,12 @@ import {
   getFakeSentences,
   getFakeUuid,
   getFakeWord,
+  getRandomPostId,
 } from '../test-helpers';
 import { Post } from '../types';
 import { POSTS_DISPLAY_LATEST_MAX } from '../constants';
 import {
+  getAdjacentPosts,
   getAllPostIds,
   getAllPostsData,
   getLatestPostsData,
@@ -74,17 +76,6 @@ describe('posts utilities', () => {
         } as Post);
       }
 
-      // sort by date
-      posts.sort(({ date: a }, { date: b }) => {
-        if (a < b) {
-          return 1;
-        } else if (a > b) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
-
       const latestPosts = getLatestPostsData(posts);
 
       expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
@@ -138,15 +129,121 @@ describe('posts utilities', () => {
 
   describe('getPostData()', () => {
     it('should return expected value', async () => {
-      const postData = await getPostData('pre-rendering');
+      const postId = getRandomPostId();
+      const postData = await getPostData(postId);
 
-      expect(postData).toEqual({
-        id: expect.any(String),
-        title: expect.any(String),
-        category: expect.any(String),
-        date: expect.any(String),
-        excerpt: expect.any(String),
-        contentHtml: expect.any(String),
+      expect(postData).toEqual(
+        expect.objectContaining({
+          id: postId,
+          title: expect.any(String),
+          category: expect.any(String),
+          date: expect.any(String),
+          excerpt: expect.any(String),
+          contentHtml: expect.any(String),
+        })
+      );
+
+      const expectAdjacentPostData = (adjacentPostData: any) => {
+        expect(adjacentPostData).toEqual(
+          expect.objectContaining({
+            id: expect.any(String),
+            title: expect.any(String),
+            category: expect.any(String),
+            date: expect.any(String),
+            excerpt: expect.any(String),
+          })
+        );
+        expect(adjacentPostData.id).not.toBe(postId);
+      };
+
+      const currentPostDate = new Date(postData.date).getTime();
+      const previousPostData = postData.previousPost;
+
+      if (previousPostData) {
+        expectAdjacentPostData(previousPostData);
+
+        const previousPostDate = new Date(previousPostData.date).getTime();
+
+        expect(currentPostDate).toBeGreaterThanOrEqual(previousPostDate);
+      } else {
+        expect(previousPostData).toBeNull();
+      }
+
+      const nextPostData = postData.nextPost;
+
+      if (nextPostData) {
+        expectAdjacentPostData(nextPostData);
+
+        const nextPostDate = new Date(nextPostData.date).getTime();
+
+        expect(currentPostDate).toBeLessThanOrEqual(nextPostDate);
+      } else {
+        expect(nextPostData).toBeNull();
+      }
+    });
+  });
+
+  describe('getAdjacentPosts()', () => {
+    it('should return previous and next post', () => {
+      const sortedPosts = [];
+
+      for (let i = 0; i < 3; i++) {
+        sortedPosts.push({
+          id: getFakeUuid(),
+          title: getFakeSentence(),
+          category: getFakeWord(),
+          date: getFakeDate(),
+          excerpt: getFakeSentences(),
+        } as Post);
+      }
+
+      const adjacentPostData = getAdjacentPosts(sortedPosts[1].id, sortedPosts);
+
+      expect(adjacentPostData).toEqual({
+        previousPost: sortedPosts[2],
+        nextPost: sortedPosts[0],
+      });
+    });
+
+    it('should return previous post only', () => {
+      const sortedPosts = [];
+
+      for (let i = 0; i < 3; i++) {
+        sortedPosts.push({
+          id: getFakeUuid(),
+          title: getFakeSentence(),
+          category: getFakeWord(),
+          date: getFakeDate(),
+          excerpt: getFakeSentences(),
+        } as Post);
+      }
+
+      const adjacentPostData = getAdjacentPosts(sortedPosts[0].id, sortedPosts);
+
+      expect(adjacentPostData).toEqual({
+        previousPost: sortedPosts[1],
+        nextPost: null,
+      });
+    });
+
+    it('should return next post only', () => {
+      const sortedPosts = [];
+
+      for (let i = 0; i < 3; i++) {
+        sortedPosts.push({
+          id: getFakeUuid(),
+          title: getFakeSentence(),
+          category: getFakeWord(),
+          date: getFakeDate(),
+          excerpt: getFakeSentences(),
+        } as Post);
+      }
+
+      const adjacentPostData = getAdjacentPosts(sortedPosts[2].id, sortedPosts);
+
+      expect(adjacentPostData).toEqual({
+        previousPost: null,
+        nextPost: sortedPosts[1],
       });
     });
   });

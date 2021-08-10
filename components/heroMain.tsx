@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
 import { getRefValue } from '../lib/hooks';
-import { useScrollOpacityEffect, useWindowLoaded } from '../lib/custom-hooks';
+import {
+  useMounted,
+  useScrollOpacityEffect,
+  useWindowLoaded,
+} from '../lib/custom-hooks';
 import { getMoveTo } from '../lib/imports';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
@@ -12,8 +16,21 @@ import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
 export default function HeroMain() {
+  const shouldDisplay = useMounted();
+
   return (
-    <section className="relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-32">
+    <section
+      className={cn(
+        'relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-32',
+        'transform transition-transform ease-in-out duration-700',
+        'sm:px-20',
+        'lg:px-32',
+        {
+          [shouldDisplay ? 'translate-y-0' : '-translate-y-full']: true,
+        }
+      )}
+      data-testid="container"
+    >
       <Loader />
       <Background />
       <div className="w-full -mt-16 text-center z-10">
@@ -70,7 +87,7 @@ function Background() {
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
-        'animate-slide transition-opacity duration-1250',
+        'animate-slide transition-opacity duration-1250 delay-700',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -91,7 +108,7 @@ function Logo() {
       <div
         className={cn(
           'absolute top-3 -left-14 text-white text-9xl tracking-normal leading-none select-none',
-          'transform transition duration-1250',
+          'transform transition duration-1250 delay-700',
           'sm:-top-1 sm:-left-24 sm:text-10xl',
           'md:top-0 md:-left-32 md:text-11xl',
           'xl:-top-5 xl:-left-44 xl:text-12xl',
@@ -105,7 +122,7 @@ function Logo() {
       </div>
       <SvgLogo
         className={cn(
-          'w-40 h-40 text-white transform transition duration-1250',
+          'w-40 h-40 text-white transform transition duration-1250 delay-700',
           'sm:w-60 sm:h-60',
           'md:w-80 md:h-80',
           'xl:w-96 xl:h-96',
@@ -118,7 +135,7 @@ function Logo() {
       <div
         className={cn(
           'absolute top-3 -right-14 text-white text-9xl tracking-normal leading-none select-none',
-          ' transform transition duration-1250',
+          ' transform transition duration-1250 delay-700',
           'sm:-top-1 sm:-right-24 sm:text-10xl',
           'md:top-0 md:-right-32 md:text-11xl',
           'xl:-top-5 xl:-right-44 xl:text-12xl',
@@ -144,7 +161,7 @@ function Title() {
       <h1
         className={cn(
           'mt-2 text-xs font-light text-white',
-          'transform transition duration-1000',
+          'transform transition duration-1000 delay-1250',
           'sm:text-base',
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
@@ -214,7 +231,7 @@ function ScrollDownButton() {
     <div
       className={cn(
         'absolute bottom-0 left-0 w-full z-10 text-center',
-        'transform transition duration-1000',
+        'transform transition duration-1000 delay-1750',
         {
           ['opacity-0']: !shouldDisplay,
           ['-translate-y-3']: !shouldDisplay,
@@ -233,17 +250,17 @@ function ScrollDownButton() {
         <div
           className={cn(
             'relative inline-flex pt-1 pb-0.5 text-gray-400 text-2xs select-none',
-            'transform transition duration-300 group-hover:translate-y-0.5  group-hover:text-white',
+            'transform transition duration-300 group-hover:translate-y-0.5 group-hover:text-white',
             'md:mb-1 md:text-sm md:group-hover:translate-y-1',
             'xl:mb-2 xl:text-lg'
           )}
         >
           {text}
-          <div className="absolute bottom-0 left-0 w-full h-px bg-white bg-opacity-20 z-0" />
+          <div className="absolute bottom-0 right-0 w-full h-px bg-white bg-opacity-20 z-0 pointer-events-none" />
           <div
             className={cn(
-              'absolute bottom-0 left-0 w-0 h-px bg-white z-10',
-              'transition-width duration-300 group-hover:w-full'
+              'absolute bottom-0 right-0 w-0 h-px bg-white z-10 pointer-events-none',
+              'transition-width duration-500 group-hover:right-auto group-hover:left-0 group-hover:w-full'
             )}
           />
         </div>

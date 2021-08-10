@@ -1,7 +1,15 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { Transition } from 'react-transition-group';
-import { useScrollOpacityEffect, useWindowLoaded } from '../lib/custom-hooks';
+import {
+  SwitchTransition,
+  Transition,
+  TransitionStatus,
+} from 'react-transition-group';
+import {
+  useMounted,
+  useScrollOpacityEffect,
+  useWindowLoaded,
+} from '../lib/custom-hooks';
 import Spinner from './spinner';
 
 export default function HeroSub({
@@ -11,19 +19,42 @@ export default function HeroSub({
   title: string;
   description: string;
 }) {
+  const shouldDisplay = useMounted();
+  const sectionRef = useRef<HTMLElement>(null);
+
   return (
-    <section
-      className={cn(
-        'relative flex flex-col justify-center min-h-96 bg-gray-1000 py-28 px-6 text-center',
-        'sm:px-20',
-        'lg:px-32'
-      )}
-    >
-      <Loader />
-      <Background />
-      <Title>{title}</Title>
-      <Desc>{description}</Desc>
-    </section>
+    <SwitchTransition>
+      <Transition
+        key={title}
+        nodeRef={sectionRef}
+        timeout={500}
+        mountOnEnter
+        unmountOnExit
+      >
+        {(state) => (
+          <section
+            ref={sectionRef}
+            className={cn(
+              'relative flex flex-col justify-center min-h-96 bg-gray-1000 py-28 px-6 text-center overflow-hidden',
+              'transform transition-transform ease-in-out duration-500',
+              'sm:px-20',
+              'lg:px-32',
+              {
+                [shouldDisplay && state === 'entered'
+                  ? 'translate-y-0'
+                  : '-translate-y-full']: true,
+              }
+            )}
+            data-testid="container"
+          >
+            <Loader />
+            <Background />
+            <Title title={title} state={state} />
+            <Desc description={description} state={state} />
+          </section>
+        )}
+      </Transition>
+    </SwitchTransition>
   );
 }
 
@@ -50,7 +81,7 @@ function Loader() {
           ref={spinnerRef}
           className={cn(
             'absolute inset-0 m-auto w-8 h-8 border-2',
-            'transition-opacity duration-1000',
+            'transition-opacity duration-1000 delay-1250',
             'sm:w-10 sm:h-10 sm:border-4',
             'md:w-12 md:h-12',
             'xl:w-14 xl:h-14',
@@ -72,7 +103,7 @@ function Background() {
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
-        'animate-slide transition-opacity duration-1250',
+        'animate-slide transition-opacity duration-1250 delay-500',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -83,7 +114,7 @@ function Background() {
   );
 }
 
-function Title({ children }: { children: ReactNode }) {
+function Title({ title, state }: { title: string; state: TransitionStatus }) {
   const titleRef = useRef<HTMLDivElement>(null);
   const shouldDisplay = useWindowLoaded();
   const opacity = useScrollOpacityEffect(titleRef);
@@ -93,39 +124,49 @@ function Title({ children }: { children: ReactNode }) {
       <h1
         className={cn(
           'text-3xl font-bold text-white',
-          'transform transition duration-1000',
+          'transform transition duration-1000 delay-500',
           'sm:text-4xl sm:leading-tight',
           'md:text-5xl md:leading-tight',
           'xl:text-7xl xl:leading-tight',
           {
-            ['opacity-0 translate-y-full']: !shouldDisplay,
+            [shouldDisplay && state === 'entered'
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-full']: true,
           }
         )}
       >
-        {children}
+        {title}
       </h1>
     </div>
   );
 }
 
-function Desc({ children }: { children: ReactNode }) {
+function Desc({
+  description,
+  state,
+}: {
+  description: string;
+  state: TransitionStatus;
+}) {
   const descRef = useRef<HTMLDivElement>(null);
   const shouldDisplay = useWindowLoaded();
   const opacity = useScrollOpacityEffect(descRef);
 
   return (
-    <div ref={descRef} className={cn('overflow-hidden')} style={{ opacity }}>
+    <div ref={descRef} className="overflow-hidden" style={{ opacity }}>
       <p
         className={cn(
           'font-light text-white',
-          'transform transition duration-1000 delay-300',
+          'transform transition duration-1000 delay-1000',
           'xl:text-2xl',
           {
-            ['opacity-0 translate-y-full']: !shouldDisplay,
+            [shouldDisplay && state === 'entered'
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-full']: true,
           }
         )}
       >
-        {children}
+        {description}
       </p>
     </div>
   );

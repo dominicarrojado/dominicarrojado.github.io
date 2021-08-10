@@ -64,6 +64,7 @@ function ImageContainer({
   title: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const { windowHeight } = useWindowSize();
   const [isScrolling, setIsScrolling] = useState(false);
   const [isImgLoaded, setIsImgLoaded] = useState(false);
@@ -169,12 +170,14 @@ function ImageContainer({
         </LazyLoad>
         <Transition
           in={shouldDisplayGifImg}
+          nodeRef={imgRef}
           timeout={300}
           mountOnEnter
           unmountOnExit
         >
           {(state) => (
             <img
+              ref={imgRef}
               src={gifData}
               alt={`GIF of ${title}`}
               className={cn(
@@ -221,6 +224,7 @@ function GifLoader({
   progress: number;
   title: string;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const isMounted = useMounted();
   const text = 'Downloading GIF...';
   const loaderOnMouseEnter = () => {
@@ -234,12 +238,14 @@ function GifLoader({
   return (
     <Transition
       in={isMounted && shouldDisplay}
+      nodeRef={containerRef}
       timeout={300}
       mountOnEnter
       unmountOnExit
     >
       {(state) => (
         <div
+          ref={containerRef}
           className={cn(
             'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
             'transition-opacity duration-300',

@@ -84,9 +84,9 @@ function Tooltip({
       <div
         ref={wrapperRef}
         className={cn(
-          'absolute bg-black py-2 px-4 text-center text-white text-sm font-normal whitespace-nowrap pointer-events-none',
+          'absolute bg-black py-1.5 px-3 text-center text-white text-sm font-normal whitespace-nowrap pointer-events-none',
           'transform transition duration-300',
-          'lg:text-base',
+          'lg:py-2 lg:px-4 lg:text-base',
           {
             ['opacity-0']: !shouldDisplay,
             ['bottom-full']: isTop,

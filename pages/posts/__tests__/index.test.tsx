@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import * as customHooks from '../../../lib/custom-hooks';
 import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostsSection from '../../../components/postsSection';
@@ -11,6 +12,9 @@ describe('<Posts />', () => {
   });
 
   it('should render expected components', async () => {
+    // mock to prevent re-render of hero section
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const postsSectionSpy = jest.spyOn(PostsSection, 'default');

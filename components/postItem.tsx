@@ -46,7 +46,7 @@ function PostItem({
               />
               <div
                 className={cn(
-                  'inline-block rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
+                  'rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
                   'md:py-1 md:px-2 md:text-xs',
                   'xl:text-sm'
                 )}

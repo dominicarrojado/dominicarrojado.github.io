@@ -76,6 +76,12 @@ export type Post = {
   excerpt: string;
 };
 
+export type PostData = Post & {
+  contentHtml: string;
+  previousPost: Post | null;
+  nextPost: Post | null;
+};
+
 export type Testimonial = {
   order: number;
   name: string;

@@ -1,5 +1,7 @@
 import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
+import fs from 'fs';
+import path from 'path';
 import { Nullish } from './types';
 import { ROUTES } from './constants';
 
@@ -46,6 +48,42 @@ export function fireEventTransitionEnd(
   (transitionEndEvent as any).propertyName = propertyName;
 
   fireEvent(element, transitionEndEvent);
+}
+
+export function getMonthName(monthIdx: number) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  return months[monthIdx];
+}
+
+export function getRandomRoute() {
+  return ROUTES[getFakeNumber(ROUTES.length - 1)];
+}
+
+export function getRandomPostId() {
+  const postsDirectory = path.join(process.cwd(), 'posts');
+  const fileNames = fs.readdirSync(postsDirectory);
+  const posts = fileNames.map((fileName) => {
+    // remove ".md" from file name to get id
+    const id = fileName.replace(/\.md$/, '');
+
+    return id;
+  });
+
+  return posts[getFakeNumber(posts.length - 1)];
 }
 
 export function getFakeBoolean() {
@@ -117,10 +155,6 @@ export function getFakeJobTitle() {
 
 export function getFakeCompanyName() {
   return faker.company.companyName();
-}
-
-export function getRandomRoute() {
-  return ROUTES[getFakeNumber(ROUTES.length - 1)];
 }
 
 export function getFakeJson() {

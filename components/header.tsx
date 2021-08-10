@@ -1,5 +1,7 @@
 import {
+  Dispatch,
   MutableRefObject,
+  SetStateAction,
   TransitionEvent,
   useEffect,
   useRef,
@@ -299,11 +301,11 @@ function MenuItems({
               onClick={closeMenu}
             >
               {item.title}
-              <div className="absolute bottom-0 left-0 w-full h-px bg-white bg-opacity-20 z-0" />
+              <div className="absolute bottom-0 right-0 w-full h-px bg-white bg-opacity-20 z-0 pointer-events-none" />
               <div
                 className={cn(
-                  'absolute bottom-0 left-0 w-0 h-px bg-white z-10',
-                  'transition-width duration-300 group-hover:w-full'
+                  'absolute bottom-0 right-0 w-0 h-px bg-white z-10 pointer-events-none',
+                  'transition-width duration-300 group-hover:right-auto group-hover:left-0 group-hover:w-full'
                 )}
               />
             </a>
@@ -315,35 +317,59 @@ function MenuItems({
 }
 
 function SocialItems({ isMenuOpen }: { isMenuOpen: boolean }) {
-  const isBtnClickedRef: MutableRefObject<Record<string, boolean>> = useRef({});
-  const [copiedItem, setCopiedItem] = useState('');
-  const socialOnMouseLeave = (social: Social) => {
-    setCopiedItem('');
+  return (
+    <ul
+      className={cn(
+        'flex mt-10 transform -translate-x-4',
+        'sm:-translate-x-5',
+        'md:-translate-x-6',
+        'lg:hidden'
+      )}
+    >
+      {SOCIAL_LINKS.map((social, idx) => (
+        <SocialItem
+          key={idx}
+          idx={idx}
+          social={social}
+          isMenuOpen={isMenuOpen}
+        />
+      ))}
+    </ul>
+  );
+}
 
-    const socialName = social.name;
+function SocialItem({
+  idx,
+  social,
+  isMenuOpen,
+}: {
+  idx: number;
+  social: Social;
+  isMenuOpen: boolean;
+}) {
+  const isBtnClickedRef = useRef(false);
+  const [isUrlCopied, setIsUrlCopied] = useState(false);
+  const tipContainerRef = useRef<HTMLDivElement>(null);
+  const onMouseLeave = () => {
+    setIsUrlCopied(false);
 
-    if (!getRefValue(isBtnClickedRef)[socialName]) {
+    if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
-        socialName,
         event: GoogleAnalyticsEvents.SOCIAL_HOVER,
         hoverText: social.title,
         hoverUrl: social.url,
+        socialName: social.name,
       });
     }
   };
-  const socialOnClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    social: Social
-  ) => {
-    const socialName = social.name;
-
-    isBtnClickedRef.current[socialName] = true;
+  const onClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    isBtnClickedRef.current = true;
 
     trackEvent({
-      socialName,
       event: GoogleAnalyticsEvents.SOCIAL_CLICK,
       linkText: social.title,
       linkUrl: social.url,
+      socialName: social.name,
     });
 
     if (!social.shouldCopyOnClick) {
@@ -358,60 +384,54 @@ function SocialItems({ isMenuOpen }: { isMenuOpen: boolean }) {
     }
 
     e.preventDefault();
-    setCopiedItem(social.name);
+    setIsUrlCopied(true);
   };
 
   return (
-    <ul
-      className={cn(
-        'flex mt-10 transform -translate-x-4',
-        'sm:-translate-x-5',
-        'md:-translate-x-6',
-        'lg:hidden'
-      )}
+    <li
+      key={social.name}
+      className={cn('transform', {
+        [!isMenuOpen
+          ? 'opacity-0 transition-transform translate-y-1/2 duration-300'
+          : 'opacity-100 transition translate-y-0 duration-500']: true,
+      })}
+      style={
+        isMenuOpen
+          ? { transitionDelay: `${(idx + 1) * 75 + 300}ms` }
+          : undefined
+      }
     >
-      {SOCIAL_LINKS.map((social, idx) => (
-        <li
-          key={social.name}
-          className={cn('transform', {
-            [!isMenuOpen
-              ? 'opacity-0 transition-transform translate-y-1/2 duration-300'
-              : 'opacity-100 transition translate-y-0 duration-500']: true,
-          })}
-          style={
-            isMenuOpen
-              ? { transitionDelay: `${(idx + 1) * 75 + 300}ms` }
-              : undefined
-          }
+      <a
+        href={social.url}
+        title={social.title}
+        {...EXTERNAL_LINK_ATTRIBUTES}
+        className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+      >
+        {social.icon({
+          className: cn(
+            'w-9 h-9 text-gray-300',
+            'transition-colors hover:text-white focus:text-white',
+            'sm:w-10 sm:h-10',
+            'md:w-11 md:h-11'
+          ),
+        })}
+        <Transition
+          in={isUrlCopied}
+          nodeRef={tipContainerRef}
+          timeout={300}
+          mountOnEnter
+          unmountOnExit
         >
-          <a
-            href={social.url}
-            title={social.title}
-            {...EXTERNAL_LINK_ATTRIBUTES}
-            className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
-            onMouseLeave={() => socialOnMouseLeave(social)}
-            onClick={(e) => socialOnClick(e, social)}
-          >
-            {social.icon({
-              className: cn(
-                'w-9 h-9 text-gray-300',
-                'transition-colors hover:text-white focus:text-white',
-                'sm:w-10 sm:h-10',
-                'md:w-11 md:h-11'
-              ),
-            })}
-            <Transition
-              in={social.name === copiedItem}
-              timeout={300}
-              mountOnEnter
-              unmountOnExit
-            >
-              {(state) => <Tooltip show={state === 'entered'}>Copied!</Tooltip>}
-            </Transition>
-          </a>
-        </li>
-      ))}
-    </ul>
+          {(state) => (
+            <div ref={tipContainerRef}>
+              <Tooltip show={state === 'entered'}>Copied!</Tooltip>
+            </div>
+          )}
+        </Transition>
+      </a>
+    </li>
   );
 }
 
