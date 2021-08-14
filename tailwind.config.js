@@ -79,11 +79,19 @@ module.exports = {
                 color: 'rgba(0, 0, 0, 1)',
               },
             },
+            strong: {
+              fontWeight: 500,
+            },
             pre: {
               backgroundColor: '#2c2c34',
             },
             code: {
+              border: '1px solid rgba(229, 231, 235, 1)',
+              borderRadius: '0.375rem',
+              backgroundColor: 'rgba(243, 244, 246, 1)',
+              padding: '0.25rem 0.5rem',
               color: 'rgba(31, 41, 55, 1)',
+              fontWeight: 400,
               '&::before': {
                 display: 'none',
               },

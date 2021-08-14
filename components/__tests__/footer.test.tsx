@@ -100,7 +100,7 @@ describe('<Footer />', () => {
       jest.restoreAllMocks();
     });
 
-    it('should be hidden when window is NOT loaded', () => {
+    it('should NOT display by default', () => {
       SOCIAL_LINKS.forEach((social) => {
         const tooltipEl = screen.queryByText(social.title);
         const listItemEl = tooltipEl?.closest('li') as HTMLLIElement;
@@ -109,7 +109,7 @@ describe('<Footer />', () => {
       });
     });
 
-    it('should display when window is loaded', () => {
+    it('should display on window load', () => {
       act(() => {
         Window.emit('load');
       });

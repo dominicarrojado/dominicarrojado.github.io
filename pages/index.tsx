@@ -3,7 +3,7 @@ import { getLatestPostsData } from '../lib/posts';
 import { getAllTestimonialsData } from '../lib/testimonials';
 import SeoTags from '../components/seoTags';
 import HeroMain from '../components/heroMain';
-import AboutMeHomeSection from '../components/aboutMeHomeSection';
+import AboutHomeSection from '../components/aboutHomeSection';
 import ProjectsHomeSection from '../components/projectsHomeSection';
 import PostsHomeSection from '../components/postsHomeSection';
 import TestimonialsHomeSection from '../components/testimonialsHomeSection';
@@ -29,7 +29,7 @@ export default function Home({
         imageHeight={0}
       />
       <HeroMain />
-      <AboutMeHomeSection />
+      <AboutHomeSection />
       <ProjectsHomeSection />
       <PostsHomeSection latestPosts={latestPosts} />
       <TestimonialsHomeSection testimonials={testimonials} />

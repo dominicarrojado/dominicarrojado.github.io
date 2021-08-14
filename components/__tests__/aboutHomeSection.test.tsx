@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { queryByTextIgnoreHTML } from '../../lib/test-helpers';
-import AboutMeHomeSection from '../aboutMeHomeSection';
+import AboutHomeSection from '../aboutHomeSection';
 
-describe('<AboutMeHomeSection />', () => {
+describe('<AboutHomeSection />', () => {
   beforeEach(() => {
-    render(<AboutMeHomeSection />);
+    render(<AboutHomeSection />);
   });
 
   it('should have expected title', () => {
@@ -17,8 +17,8 @@ describe('<AboutMeHomeSection />', () => {
     const content1 =
       "I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end & back-end development. I'm experienced in developing small to large web applications.";
     const content2 =
-      "I'm currently based in Singapore and working at PropertyGuru as a Senior Software Engineer (FinTech).";
-    const anchorEl = screen.queryByText('PropertyGuru');
+      "I'm currently based in Singapore and working at PropertyGuru Finance as a Senior Software Engineer.";
+    const anchorEl = screen.queryByText('PropertyGuru Finance');
 
     expect(screen.queryByText(content1)).toBeInTheDocument();
     expect(queryByTextIgnoreHTML(screen, content2)).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('<AboutMeHomeSection />', () => {
     const anchorEl = screen.queryByText('Read More');
 
     expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute('href', '/about-me');
+    expect(anchorEl).toHaveAttribute('href', '/about');
     expect(anchorEl).not.toHaveAttribute('rel');
     expect(anchorEl).not.toHaveAttribute('target');
   });

@@ -6,9 +6,9 @@ import AnchorLink from './anchorLink';
 import { Route } from '../lib/types';
 import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
 
-function AboutMeHomeSection() {
+function AboutHomeSection() {
   return (
-    <Section id="about-me" className="bg-gray-100">
+    <Section id="about" className="bg-gray-100">
       <div className="max-w-5xl mx-auto">
         <SectionTitle>About Me</SectionTitle>
         <SectionContent>
@@ -23,12 +23,12 @@ function AboutMeHomeSection() {
             href="https://www.propertyguru.com.sg/mortgage"
             {...EXTERNAL_LINK_ATTRIBUTES}
           >
-            PropertyGuru
+            PropertyGuru Finance
           </a>{' '}
-          as a Senior Software Engineer (FinTech).
+          as a Senior Software Engineer.
         </SectionContent>
         <div className="mt-12 text-center">
-          <Link href={Route.ABOUT_ME} passHref>
+          <Link href={Route.ABOUT} passHref>
             <AnchorLink>Read More</AnchorLink>
           </Link>
         </div>
@@ -37,4 +37,4 @@ function AboutMeHomeSection() {
   );
 }
 
-export default AboutMeHomeSection;
+export default AboutHomeSection;

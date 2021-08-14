@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroMain from '../../components/heroMain';
-import * as AboutMeHomeSection from '../../components/aboutMeHomeSection';
+import * as AboutHomeSection from '../../components/aboutHomeSection';
 import * as ProjectsHomeSection from '../../components/projectsHomeSection';
 import * as PostsHomeSection from '../../components/postsHomeSection';
 import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
@@ -29,7 +29,7 @@ describe('<Home />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroMainSpy = jest.spyOn(HeroMain, 'default');
-    const aboutMeHomeSectionSpy = jest.spyOn(AboutMeHomeSection, 'default');
+    const aboutHomeSectionSpy = jest.spyOn(AboutHomeSection, 'default');
     const projectsHomeSectionSpy = jest.spyOn(ProjectsHomeSection, 'default');
     const postsHomeSectionSpy = jest.spyOn(PostsHomeSection, 'default');
     const testimonialsHomeSectionSpy = jest.spyOn(
@@ -87,7 +87,7 @@ describe('<Home />', () => {
     );
 
     expect(heroMainSpy).toBeCalledTimes(1);
-    expect(aboutMeHomeSectionSpy).toBeCalledTimes(1);
+    expect(aboutHomeSectionSpy).toBeCalledTimes(1);
     expect(projectsHomeSectionSpy).toBeCalledTimes(1);
     expect(postsHomeSectionSpy).toBeCalledTimes(1);
     expect(testimonialsHomeSectionSpy).toBeCalledTimes(1);

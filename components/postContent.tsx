@@ -58,7 +58,7 @@ export default function PostContent({ postData }: { postData: PostData }) {
               </div>
               <article
                 className={cn(
-                  'w-full max-w-full mt-8 mx-auto prose',
+                  'w-full max-w-full mt-8 prose',
                   'sm:mt-10 sm:prose-lg',
                   'xl:mt-14 xl:prose-xl'
                 )}

@@ -163,7 +163,7 @@ function SocialItems() {
               }
             )}
             style={{
-              transitionDelay: `${(idx + 1) * 150 + 1250}ms`,
+              transitionDelay: `${(idx + 1) * 150 + 1900}ms`,
             }}
           >
             <a

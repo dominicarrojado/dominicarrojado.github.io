@@ -241,7 +241,7 @@ function ScrollDownButton() {
     >
       <a
         ref={btnRef}
-        href="#about-me"
+        href="#about"
         className="group relative inline-flex flex-col items-center pb-1"
         onMouseLeave={btnOnMouseLeave}
         onClick={btnOnClick}

@@ -20,8 +20,8 @@ export const FONTS = [
   'Roboto-BoldItalic',
 ];
 export const EXTERNAL_LINK_ATTRIBUTES = {
-  rel: 'noopener noreferrer nofollow',
   target: '_blank',
+  rel: 'noopener noreferrer nofollow',
 };
 
 export const PROJECTS: Array<Project> = [
@@ -406,7 +406,7 @@ export const MENU_ITEMS = [
     title: 'Home',
   },
   {
-    path: Route.ABOUT_ME,
+    path: Route.ABOUT,
     title: 'About Me',
   },
   {

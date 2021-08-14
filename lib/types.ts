@@ -2,7 +2,7 @@ import { HTMLAttributes, ReactNode } from 'react';
 
 export enum Route {
   HOME = '/',
-  ABOUT_ME = '/about-me',
+  ABOUT = '/about',
   PROJECTS = '/projects',
   POSTS = '/posts',
 }

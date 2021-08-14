@@ -272,7 +272,7 @@ describe('<Header />', () => {
       expect(btnEl).not.toHaveClass('pointer-events-none');
     });
 
-    it('should be hidden when window is NOT loaded', () => {
+    it('should NOT display by default', () => {
       const btnTextEl = screen.queryByText('Menu');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
       const stacks = btnEl.querySelectorAll('div');
@@ -284,7 +284,7 @@ describe('<Header />', () => {
       });
     });
 
-    it('should display when window is loaded', () => {
+    it('should display on window load', () => {
       act(() => {
         Window.emit('load');
       });
