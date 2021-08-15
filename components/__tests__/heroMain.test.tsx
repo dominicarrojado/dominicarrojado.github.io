@@ -14,7 +14,7 @@ describe('<HeroMain />', () => {
 
   describe('content and tags', () => {
     it('should have expected title', () => {
-      const title = 'Dominic Arrojado · Senior Software Engineer';
+      const title = 'Guides, Tips and Tricks to Web Development';
       const titleEl = screen.queryByText(title);
 
       expect(titleEl?.tagName).toBe('H1');

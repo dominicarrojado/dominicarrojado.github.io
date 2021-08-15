@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { useWindowLoaded } from '../lib/custom-hooks';
 import Section from './section';
-import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
+import AnchorLink from './anchorLink';
 
 function AboutSection() {
   const propertyGuruFinanceUrl = 'https://www.propertyguru.com.sg/mortgage';
@@ -26,20 +26,17 @@ function AboutSection() {
         <br />
         <br />
         I'm currently based in Singapore and working at{' '}
-        <a href={propertyGuruFinanceUrl} {...EXTERNAL_LINK_ATTRIBUTES}>
+        <AnchorLink href={propertyGuruFinanceUrl} isExternal>
           PropertyGuru Finance
-        </a>{' '}
+        </AnchorLink>{' '}
         as a Senior Software Engineer.{' '}
-        <a href={propertyGuruFinanceUrl} {...EXTERNAL_LINK_ATTRIBUTES}>
+        <AnchorLink href={propertyGuruFinanceUrl} isExternal>
           PropertyGuru Finance
-        </a>{' '}
+        </AnchorLink>{' '}
         is a financial technology (<em>fintech</em>) arm within{' '}
-        <a
-          href="https://www.propertygurugroup.com/"
-          {...EXTERNAL_LINK_ATTRIBUTES}
-        >
+        <AnchorLink href="https://www.propertygurugroup.com/" isExternal>
           PropertyGuru Group
-        </a>{' '}
+        </AnchorLink>{' '}
         - Southeast Asia's pioneering and most trusted property technology
         company.
         <br />
@@ -49,32 +46,37 @@ function AboutSection() {
         career. I've been here since 2018 and my knowledge and experiences have
         grown exponentially since then. With Singapore being a multi-ethnic
         society and a regional hub, I'm able to work with competitive people
-        from different walks of life which honed to who I am today.
+        from different walks of life, gave me challenges and inspiration that
+        shaped me to who I am today.
         <br />
         <br />
-        When I'm not coding, I'm either watching Netflix shows with my partner
-        or doing my 2-hour workout. I have a love for movies and music. Here's
-        my{' '}
-        <a
+        When I'm not coding, I'm either watching{' '}
+        <AnchorLink href="https://www.netflix.com/" isExternal>
+          Netflix
+        </AnchorLink>{' '}
+        shows with my partner or doing my 2-hour workout. I have a love for
+        movies and music. Here's my{' '}
+        <AnchorLink
           href="https://open.spotify.com/user/dominicarrojado/playlists"
-          {...EXTERNAL_LINK_ATTRIBUTES}
+          isExternal
         >
           Spotify playlists
-        </a>{' '}
+        </AnchorLink>{' '}
         if you'd like to know what I listen to. I'm also currently learning a
         new language, not programming, but Chinese and I'm learning it in{' '}
-        <a href="https://www.duolingo.com/" {...EXTERNAL_LINK_ATTRIBUTES}>
+        <AnchorLink href="https://www.duolingo.com/" isExternal>
           Duolingo
-        </a>{' '}
+        </AnchorLink>{' '}
         app - I highly recommend it because it's a free, fun and effective way
         to learn a language.
         <br />
         <br />
         Being an introvert and a man of few words, I didn't imagine myself to be
         doing this blog, but one day I suddenly got this thought that I should
-        start writing tech blogs or video tutorials to share my knowledge and
-        experiences in web development - so let's see where this goes and
-        hopefully it will benefit and help some of you folks out here!
+        start writing tech blogs and create video tutorials to share my
+        knowledge and learnings in web development experiences - so let's see
+        where this goes and hopefully it will benefit and help some of you folks
+        out here!
         <br />
         <br />
         That's all for me for now. Thanks for reading ~

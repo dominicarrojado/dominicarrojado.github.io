@@ -3,7 +3,7 @@ import cn from 'classnames';
 import Section from './section';
 import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
-import AnchorLink from './anchorLink';
+import TextArrowLink from './textArrowLink';
 import PostItem from './postItem';
 import { Post, Route } from '../lib/types';
 
@@ -30,7 +30,7 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
         className={cn('mt-12 text-center', 'md:mt-16', 'lg:mt-18', 'xl:mt-20')}
       >
         <Link href={Route.POSTS} passHref>
-          <AnchorLink>See All Blog</AnchorLink>
+          <TextArrowLink>See All Blog</TextArrowLink>
         </Link>
       </div>
     </Section>

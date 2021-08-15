@@ -1,12 +1,4 @@
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  TransitionEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition, Transition } from 'react-transition-group';
@@ -15,14 +7,11 @@ import { getRefValue } from '../lib/hooks';
 import { useWindowLoaded, useWindowSize } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
-import Tooltip from './tooltip';
 import SvgLogo from './svgLogo';
+import Tooltip from './tooltip';
+import AnchorLink from './anchorLink';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
-import {
-  EXTERNAL_LINK_ATTRIBUTES,
-  MENU_ITEMS,
-  SOCIAL_LINKS,
-} from '../lib/constants';
+import { MENU_ITEMS, SOCIAL_LINKS } from '../lib/constants';
 
 function Header({ route }: { route: Route }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -401,13 +390,13 @@ function SocialItem({
           : undefined
       }
     >
-      <a
+      <AnchorLink
         href={social.url}
         title={social.title}
-        {...EXTERNAL_LINK_ATTRIBUTES}
         className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
+        isExternal
       >
         {social.icon({
           className: cn(
@@ -430,7 +419,7 @@ function SocialItem({
             </div>
           )}
         </Transition>
-      </a>
+      </AnchorLink>
     </li>
   );
 }

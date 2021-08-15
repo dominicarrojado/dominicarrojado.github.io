@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useWindowLoaded } from '../lib/custom-hooks';
 import Section from './section';
 import PostItem from './postItem';
-import ButtonLink from './buttonLink';
+import ButtonArrowLink from './buttonArrowLink';
 import { Post } from '../lib/types';
 import { POSTS_DISPLAY_LATEST_MAX } from '../lib/constants';
 
@@ -50,9 +50,9 @@ function PostsSection({ posts }: { posts: Array<Post> }) {
             'xl:mt-20'
           )}
         >
-          <ButtonLink withIcon={false} onClick={showAllOnClick}>
+          <ButtonArrowLink withIcon={false} onClick={showAllOnClick}>
             Show All Posts
-          </ButtonLink>
+          </ButtonArrowLink>
         </div>
       )}
     </Section>

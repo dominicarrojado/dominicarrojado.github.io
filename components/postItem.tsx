@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import Date from './date';
-import ButtonLink from './buttonLink';
+import ButtonArrowLink from './buttonArrowLink';
 import { Post, Route } from '../lib/types';
 
 function PostItem({
@@ -66,7 +66,7 @@ function PostItem({
             </h3>
             <p className="mt-4">{post.excerpt}</p>
             <div className="mt-6">
-              <ButtonLink>Read More</ButtonLink>
+              <ButtonArrowLink>Read More</ButtonArrowLink>
             </div>
           </article>
         </a>

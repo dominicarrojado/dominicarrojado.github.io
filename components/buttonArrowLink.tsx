@@ -2,7 +2,7 @@ import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
 import SvgChevronRight from './svgChevronRight';
 
-const ButtonLink = forwardRef(
+const ButtonArrowLink = forwardRef(
   (
     {
       children,
@@ -36,6 +36,6 @@ const ButtonLink = forwardRef(
   }
 );
 
-ButtonLink.displayName = 'ButtonLink';
+ButtonArrowLink.displayName = 'ButtonArrowLink';
 
-export default ButtonLink;
+export default ButtonArrowLink;

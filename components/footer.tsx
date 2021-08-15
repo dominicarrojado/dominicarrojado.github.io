@@ -10,10 +10,10 @@ import { getRefValue } from '../lib/hooks';
 import { useWindowLoaded } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
+import AnchorLink from './anchorLink';
 import Tooltip from './tooltip';
 import { GoogleAnalyticsEvents, Social } from '../lib/types';
 import {
-  EXTERNAL_LINK_ATTRIBUTES,
   QUOTES,
   QUOTES_INTERVAL,
   QUOTES_LENGTH,
@@ -166,13 +166,13 @@ function SocialItems() {
               transitionDelay: `${(idx + 1) * 150 + 1900}ms`,
             }}
           >
-            <a
+            <AnchorLink
               href={social.url}
-              {...EXTERNAL_LINK_ATTRIBUTES}
               className="group relative inline-flex p-4 cursor-pointer"
               onMouseLeave={() => socialOnMouseLeave(social)}
               onClick={(e) => socialOnClick(e, social)}
               tabIndex={idx + 3}
+              isExternal
             >
               {social.icon({
                 className: cn(
@@ -185,7 +185,7 @@ function SocialItems() {
               <Tooltip onHidden={tooltipOnHidden}>
                 {name !== copiedItem ? social.title : 'Copied!'}
               </Tooltip>
-            </a>
+            </AnchorLink>
           </li>
         );
       })}

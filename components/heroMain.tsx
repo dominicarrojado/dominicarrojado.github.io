@@ -171,7 +171,7 @@ function Title() {
         )}
         data-testid="title"
       >
-        Dominic Arrojado · Senior Software Engineer
+        Guides, Tips and Tricks to Web Development
       </h1>
     </div>
   );

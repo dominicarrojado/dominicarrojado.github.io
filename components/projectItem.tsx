@@ -7,9 +7,9 @@ import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
 import { useDownloadGif, useMounted, useWindowSize } from '../lib/custom-hooks';
 import { checkIsUrlInternal } from '../lib/location';
-import AnchorLink from './anchorLink';
-import Spinner from './spinner';
 import SvgStar from './svgStar';
+import TextArrowLink from './textArrowLink';
+import Spinner from './spinner';
 import Tooltip from './tooltip';
 import {
   GoogleAnalyticsEvents,
@@ -17,7 +17,6 @@ import {
   ProjectLink,
   TooltipPosition,
 } from '../lib/types';
-import { EXTERNAL_LINK_ATTRIBUTES } from '../lib/constants';
 
 export default function ProjectItem({
   project,
@@ -350,6 +349,7 @@ function LinkItem({
   projectTitle,
 }: ProjectLink & { projectTitle: string }) {
   const isClickedRef = useRef(false);
+  const isExternal = !checkIsUrlInternal(url);
   const onMouseLeave = () => {
     if (!getRefValue(isClickedRef)) {
       trackEvent({
@@ -370,20 +370,17 @@ function LinkItem({
     });
   };
 
-  const linkAttributes = !checkIsUrlInternal(url)
-    ? EXTERNAL_LINK_ATTRIBUTES
-    : { target: '_blank' };
-
   return (
     <li className={cn('mt-4', 'sm:mt-2', 'lg:mt-1')}>
-      <AnchorLink
+      <TextArrowLink
         href={url}
-        {...linkAttributes}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
+        target={!isExternal ? '_blank' : undefined}
+        isExternal={isExternal}
       >
         {title}
-      </AnchorLink>
+      </TextArrowLink>
     </li>
   );
 }

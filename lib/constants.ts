@@ -1,6 +1,7 @@
-import SvgEnvelope from '../components/svgEnvelope';
-import SvgGitHub from '../components/svgGitHub';
+import SvgThumbUp from '../components/svgThumbUp';
 import SvgLinkedIn from '../components/svgLinkedIn';
+import SvgGitHub from '../components/svgGitHub';
+import SvgEnvelope from '../components/svgEnvelope';
 import { Quote, Route, Social, SocialName, Project } from './types';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
@@ -19,10 +20,6 @@ export const FONTS = [
   'Roboto-Bold',
   'Roboto-BoldItalic',
 ];
-export const EXTERNAL_LINK_ATTRIBUTES = {
-  target: '_blank',
-  rel: 'noopener noreferrer nofollow',
-};
 
 export const PROJECTS: Array<Project> = [
   {
@@ -354,6 +351,13 @@ export const PROJECTS: Array<Project> = [
 export const BEST_PROJECTS = PROJECTS.filter(({ isBest }) => isBest);
 
 export const SOCIAL_LINKS: Array<Social> = [
+  {
+    name: SocialName.DONATE,
+    title: 'Show your support and donate!',
+    url: 'https://www.paypal.com/paypalme/DominicArrojado',
+    icon: SvgThumbUp,
+    shouldCopyOnClick: false,
+  },
   {
     name: SocialName.LINKEDIN,
     title: 'Connect with me @ LinkedIn!',

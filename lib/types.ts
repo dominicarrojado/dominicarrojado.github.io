@@ -8,6 +8,7 @@ export enum Route {
 }
 
 export enum SocialName {
+  DONATE = 'donate',
   LINKEDIN = 'linkedin',
   GITHUB = 'github',
   EMAIL = 'email',

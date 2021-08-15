@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { getFakeSentence } from '../../lib/test-helpers';
-import ButtonLink from '../buttonLink';
+import ButtonArrowLink from '../buttonArrowLink';
 
-describe('<ButtonLink />', () => {
+describe('<ButtonArrowLink />', () => {
   const renderComponent = ({
     children,
     withIcon,
@@ -11,7 +11,7 @@ describe('<ButtonLink />', () => {
     children: ReactNode;
     withIcon?: boolean;
   }) => {
-    render(<ButtonLink withIcon={withIcon}>{children}</ButtonLink>);
+    render(<ButtonArrowLink withIcon={withIcon}>{children}</ButtonArrowLink>);
   };
 
   describe('withIcon prop is undefined', () => {
@@ -22,14 +22,14 @@ describe('<ButtonLink />', () => {
     });
 
     it('should render children', () => {
-      const anchorEl = screen.queryByText(text);
+      const btnEl = screen.queryByText(text);
 
-      expect(anchorEl?.tagName).toBe('BUTTON');
+      expect(btnEl?.tagName).toBe('BUTTON');
     });
 
     it('should render the icon by default', () => {
-      const anchorEl = screen.queryByText(text);
-      const iconEl = anchorEl?.querySelector('svg');
+      const btnEl = screen.queryByText(text);
+      const iconEl = btnEl?.querySelector('svg');
 
       expect(iconEl).toBeInTheDocument();
     });
@@ -43,14 +43,14 @@ describe('<ButtonLink />', () => {
     });
 
     it('should render children', () => {
-      const anchorEl = screen.queryByText(text);
+      const btnEl = screen.queryByText(text);
 
-      expect(anchorEl?.tagName).toBe('BUTTON');
+      expect(btnEl?.tagName).toBe('BUTTON');
     });
 
     it('should NOT render the icon', () => {
-      const anchorEl = screen.queryByText(text);
-      const iconEl = anchorEl?.querySelector('svg');
+      const btnEl = screen.queryByText(text);
+      const iconEl = btnEl?.querySelector('svg');
 
       expect(iconEl).not.toBeInTheDocument();
     });

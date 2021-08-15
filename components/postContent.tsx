@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import { useWindowLoaded } from '../lib/custom-hooks';
-import AnchorLink from './anchorLink';
-import Date from './date';
-import Section from './section';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
+import Section from './section';
+import Date from './date';
+import TextArrowLink from './textArrowLink';
 import { PostData, Route } from '../lib/types';
 
 export default function PostContent({ postData }: { postData: PostData }) {
@@ -82,7 +82,7 @@ export default function PostContent({ postData }: { postData: PostData }) {
               </div>
               <div className="mt-16 text-center">
                 <Link href={Route.POSTS} passHref>
-                  <AnchorLink>See All Blog</AnchorLink>
+                  <TextArrowLink>See All Blog</TextArrowLink>
                 </Link>
               </div>
             </div>

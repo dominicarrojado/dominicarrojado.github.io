@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
+import { ReactNode } from 'react';
 import { getFakeSentence } from '../../lib/test-helpers';
-import AnchorLink from '../anchorLink';
+import TextArrowLink from '../textArrowLink';
 
-describe('<AnchorLink />', () => {
+describe('<TextArrowLink />', () => {
   const renderComponent = ({
     children,
     isExternal,
@@ -11,7 +11,7 @@ describe('<AnchorLink />', () => {
     children: ReactNode;
     isExternal?: boolean;
   }) => {
-    render(<AnchorLink isExternal={isExternal}>{children}</AnchorLink>);
+    render(<TextArrowLink isExternal={isExternal}>{children}</TextArrowLink>);
   };
 
   describe('isExternal prop is undefined', () => {

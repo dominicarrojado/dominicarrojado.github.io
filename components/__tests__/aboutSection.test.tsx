@@ -10,11 +10,13 @@ describe('<AboutSection />', () => {
   it('should have expected anchor', () => {
     const pgfAnchorEls = screen.queryAllByText('PropertyGuru Finance');
     const pggAnchorEl = screen.queryByText('PropertyGuru Group');
+    const netflixEl = screen.queryByText('Netflix');
     const playlistEl = screen.queryByText('Spotify playlists');
     const duolingoEl = screen.queryByText('Duolingo');
     const externalLinkEls = [
       ...pgfAnchorEls,
       pggAnchorEl,
+      netflixEl,
       playlistEl,
       duolingoEl,
     ];
@@ -39,6 +41,8 @@ describe('<AboutSection />', () => {
       'href',
       'https://www.propertygurugroup.com/'
     );
+
+    expect(netflixEl).toHaveAttribute('href', 'https://www.netflix.com/');
 
     expect(playlistEl).toHaveAttribute(
       'href',
