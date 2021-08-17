@@ -8,14 +8,11 @@ import { PostData } from '../../lib/types';
 function Post({ postData }: { postData: PostData }) {
   return (
     <>
-      {/* TODO: update SEO tags later */}
       <SeoTags
         path={`/posts/${postData.id}`}
         title={postData.title}
         description={postData.excerpt}
-        imageUrl=""
-        imageWidth={0}
-        imageHeight={0}
+        imageUrl={postData.imageUrl}
       />
       <HeroSub title={postData.title} description={postData.excerpt} />
       <PostContent postData={postData} />

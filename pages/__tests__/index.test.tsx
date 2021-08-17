@@ -71,17 +71,13 @@ describe('<Home />', () => {
     render(<Home latestPosts={latestPosts} testimonials={testimonials} />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
-
-    // TODO: update SEO tags later
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/',
         title: MAIN_TITLE,
         description:
           "Guides, Tips and Tricks to Web Development. I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end &amp; back-end development. I'm experienced in developing small to large web applications. I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences.",
-        imageUrl: '',
-        imageWidth: 0,
-        imageHeight: 0,
+        imageUrl: '/images/pages/home.png',
       },
       {}
     );

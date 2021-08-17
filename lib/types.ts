@@ -40,6 +40,14 @@ export enum GoogleAnalyticsEvents {
   TESTIMONIALS_SWIPE = 'testimonials_swipe',
 }
 
+export enum ExternalUrl {
+  PROPERTY_GURU_FINANCE = 'https://www.propertyguru.com.sg/mortgage',
+  PROPERTY_GURU_GROUP = 'https://www.propertygurugroup.com/',
+  NETFLIX = 'https://www.netflix.com/',
+  SPOTIFY_PLAYLISTS = 'https://open.spotify.com/user/dominicarrojado/playlists',
+  DUOLINGO = 'https://www.duolingo.com/profile/Dominic778651',
+}
+
 export type Nullish<T> = T | null | undefined;
 
 export type ProjectLink = {
@@ -75,6 +83,7 @@ export type Post = {
   category: PostCategory;
   date: string;
   excerpt: string;
+  imageUrl: string;
 };
 
 export type PostData = Post & {

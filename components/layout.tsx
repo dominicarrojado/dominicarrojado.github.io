@@ -30,15 +30,6 @@ function Layout({ route, children }: { route: Route; children: ReactNode }) {
         />
         {/* End Google Tag Manager */}
 
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1"
-        />
-        <meta name="theme-color" content="#000000" />
-        <link rel="manifest" href="/manifest.json" />
-
         <PreLoadTags />
       </Head>
 

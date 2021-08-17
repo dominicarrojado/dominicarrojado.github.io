@@ -6,6 +6,7 @@ import {
   getFakeNumber,
   getFakeSentence,
   getFakeSentences,
+  getRandomRoute,
 } from '../../lib/test-helpers';
 import { MAIN_TITLE, MAIN_URL } from '../../lib/constants';
 import SeoTags from '../seoTags';
@@ -19,6 +20,35 @@ describe('<SeoTags />', () => {
 
   afterEach(() => {
     jest.restoreAllMocks();
+  });
+
+  describe('image sizes prop is not defined', () => {
+    beforeEach(() => {
+      render(
+        <SeoTags
+          path={getRandomRoute()}
+          title={getFakeSentence()}
+          description={getFakeSentences()}
+          imageUrl={getFakeImageUrl()}
+        />
+      );
+    });
+
+    it('should render image width tags', () => {
+      const metaOgImgWidth = document.querySelector(
+        'meta[property="og:image:width"]'
+      );
+
+      expect(metaOgImgWidth).toHaveAttribute('content', '1920');
+    });
+
+    it('should render image height tags', () => {
+      const metaOgImgHeight = document.querySelector(
+        'meta[property="og:image:height"]'
+      );
+
+      expect(metaOgImgHeight).toHaveAttribute('content', '1200');
+    });
   });
 
   describe('path is index', () => {
@@ -88,10 +118,11 @@ describe('<SeoTags />', () => {
       const metaTwitterImg = document.querySelector(
         'meta[name="twitter:image"]'
       );
+      const fullImgUrl = `${MAIN_URL}${imageUrl}`;
 
-      expect(metaOgImg).toHaveAttribute('content', imageUrl);
-      expect(metaOgSecureImg).toHaveAttribute('content', imageUrl);
-      expect(metaTwitterImg).toHaveAttribute('content', imageUrl);
+      expect(metaOgImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaOgSecureImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaTwitterImg).toHaveAttribute('content', fullImgUrl);
     });
 
     it('should render image width tags', () => {
@@ -183,10 +214,11 @@ describe('<SeoTags />', () => {
       const metaTwitterImg = document.querySelector(
         'meta[name="twitter:image"]'
       );
+      const fullImgUrl = `${MAIN_URL}${imageUrl}`;
 
-      expect(metaOgImg).toHaveAttribute('content', imageUrl);
-      expect(metaOgSecureImg).toHaveAttribute('content', imageUrl);
-      expect(metaTwitterImg).toHaveAttribute('content', imageUrl);
+      expect(metaOgImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaOgSecureImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaTwitterImg).toHaveAttribute('content', fullImgUrl);
     });
 
     it('should render image width tags', () => {

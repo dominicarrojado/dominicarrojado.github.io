@@ -24,7 +24,7 @@ describe('<AboutHomeSection />', () => {
 
     expect(screen.queryByText(content1)).toBeInTheDocument();
     expect(queryByTextIgnoreHTML(screen, content2)).toBeInTheDocument();
-    expect(screen.queryByText(content3)).toBeInTheDocument();
+    expect(queryByTextIgnoreHTML(screen, content3)).toBeInTheDocument();
     expect(anchorEl?.tagName).toBe('A');
     expect(anchorEl).toHaveAttribute(
       'href',
@@ -35,11 +35,23 @@ describe('<AboutHomeSection />', () => {
   });
 
   it('should have expected anchor', () => {
-    const anchorEl = screen.queryByText('Read More');
+    const pgfAnchorEl = screen.queryByText('PropertyGuru Finance');
+    const footerAnchorEl = screen.queryByText('Read More');
+    const linkEls = [pgfAnchorEl, footerAnchorEl];
 
-    expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute('href', '/about');
-    expect(anchorEl).not.toHaveAttribute('rel');
-    expect(anchorEl).not.toHaveAttribute('target');
+    linkEls.forEach((internalLinkEl) => {
+      expect(internalLinkEl?.tagName).toBe('A');
+    });
+
+    expect(pgfAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.propertyguru.com.sg/mortgage'
+    );
+    expect(pgfAnchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
+    expect(pgfAnchorEl).toHaveAttribute('target', '_blank');
+
+    expect(footerAnchorEl).toHaveAttribute('href', '/about');
+    expect(footerAnchorEl).not.toHaveAttribute('rel');
+    expect(footerAnchorEl).not.toHaveAttribute('target');
   });
 });

@@ -8,18 +8,23 @@ describe('<AboutSection />', () => {
   });
 
   it('should have expected anchor', () => {
+    const blogAnchorEl = screen.queryByText('tech blogs');
     const pgfAnchorEls = screen.queryAllByText('PropertyGuru Finance');
     const pggAnchorEl = screen.queryByText('PropertyGuru Group');
-    const netflixEl = screen.queryByText('Netflix');
-    const playlistEl = screen.queryByText('Spotify playlists');
-    const duolingoEl = screen.queryByText('Duolingo');
+    const netflixAnchorEl = screen.queryByText('Netflix');
+    const playlistAnchorEl = screen.queryByText('Spotify playlists');
+    const duolingoAnchorEl = screen.queryByText('Duolingo');
     const externalLinkEls = [
       ...pgfAnchorEls,
       pggAnchorEl,
-      netflixEl,
-      playlistEl,
-      duolingoEl,
+      netflixAnchorEl,
+      playlistAnchorEl,
+      duolingoAnchorEl,
     ];
+
+    expect(blogAnchorEl?.tagName).toBe('A');
+    expect(blogAnchorEl).not.toHaveAttribute('rel');
+    expect(blogAnchorEl).not.toHaveAttribute('target');
 
     externalLinkEls.forEach((externalLinkEl) => {
       expect(externalLinkEl?.tagName).toBe('A');
@@ -42,14 +47,17 @@ describe('<AboutSection />', () => {
       'https://www.propertygurugroup.com/'
     );
 
-    expect(netflixEl).toHaveAttribute('href', 'https://www.netflix.com/');
+    expect(netflixAnchorEl).toHaveAttribute('href', 'https://www.netflix.com/');
 
-    expect(playlistEl).toHaveAttribute(
+    expect(playlistAnchorEl).toHaveAttribute(
       'href',
       'https://open.spotify.com/user/dominicarrojado/playlists'
     );
 
-    expect(duolingoEl).toHaveAttribute('href', 'https://www.duolingo.com/');
+    expect(duolingoAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.duolingo.com/profile/Dominic778651'
+    );
   });
 
   it('should NOT display about by default', () => {

@@ -21,17 +21,13 @@ describe('<About />', () => {
     render(<About />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
-
-    // TODO: update SEO tags later
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/about',
         title: 'About Me',
         description:
           'An introduction of myself - my passion, experiences and interests',
-        imageUrl: '',
-        imageWidth: 0,
-        imageHeight: 0,
+        imageUrl: '/images/pages/about.png',
       },
       {}
     );

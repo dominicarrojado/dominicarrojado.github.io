@@ -19,17 +19,15 @@ export default function Home({
 }) {
   const desc =
     "Guides, Tips and Tricks to Web Development. I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end &amp; back-end development. I'm experienced in developing small to large web applications. I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences.";
+  const imageUrl = '/images/pages/home.png';
 
   return (
     <>
-      {/* TODO: update SEO tags later */}
       <SeoTags
         path={Route.HOME}
         title={MAIN_TITLE}
         description={desc}
-        imageUrl=""
-        imageWidth={0}
-        imageHeight={0}
+        imageUrl={imageUrl}
       />
       <HeroMain />
       <AboutHomeSection />

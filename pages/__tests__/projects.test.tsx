@@ -21,16 +21,12 @@ describe('<Projects />', () => {
     render(<Projects />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
-
-    // TODO: update SEO tags later
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/projects',
         title: 'Featured Projects',
         description: "A selection of projects I've done so far.",
-        imageUrl: '',
-        imageWidth: 0,
-        imageHeight: 0,
+        imageUrl: '/images/pages/projects.png',
       },
       {}
     );

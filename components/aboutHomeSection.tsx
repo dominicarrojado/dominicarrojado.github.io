@@ -4,7 +4,7 @@ import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import AnchorLink from './anchorLink';
 import TextArrowLink from './textArrowLink';
-import { Route } from '../lib/types';
+import { ExternalUrl, Route } from '../lib/types';
 
 function AboutHomeSection() {
   return (
@@ -19,18 +19,19 @@ function AboutHomeSection() {
         </SectionContent>
         <SectionContent>
           I'm currently based in Singapore and working at{' '}
-          <AnchorLink
-            href="https://www.propertyguru.com.sg/mortgage"
-            isExternal
-          >
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
             PropertyGuru Finance
           </AnchorLink>{' '}
           as a Senior Software Engineer.
         </SectionContent>
         <SectionContent>
-          I write tech blogs and create video tutorials to share my knowledge
-          and learnings in my web development experiences. I hope it will
-          benefit and help some of you folks out here.
+          I write{' '}
+          <Link href={Route.POSTS}>
+            <a>tech blogs</a>
+          </Link>{' '}
+          and create video tutorials to share my knowledge and learnings in my
+          web development experiences. I hope it will benefit and help some of
+          you folks out here.
         </SectionContent>
         <div className="mt-12 text-center">
           <Link href={Route.ABOUT} passHref>

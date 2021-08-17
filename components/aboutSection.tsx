@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import cn from 'classnames';
 import { useWindowLoaded } from '../lib/custom-hooks';
 import Section from './section';
 import AnchorLink from './anchorLink';
+import { ExternalUrl, Route } from '../lib/types';
 
 function AboutSection() {
-  const propertyGuruFinanceUrl = 'https://www.propertyguru.com.sg/mortgage';
   const shouldDisplay = useWindowLoaded();
 
   return (
@@ -26,15 +27,15 @@ function AboutSection() {
         <br />
         <br />
         I'm currently based in Singapore and working at{' '}
-        <AnchorLink href={propertyGuruFinanceUrl} isExternal>
+        <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
           PropertyGuru Finance
         </AnchorLink>{' '}
         as a Senior Software Engineer.{' '}
-        <AnchorLink href={propertyGuruFinanceUrl} isExternal>
+        <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
           PropertyGuru Finance
         </AnchorLink>{' '}
         is a financial technology (<em>fintech</em>) arm within{' '}
-        <AnchorLink href="https://www.propertygurugroup.com/" isExternal>
+        <AnchorLink href={ExternalUrl.PROPERTY_GURU_GROUP} isExternal>
           PropertyGuru Group
         </AnchorLink>{' '}
         - Southeast Asia's pioneering and most trusted property technology
@@ -51,20 +52,17 @@ function AboutSection() {
         <br />
         <br />
         When I'm not coding, I'm either watching{' '}
-        <AnchorLink href="https://www.netflix.com/" isExternal>
+        <AnchorLink href={ExternalUrl.NETFLIX} isExternal>
           Netflix
         </AnchorLink>{' '}
         shows with my partner or doing my 2-hour workout. I have a love for
         movies and music. Here's my{' '}
-        <AnchorLink
-          href="https://open.spotify.com/user/dominicarrojado/playlists"
-          isExternal
-        >
+        <AnchorLink href={ExternalUrl.SPOTIFY_PLAYLISTS} isExternal>
           Spotify playlists
         </AnchorLink>{' '}
         if you'd like to know what I listen to. I'm also currently learning a
         new language, not programming, but Chinese and I'm learning it in{' '}
-        <AnchorLink href="https://www.duolingo.com/" isExternal>
+        <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
           Duolingo
         </AnchorLink>{' '}
         app - I highly recommend it because it's a free, fun and effective way
@@ -73,10 +71,13 @@ function AboutSection() {
         <br />
         Being an introvert and a man of few words, I didn't imagine myself to be
         doing this blog, but one day I suddenly got this thought that I should
-        start writing tech blogs and create video tutorials to share my
-        knowledge and learnings in web development experiences - so let's see
-        where this goes and hopefully it will benefit and help some of you folks
-        out here!
+        start writing{' '}
+        <Link href={Route.POSTS}>
+          <a>tech blogs</a>
+        </Link>{' '}
+        and create video tutorials to share my knowledge and learnings in web
+        development experiences - so let's see where this goes and hopefully it
+        will benefit and help some of you folks out here!
         <br />
         <br />
         That's all for me for now. Thanks for reading ~

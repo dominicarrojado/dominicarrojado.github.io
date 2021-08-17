@@ -9,6 +9,8 @@ export const MAIN_URL = 'https://dominicarrojado.com';
 export const ROUTES = Object.values(Route);
 export const SCROLL_DOWN_DURATION = 1500;
 export const POSTS_DISPLAY_LATEST_MAX = 4;
+export const SEO_DEFAULT_IMAGE_WIDTH = 1920;
+export const SEO_DEFAULT_IMAGE_HEIGHT = 1200;
 
 export const FONTS = [
   'Roboto-Light',

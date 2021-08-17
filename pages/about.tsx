@@ -7,6 +7,7 @@ function About() {
   const title = 'About Me';
   const desc =
     'An introduction of myself - my passion, experiences and interests';
+  const imageUrl = '/images/pages/about.png';
 
   return (
     <>
@@ -15,9 +16,7 @@ function About() {
         path={Route.ABOUT}
         title={title}
         description={desc}
-        imageUrl=""
-        imageWidth={0}
-        imageHeight={0}
+        imageUrl={imageUrl}
       />
       <HeroSub title={title} description={desc} />
       <AboutSection />

@@ -40,17 +40,13 @@ describe('<Posts />', () => {
     render(<Posts posts={posts} />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
-
-    // TODO: update SEO tags later
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/posts',
         title: 'Blog',
         description:
           'A place to share my knowledge and learnings from my web development experiences.',
-        imageUrl: '',
-        imageWidth: 0,
-        imageHeight: 0,
+        imageUrl: '/images/pages/posts.png',
       },
       {}
     );
