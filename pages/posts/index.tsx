@@ -8,7 +8,7 @@ import { Post, Route } from '../../lib/types';
 export default function Posts({ posts }: { posts: Array<Post> }) {
   const title = 'Blog';
   const desc =
-    'A place to share my knowledge and learnings from my web development experiences.';
+    'A place to share my knowledge and learnings from my web development experiences';
   const imageUrl = '/images/pages/posts.png';
 
   return (

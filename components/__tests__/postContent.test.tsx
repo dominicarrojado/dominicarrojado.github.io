@@ -106,20 +106,20 @@ describe('<PostContent />', () => {
       expect(anchorEl).not.toHaveAttribute('target');
     });
 
-    it('should NOT display content by default', () => {
-      const contentEl = screen.queryByTestId('content');
+    it('should NOT display section by default', () => {
+      const sectionEl = screen.queryByTestId('section');
 
-      expect(contentEl).toHaveClass('opacity-0');
+      expect(sectionEl).toHaveClass('opacity-0');
     });
 
-    it('should display content on window load', () => {
+    it('should display section on window load', () => {
       act(() => {
         Window.emit('load');
       });
 
-      const contentEl = screen.queryByTestId('content');
+      const sectionEl = screen.queryByTestId('section');
 
-      expect(contentEl).not.toHaveClass('opacity-0');
+      expect(sectionEl).not.toHaveClass('opacity-0');
     });
 
     it('should have shorter delay by default', () => {
@@ -127,10 +127,10 @@ describe('<PostContent />', () => {
         Window.emit('load');
       });
 
-      const contentEl = screen.queryByTestId('content');
+      const sectionEl = screen.queryByTestId('section');
 
-      expect(contentEl).toHaveClass('delay-1500');
-      expect(contentEl).not.toHaveClass('delay-2500');
+      expect(sectionEl).toHaveClass('delay-1500');
+      expect(sectionEl).not.toHaveClass('delay-2500');
     });
 
     it('should have shorter animation delay by default', () => {
@@ -138,10 +138,10 @@ describe('<PostContent />', () => {
         Window.emit('load');
       });
 
-      const contentEl = screen.queryByTestId('content');
+      const sectionEl = screen.queryByTestId('section');
 
-      expect(contentEl).toHaveClass('delay-1500');
-      expect(contentEl).not.toHaveClass('delay-2500');
+      expect(sectionEl).toHaveClass('delay-1500');
+      expect(sectionEl).not.toHaveClass('delay-2500');
     });
 
     it('should have longer animation delay by default on transition end of opacity', () => {
@@ -149,12 +149,12 @@ describe('<PostContent />', () => {
         Window.emit('load');
       });
 
-      const contentEl = screen.queryByTestId('content') as HTMLElement;
+      const sectionEl = screen.queryByTestId('section') as HTMLElement;
 
-      fireEventTransitionEnd(contentEl, 'opacity');
+      fireEventTransitionEnd(sectionEl, 'opacity');
 
-      expect(contentEl).toHaveClass('delay-2500');
-      expect(contentEl).not.toHaveClass('delay-1500');
+      expect(sectionEl).toHaveClass('delay-2500');
+      expect(sectionEl).not.toHaveClass('delay-1500');
     });
 
     it('should have shorter animation delay on transition end of other prop name', () => {
@@ -162,12 +162,12 @@ describe('<PostContent />', () => {
         Window.emit('load');
       });
 
-      const contentEl = screen.queryByTestId('content') as HTMLElement;
+      const sectionEl = screen.queryByTestId('section') as HTMLElement;
 
-      fireEventTransitionEnd(contentEl, getFakeWord());
+      fireEventTransitionEnd(sectionEl, getFakeWord());
 
-      expect(contentEl).toHaveClass('delay-1500');
-      expect(contentEl).not.toHaveClass('delay-2500');
+      expect(sectionEl).toHaveClass('delay-1500');
+      expect(sectionEl).not.toHaveClass('delay-2500');
     });
   });
 

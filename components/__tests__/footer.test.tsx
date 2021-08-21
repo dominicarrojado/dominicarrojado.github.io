@@ -1,6 +1,9 @@
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import Window from '../../modules/Window';
-import { fireEventTransitionEnd } from '../../lib/test-helpers';
+import {
+  fireEventTransitionEnd,
+  queryByTextIgnoreHTML,
+} from '../../lib/test-helpers';
 import * as dom from '../../lib/dom';
 import * as ga from '../../lib/google-analytics';
 import { Social } from '../../lib/types';
@@ -36,11 +39,24 @@ describe('<Footer />', () => {
       });
     });
 
-    it('should have expected credits', () => {
+    it('should have expected legal items', () => {
       const currentYear = new Date().getFullYear();
-      const credits = `© Dominic Arrojado ${currentYear}`;
+      const legalText = `©${currentYear} Dominic Arrojado · Privacy Policy · Disclaimer`;
+      const privacyAnchorEl = screen.queryByText('Privacy Policy');
+      const disclaimerAnchorEl = screen.queryByText('Disclaimer');
+      const linkEls = [privacyAnchorEl, disclaimerAnchorEl];
 
-      expect(screen.queryByText(credits)).toBeInTheDocument();
+      expect(queryByTextIgnoreHTML(screen, legalText)).toBeInTheDocument();
+
+      linkEls.forEach((linkEl) => {
+        expect(linkEl?.tagName).toBe('A');
+        expect(linkEl).not.toHaveAttribute('target');
+        expect(linkEl).not.toHaveAttribute('rel');
+      });
+
+      expect(privacyAnchorEl).toHaveAttribute('href', '/privacy-policy');
+
+      expect(disclaimerAnchorEl).toHaveAttribute('href', '/disclaimer');
     });
   });
 

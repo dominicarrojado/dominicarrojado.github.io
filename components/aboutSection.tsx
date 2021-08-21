@@ -1,87 +1,76 @@
 import Link from 'next/link';
 import cn from 'classnames';
-import { useWindowLoaded } from '../lib/custom-hooks';
 import Section from './section';
 import AnchorLink from './anchorLink';
 import { ExternalUrl, Route } from '../lib/types';
+import PageContent from './pageContent';
 
 function AboutSection() {
-  const shouldDisplay = useWindowLoaded();
-
   return (
     <Section>
-      <p
-        className={cn(
-          'w-11/12 max-w-screen-3xl mx-auto',
-          'transition duration-700 delay-1500',
-          'lg:w-5/6',
-          {
-            ['transform opacity-0 translate-y-10']: !shouldDisplay,
-          }
-        )}
-        data-testid="about"
-      >
-        I'm Dominic Arrojado and my passion is turning design into code. I'm a
-        web developer specializing in both front-end &amp; back-end development.
-        I'm experienced in developing small to large web applications.
-        <br />
-        <br />
-        I'm currently based in Singapore and working at{' '}
-        <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
-          PropertyGuru Finance
-        </AnchorLink>{' '}
-        as a Senior Software Engineer.{' '}
-        <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
-          PropertyGuru Finance
-        </AnchorLink>{' '}
-        is a financial technology (<em>fintech</em>) arm within{' '}
-        <AnchorLink href={ExternalUrl.PROPERTY_GURU_GROUP} isExternal>
-          PropertyGuru Group
-        </AnchorLink>{' '}
-        - Southeast Asia's pioneering and most trusted property technology
-        company.
-        <br />
-        <br />
-        I'm originally from the Philippines and had an opportunity to move here
-        in Singapore to be with my girlfriend (now fiancée!) and further my
-        career. I've been here since 2018 and my knowledge and experiences have
-        grown exponentially since then. With Singapore being a multi-ethnic
-        society and a regional hub, I'm able to work with competitive people
-        from different walks of life, gave me challenges and inspiration that
-        shaped me to who I am today.
-        <br />
-        <br />
-        When I'm not coding, I'm either watching{' '}
-        <AnchorLink href={ExternalUrl.NETFLIX} isExternal>
-          Netflix
-        </AnchorLink>{' '}
-        shows with my partner or doing my 2-hour workout. I have a love for
-        movies and music. Here's my{' '}
-        <AnchorLink href={ExternalUrl.SPOTIFY_PLAYLISTS} isExternal>
-          Spotify playlists
-        </AnchorLink>{' '}
-        if you'd like to know what I listen to. I'm also currently learning a
-        new language, not programming, but Chinese and I'm learning it in{' '}
-        <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
-          Duolingo
-        </AnchorLink>{' '}
-        app - I highly recommend it because it's a free, fun and effective way
-        to learn a language.
-        <br />
-        <br />
-        Being an introvert and a man of few words, I didn't imagine myself to be
-        doing this blog, but one day I suddenly got this thought that I should
-        start writing{' '}
-        <Link href={Route.POSTS}>
-          <a>tech blogs</a>
-        </Link>{' '}
-        and create video tutorials to share my knowledge and learnings in web
-        development experiences - so let's see where this goes and hopefully it
-        will benefit and help some of you folks out here!
-        <br />
-        <br />
-        That's all for me for now. Thanks for reading ~
-      </p>
+      <PageContent>
+        <p>
+          I'm Dominic Arrojado and my passion is turning design into code. I'm a
+          web developer specializing in both front-end &amp; back-end
+          development. I'm experienced in developing small to large web
+          applications.
+        </p>
+        <p>
+          I'm currently based in Singapore and working at{' '}
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
+            PropertyGuru Finance
+          </AnchorLink>{' '}
+          as a Senior Software Engineer.{' '}
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
+            PropertyGuru Finance
+          </AnchorLink>{' '}
+          is a financial technology (<em>fintech</em>) arm within{' '}
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU_GROUP} isExternal>
+            PropertyGuru Group
+          </AnchorLink>{' '}
+          - Southeast Asia's pioneering and most trusted property technology
+          company.
+        </p>
+        <p>
+          I'm originally from the Philippines and had an opportunity to move
+          here in Singapore to be with my girlfriend (now fiancée!) and further
+          my career. I've been here since 2018 and my knowledge and experiences
+          have grown exponentially since then. With Singapore being a
+          multi-ethnic society and a regional hub, I'm able to work with
+          competitive people from different walks of life, gave me challenges
+          and inspiration that shaped me to who I am today.
+        </p>
+        <p>
+          When I'm not coding, I'm either watching{' '}
+          <AnchorLink href={ExternalUrl.NETFLIX} isExternal>
+            Netflix
+          </AnchorLink>{' '}
+          shows with my partner or doing my 2-hour workout. I have a love for
+          movies and music. Here's my{' '}
+          <AnchorLink href={ExternalUrl.SPOTIFY_PLAYLISTS} isExternal>
+            Spotify playlists
+          </AnchorLink>{' '}
+          if you'd like to know what I listen to. I'm also currently learning a
+          new language, not programming, but Chinese and I'm learning it in{' '}
+          <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
+            Duolingo
+          </AnchorLink>{' '}
+          app - I highly recommend it because it's a free, fun and effective way
+          to learn a language.
+        </p>
+        <p>
+          Being an introvert and a man of few words, I didn't imagine myself to
+          be doing this blog, but one day I suddenly got this thought that I
+          should start writing{' '}
+          <Link href={Route.POSTS}>
+            <a>tech blogs</a>
+          </Link>{' '}
+          and create video tutorials to share my knowledge and learnings in web
+          development experiences - so let's see where this goes and hopefully
+          it will benefit and help some of you folks out here!
+        </p>
+        <p>That's all for me for now. Thanks for reading ~</p>
+      </PageContent>
     </Section>
   );
 }

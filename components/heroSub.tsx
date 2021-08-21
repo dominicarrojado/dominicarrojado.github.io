@@ -123,11 +123,12 @@ function Title({ title, state }: { title: string; state: TransitionStatus }) {
     <div ref={titleRef} className="overflow-hidden py-2" style={{ opacity }}>
       <h1
         className={cn(
-          'text-3xl font-bold text-white',
+          'text-3xl font-bold text-white leading-tight',
           'transform transition duration-1000 delay-500',
-          'sm:text-4xl sm:leading-tight',
-          'md:text-5xl md:leading-tight',
-          'xl:text-7xl xl:leading-tight',
+          'sm:text-4xl',
+          'md:text-5xl',
+          'lg:text-6xl',
+          'xl:text-7xl',
           {
             [shouldDisplay && state === 'entered'
               ? 'opacity-100 translate-y-0'

@@ -2,10 +2,10 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
-import * as ProjectsSection from '../../components/projectsSection';
-import Projects from '../projects';
+import * as PrivacyPolicySection from '../../components/privacyPolicySection';
+import PrivacyPolicy from '../privacy-policy';
 
-describe('<Projects />', () => {
+describe('<PrivacyPolicy />', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -16,22 +16,22 @@ describe('<Projects />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
-    const projectsSectionSpy = jest.spyOn(ProjectsSection, 'default');
+    const privacyPolicySectionSpy = jest.spyOn(PrivacyPolicySection, 'default');
 
-    render(<Projects />);
+    render(<PrivacyPolicy />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
-        path: '/projects',
-        title: 'Featured Projects',
-        description: "A selection of projects I've done so far",
-        imageUrl: '/images/pages/projects.png',
+        path: '/privacy-policy',
+        title: 'Privacy Policy',
+        description: 'Find what you need to know about your privacy',
+        imageUrl: '/images/pages/privacy-policy.png',
       },
       {}
     );
 
     expect(heroSubSpy).toBeCalledTimes(1);
-    expect(projectsSectionSpy).toBeCalledTimes(1);
+    expect(privacyPolicySectionSpy).toBeCalledTimes(1);
   });
 });

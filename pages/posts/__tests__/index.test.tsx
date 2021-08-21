@@ -45,7 +45,7 @@ describe('<Posts />', () => {
         path: '/posts',
         title: 'Blog',
         description:
-          'A place to share my knowledge and learnings from my web development experiences.',
+          'A place to share my knowledge and learnings from my web development experiences',
         imageUrl: '/images/pages/posts.png',
       },
       {}

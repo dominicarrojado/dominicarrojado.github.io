@@ -1,5 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
-import Window from '../../modules/Window';
+import { render, screen } from '@testing-library/react';
 import AboutSection from '../aboutSection';
 
 describe('<AboutSection />', () => {
@@ -7,7 +6,7 @@ describe('<AboutSection />', () => {
     render(<AboutSection />);
   });
 
-  it('should have expected anchor', () => {
+  it('should have expected anchors', () => {
     const blogAnchorEl = screen.queryByText('tech blogs');
     const pgfAnchorEls = screen.queryAllByText('PropertyGuru Finance');
     const pggAnchorEl = screen.queryByText('PropertyGuru Group');
@@ -58,21 +57,5 @@ describe('<AboutSection />', () => {
       'href',
       'https://www.duolingo.com/profile/Dominic778651'
     );
-  });
-
-  it('should NOT display about by default', () => {
-    const aboutEl = screen.queryByTestId('about');
-
-    expect(aboutEl).toHaveClass('opacity-0');
-  });
-
-  it('should display about on window load', () => {
-    act(() => {
-      Window.emit('load');
-    });
-
-    const aboutEl = screen.queryByTestId('about');
-
-    expect(aboutEl).not.toHaveClass('opacity-0');
   });
 });

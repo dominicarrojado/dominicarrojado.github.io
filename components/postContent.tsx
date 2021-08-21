@@ -8,7 +8,8 @@ import SvgChevronRight from './svgChevronRight';
 import Section from './section';
 import Date from './date';
 import TextArrowLink from './textArrowLink';
-import { PostData, Route } from '../lib/types';
+import PageContent from './pageContent';
+import { Post, PostData, Route } from '../lib/types';
 
 export default function PostContent({ postData }: { postData: PostData }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,63 +34,85 @@ export default function PostContent({ postData }: { postData: PostData }) {
                 : 'opacity-0 translate-y-10']: true,
             })}
             onTransitionEnd={onTransitionEnd}
-            data-testid="content"
+            data-testid="section"
           >
-            <div className={cn('w-11/12 max-w-screen-3xl mx-auto', 'lg:w-5/6')}>
-              <div className="flex justify-between items-center">
-                <div
-                  className={cn(
-                    'mr-4 text-sm text-gray-400',
-                    'sm:text-base',
-                    'xl:text-lg'
-                  )}
-                >
-                  Last Updated: <Date dateString={postData.date} />
-                </div>
-                <div
-                  className={cn(
-                    'rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
-                    'md:py-1 md:px-2 md:text-xs',
-                    'xl:text-sm'
-                  )}
-                >
-                  {postData.category}
-                </div>
-              </div>
-              <article
-                className={cn(
-                  'w-full max-w-full mt-8 prose',
-                  'sm:mt-10 sm:prose-lg',
-                  'xl:mt-14 xl:prose-xl'
-                )}
-                dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-              />
-              <div className="mt-24 flex justify-between">
-                {postData.previousPost && (
-                  <AdjacentPostLink
-                    href={`${Route.POSTS}/${postData.previousPost.id}`}
-                    title={postData.previousPost.title}
-                    isPrevious
-                  />
-                )}
-                <div />
-                {postData.nextPost && (
-                  <AdjacentPostLink
-                    href={`${Route.POSTS}/${postData.nextPost.id}`}
-                    title={postData.nextPost.title}
-                  />
-                )}
-              </div>
-              <div className="mt-16 text-center">
-                <Link href={Route.POSTS} passHref>
-                  <TextArrowLink>See All Blog</TextArrowLink>
-                </Link>
-              </div>
-            </div>
+            <PostHeader date={postData.date} category={postData.category} />
+            <PageContent
+              className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}
+              dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+            />
+            <PostFooter
+              previousPost={postData.previousPost}
+              nextPost={postData.nextPost}
+            />
           </Section>
         )}
       </Transition>
     </SwitchTransition>
+  );
+}
+
+function PostHeader({ date, category }: { date: string; category: string }) {
+  return (
+    <div
+      className={cn(
+        'flex justify-between items-center w-11/12 max-w-screen-3xl mx-auto',
+        'lg:w-5/6'
+      )}
+    >
+      <div
+        className={cn(
+          'mr-4 text-sm text-gray-400',
+          'sm:text-base',
+          'xl:text-lg'
+        )}
+      >
+        Last Updated: <Date dateString={date} />
+      </div>
+      <div
+        className={cn(
+          'rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
+          'md:py-1 md:px-2 md:text-xs',
+          'xl:text-sm'
+        )}
+      >
+        {category}
+      </div>
+    </div>
+  );
+}
+
+function PostFooter({
+  previousPost,
+  nextPost,
+}: {
+  previousPost: Post | null;
+  nextPost: Post | null;
+}) {
+  return (
+    <div className={cn('w-11/12 max-w-screen-3xl mx-auto', 'lg:w-5/6')}>
+      <div className="mt-24 flex justify-between items-center">
+        {previousPost && (
+          <AdjacentPostLink
+            href={`${Route.POSTS}/${previousPost.id}`}
+            title={previousPost.title}
+            isPrevious
+          />
+        )}
+        <div />
+        {nextPost && (
+          <AdjacentPostLink
+            href={`${Route.POSTS}/${nextPost.id}`}
+            title={nextPost.title}
+          />
+        )}
+      </div>
+      <div className="mt-16 text-center">
+        <Link href={Route.POSTS} passHref>
+          <TextArrowLink>See All Blog</TextArrowLink>
+        </Link>
+      </div>
+    </div>
   );
 }
 

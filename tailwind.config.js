@@ -82,6 +82,12 @@ module.exports = {
             strong: {
               fontWeight: 500,
             },
+            h2: {
+              color: 'rgba(31, 41, 55, 1)',
+              fontSize: '1.125rem',
+              fontWeight: 400,
+              lineHeight: '1.75rem',
+            },
             pre: {
               backgroundColor: '#2c2c34',
             },
@@ -105,12 +111,20 @@ module.exports = {
           css: {
             fontSize: '1.125rem',
             lineHeight: '1.75rem',
+            h2: {
+              fontSize: '1.25rem',
+              lineHeight: '1.75rem',
+            },
           },
         },
         xl: {
           css: {
             fontSize: '1.25rem',
             lineHeight: '1.75rem',
+            h2: {
+              fontSize: '1.5rem',
+              lineHeight: '1.75rem',
+            },
           },
         },
       },

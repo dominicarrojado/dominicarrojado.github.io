@@ -6,6 +6,8 @@ import { Quote, Route, Social, SocialName, Project } from './types';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
+export const PRIVACY_EMAIL = 'privacy@dominicarrojado.com';
+export const DISCLAIMER_EMAIL = 'disclaimer@dominicarrojado.com';
 export const ROUTES = Object.values(Route);
 export const SCROLL_DOWN_DURATION = 1500;
 export const POSTS_DISPLAY_LATEST_MAX = 4;

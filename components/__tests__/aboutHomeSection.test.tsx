@@ -34,13 +34,13 @@ describe('<AboutHomeSection />', () => {
     expect(anchorEl).toHaveAttribute('target', '_blank');
   });
 
-  it('should have expected anchor', () => {
+  it('should have expected anchors', () => {
     const pgfAnchorEl = screen.queryByText('PropertyGuru Finance');
     const footerAnchorEl = screen.queryByText('Read More');
     const linkEls = [pgfAnchorEl, footerAnchorEl];
 
-    linkEls.forEach((internalLinkEl) => {
-      expect(internalLinkEl?.tagName).toBe('A');
+    linkEls.forEach((linkEl) => {
+      expect(linkEl?.tagName).toBe('A');
     });
 
     expect(pgfAnchorEl).toHaveAttribute(

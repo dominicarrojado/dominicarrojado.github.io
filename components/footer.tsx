@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, {
   MutableRefObject,
   useEffect,
@@ -12,7 +13,7 @@ import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import AnchorLink from './anchorLink';
 import Tooltip from './tooltip';
-import { GoogleAnalyticsEvents, Social } from '../lib/types';
+import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
 import {
   QUOTES,
   QUOTES_INTERVAL,
@@ -25,7 +26,7 @@ export default function Footer() {
     <footer className="py-20 px-6 bg-gray-100">
       <Quotes />
       <SocialItems />
-      <Credits />
+      <Legal />
     </footer>
   );
 }
@@ -193,7 +194,7 @@ function SocialItems() {
   );
 }
 
-function Credits() {
+function Legal() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
@@ -205,7 +206,14 @@ function Credits() {
         'xl:text-lg'
       )}
     >
-      © Dominic Arrojado {currentYear}
+      <span className="font-normal">©{currentYear} Dominic Arrojado</span> ·{' '}
+      <Link href={Route.PRIVACY_POLICY}>
+        <a>Privacy Policy</a>
+      </Link>{' '}
+      ·{' '}
+      <Link href={Route.DISCLAIMER}>
+        <a>Disclaimer</a>
+      </Link>
     </p>
   );
 }

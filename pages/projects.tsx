@@ -5,12 +5,11 @@ import { Route } from '../lib/types';
 
 function Projects() {
   const title = 'Featured Projects';
-  const desc = "A selection of projects I've done so far.";
+  const desc = "A selection of projects I've done so far";
   const imageUrl = '/images/pages/projects.png';
 
   return (
     <>
-      {/* TODO: update SEO tags later */}
       <SeoTags
         path={Route.PROJECTS}
         title={title}

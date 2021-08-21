@@ -5,6 +5,8 @@ export enum Route {
   ABOUT = '/about',
   PROJECTS = '/projects',
   POSTS = '/posts',
+  PRIVACY_POLICY = '/privacy-policy',
+  DISCLAIMER = '/disclaimer',
 }
 
 export enum SocialName {
@@ -46,6 +48,18 @@ export enum ExternalUrl {
   NETFLIX = 'https://www.netflix.com/',
   SPOTIFY_PLAYLISTS = 'https://open.spotify.com/user/dominicarrojado/playlists',
   DUOLINGO = 'https://www.duolingo.com/profile/Dominic778651',
+  GITHUB = 'https://github.com/',
+  GITHUB_PAGES = 'https://pages.github.com/',
+  GITHUB_PAGES_PRIVACY_POLICY = 'https://docs.github.com/en/github/site-policy/github-privacy-statement#github-pages',
+  METEOR = 'https://www.meteor.com/',
+  METEOR_CLOUD = 'https://www.meteor.com/cloud',
+  METEOR_CLOUD_PRIVACY_POLICY = 'https://cloud-guide.meteor.com/security.html',
+  GOOGLE = 'https://www.google.com/',
+  GOOGLE_ANALYTICS = 'https://analytics.google.com/',
+  GOOGLE_ANALYTICS_POLICY = 'https://support.google.com/analytics/answer/6004245',
+  GOOGLE_TAG_MANAGER = 'https://tagmanager.google.com/',
+  GOOGLE_TAG_MANAGER_POLICY = 'https://support.google.com/tagmanager/answer/9323295',
+  COOKIES = 'https://en.wikipedia.org/wiki/HTTP_cookie',
 }
 
 export type Nullish<T> = T | null | undefined;
