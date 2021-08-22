@@ -9,12 +9,21 @@ config.disabled = true; // disable react-transitions-group transitions
 describe('<HeroSub />', () => {
   const title = getFakeSentence();
   const desc = getFakeSentences();
-
-  beforeEach(() => {
-    render(<HeroSub title={title} description={desc} />);
-  });
+  const renderComponent = (isMinHeightFull?: boolean) => {
+    render(
+      <HeroSub
+        title={title}
+        description={desc}
+        isMinHeightFull={isMinHeightFull}
+      />
+    );
+  };
 
   describe('content', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
     it('should render title', () => {
       const titleEl = screen.queryByText(title);
 
@@ -29,6 +38,10 @@ describe('<HeroSub />', () => {
   });
 
   describe('window is NOT loaded', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
     it('should display container', () => {
       const containerEl = screen.queryByTestId('container');
 
@@ -62,6 +75,8 @@ describe('<HeroSub />', () => {
 
   describe('window is loaded', () => {
     beforeEach(() => {
+      renderComponent();
+
       act(() => {
         Window.emit('load');
       });
@@ -95,6 +110,26 @@ describe('<HeroSub />', () => {
       const descEl = screen.queryByText(desc);
 
       expect(descEl).not.toHaveClass('opacity-0');
+    });
+  });
+
+  describe('isMinHeightFull prop', () => {
+    test('should have smaller min height by default', () => {
+      renderComponent();
+
+      const containerEl = screen.queryByTestId('container');
+
+      expect(containerEl).toHaveClass('min-h-96');
+      expect(containerEl).not.toHaveClass('min-h-full');
+    });
+
+    test('should have full min height if isMinHeightFull is true', () => {
+      renderComponent(true);
+
+      const containerEl = screen.queryByTestId('container');
+
+      expect(containerEl).toHaveClass('min-h-full');
+      expect(containerEl).not.toHaveClass('min-h-96');
     });
   });
 });

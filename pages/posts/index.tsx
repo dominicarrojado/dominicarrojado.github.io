@@ -13,7 +13,6 @@ export default function Posts({ posts }: { posts: Array<Post> }) {
 
   return (
     <>
-      {/* TODO: update SEO tags later */}
       <SeoTags
         path={Route.POSTS}
         title={title}

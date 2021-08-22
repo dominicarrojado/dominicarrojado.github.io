@@ -20,19 +20,17 @@ function Post({ postData }: { postData: PostData }) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostIds();
+export const getStaticPaths: GetStaticPaths = () => {
   return {
-    paths,
+    paths: getAllPostIds(),
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params?.id as string);
   return {
     props: {
-      postData,
+      postData: await getPostData(params?.id as string),
     },
   };
 };

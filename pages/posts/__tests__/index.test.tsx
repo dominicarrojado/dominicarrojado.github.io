@@ -30,6 +30,7 @@ describe('<Posts />', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            imageUrl: expect.any(String),
           },
         ]),
       },
@@ -39,19 +40,24 @@ describe('<Posts />', () => {
 
     render(<Posts posts={posts} />);
 
+    const title = 'Blog';
+    const desc =
+      'A place to share my knowledge and learnings from my web development experiences';
+
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
+        title,
         path: '/posts',
-        title: 'Blog',
-        description:
-          'A place to share my knowledge and learnings from my web development experiences',
+        description: desc,
         imageUrl: '/images/pages/posts.png',
       },
       {}
     );
 
     expect(heroSubSpy).toBeCalledTimes(1);
+    expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
+
     expect(postsSectionSpy).toBeCalledTimes(1);
   });
 });

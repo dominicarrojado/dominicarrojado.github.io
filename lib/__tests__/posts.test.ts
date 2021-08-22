@@ -29,6 +29,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            imageUrl: expect.any(String),
           },
         ])
       );
@@ -55,6 +56,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          imageUrl: expect.any(String),
         },
       ] as Array<Post>;
 
@@ -73,6 +75,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          imageUrl: expect.any(String),
         } as Post);
       }
 
@@ -94,6 +97,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            imageUrl: expect.any(String),
           },
         ])
       );
@@ -139,6 +143,7 @@ describe('posts utilities', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
+          imageUrl: expect.any(String),
           contentHtml: expect.any(String),
         })
       );
@@ -151,6 +156,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            imageUrl: expect.any(String),
           })
         );
         expect(adjacentPostData.id).not.toBe(postId);
@@ -194,6 +200,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          imageUrl: expect.any(String),
         } as Post);
       }
 
@@ -215,6 +222,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          imageUrl: expect.any(String),
         } as Post);
       }
 
@@ -236,6 +244,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          imageUrl: expect.any(String),
         } as Post);
       }
 

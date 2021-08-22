@@ -20,18 +20,23 @@ describe('<PrivacyPolicy />', () => {
 
     render(<PrivacyPolicy />);
 
+    const title = 'Privacy Policy';
+    const desc = 'Find what you need to know about your privacy';
+
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
+        title,
         path: '/privacy-policy',
-        title: 'Privacy Policy',
-        description: 'Find what you need to know about your privacy',
+        description: desc,
         imageUrl: '/images/pages/privacy-policy.png',
       },
       {}
     );
 
     expect(heroSubSpy).toBeCalledTimes(1);
+    expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
+
     expect(privacyPolicySectionSpy).toBeCalledTimes(1);
   });
 });

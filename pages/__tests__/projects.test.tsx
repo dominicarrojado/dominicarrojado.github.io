@@ -20,18 +20,23 @@ describe('<Projects />', () => {
 
     render(<Projects />);
 
+    const title = 'Featured Projects';
+    const desc = "A selection of projects I've done so far";
+
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
+        title,
         path: '/projects',
-        title: 'Featured Projects',
-        description: "A selection of projects I've done so far",
+        description: desc,
         imageUrl: '/images/pages/projects.png',
       },
       {}
     );
 
     expect(heroSubSpy).toBeCalledTimes(1);
+    expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
+
     expect(projectsSectionSpy).toBeCalledTimes(1);
   });
 });

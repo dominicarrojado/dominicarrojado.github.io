@@ -2,10 +2,9 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
-import * as AboutSection from '../../components/aboutSection';
-import About from '../about';
+import Page404 from '../404';
 
-describe('<About />', () => {
+describe('<Page404 />', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -16,21 +15,20 @@ describe('<About />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
-    const aboutSectionSpy = jest.spyOn(AboutSection, 'default');
 
-    render(<About />);
+    render(<Page404 />);
 
-    const title = 'About Me';
-    const desc =
-      'An introduction of myself - my passion, experiences and interests';
+    const title = '404 - Page Not Found';
+    const shortDesc = "Sorry, we couldn't find what you're looking for.";
+    const desc = `${shortDesc} Please check the menu for existing pages.`;
 
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
         title,
-        path: '/about',
-        description: desc,
-        imageUrl: '/images/pages/about.png',
+        path: '/',
+        description: shortDesc,
+        imageUrl: '/images/pages/404.png',
       },
       {}
     );
@@ -40,10 +38,9 @@ describe('<About />', () => {
       {
         title,
         description: desc,
+        isMinHeightFull: true,
       },
       {}
     );
-
-    expect(aboutSectionSpy).toBeCalledTimes(1);
   });
 });

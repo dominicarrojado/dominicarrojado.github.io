@@ -11,7 +11,6 @@ function About() {
 
   return (
     <>
-      {/* TODO: update SEO tags later */}
       <SeoTags
         path={Route.ABOUT}
         title={title}

@@ -20,19 +20,24 @@ describe('<Disclaimer />', () => {
 
     render(<Disclaimer />);
 
+    const title = 'Disclaimer';
+    const desc =
+      'Statements to specify or delimit the scope of rights and obligations';
+
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(
       {
+        title,
         path: '/disclaimer',
-        title: 'Disclaimer',
-        description:
-          'Statements to specify or delimit the scope of rights and obligations',
+        description: desc,
         imageUrl: '/images/pages/disclaimer.png',
       },
       {}
     );
 
     expect(heroSubSpy).toBeCalledTimes(1);
+    expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
+
     expect(disclaimerSectionSpy).toBeCalledTimes(1);
   });
 });

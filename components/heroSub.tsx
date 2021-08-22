@@ -15,9 +15,11 @@ import Spinner from './spinner';
 export default function HeroSub({
   title,
   description,
+  isMinHeightFull,
 }: {
   title: string;
   description: string;
+  isMinHeightFull?: boolean;
 }) {
   const shouldDisplay = useMounted();
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,11 +37,12 @@ export default function HeroSub({
           <section
             ref={sectionRef}
             className={cn(
-              'relative flex flex-col justify-center min-h-96 bg-gray-1000 py-28 px-6 text-center overflow-hidden',
+              'relative flex flex-col justify-center bg-gray-1000 py-28 px-6 text-center overflow-hidden',
               'transform transition-transform ease-in-out duration-500',
               'sm:px-20',
               'lg:px-32',
               {
+                [!isMinHeightFull ? 'min-h-96' : 'min-h-full']: true,
                 [shouldDisplay && state === 'entered'
                   ? 'translate-y-0'
                   : '-translate-y-full']: true,

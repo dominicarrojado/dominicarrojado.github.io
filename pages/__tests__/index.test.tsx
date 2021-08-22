@@ -6,8 +6,8 @@ import * as AboutHomeSection from '../../components/aboutHomeSection';
 import * as ProjectsHomeSection from '../../components/projectsHomeSection';
 import * as PostsHomeSection from '../../components/postsHomeSection';
 import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
-import { Post, Testimonial } from '../../lib/types';
-import { MAIN_TITLE, POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
+import { Post } from '../../lib/types';
+import { POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
 import Home, { getStaticProps } from '../index';
 
 describe('<Home />', () => {
@@ -46,6 +46,7 @@ describe('<Home />', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            imageUrl: expect.any(String),
           },
         ]),
       },
@@ -61,7 +62,7 @@ describe('<Home />', () => {
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/',
-        title: MAIN_TITLE,
+        title: 'Dominic Arrojado',
         description:
           "Guides, Tips and Tricks to Web Development. I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end &amp; back-end development. I'm experienced in developing small to large web applications. I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences.",
         imageUrl: '/images/pages/home.png',
