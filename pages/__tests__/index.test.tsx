@@ -23,8 +23,6 @@ describe('<Home />', () => {
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,
       windowHeight: 0,
-      windowWidthRef: { current: 0 },
-      windowHeightRef: { current: 0 },
     });
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
@@ -50,15 +48,6 @@ describe('<Home />', () => {
             excerpt: expect.any(String),
           },
         ]),
-        testimonials: expect.arrayContaining([
-          {
-            order: expect.any(Number),
-            name: expect.any(String),
-            jobTitle: expect.any(String),
-            companyName: expect.any(String),
-            contentHtml: expect.any(String),
-          },
-        ]),
       },
     });
 
@@ -66,9 +55,7 @@ describe('<Home />', () => {
 
     expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
 
-    const testimonials = staticProps.props.testimonials as Array<Testimonial>;
-
-    render(<Home latestPosts={latestPosts} testimonials={testimonials} />);
+    render(<Home latestPosts={latestPosts} />);
 
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(

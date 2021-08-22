@@ -6,7 +6,12 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
   return (
     <li
       className={cn(
-        'group w-full flex px-3',
+        'group w-full flex flex-shrink-0 px-3',
+        'xs:w-11/12',
+        'sm:w-5/6',
+        'md:w-7/12',
+        'lg:w-1/2',
+        'xl:w-1/3',
         'transform transition-transform duration-300 even:rotate-1 odd:-rotate-1 hover:rotate-0',
         'md:px-5'
       )}
@@ -33,9 +38,7 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
               'xl:w-16 xl:h-16 xl:-translate-y-2.5'
             )}
           />
-          <div
-            dangerouslySetInnerHTML={{ __html: testimonial.contentHtml }}
-          ></div>
+          {testimonial.quote}
         </blockquote>
         <figcaption className={cn('bg-gray-100 p-5', 'sm:p-6', 'md:p-8')}>
           <div className="font-normal">{testimonial.name}</div>

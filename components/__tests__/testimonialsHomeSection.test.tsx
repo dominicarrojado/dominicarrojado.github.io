@@ -1,38 +1,65 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import {
-  getFakeCompanyName,
-  getFakeJobTitle,
-  getFakeName,
-  getFakeNumber,
-  getFakeSentences,
-  setReadOnlyProperty,
-} from '../../lib/test-helpers';
+import { setReadOnlyProperty } from '../../lib/test-helpers';
 import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
 import * as TestimonialItem from '../testimonialItem';
-import { Testimonial } from '../../lib/types';
 import TestimonialsHomeSection from '../testimonialsHomeSection';
 
 describe('<TestimonialsHomeSection />', () => {
   const testimonials = [
     {
-      order: getFakeNumber(),
-      name: getFakeName(),
-      jobTitle: getFakeJobTitle(),
-      companyName: getFakeCompanyName(),
-      contentHtml: `<p>${getFakeSentences()}</p>`,
+      name: 'Janice Lim',
+      jobTitle: 'Product Manager',
+      companyName: 'PropertyGuru Pte. Ltd.',
+      quote:
+        "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such engineer on the team. It has not only made my job easier, but we've also ended up with better end products – seamless collaboration, great exchange of ideas, quick and precise execution.",
     },
     {
-      order: getFakeNumber(),
-      name: getFakeName(),
-      jobTitle: getFakeJobTitle(),
-      companyName: getFakeCompanyName(),
-      contentHtml: `<p>${getFakeSentences()}</p>`,
+      name: 'Gary Lim',
+      jobTitle: 'Senior UX Designer',
+      companyName: 'Razer Inc.',
+      quote:
+        "Not often do you find an engineer with an eye for design details, and Dominic happens to be one of them. I enjoyed working with him on some projects with complex UI (User Interface) design. Whenever he delivers, it's always a joy to see my design comes alive as I intended. Any designer would be lucky to have Dominic working on his/her design.",
     },
-  ] as Array<Testimonial>;
+    {
+      name: 'Hongzheng Liao (Jansen)',
+      jobTitle: 'Director (Software)',
+      companyName: 'Razer Inc.',
+      quote:
+        "It is every manager's dream to have an engineer like Dominic in the team. He is self-driven, confident, proactive and smart. He has brought great value to the team by consistently building and delivering software solutions in time and with great quality. He would always be an indispensable asset to any team he works for in the future and has my highest recommendation.",
+    },
+    {
+      name: 'Vincent Chin',
+      jobTitle: 'Managing Partner',
+      companyName: 'Hashtag Interactive Pte. Ltd.',
+      quote:
+        'Dominic has consistently shown a great aptitude for programming and continuously worked on advancing his knowledge in the field whilst performing his day-to-day functions; A self-learner, he was responsible and instrumental in many successful web and app development projects.',
+    },
+    {
+      name: 'Anonymous',
+      jobTitle: '',
+      companyName: 'PropertyGuru Pte. Ltd.',
+      quote:
+        'Dom has been very helpful in terms of integrations between front-end and back-end. His pacy and skillful work is commendable. I admire how he thinks in terms of technical implementation and try to align UI components along with front-end tech design. This saves a lot of time to build components and flows.',
+    },
+    {
+      name: 'Hao Long Chiang (Zack)',
+      jobTitle: 'Senior Product Developer',
+      companyName: 'Razer Inc.',
+      quote:
+        "He's a really good software engineer. His analytical skill is really very good, he can solve difficult business problems by recommending technical solutions by looking At the business case and discussing with the stakeholders.",
+    },
+    {
+      name: 'Jixiang Li',
+      jobTitle: 'Software Engineer',
+      companyName: 'Razer Inc.',
+      quote:
+        'Dominic is a very good colleague to work with. He has excellent engineering and programming skills and I learned a lot from him when doing the same project together. He is also a kind person with patience. I am glad to have worked with him before :)',
+    },
+  ];
   const testimonialsLen = testimonials.length;
   const renderComponent = () => {
-    render(<TestimonialsHomeSection testimonials={testimonials} />);
+    render(<TestimonialsHomeSection />);
   };
   const windowWidthOrig = window.innerWidth;
 
@@ -64,8 +91,6 @@ describe('<TestimonialsHomeSection />', () => {
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,
       windowHeight: 0,
-      windowWidthRef: { current: 0 },
-      windowHeightRef: { current: 0 },
     });
 
     const testimonialItemSpy = jest.spyOn(TestimonialItem, 'default');
@@ -89,174 +114,131 @@ describe('<TestimonialsHomeSection />', () => {
     expect(tipEl).not.toHaveClass('opacity-0');
   });
 
-  it('should have expected container width on extra-small breakpoint', () => {
-    const windowWidth = 474;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const containerEl = screen.queryByTestId('container');
-
-    expect(containerEl).toHaveStyle({
-      width: `${windowWidth * testimonialsLen}px`,
-    });
-  });
-
-  it('should have expected container width on small breakpoint', () => {
-    const windowWidth = 639;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const containerEl = screen.queryByTestId('container');
-
-    expect(containerEl).toHaveStyle({
-      width: `${windowWidth * 0.9 * testimonialsLen}px`,
-    });
-  });
-
-  it('should have expected container width on medium breakpoint', () => {
-    const windowWidth = 1023;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const containerEl = screen.queryByTestId('container');
-
-    expect(containerEl).toHaveStyle({
-      width: `${windowWidth * 0.85 * testimonialsLen}px`,
-    });
-  });
-
-  it('should have expected container width on large breakpoint', () => {
-    const windowWidth = 1279;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const containerEl = screen.queryByTestId('container');
-
-    expect(containerEl).toHaveStyle({
-      width: `${(windowWidth / 2) * testimonialsLen}px`,
-    });
-  });
-
-  it('should have expected container width on extra large breakpoint', () => {
-    const windowWidth = 1281;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const containerEl = screen.queryByTestId('container');
-
-    expect(containerEl).toHaveStyle({
-      width: `${(windowWidth / 3) * testimonialsLen}px`,
-    });
-  });
-
   it('should allow swiping', () => {
     const windowWidth = 474;
+    const containerWidth = windowWidth;
+    const listWidth = containerWidth * testimonialsLen;
 
     setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
     renderComponent();
 
-    const containerEl = screen.queryByTestId('container') as HTMLDivElement;
+    const listEl = screen.queryByRole('list') as HTMLUListElement;
+    const containerEl = listEl.parentElement as HTMLDivElement;
+
+    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+
     const startX = 10;
     const moveX = 0;
     const offsetX = 0 - startX - moveX;
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
-    expect(containerEl).toHaveStyle({
-      transform: `translateX(${offsetX}px)`,
+    expect(listEl).toHaveStyle({
+      transform: `translate3d(${offsetX}px, 0, 0)`,
     });
   });
 
   it('should limit swipe on the right', () => {
     const windowWidth = 474;
-    const containerWidth = windowWidth * testimonialsLen;
+    const containerWidth = windowWidth;
+    const listWidth = containerWidth * testimonialsLen;
 
     setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
     renderComponent();
 
-    const containerEl = screen.queryByTestId('container') as HTMLDivElement;
-    const startX = containerWidth;
-    const moveX = 0;
-    const offsetX = 0 - containerWidth - windowWidth * -1;
+    const listEl = screen.queryByRole('list') as HTMLUListElement;
+    const containerEl = listEl.parentElement as HTMLDivElement;
 
-    fireEvent.touchStart(containerEl, {
+    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+
+    const startX = listWidth;
+    const moveX = 0;
+    const offsetX = 0 - listWidth - windowWidth * -1;
+
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
-    expect(containerEl).toHaveStyle({
-      transform: `translateX(${offsetX}px)`,
+    expect(listEl).toHaveStyle({
+      transform: `translate3d(${offsetX}px, 0, 0)`,
     });
   });
 
   it('should limit swipe on the left', () => {
     const windowWidth = 474;
+    const containerWidth = windowWidth;
+    const listWidth = containerWidth * testimonialsLen;
 
     setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
     renderComponent();
 
-    const containerEl = screen.queryByTestId('container') as HTMLDivElement;
+    const listEl = screen.queryByRole('list') as HTMLUListElement;
+    const containerEl = listEl.parentElement as HTMLDivElement;
+
+    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+
     const startX = -100;
     const moveX = 0;
     const offsetX = 0;
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
-    expect(containerEl).toHaveStyle({
-      transform: `translateX(${offsetX}px)`,
+    expect(listEl).toHaveStyle({
+      transform: `translate3d(${offsetX}px, 0, 0)`,
     });
   });
 
   it('should hide tip on swipe', () => {
     const windowWidth = 474;
+    const containerWidth = windowWidth;
+    const listWidth = containerWidth * testimonialsLen;
 
     setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
     renderComponent();
 
-    const containerEl = screen.queryByTestId('container') as HTMLDivElement;
+    const listEl = screen.queryByRole('list') as HTMLUListElement;
+    const containerEl = listEl.parentElement as HTMLDivElement;
+
+    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+
     const startX = 41;
     const moveX = 0;
     const offsetX = 0 - startX - moveX;
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
-    expect(containerEl).toHaveStyle({
-      transform: `translateX(${offsetX}px)`,
+    expect(listEl).toHaveStyle({
+      transform: `translate3d(${offsetX}px, 0, 0)`,
     });
 
     const tipEl = screen.queryByText('Swipe to See More');
@@ -268,40 +250,47 @@ describe('<TestimonialsHomeSection />', () => {
     const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
     const windowWidth = 474;
+    const containerWidth = windowWidth;
+    const listWidth = containerWidth * testimonialsLen;
 
     setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
     renderComponent();
 
-    const containerEl = screen.queryByTestId('container') as HTMLDivElement;
+    const listEl = screen.queryByRole('list') as HTMLUListElement;
+    const containerEl = listEl.parentElement as HTMLDivElement;
+
+    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+
     let startX = 39;
     let moveX = 0;
     let offsetX = 0 - startX - moveX;
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
-    expect(containerEl).toHaveStyle({
-      transform: `translateX(${offsetX}px)`,
+    expect(listEl).toHaveStyle({
+      transform: `translate3d(${offsetX}px, 0, 0)`,
     });
 
     expect(trackEventSpy).not.toBeCalled();
 
-    startX = 41;
+    startX = 40;
     offsetX = 0 - startX - moveX;
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
     expect(trackEventSpy).toBeCalledTimes(1);
     expect(trackEventSpy).toBeCalledWith({
@@ -311,13 +300,13 @@ describe('<TestimonialsHomeSection />', () => {
     // expect not to track twice
     trackEventSpy.mockClear();
 
-    fireEvent.touchStart(containerEl, {
+    fireEvent.touchStart(listEl, {
       changedTouches: [{ clientX: startX }],
     });
-    fireEvent.touchMove(containerEl, {
+    fireEvent.touchMove(listEl, {
       changedTouches: [{ clientX: moveX }],
     });
-    fireEvent.touchEnd(containerEl);
+    fireEvent.touchEnd(listEl);
 
     expect(trackEventSpy).not.toBeCalled();
   });

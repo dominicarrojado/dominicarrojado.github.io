@@ -33,23 +33,13 @@ export function useWindowLoaded() {
 }
 
 export function useWindowSize() {
-  const windowWidthRef = useRef(0);
-  const windowHeightRef = useRef(0);
-  const [windowWidth, _setWindowWidth] = useState(0);
-  const [windowHeight, _setWindowHeight] = useState(0);
-  const setWidth = (value: number) => {
-    windowWidthRef.current = value;
-    _setWindowWidth(value);
-  };
-  const setHeight = (value: number) => {
-    windowHeightRef.current = value;
-    _setWindowHeight(value);
-  };
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
 
   useEffect(() => {
     const windowOnResize = () => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
     };
 
     windowOnResize();
@@ -61,7 +51,7 @@ export function useWindowSize() {
     };
   });
 
-  return { windowWidth, windowHeight, windowWidthRef, windowHeightRef };
+  return { windowWidth, windowHeight };
 }
 
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {

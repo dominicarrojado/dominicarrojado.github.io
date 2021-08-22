@@ -107,9 +107,8 @@ export type PostData = Post & {
 };
 
 export type Testimonial = {
-  order: number;
   name: string;
   jobTitle: string;
   companyName: string;
-  contentHtml: string;
+  quote: string;
 };

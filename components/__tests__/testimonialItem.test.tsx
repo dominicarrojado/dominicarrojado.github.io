@@ -3,20 +3,17 @@ import {
   getFakeCompanyName,
   getFakeJobTitle,
   getFakeName,
-  getFakeNumber,
   getFakeSentences,
 } from '../../lib/test-helpers';
-import { Testimonial } from '../../lib/types';
 import TestimonialItem from '../testimonialItem';
 
 describe('<TestimonialItem />', () => {
   const testimonial = {
-    order: getFakeNumber(),
     name: getFakeName(),
     jobTitle: getFakeJobTitle(),
     companyName: getFakeCompanyName(),
-    contentHtml: `<p>${getFakeSentences()}</p>`,
-  } as Testimonial;
+    quote: getFakeSentences(),
+  };
 
   beforeEach(() => {
     render(<TestimonialItem testimonial={testimonial} />);
@@ -41,7 +38,7 @@ describe('<TestimonialItem />', () => {
   });
 
   it('should render the quote', () => {
-    const textContent = testimonial.contentHtml.replace(/<p>|\<\/p>/g, '');
+    const textContent = testimonial.quote.replace(/<p>|\<\/p>/g, '');
     const quoteEl = screen.queryByText(textContent);
 
     expect(quoteEl).toBeInTheDocument();

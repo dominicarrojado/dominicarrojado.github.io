@@ -2,7 +2,14 @@ import SvgThumbUp from '../components/svgThumbUp';
 import SvgLinkedIn from '../components/svgLinkedIn';
 import SvgGitHub from '../components/svgGitHub';
 import SvgEnvelope from '../components/svgEnvelope';
-import { Quote, Route, Social, SocialName, Project } from './types';
+import {
+  Project,
+  Quote,
+  Route,
+  Social,
+  SocialName,
+  Testimonial,
+} from './types';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
@@ -384,6 +391,60 @@ export const SOCIAL_LINKS: Array<Social> = [
     shouldCopyOnClick: true,
   },
 ];
+
+export const TESTIMONIALS_SUCCESS_SWIPE_DIFF = 40;
+export const TESTIMONIALS: Array<Testimonial> = [
+  {
+    name: 'Janice Lim',
+    jobTitle: 'Product Manager',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such engineer on the team. It has not only made my job easier, but we've also ended up with better end products – seamless collaboration, great exchange of ideas, quick and precise execution.",
+  },
+  {
+    name: 'Gary Lim',
+    jobTitle: 'Senior UX Designer',
+    companyName: 'Razer Inc.',
+    quote:
+      "Not often do you find an engineer with an eye for design details, and Dominic happens to be one of them. I enjoyed working with him on some projects with complex UI (User Interface) design. Whenever he delivers, it's always a joy to see my design comes alive as I intended. Any designer would be lucky to have Dominic working on his/her design.",
+  },
+  {
+    name: 'Hongzheng Liao (Jansen)',
+    jobTitle: 'Director (Software)',
+    companyName: 'Razer Inc.',
+    quote:
+      "It is every manager's dream to have an engineer like Dominic in the team. He is self-driven, confident, proactive and smart. He has brought great value to the team by consistently building and delivering software solutions in time and with great quality. He would always be an indispensable asset to any team he works for in the future and has my highest recommendation.",
+  },
+  {
+    name: 'Vincent Chin',
+    jobTitle: 'Managing Partner',
+    companyName: 'Hashtag Interactive Pte. Ltd.',
+    quote:
+      'Dominic has consistently shown a great aptitude for programming and continuously worked on advancing his knowledge in the field whilst performing his day-to-day functions; A self-learner, he was responsible and instrumental in many successful web and app development projects.',
+  },
+  {
+    name: 'Anonymous',
+    jobTitle: '',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      'Dom has been very helpful in terms of integrations between front-end and back-end. His pacy and skillful work is commendable. I admire how he thinks in terms of technical implementation and try to align UI components along with front-end tech design. This saves a lot of time to build components and flows.',
+  },
+  {
+    name: 'Hao Long Chiang (Zack)',
+    jobTitle: 'Senior Product Developer',
+    companyName: 'Razer Inc.',
+    quote:
+      "He's a really good software engineer. His analytical skill is really very good, he can solve difficult business problems by recommending technical solutions by looking At the business case and discussing with the stakeholders.",
+  },
+  {
+    name: 'Jixiang Li',
+    jobTitle: 'Software Engineer',
+    companyName: 'Razer Inc.',
+    quote:
+      'Dominic is a very good colleague to work with. He has excellent engineering and programming skills and I learned a lot from him when doing the same project together. He is also a kind person with patience. I am glad to have worked with him before :)',
+  },
+];
+export const TESTIMONIALS_LENGTH = TESTIMONIALS.length;
 
 export const QUOTES_INTERVAL = 6000;
 export const QUOTES: Array<Quote> = [

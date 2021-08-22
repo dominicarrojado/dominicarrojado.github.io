@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { useWindowSize } from '../lib/custom-hooks';
 import { getRefValue, useStateRef } from '../lib/hooks';
@@ -9,55 +9,49 @@ import SectionContent from './sectionContent';
 import SectionTitle from './sectionTitle';
 import TestimonialItem from './testimonialItem';
 import SvgTouch from './svgTouch';
-import { GoogleAnalyticsEvents, Testimonial } from '../lib/types';
+import { GoogleAnalyticsEvents } from '../lib/types';
+import {
+  TESTIMONIALS,
+  TESTIMONIALS_SUCCESS_SWIPE_DIFF,
+} from '../lib/constants';
 
-function TestimonialsHomeSection({
-  testimonials,
-}: {
-  testimonials: Array<Testimonial>;
-}) {
+function TestimonialsHomeSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const currentOffsetXRef = useRef(0);
+  const newOffsetXRef = useRef(0);
   const startXRef = useRef(0);
-  const containerWidthRef = useRef(0);
   const isSwipeTrackedRef = useRef(false);
-  const { windowWidth, windowWidthRef } = useWindowSize();
+  const { windowWidth } = useWindowSize();
   const [shouldDisplayTip, setShouldDisplayTip] = useState(true);
+  const [isSwiping, setIsSwiping] = useState(false);
   const [offsetX, setOffsetX, offsetXRef] = useStateRef(0);
-  const itemWidth = useMemo(() => {
-    switch (true) {
-      case windowWidth < 475:
-        return windowWidth;
-
-      case windowWidth < 640:
-        return windowWidth * 0.9;
-
-      case windowWidth < 1024:
-        return windowWidth * 0.85;
-
-      case windowWidth < 1280:
-        return windowWidth / 2;
-
-      default:
-        return windowWidth / 3;
-    }
-  }, [windowWidth]);
-  const containerWidth = useMemo(
-    () => itemWidth * testimonials.length,
-    [itemWidth, testimonials]
-  );
 
   const onTouchMove = (e: TouchEvent | MouseEvent) => {
-    const diff = getRefValue(startXRef) - getTouchEventData(e).clientX;
+    const currentX = getTouchEventData(e).clientX;
+    const diff = getRefValue(startXRef) - currentX;
+    const listEl = getRefValue(listRef);
+    const containerEl = getRefValue(containerRef);
+    const listWidth = listEl.scrollWidth;
+    const containerWidth = containerEl.offsetWidth;
+    const offsetXMin = -(listWidth - containerWidth);
+    const offsetXMax = 0;
     let newOffsetX = getRefValue(currentOffsetXRef) - diff;
 
-    // limit swiping on both ends
-    newOffsetX = Math.min(newOffsetX, 0);
-    newOffsetX = Math.max(
-      newOffsetX,
-      (getRefValue(containerWidthRef) - getRefValue(windowWidthRef)) * -1
-    );
+    // add resistance to when swiping on both ends
+    if (newOffsetX >= offsetXMax || newOffsetX <= offsetXMin) {
+      if (diff > 0) {
+        // swipe to the right
+        newOffsetX -= (newOffsetX - offsetXMin) * 0.5;
+      } else {
+        // swipe to the left
+        newOffsetX -= (newOffsetX + offsetXMax) * 0.5;
+      }
+    }
 
-    if (newOffsetX < -40) {
+    setOffsetX(newOffsetX);
+
+    if (Math.abs(diff) >= TESTIMONIALS_SUCCESS_SWIPE_DIFF) {
       setShouldDisplayTip(false);
 
       if (!getRefValue(isSwipeTrackedRef)) {
@@ -68,17 +62,27 @@ function TestimonialsHomeSection({
       }
     }
 
-    setOffsetX(newOffsetX);
+    // limit swiping on both ends
+    let adjustedOffsetX = newOffsetX;
+    adjustedOffsetX = Math.min(adjustedOffsetX, offsetXMax);
+    adjustedOffsetX = Math.max(adjustedOffsetX, offsetXMin);
+
+    newOffsetXRef.current = adjustedOffsetX;
   };
   const onTouchEnd = () => {
+    setIsSwiping(false);
+    setOffsetX(getRefValue(newOffsetXRef));
+
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('touchend', onTouchEnd);
     window.removeEventListener('mouseup', onTouchEnd);
     window.removeEventListener('mousemove', onTouchMove);
   };
   const onTouchStart = (
-    e: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+    e: React.TouchEvent<HTMLUListElement> | React.MouseEvent<HTMLUListElement>
   ) => {
+    setIsSwiping(true);
+
     startXRef.current = getTouchEventData(e).clientX;
     currentOffsetXRef.current = getRefValue(offsetXRef);
 
@@ -89,14 +93,12 @@ function TestimonialsHomeSection({
   };
 
   useEffect(() => {
-    containerWidthRef.current = containerWidth;
-
     // reset states on window resize
     setOffsetX(0);
     setShouldDisplayTip(true);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth]);
+  }, [windowWidth]);
 
   return (
     <Section>
@@ -112,24 +114,27 @@ function TestimonialsHomeSection({
         )}
       >
         <div
-          className="pb-10 cursor-grab active:cursor-grabbing"
-          onTouchStart={onTouchStart}
-          onMouseDown={onTouchStart}
+          ref={containerRef}
+          className="relative pb-10 cursor-grab active:cursor-grabbing"
         >
           <ul
+            ref={listRef}
             className={cn(
-              'relative w-full mt-8 flex items-center select-none',
+              'relative mt-8 flex flex-row items-center select-none',
               'sm:mt-10',
-              'lg:mt-12'
+              'lg:mt-12',
+              {
+                ['transform transition-transform duration-500']: !isSwiping,
+              }
             )}
             style={{
-              width: containerWidth,
-              transform: `translateX(${offsetX}px)`,
+              transform: `translate3d(${offsetX}px, 0, 0)`,
               touchAction: 'pan-y',
             }}
-            data-testid="container"
+            onTouchStart={onTouchStart}
+            onMouseDown={onTouchStart}
           >
-            {testimonials.map((testimonial, idx) => (
+            {TESTIMONIALS.map((testimonial, idx) => (
               <TestimonialItem key={idx} testimonial={testimonial} />
             ))}
           </ul>

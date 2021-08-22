@@ -52,7 +52,6 @@ function Header({ route }: { route: Route }) {
 
 function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
   const isWindowLoaded = useWindowLoaded();
-  const { windowHeightRef } = useWindowSize();
   const [animationDone, setAnimationDone] = useState(false);
   const [isPastHeroSection, setIsPastHeroSection] = useState(false);
   const onTransitionEnd = (e: TransitionEvent<HTMLAnchorElement>) => {
@@ -66,7 +65,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
 
   useEffect(() => {
     const onScroll = () => {
-      setIsPastHeroSection(window.pageYOffset >= getRefValue(windowHeightRef));
+      setIsPastHeroSection(window.pageYOffset >= window.innerHeight);
     };
 
     Window.on('scroll', onScroll);
