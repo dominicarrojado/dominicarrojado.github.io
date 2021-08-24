@@ -13,12 +13,14 @@ describe('<AboutSection />', () => {
     const netflixAnchorEl = screen.queryByText('Netflix');
     const playlistAnchorEl = screen.queryByText('Spotify playlists');
     const duolingoAnchorEl = screen.queryByText('Duolingo');
+    const youtubeAnchorEl = screen.queryByText('videos');
     const externalLinkEls = [
       ...pgfAnchorEls,
       pggAnchorEl,
       netflixAnchorEl,
       playlistAnchorEl,
       duolingoAnchorEl,
+      youtubeAnchorEl,
     ];
 
     expect(blogAnchorEl?.tagName).toBe('A');
@@ -56,6 +58,11 @@ describe('<AboutSection />', () => {
     expect(duolingoAnchorEl).toHaveAttribute(
       'href',
       'https://www.duolingo.com/profile/Dominic778651'
+    );
+
+    expect(youtubeAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg'
     );
   });
 });

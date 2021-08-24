@@ -19,39 +19,41 @@ describe('<AboutHomeSection />', () => {
     const content2 =
       "I'm currently based in Singapore and working at PropertyGuru Finance as a Senior Software Engineer.";
     const content3 =
-      'I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences. I hope it will benefit and help some of you folks out here.';
-    const anchorEl = screen.queryByText('PropertyGuru Finance');
+      'I write tech blogs and create videos to share my knowledge and learnings in my web development experiences. I hope it will benefit and help some of you folks out here.';
 
     expect(screen.queryByText(content1)).toBeInTheDocument();
     expect(queryByTextIgnoreHTML(screen, content2)).toBeInTheDocument();
     expect(queryByTextIgnoreHTML(screen, content3)).toBeInTheDocument();
-    expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute(
-      'href',
-      'https://www.propertyguru.com.sg/mortgage'
-    );
-    expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
-    expect(anchorEl).toHaveAttribute('target', '_blank');
   });
 
   it('should have expected anchors', () => {
-    const pgfAnchorEl = screen.queryByText('PropertyGuru Finance');
     const footerAnchorEl = screen.queryByText('Read More');
-    const linkEls = [pgfAnchorEl, footerAnchorEl];
+    const pgfAnchorEl = screen.queryByText('PropertyGuru Finance');
+    const youtubeAnchorEl = screen.queryByText('videos');
+    const externalLinkEls = [pgfAnchorEl, youtubeAnchorEl];
 
-    linkEls.forEach((linkEl) => {
-      expect(linkEl?.tagName).toBe('A');
+    expect(footerAnchorEl?.tagName).toBe('A');
+    expect(footerAnchorEl).toHaveAttribute('href', '/about');
+    expect(footerAnchorEl).not.toHaveAttribute('rel');
+    expect(footerAnchorEl).not.toHaveAttribute('target');
+
+    externalLinkEls.forEach((externalLinkEl) => {
+      expect(externalLinkEl?.tagName).toBe('A');
+      expect(externalLinkEl).toHaveAttribute(
+        'rel',
+        'noopener noreferrer nofollow'
+      );
+      expect(externalLinkEl).toHaveAttribute('target', '_blank');
     });
 
     expect(pgfAnchorEl).toHaveAttribute(
       'href',
       'https://www.propertyguru.com.sg/mortgage'
     );
-    expect(pgfAnchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
-    expect(pgfAnchorEl).toHaveAttribute('target', '_blank');
 
-    expect(footerAnchorEl).toHaveAttribute('href', '/about');
-    expect(footerAnchorEl).not.toHaveAttribute('rel');
-    expect(footerAnchorEl).not.toHaveAttribute('target');
+    expect(youtubeAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg'
+    );
   });
 });

@@ -29,9 +29,12 @@ function AboutHomeSection() {
           <Link href={Route.POSTS}>
             <a>tech blogs</a>
           </Link>{' '}
-          and create video tutorials to share my knowledge and learnings in my
-          web development experiences. I hope it will benefit and help some of
-          you folks out here.
+          and create{' '}
+          <AnchorLink href={ExternalUrl.YOUTUBE} isExternal>
+            videos
+          </AnchorLink>{' '}
+          to share my knowledge and learnings in my web development experiences.
+          I hope it will benefit and help some of you folks out here.
         </SectionContent>
         <div className="mt-12 text-center">
           <Link href={Route.ABOUT} passHref>

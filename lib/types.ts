@@ -60,6 +60,7 @@ export enum ExternalUrl {
   GOOGLE_TAG_MANAGER = 'https://tagmanager.google.com/',
   GOOGLE_TAG_MANAGER_POLICY = 'https://support.google.com/tagmanager/answer/9323295',
   COOKIES = 'https://en.wikipedia.org/wiki/HTTP_cookie',
+  YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
 }
 
 export type Nullish<T> = T | null | undefined;
