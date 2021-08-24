@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import {
+  MAIN_AUTHOR,
   MAIN_TITLE,
   MAIN_URL,
   SEO_DEFAULT_IMAGE,
@@ -36,6 +37,7 @@ function SeoTags({
       />
       <meta name="theme-color" content="#000000" />
       <meta name="description" content={description} />
+      <meta name="author" content={MAIN_AUTHOR} />
       <link rel="canonical" href={metaUrl} />
       <link rel="icon" href={`${MAIN_URL}/favicon.ico`} />
       <link rel="manifest" href={`${MAIN_URL}/manifest.json`} />

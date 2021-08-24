@@ -8,7 +8,7 @@ import {
   getFakeSentences,
   getRandomRoute,
 } from '../../lib/test-helpers';
-import { MAIN_TITLE, MAIN_URL } from '../../lib/constants';
+import { MAIN_AUTHOR, MAIN_TITLE, MAIN_URL } from '../../lib/constants';
 import SeoTags from '../seoTags';
 
 describe('<SeoTags />', () => {
@@ -84,6 +84,12 @@ describe('<SeoTags />', () => {
           imageHeight={imageHeight}
         />
       );
+    });
+
+    it('should render author tag', () => {
+      const metaAuthor = document.querySelector('meta[name="author"]');
+
+      expect(metaAuthor).toHaveAttribute('content', MAIN_AUTHOR);
     });
 
     it('should render url tags', () => {

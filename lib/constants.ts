@@ -12,6 +12,7 @@ import {
 } from './types';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
+export const MAIN_AUTHOR = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
 export const PRIVACY_EMAIL = 'privacy@dominicarrojado.com';
 export const DISCLAIMER_EMAIL = 'disclaimer@dominicarrojado.com';
