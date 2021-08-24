@@ -71,7 +71,7 @@ Now, update your `index.mjml` to add the code below:
 
 ```
 <mjml>
-  <mj-body background-color="white">
+  <mj-body background-color="#eeeeee">
     <mj-section>
       <mj-column>
         <mj-text>
