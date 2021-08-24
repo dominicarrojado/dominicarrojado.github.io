@@ -47,14 +47,14 @@ describe('<TestimonialsHomeSection />', () => {
       jobTitle: 'Senior Product Developer',
       companyName: 'Razer Inc.',
       quote:
-        "He's a really good software engineer. His analytical skill is really very good, he can solve difficult business problems by recommending technical solutions by looking At the business case and discussing with the stakeholders.",
+        "He's a really good software engineer. His analytical skill is really very good, he can solve difficult business problems by recommending technical solutions while looking at the business case and discussing with the stakeholders.",
     },
     {
       name: 'Jixiang Li',
       jobTitle: 'Software Engineer',
       companyName: 'Razer Inc.',
       quote:
-        'Dominic is a very good colleague to work with. He has excellent engineering and programming skills and I learned a lot from him when doing the same project together. He is also a kind person with patience. I am glad to have worked with him before :)',
+        'Dominic is a very good colleague to work with. He has excellent engineering and programming skills and I learned a lot from him when doing the same project together. He is also a kind and patient person. I am glad to have worked with him before.',
     },
   ];
   const testimonialsLen = testimonials.length;

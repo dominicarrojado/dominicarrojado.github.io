@@ -39,13 +39,13 @@ function TestimonialsHomeSection() {
     let newOffsetX = getRefValue(currentOffsetXRef) - diff;
 
     // add resistance to when swiping on both ends
-    if (newOffsetX >= offsetXMax || newOffsetX <= offsetXMin) {
+    if (diff !== 0 && (newOffsetX > offsetXMax || newOffsetX < offsetXMin)) {
       if (diff > 0) {
         // swipe to the right
-        newOffsetX -= (newOffsetX - offsetXMin) * 0.5;
+        newOffsetX -= Math.round((newOffsetX - offsetXMin) * 0.3);
       } else {
         // swipe to the left
-        newOffsetX -= (newOffsetX + offsetXMax) * 0.5;
+        newOffsetX -= Math.round((newOffsetX - offsetXMax) * 0.3);
       }
     }
 
