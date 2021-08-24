@@ -7,16 +7,10 @@ function About() {
   const title = 'About Me';
   const desc =
     'An introduction of myself - my passion, experiences and interests';
-  const imageUrl = '/images/pages/about.png';
 
   return (
     <>
-      <SeoTags
-        path={Route.ABOUT}
-        title={title}
-        description={desc}
-        imageUrl={imageUrl}
-      />
+      <SeoTags path={Route.ABOUT} title={title} description={desc} />
       <HeroSub title={title} description={desc} />
       <AboutSection />
     </>

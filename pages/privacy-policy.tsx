@@ -6,16 +6,10 @@ import { Route } from '../lib/types';
 function PrivacyPolicy() {
   const title = 'Privacy Policy';
   const desc = 'Find what you need to know about your privacy';
-  const imageUrl = '/images/pages/privacy-policy.png';
 
   return (
     <>
-      <SeoTags
-        path={Route.PRIVACY_POLICY}
-        title={title}
-        description={desc}
-        imageUrl={imageUrl}
-      />
+      <SeoTags path={Route.PRIVACY_POLICY} title={title} description={desc} />
       <HeroSub title={title} description={desc} />
       <PrivacyPolicySection />
     </>

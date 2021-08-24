@@ -46,7 +46,6 @@ describe('<Home />', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
-            imageUrl: expect.any(String),
           },
         ]),
       },
@@ -62,10 +61,9 @@ describe('<Home />', () => {
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/',
-        title: 'Dominic Arrojado',
+        title: 'Dominic Arrojado - Tech Blog',
         description:
           "Guides, Tips and Tricks to Web Development. I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end &amp; back-end development. I'm experienced in developing small to large web applications. I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences.",
-        imageUrl: '/images/pages/home.png',
       },
       {}
     );

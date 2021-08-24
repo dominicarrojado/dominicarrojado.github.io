@@ -7,16 +7,10 @@ function Disclaimer() {
   const title = 'Disclaimer';
   const desc =
     'Statements to specify or delimit the scope of rights and obligations';
-  const imageUrl = '/images/pages/disclaimer.png';
 
   return (
     <>
-      <SeoTags
-        path={Route.DISCLAIMER}
-        title={title}
-        description={desc}
-        imageUrl={imageUrl}
-      />
+      <SeoTags path={Route.DISCLAIMER} title={title} description={desc} />
       <HeroSub title={title} description={desc} />
       <DisclaimerSection />
     </>

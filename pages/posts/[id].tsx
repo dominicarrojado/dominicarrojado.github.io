@@ -3,16 +3,15 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 import SeoTags from '../../components/seoTags';
 import HeroSub from '../../components/heroSub';
 import PostContent from '../../components/postContent';
-import { PostData } from '../../lib/types';
+import { PostData, Route } from '../../lib/types';
 
 function Post({ postData }: { postData: PostData }) {
   return (
     <>
       <SeoTags
-        path={`/posts/${postData.id}`}
+        path={`${Route.POSTS}/${postData.id}`}
         title={postData.title}
         description={postData.excerpt}
-        imageUrl={postData.imageUrl}
       />
       <HeroSub title={postData.title} description={postData.excerpt} />
       <PostContent postData={postData} />

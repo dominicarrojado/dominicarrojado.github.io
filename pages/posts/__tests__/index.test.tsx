@@ -30,7 +30,6 @@ describe('<Posts />', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
-            imageUrl: expect.any(String),
           },
         ]),
       },
@@ -50,7 +49,6 @@ describe('<Posts />', () => {
         title,
         path: '/posts',
         description: desc,
-        imageUrl: '/images/pages/posts.png',
       },
       {}
     );

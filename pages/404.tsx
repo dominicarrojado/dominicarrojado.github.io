@@ -6,16 +6,10 @@ function About() {
   const title = '404 - Page Not Found';
   const shortDesc = "Sorry, we couldn't find what you're looking for.";
   const desc = `${shortDesc} Please check the menu for existing pages.`;
-  const imageUrl = '/images/pages/404.png';
 
   return (
     <>
-      <SeoTags
-        path={Route.HOME}
-        title={title}
-        description={shortDesc}
-        imageUrl={imageUrl}
-      />
+      <SeoTags path={Route.HOME} title={title} description={shortDesc} />
       <HeroSub title={title} description={desc} isMinHeightFull />
     </>
   );

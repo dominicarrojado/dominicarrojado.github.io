@@ -22,16 +22,30 @@ describe('<SeoTags />', () => {
     jest.restoreAllMocks();
   });
 
-  describe('image sizes prop is not defined', () => {
+  describe('image props are not defined', () => {
     beforeEach(() => {
       render(
         <SeoTags
           path={getRandomRoute()}
           title={getFakeSentence()}
           description={getFakeSentences()}
-          imageUrl={getFakeImageUrl()}
         />
       );
+    });
+
+    it('should render image url tags', () => {
+      const metaOgImg = document.querySelector('meta[property="og:image"]');
+      const metaOgSecureImg = document.querySelector(
+        'meta[property="og:image:secure_url"]'
+      );
+      const metaTwitterImg = document.querySelector(
+        'meta[name="twitter:image"]'
+      );
+      const fullImgUrl = `${MAIN_URL}/images/pages/guides-tips-and-tricks-to-web-development.png`;
+
+      expect(metaOgImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaOgSecureImg).toHaveAttribute('content', fullImgUrl);
+      expect(metaTwitterImg).toHaveAttribute('content', fullImgUrl);
     });
 
     it('should render image width tags', () => {
@@ -39,7 +53,7 @@ describe('<SeoTags />', () => {
         'meta[property="og:image:width"]'
       );
 
-      expect(metaOgImgWidth).toHaveAttribute('content', '1920');
+      expect(metaOgImgWidth).toHaveAttribute('content', '2400');
     });
 
     it('should render image height tags', () => {
@@ -47,7 +61,7 @@ describe('<SeoTags />', () => {
         'meta[property="og:image:height"]'
       );
 
-      expect(metaOgImgHeight).toHaveAttribute('content', '1200');
+      expect(metaOgImgHeight).toHaveAttribute('content', '1254');
     });
   });
 

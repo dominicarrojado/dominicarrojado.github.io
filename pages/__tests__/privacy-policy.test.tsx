@@ -29,7 +29,6 @@ describe('<PrivacyPolicy />', () => {
         title,
         path: '/privacy-policy',
         description: desc,
-        imageUrl: '/images/pages/privacy-policy.png',
       },
       {}
     );

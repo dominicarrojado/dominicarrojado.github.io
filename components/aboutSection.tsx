@@ -65,9 +65,9 @@ function AboutSection() {
           <Link href={Route.POSTS}>
             <a>tech blogs</a>
           </Link>{' '}
-          and create video tutorials to share my knowledge and learnings in web
-          development experiences - so let's see where this goes and hopefully
-          it will benefit and help some of you folks out here!
+          and create video tutorials to share my knowledge and learnings in my
+          web development experiences - so let's see where this goes and
+          hopefully it will benefit and help some of you folks out here!
         </p>
         <p>That's all for me for now. Thanks for reading ~</p>
       </PageContent>

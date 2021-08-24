@@ -97,7 +97,6 @@ export type Post = {
   category: PostCategory;
   date: string;
   excerpt: string;
-  imageUrl: string;
 };
 
 export type PostData = Post & {

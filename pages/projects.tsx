@@ -6,16 +6,10 @@ import { Route } from '../lib/types';
 function Projects() {
   const title = 'Featured Projects';
   const desc = "A selection of projects I've done so far";
-  const imageUrl = '/images/pages/projects.png';
 
   return (
     <>
-      <SeoTags
-        path={Route.PROJECTS}
-        title={title}
-        description={desc}
-        imageUrl={imageUrl}
-      />
+      <SeoTags path={Route.PROJECTS} title={title} description={desc} />
       <HeroSub title={title} description={desc} />
       <ProjectsSection />
     </>

@@ -30,7 +30,6 @@ describe('<Disclaimer />', () => {
         title,
         path: '/disclaimer',
         description: desc,
-        imageUrl: '/images/pages/disclaimer.png',
       },
       {}
     );

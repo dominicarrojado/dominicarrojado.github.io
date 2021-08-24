@@ -28,7 +28,6 @@ describe('<Page404 />', () => {
         title,
         path: '/',
         description: shortDesc,
-        imageUrl: '/images/pages/404.png',
       },
       {}
     );

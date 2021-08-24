@@ -2,6 +2,7 @@ import Head from 'next/head';
 import {
   MAIN_TITLE,
   MAIN_URL,
+  SEO_DEFAULT_IMAGE,
   SEO_DEFAULT_IMAGE_HEIGHT,
   SEO_DEFAULT_IMAGE_WIDTH,
 } from '../lib/constants';
@@ -10,14 +11,14 @@ function SeoTags({
   path,
   title,
   description,
-  imageUrl,
+  imageUrl = SEO_DEFAULT_IMAGE,
   imageWidth = SEO_DEFAULT_IMAGE_WIDTH,
   imageHeight = SEO_DEFAULT_IMAGE_HEIGHT,
 }: {
   path: string;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
   imageWidth?: number;
   imageHeight?: number;
 }) {

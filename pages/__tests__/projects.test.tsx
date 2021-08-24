@@ -29,7 +29,6 @@ describe('<Projects />', () => {
         title,
         path: '/projects',
         description: desc,
-        imageUrl: '/images/pages/projects.png',
       },
       {}
     );

@@ -86,7 +86,7 @@ module.exports = {
               },
             },
             strong: {
-              fontWeight: 500,
+              fontWeight: 400,
             },
             h2: {
               color: 'rgba(31, 41, 55, 1)',
@@ -98,6 +98,7 @@ module.exports = {
               backgroundColor: '#2c2c34',
             },
             code: {
+              display: 'inline-block',
               border: '1px solid rgba(229, 231, 235, 1)',
               borderRadius: '0.375rem',
               backgroundColor: 'rgba(243, 244, 246, 1)',

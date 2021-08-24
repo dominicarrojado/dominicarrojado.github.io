@@ -34,7 +34,6 @@ describe('<PostIndex />', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
-          imageUrl: expect.any(String),
           contentHtml: expect.any(String),
         }),
       },
@@ -47,7 +46,6 @@ describe('<PostIndex />', () => {
         category: expect.any(String),
         date: expect.any(String),
         excerpt: expect.any(String),
-        imageUrl: expect.any(String),
       });
     };
 
@@ -61,7 +59,6 @@ describe('<PostIndex />', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
-          imageUrl: expect.any(String),
         })
       );
       expect(adjacentPostData.id).not.toBe(postId);
@@ -100,7 +97,6 @@ describe('<PostIndex />', () => {
         path: `/posts/${postId}`,
         title: postData.title,
         description: postData.excerpt,
-        imageUrl: postData.imageUrl,
       },
       {}
     );
