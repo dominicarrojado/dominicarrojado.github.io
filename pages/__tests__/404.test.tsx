@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
-import Page404 from '../404';
+import Page404 from '../404.page';
 
 describe('<Page404 />', () => {
   afterEach(() => {

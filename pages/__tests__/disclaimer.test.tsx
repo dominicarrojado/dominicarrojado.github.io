@@ -3,7 +3,7 @@ import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
 import * as DisclaimerSection from '../../components/disclaimerSection';
-import Disclaimer from '../disclaimer';
+import Disclaimer from '../disclaimer.page';
 
 describe('<Disclaimer />', () => {
   afterEach(() => {

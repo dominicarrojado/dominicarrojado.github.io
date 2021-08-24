@@ -8,7 +8,7 @@ import * as PostsHomeSection from '../../components/postsHomeSection';
 import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
 import { Post } from '../../lib/types';
 import { POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
-import Home, { getStaticProps } from '../index';
+import Home, { getStaticProps } from '../index.page';
 
 describe('<Home />', () => {
   afterEach(() => {

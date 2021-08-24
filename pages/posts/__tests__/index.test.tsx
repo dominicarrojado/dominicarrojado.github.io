@@ -4,7 +4,7 @@ import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostsSection from '../../../components/postsSection';
 import { Post } from '../../../lib/types';
-import Posts, { getStaticProps } from '../index';
+import Posts, { getStaticProps } from '../index.page';
 
 describe('<Posts />', () => {
   afterEach(() => {

@@ -3,7 +3,7 @@ import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
 import * as PrivacyPolicySection from '../../components/privacyPolicySection';
-import PrivacyPolicy from '../privacy-policy';
+import PrivacyPolicy from '../privacy-policy.page';
 
 describe('<PrivacyPolicy />', () => {
   afterEach(() => {

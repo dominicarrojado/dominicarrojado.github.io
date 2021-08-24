@@ -6,7 +6,7 @@ import {
   getRandomRoute,
 } from '../../lib/test-helpers';
 import * as Layout from '../../components/layout';
-import App from '../_app';
+import App from '../_app.page';
 
 describe('<App />', () => {
   const renderComponent = (appProps: AppProps) => {

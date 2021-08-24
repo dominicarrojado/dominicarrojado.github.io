@@ -5,7 +5,7 @@ import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostContent from '../../../components/postContent';
 import { Post, PostData } from '../../../lib/types';
-import PostIndex, { getStaticPaths, getStaticProps } from '../[id]';
+import PostIndex, { getStaticPaths, getStaticProps } from '../[id].page';
 
 describe('<PostIndex />', () => {
   afterEach(() => {

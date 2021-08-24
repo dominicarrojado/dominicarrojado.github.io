@@ -3,7 +3,7 @@ import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
 import * as ProjectsSection from '../../components/projectsSection';
-import Projects from '../projects';
+import Projects from '../projects.page';
 
 describe('<Projects />', () => {
   afterEach(() => {

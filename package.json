@@ -5,9 +5,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
-    "build": "next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "export": "next export",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "predeploy": "yarn build",
