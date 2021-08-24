@@ -207,6 +207,7 @@ describe('<ProjectItem />', () => {
   describe('GIF logic', () => {
     const project = createProject(getFakeBoolean());
     const windowHeightOrig = window.innerHeight;
+    const windowPageYOffset = window.pageYOffset;
     const requestAnimationFrameOrig = window.requestAnimationFrame;
     const renderComponent = () => {
       render(<ProjectItem project={project} />);
@@ -222,6 +223,7 @@ describe('<ProjectItem />', () => {
       jest.restoreAllMocks();
 
       setReadOnlyProperty(window, 'innerHeight', windowHeightOrig);
+      setReadOnlyProperty(window, 'pageYOffset', windowPageYOffset);
       window.requestAnimationFrame = requestAnimationFrameOrig;
     });
 
@@ -268,6 +270,7 @@ describe('<ProjectItem />', () => {
         );
 
       // mock HTML properties that makes image to be in view
+      setReadOnlyProperty(window, 'pageYOffset', 1);
       setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({
@@ -411,6 +414,7 @@ describe('<ProjectItem />', () => {
         cancelDownloadGif: cancelDownloadGifMock,
       });
 
+      setReadOnlyProperty(window, 'pageYOffset', 1);
       setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({

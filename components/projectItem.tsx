@@ -111,12 +111,17 @@ function ImageContainer({
 
     const onScroll = () => {
       window.requestAnimationFrame(() => {
+        const { pageYOffset, innerHeight } = window;
         const containerEl = getRefValue(containerRef);
         const { top, height } = containerEl.getBoundingClientRect();
 
         setIsScrolling(true);
 
-        if (top >= 0 && top + height <= window.innerHeight) {
+        if (
+          pageYOffset !== 0 && // to prevent showing GIF when switching to projects page
+          top >= 0 &&
+          top + height <= innerHeight
+        ) {
           setIsImgInView(true);
         } else {
           setIsImgInView(false);
