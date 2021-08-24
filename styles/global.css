@@ -93,7 +93,7 @@
 
   html,
   body,
-  #__next {
+  body > div:first-child {
     @apply h-full;
   }
 
