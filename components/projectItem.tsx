@@ -110,27 +110,23 @@ function ImageContainer({
     let timeout: number;
 
     const onScroll = () => {
-      const { pageYOffset, innerHeight } = window;
-      const containerEl = getRefValue(containerRef);
+      window.requestAnimationFrame(() => {
+        const containerEl = getRefValue(containerRef);
+        const { top, height } = containerEl.getBoundingClientRect();
 
-      setIsScrolling(true);
+        setIsScrolling(true);
 
-      if (
-        pageYOffset !== 0 && // to prevent showing GIF when switching to projects page
-        containerEl &&
-        containerEl.offsetTop >= pageYOffset &&
-        containerEl.offsetTop + containerEl.offsetHeight <=
-          pageYOffset + innerHeight
-      ) {
-        setIsImgInView(true);
-      } else {
-        setIsImgInView(false);
-      }
+        if (top >= 0 && top + height <= window.innerHeight) {
+          setIsImgInView(true);
+        } else {
+          setIsImgInView(false);
+        }
 
-      clearTimeout(timeout);
-      timeout = window.setTimeout(() => {
-        setIsScrolling(false);
-      }, 200);
+        clearTimeout(timeout);
+        timeout = window.setTimeout(() => {
+          setIsScrolling(false);
+        }, 200);
+      });
     };
 
     Window.on('scroll', onScroll);

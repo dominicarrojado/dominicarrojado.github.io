@@ -207,18 +207,22 @@ describe('<ProjectItem />', () => {
   describe('GIF logic', () => {
     const project = createProject(getFakeBoolean());
     const windowHeightOrig = window.innerHeight;
-    const windowPageYOffset = window.pageYOffset;
+    const requestAnimationFrameOrig = window.requestAnimationFrame;
     const renderComponent = () => {
       render(<ProjectItem project={project} />);
 
       forceVisible();
     };
 
+    beforeEach(() => {
+      window.requestAnimationFrame = jest.fn((callback: any) => callback());
+    });
+
     afterEach(() => {
       jest.restoreAllMocks();
 
       setReadOnlyProperty(window, 'innerHeight', windowHeightOrig);
-      setReadOnlyProperty(window, 'pageYOffset', windowPageYOffset);
+      window.requestAnimationFrame = requestAnimationFrameOrig;
     });
 
     it('should NOT display GIF by default', () => {
@@ -264,12 +268,17 @@ describe('<ProjectItem />', () => {
         );
 
       // mock HTML properties that makes image to be in view
-      setReadOnlyProperty(window, 'pageYOffset', 1);
       setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({
-        offsetTop: 1,
-        offsetHeight: 2,
+        getBoundingClientRect: jest.fn(() => ({
+          top: 0,
+          height: 2,
+        })),
+
+        // for Tooltip component
+        offsetTop: 0,
+        offsetHeight: 0,
       });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
@@ -402,12 +411,17 @@ describe('<ProjectItem />', () => {
         cancelDownloadGif: cancelDownloadGifMock,
       });
 
-      setReadOnlyProperty(window, 'pageYOffset', 1);
       setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({
+        getBoundingClientRect: jest.fn(() => ({
+          top: -1,
+          height: 1,
+        })),
+
+        // for Tooltip component
         offsetTop: 0,
-        offsetHeight: 1,
+        offsetHeight: 0,
       });
 
       renderComponent();
