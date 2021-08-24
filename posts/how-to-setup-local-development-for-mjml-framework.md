@@ -1,7 +1,7 @@
 ---
 title: 'How to set up a local development for MJML framework'
-date: '2021-08-10'
-excerpt: 'Get a head start with MJML framework to help you build your email template faster.'
+date: '2021-08-24'
+excerpt: 'Get a head start with MJML framework to help you build your email template faster'
 category: 'technology'
 ---
 
