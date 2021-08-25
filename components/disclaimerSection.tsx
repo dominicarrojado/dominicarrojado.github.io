@@ -2,7 +2,7 @@ import Link from 'next/link';
 import AnchorLink from './anchorLink';
 import PageContent from './pageContent';
 import Section from './section';
-import { Route } from '../lib/types';
+import { ExternalUrl, Route } from '../lib/types';
 import { DISCLAIMER_EMAIL } from '../lib/constants';
 
 function DisclaimerSection() {
@@ -39,6 +39,12 @@ function DisclaimerSection() {
           projects. If any company that owns these projects would like to
           request for removal of their projects on this website, please contact
           us.
+        </p>
+        <h2>Font Awesome Icons</h2>
+        <p>
+          We give credit to Font Awesome for the free icons we use on this
+          Website. To see their license, click{' '}
+          <AnchorLink href={ExternalUrl.FONT_AWESOME_LICENSE} isExternal>here</AnchorLink>.
         </p>
         <h2>Links to other resources</h2>
         <p>

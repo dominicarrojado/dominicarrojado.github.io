@@ -1,4 +1,4 @@
-import SvgThumbUp from '../components/svgThumbUp';
+import SvgDonate from '../components/svgDonate';
 import SvgLinkedIn from '../components/svgLinkedIn';
 import SvgGitHub from '../components/svgGitHub';
 import SvgEnvelope from '../components/svgEnvelope';
@@ -369,7 +369,7 @@ export const SOCIAL_LINKS: Array<Social> = [
     name: SocialName.DONATE,
     title: 'Show your support and donate!',
     url: 'https://www.paypal.com/paypalme/DominicArrojado',
-    icon: SvgThumbUp,
+    icon: SvgDonate,
     shouldCopyOnClick: false,
   },
   {

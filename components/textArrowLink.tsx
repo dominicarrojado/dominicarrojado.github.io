@@ -27,10 +27,11 @@ const TextArrowLink = forwardRef(
         {children}
         <SvgChevronRight
           className={cn(
-            'inline-block w-3 h-3 ml-1 text-black opacity-30',
+            'inline-block w-2 h-2 ml-2 text-black opacity-30',
             'transform transition duration-300 group-hover:translate-x-1.5 group-hover:opacity-100',
-            'sm:w-4 sm:h-4',
-            'xl:w-5 xl:h-5 xl:ml-2'
+            'sm:w-2.5 sm:h-2.5 sm:ml-2.5',
+            'md:w-3 md:h-3 md:ml-3',
+            'xl:w-3.5 xl:h-3.5'
           )}
         />
       </a>

@@ -8,7 +8,7 @@ import Section from './section';
 import SectionContent from './sectionContent';
 import SectionTitle from './sectionTitle';
 import TestimonialItem from './testimonialItem';
-import SvgTouch from './svgTouch';
+import SvgMousePointer from './svgMousePointer';
 import { GoogleAnalyticsEvents } from '../lib/types';
 import {
   TESTIMONIALS,
@@ -150,8 +150,8 @@ function TestimonialsHomeSection() {
             }
           )}
         >
-          <SvgTouch
-            className={cn('w-4 h-4 mr-2 animate-pulse', 'md:w-5 md:h-5')}
+          <SvgMousePointer
+            className={cn('w-3 h-3 mr-2 animate-pulse', 'md:w-4 md:h-4')}
           />
           Swipe to See More
         </small>

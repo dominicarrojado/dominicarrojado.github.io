@@ -31,11 +31,11 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
         >
           <SvgQuote
             className={cn(
-              'w-10 h-10 text-gray-300',
-              'transform -translate-y-1.5 rotate-180',
-              'sm:w-11 sm:h-11',
-              'md:w-14 md:h-14 md:-translate-y-2',
-              'xl:w-16 xl:h-16 xl:-translate-y-2.5'
+              'w-6 h-6 mt-2 mb-2 text-gray-300',
+              'transform -translate-y-1.5',
+              'sm:w-7 sm:h-7',
+              'md:w-8 md:h-8 md:-translate-y-2',
+              'xl:w-9 xl:h-9 xl:-translate-y-2.5'
             )}
           />
           {testimonial.quote}

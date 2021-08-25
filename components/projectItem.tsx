@@ -337,7 +337,10 @@ function Highlight() {
       )}
     >
       <SvgStar
-        className={cn('inline-block w-3 h-3 mr-1 -mt-0.5', 'md:w-4 md:h-4')}
+        className={cn(
+          'inline-block w-2.5 h-2.5 mr-1 -mt-0.5',
+          'md:w-3.5 md:h-3.5'
+        )}
       />
       Best Project
     </div>

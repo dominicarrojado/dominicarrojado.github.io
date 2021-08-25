@@ -242,7 +242,7 @@ function ScrollDownButton() {
       <a
         ref={btnRef}
         href="#about"
-        className="group relative inline-flex flex-col items-center pb-1"
+        className="group relative inline-flex flex-col items-center pb-2"
         onMouseLeave={btnOnMouseLeave}
         onClick={btnOnClick}
         tabIndex={2}
@@ -266,10 +266,10 @@ function ScrollDownButton() {
         </div>
         <SvgArrowDown
           className={cn(
-            'inline-flex mt-2 w-3 h-3 text-gray-600',
-            'animate-bounce transition-colors duration-300 group-hover:text-white',
-            'md:w-4 md:h-4',
-            'xl:w-5 xl:h-5'
+            'inline-flex mt-2 w-2 h-2 text-gray-600',
+            'animate-bounce transition-colors duration-300 group-hover:text-gray-300',
+            'md:w-3 md:h-3',
+            'xl:w-4 xl:h-4'
           )}
         />
       </a>
