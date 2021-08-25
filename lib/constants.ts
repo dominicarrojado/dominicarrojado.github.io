@@ -236,7 +236,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Website',
-        url: 'https://www.hashtag-interactive.com/',
+        url: 'https://dominicarrojado.com/hashtag-interactive-website/',
       },
     ],
     imageUrl: '/images/projects/hashtag-interactive-website.png',
