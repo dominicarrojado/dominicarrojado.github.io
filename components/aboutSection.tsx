@@ -45,14 +45,14 @@ function AboutSection() {
           <AnchorLink href={ExternalUrl.NETFLIX} isExternal>
             Netflix
           </AnchorLink>{' '}
-          shows with my partner or doing my 2-hour workout. I have passion for
+          shows with my partner or doing my 2-hour workout. I have a passion for
           watching movies and listening to music. Here's my{' '}
           <AnchorLink href={ExternalUrl.SPOTIFY_PLAYLISTS} isExternal>
             Spotify playlists
           </AnchorLink>{' '}
-          if you'd like to find out what I listen to. I'm also currently
-          learning a new language, nope it's not programming, it's Chinese and
-          I'm learning it in{' '}
+          if you'd like to know what I listen to. I'm also currently learning a
+          new language, nope it's not a programming one, it's Chinese and I'm
+          learning it in{' '}
           <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
             Duolingo
           </AnchorLink>{' '}
@@ -70,11 +70,13 @@ function AboutSection() {
           <AnchorLink href={ExternalUrl.YOUTUBE} isExternal>
             videos
           </AnchorLink>{' '}
-          to share my knowledge and learnings in my web development experiences
-          - so I'm going to see where this goes and hopefully it will benefit
-          and help some of you folks out here!
+          to share my knowledge and learnings in my web development experiences.
+          I guess it's just part of being a developer that when you gain much
+          experience, you eventually want to share it. That's how our community
+          will keep growing. Let's see where this goes and hopefully it will
+          benefit and help some of you folks out here!
         </p>
-        <p>That's all for me for now. Thanks for reading ~</p>
+        <p>That's all for now. Thank you for your time ~</p>
       </PageContent>
     </Section>
   );
