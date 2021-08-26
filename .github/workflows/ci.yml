@@ -58,6 +58,9 @@ jobs:
       - name: Generate static files
         run: yarn export
 
+      - name: Move 404 page to root directory
+        run: mv ./out/404/index.html ./out/404.html
+
       - name: Deploy
         run: |
           git config --global user.name $user_name
