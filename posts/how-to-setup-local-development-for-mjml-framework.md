@@ -122,7 +122,7 @@ Once installed, open your `package.json` again and update the scripts with the f
     "start": "mjml --watch src/index.mjml --output src/index.html",
     "server": "live-server --host=localhost --open=src",
     "dev": "concurrently \"yarn start\" \"yarn server\"",
-    "build": "mjml src/index.mjml --output src/index.html",
+    "build": "mjml src/index.mjml --output src/index.html"
   },
 ```
 
@@ -134,7 +134,7 @@ Let's run our `dev` script by typing the command below on our terminal:
 yarn run dev
 ```
 
-This command will open your default browser and go to `http://localhost:8080/src/`. If it doesn't, you can do it yourself too. You should be able to see the page with the text `Hello World` displayed on your browser. This is the `index.html` served by our local server.
+This command will open your default browser and go to `http://localhost:8080/src/`. If it doesn't, you can do it yourself too. You should be able to see the page with the text `Hello World` displayed on your browser. If you end up seeing the directory of `/src/`, just refresh the page and you should see your email template. This is the `index.html` served by our local server.
 
 Now go back to Visual Studio Code and try do make some changes in the `index.mjml` file.
 
@@ -146,7 +146,7 @@ Now go back to Visual Studio Code and try do make some changes in the `index.mjm
 ...
 ```
 
-Once you saved the file, it should be automatically update the `index.html` and reflect on the browser.
+Once you save the file, it will be automatically update the `index.html` and refresh the page on the browser.
 
 That's it! You now have a local development setup for MJML framework and can start building your email template. I hope this was helpful and please don't forget to share. I'll be doing another blog soon where I'll build an email template using MJML with this local development setup. So stay tuned!
 
