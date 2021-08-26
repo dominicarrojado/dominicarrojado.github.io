@@ -61,7 +61,8 @@ export enum ExternalUrl {
   GOOGLE_TAG_MANAGER_POLICY = 'https://support.google.com/tagmanager/answer/9323295',
   COOKIES = 'https://en.wikipedia.org/wiki/HTTP_cookie',
   YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
-  FONT_AWESOME_LICENSE = 'https://fontawesome.com/license',
+  FONT_AWESOME = 'https://fontawesome.com/',
+  FONT_AWESOME_LICENSE = 'https://fontawesome.com/license/free',
 }
 
 export type Nullish<T> = T | null | undefined;

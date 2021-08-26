@@ -10,28 +10,35 @@ describe('<DisclaimerSection />', () => {
     const disclaimerEmail = 'disclaimer@dominicarrojado.com';
     const projectsAnchorEl = screen.queryByText('Projects');
     const emailAnchorEl = screen.queryByText(disclaimerEmail);
-    const linkEls = [projectsAnchorEl, emailAnchorEl];
-    const fontAwesomeAnchorEl = screen.queryByText('here');
+    const internalLinkEls = [projectsAnchorEl, emailAnchorEl];
+    const faAnchorEl = screen.queryAllByText('Font Awesome')[1];
+    const faLicenseAnchorEl = screen.queryByText('here');
+    const externalLinkEls = [faAnchorEl, faLicenseAnchorEl];
 
-    linkEls.forEach((linkEl) => {
-      expect(linkEl?.tagName).toBe('A');
-      expect(linkEl).not.toHaveAttribute('target');
-      expect(linkEl).not.toHaveAttribute('rel');
+    internalLinkEls.forEach((internalLink) => {
+      expect(internalLink?.tagName).toBe('A');
+      expect(internalLink).not.toHaveAttribute('target');
+      expect(internalLink).not.toHaveAttribute('rel');
     });
 
     expect(projectsAnchorEl).toHaveAttribute('href', '/projects');
 
     expect(emailAnchorEl).toHaveAttribute('href', `mailto:${disclaimerEmail}`);
 
-    expect(fontAwesomeAnchorEl?.tagName).toBe('A');
-    expect(fontAwesomeAnchorEl).toHaveAttribute(
+    externalLinkEls.forEach((externalLinkEl) => {
+      expect(externalLinkEl?.tagName).toBe('A');
+      expect(externalLinkEl).toHaveAttribute('target', '_blank');
+      expect(externalLinkEl).toHaveAttribute(
+        'rel',
+        'noopener noreferrer nofollow'
+      );
+    });
+
+    expect(faAnchorEl).toHaveAttribute('href', 'https://fontawesome.com/');
+
+    expect(faLicenseAnchorEl).toHaveAttribute(
       'href',
-      'https://fontawesome.com/license'
-    );
-    expect(fontAwesomeAnchorEl).toHaveAttribute('target', '_blank');
-    expect(fontAwesomeAnchorEl).toHaveAttribute(
-      'rel',
-      'noopener noreferrer nofollow'
+      'https://fontawesome.com/license/free'
     );
   });
 });
