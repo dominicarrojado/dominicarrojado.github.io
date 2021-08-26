@@ -1,6 +1,6 @@
 ---
 title: 'How to set up a local development for MJML framework'
-date: '2021-08-24'
+date: '2021-08-26'
 excerpt: 'Get a head start with MJML framework to help you build your email template faster'
 category: 'technology'
 ---
@@ -63,7 +63,21 @@ Then click on the "Extensions" tab and look for "MJML" and install it. You can a
 
 ![Screenshot of how to install MJML extension in Visual Studio Code](/images/posts/how-to-setup-local-development-for-mjml-framework/install-mjml-extension-in-visual-studio-code.png)
 
-If you have a decent-sized monitor with a resolution of at least 1920 x 1080, then you're done with this setup! That's because the MJML extension already has a live preview for MJML files. Within Visual Studio code, you can click on the MJML logo located on the top right corner. It will split the screen between your code and the preview so you can see updates as you type. This extension can also show inline errors, provide code snippets and many more!
+One of the feature of this extension is that it can beautify the MJML code. To enable that feature, create a folder in your root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. This is done to have a project-specific settings for Visual Studio Code. Let's update the created file to add the code below:
+
+```
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "[mjml]": {
+    "editor.defaultFormatter": "mjmlio.vscode-mjml"
+  }
+}
+```
+
+Once updated, it will automatically format your MJML code when you do save. Feel free to modify `editor.tabSize` as that can be changed according to your preference.
+
+Now, if you have a decent-sized monitor with a resolution of at least 1920 x 1080, then you're done with this setup! That's because the MJML extension already has a live preview for MJML files. Within Visual Studio code, you can click on the MJML logo located on the top right corner. It will split the screen between your code and the preview so you can see updates as you type. This extension can also show inline errors, provide code snippets and many more!
 
 Let's try out the preview feature of MJML extension. Open your `index.mjml`, it should show the MJML logo on the top right corder of your Visual Studio Code, click it and it will split the screen.
 
