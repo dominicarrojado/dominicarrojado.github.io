@@ -1,6 +1,6 @@
 ---
 title: 'How to set up a local development for MJML framework'
-date: '2021-08-26'
+date: '2021-08-27'
 excerpt: 'Get a head start with MJML framework to help you build your email template faster'
 category: 'technology'
 ---
@@ -147,6 +147,21 @@ Now go back to Visual Studio Code and try do make some changes in the `index.mjm
 ```
 
 Once you save the file, it will be automatically update the `index.html` and refresh the page on the browser.
+
+If you're ready to commit your changes in git, you can create a `.gitignore` file and add the following below:
+
+```
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# production
+/src/index.html
+
+# misc
+.DS_Store
+```
 
 That's it! You now have a local development setup for MJML framework and can start building your email template. I hope this was helpful and please don't forget to share. I'll be doing another blog soon where I'll build an email template using MJML with this local development setup. So stay tuned!
 
