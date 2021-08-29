@@ -189,10 +189,10 @@ describe('<SeoTags />', () => {
     it('should render url tags', () => {
       const linkCanonical = document.querySelector('link[rel="canonical"]');
       const metaOgUrl = document.querySelector('meta[property="og:url"]');
-      const expectedContent = `${MAIN_URL}${path}`;
+      const fullUrl = `${MAIN_URL}${path}/`;
 
-      expect(linkCanonical).toHaveAttribute('href', expectedContent);
-      expect(metaOgUrl).toHaveAttribute('content', expectedContent);
+      expect(linkCanonical).toHaveAttribute('href', fullUrl);
+      expect(metaOgUrl).toHaveAttribute('content', fullUrl);
     });
 
     it('should render title tags', () => {
