@@ -28,6 +28,7 @@ export enum PostCategory {
 }
 
 export enum GoogleAnalyticsEvents {
+  PAGE_VIEW = 'page_view',
   HEADER_BTN_HOVER = 'header_btn_hover',
   HEADER_BTN_CLICK = 'header_btn_click',
   SCROLL_HOVER = 'scroll_hover',

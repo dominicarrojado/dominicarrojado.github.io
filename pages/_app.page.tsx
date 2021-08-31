@@ -1,14 +1,29 @@
 import { useEffect } from 'react';
 import { AppProps } from 'next/app';
+import { trackEvent } from '../lib/google-analytics';
 import Window from '../modules/Window';
 import Layout from '../components/layout';
 import '../styles/global.css';
-import { Route } from '../lib/types';
+import { GoogleAnalyticsEvents, Route } from '../lib/types';
 
 function App({ Component, pageProps, router }: AppProps) {
+  const routerEvents = router.events;
+
   useEffect(() => {
     Window.init();
   }, []);
+
+  useEffect(() => {
+    const onRouteChangeComplete = (_url: string) => {
+      trackEvent({ event: GoogleAnalyticsEvents.PAGE_VIEW });
+    };
+
+    routerEvents.on('routeChangeComplete', onRouteChangeComplete);
+
+    return () => {
+      routerEvents.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, [routerEvents]);
 
   return (
     <Layout route={router.route as Route}>

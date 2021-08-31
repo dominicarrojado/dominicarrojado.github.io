@@ -5,6 +5,8 @@ import {
   getFakeSentence,
   getRandomRoute,
 } from '../../lib/test-helpers';
+import Events from '../../modules/Events';
+import * as ga from '../../lib/google-analytics';
 import * as Layout from '../../components/layout';
 import App from '../_app.page';
 
@@ -18,7 +20,7 @@ describe('<App />', () => {
     const route = getRandomRoute();
 
     renderComponent({
-      router: { route },
+      router: { route, events: new Events() },
       Component: jest.fn(() => <>{getFakeSentence()}</>),
     } as any);
 
@@ -34,12 +36,27 @@ describe('<App />', () => {
 
     renderComponent({
       pageProps,
-      router: { route: getRandomRoute() },
+      router: { route: getRandomRoute(), events: new Events() },
       Component: componentSpy,
     } as any);
 
     expect(componentSpy).toBeCalledTimes(1);
     expect(componentSpy).toBeCalledWith(pageProps, {});
     expect(screen.queryByText(text)).toBeInTheDocument();
+  });
+
+  it('should track route change', () => {
+    const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+    const routerEvents = new Events();
+
+    renderComponent({
+      router: { route: getRandomRoute(), events: routerEvents },
+      Component: jest.fn(() => <>{getFakeSentence()}</>),
+    } as any);
+
+    routerEvents.emit('routeChangeComplete', getRandomRoute());
+
+    expect(trackEventSpy).toBeCalledTimes(1);
+    expect(trackEventSpy).toBeCalledWith({ event: 'page_view' });
   });
 });

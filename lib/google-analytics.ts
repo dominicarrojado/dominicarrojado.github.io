@@ -7,6 +7,10 @@ declare global {
   }
 }
 
+type EventPageView = {
+  event: GoogleAnalyticsEvents.PAGE_VIEW;
+};
+
 type EventHeaderMenuHover = {
   event: GoogleAnalyticsEvents.HEADER_BTN_HOVER;
   hoverText: string;
@@ -80,6 +84,7 @@ type EventTestimonialsSwipe = {
 
 export function trackEvent(
   data:
+    | EventPageView
     | EventHeaderMenuHover
     | EventHeaderMenuClick
     | EventScrollDownHover
