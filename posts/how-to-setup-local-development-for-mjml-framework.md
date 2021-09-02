@@ -1,17 +1,19 @@
 ---
 title: 'How to set up a local development for MJML framework'
-date: '2021-08-27'
+date: '2021-09-02'
 excerpt: 'Get a head start with MJML framework to help you build your email template faster'
 category: 'technology'
 ---
+
+Do you prefer to watch the video version? Click [here](https://youtu.be/ZMkkegfq0W0).
 
 Are you still building your email templates with just plain HTML where you write code in an old and unconventional way with too much repetition resulting in large amounts of code that's very hard to maintain? Well, say no more. There's already an email framework that makes it less painful to build responsive email templates. It's called [MJML](https://mjml.io/) - short for Mailjet Markup Language. Originally created by a team of developers at [Mailjet](https://www.mailjet.com/), MJML's objective is to simplify the way people design responsive emails.
 
 From the first glimpse of this framework, I was already hooked because this is exactly what I needed to improve my experience in building email templates. I knew I had to try it out right away. I'm glad I did because I'm now able to write less, save time and code more efficiently. I've shared my experience with this framework with my colleagues and they were also amazed and convinced. The semantic syntax is so **simple**! I didn't have to struggle as much with responsiveness as it works well on different email platforms, even on Outlook. If you're still not convinced, you can learn more about this framework [here](https://mjml.io/).
 
-If you're already on board and ready to get started, I'll now teach you how to set up local development for MJML framework. This will give you a head start and help you build your email template even faster. Alright, let's do this!
+If you're already on board and ready to get started, I'll now teach you how to set up local development for MJML framework. This will give you a head start and help you build your email template even faster. If you don't want to go through the steps below and you just want to get the boilerplate, you can clone the code from [here](https://github.com/dominicarrojado/mjml-email-framework-boilerplate).
 
-By the way, upon writing this blog, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
+By the way, upon writing this post, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
 
 Some prerequisites below. Make sure to install them if you haven't!
 
@@ -126,7 +128,7 @@ Once installed, open your `package.json` again and update the scripts with the f
   },
 ```
 
-Let's understand each command that was newly added. The `start` script is basically the same as the `build` script but with a `--watch` parameter, which means it will be running in the background to watch for file changes and update the HTML file so we don't have to manually run the `build` script for every change. The `server` script is to start a server locally and serve the files under the `src` folder, specifically our `index.html` so we can view it in the browser. Since we have 2 scripts that needs to run at the same time, we created the `dev` script which will utilize `concurrently` to run both the `start` and the `server` script.
+Let's understand each command that was newly added. The `start` script is basically the same as the `build` script but with a `--watch` parameter, which means it will be running in the background to watch for file changes and update the HTML file so we don't have to manually run the `build` script for every change. The `server` script is to start a server locally and serve the files inside the `src` folder, specifically our `index.html` so we can view it in the browser. Since we have 2 scripts that needs to run at the same time, we created the `dev` script which will utilize `concurrently` to run both the `start` and the `server` script.
 
 Let's run our `dev` script by typing the command below on our terminal:
 
@@ -163,6 +165,6 @@ If you're ready to commit your changes in git, you can create a `.gitignore` fil
 .DS_Store
 ```
 
-That's it! You now have a local development setup for MJML framework and can start building your email template. I hope this was helpful and please don't forget to share. I'll be doing another blog soon where I'll build an email template using MJML with this local development setup. So stay tuned!
+That's it! You now have a local development setup for MJML framework and can start building your email template. I hope this was helpful and please don't forget to share. I'll be doing another post soon where I'll build an email template using MJML with this local development setup. So stay tuned!
 
 Cheers ~

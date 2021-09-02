@@ -156,14 +156,15 @@ function AdjacentPostLink({
         </div>
         <Icon
           className={cn(
-            'absolute top-0 bottom-0 m-auto flex-shrink-0 w-3 h-3 ml-1 text-black opacity-30',
+            'absolute top-0 bottom-0 m-auto flex-shrink-0 w-2 h-2 text-black opacity-30',
             'transform transition duration-300 group-hover:opacity-100',
-            'sm:w-4 sm:h-4',
-            'xl:w-5 xl:h-5',
+            'sm:w-2.5 sm:h-2.5',
+            'md:w-3 md:h-3',
+            'xl:w-3.5 xl:h-3.5',
             {
               [isPrevious
-                ? '-left-6 sm:-left-8 xl:-left-9 group-hover:-translate-x-1.5'
-                : '-right-6 sm:-right-8 xl:-right-9 group-hover:translate-x-1.5']:
+                ? '-left-5 sm:-left-7 xl:-left-8 group-hover:-translate-x-1.5'
+                : '-right-5 sm:-right-7 xl:-right-8 group-hover:translate-x-1.5']:
                 true,
             }
           )}
