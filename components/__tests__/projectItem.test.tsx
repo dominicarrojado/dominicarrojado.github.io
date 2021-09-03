@@ -210,9 +210,11 @@ describe('<ProjectItem />', () => {
     const windowPageYOffset = window.pageYOffset;
     const requestAnimationFrameOrig = window.requestAnimationFrame;
     const renderComponent = () => {
-      render(<ProjectItem project={project} />);
+      const component = render(<ProjectItem project={project} />);
 
       forceVisible();
+
+      return component;
     };
 
     beforeEach(() => {
@@ -436,6 +438,18 @@ describe('<ProjectItem />', () => {
 
       await waitFor(() => expect(startDownloadGifMock).not.toBeCalled());
       expect(cancelDownloadGifMock).toBeCalledTimes(1);
+    });
+
+    it('should handle container not found when route changes before request animation frame gets executed', () => {
+      const { container } = renderComponent();
+
+      jest.spyOn(hooks, 'getRefValue').mockReturnValue(null);
+
+      act(() => {
+        Window.emit('scroll');
+      });
+
+      expect(container).toBeInTheDocument();
     });
   });
 });

@@ -111,8 +111,13 @@ function ImageContainer({
 
     const onScroll = () => {
       window.requestAnimationFrame(() => {
-        const { pageYOffset, innerHeight } = window;
         const containerEl = getRefValue(containerRef);
+
+        if (!containerEl) {
+          return;
+        }
+
+        const { pageYOffset, innerHeight } = window;
         const { top, height } = containerEl.getBoundingClientRect();
 
         setIsScrolling(true);
