@@ -47,6 +47,7 @@ export enum ExternalUrl {
   PROPERTY_GURU_FINANCE = 'https://www.propertyguru.com.sg/mortgage',
   PROPERTY_GURU_GROUP = 'https://www.propertygurugroup.com/',
   NETFLIX = 'https://www.netflix.com/',
+  IMAGINE_DRAGONS = 'https://www.imaginedragonsmusic.com/',
   SPOTIFY_PLAYLISTS = 'https://open.spotify.com/user/dominicarrojado/playlists',
   DUOLINGO = 'https://www.duolingo.com/profile/Dominic778651',
   GITHUB = 'https://github.com/',

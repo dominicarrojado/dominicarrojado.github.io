@@ -11,6 +11,7 @@ describe('<AboutSection />', () => {
     const pgfAnchorEls = screen.queryAllByText('PropertyGuru Finance');
     const pggAnchorEl = screen.queryByText('PropertyGuru Group');
     const netflixAnchorEl = screen.queryByText('Netflix');
+    const bandAnchorEl = screen.queryByText('Imagine Dragons');
     const playlistAnchorEl = screen.queryByText('Spotify playlists');
     const duolingoAnchorEl = screen.queryByText('Duolingo');
     const youtubeAnchorEl = screen.queryByText('videos');
@@ -18,6 +19,7 @@ describe('<AboutSection />', () => {
       ...pgfAnchorEls,
       pggAnchorEl,
       netflixAnchorEl,
+      bandAnchorEl,
       playlistAnchorEl,
       duolingoAnchorEl,
       youtubeAnchorEl,
@@ -49,6 +51,11 @@ describe('<AboutSection />', () => {
     );
 
     expect(netflixAnchorEl).toHaveAttribute('href', 'https://www.netflix.com/');
+
+    expect(bandAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.imaginedragonsmusic.com/'
+    );
 
     expect(playlistAnchorEl).toHaveAttribute(
       'href',

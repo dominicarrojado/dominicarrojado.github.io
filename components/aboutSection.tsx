@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import cn from 'classnames';
 import Section from './section';
 import AnchorLink from './anchorLink';
 import { ExternalUrl, Route } from '../lib/types';
@@ -45,14 +44,17 @@ function AboutSection() {
           <AnchorLink href={ExternalUrl.NETFLIX} isExternal>
             Netflix
           </AnchorLink>{' '}
-          shows with my partner or doing my 2-hour workout. I have a passion for
-          watching movies and listening to music. Here's my{' '}
+          shows with my partner or doing my 2-hour workout. I like to watch
+          movies and listen to music. Favorite band?{' '}
+          <AnchorLink href={ExternalUrl.IMAGINE_DRAGONS} isExternal>
+            Imagine Dragons
+          </AnchorLink>
+          ! If you'd like to hear the songs I listen to, here's my{' '}
           <AnchorLink href={ExternalUrl.SPOTIFY_PLAYLISTS} isExternal>
             Spotify playlists
-          </AnchorLink>{' '}
-          if you'd like to know what I listen to. I'm also currently learning a
-          new language, nope it's not a programming one, it's Chinese and I'm
-          learning it in{' '}
+          </AnchorLink>
+          . I'm also currently learning a new language, nope it's not a
+          programming one, it's Chinese and I'm learning it in{' '}
           <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
             Duolingo
           </AnchorLink>{' '}
