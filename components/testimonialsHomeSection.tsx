@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { useWindowSize } from '../lib/custom-hooks';
 import { getRefValue, useStateRef } from '../lib/hooks';
@@ -9,13 +9,17 @@ import SectionContent from './sectionContent';
 import SectionTitle from './sectionTitle';
 import TestimonialItem from './testimonialItem';
 import SvgMousePointer from './svgMousePointer';
+import SvgHandPointer from './svgHandPointer';
 import { GoogleAnalyticsEvents } from '../lib/types';
 import {
+  SCREEN_LG,
   TESTIMONIALS,
+  TESTIMONIALS_LENGTH,
   TESTIMONIALS_SUCCESS_SWIPE_DIFF,
 } from '../lib/constants';
+import { HTMLProps } from 'react-test-renderer/node_modules/@types/react';
 
-function TestimonialsHomeSection() {
+export default function TestimonialsHomeSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const currentOffsetXRef = useRef(0);
@@ -25,27 +29,51 @@ function TestimonialsHomeSection() {
   const { windowWidth } = useWindowSize();
   const [shouldDisplayTip, setShouldDisplayTip] = useState(true);
   const [isSwiping, setIsSwiping] = useState(false);
+  const [swipeIdx, setSwipeIdx] = useState(0);
+  const [maxSwipe, setMaxSwipe] = useState(0);
+  const indicators = useMemo(
+    () => Array.from(Array(maxSwipe).keys()),
+    [maxSwipe]
+  );
   const [offsetX, setOffsetX, offsetXRef] = useStateRef(0);
+  const TipIcon = windowWidth < SCREEN_LG ? SvgHandPointer : SvgMousePointer;
+
+  const getSwipeDetails = () => {
+    const containerEl = getRefValue(containerRef);
+    const listEl = getRefValue(listRef);
+    const containerWidth = Math.round(containerEl.offsetWidth / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
+    const listWidth = listEl.scrollWidth;
+    const listItemEl = listEl.firstElementChild as HTMLLIElement;
+    const swipeWidth = listItemEl.offsetWidth;
+    const offsetXMin = -(listWidth - containerWidth);
+    const offsetXMax = 0;
+    const maxSwipe =
+      TESTIMONIALS_LENGTH - Math.floor(containerWidth / swipeWidth) + 1;
+
+    return {
+      offsetXMin,
+      offsetXMax,
+      swipeWidth,
+      maxSwipe,
+    };
+  };
 
   const onTouchMove = (e: TouchEvent | MouseEvent) => {
     const currentX = getTouchEventData(e).clientX;
     const diff = getRefValue(startXRef) - currentX;
-    const listEl = getRefValue(listRef);
-    const containerEl = getRefValue(containerRef);
-    const listWidth = listEl.scrollWidth;
-    const containerWidth = containerEl.offsetWidth;
-    const offsetXMin = -(listWidth - containerWidth);
-    const offsetXMax = 0;
     let newOffsetX = getRefValue(currentOffsetXRef) - diff;
+
+    // get swipe details
+    const { offsetXMin, offsetXMax, swipeWidth, maxSwipe } = getSwipeDetails();
 
     // add resistance to when swiping on both ends
     if (diff !== 0 && (newOffsetX > offsetXMax || newOffsetX < offsetXMin)) {
       if (diff > 0) {
         // swipe to the right
-        newOffsetX -= Math.round((newOffsetX - offsetXMin) * 0.3);
+        newOffsetX -= Math.round((newOffsetX - offsetXMin) * 0.7);
       } else {
         // swipe to the left
-        newOffsetX -= Math.round((newOffsetX - offsetXMax) * 0.3);
+        newOffsetX -= Math.round((newOffsetX - offsetXMax) * 0.7);
       }
     }
 
@@ -62,10 +90,27 @@ function TestimonialsHomeSection() {
       }
     }
 
-    // limit swiping on both ends
-    let adjustedOffsetX = newOffsetX;
-    adjustedOffsetX = Math.min(adjustedOffsetX, offsetXMax);
-    adjustedOffsetX = Math.max(adjustedOffsetX, offsetXMin);
+    let adjustedOffsetX = getRefValue(currentOffsetXRef);
+
+    // adjust offset to arrange items on their respective column after touch ends
+    if (Math.abs(diff) > TESTIMONIALS_SUCCESS_SWIPE_DIFF) {
+      if (diff > 0) {
+        // swipe to the right
+        adjustedOffsetX = Math.floor(newOffsetX / swipeWidth) * swipeWidth;
+      } else {
+        // swipe to the left
+        adjustedOffsetX = Math.ceil(newOffsetX / swipeWidth) * swipeWidth;
+      }
+
+      // limit swiping on most right or left
+      adjustedOffsetX = Math.min(adjustedOffsetX, offsetXMax);
+      adjustedOffsetX = Math.max(adjustedOffsetX, offsetXMin);
+
+      let newSwipeIdx = Math.ceil(Math.abs(adjustedOffsetX / swipeWidth));
+      newSwipeIdx = Math.min(newSwipeIdx, maxSwipe - 1);
+
+      setSwipeIdx(newSwipeIdx);
+    }
 
     newOffsetXRef.current = adjustedOffsetX;
   };
@@ -91,10 +136,22 @@ function TestimonialsHomeSection() {
     window.addEventListener('mousemove', onTouchMove);
     window.addEventListener('mouseup', onTouchEnd);
   };
+  const indicatorOnClick = (idx: number) => {
+    const { swipeWidth, offsetXMin } = getSwipeDetails();
+    let newOffsetX = -(swipeWidth * idx);
+    newOffsetX = Math.max(newOffsetX, offsetXMin);
+
+    setOffsetX(newOffsetX);
+    setSwipeIdx(idx);
+  };
 
   useEffect(() => {
+    const { maxSwipe } = getSwipeDetails();
+
     // reset states on window resize
     setOffsetX(0);
+    setSwipeIdx(0);
+    setMaxSwipe(maxSwipe || 0);
     setShouldDisplayTip(true);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,25 +169,21 @@ function TestimonialsHomeSection() {
           'sm:-mx-8',
           'lg:-mx-10'
         )}
+        style={{ touchAction: 'pan-y' }}
       >
-        <div
-          ref={containerRef}
-          className="relative pb-10 cursor-grab active:cursor-grabbing"
-        >
+        <div ref={containerRef} className="relative pb-10">
           <ul
             ref={listRef}
             className={cn(
-              'relative mt-8 flex flex-row items-center select-none',
+              'relative mt-8 flex flex-row items-center cursor-grab active:cursor-grabbing select-none',
+              'transform transition-transform ease-out',
               'sm:mt-10',
               'lg:mt-12',
               {
-                ['transform transition-transform duration-500']: !isSwiping,
+                [!isSwiping ? 'duration-300' : 'duration-0']: true,
               }
             )}
-            style={{
-              transform: `translate3d(${offsetX}px, 0, 0)`,
-              touchAction: 'pan-y',
-            }}
+            style={{ transform: `translate3d(${offsetX}px, 0, 0)` }}
             onTouchStart={onTouchStart}
             onMouseDown={onTouchStart}
           >
@@ -138,6 +191,18 @@ function TestimonialsHomeSection() {
               <TestimonialItem key={idx} testimonial={testimonial} />
             ))}
           </ul>
+          <div
+            className="flex justify-center items-center mt-8"
+            data-testid="indicators"
+          >
+            {indicators.map((idx) => (
+              <IndicatorButton
+                key={idx}
+                className={idx === swipeIdx ? 'bg-gray-400' : 'bg-gray-200'}
+                onClick={() => indicatorOnClick(idx)}
+              />
+            ))}
+          </div>
         </div>
         <small
           className={cn(
@@ -150,7 +215,7 @@ function TestimonialsHomeSection() {
             }
           )}
         >
-          <SvgMousePointer
+          <TipIcon
             className={cn('w-3 h-3 mr-2 animate-pulse', 'md:w-4 md:h-4')}
           />
           Swipe to See More
@@ -160,4 +225,22 @@ function TestimonialsHomeSection() {
   );
 }
 
-export default TestimonialsHomeSection;
+function IndicatorButton({
+  type,
+  className,
+  ...props
+}: HTMLProps<HTMLButtonElement>) {
+  return (
+    <button
+      className={cn(
+        'w-1 h-1 ml-1 first:ml-0 rounded-full cursor-pointer',
+        'transition-colors',
+        'md:w-1.5 md:h-1.5',
+        'lg:w-2 lg:h-2 lg:ml-1.5',
+        'xl:w-2.5 xl:h-2.5 xl:ml-2',
+        className
+      )}
+      {...props}
+    />
+  );
+}

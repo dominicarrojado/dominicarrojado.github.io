@@ -35,6 +35,8 @@ export const FONTS = [
   'Roboto-BoldItalic',
 ];
 
+export const SCREEN_LG = 1024;
+
 export const PROJECTS: Array<Project> = [
   {
     title: 'THX Spatial Audio',

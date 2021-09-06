@@ -41,6 +41,7 @@ module.exports = {
         'transform-opacity-color': 'transform, opacity, color',
       },
       transitionDuration: {
+        0: '0ms',
         1250: '1250ms',
       },
       transitionDelay: {

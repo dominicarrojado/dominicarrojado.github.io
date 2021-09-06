@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { setReadOnlyProperty } from '../../lib/test-helpers';
+import { getFakeNumber, setReadOnlyProperty } from '../../lib/test-helpers';
+import * as hooks from '../../lib/hooks';
 import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
 import * as TestimonialItem from '../testimonialItem';
@@ -106,7 +107,7 @@ describe('<TestimonialsHomeSection />', () => {
     });
   });
 
-  it('should display tip', () => {
+  it('should display tip by default', () => {
     renderComponent();
 
     const tipEl = screen.queryByText('Swipe to See More');
@@ -114,200 +115,258 @@ describe('<TestimonialsHomeSection />', () => {
     expect(tipEl).not.toHaveClass('opacity-0');
   });
 
-  it('should allow swiping', () => {
-    const windowWidth = 474;
-    const containerWidth = windowWidth;
-    const listWidth = containerWidth * testimonialsLen;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
+  it('should display hand pointer tip icon on mobile/tablet', () => {
+    setReadOnlyProperty(
+      window,
+      'innerWidth',
+      getFakeNumber({ min: 1, max: 1023 })
+    );
 
     renderComponent();
 
-    const listEl = screen.queryByRole('list') as HTMLUListElement;
-    const containerEl = listEl.parentElement as HTMLDivElement;
+    const tipEl = screen.queryByText('Swipe to See More') as HTMLElement;
+    const iconEl = tipEl.querySelector('svg');
 
-    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
-    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
-
-    const startX = 10;
-    const moveX = 0;
-    const offsetX = 0 - startX - moveX;
-
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
-
-    expect(listEl).toHaveStyle({
-      transform: `translate3d(${offsetX}px, 0, 0)`,
-    });
+    expect(iconEl).toHaveAttribute('viewBox', '0 0 448 512');
   });
 
-  it('should limit swipe on the right', () => {
-    const windowWidth = 474;
-    const containerWidth = windowWidth;
-    const listWidth = containerWidth * testimonialsLen;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
+  it('should display mouse pointer tip icon on desktop', () => {
+    setReadOnlyProperty(window, 'innerWidth', getFakeNumber({ min: 1024 }));
 
     renderComponent();
 
-    const listEl = screen.queryByRole('list') as HTMLUListElement;
-    const containerEl = listEl.parentElement as HTMLDivElement;
+    const tipEl = screen.queryByText('Swipe to See More') as HTMLElement;
+    const iconEl = tipEl.querySelector('svg');
 
-    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
-    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
-
-    const startX = listWidth;
-    const moveX = 0;
-    const offsetX = 0 - listWidth - windowWidth * -1;
-
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
-
-    expect(listEl).toHaveStyle({
-      transform: `translate3d(${offsetX}px, 0, 0)`,
-    });
+    expect(iconEl).toHaveAttribute('viewBox', '0 0 320 512');
   });
 
-  it('should limit swipe on the left', () => {
-    const windowWidth = 474;
-    const containerWidth = windowWidth;
-    const listWidth = containerWidth * testimonialsLen;
+  describe('swipe logic', () => {
+    const swipeSuccessDiff = 40;
+    let windowWidth: number;
+    let containerWidth: number;
+    let listWidth: number;
+    let listItemWidth: number;
 
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
+    beforeEach(() => {
+      windowWidth = getFakeNumber();
+      containerWidth = Math.round(getFakeNumber({ max: windowWidth }) / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
+      listWidth = containerWidth * testimonialsLen;
+      listItemWidth = containerWidth;
 
-    renderComponent();
+      jest
+        .spyOn(customHooks, 'useWindowSize')
+        .mockReturnValue({ windowWidth, windowHeight: getFakeNumber() });
 
-    const listEl = screen.queryByRole('list') as HTMLUListElement;
-    const containerEl = listEl.parentElement as HTMLDivElement;
+      setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
-    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
-    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+      // for setting maxSwipe on useEffect
+      jest
+        .spyOn(hooks, 'getRefValue')
+        // containerEl
+        .mockReturnValueOnce({
+          offsetWidth: containerWidth,
+        })
+        // listEl
+        .mockReturnValueOnce({
+          scrollWidth: listWidth,
+          firstElementChild: {
+            offsetWidth: listItemWidth,
+          },
+        });
 
-    const startX = -100;
-    const moveX = 0;
-    const offsetX = 0;
+      renderComponent();
 
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+      const containerEl = listEl.parentElement as HTMLDivElement;
 
-    expect(listEl).toHaveStyle({
-      transform: `translate3d(${offsetX}px, 0, 0)`,
-    });
-  });
-
-  it('should hide tip on swipe', () => {
-    const windowWidth = 474;
-    const containerWidth = windowWidth;
-    const listWidth = containerWidth * testimonialsLen;
-
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const listEl = screen.queryByRole('list') as HTMLUListElement;
-    const containerEl = listEl.parentElement as HTMLDivElement;
-
-    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
-    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
-
-    const startX = 41;
-    const moveX = 0;
-    const offsetX = 0 - startX - moveX;
-
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
-
-    expect(listEl).toHaveStyle({
-      transform: `translate3d(${offsetX}px, 0, 0)`,
+      setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
+      setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
+      setReadOnlyProperty(listEl, 'firstElementChild', {
+        offsetWidth: listItemWidth,
+      });
     });
 
-    const tipEl = screen.queryByText('Swipe to See More');
+    it('should swipe from left to right by column width', () => {
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+      const startX = swipeSuccessDiff + 1;
+      const moveX = 0;
 
-    expect(tipEl).toHaveClass('opacity-0');
-  });
+      // swipe to the right
+      for (let idx = 1; idx < testimonialsLen; idx++) {
+        fireEvent.touchStart(listEl, {
+          changedTouches: [{ clientX: startX }],
+        });
+        fireEvent.touchMove(listEl, {
+          changedTouches: [{ clientX: moveX }],
+        });
+        fireEvent.touchEnd(listEl);
 
-  it('should track swipe', () => {
-    const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+        expect(listEl).toHaveStyle({
+          transform: `translate3d(${listItemWidth * idx * -1}px, 0, 0)`,
+        });
+      }
 
-    const windowWidth = 474;
-    const containerWidth = windowWidth;
-    const listWidth = containerWidth * testimonialsLen;
+      // swipe to the left
+      for (let idx = testimonialsLen - 2; idx >= 0; idx--) {
+        fireEvent.touchStart(listEl, {
+          changedTouches: [{ clientX: -startX }],
+        });
+        fireEvent.touchMove(listEl, {
+          changedTouches: [{ clientX: moveX }],
+        });
+        fireEvent.touchEnd(listEl);
 
-    setReadOnlyProperty(window, 'innerWidth', windowWidth);
-
-    renderComponent();
-
-    const listEl = screen.queryByRole('list') as HTMLUListElement;
-    const containerEl = listEl.parentElement as HTMLDivElement;
-
-    setReadOnlyProperty(containerEl, 'offsetWidth', containerWidth);
-    setReadOnlyProperty(listEl, 'scrollWidth', listWidth);
-
-    let startX = 39;
-    let moveX = 0;
-    let offsetX = 0 - startX - moveX;
-
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
-
-    expect(listEl).toHaveStyle({
-      transform: `translate3d(${offsetX}px, 0, 0)`,
+        expect(listEl).toHaveStyle({
+          transform: `translate3d(${listItemWidth * idx * -1}px, 0, 0)`,
+        });
+      }
     });
 
-    expect(trackEventSpy).not.toBeCalled();
+    it('should limit swipe on the right', () => {
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
 
-    startX = 40;
-    offsetX = 0 - startX - moveX;
+      const startX = listWidth;
+      const moveX = 0;
+      const offsetXMin = 0 - listWidth - containerWidth * -1;
 
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(listEl).toHaveStyle({
+        transform: `translate3d(${offsetXMin}px, 0, 0)`,
+      });
     });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
 
-    expect(trackEventSpy).toBeCalledTimes(1);
-    expect(trackEventSpy).toBeCalledWith({
-      event: 'testimonials_swipe',
+    it('should limit swipe on the left', () => {
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+
+      const startX = -1;
+      const moveX = 0;
+      const offsetXMax = 0;
+
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(listEl).toHaveStyle({
+        transform: `translate3d(${offsetXMax}px, 0, 0)`,
+      });
     });
 
-    // expect not to track twice
-    trackEventSpy.mockClear();
+    it('should hide tip on swipe', () => {
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+      const tipEl = screen.queryByText('Swipe to See More');
 
-    fireEvent.touchStart(listEl, {
-      changedTouches: [{ clientX: startX }],
-    });
-    fireEvent.touchMove(listEl, {
-      changedTouches: [{ clientX: moveX }],
-    });
-    fireEvent.touchEnd(listEl);
+      const startX = 41;
+      const moveX = 0;
 
-    expect(trackEventSpy).not.toBeCalled();
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(tipEl).toHaveClass('opacity-0');
+    });
+
+    it('should track swipe', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+
+      let startX = 39;
+      const moveX = 0;
+
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(trackEventSpy).not.toBeCalled();
+
+      startX = 40;
+
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'testimonials_swipe',
+      });
+
+      // expect not to track twice
+      trackEventSpy.mockClear();
+
+      fireEvent.touchStart(listEl, {
+        changedTouches: [{ clientX: startX }],
+      });
+      fireEvent.touchMove(listEl, {
+        changedTouches: [{ clientX: moveX }],
+      });
+      fireEvent.touchEnd(listEl);
+
+      expect(trackEventSpy).not.toBeCalled();
+    });
+
+    it('should swipe on indicator click', () => {
+      const indicatorsEl = screen.queryByTestId('indicators') as HTMLDivElement;
+      const indicatorsEls = indicatorsEl.childNodes;
+      const listEl = screen.queryByRole('list') as HTMLUListElement;
+
+      expect(indicatorsEls[0]).toHaveClass('bg-gray-400');
+      expect(indicatorsEls[0]).not.toHaveClass('bg-gray-200');
+
+      // swipe to the right
+      for (let idx = 1; idx < testimonialsLen; idx++) {
+        const indicatorEl = indicatorsEls[idx];
+
+        expect(indicatorEl).toHaveClass('bg-gray-200');
+        expect(indicatorEl).not.toHaveClass('bg-gray-400');
+
+        fireEvent.click(indicatorEl);
+
+        expect(listEl).toHaveStyle({
+          transform: `translate3d(${listItemWidth * idx * -1}px, 0, 0)`,
+        });
+        expect(indicatorEl).toHaveClass('bg-gray-400');
+        expect(indicatorEl).not.toHaveClass('bg-gray-200');
+      }
+
+      // swipe to the left
+      for (let idx = testimonialsLen - 2; idx >= 0; idx--) {
+        const indicatorEl = indicatorsEls[idx];
+
+        expect(indicatorEl).toHaveClass('bg-gray-200');
+        expect(indicatorEl).not.toHaveClass('bg-gray-400');
+
+        fireEvent.click(indicatorEl);
+
+        expect(listEl).toHaveStyle({
+          transform: `translate3d(${listItemWidth * idx * -1}px, 0, 0)`,
+        });
+        expect(indicatorEl).toHaveClass('bg-gray-400');
+        expect(indicatorEl).not.toHaveClass('bg-gray-200');
+      }
+    });
   });
 });
