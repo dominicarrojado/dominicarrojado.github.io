@@ -1,6 +1,6 @@
 ---
 title: 'Building an email template with MJML framework'
-date: '2021-09-04'
+date: '2021-09-06'
 excerpt: 'Learn how to build a responsive email template in a less painful way'
 category: 'technology'
 ---
@@ -592,14 +592,16 @@ The `<mj-style>` without the "inline" attribute is also useful for `:hover` styl
 ...
 ```
 
-And we are **done**! You've just built an email template with MJML framework with just a few lines of code - 296 to be exact. Just compare that amount of code against the generated `index.html`, it's more than half and definitely much cleaner and easier to maintain than when you build the email template in regular HTML. And didn't have to struggle much with regards to responsiveness, MJML handles most of it for us.
+And we are **done**! You've just built an email template with MJML framework with just a few lines of code - 296 to be exact. Just compare that amount of code against the generated `index.html`, it's half the amount of code and definitely much cleaner and easier to maintain than when you build the email template in regular HTML. And we didn't have to struggle much with regards to responsiveness, MJML handles most of it for us.
 
-If you want to build more email templates and practice, you can check out some of my past email templates which I recently just migrated to MJML framework:
+If you need the final code of this template, this is the [link](https://github.com/dominicarrojado/mjml-sample-edm) to the GitHub repository.
+
+And in case you want to build more email templates and practice, you can check out some of my past email templates which I recently just migrated to MJML framework:
 
 - AXA Email Templates ([Smart Travel I](/axa-smart-travel-edm/), [Smart Travel II](/axa-smart-travel-2-edm/), [Mother's Day](/axa-mothers-day-edm/), [Shield](/axa-shield-edm/), [SmartHome](/axa-smart-home-edm/), [Singtel Partnership](/axa-singtel-edm/), [September Promo](/axa-september-promo-edm/))
 - M1 Email Templates ([Passport I](/m1-data-passport-edm/), [Passport II](/m1-data-passport-2-edm/), [Passport III](/m1-data-passport-3-edm/), [Passport IV](/m1-data-passport-4-edm/))
 - [Hashtag Interactive Welcome Email Template](/hashtag-interactive-welcome-edm/)
 
-If you want to see their codes, they are available on my [GitHub](https://github.com/dominicarrojado).
+The codes of these templates are available on my [GitHub](https://github.com/dominicarrojado).
 
-Alright, I hope this post was insightful and gave you all the pointers you need when building email templates with MJML framework. You can also check their official documentation [here](https://documentation.mjml.io/) to further your knowledge. This framework deserves to be shared, so please do!
+I hope this post was insightful and gave you all the pointers you need when building email templates with MJML framework. You can also check their official documentation [here](https://documentation.mjml.io/) to further your knowledge. This framework deserves to be shared, so please do!
