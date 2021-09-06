@@ -30,7 +30,7 @@ function AboutHomeSection() {
             <a>tech blogs</a>
           </Link>{' '}
           and create{' '}
-          <AnchorLink href={ExternalUrl.YOUTUBE} isExternal>
+          <AnchorLink href={ExternalUrl.PERSONAL_YOUTUBE} isExternal>
             videos
           </AnchorLink>{' '}
           to share my knowledge and learnings in my web development experiences.

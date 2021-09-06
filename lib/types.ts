@@ -11,6 +11,7 @@ export enum Route {
 
 export enum SocialName {
   DONATE = 'donate',
+  YOUTUBE = 'youtube',
   LINKEDIN = 'linkedin',
   GITHUB = 'github',
   EMAIL = 'email',
@@ -44,6 +45,10 @@ export enum GoogleAnalyticsEvents {
 }
 
 export enum ExternalUrl {
+  PERSONAL_PAYPAL = 'https://www.paypal.com/paypalme/DominicArrojado',
+  PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
+  PERSONAL_LINKEDIN = 'https://www.linkedin.com/in/dominic-arrojado-75ba03a9/',
+  PERSONAL_GITHUB = 'https://github.com/dominicarrojado/',
   PROPERTY_GURU_FINANCE = 'https://www.propertyguru.com.sg/mortgage',
   PROPERTY_GURU_GROUP = 'https://www.propertygurugroup.com/',
   NETFLIX = 'https://www.netflix.com/',
@@ -62,7 +67,6 @@ export enum ExternalUrl {
   GOOGLE_TAG_MANAGER = 'https://tagmanager.google.com/',
   GOOGLE_TAG_MANAGER_POLICY = 'https://support.google.com/tagmanager/answer/9323295',
   COOKIES = 'https://en.wikipedia.org/wiki/HTTP_cookie',
-  YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
   FONT_AWESOME = 'https://fontawesome.com/',
   FONT_AWESOME_LICENSE = 'https://fontawesome.com/license/free',
 }

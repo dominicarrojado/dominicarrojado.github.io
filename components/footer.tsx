@@ -169,7 +169,10 @@ function SocialItems() {
           >
             <AnchorLink
               href={social.url}
-              className="group relative inline-flex p-4 cursor-pointer"
+              className={cn(
+                'group relative inline-flex p-3 cursor-pointer',
+                'sm:p-4'
+              )}
               onMouseLeave={() => socialOnMouseLeave(social)}
               onClick={(e) => socialOnClick(e, social)}
               tabIndex={idx + 3}
@@ -177,9 +180,9 @@ function SocialItems() {
             >
               {social.icon({
                 className: cn(
-                  'w-8 h-8 text-gray-400',
-                  'transition-colors',
-                  'group-hover:text-gray-500',
+                  'w-7 h-7 text-gray-400',
+                  'transition-colors group-hover:text-gray-500',
+                  'sm:w-8 sm:h-8',
                   'xl:w-9 xl:h-9'
                 ),
               })}
@@ -206,7 +209,9 @@ function Legal() {
         'xl:text-lg'
       )}
     >
-      <span className="font-normal">©{currentYear} Dominic Arrojado</span> ·{' '}
+      <span className="font-normal">©{currentYear} Dominic Arrojado</span>{' '}
+      <span className="block mt-1 sm:hidden" />
+      <span className="hidden sm:inline">·</span>{' '}
       <Link href={Route.PRIVACY_POLICY}>
         <a>Privacy Policy</a>
       </Link>{' '}

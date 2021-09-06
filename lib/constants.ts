@@ -3,6 +3,7 @@ import SvgLinkedIn from '../components/svgLinkedIn';
 import SvgGitHub from '../components/svgGitHub';
 import SvgEnvelope from '../components/svgEnvelope';
 import {
+  ExternalUrl,
   Project,
   Quote,
   Route,
@@ -10,10 +11,12 @@ import {
   SocialName,
   Testimonial,
 } from './types';
+import SvgYouTube from '../components/svgYouTube';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_AUTHOR = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
+export const PERSONAL_EMAIL = 'dominicarrojado@gmail.com';
 export const PRIVACY_EMAIL = 'privacy@dominicarrojado.com';
 export const DISCLAIMER_EMAIL = 'disclaimer@dominicarrojado.com';
 export const ROUTES = Object.values(Route);
@@ -370,28 +373,35 @@ export const SOCIAL_LINKS: Array<Social> = [
   {
     name: SocialName.DONATE,
     title: 'Show your support and donate!',
-    url: 'https://www.paypal.com/paypalme/DominicArrojado',
+    url: ExternalUrl.PERSONAL_PAYPAL,
     icon: SvgDonate,
     shouldCopyOnClick: false,
   },
   {
+    name: SocialName.YOUTUBE,
+    title: 'Watch my tech videos!',
+    url: ExternalUrl.PERSONAL_YOUTUBE,
+    icon: SvgYouTube,
+    shouldCopyOnClick: false,
+  },
+  {
     name: SocialName.LINKEDIN,
-    title: 'Connect with me @ LinkedIn!',
-    url: 'https://www.linkedin.com/in/dominic-arrojado-75ba03a9/',
+    title: "Let's connect on LinkedIn!",
+    url: ExternalUrl.PERSONAL_LINKEDIN,
     icon: SvgLinkedIn,
     shouldCopyOnClick: false,
   },
   {
     name: SocialName.GITHUB,
-    title: 'Follow me @ GitHub!',
-    url: 'https://github.com/dominicarrojado/',
+    title: 'Follow me on GitHub!',
+    url: ExternalUrl.PERSONAL_GITHUB,
     icon: SvgGitHub,
     shouldCopyOnClick: false,
   },
   {
     name: SocialName.EMAIL,
     title: 'Email me!',
-    url: 'mailto:dominicarrojado@gmail.com',
+    url: `mailto:${PERSONAL_EMAIL}`,
     icon: SvgEnvelope,
     shouldCopyOnClick: true,
   },
