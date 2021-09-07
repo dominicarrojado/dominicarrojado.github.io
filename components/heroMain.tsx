@@ -21,7 +21,7 @@ export default function HeroMain() {
   return (
     <section
       className={cn(
-        'relative flex flex-col bg-gray-1000 items-center justify-center overflow-hidden min-h-full py-32',
+        'relative flex flex-col bg-gray-750 items-center justify-center overflow-hidden min-h-full py-32',
         'transform transition-transform ease-in-out duration-700',
         'sm:px-20',
         'lg:px-32',

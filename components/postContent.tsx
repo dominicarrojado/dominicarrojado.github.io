@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import { useWindowLoaded } from '../lib/custom-hooks';
+import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
 import Section from './section';
@@ -37,6 +38,7 @@ export default function PostContent({ postData }: { postData: PostData }) {
             data-testid="section"
           >
             <PostHeader date={postData.date} category={postData.category} />
+            <PostVideoLink videoUrl={postData.videoUrl} />
             <PageContent
               className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}
               dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
@@ -50,6 +52,24 @@ export default function PostContent({ postData }: { postData: PostData }) {
       </Transition>
     </SwitchTransition>
   );
+}
+
+function PostVideoLink({ videoUrl }: { videoUrl: string }) {
+  return videoUrl ? (
+    <div className={cn('w-11/12 max-w-screen-3xl mt-4 mx-auto', 'lg:w-5/6')}>
+      <TextArrowLink href={videoUrl} isExternal>
+        <SvgYouTube
+          className={cn(
+            'w-6 h-6 mr-2 text-gray-400',
+            'transition-colors duration-300 group-hover:text-red',
+            'sm:w-7 sm:h-7 sm:mr-3',
+            'xl:w-8 xl:h-8'
+          )}
+        />{' '}
+        Watch it on YouTube
+      </TextArrowLink>
+    </div>
+  ) : null;
 }
 
 function PostHeader({ date, category }: { date: string; category: string }) {

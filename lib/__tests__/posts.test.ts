@@ -2,6 +2,7 @@ import {
   getFakeDate,
   getFakeSentence,
   getFakeSentences,
+  getFakeUrl,
   getFakeUuid,
   getFakeWord,
   getRandomPostId,
@@ -29,6 +30,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            videoUrl: expect.any(String),
           },
         ])
       );
@@ -55,6 +57,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          videoUrl: getFakeUrl(),
         },
       ] as Array<Post>;
 
@@ -73,6 +76,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          videoUrl: getFakeUrl(),
         } as Post);
       }
 
@@ -94,6 +98,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            videoUrl: expect.any(String),
           },
         ])
       );
@@ -139,6 +144,7 @@ describe('posts utilities', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
+          videoUrl: expect.any(String),
           contentHtml: expect.any(String),
         })
       );
@@ -151,6 +157,7 @@ describe('posts utilities', () => {
             category: expect.any(String),
             date: expect.any(String),
             excerpt: expect.any(String),
+            videoUrl: expect.any(String),
           })
         );
         expect(adjacentPostData.id).not.toBe(postId);
@@ -194,6 +201,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          videoUrl: getFakeUrl(),
         } as Post);
       }
 
@@ -215,6 +223,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          videoUrl: getFakeUrl(),
         } as Post);
       }
 
@@ -236,6 +245,7 @@ describe('posts utilities', () => {
           category: getFakeWord(),
           date: getFakeDate(),
           excerpt: getFakeSentences(),
+          videoUrl: getFakeUrl(),
         } as Post);
       }
 

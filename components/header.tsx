@@ -81,7 +81,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
     <Link href={Route.HOME}>
       <a
         className={cn(
-          'group fixed top-3.5 left-3.5 flex shadow-3xl border border-white bg-gray-1000 bg-opacity-90 z-50 p-1.5',
+          'group fixed top-3.5 left-3.5 flex shadow-3xl border border-white bg-gray-750 bg-opacity-90 z-50 p-1.5',
           'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
           'sm:top-4 sm:left-4',
           'md:top-6 md:left-7 md:border-2',
@@ -236,7 +236,7 @@ function MenuBackground({ isMenuOpen }: { isMenuOpen: boolean }) {
   return (
     <div
       className={cn(
-        'fixed top-0 right-0 w-full h-full bg-gray-1000 z-30',
+        'fixed top-0 right-0 w-full h-full bg-gray-750 z-30',
         'transition-opacity duration-500',
         {
           ['opacity-0 pointer-events-none delay-100']: !isMenuOpen,

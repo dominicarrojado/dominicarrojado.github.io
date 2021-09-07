@@ -4,6 +4,7 @@ import {
   getFakeDate,
   getFakeSentence,
   getFakeSentences,
+  getFakeUrl,
   getFakeUuid,
   getFakeWord,
   getMonthName,
@@ -25,6 +26,7 @@ describe('<PostContent />', () => {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
       contentHtml: `<p>${getFakeSentences()}</p>`,
       previousPost: {
         id: getFakeUuid(),
@@ -32,6 +34,7 @@ describe('<PostContent />', () => {
         category: getFakeWord(),
         date: getFakeDate(),
         excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
       },
       nextPost: {
         id: getFakeUuid(),
@@ -39,6 +42,7 @@ describe('<PostContent />', () => {
         category: getFakeWord(),
         date: getFakeDate(),
         excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
       },
     } as PostData & { previousPost: Post; nextPost: Post };
 
@@ -64,6 +68,15 @@ describe('<PostContent />', () => {
       const categoryEl = screen.queryByText(postData.category);
 
       expect(categoryEl).toBeInTheDocument();
+    });
+
+    it('should render the video anchor', () => {
+      const anchorEl = screen.queryByText('Watch it on YouTube');
+
+      expect(anchorEl?.tagName).toBe('A');
+      expect(anchorEl).toHaveAttribute('href', postData.videoUrl);
+      expect(anchorEl).toHaveAttribute('target', '_blank');
+      expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
     });
 
     it('should render the content', () => {
@@ -171,6 +184,44 @@ describe('<PostContent />', () => {
     });
   });
 
+  describe('video url is empty', () => {
+    const postData = {
+      id: getFakeUuid(),
+      title: getFakeSentence(),
+      category: getFakeWord(),
+      date: getFakeDate(),
+      excerpt: getFakeSentences(),
+      videoUrl: '',
+      contentHtml: `<p>${getFakeSentences()}</p>`,
+      previousPost: {
+        id: getFakeUuid(),
+        title: getFakeSentence(),
+        category: getFakeWord(),
+        date: getFakeDate(),
+        excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
+      },
+      nextPost: {
+        id: getFakeUuid(),
+        title: getFakeSentence(),
+        category: getFakeWord(),
+        date: getFakeDate(),
+        excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
+      },
+    } as PostData;
+
+    beforeEach(() => {
+      renderComponent({ postData });
+    });
+
+    it('should NOT render the video anchor', () => {
+      const anchorEl = screen.queryByText('Watch it on YouTube');
+
+      expect(anchorEl).not.toBeInTheDocument();
+    });
+  });
+
   describe('previous post is null', () => {
     const postData = {
       id: getFakeUuid(),
@@ -178,6 +229,7 @@ describe('<PostContent />', () => {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
       contentHtml: `<p>${getFakeSentences()}</p>`,
       previousPost: null,
       nextPost: {
@@ -186,6 +238,7 @@ describe('<PostContent />', () => {
         category: getFakeWord(),
         date: getFakeDate(),
         excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
       },
     } as PostData & { nextPost: Post };
 
@@ -219,6 +272,7 @@ describe('<PostContent />', () => {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
       contentHtml: `<p>${getFakeSentences()}</p>`,
       previousPost: {
         id: getFakeUuid(),
@@ -226,6 +280,7 @@ describe('<PostContent />', () => {
         category: getFakeWord(),
         date: getFakeDate(),
         excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
       },
       nextPost: null,
     } as PostData & { previousPost: Post };

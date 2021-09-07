@@ -3,6 +3,7 @@ import {
   getFakeDate,
   getFakeSentence,
   getFakeSentences,
+  getFakeUrl,
   getFakeUuid,
   getFakeWord,
 } from '../../lib/test-helpers';
@@ -18,6 +19,7 @@ describe('<PostsHomeSection />', () => {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
     },
     {
       id: getFakeUuid(),
@@ -25,6 +27,7 @@ describe('<PostsHomeSection />', () => {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
     },
   ] as Array<Post>;
   const renderComponent = () => {

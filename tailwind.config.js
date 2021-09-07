@@ -26,7 +26,10 @@ module.exports = {
         96: '24rem',
       },
       backgroundColor: {
-        'gray-1000': '#2c2c34',
+        'gray-750': 'rgba(44, 44, 52, 1)',
+      },
+      textColor: {
+        red: 'rgba(255, 0, 0, 1)',
       },
       fontSize: {
         '3xs': '.55rem',
@@ -101,7 +104,7 @@ module.exports = {
               },
             },
             pre: {
-              backgroundColor: '#2c2c34',
+              backgroundColor: 'rgba(44, 44, 52, 1)',
             },
             code: {
               display: 'inline-block',

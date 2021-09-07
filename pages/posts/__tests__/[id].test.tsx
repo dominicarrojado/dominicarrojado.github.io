@@ -34,6 +34,7 @@ describe('<PostIndex />', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
+          videoUrl: expect.any(String),
           contentHtml: expect.any(String),
         }),
       },
@@ -46,6 +47,7 @@ describe('<PostIndex />', () => {
         category: expect.any(String),
         date: expect.any(String),
         excerpt: expect.any(String),
+        videoUrl: expect.any(String),
       });
     };
 
@@ -59,6 +61,7 @@ describe('<PostIndex />', () => {
           category: expect.any(String),
           date: expect.any(String),
           excerpt: expect.any(String),
+          videoUrl: expect.any(String),
         })
       );
       expect(adjacentPostData.id).not.toBe(postId);

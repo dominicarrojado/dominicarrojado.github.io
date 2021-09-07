@@ -106,6 +106,7 @@ export type Post = {
   category: PostCategory;
   date: string;
   excerpt: string;
+  videoUrl: string;
 };
 
 export type PostData = Post & {

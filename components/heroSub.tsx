@@ -37,7 +37,7 @@ export default function HeroSub({
           <section
             ref={sectionRef}
             className={cn(
-              'relative flex flex-col justify-center bg-gray-1000 py-28 px-6 text-center overflow-hidden',
+              'relative flex flex-col justify-center bg-gray-750 py-28 px-6 text-center overflow-hidden',
               'transform transition-transform ease-in-out duration-500',
               'sm:px-20',
               'lg:px-32',

@@ -5,6 +5,7 @@ import {
   getFakeNumber,
   getFakeSentence,
   getFakeSentences,
+  getFakeUrl,
   getFakeUuid,
   getFakeWord,
   getMonthName,
@@ -19,6 +20,7 @@ describe('<PostItem />', () => {
     category: getFakeWord(),
     date: getFakeDate(),
     excerpt: getFakeSentences(),
+    videoUrl: getFakeUrl(),
   } as Post;
   const renderComponent = (props: {
     className?: string;

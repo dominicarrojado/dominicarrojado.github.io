@@ -4,6 +4,7 @@ import {
   getFakeNumber,
   getFakeSentence,
   getFakeSentences,
+  getFakeUrl,
   getFakeUuid,
   getFakeWord,
 } from '../../lib/test-helpers';
@@ -178,6 +179,7 @@ function createPosts(count: number) {
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
+      videoUrl: getFakeUrl(),
     } as Post);
   }
 

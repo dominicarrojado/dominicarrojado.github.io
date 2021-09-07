@@ -3,6 +3,7 @@ title: 'Building an email template with MJML framework'
 date: '2021-09-06'
 excerpt: 'Learn how to build a responsive email template in a less painful way'
 category: 'technology'
+videoUrl: ''
 ---
 
 ## Introduction
