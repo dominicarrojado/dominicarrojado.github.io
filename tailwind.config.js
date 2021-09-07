@@ -95,6 +95,11 @@ module.exports = {
               fontWeight: 400,
               lineHeight: '1.75rem',
             },
+            figure: {
+              figcaption: {
+                color: 'rgba(156, 163, 175, 1)',
+              },
+            },
             pre: {
               backgroundColor: '#2c2c34',
             },

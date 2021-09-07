@@ -11,7 +11,7 @@ import { Post, Route } from '../lib/types';
 export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
   const title = 'Dominic Arrojado - Tech Blog';
   const desc =
-    "Guides, Tips and Tricks to Web Development. I'm Dominic Arrojado and my passion is turning design into code. I'm a web developer specializing in both front-end &amp; back-end development. I'm experienced in developing small to large web applications. I write tech blogs and create video tutorials to share my knowledge and learnings in my web development experiences.";
+    "My name is Dominic Arrojado. I'm a web developer and this is your guides, tips and tricks to web development. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.";
 
   return (
     <>

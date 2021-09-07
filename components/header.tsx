@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
-import { useWindowLoaded, useWindowSize } from '../lib/custom-hooks';
+import { useWindowLoaded } from '../lib/custom-hooks';
 import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
@@ -40,7 +40,7 @@ function Header({ route }: { route: Route }) {
         data-testid="menu-container"
       >
         <div className="flex justify-center items-center min-h-full">
-          <div className="py-10">
+          <div className={cn('py-10 pl-8', 'sm:pl-0')}>
             <MenuItems isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
             <SocialItems isMenuOpen={isMenuOpen} />
           </div>
@@ -392,14 +392,14 @@ function SocialItem({
       <AnchorLink
         href={social.url}
         title={social.title}
-        className={cn('flex items-center p-4', 'sm:p-5', 'md:p-6')}
+        className={cn('flex items-center p-3.5', 'sm:p-5', 'md:p-6')}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
         isExternal
       >
         {social.icon({
           className: cn(
-            'w-9 h-9 text-gray-300',
+            'w-8 h-8 text-gray-300',
             'transition-colors hover:text-white focus:text-white',
             'sm:w-10 sm:h-10',
             'md:w-11 md:h-11'

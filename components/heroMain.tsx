@@ -160,9 +160,9 @@ function Title() {
     <div ref={titleRef} className="overflow-hidden" style={{ opacity }}>
       <h1
         className={cn(
-          'mt-2 text-xs font-light text-white',
+          'mt-2 px-4 text-base font-light text-white',
           'transform transition duration-1000 delay-1250',
-          'sm:text-base',
+          'sm:text-lg',
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
           {

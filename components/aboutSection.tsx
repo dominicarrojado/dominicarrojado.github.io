@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import cn from 'classnames';
 import Section from './section';
 import AnchorLink from './anchorLink';
 import { ExternalUrl, Route } from '../lib/types';
@@ -8,11 +9,22 @@ function AboutSection() {
   return (
     <Section>
       <PageContent>
+        <figure className={cn('md:float-left md:mr-16', 'xl:mr-20')}>
+          <img
+            className="w-72 h-auto mx-auto shadow-3xl"
+            src="/images/about/my-fiancee-and-i.jpeg"
+            alt="A photo of my fiancée and I"
+            draggable="false"
+          />
+          <figcaption className="text-gray-400 text-center">
+            My fiancée and I.
+          </figcaption>
+        </figure>
         <p>
-          I'm Dominic Arrojado and my passion is turning design into code. I'm a
-          web developer specializing in both front-end &amp; back-end
-          development. I'm experienced in developing small to large web
-          applications.
+          My name is Dominic Arrojado and my passion is translating design into
+          code with great attention to details. I'm a web developer specializing
+          in both front-end and back-end development. I'm experienced in
+          developing small to large web applications.
         </p>
         <p>
           I'm currently based in Singapore and working at{' '}
@@ -36,7 +48,7 @@ function AboutSection() {
           my career. I've been here since 2018 and my knowledge and experiences
           have grown exponentially since then. With Singapore being a
           multi-ethnic society and a regional hub, I'm able to work with
-          competitive people from different walks of life; gave me the
+          competitive people from different walks of life. This gave me the
           inspiration and challenges I needed that shaped me to who I am today.
         </p>
         <p>
