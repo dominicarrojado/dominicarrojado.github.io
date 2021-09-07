@@ -10,7 +10,8 @@ import Section from './section';
 import Date from './date';
 import TextArrowLink from './textArrowLink';
 import PageContent from './pageContent';
-import { Post, PostData, Route } from '../lib/types';
+import { ExternalUrl, Post, PostData, Route } from '../lib/types';
+import AnchorLink from './anchorLink';
 
 export default function PostContent({ postData }: { postData: PostData }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -111,6 +112,16 @@ function PostFooter({
 }) {
   return (
     <div className={cn('w-11/12 max-w-screen-3xl mx-auto', 'lg:w-5/6')}>
+      <p className="mt-16 text-gray-400">
+        Found an issue with this post?{' '}
+        <AnchorLink
+          href={ExternalUrl.PERSONAL_GITHUB_WEBSITE_ISSUES}
+          isExternal
+        >
+          Report it here
+        </AnchorLink>
+        .
+      </p>
       <div className="mt-24 flex justify-between items-center">
         {previousPost && (
           <AdjacentPostLink

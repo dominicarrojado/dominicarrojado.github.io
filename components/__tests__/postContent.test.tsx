@@ -86,6 +86,24 @@ describe('<PostContent />', () => {
       expect(contentEl).toBeInTheDocument();
     });
 
+    it('should render the report issue anchor', () => {
+      const anchorText = 'Report it here';
+      const textEl = queryByTextIgnoreHTML(
+        screen,
+        `Found an issue with this post? ${anchorText}.`
+      );
+      const anchorEl = screen.queryByText(anchorText);
+
+      expect(textEl).toBeInTheDocument();
+      expect(anchorEl?.tagName).toBe('A');
+      expect(anchorEl).toHaveAttribute(
+        'href',
+        'https://github.com/dominicarrojado/dominicarrojado.github.io/issues'
+      );
+      expect(anchorEl).toHaveAttribute('target', '_blank');
+      expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
+    });
+
     it('should render the previous post anchor', () => {
       const { previousPost } = postData;
       const textEl = screen.queryByText(previousPost.title);

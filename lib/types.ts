@@ -49,6 +49,7 @@ export enum ExternalUrl {
   PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
   PERSONAL_LINKEDIN = 'https://www.linkedin.com/in/dominic-arrojado-75ba03a9/',
   PERSONAL_GITHUB = 'https://github.com/dominicarrojado/',
+  PERSONAL_GITHUB_WEBSITE_ISSUES = 'https://github.com/dominicarrojado/dominicarrojado.github.io/issues',
   PROPERTY_GURU_FINANCE = 'https://www.propertyguru.com.sg/mortgage',
   PROPERTY_GURU_GROUP = 'https://www.propertygurugroup.com/',
   NETFLIX = 'https://www.netflix.com/',
