@@ -33,7 +33,7 @@ describe('<Tooltip />', () => {
           offsetWidth: getFakeNumber(),
           offsetHeight: getFakeNumber(),
         };
-        const wrapperProps = {
+        const contentProps = {
           offsetWidth: getFakeNumber(),
           offsetHeight: getFakeNumber(),
         };
@@ -41,33 +41,34 @@ describe('<Tooltip />', () => {
         jest
           .spyOn(hooks, 'getRefValue')
           .mockReturnValueOnce(containerProps)
-          .mockReturnValueOnce(wrapperProps);
+          .mockReturnValueOnce(contentProps);
 
         const text = getFakeSentence();
         const { unmount } = render(
           <Tooltip position={position}>{text}</Tooltip>
         );
 
-        const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+        const contentEl = screen.queryByText(text) as HTMLDivElement;
+        const wrapperEl = contentEl.parentElement as HTMLDivElement;
         const containerEl = wrapperEl.parentElement as HTMLDivElement;
 
         // expect to be hidden by default
-        expect(wrapperEl).toHaveClass('opacity-0');
+        expect(contentEl).toHaveClass('opacity-0');
 
         // expect to be displayed on mouse enter
         fireEvent.mouseEnter(containerEl);
 
-        expect(wrapperEl).not.toHaveClass('opacity-0');
+        expect(contentEl).not.toHaveClass('opacity-0');
         expect(wrapperEl).toHaveStyle({
           left: `${
-            (wrapperProps.offsetWidth / 2 - containerProps.offsetWidth / 2) * -1
+            (contentProps.offsetWidth / 2 - containerProps.offsetWidth / 2) * -1
           }px`,
         });
 
         // expect to be hidden on mouse leave
         fireEvent.mouseLeave(containerEl);
 
-        expect(wrapperEl).toHaveClass('opacity-0');
+        expect(contentEl).toHaveClass('opacity-0');
 
         unmount();
       });
@@ -87,7 +88,7 @@ describe('<Tooltip />', () => {
           offsetWidth: getFakeNumber(),
           offsetHeight: getFakeNumber(),
         };
-        const wrapperProps = {
+        const contentProps = {
           offsetWidth: getFakeNumber(),
           offsetHeight: getFakeNumber(),
         };
@@ -95,26 +96,27 @@ describe('<Tooltip />', () => {
         jest
           .spyOn(hooks, 'getRefValue')
           .mockReturnValueOnce(containerProps)
-          .mockReturnValueOnce(wrapperProps);
+          .mockReturnValueOnce(contentProps);
 
         const text = getFakeSentence();
         const { unmount } = render(
           <Tooltip position={position}>{text}</Tooltip>
         );
 
-        const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+        const contentEl = screen.queryByText(text) as HTMLDivElement;
+        const wrapperEl = contentEl.parentElement as HTMLDivElement;
         const containerEl = wrapperEl.parentElement as HTMLDivElement;
 
         // expect to be hidden by default
-        expect(wrapperEl).toHaveClass('opacity-0');
+        expect(contentEl).toHaveClass('opacity-0');
 
         // expect to be displayed on mouse enter
         fireEvent.mouseEnter(containerEl);
 
-        expect(wrapperEl).not.toHaveClass('opacity-0');
+        expect(contentEl).not.toHaveClass('opacity-0');
         expect(wrapperEl).toHaveStyle({
           top: `${
-            (wrapperProps.offsetHeight / 2 - containerProps.offsetHeight / 2) *
+            (contentProps.offsetHeight / 2 - containerProps.offsetHeight / 2) *
             -1
           }px`,
         });
@@ -122,7 +124,7 @@ describe('<Tooltip />', () => {
         // check to be hidden on mouse leave
         fireEvent.mouseLeave(containerEl);
 
-        expect(wrapperEl).toHaveClass('opacity-0');
+        expect(contentEl).toHaveClass('opacity-0');
 
         unmount();
       });
@@ -135,9 +137,9 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip show={true}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+      const contentEl = screen.queryByText(text) as HTMLDivElement;
 
-      expect(wrapperEl).not.toHaveClass('opacity-0');
+      expect(contentEl).not.toHaveClass('opacity-0');
     });
 
     it('should NOT hide tooltip on mouse leave if show is true', () => {
@@ -145,12 +147,12 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip show={true}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
-      const containerEl = wrapperEl.parentElement as HTMLDivElement;
+      const contentEl = screen.queryByText(text) as HTMLDivElement;
+      const containerEl = contentEl.parentElement as HTMLDivElement;
 
       fireEvent.mouseLeave(containerEl);
 
-      expect(wrapperEl).not.toHaveClass('opacity-0');
+      expect(contentEl).not.toHaveClass('opacity-0');
     });
 
     it('should hide tooltip if show is false', () => {
@@ -158,9 +160,9 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip show={false}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+      const contentEl = screen.queryByText(text) as HTMLDivElement;
 
-      expect(wrapperEl).toHaveClass('opacity-0');
+      expect(contentEl).toHaveClass('opacity-0');
     });
 
     it('should NOT display tooltip on mouse enter if show is false', () => {
@@ -168,12 +170,12 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip show={false}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
-      const containerEl = wrapperEl.parentElement as HTMLDivElement;
+      const contentEl = screen.queryByText(text) as HTMLDivElement;
+      const containerEl = contentEl.parentElement as HTMLDivElement;
 
       fireEvent.mouseEnter(containerEl);
 
-      expect(wrapperEl).toHaveClass('opacity-0');
+      expect(contentEl).toHaveClass('opacity-0');
     });
   });
 
@@ -184,9 +186,9 @@ describe('<Tooltip />', () => {
 
       render(<Tooltip className={className}>{text}</Tooltip>);
 
-      const wrapperEl = screen.queryByText(text) as HTMLDivElement;
+      const contentEl = screen.queryByText(text) as HTMLDivElement;
 
-      expect(wrapperEl).toHaveClass(className);
+      expect(contentEl).toHaveClass(className);
     });
   });
 

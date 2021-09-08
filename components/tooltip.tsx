@@ -25,7 +25,8 @@ function Tooltip({
   children: ReactNode;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<TooltipPosition>(position);
   const [shouldDisplay, setShouldDisplay] = useState(show);
   const [style, setStyle] = useState<CSSProperties>({});
   const isTop = position === TooltipPosition.TOP;
@@ -34,21 +35,32 @@ function Tooltip({
   const isLeft = position === TooltipPosition.LEFT;
   const repositionTooltip = useCallback(() => {
     const containerEl = getRefValue(containerRef);
-    const wrapperEl = getRefValue(wrapperRef);
-    const newStyle: CSSProperties = {};
+    const contentEl = getRefValue(contentRef);
+    const contentWidth = contentEl.offsetWidth;
+    const contentHeight = contentEl.offsetHeight;
+    const newStyle: CSSProperties = {
+      width: contentWidth,
+      height: contentHeight,
+    };
 
     // center align tooltip based on position
-    if (isRight || isLeft) {
-      newStyle.top =
-        (wrapperEl.offsetHeight / 2 - containerEl.offsetHeight / 2) * -1;
+    const currentPosition = positionRef.current;
+
+    if (
+      currentPosition === TooltipPosition.RIGHT ||
+      currentPosition === TooltipPosition.LEFT
+    ) {
+      newStyle.top = (contentHeight / 2 - containerEl.offsetHeight / 2) * -1;
     } else {
-      newStyle.left =
-        (wrapperEl.offsetWidth / 2 - containerEl.offsetWidth / 2) * -1;
+      newStyle.left = (contentWidth / 2 - containerEl.offsetWidth / 2) * -1;
     }
 
     setStyle(newStyle);
-  }, [isRight, isLeft]);
-  const showTooltip = () => setShouldDisplay(true);
+  }, []);
+  const showTooltip = () => {
+    repositionTooltip();
+    setShouldDisplay(true);
+  };
   const hideTooltip = () => setShouldDisplay(false);
   const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
     if (
@@ -68,11 +80,13 @@ function Tooltip({
         hideTooltip();
       }
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   useEffect(() => {
-    repositionTooltip();
-  }, [show, children, repositionTooltip]);
+    positionRef.current = position;
+  }, [position]);
 
   return (
     <div
@@ -82,29 +96,43 @@ function Tooltip({
       onMouseLeave={typeof show === 'undefined' ? hideTooltip : undefined}
     >
       <div
-        ref={wrapperRef}
         className={cn(
-          'absolute border border-white bg-gray-750 py-1.5 px-3 text-center text-white text-sm font-normal whitespace-nowrap pointer-events-none',
-          'dark:bg-gray-850 dark:border-gray-400',
-          'transform transition duration-300',
-          'lg:py-2 lg:px-4 lg:text-base',
+          'absolute flex items-center pointer-events-none',
           {
-            ['opacity-0']: !shouldDisplay,
+            ['justify-center']: isTop || isBottom,
             ['bottom-full']: isTop,
             ['top-full']: isBottom,
             ['left-full']: isRight,
             ['right-full']: isLeft,
-            ['translate-y-2']: isTop && !shouldDisplay,
-            ['-translate-y-2']: isBottom && !shouldDisplay,
-            ['-translate-x-2']: isRight && !shouldDisplay,
-            ['translate-x-2']: isLeft && !shouldDisplay,
           },
           className
         )}
         style={style}
-        onTransitionEnd={onTransitionEnd}
       >
-        {children}
+        <div
+          ref={contentRef}
+          className={cn(
+            'border border-white bg-gray-750 py-1.5 px-3 text-center text-white text-sm font-normal whitespace-nowrap',
+            'dark:bg-gray-850 dark:border-gray-400',
+            'transform transition duration-300',
+            'lg:py-2 lg:px-4 lg:text-base',
+            {
+              ['opacity-0']: !shouldDisplay,
+              ['bottom-full']: isTop,
+              ['top-full']: isBottom,
+              ['left-full']: isRight,
+              ['right-full']: isLeft,
+              ['translate-y-2']: isTop && !shouldDisplay,
+              ['-translate-y-2']: isBottom && !shouldDisplay,
+              ['-translate-x-2']: isRight && !shouldDisplay,
+              ['translate-x-2']: isLeft && !shouldDisplay,
+            },
+            className
+          )}
+          onTransitionEnd={onTransitionEnd}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
