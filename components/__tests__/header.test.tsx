@@ -3,8 +3,10 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
 import * as Link from 'next/link';
 import Window from '../../modules/Window';
+import DarkMode from '../../modules/DarkMode';
 import {
   fireEventTransitionEnd,
+  getFakeString,
   getFakeWord,
   getRandomRoute,
   setReadOnlyProperty,
@@ -242,40 +244,214 @@ describe('<Header />', () => {
     });
   });
 
-  describe('<Button />', () => {
+  describe('<ThemeButton />', () => {
+    const matchMediaOrig = window.matchMedia;
+
+    beforeEach(() => {
+      window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+
+      DarkMode.init();
+    });
+
+    afterEach(() => {
+      DarkMode.initialized = false;
+      DarkMode.enabled = false;
+      DarkMode._documentElement = null;
+      document.documentElement.classList.remove('dark');
+      localStorage.clear();
+      window.matchMedia = matchMediaOrig;
+    });
+
+    it('should have expected text for light theme', () => {
+      renderComponent(getRandomRoute());
+
+      expect(screen.queryByText('Light')).toBeInTheDocument();
+      expect(screen.queryByText('Dark')).not.toBeInTheDocument();
+    });
+
+    it('should have expected text for dark theme', () => {
+      DarkMode.enabled = true;
+
+      renderComponent(getRandomRoute());
+
+      expect(screen.queryByText('Dark')).toBeInTheDocument();
+      expect(screen.queryByText('Light')).not.toBeInTheDocument();
+    });
+
+    it('should NOT display by default', () => {
+      renderComponent(getRandomRoute());
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnIconContainerEl = btnTextEl?.previousElementSibling;
+      const btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      expect(btnTextEl).toHaveClass('opacity-0');
+      expect(btnIconEl).toHaveClass('opacity-0');
+    });
+
+    it('should display on window load', () => {
+      renderComponent(getRandomRoute());
+
+      act(() => {
+        Window.emit('load');
+      });
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnIconContainerEl = btnTextEl?.previousElementSibling;
+      const btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      expect(btnTextEl).not.toHaveClass('opacity-0');
+      expect(btnIconEl).not.toHaveClass('opacity-0');
+    });
+
+    it('should have shorter transition duration on click', () => {
+      renderComponent(getRandomRoute());
+
+      let btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+      let btnIconContainerEl = btnTextEl?.previousElementSibling;
+      let btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnTextEl).toHaveClass('duration-700');
+
+      fireEvent.click(btnEl);
+
+      btnTextEl = screen.queryByText('Dark');
+      btnIconContainerEl = btnTextEl?.previousElementSibling;
+      btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnTextEl).toHaveClass('duration-150');
+    });
+
+    it('should have shorter transition duration on transition end of opacity', () => {
+      renderComponent(getRandomRoute());
+
+      const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
+      const btnIconContainerEl = btnTextEl?.previousElementSibling;
+      const btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnTextEl).toHaveClass('duration-700');
+
+      fireEventTransitionEnd(btnTextEl, 'opacity');
+
+      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnTextEl).toHaveClass('duration-150');
+    });
+
+    it('should have shorter transition duration on transition end of other prop name', () => {
+      renderComponent(getRandomRoute());
+
+      const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
+      const btnIconContainerEl = btnTextEl?.previousElementSibling;
+      const btnIconEl = btnIconContainerEl?.querySelector('svg');
+
+      fireEventTransitionEnd(btnTextEl, getFakeString());
+
+      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnTextEl).toHaveClass('duration-700');
+    });
+
+    it('should change text on click', () => {
+      renderComponent(getRandomRoute());
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      expect(screen.queryByText('Dark')).toBeInTheDocument();
+      expect(screen.queryByText('Light')).not.toBeInTheDocument();
+
+      fireEvent.click(btnEl);
+
+      expect(screen.queryByText('Light')).toBeInTheDocument();
+      expect(screen.queryByText('Dark')).not.toBeInTheDocument();
+    });
+
+    it('should track as hover if NOT clicked', () => {
+      renderComponent(getRandomRoute());
+
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.mouseLeave(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'theme_btn_hover',
+        hoverText: 'Light',
+      });
+    });
+
+    it('should track menu click', () => {
+      renderComponent(getRandomRoute());
+
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'theme_btn_click',
+        linkText: 'Light',
+      });
+    });
+
+    it('should track close click', () => {
+      renderComponent(getRandomRoute());
+
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      trackEventSpy.mockClear();
+
+      fireEvent.click(btnEl);
+
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'theme_btn_click',
+        linkText: 'Dark',
+      });
+    });
+
+    it('should NOT track as hover if clicked', () => {
+      renderComponent(getRandomRoute());
+
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+
+      const btnTextEl = screen.queryByText('Light');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      trackEventSpy.mockClear();
+
+      fireEvent.mouseLeave(btnEl);
+
+      expect(trackEventSpy).not.toBeCalled();
+    });
+  });
+
+  describe('<MenuButton />', () => {
     beforeEach(() => {
       renderComponent(getRandomRoute());
     });
 
-    it('should NOT be clickable by default', () => {
-      const btnTextEl = screen.queryByText('Menu');
-      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
-
-      expect(btnEl).toHaveClass('pointer-events-none');
-    });
-
-    it('should NOT be clickable on transition end of other prop name', () => {
-      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
-      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
-
-      fireEventTransitionEnd(btnTextEl, getFakeWord());
-
-      expect(btnEl).toHaveClass('pointer-events-none');
-    });
-
-    it('should NOT be clickable on transition end of opacity', () => {
-      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
-      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
-
-      fireEventTransitionEnd(btnTextEl, 'opacity');
-
-      expect(btnEl).not.toHaveClass('pointer-events-none');
-    });
-
     it('should NOT display by default', () => {
       const btnTextEl = screen.queryByText('Menu');
-      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
-      const stacks = btnEl.querySelectorAll('div');
+      const stacks = screen.queryAllByTestId('menu-stack');
 
       expect(btnTextEl).toHaveClass('opacity-0');
 
@@ -290,12 +466,61 @@ describe('<Header />', () => {
       });
 
       const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
-      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
-      const stacks = btnEl.querySelectorAll('div');
+      const stacks = screen.queryAllByTestId('menu-stack');
+
+      expect(btnTextEl).not.toHaveClass('opacity-0');
 
       stacks.forEach((stack) => {
         expect(stack).not.toHaveClass('opacity-0');
       });
+    });
+
+    it('should have shorter transition duration on click', () => {
+      let btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+      const stacks = screen.queryAllByTestId('menu-stack');
+
+      stacks.forEach((stack) => {
+        expect(stack).toHaveClass('duration-1000');
+      });
+      expect(btnTextEl).toHaveClass('duration-700');
+
+      fireEvent.click(btnEl);
+
+      stacks.forEach((stack) => {
+        expect(stack).toHaveClass('duration-300');
+      });
+
+      btnTextEl = screen.queryByText('Close');
+
+      expect(btnTextEl).toHaveClass('duration-150');
+    });
+
+    it('should have shorter transition duration on transition end of other prop name', () => {
+      const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
+      const stacks = screen.queryAllByTestId('menu-stack');
+
+      fireEventTransitionEnd(btnTextEl, getFakeString());
+
+      stacks.forEach((stack) => {
+        expect(stack).toHaveClass('duration-1000');
+      });
+      expect(btnTextEl).toHaveClass('duration-700');
+    });
+
+    it('should change text on click', () => {
+      const btnTextEl = screen.queryByText('Menu');
+      const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
+
+      fireEvent.click(btnEl);
+
+      expect(screen.queryByText('Close')).toBeInTheDocument();
+      expect(screen.queryByText('Menu')).not.toBeInTheDocument();
+
+      fireEvent.click(btnEl);
+
+      expect(screen.queryByText('Menu')).toBeInTheDocument();
+      expect(screen.queryByText('Close')).not.toBeInTheDocument();
     });
 
     it('should track as hover if NOT clicked', () => {

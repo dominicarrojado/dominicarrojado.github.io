@@ -21,6 +21,16 @@ type EventHeaderMenuClick = {
   linkText: string;
 };
 
+type EventThemeButtonHover = {
+  event: GoogleAnalyticsEvents.THEME_BTN_HOVER;
+  hoverText: string;
+};
+
+type EventThemeButtonClick = {
+  event: GoogleAnalyticsEvents.THEME_BTN_CLICK;
+  linkText: string;
+};
+
 type EventScrollDownHover = {
   event: GoogleAnalyticsEvents.SCROLL_HOVER;
   hoverText: string;
@@ -87,6 +97,8 @@ export function trackEvent(
     | EventPageView
     | EventHeaderMenuHover
     | EventHeaderMenuClick
+    | EventThemeButtonHover
+    | EventThemeButtonClick
     | EventScrollDownHover
     | EventScrollDownClick
     | EventSocialHover

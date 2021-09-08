@@ -9,9 +9,9 @@ import SvgChevronRight from './svgChevronRight';
 import Section from './section';
 import Date from './date';
 import TextArrowLink from './textArrowLink';
-import PageContent from './pageContent';
-import { ExternalUrl, Post, PostData, Route } from '../lib/types';
+import Content from './content';
 import AnchorLink from './anchorLink';
+import { ExternalUrl, Post, PostData, Route } from '../lib/types';
 
 export default function PostContent({ postData }: { postData: PostData }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,18 +29,21 @@ export default function PostContent({ postData }: { postData: PostData }) {
         {(state) => (
           <Section
             ref={sectionRef}
-            className={cn('transform transition duration-1000', {
-              [animationDone ? 'delay-2500' : 'delay-1500']: true,
-              [shouldDisplay && state === 'entered'
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-10']: true,
-            })}
+            className={cn(
+              'transform transition-transform-opacity duration-1000',
+              {
+                [animationDone ? 'delay-2500' : 'delay-1500']: true,
+                [shouldDisplay && state === 'entered'
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-10']: true,
+              }
+            )}
             onTransitionEnd={onTransitionEnd}
             data-testid="section"
           >
             <PostHeader date={postData.date} category={postData.category} />
             <PostVideoLink videoUrl={postData.videoUrl} />
-            <PageContent
+            <Content
               className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}
               dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
             />
@@ -63,6 +66,7 @@ function PostVideoLink({ videoUrl }: { videoUrl: string }) {
           className={cn(
             'w-6 h-6 mr-2 text-gray-400',
             'transition-colors duration-300 group-hover:text-red',
+            'dark:group-hover:text-white',
             'sm:w-7 sm:h-7 sm:mr-3',
             'xl:w-8 xl:h-8'
           )}
@@ -93,6 +97,7 @@ function PostHeader({ date, category }: { date: string; category: string }) {
       <div
         className={cn(
           'rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
+          'dark:bg-gray-600',
           'md:py-1 md:px-2 md:text-xs',
           'xl:text-sm'
         )}
@@ -171,7 +176,8 @@ function AdjacentPostLink({
           <div
             className={cn(
               'font-normal',
-              'transition-colors duration-300 group-hover:text-black'
+              'transition-colors duration-300 group-hover:text-black',
+              'dark:group-hover:text-white'
             )}
           >
             {title}
@@ -179,7 +185,8 @@ function AdjacentPostLink({
           <small
             className={cn(
               'text-gray-400',
-              'transition-colors duration-300 group-hover:text-black'
+              'transition-colors duration-300 group-hover:text-black',
+              'dark:group-hover:text-white'
             )}
           >
             {isPrevious ? 'Previous Post' : 'Next Post'}
@@ -188,7 +195,8 @@ function AdjacentPostLink({
         <Icon
           className={cn(
             'absolute top-0 bottom-0 m-auto flex-shrink-0 w-2 h-2 text-black opacity-30',
-            'transform transition duration-300 group-hover:opacity-100',
+            'dark:text-white',
+            'transform transition-transform-opacity duration-300 group-hover:opacity-100',
             'sm:w-2.5 sm:h-2.5',
             'md:w-3 md:h-3',
             'xl:w-3.5 xl:h-3.5',

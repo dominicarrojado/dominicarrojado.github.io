@@ -168,7 +168,7 @@ function ImageContainer({
           <img
             src={imageUrl}
             alt={`Screenshot of ${title}`}
-            className="max-w-full h-auto shadow-3xl z-10"
+            className="z-10 max-w-full h-auto shadow-3xl"
             draggable={false}
             onLoad={imgOnLoad}
           />
@@ -211,7 +211,7 @@ function ImageLoader() {
   return (
     <Spinner
       className={cn(
-        'absolute inset-0 w-7 h-7 my-10 mx-auto border-2 z-0',
+        'absolute inset-0 z-0 w-7 h-7 my-10 mx-auto border-2',
         'sm:w-9 sm:h-9',
         'md:w-11 md:h-11 md:border-4'
       )}

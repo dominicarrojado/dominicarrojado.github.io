@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { trackEvent } from '../lib/google-analytics';
 import Window from '../modules/Window';
+import DarkMode from '../modules/DarkMode';
 import Layout from '../components/layout';
 import '../styles/global.css';
 import { GoogleAnalyticsEvents, Route } from '../lib/types';
@@ -11,6 +12,7 @@ function App({ Component, pageProps, router }: AppProps) {
 
   useEffect(() => {
     Window.init();
+    DarkMode.init();
   }, []);
 
   useEffect(() => {

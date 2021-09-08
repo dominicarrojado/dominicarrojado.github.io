@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     screens: {
       xs: '475px',
@@ -17,6 +17,9 @@ module.exports = {
       },
       minWidth: {
         11: '2.75rem',
+        16: '4rem',
+        16.5: '4.125rem',
+        18: '4.5rem',
       },
       maxWidth: {
         'screen-3xl': '2880px',
@@ -26,7 +29,9 @@ module.exports = {
         96: '24rem',
       },
       backgroundColor: {
+        'gray-650': 'rgba(57, 57, 65, 1)',
         'gray-750': 'rgba(44, 44, 52, 1)',
+        'gray-850': 'rgba(31, 31, 39, 1)',
       },
       textColor: {
         red: 'rgba(255, 0, 0, 1)',
@@ -41,6 +46,7 @@ module.exports = {
       transitionProperty: {
         width: 'width',
         height: 'height',
+        'transform-opacity': 'transform, opacity',
         'transform-opacity-color': 'transform, opacity, color',
       },
       transitionDuration: {
@@ -75,45 +81,44 @@ module.exports = {
           },
         },
       },
-      typography: {
+      typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: 'rgba(107, 114, 128, 1)',
-            fontSize: '1rem',
-            lineHeight: '1.5rem',
+            color: theme('colors.gray.500'),
+            fontSize: theme('fontSize.base'),
+            lineHeight: theme('lineHeight.6'),
             a: {
-              color: 'rgba(107, 114, 128, 1)',
-              fontWeight: 300,
+              color: theme('colors.gray.500'),
+              fontWeight: theme('fontWeight.light'),
               textDecoration: 'none',
               '&:hover': {
-                color: 'rgba(0, 0, 0, 1)',
+                color: theme('colors.black'),
               },
             },
             strong: {
-              fontWeight: 400,
+              fontWeight: theme('fontWeight.normal'),
             },
             h2: {
-              color: 'rgba(31, 41, 55, 1)',
-              fontSize: '1.125rem',
-              fontWeight: 400,
-              lineHeight: '1.75rem',
+              color: theme('colors.gray.800'),
+              fontSize: theme('fontSize.lg'),
+              fontWeight: theme('fontWeight.normal'),
+              lineHeight: theme('lineHeight.7'),
             },
             figure: {
               figcaption: {
-                color: 'rgba(156, 163, 175, 1)',
+                color: theme('colors.gray.400'),
               },
-            },
-            pre: {
-              backgroundColor: 'rgba(44, 44, 52, 1)',
             },
             code: {
               display: 'inline-block',
-              border: '1px solid rgba(229, 231, 235, 1)',
-              borderRadius: '0.375rem',
-              backgroundColor: 'rgba(243, 244, 246, 1)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: theme('colors.gray.200'),
+              borderRadius: theme('borderRadius.md'),
+              backgroundColor: theme('colors.gray.100'),
               padding: '0.25rem 0.5rem',
-              color: 'rgba(31, 41, 55, 1)',
-              fontWeight: 400,
+              color: theme('colors.gray.800'),
+              fontWeight: theme('fontWeight.normal'),
               '&::before': {
                 display: 'none',
               },
@@ -121,29 +126,59 @@ module.exports = {
                 display: 'none',
               },
             },
+            pre: {
+              backgroundColor: 'rgba(44, 44, 52, 1)',
+            },
           },
         },
         lg: {
           css: {
-            fontSize: '1.125rem',
-            lineHeight: '1.75rem',
+            fontSize: theme('fontSize.lg'),
+            lineHeight: theme('lineHeight.7'),
             h2: {
-              fontSize: '1.25rem',
-              lineHeight: '1.75rem',
+              fontSize: theme('fontSize.xl'),
+              lineHeight: theme('lineHeight.7'),
             },
           },
         },
         xl: {
           css: {
-            fontSize: '1.25rem',
-            lineHeight: '1.75rem',
+            fontSize: theme('fontSize.xl'),
+            lineHeight: theme('lineHeight.7'),
             h2: {
-              fontSize: '1.5rem',
-              lineHeight: '1.75rem',
+              fontSize: theme('fontSize.2xl'),
+              lineHeight: theme('lineHeight.7'),
             },
           },
         },
-      },
+        dark: {
+          css: {
+            color: theme('colors.gray.300'),
+            a: {
+              color: theme('colors.gray.300'),
+              '&:hover': {
+                color: theme('colors.white'),
+              },
+            },
+            strong: {
+              color: theme('colors.gray.300'),
+            },
+            h2: {
+              color: theme('colors.gray.100'),
+            },
+            code: {
+              color: theme('colors.gray.100'),
+              borderColor: 'transparent',
+              backgroundColor: 'rgba(44, 44, 52, 1)',
+            },
+            pre: {
+              code: {
+                color: theme('colors.gray.100'),
+              },
+            },
+          },
+        },
+      }),
     },
   },
   variants: {
@@ -154,6 +189,7 @@ module.exports = {
       translate: ['group-hover'],
       rotate: ['even', 'odd'],
       cursor: ['active'],
+      typography: ['dark'],
     },
   },
   plugins: [require('@tailwindcss/typography')],

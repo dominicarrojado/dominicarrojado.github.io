@@ -1,5 +1,10 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
 export enum Route {
   HOME = '/',
   ABOUT = '/about',
@@ -32,6 +37,8 @@ export enum GoogleAnalyticsEvents {
   PAGE_VIEW = 'page_view',
   HEADER_BTN_HOVER = 'header_btn_hover',
   HEADER_BTN_CLICK = 'header_btn_click',
+  THEME_BTN_HOVER = 'theme_btn_hover',
+  THEME_BTN_CLICK = 'theme_btn_click',
   SCROLL_HOVER = 'scroll_hover',
   SCROLL_CLICK = 'scroll_click',
   SOCIAL_HOVER = 'social_hover',

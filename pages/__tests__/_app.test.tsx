@@ -11,9 +11,18 @@ import * as Layout from '../../components/layout';
 import App from '../_app.page';
 
 describe('<App />', () => {
+  const matchMediaOrig = window.matchMedia; // DarkMode module uses window.matchMedia
   const renderComponent = (appProps: AppProps) => {
     render(<App {...appProps} />);
   };
+
+  beforeEach(() => {
+    window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+  });
+
+  afterEach(() => {
+    window.matchMedia = matchMediaOrig;
+  });
 
   it('should render with layout', () => {
     const layoutSpy = jest.spyOn(Layout, 'default');

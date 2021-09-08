@@ -9,7 +9,7 @@ import { Post, Route } from '../lib/types';
 
 function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
   return (
-    <Section id="posts" className="bg-gray-100">
+    <Section id="posts" className="bg-gray-100 dark:bg-gray-750">
       <SectionTitle>Blog</SectionTitle>
       <SectionContent>
         A place to share my knowledge and learnings from my web development
@@ -23,7 +23,11 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
         )}
       >
         {latestPosts.map((post, idx) => (
-          <PostItem key={idx} post={post} anchorClassName="bg-white" />
+          <PostItem
+            key={idx}
+            post={post}
+            anchorClassName="bg-white dark:bg-gray-650"
+          />
         ))}
       </ul>
       <div

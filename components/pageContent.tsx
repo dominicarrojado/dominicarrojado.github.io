@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { HTMLProps } from 'react';
 import { useWindowLoaded } from '../lib/custom-hooks';
+import Content from './content';
 
 function PageContent({
   className,
@@ -10,23 +11,19 @@ function PageContent({
   const shouldDisplay = useWindowLoaded();
 
   return (
-    <article
+    <Content
       className={cn(
-        'w-11/12 max-w-screen-3xl mx-auto prose',
-        'transform transition duration-700 delay-1500',
-        'sm:prose-lg',
-        'lg:w-5/6',
-        'xl:prose-xl',
+        'transform transition-transform-opacity duration-700 delay-1500',
         {
           ['opacity-0 translate-y-10']: !shouldDisplay,
         },
         className
       )}
-      data-testid="content"
+      data-testid="page-content"
       {...props}
     >
       {children}
-    </article>
+    </Content>
   );
 }
 

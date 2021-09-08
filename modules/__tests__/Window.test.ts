@@ -2,12 +2,8 @@ import { setReadOnlyProperty } from '../../lib/test-helpers';
 import Window from '../Window';
 
 describe('Window module', () => {
-  const resetWindowStates = () => {
-    Window.loaded = false;
-  };
-
   afterEach(() => {
-    resetWindowStates();
+    Window.loaded = false;
   });
 
   it('should be loaded if document.readyState is complete', () => {

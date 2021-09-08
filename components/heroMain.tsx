@@ -33,7 +33,7 @@ export default function HeroMain() {
     >
       <Loader />
       <Background />
-      <div className="w-full -mt-16 text-center z-10">
+      <div className="z-10 w-full -mt-16 text-center">
         <Logo />
         <Title />
       </div>
@@ -182,9 +182,7 @@ function ScrollDownButton() {
   const btnRef = useRef<HTMLAnchorElement>(null);
   const isBtnClickedRef = useRef(false);
   const shouldDisplay = useWindowLoaded();
-  const btnOnMouseLeave = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
         event: GoogleAnalyticsEvents.SCROLL_HOVER,
@@ -256,7 +254,7 @@ function ScrollDownButton() {
           )}
         >
           {text}
-          <div className="absolute bottom-0 right-0 w-full h-px bg-white bg-opacity-20 z-0 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 z-0 w-full h-px bg-white bg-opacity-20 pointer-events-none" />
           <div
             className={cn(
               'absolute bottom-0 right-0 w-0 h-px bg-white z-10 pointer-events-none',

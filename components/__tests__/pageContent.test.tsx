@@ -1,34 +1,48 @@
+import { ReactNode } from 'react';
 import { render, screen, act } from '@testing-library/react';
-import { getFakeSentences } from '../../lib/test-helpers';
+import { getFakeSentences, getFakeWord } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
 import PageContent from '../pageContent';
 
 describe('<PageContent />', () => {
-  const children = getFakeSentences();
-
-  beforeEach(() => {
-    render(<PageContent>{children}</PageContent>);
-  });
+  const renderComponent = ({
+    className,
+    children,
+  }: {
+    className?: string;
+    children: ReactNode;
+  }) => {
+    render(<PageContent className={className}>{children}</PageContent>);
+  };
 
   it('should NOT display about by default', () => {
-    const contentEl = screen.queryByTestId('content');
+    renderComponent({ children: getFakeSentences() });
 
-    expect(contentEl).toHaveClass('opacity-0');
+    const pageContentEl = screen.queryByTestId('page-content');
+
+    expect(pageContentEl).toHaveClass('opacity-0');
   });
 
   it('should display about on window load', () => {
+    renderComponent({ children: getFakeSentences() });
+
     act(() => {
       Window.emit('load');
     });
 
-    const contentEl = screen.queryByTestId('content');
+    const pageContentEl = screen.queryByTestId('page-content');
 
-    expect(contentEl).not.toHaveClass('opacity-0');
+    expect(pageContentEl).not.toHaveClass('opacity-0');
   });
 
-  it('should render children', () => {
-    const contentEl = screen.queryByText(children);
+  it('should accept className prop', () => {
+    const className = getFakeWord();
+    const children = getFakeSentences();
 
-    expect(contentEl?.tagName).toBe('ARTICLE');
+    renderComponent({ className, children });
+
+    const pageContentEl = screen.queryByText(children);
+
+    expect(pageContentEl).toHaveClass(className);
   });
 });

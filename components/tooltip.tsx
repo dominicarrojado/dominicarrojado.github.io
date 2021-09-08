@@ -77,7 +77,7 @@ function Tooltip({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 m-auto z-50"
+      className="absolute inset-0 z-50 m-auto"
       onMouseEnter={typeof show === 'undefined' ? showTooltip : undefined}
       onMouseLeave={typeof show === 'undefined' ? hideTooltip : undefined}
     >

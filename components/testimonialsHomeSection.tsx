@@ -41,14 +41,15 @@ export default function TestimonialsHomeSection() {
   const getSwipeDetails = () => {
     const containerEl = getRefValue(containerRef);
     const listEl = getRefValue(listRef);
-    const containerWidth = Math.round(containerEl.offsetWidth / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
+    const containerWidth = containerEl.offsetWidth;
+    const containerWidthRounded = Math.round(containerWidth / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
     const listWidth = listEl.scrollWidth;
     const listItemEl = listEl.firstElementChild as HTMLLIElement;
     const swipeWidth = listItemEl.offsetWidth;
-    const offsetXMin = -(listWidth - containerWidth);
+    const offsetXMin = -(listWidth - containerWidthRounded);
     const offsetXMax = 0;
     const maxSwipe =
-      TESTIMONIALS_LENGTH - Math.floor(containerWidth / swipeWidth) + 1;
+      TESTIMONIALS_LENGTH - Math.round(containerWidth / swipeWidth) + 1;
 
     return {
       offsetXMin,
@@ -198,7 +199,11 @@ export default function TestimonialsHomeSection() {
             {indicators.map((idx) => (
               <IndicatorButton
                 key={idx}
-                className={idx === swipeIdx ? 'bg-gray-400' : 'bg-gray-200'}
+                className={
+                  idx === swipeIdx
+                    ? 'bg-gray-400 dark:bg-gray-300'
+                    : 'bg-gray-200 dark:bg-gray-500'
+                }
                 onClick={() => indicatorOnClick(idx)}
               />
             ))}
@@ -207,7 +212,8 @@ export default function TestimonialsHomeSection() {
         <small
           className={cn(
             'absolute top-5 right-16 flex items-center bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
-            'transition transform duration-700',
+            'dark:bg-gray-600',
+            'transform transition-transform-opacity duration-700',
             'md:right-20',
             {
               'opacity-0': !shouldDisplayTip,

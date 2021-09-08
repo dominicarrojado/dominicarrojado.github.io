@@ -107,6 +107,15 @@
     @apply leading-normal;
   }
 
+  .dark body {
+    @apply bg-gray-650;
+  }
+
+  .dark body,
+  .dark button {
+    @apply text-gray-300;
+  }
+
   h1,
   h2,
   h3,
@@ -114,6 +123,15 @@
   h5,
   h6 {
     @apply text-gray-800;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    @apply text-gray-100;
   }
 
   p a {
@@ -127,32 +145,44 @@
     @apply text-black;
   }
 
+  .dark p a:hover {
+    @apply text-white;
+  }
+
   p a::before,
   p a::after {
     @apply absolute;
     @apply bottom-0;
     @apply right-0;
+    @apply z-0;
     @apply w-full;
     @apply h-px;
     @apply bg-black;
-    @apply z-0;
     @apply pointer-events-none;
 
     content: '';
   }
 
-  p a::before {
+  .dark p a::before,
+  .dark p a::after {
+    @apply bg-white;
+  }
+
+  p a::before,
+  .dark p a::before {
     @apply w-full;
     @apply bg-opacity-20;
   }
 
-  p a::after {
+  p a::after,
+  .dark p a::after {
     @apply w-0;
     @apply transition-width;
     @apply duration-500;
   }
 
-  p a:hover::after {
+  p a:hover::after,
+  .dark p a:hover::after {
     @apply right-auto;
     @apply left-0;
     @apply w-full;

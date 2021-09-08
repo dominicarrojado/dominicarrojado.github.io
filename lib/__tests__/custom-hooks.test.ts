@@ -1,13 +1,19 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import axios from 'axios';
 import Window from '../../modules/Window';
-import { getFakeNumber, setReadOnlyProperty } from '../test-helpers';
+import DarkMode from '../../modules/DarkMode';
+import {
+  getFakeBoolean,
+  getFakeNumber,
+  setReadOnlyProperty,
+} from '../test-helpers';
 import * as axiosHelpers from '../axios';
 import * as hooks from '../hooks';
 import {
-  useScrollOpacityEffect,
+  useDarkModeEnabled,
   useDownloadGif,
   useMounted,
+  useScrollOpacityEffect,
   useWindowLoaded,
 } from '../custom-hooks';
 
@@ -21,12 +27,13 @@ describe('hooks utilities', () => {
   });
 
   describe('useWindowLoaded()', () => {
-    const resetWindowStates = () => {
+    beforeEach(() => {
+      Window.init();
       Window.loaded = false;
-    };
+    });
 
     afterEach(() => {
-      resetWindowStates();
+      Window.loaded = false;
     });
 
     it('should return initial value', () => {
@@ -51,6 +58,81 @@ describe('hooks utilities', () => {
       });
 
       expect(hook.result.current).toBe(true);
+    });
+  });
+
+  describe('useDarkModeEnabled()', () => {
+    const matchMediaOrig = window.matchMedia;
+
+    beforeEach(() => {
+      window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+
+      DarkMode.init();
+      DarkMode.initialized = false;
+      DarkMode.enabled = false;
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+
+      DarkMode.initialized = false;
+      DarkMode.enabled = false;
+      DarkMode._documentElement = null;
+      document.documentElement.classList.remove('dark');
+      localStorage.clear();
+      window.matchMedia = matchMediaOrig;
+    });
+
+    it('should return initial value', () => {
+      const hook = renderHook(() => useDarkModeEnabled());
+      const { isDarkModeReady, isDarkModeEnabled, toggleDarkMode } =
+        hook.result.current;
+
+      expect(isDarkModeReady).toBe(false);
+      expect(isDarkModeEnabled).toBe(false);
+      expect(typeof toggleDarkMode).toBe('function');
+    });
+
+    it('should return updated values if initialized', () => {
+      const isEnabled = getFakeBoolean();
+
+      DarkMode.initialized = true;
+      DarkMode.enabled = isEnabled;
+
+      const hook = renderHook(() => useDarkModeEnabled());
+      const { isDarkModeReady, isDarkModeEnabled } = hook.result.current;
+
+      expect(isDarkModeReady).toBe(true);
+      expect(isDarkModeEnabled).toBe(isEnabled);
+    });
+
+    it('should update values on initialize', () => {
+      const hook = renderHook(() => useDarkModeEnabled());
+      const isEnabled = getFakeBoolean();
+
+      act(() => {
+        DarkMode.initialized = true;
+        DarkMode.enabled = isEnabled;
+        DarkMode.emit('init');
+      });
+
+      const { isDarkModeReady, isDarkModeEnabled } = hook.result.current;
+
+      expect(isDarkModeReady).toBe(true);
+      expect(isDarkModeEnabled).toBe(isEnabled);
+    });
+
+    it('should update value on toggle', () => {
+      const hook = renderHook(() => useDarkModeEnabled());
+      const { toggleDarkMode } = hook.result.current;
+
+      act(() => {
+        toggleDarkMode();
+      });
+
+      const { isDarkModeEnabled } = hook.result.current;
+
+      expect(isDarkModeEnabled).toBe(true);
     });
   });
 

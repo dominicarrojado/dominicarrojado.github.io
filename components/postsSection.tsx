@@ -28,15 +28,18 @@ function PostsSection({ posts }: { posts: Array<Post> }) {
             <PostItem
               key={idx}
               post={post}
-              className={cn('transform transition duration-700', {
-                'opacity-0 translate-y-10': !shouldDisplay,
-              })}
+              className={cn(
+                'transform transition-transform-opacity duration-700',
+                {
+                  'opacity-0 translate-y-10': !shouldDisplay,
+                }
+              )}
               style={{
                 transitionDelay: !isOlder
                   ? `${idx * 150 + 1500}ms`
                   : `${(idx - POSTS_DISPLAY_LATEST_MAX) * 150}ms`,
               }}
-              anchorClassName="bg-gray-100"
+              anchorClassName="bg-gray-100 dark:bg-gray-750"
             />
           );
         })}

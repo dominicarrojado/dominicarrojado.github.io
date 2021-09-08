@@ -14,9 +14,12 @@ function ProjectsSection() {
           <ProjectItem
             key={idx}
             project={project}
-            className={cn('transform transition duration-700', {
-              ['opacity-0 translate-y-10']: !shouldDisplay,
-            })}
+            className={cn(
+              'transform transition-transform-opacity duration-700',
+              {
+                ['opacity-0 translate-y-10']: !shouldDisplay,
+              }
+            )}
             style={{
               transitionDelay: `${idx * 150 + 1500}ms`,
             }}

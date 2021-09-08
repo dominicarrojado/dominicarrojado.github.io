@@ -23,7 +23,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="py-20 px-6 bg-gray-100">
+    <footer className="py-20 px-6 bg-gray-100 dark:bg-gray-850">
       <Quotes />
       <SocialItems />
       <Legal />
@@ -147,7 +147,7 @@ function SocialItems() {
     <ul
       className={cn(
         'mt-10 text-center',
-        'lg:fixed lg:bottom-3 lg:right-7 lg:mt-0 lg:z-40'
+        'lg:fixed lg:bottom-3 lg:z-40 lg:right-7 lg:mt-0'
       )}
     >
       {SOCIAL_LINKS.map((social, idx) => {
@@ -181,7 +181,9 @@ function SocialItems() {
               {social.icon({
                 className: cn(
                   'w-7 h-7 text-gray-400',
+                  'dark:text-gray-300',
                   'transition-colors group-hover:text-gray-500',
+                  'dark:group-hover:text-white',
                   'sm:w-8 sm:h-8',
                   'xl:w-9 xl:h-9'
                 ),

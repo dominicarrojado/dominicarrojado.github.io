@@ -1,6 +1,7 @@
 import { useRef, useState, RefObject, useEffect } from 'react';
 import { AxiosStatic, CancelTokenSource } from 'axios';
 import Window from '../modules/Window';
+import DarkMode from '../modules/DarkMode';
 import { getImageDataFromResponse } from './axios';
 import { getRefValue } from './hooks';
 
@@ -52,6 +53,36 @@ export function useWindowSize() {
   });
 
   return { windowWidth, windowHeight };
+}
+
+export function useDarkModeEnabled() {
+  const [isDarkModeReady, setIsDarkModeReady] = useState(false);
+  const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
+
+  useEffect(() => {
+    const darkModeOnReady = () => {
+      setIsDarkModeReady(DarkMode.initialized);
+      setIsDarkModeEnabled(DarkMode.enabled);
+    };
+    const darkModeOnChange = (enabled: boolean) =>
+      setIsDarkModeEnabled(enabled);
+
+    DarkMode.on('init', darkModeOnReady);
+    DarkMode.on('change', darkModeOnChange);
+
+    darkModeOnReady();
+
+    return () => {
+      DarkMode.off('init', darkModeOnReady);
+      DarkMode.off('change', darkModeOnChange);
+    };
+  });
+
+  return {
+    isDarkModeReady,
+    isDarkModeEnabled,
+    toggleDarkMode: DarkMode.toggle,
+  };
 }
 
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
