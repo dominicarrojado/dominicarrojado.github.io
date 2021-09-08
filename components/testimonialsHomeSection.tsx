@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { HTMLProps, useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { useWindowSize } from '../lib/custom-hooks';
 import { getRefValue, useStateRef } from '../lib/hooks';
@@ -17,7 +17,6 @@ import {
   TESTIMONIALS_LENGTH,
   TESTIMONIALS_SUCCESS_SWIPE_DIFF,
 } from '../lib/constants';
-import { HTMLProps } from 'react-test-renderer/node_modules/@types/react';
 
 export default function TestimonialsHomeSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -211,8 +210,8 @@ export default function TestimonialsHomeSection() {
         </div>
         <small
           className={cn(
-            'absolute top-5 right-16 flex items-center bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
-            'dark:bg-gray-400 dark:bg-opacity-10',
+            'absolute top-5 right-16 flex items-center border border-transparent bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
+            'dark:bg-gray-650 dark:border-gray-400 dark:border-opacity-20',
             'transform transition-transform-opacity duration-700',
             'md:right-20',
             {
