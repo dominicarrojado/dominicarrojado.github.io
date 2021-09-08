@@ -212,7 +212,7 @@ export default function TestimonialsHomeSection() {
         <small
           className={cn(
             'absolute top-5 right-16 flex items-center bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
-            'dark:bg-gray-600',
+            'dark:bg-gray-400 dark:bg-opacity-10',
             'transform transition-transform-opacity duration-700',
             'md:right-20',
             {

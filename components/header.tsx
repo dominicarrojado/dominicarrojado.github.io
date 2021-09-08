@@ -182,13 +182,13 @@ function ThemeButton({
                     'transform transition-transform-opacity-color',
                     !animationDone
                       ? {
-                          'duration-700 delay-500': true,
+                          'duration-700 delay-700': true,
                           [shouldDisplay
                             ? 'opacity-100 translate-y-0'
                             : 'opacity-0 translate-y-2']: true,
                         }
                       : {
-                          'duration-150': true,
+                          'duration-100': true,
                           [state === 'entered'
                             ? 'opacity-100 translate-y-0'
                             : 'opacity-0 translate-y-2']: true,
@@ -204,13 +204,13 @@ function ThemeButton({
                   'xl:text-xs',
                   !animationDone
                     ? {
-                        'duration-700 delay-700': true,
+                        'duration-700 delay-1000': true,
                         [shouldDisplay
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-3']: true,
                       }
                     : {
-                        'duration-150': true,
+                        'duration-100': true,
                         [state === 'entered'
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-3']: true,

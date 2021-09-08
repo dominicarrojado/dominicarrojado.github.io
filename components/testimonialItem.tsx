@@ -19,7 +19,7 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
       <figure
         className={cn(
           'border rounded-lg shadow-md overflow-hidden',
-          'dark:border-gray-900',
+          'dark:border-gray-400 dark:border-opacity-30',
           'transition-shadow hover:shadow-xl'
         )}
       >
@@ -34,7 +34,7 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
           <SvgQuote
             className={cn(
               'w-6 h-6 mt-2 mb-2 text-gray-300',
-              'dark:text-gray-400',
+              'dark:text-gray-400 dark:text-opacity-40',
               'transform -translate-y-1.5',
               'sm:w-7 sm:h-7',
               'md:w-8 md:h-8 md:-translate-y-2',
