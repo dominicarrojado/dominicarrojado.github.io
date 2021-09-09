@@ -149,14 +149,17 @@ describe('<TestimonialsHomeSection />', () => {
     let listItemWidth: number;
 
     beforeEach(() => {
-      windowWidth = getFakeNumber();
+      windowWidth = getFakeNumber({ min: 1 });
       containerWidth = Math.round(getFakeNumber({ max: windowWidth }) / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
       listWidth = containerWidth * testimonialsLen;
       listItemWidth = containerWidth;
 
       jest
         .spyOn(customHooks, 'useWindowSize')
-        .mockReturnValue({ windowWidth, windowHeight: getFakeNumber() });
+        .mockReturnValue({
+          windowWidth,
+          windowHeight: getFakeNumber({ min: 1 }),
+        });
 
       setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
