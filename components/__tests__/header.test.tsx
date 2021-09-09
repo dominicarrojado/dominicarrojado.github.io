@@ -321,8 +321,8 @@ describe('<Header />', () => {
       btnIconContainerEl = btnTextEl?.previousElementSibling;
       btnIconEl = btnIconContainerEl?.querySelector('svg');
 
-      expect(btnIconEl).toHaveClass('duration-100');
-      expect(btnTextEl).toHaveClass('duration-100');
+      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnTextEl).toHaveClass('duration-150');
     });
 
     it('should have shorter transition duration on transition end of opacity', () => {
@@ -337,8 +337,8 @@ describe('<Header />', () => {
 
       fireEventTransitionEnd(btnTextEl, 'opacity');
 
-      expect(btnIconEl).toHaveClass('duration-100');
-      expect(btnTextEl).toHaveClass('duration-100');
+      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnTextEl).toHaveClass('duration-150');
     });
 
     it('should have shorter transition duration on transition end of other prop name', () => {

@@ -80,7 +80,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
           'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
           'sm:top-4 sm:left-4',
           'md:top-6 md:left-7 md:border-2',
-          'xl:top-5 xl:left-9 xl:p-2',
+          'xl:left-9 xl:p-2',
           {
             ['delay-700']: withAnimationDelay,
             ['opacity-0 -translate-y-full']: !shouldDisplay,
@@ -158,12 +158,12 @@ function ThemeButton({
   return (
     <button
       className={cn(
-        'group fixed top-3 right-16 z-50 min-w-16 pt-2 pb-2 px-4 text-gray-400',
+        'group fixed top-3 right-12 z-50 min-w-11 pt-2 pb-2 px-2 text-gray-400',
         'dark:text-gray-300',
-        'transition-colors hover:text-gray-500',
+        'hover:text-gray-500',
         'dark:hover:text-gray-100',
-        'sm:top-3',
-        'md:top-6 md:right-20 md:min-w-16.5',
+        'sm:top-3 sm:right-14',
+        'md:top-6 md:right-20 md:min-w-16.5 md:px-4',
         'lg:right-24 lg:min-w-18',
         'xl:top-7 xl:right-24'
       )}
@@ -188,7 +188,7 @@ function ThemeButton({
                             : 'opacity-0 translate-y-2']: true,
                         }
                       : {
-                          'duration-100': true,
+                          'duration-150': true,
                           [state === 'entered'
                             ? 'opacity-100 translate-y-0'
                             : 'opacity-0 translate-y-2']: true,
@@ -210,7 +210,7 @@ function ThemeButton({
                           : 'opacity-0 -translate-y-3']: true,
                       }
                     : {
-                        'duration-100': true,
+                        'duration-150': true,
                         [state === 'entered'
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-3']: true,
@@ -267,9 +267,9 @@ function MenuButton({
   return (
     <button
       className={cn(
-        'group fixed top-3 right-1 z-50 flex items-center flex-col rounded pt-3 pb-2 px-4',
+        'group fixed top-3 right-1 z-50 flex items-center flex-col rounded pt-3 pb-2 px-2',
         'sm:top-3 sm:right-2',
-        'md:top-6 md:right-4',
+        'md:top-6 md:right-4 md:px-4',
         'lg:right-6',
         'xl:top-7'
       )}
