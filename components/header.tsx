@@ -24,8 +24,17 @@ export default function Header({ route }: { route: Route }) {
     <>
       <header>
         <Logo route={route} closeMenu={closeMenu} />
-        <ThemeButtonContainer />
-        <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <div
+          className={cn(
+            'fixed flex items-end top-3 right-1 z-50',
+            'sm:top-3 sm:right-2',
+            'md:top-6 md:right-4',
+            'xl:top-7'
+          )}
+        >
+          <ThemeButtonContainer />
+          <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        </div>
       </header>
       <MenuBackground isMenuOpen={isMenuOpen} />
       <div
@@ -79,7 +88,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
           'group fixed top-3.5 left-3.5 z-50 flex shadow-3xl border border-white bg-gray-750 bg-opacity-90 p-1.5',
           'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
           'sm:top-4 sm:left-4',
-          'md:top-6 md:left-7 md:border-2',
+          'md:top-6 md:left-8 md:border-2',
           'xl:left-9 xl:p-2',
           {
             ['delay-700']: withAnimationDelay,
@@ -158,14 +167,12 @@ function ThemeButton({
   return (
     <button
       className={cn(
-        'group fixed top-3 right-12 z-50 min-w-11 pt-2 pb-2 px-2 text-gray-400',
+        'group min-w-11.5 pt-2 pb-2 px-2 text-gray-400',
         'dark:text-gray-300',
         'hover:text-gray-500',
         'dark:hover:text-gray-100',
-        'sm:top-3 sm:right-14',
-        'md:top-6 md:right-20 md:min-w-16.5 md:px-4',
-        'lg:right-24 lg:min-w-18',
-        'xl:top-7 xl:right-24'
+        'md:min-w-15 md:px-3',
+        'lg:min-w-18'
       )}
       onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}
@@ -267,11 +274,9 @@ function MenuButton({
   return (
     <button
       className={cn(
-        'group fixed top-3 right-1 z-50 flex items-center flex-col rounded pt-3 pb-2 px-2',
-        'sm:top-3 sm:right-2',
-        'md:top-6 md:right-4 md:px-4',
-        'lg:right-6',
-        'xl:top-7'
+        'group flex items-center flex-col min-w-12 rounded pt-3 pb-2 px-2',
+        'md:min-w-15.5 md:px-3',
+        'xl:min-w-18.5'
       )}
       onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}

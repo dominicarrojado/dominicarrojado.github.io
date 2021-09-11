@@ -23,7 +23,12 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="py-20 px-6 bg-gray-100 dark:bg-gray-850">
+    <footer
+      className={cn(
+        'py-20 px-6 bg-gray-100 dark:bg-gray-850 overflow-hidden',
+        'lg:overflow-auto'
+      )}
+    >
       <Quotes />
       <SocialItems />
       <Legal />
@@ -146,7 +151,7 @@ function SocialItems() {
   return (
     <ul
       className={cn(
-        'mt-10 text-center',
+        'max-w-full mt-10 flex flex-wrap justify-center',
         'lg:fixed lg:bottom-3 lg:z-40 lg:right-7 lg:mt-0'
       )}
     >
@@ -157,7 +162,7 @@ function SocialItems() {
           <li
             key={name}
             className={cn(
-              'inline-flex',
+              'flex',
               'lg:transform lg:transition lg:ease-in-out lg:duration-500',
               {
                 ['lg:opacity-0 lg:translate-y-full']: !shouldDisplay,

@@ -17,9 +17,12 @@ module.exports = {
       },
       minWidth: {
         11: '2.75rem',
-        16: '4rem',
-        16.5: '4.125rem',
+        11.5: '2.865rem',
+        12: '3rem',
+        15: '3.75rem',
+        15.5: '3.875rem',
         18: '4.5rem',
+        18.5: '4.625rem',
       },
       maxWidth: {
         'screen-3xl': '2880px',
