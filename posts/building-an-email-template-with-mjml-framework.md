@@ -1,9 +1,9 @@
 ---
 title: 'Building an email template with MJML framework'
-date: '2021-09-06'
+date: '2021-09-16'
 excerpt: 'Learn how to build a responsive email template in a less painful way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/9uQtftjQwmI'
 ---
 
 ## Introduction
@@ -25,6 +25,7 @@ By the way, upon writing this post, I assume that you have some web development 
 Some prerequisites below. Make sure to install them if you haven't!
 
 - [Visual Studio Code](https://code.visualstudio.com/)
+- [MJML Extension in Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml)
 - [Yarn](https://classic.yarnpkg.com/lang/en/)
 
 Alright, let's start by opening our project in [Visual Studio Code](https://code.visualstudio.com/) and open the main file `src/index.mjml`.
@@ -66,7 +67,7 @@ Next, let's define a default style for our MJML components. We can define them i
 ...
     <mj-breakpoint width="600px" />
     <mj-attributes>
-      <mj-all font-family="Arial" padding="0" />
+      <mj-all color="#2C2C2C" font-family="Arial" padding="0" />
     </mj-attributes>
 ...
 ```
@@ -353,7 +354,7 @@ We're already half way there! Let's move on to the next section. As you can see 
     <mj-wrapper padding="10px 20px 20px" background-color="#FFFFFF">
       <mj-section background-color="#E2E3E5" border-radius="5px 5px 0 0">
         <mj-group>
-          <mj-column padding="20px 20px 0">
+          <mj-column padding="20px 0">
             <mj-text align="center" font-size="16px" font-weight="700" line-height="22px">
               Quisque tincidunt nulla eros
             </mj-text>
@@ -467,6 +468,8 @@ Alright, we've done the difficult sections, the next sections would be easy now.
 And to finish off the last piece of our email template, let's write the code for the final section:
 
 ```
+      <mj-class name="footer-text" font-size="12px" line-height="18px" />
+    </mj-attributes>
 ...
       .footer-anchor-text {
         display: inline;
