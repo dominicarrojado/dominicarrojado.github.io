@@ -21,12 +21,8 @@ function AboutHomeSection() {
             videos
           </AnchorLink>{' '}
           to share my knowledge and learnings in my web development experiences.
-          I hope it will benefit and help some of you folks out here.
-        </SectionContent>
-        <SectionContent>
-          I'm a web developer specializing in both front-end and back-end
-          development. I'm experienced in developing small to large web
-          applications.
+          It is my passion to translate design into code with great attention to
+          details and solve complicated problems with simple solutions.
         </SectionContent>
         <SectionContent>
           I'm currently based in Singapore and working at{' '}
