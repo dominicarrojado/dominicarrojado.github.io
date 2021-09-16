@@ -27,7 +27,7 @@
     "react-transition-group": "^4.4.2",
     "remark": "^13.0.0",
     "remark-external-links": "^8.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
