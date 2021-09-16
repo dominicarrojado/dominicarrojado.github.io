@@ -15,7 +15,7 @@
     "deploy": "gh-pages -d out"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "classnames": "^2.3.1",
     "date-fns": "^2.22.1",
     "gray-matter": "^4.0.3",
