@@ -140,7 +140,11 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://www.justqwerk.com/',
+        url: 'https://www.justqwerk.com/sign-in',
+      },
+      {
+        title: 'View Website',
+        url: 'https://dominicarrojado.com/qwerk-website/',
       },
     ],
     imageUrl: '/images/projects/qwerk-web-app.png',
