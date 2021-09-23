@@ -122,6 +122,7 @@ module.exports = {
               padding: '0 0.5rem',
               color: theme('colors.gray.800'),
               fontWeight: theme('fontWeight.normal'),
+              wordBreak: 'break-all',
               '&::before': {
                 display: 'none',
               },
