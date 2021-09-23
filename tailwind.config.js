@@ -119,7 +119,7 @@ module.exports = {
               borderColor: theme('colors.gray.200'),
               borderRadius: theme('borderRadius.md'),
               backgroundColor: theme('colors.gray.100'),
-              padding: '0.25rem 0.5rem',
+              padding: '0 0.5rem',
               color: theme('colors.gray.800'),
               fontWeight: theme('fontWeight.normal'),
               '&::before': {
