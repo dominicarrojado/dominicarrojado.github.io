@@ -1,6 +1,6 @@
 ---
 title: 'How to create your own accordion in React and TypeScript with tests'
-date: '2021-09-23'
+date: '2021-09-24'
 excerpt: 'Learn how to build a collapsible content in a reactive and reusable way'
 category: 'technology'
 videoUrl: ''
@@ -127,6 +127,7 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 ```
 
@@ -314,7 +315,7 @@ Next, create `AccordionItem.css` under `components` folder and add the following
 
 ```css
 .accordion-item {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
 }
 
 .accordion-item:not(:first-of-type) {
@@ -323,7 +324,6 @@ Next, create `AccordionItem.css` under `components` folder and add the following
 
 .accordion-item-title {
   width: 100%;
-  background-color: #ffffff;
   margin: 0;
 }
 
@@ -331,21 +331,21 @@ Next, create `AccordionItem.css` under `components` folder and add the following
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 0;
   padding: 15px 20px;
   font-size: 18px;
   font-weight: 400;
-  text-align: left;
   cursor: pointer;
+  user-select: none;
 }
 
 .accordion-item-btn::after {
+  content: '';
   flex-shrink: 0;
   width: 18px;
   height: 18px;
   margin-left: auto;
-  content: '';
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-size: 18px;
@@ -537,6 +537,8 @@ Alright, the first component we would be writing test is `Accordion.tsx`. Create
 Then let's add in the structure of the test:
 
 ```tsx
+import Accordion from '../Accordion';
+
 describe('<Accordion />', () => {});
 ```
 
@@ -656,7 +658,7 @@ Awesome, our second test case passed as well! But the line 9 is still uncovered 
       fireEvent.click(titleEl);
       fireEvent.click(titleEl);
 
-      const currentListEl = titleEl.closest('li') as HTMLLIElement;
+      const currentListEl = titleEl.closest('li');
 
       expect(currentListEl).not.toHaveClass('active');
     });
@@ -701,7 +703,7 @@ describe('<AccordionItem />', () => {
     );
 
     const titleEl = screen.queryByText(title);
-    const contentEl = screen.queryByText(title);
+    const contentEl = screen.queryByText(content);
 
     expect(titleEl).toBeInTheDocument();
     expect(contentEl).toBeInTheDocument();
