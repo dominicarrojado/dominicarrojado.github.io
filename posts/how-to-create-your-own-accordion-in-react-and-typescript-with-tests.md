@@ -3,7 +3,7 @@ title: 'How to create your own accordion in React and TypeScript with tests'
 date: '2021-09-24'
 excerpt: 'Learn how to build a collapsible content in a reactive and reusable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/Hn7iDjbPtVY'
 ---
 
 ## Introduction
