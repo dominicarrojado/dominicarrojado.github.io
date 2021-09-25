@@ -1,6 +1,6 @@
 ---
 title: 'How to create your own accordion in React and TypeScript with tests'
-date: '2021-09-25'
+date: '2021-09-26'
 excerpt: 'Learn how to build a collapsible content in a reactive and reusable way'
 category: 'technology'
 videoUrl: 'https://youtu.be/Hn7iDjbPtVY'
@@ -16,12 +16,9 @@ This is the [link](/react-typescript-accordion/) to the accordion which we'll ac
 
 By the way, upon writing this post, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [React](https://reactjs.org/).
 
-Some prerequisites below. Make sure to install them in your system if you haven't!
+Make sure to install [Yarn](https://classic.yarnpkg.com/lang/en/) in your system if you haven't. We use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_.
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Yarn](https://classic.yarnpkg.com/lang/en/)
-
-We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) in this tutorial as we will utilize a few extensions from their [marketplace](https://marketplace.visualstudio.com/vscode). And we'll use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_.
+I've written a [separate post](/posts/local-development-setup-for-react-and-typescript-projects/) about the [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) and extensions I use to help me save time and energy when writing my code in React. I highly suggest for you to check it out if you haven't!
 
 ## Initialize your project
 
@@ -33,11 +30,10 @@ To create our project with React and TypeScript, run this command in your termin
 yarn create react-app react-typescript-accordion --template typescript
 ```
 
-Open the created project in your Visual Studio Code. Then open the terminal in Visual Studio Code. The keyboard shortcut would be ` Ctrl` + `` ` ``.
-
-Then, let's run our project to see if everything is working fine:
+Once installed, let's run our project to see if everything is working fine:
 
 ```bash
+cd react-typescript-accordion
 yarn start
 ```
 
@@ -46,41 +42,6 @@ This command will open your default browser and go to `http://localhost:3000/`. 
 ![Screenshot of Create React App default page](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/create-react-app-default-page.png)
 
 This setup comes with live-editing or hot reloading which means when we save file changes, it will automatically update the app and reload on the browser. That's great for local development!
-
-## Install Prettier Extension in Visual Studio Code
-
-Before we start coding, let's install [Prettier](https://prettier.io/), it's a code formatter that saves us time and energy by formatting the code when we save file changes.
-
-Click on the "Extensions" tab and look for "Prettier" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
-
-![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/install-prettier-extension-in-visual-studio-code.png)
-
-After Prettier is installed, we still need to enable the formatting feature by updating our settings in Visual Studio Code. Let's create a folder in the root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. Then update the created file with the code below:
-
-```json
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.tabSize": 2
-}
-```
-
-Feel free to modify `editor.tabSize` as that can be changed according to your preference.
-
-Next, create another file in the root directory and name it `.prettierrc`. Update the created file and add the code below:
-
-```json
-{
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "arrowParens": "always",
-  "tabWidth": 2
-}
-```
-
-This will be the config for Prettier to follow when formatting the code. These configs can be updated according to your preference.
-
-Alright, once the changes are done. That should make our Prettier work.
 
 ## Clean up the project
 
@@ -520,13 +481,13 @@ And there you go, you've just built your own accordion in React and TypeScript!
 
 Alright, time to write tests for the components we've built. Tests are really great as it helps us cover all the logics in our code and whenever we update the codebase, they help us determine whether we broke anything before it the changes get pushed to our repository.
 
-Before we start, let's install a library called `faker` which gives us random data. Why do we want random data? It makes our tests more reliable as opposed to hardcoding the data we use in testing. Run the command below on your terminal to install it along with its type:
+Before we start, let's install a library called [faker](https://github.com/Marak/faker.js) which gives us random data. Why do we want random data? It makes our tests more reliable as opposed to hardcoding the data we use in testing. Run the command below on your terminal to install it along with its type:
 
 ```bash
 yarn add -D faker @types/faker
 ```
 
-So if your project uses TypeScript, when installing libraries like this, you would have to install their types as well, if not TypeScript would complain that it couldn't find the library's type declarations.
+Since our project uses TypeScript, when installing libraries, we would have to install their types as well, because if not TypeScript would display an error that it couldn't find the library's type declarations.
 
 That's all we need to install because Create React App already set up and installed the necessary libraries for our testing environment such as Jest and Testing Library.
 
@@ -954,5 +915,3 @@ And there you have it! You've just built your own accordion in React and TypeScr
 In case you need the final code of the accordion as a reference, this is the [link](https://github.com/dominicarrojado/react-typescript-accordion) to the GitHub repository.
 
 Please don't forget to share this post and just a heads up, I'll be writing more of these "building your own components in React and TypeScript with tests" so if you're interested, you can come back to my blog to check it out once they're published.
-
-Peace ~
