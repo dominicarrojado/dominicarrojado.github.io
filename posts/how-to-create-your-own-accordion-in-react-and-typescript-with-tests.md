@@ -1,6 +1,6 @@
 ---
 title: 'How to create your own accordion in React and TypeScript with tests'
-date: '2021-09-24'
+date: '2021-09-25'
 excerpt: 'Learn how to build a collapsible content in a reactive and reusable way'
 category: 'technology'
 videoUrl: 'https://youtu.be/Hn7iDjbPtVY'
@@ -906,7 +906,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 });
 ```
 
-Like I've mentioned earlier, each component or function should have their own tests. So as a bonus, here's the test case for the hooks utility we created earlier, the code below should be added inside `src/lib/__tests__/hooks.test.ts`:
+## Write tests for hooks.ts
+
+I've mentioned it earlier that each component or function we create should have their own tests. So as a bonus, here's the test case for the hooks utility we created earlier, the code below should be added inside `src/lib/__tests__/hooks.test.ts`:
 
 ```ts
 import faker from 'faker';
@@ -925,6 +927,8 @@ describe('hooks utilities', () => {
   a;
 });
 ```
+
+## Write tests for App.tsx
 
 And then here's the code for testing our `App` component under `src/__tests__/App.test.tsx`:
 
