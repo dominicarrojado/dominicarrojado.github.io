@@ -61,7 +61,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'Play Game',
-        url: 'https://dominicarrojado.com/mouse-accuracy-game/',
+        url: '/mouse-accuracy-game/',
       },
     ],
     imageUrl: '/images/projects/razer-training-mode-virus-edition-app.png',
@@ -144,7 +144,7 @@ export const PROJECTS: Array<Project> = [
       },
       {
         title: 'View Website',
-        url: 'https://dominicarrojado.com/qwerk-website/',
+        url: '/qwerk-website/',
       },
     ],
     imageUrl: '/images/projects/qwerk-web-app.png',
@@ -158,7 +158,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Website',
-        url: 'https://dominicarrojado.com/maybank-fc-barcelona-website/',
+        url: '/maybank-fc-barcelona-website/',
       },
     ],
     imageUrl: '/images/projects/maybank-fc-barcelona-website.png',
@@ -198,7 +198,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Website',
-        url: 'https://dominicarrojado.com/kronenbourg-website/',
+        url: '/kronenbourg-website/',
       },
     ],
     imageUrl: '/images/projects/kronenbourg-website.png',
@@ -245,7 +245,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Website',
-        url: 'https://dominicarrojado.com/hashtag-interactive-website/',
+        url: '/hashtag-interactive-website/',
       },
     ],
     imageUrl: '/images/projects/hashtag-interactive-website.png',
@@ -302,7 +302,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Email Template',
-        url: 'https://dominicarrojado.com/hashtag-interactive-welcome-edm/',
+        url: '/hashtag-interactive-welcome-edm/',
       },
     ],
     imageUrl: '/images/projects/hashtag-interactive-welcome-email-template.png',
@@ -315,19 +315,19 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Data Passport I',
-        url: 'https://dominicarrojado.com/m1-data-passport-edm/',
+        url: '/m1-data-passport-edm/',
       },
       {
         title: 'View Data Passport II',
-        url: 'https://dominicarrojado.com/m1-data-passport-2-edm/',
+        url: '/m1-data-passport-2-edm/',
       },
       {
         title: 'View Data Passport III',
-        url: 'https://dominicarrojado.com/m1-data-passport-3-edm/',
+        url: '/m1-data-passport-3-edm/',
       },
       {
         title: 'View Data Passport IV',
-        url: 'https://dominicarrojado.com/m1-data-passport-4-edm/',
+        url: '/m1-data-passport-4-edm/',
       },
     ],
     imageUrl: '/images/projects/m1-email-template.png',
@@ -340,31 +340,31 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Smart Travel I',
-        url: 'https://dominicarrojado.com/axa-smart-travel-edm/',
+        url: '/axa-smart-travel-edm/',
       },
       {
         title: 'View Smart Travel II',
-        url: 'https://dominicarrojado.com/axa-smart-travel-2-edm/',
+        url: '/axa-smart-travel-2-edm/',
       },
       {
         title: "View Mother's Day",
-        url: 'https://dominicarrojado.com/axa-mothers-day-edm/',
+        url: '/axa-mothers-day-edm/',
       },
       {
         title: 'View Shield',
-        url: 'https://dominicarrojado.com/axa-shield-edm/',
+        url: '/axa-shield-edm/',
       },
       {
         title: 'View SmartHome',
-        url: 'https://dominicarrojado.com/axa-smart-home-edm/',
+        url: '/axa-smart-home-edm/',
       },
       {
         title: 'View Singtel Partnership',
-        url: 'https://dominicarrojado.com/axa-singtel-edm/',
+        url: '/axa-singtel-edm/',
       },
       {
         title: 'View September Promo',
-        url: 'https://dominicarrojado.com/axa-september-promo-edm/',
+        url: '/axa-september-promo-edm/',
       },
     ],
     imageUrl: '/images/projects/axa-email-template.png',

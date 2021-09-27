@@ -6,7 +6,6 @@ import ReactMarkdown from 'react-markdown';
 // @ts-ignore: using an old rehype-highlight version that has no declaration file
 import rehypeHighlight from 'rehype-highlight';
 import { useWindowLoaded } from '../lib/custom-hooks';
-import { checkIsUrlInternal } from '../lib/location';
 import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
@@ -114,18 +113,19 @@ function PostHeader({ date, category }: { date: string; category: string }) {
 function PostMarkdown({ content }: { content: string }) {
   const anchorComponent = (props: HTMLProps<HTMLAnchorElement>) => {
     const { href, ...otherProps } = props;
-    const isInternal =
-      typeof href === 'string' &&
-      (href.startsWith(Route.HOME) || checkIsUrlInternal(href));
+    const isInternal = typeof href === 'string' && href.startsWith(Route.HOME);
 
     if (isInternal) {
+      const anchorHref = href as string;
       const isNextRoute =
-        href === Route.HOME ||
-        ROUTES.some((route) => route !== Route.HOME && href.startsWith(route));
+        anchorHref === Route.HOME ||
+        ROUTES.some(
+          (route) => route !== Route.HOME && anchorHref.startsWith(route)
+        );
 
       if (isNextRoute) {
         return (
-          <Link href={href}>
+          <Link href={anchorHref}>
             <a {...otherProps} />
           </Link>
         );

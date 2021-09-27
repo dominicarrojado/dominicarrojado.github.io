@@ -6,7 +6,6 @@ import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
 import { useDownloadGif, useMounted, useWindowSize } from '../lib/custom-hooks';
-import { checkIsUrlInternal } from '../lib/location';
 import SvgStar from './svgStar';
 import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
@@ -15,6 +14,7 @@ import {
   GoogleAnalyticsEvents,
   Project,
   ProjectLink,
+  Route,
   TooltipPosition,
 } from '../lib/types';
 
@@ -358,7 +358,7 @@ function LinkItem({
   projectTitle,
 }: ProjectLink & { projectTitle: string }) {
   const isClickedRef = useRef(false);
-  const isExternal = !checkIsUrlInternal(url);
+  const isExternal = !url.startsWith(Route.HOME);
   const onMouseLeave = () => {
     if (!getRefValue(isClickedRef)) {
       trackEvent({
@@ -385,7 +385,7 @@ function LinkItem({
         href={url}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
-        target={!isExternal ? '_blank' : undefined}
+        target="_blank"
         isExternal={isExternal}
       >
         {title}

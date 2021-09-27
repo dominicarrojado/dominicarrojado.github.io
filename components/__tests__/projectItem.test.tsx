@@ -21,7 +21,6 @@ import {
 import * as customHooks from '../../lib/custom-hooks';
 import * as hooks from '../../lib/hooks';
 import * as ga from '../../lib/google-analytics';
-import { MAIN_URL } from '../../lib/constants';
 import ProjectItem from '../projectItem';
 
 jest.useFakeTimers();
@@ -70,7 +69,7 @@ describe('<ProjectItem />', () => {
         expect(linkEl).toHaveAttribute('href', link.url);
         expect(linkEl).toHaveAttribute('target', '_blank');
 
-        if (link.url.startsWith(MAIN_URL)) {
+        if (link.url.startsWith('/')) {
           expect(linkEl).not.toHaveAttribute('rel');
         } else {
           expect(linkEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
@@ -120,7 +119,7 @@ describe('<ProjectItem />', () => {
         expect(linkEl).toHaveAttribute('href', link.url);
         expect(linkEl).toHaveAttribute('target', '_blank');
 
-        if (link.url.startsWith(MAIN_URL)) {
+        if (link.url.startsWith('/')) {
           expect(linkEl).not.toHaveAttribute('rel');
         } else {
           expect(linkEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
@@ -466,7 +465,7 @@ function createProject(isBest: boolean) {
       },
       {
         title: getFakeSentence(),
-        url: `${MAIN_URL}${getFakeDirectoryPath()}`, // for internal link check
+        url: getFakeDirectoryPath(), // for internal link check
       },
     ],
     imageUrl: getFakeImageUrl(),

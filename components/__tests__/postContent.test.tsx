@@ -15,7 +15,6 @@ import {
 import Window from '../../modules/Window';
 import { Post, PostData, Route } from '../../lib/types';
 import PostContent from '../postContent';
-import { MAIN_URL } from '../../lib/constants';
 
 describe('<PostContent />', () => {
   const renderComponent = ({ postData }: { postData: PostData }) => {
@@ -333,7 +332,7 @@ describe('<PostContent />', () => {
 
       it('should render project link', () => {
         const anchorText = getFakeSentence();
-        const anchorHref = `${MAIN_URL}${getFakeDirectoryPath()}`;
+        const anchorHref = getFakeDirectoryPath();
         const postData = {
           ...generatePostData(),
           content: `[${anchorText}](${anchorHref})`,

@@ -1,11 +1,5 @@
-import { MAIN_URL } from '../constants';
-import {
-  getFakeDirectoryPath,
-  getFakeDomainWord,
-  getFakeUrl,
-  setReadOnlyProperty,
-} from '../test-helpers';
-import { checkIsLocalhost, checkIsUrlInternal } from '../location';
+import { getFakeDomainWord, setReadOnlyProperty } from '../test-helpers';
+import { checkIsLocalhost } from '../location';
 
 describe('location utilities', () => {
   describe('checkIsLocalhost()', () => {
@@ -34,20 +28,6 @@ describe('location utilities', () => {
       });
 
       expect(checkIsLocalhost()).toBe(false);
-    });
-  });
-
-  describe('checkIsUrlInternal()', () => {
-    it('should return true if internal', () => {
-      const url = `${MAIN_URL}${getFakeDirectoryPath()}`;
-
-      expect(checkIsUrlInternal(url)).toBe(true);
-    });
-
-    it('should return false if NOT internal', () => {
-      const url = getFakeUrl();
-
-      expect(checkIsUrlInternal(url)).toBe(false);
     });
   });
 });
