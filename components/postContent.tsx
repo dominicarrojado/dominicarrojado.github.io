@@ -2,7 +2,11 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
+import ReactMarkdown from 'react-markdown';
+// @ts-ignore: using an old rehype-highlight version that has no declaration file
+import rehypeHighlight from 'rehype-highlight';
 import { useWindowLoaded } from '../lib/custom-hooks';
+import { checkIsUrlInternal } from '../lib/location';
 import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
@@ -12,6 +16,8 @@ import TextArrowLink from './textArrowLink';
 import Content from './content';
 import AnchorLink from './anchorLink';
 import { ExternalUrl, Post, PostData, Route } from '../lib/types';
+import { ROUTES } from '../lib/constants';
+import 'highlight.js/styles/vs2015.css';
 
 export default function PostContent({ postData }: { postData: PostData }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -43,10 +49,7 @@ export default function PostContent({ postData }: { postData: PostData }) {
           >
             <PostHeader date={postData.date} category={postData.category} />
             <PostVideoLink videoUrl={postData.videoUrl} />
-            <Content
-              className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}
-              dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-            />
+            <PostMarkdown content={postData.content} />
             <PostFooter
               previousPost={postData.previousPost}
               nextPost={postData.nextPost}
@@ -105,6 +108,42 @@ function PostHeader({ date, category }: { date: string; category: string }) {
         {category}
       </div>
     </div>
+  );
+}
+
+function PostMarkdown({ content }: { content: string }) {
+  const anchorComponent = (props: HTMLProps<HTMLAnchorElement>) => {
+    const { href, ...otherProps } = props;
+    const isInternal =
+      typeof href === 'string' &&
+      (href.startsWith(Route.HOME) || checkIsUrlInternal(href));
+
+    if (isInternal) {
+      const isNextRoute =
+        href === Route.HOME ||
+        ROUTES.some((route) => route !== Route.HOME && href.startsWith(route));
+
+      if (isNextRoute) {
+        return (
+          <Link href={href}>
+            <a {...otherProps} />
+          </Link>
+        );
+      }
+    }
+
+    return <AnchorLink {...props} isExternal={!isInternal} />;
+  };
+
+  return (
+    <Content className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}>
+      <ReactMarkdown
+        rehypePlugins={[rehypeHighlight]}
+        components={{ a: anchorComponent }}
+      >
+        {content}
+      </ReactMarkdown>
+    </Content>
   );
 }
 

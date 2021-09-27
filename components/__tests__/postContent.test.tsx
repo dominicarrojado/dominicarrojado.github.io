@@ -2,32 +2,34 @@ import { render, screen, act } from '@testing-library/react';
 import {
   fireEventTransitionEnd,
   getFakeDate,
+  getFakeDirectoryPath,
   getFakeSentence,
   getFakeSentences,
   getFakeUrl,
   getFakeUuid,
   getFakeWord,
   getMonthName,
+  getRandomRoute,
   queryByTextIgnoreHTML,
 } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
-import { Post, PostData } from '../../lib/types';
+import { Post, PostData, Route } from '../../lib/types';
 import PostContent from '../postContent';
+import { MAIN_URL } from '../../lib/constants';
 
 describe('<PostContent />', () => {
   const renderComponent = ({ postData }: { postData: PostData }) => {
     render(<PostContent postData={postData} />);
   };
-
-  describe('all props defined', () => {
-    const postData = {
+  const generatePostData = () =>
+    ({
       id: getFakeUuid(),
       title: getFakeSentence(),
       category: getFakeWord(),
       date: getFakeDate(),
       excerpt: getFakeSentences(),
       videoUrl: getFakeUrl(),
-      contentHtml: `<p>${getFakeSentences()}</p>`,
+      content: getFakeSentences(),
       previousPost: {
         id: getFakeUuid(),
         title: getFakeSentence(),
@@ -44,7 +46,13 @@ describe('<PostContent />', () => {
         excerpt: getFakeSentences(),
         videoUrl: getFakeUrl(),
       },
-    } as PostData & { previousPost: Post; nextPost: Post };
+    } as PostData as PostData & {
+      previousPost: Post;
+      nextPost: Post;
+    });
+
+  describe('all props defined', () => {
+    const postData = generatePostData();
 
     beforeEach(() => {
       renderComponent({ postData });
@@ -80,8 +88,7 @@ describe('<PostContent />', () => {
     });
 
     it('should render the content', () => {
-      const textContent = postData.contentHtml.replace(/<p>|\<\/p>/g, '');
-      const contentEl = screen.queryByText(textContent);
+      const contentEl = screen.queryByText(postData.content);
 
       expect(contentEl).toBeInTheDocument();
     });
@@ -204,30 +211,9 @@ describe('<PostContent />', () => {
 
   describe('video url is empty', () => {
     const postData = {
-      id: getFakeUuid(),
-      title: getFakeSentence(),
-      category: getFakeWord(),
-      date: getFakeDate(),
-      excerpt: getFakeSentences(),
+      ...generatePostData(),
       videoUrl: '',
-      contentHtml: `<p>${getFakeSentences()}</p>`,
-      previousPost: {
-        id: getFakeUuid(),
-        title: getFakeSentence(),
-        category: getFakeWord(),
-        date: getFakeDate(),
-        excerpt: getFakeSentences(),
-        videoUrl: getFakeUrl(),
-      },
-      nextPost: {
-        id: getFakeUuid(),
-        title: getFakeSentence(),
-        category: getFakeWord(),
-        date: getFakeDate(),
-        excerpt: getFakeSentences(),
-        videoUrl: getFakeUrl(),
-      },
-    } as PostData;
+    };
 
     beforeEach(() => {
       renderComponent({ postData });
@@ -242,22 +228,8 @@ describe('<PostContent />', () => {
 
   describe('previous post is null', () => {
     const postData = {
-      id: getFakeUuid(),
-      title: getFakeSentence(),
-      category: getFakeWord(),
-      date: getFakeDate(),
-      excerpt: getFakeSentences(),
-      videoUrl: getFakeUrl(),
-      contentHtml: `<p>${getFakeSentences()}</p>`,
+      ...generatePostData(),
       previousPost: null,
-      nextPost: {
-        id: getFakeUuid(),
-        title: getFakeSentence(),
-        category: getFakeWord(),
-        date: getFakeDate(),
-        excerpt: getFakeSentences(),
-        videoUrl: getFakeUrl(),
-      },
     } as PostData & { nextPost: Post };
 
     beforeEach(() => {
@@ -285,21 +257,7 @@ describe('<PostContent />', () => {
 
   describe('next post is null', () => {
     const postData = {
-      id: getFakeUuid(),
-      title: getFakeSentence(),
-      category: getFakeWord(),
-      date: getFakeDate(),
-      excerpt: getFakeSentences(),
-      videoUrl: getFakeUrl(),
-      contentHtml: `<p>${getFakeSentences()}</p>`,
-      previousPost: {
-        id: getFakeUuid(),
-        title: getFakeSentence(),
-        category: getFakeWord(),
-        date: getFakeDate(),
-        excerpt: getFakeSentences(),
-        videoUrl: getFakeUrl(),
-      },
+      ...generatePostData(),
       nextPost: null,
     } as PostData & { previousPost: Post };
 
@@ -323,6 +281,91 @@ describe('<PostContent />', () => {
       const helperEl = screen.queryByText('Next Post');
 
       expect(helperEl).not.toBeInTheDocument();
+    });
+  });
+
+  describe('<PostMarkdown />', () => {
+    describe('anchor elements', () => {
+      it('should render home link', () => {
+        const anchorText = getFakeSentence();
+        const anchorHref = '/';
+        const postData = {
+          ...generatePostData(),
+          content: `[${anchorText}](${anchorHref})`,
+        };
+
+        renderComponent({ postData });
+
+        const anchorEl = screen.queryByText(anchorText);
+
+        expect(anchorEl?.tagName).toBe('A');
+        expect(anchorEl).toHaveAttribute('href', anchorHref);
+        expect(anchorEl).not.toHaveAttribute('target');
+        expect(anchorEl).not.toHaveAttribute('rel');
+      });
+
+      it('should render internal link', () => {
+        const getRandomRouteExceptHome = (): Route => {
+          const route = getRandomRoute();
+
+          if (route === Route.HOME) {
+            return getRandomRouteExceptHome();
+          }
+
+          return route;
+        };
+        const anchorText = getFakeSentence();
+        const anchorHref = `${getRandomRouteExceptHome()}${getFakeDirectoryPath()}`;
+        const postData = {
+          ...generatePostData(),
+          content: `[${anchorText}](${anchorHref})`,
+        };
+
+        renderComponent({ postData });
+
+        const anchorEl = screen.queryByText(anchorText);
+
+        expect(anchorEl?.tagName).toBe('A');
+        expect(anchorEl).toHaveAttribute('href', anchorHref);
+        expect(anchorEl).not.toHaveAttribute('target');
+        expect(anchorEl).not.toHaveAttribute('rel');
+      });
+
+      it('should render project link', () => {
+        const anchorText = getFakeSentence();
+        const anchorHref = `${MAIN_URL}${getFakeDirectoryPath()}`;
+        const postData = {
+          ...generatePostData(),
+          content: `[${anchorText}](${anchorHref})`,
+        };
+
+        renderComponent({ postData });
+
+        const anchorEl = screen.queryByText(anchorText);
+
+        expect(anchorEl?.tagName).toBe('A');
+        expect(anchorEl).toHaveAttribute('href', anchorHref);
+        expect(anchorEl).not.toHaveAttribute('target');
+        expect(anchorEl).not.toHaveAttribute('rel');
+      });
+
+      it('should render external link', () => {
+        const anchorText = getFakeSentence();
+        const anchorHref = getFakeUrl();
+        const postData = {
+          ...generatePostData(),
+          content: `[${anchorText}](${anchorHref})`,
+        };
+
+        renderComponent({ postData });
+
+        const anchorEl = screen.queryByText(anchorText);
+
+        expect(anchorEl?.tagName).toBe('A');
+        expect(anchorEl).toHaveAttribute('href', anchorHref);
+        expect(anchorEl).toHaveAttribute('target', '_blank');
+        expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
+      });
     });
   });
 });

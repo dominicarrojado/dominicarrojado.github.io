@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Route } from '../lib/types';
 import {
   MAIN_AUTHOR,
   MAIN_TITLE,
@@ -23,7 +24,7 @@ function SeoTags({
   imageWidth?: number;
   imageHeight?: number;
 }) {
-  const isIndex = path === '/';
+  const isIndex = path === Route.HOME;
   const metaUrl = isIndex ? MAIN_URL : `${MAIN_URL}${path}/`;
   const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
   const fullImgUrl = `${MAIN_URL}${imageUrl}`;

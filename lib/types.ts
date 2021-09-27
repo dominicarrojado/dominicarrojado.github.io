@@ -118,7 +118,7 @@ export type Post = {
 };
 
 export type PostData = Post & {
-  contentHtml: string;
+  content: string;
   previousPost: Post | null;
   nextPost: Post | null;
 };

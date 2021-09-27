@@ -2,8 +2,8 @@ import Link from 'next/link';
 import cn from 'classnames';
 import Section from './section';
 import AnchorLink from './anchorLink';
-import { ExternalUrl, Route } from '../lib/types';
 import PageContent from './pageContent';
+import { ExternalUrl, Route } from '../lib/types';
 
 function AboutSection() {
   return (

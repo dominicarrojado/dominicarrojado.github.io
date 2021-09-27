@@ -145,7 +145,7 @@ describe('posts utilities', () => {
           date: expect.any(String),
           excerpt: expect.any(String),
           videoUrl: expect.any(String),
-          contentHtml: expect.any(String),
+          content: expect.any(String),
         })
       );
 

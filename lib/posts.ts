@@ -1,9 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import remark from 'remark';
-import remarkHtml from 'remark-html';
-import remarkExternalLinks from 'remark-external-links';
 import { sortArrayByKeys } from './array';
 import { POSTS_DISPLAY_LATEST_MAX } from './constants';
 
@@ -64,20 +61,10 @@ export async function getPostData(id: string) {
   // use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
-  // use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(remarkExternalLinks, {
-      target: '_blank',
-      rel: ['noopener noreferrer nofollow'],
-    })
-    .use(remarkHtml)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
   // combine the data with the id
   return {
     id,
-    contentHtml,
+    content: matterResult.content,
     ...getAdjacentPosts(id),
     ...(matterResult.data as { date: string; title: string }),
   };
