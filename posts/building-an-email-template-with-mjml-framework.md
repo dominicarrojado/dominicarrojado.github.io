@@ -14,7 +14,7 @@ If you haven't heard about it yet, there's already an email framework that makes
 
 To start, you would need to setup your local development for MJML framework, I've written a [separate post](/posts/how-to-setup-local-development-for-mjml-framework/) just for that, but you can also just clone the boilerplate to save time:
 
-```
+```bash
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git mjml-sample-edm
 ```
 
@@ -34,12 +34,10 @@ Alright, let's start by opening our project in [Visual Studio Code](https://code
 
 Let's setup the initial structure of our MJML code. Type the following below:
 
-```
+```html
 <mjml>
-  <mj-head>
-  </mj-head>
-  <mj-body>
-  </mj-body>
+  <mj-head> </mj-head>
+  <mj-body> </mj-body>
 </mjml>
 ```
 
@@ -51,25 +49,29 @@ Inside `<mj-head>` tag we can define things like breakpoint, attribute overrides
 
 To start with, let's define the breakpoint by writing the following code below:
 
-```
+```html
 <mjml>
   <mj-head>
     <mj-breakpoint width="600px" />
   </mj-head>
-...
+  ...
+</mjml>
 ```
 
 The `<mj-breakpoint>` tag allows us to control on which breakpoint the layout should go desktop/mobile.
 
 Next, let's define a default style for our MJML components. We can define them inside the `<mj-attributes>` tag. Let's update the code with the following below:
 
-```
-...
+```html
+<mjml>
+  <mj-head>
     <mj-breakpoint width="600px" />
     <mj-attributes>
       <mj-all color="#2C2C2C" font-family="Arial" padding="0" />
     </mj-attributes>
-...
+  </mj-head>
+  ...
+</mjml>
 ```
 
 Using `<mj-all>` tag makes it easier to override style of MJML components via one tag. I have also set the `padding` to `0` because some components have default padding, by resetting it to `0` will make it easier for us to construct our template especially when following the expected design. We can add MJML component tags (like `<mj-section>`, `<mj-column>`, `<mj-text>`, etc.) inside `<mj-attributes>` tag to override the default settings on a specific component. We can also apply styles to a group of components using `<mj-class>` tag to help us reduce duplications in our code, we'll get to use that later as well.
@@ -78,11 +80,11 @@ Using `<mj-all>` tag makes it easier to override style of MJML components via on
 
 Moving on to `<mj-body>` tag for now, we can set the background color of our entire template with the code below:
 
-```
-...
-  <mj-body background-color="#F2F2F2">
-  </mj-body>
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2"> </mj-body>
+</mjml>
 ```
 
 As you can tell by now, from setting our default styles to setting the body's background color, it looks exactly the same way we define it in CSS. This is another thing which I like about MJML. The syntax is so simple!
@@ -91,61 +93,74 @@ As you can tell by now, from setting our default styles to setting the body's ba
 
 Now, let's build the first section of our email template. It's good to add a comment to your sections so it would be easier to locate them when maintaining it in the future. So below, I've added `<mj-section>` tag inside the `<mj-body>` tag. These tags are intended to be used as rows within our email template. They are used to structure the layout. By default, it has a width of `600px`, since that's also the width of our sections based on the design, then we don't need to specify the width.
 
-```
-...
+```html
+<mjml>
+  ...
   <mj-body background-color="#F2F2F2">
     <!-- Email Title -->
-    <mj-section>
-    </mj-section>
+    <mj-section> </mj-section>
     <!-- End Email Title -->
   </mj-body>
-...
+</mjml>
 ```
 
 Next, let's add `<mj-group>` tag inside the `<mj-section>` tag. This tag prevents columns from stacking on mobile.
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
     <!-- Email Title -->
     <mj-section>
-      <mj-group>
-      </mj-group>
+      <mj-group> </mj-group>
     </mj-section>
     <!-- End Email Title -->
-...
+  </mj-body>
+</mjml>
 ```
 
 Then, let's add `<mj-column>` tag inside the `<mj-group>` tag. This tag enables us to horizontally organize the content within our sections. Column width should be expressed in percentage to be responsive, if not defined will be 100% divided by the number of its siblings. Every single column has to contain something because they are responsive containers, and will be vertically stacked on a mobile view but in this case it won't because of its parent `<mj-group>` preventing it.
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
     <!-- Email Title -->
     <mj-section>
       <mj-group>
-        <mj-column>
-        </mj-column>
+        <mj-column> </mj-column>
       </mj-group>
     </mj-section>
     <!-- End Email Title -->
-...
+  </mj-body>
+</mjml>
 ```
 
 To finish off this section, let's add `<mj-text>` tag along with the expected styles from the design - see the code below. Now you may ask, can I just use `<mj-text>` tag alone since we are not styling anything or use any features from `<mj-section>` until the `<mj-column>`? The answer would be **no**. This structure is standardized by MJML. We can't use `<mj-text>` tags without wrapping it in a `<mj-column>` tag. Same for `<mj-column>` tags, it needs to be wrapped inside `<mj-section>` or `<mj-group>` tag. And `<mj-section>` tags need to be wrapped inside `<mj-body>` or `<mj-wrapper>` tag.
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
     <!-- Email Title -->
     <mj-section>
       <mj-group>
         <mj-column>
-          <mj-text align="center" padding="5px 0" color="#999999" font-size="10px" line-height="18px">
+          <mj-text
+            align="center"
+            padding="5px 0"
+            color="#999999"
+            font-size="10px"
+            line-height="18px"
+          >
             Integer faucibus ipsum et ex congue efficitur
           </mj-text>
         </mj-column>
       </mj-group>
     </mj-section>
     <!-- End Email Title -->
-...
+  </mj-body>
+</mjml>
 ```
 
 Don't worry if you're not used to writing this structure at the start, with the help of MJML extension in Visual Studio Code, you would get inline errors when the standard structure is violated. You can hover on the inline error and it would explain to you what you violated along with how to fix it. You would also get inline errors if you try to add styles not supported by the MJML component tag.
@@ -162,18 +177,29 @@ Let's move on to the next section. Before we do some code changes, open [this li
 
 After you've done that, let's add the following code just below the previous section:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Company Header -->
     <mj-section>
       <mj-group>
         <mj-column background-color="#FFFFFF" padding="20px">
-          <mj-image href="https://www.example.com/" target="_blank" src="images/logo.jpeg" alt="logo" width="130px" height="35px" />
+          <mj-image
+            href="https://www.example.com/"
+            target="_blank"
+            src="images/logo.jpeg"
+            alt="logo"
+            width="130px"
+            height="35px"
+          />
         </mj-column>
       </mj-group>
     </mj-section>
     <!-- End Company Header -->
-...
+  </mj-body>
+</mjml>
 ```
 
 The new tag `<mj-image>` we used in the code is just similar to an `<img>` tag in HTML but what's special about this tag is that it can also accept `href` and `target` attributes like an anchor tag. This is a good feature for images such as company logos to redirect your target to the company website.
@@ -190,18 +216,25 @@ The next section is relatively similar to the previous section, it's just an ima
 
 Then write the following code for the section:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Hero -->
     <mj-section>
       <mj-group>
         <mj-column>
-          <mj-image src="images/hero.jpeg" alt="a miniature house keychain on the table" />
+          <mj-image
+            src="images/hero.jpeg"
+            alt="a miniature house keychain on the table"
+          />
         </mj-column>
       </mj-group>
     </mj-section>
     <!-- End Hero -->
-...
+  </mj-body>
+</mjml>
 ```
 
 If you noticed, we didn't provide `width` or `height`. This is because we want it to take up 100% of it's parent column width. Since section's default width is `600px` then the image follows this width and the height will automatically adjust. The image will also become responsive on smaller viewport, you can resize your window to check it out.
@@ -214,61 +247,106 @@ Let's look at how our email template looks like now:
 
 Alright, let's move on to the next section. Let's ignore the list and just write code for the first and last paragraph:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Main Content -->
     <mj-section background-color="#FFFFFF">
       <mj-group>
         <mj-column padding="20px">
           <mj-text font-size="14px" line-height="22px">
-            Hi <strong>Dominic</strong>, <br><br>
-            Morbi ac mauris sed urna ultricies fringilla vitae in mauris. Donec tincidunt dictum ex nec semper. Proin dapibus purus velit, tristique ultrices dui suscipit ac. Vestibulum accumsan tellus lacus, vel venenatis nisi euismod vel.
+            Hi <strong>Dominic</strong>, <br /><br />
+            Morbi ac mauris sed urna ultricies fringilla vitae in mauris. Donec
+            tincidunt dictum ex nec semper. Proin dapibus purus velit, tristique
+            ultrices dui suscipit ac. Vestibulum accumsan tellus lacus, vel
+            venenatis nisi euismod vel.
           </mj-text>
           <mj-text font-size="14px" line-height="22px" padding-top="20px">
-            Aenean a neque non tortor faucibus auctor? <br>
-            Sem luctus ex Cras Porta Dapibus Proin pulvinar tortor vel quam feugiat.
+            Aenean a neque non tortor faucibus auctor? <br />
+            Sem luctus ex Cras Porta Dapibus Proin pulvinar tortor vel quam
+            feugiat.
           </mj-text>
         </mj-column>
       </mj-group>
     </mj-section>
     <!-- End Main Content -->
-...
+  </mj-body>
+</mjml>
 ```
 
 The reason why we didn't write the code for the list yet is because I wanted to show you the similarities of the first and last paragraph. Notice that they have the same `font-size` and `line-height`. For such cases, we can make use of the `<mj-class>` tag to reduce the redundancy and make it easier to maintain in the future. Let's go scroll back up to our code where `<mj-attributes>` tag is located. Then create an `<mj-class>` tag inside it with a `name` value of `body-text` as well as the shared styles of the paragraphs:
 
-```
-...
+```html
+<mjml>
+  <mj-head>
+    ...
+    <mj-attributes>
+      ...
       <mj-class name="body-text" font-size="14px" line-height="22px" />
     </mj-attributes>
-...
+  </mj-head>
+</mjml>
 ```
 
 Then we can update the MJML components that will make use of the shared styles by setting their `mj-class` attribute to `body-text` like this:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF">
+      <mj-group>
+        <mj-column padding="20px">
           <mj-text mj-class="body-text">
-            Hi <strong>Dominic</strong>, <br><br>
-            Morbi ac mauris sed urna ultricies fringilla vitae in mauris. Donec tincidunt dictum ex nec semper. Proin dapibus purus velit, tristique ultrices dui suscipit ac. Vestibulum accumsan tellus lacus, vel venenatis nisi euismod vel.
+            Hi <strong>Dominic</strong>, <br /><br />
+            Morbi ac mauris sed urna ultricies fringilla vitae in mauris. Donec
+            tincidunt dictum ex nec semper. Proin dapibus purus velit, tristique
+            ultrices dui suscipit ac. Vestibulum accumsan tellus lacus, vel
+            venenatis nisi euismod vel.
           </mj-text>
           <mj-text mj-class="body-text" padding-top="20px">
-            Aenean a neque non tortor faucibus auctor? <br>
-            Sem luctus ex Cras Porta Dapibus Proin pulvinar tortor vel quam feugiat.
+            Aenean a neque non tortor faucibus auctor? <br />
+            Sem luctus ex Cras Porta Dapibus Proin pulvinar tortor vel quam
+            feugiat.
           </mj-text>
-...
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <!-- End Main Content -->
+  </mj-body>
+</mjml>
 ```
 
 Great! Now let's add in the code for the list which is between the two paragraphs that we just coded. Since we know it would have the same styles for each item on the list, let's create another `<mj-class>` tag for it and apply to the components:
 
-```
-...
-      <mj-class name="list-text" padding-top="10px" font-size="14px" line-height="28px" />
-    </mj-attributes>
+```html
+<mjml>
+  <mj-head>
     ...
+    <mj-attributes>
+      ...
+      <mj-class
+        name="list-text"
+        padding-top="10px"
+        font-size="14px"
+        line-height="28px"
+      />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF">
+      <mj-group>
+        <mj-column padding="20px">
+          ...
           <mj-text mj-class="body-text">
-            Hi <strong>Dominic</strong>, <br><br>
-            Morbi ac mauris sed urna ultricies fringilla vitae in mauris. Donec tincidunt dictum ex nec semper. Proin dapibus purus velit, tristique ultrices dui suscipit ac. Vestibulum accumsan tellus lacus, vel venenatis nisi euismod vel.
+            Hi <strong>Dominic</strong>, <br /><br />
+            ...
           </mj-text>
           <mj-text mj-class="list-text">
             1. Aenean ullamcorper mi sed nibh mollis pulvinar?
@@ -289,25 +367,65 @@ Great! Now let's add in the code for the list which is between the two paragraph
             6. Morbi tempor massa eget faucibus molestie?
           </mj-text>
           <mj-text mj-class="body-text" padding-top="20px">
-            Aenean a neque non tortor faucibus auctor? <br>
-            Sem luctus ex Cras Porta Dapibus Proin pulvinar tortor vel quam feugiat.
+            Aenean a neque non tortor faucibus auctor? <br />
+            ...
           </mj-text>
-...
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <!-- End Main Content -->
+  </mj-body>
+</mjml>
 ```
 
 Next, let's create the button below the list, we can use the `<mj-button>` tag for that. Note that there are some similarities to this button and another button in the following sections in the email template so we should create an `<mj-class>` for the shared styles then add the styles specific to the button such as `padding-top`, `border` and `background-color`.
 
-```
-...
-      <mj-class name="btn" border-radius="8px" inner-padding="7px 103px" align="center" font-size="14px" font-weight="500" line-height="22px" fluid-on-mobile="true" />
-    </mj-attributes>
+```html
+<mjml>
+  <mj-head>
     ...
-            Speak to our Home Finance Advisors to get 1 on 1 guidance for free.
+    <mj-attributes>
+      ...
+      <mj-class
+        name="btn"
+        border-radius="8px"
+        inner-padding="7px 103px"
+        align="center"
+        font-size="14px"
+        font-weight="500"
+        line-height="22px"
+        fluid-on-mobile="true"
+      />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF">
+      <mj-group>
+        <mj-column padding="20px">
+          ...
+          <mj-text mj-class="body-text" padding-top="20px">
+            Aenean a neque non tortor faucibus auctor? <br />
+            ...
           </mj-text>
-          <mj-button href="https://www.example.com/" target="_blank" mj-class="btn" padding-top="20px" border="1px solid #343A40" background-color="transparent" color="#343A40">
+          <mj-button
+            href="https://www.example.com/"
+            target="_blank"
+            mj-class="btn"
+            padding-top="20px"
+            border="1px solid #343A40"
+            background-color="transparent"
+            color="#343A40"
+          >
             Proin Vestibulum Dui
           </mj-button>
-...
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <!-- End Main Content -->
+  </mj-body>
+</mjml>
 ```
 
 There's two attributes in the `btn` class that's probably not familiar to you. First one is the `inner-padding` attribute, which is the padding inside the button. While the `padding` attribute would apply to the button's container, we can use that for the margin spacing against other components. Then the second one is `fluid-on-mobile` attribute, if set to "true", will be full width on mobile even if width is set. This makes our button responsive on mobile.
@@ -315,7 +433,9 @@ There's two attributes in the `btn` class that's probably not familiar to you. F
 And before we forget it, there's also a link to a text located at the last paragraph which is "Cras Porta Dapibus" in particular. Since the text is inside the `<mj-text>` tag, we can't use `<mj-text>` again or any other MJML component. We will need to use regular HTML tags. We can declare styles in MJML and set them as "inline" so that we can style these HTML tags. Let's add in the code along with the class name and styles:
 
 ```
-...
+<mjml>
+  <mj-head>
+    ...
     <mj-style inline="inline">
       .body-anchor-text {
         display: inline;
@@ -327,15 +447,39 @@ And before we forget it, there's also a link to a text located at the last parag
       }
     </mj-style>
   </mj-head>
-...
+  ...
+</mjml>
+```
+
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF">
+      <mj-group>
+        <mj-column padding="20px">
+          ...
           <mj-text mj-class="body-text" padding-top="20px">
-            Aenean a neque non tortor faucibus auctor? <br>
+            Aenean a neque non tortor faucibus auctor? <br />
             Sem luctus ex
-            <a href="https://www.example.com/" target="_blank" class="body-anchor-text">
-              Cras Porta Dapibus</a>
+            <a
+              href="https://www.example.com/"
+              target="_blank"
+              class="body-anchor-text"
+            >
+              Cras Porta Dapibus</a
+            >
             Proin pulvinar tortor vel quam feugiat.
           </mj-text>
-...
+          ...
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <!-- End Main Content -->
+  </mj-body>
+</mjml>
 ```
 
 In case you get confused, just remember for sharing styles, `mj-class` declared in attributes are used by MJML components and `<mj-style inline="inline">` are used by regular HTML tags. What about `<mj-style>` without the "inline" attribute? It can be used by both MJML components and HTML tags but we'll get to that in the later part of this post.
@@ -348,14 +492,22 @@ Alright, once you save the changes, the email template now should look like this
 
 We're already half way there! Let's move on to the next section. As you can see from the design, this padded section has a white background and inside it is a container that's rounded with a gray background. How do we achieve this? We can use the `<mj-wrapper>` tag which enables us to wrap multiple sections together. It's especially useful to achieve nested layouts across sections. Let's write the following code below the previous section to construct the containers and the title:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Benefits -->
     <mj-wrapper padding="10px 20px 20px" background-color="#FFFFFF">
       <mj-section background-color="#E2E3E5" border-radius="5px 5px 0 0">
         <mj-group>
           <mj-column padding="20px 0">
-            <mj-text align="center" font-size="16px" font-weight="700" line-height="22px">
+            <mj-text
+              align="center"
+              font-size="16px"
+              font-weight="700"
+              line-height="22px"
+            >
               Quisque tincidunt nulla eros
             </mj-text>
           </mj-column>
@@ -363,7 +515,8 @@ We're already half way there! Let's move on to the next section. As you can see 
       </mj-section>
     </mj-wrapper>
     <!-- End Benefits -->
-...
+  </mj-body>
+</mjml>
 ```
 
 After that, let's construct the 3 columns below the title.
@@ -372,64 +525,121 @@ Before we do some code changes, open the following links ([benefit 1](/mjml-samp
 
 In mobile, we want them to stack on top of each other so we should not wrap the `<mj-column>` tag in `<mj-group>` tag. Let's also use `mj-class` as these columns share the same styles. Type the following code:
 
-```
-...
+```html
+<mjml>
+  <mj-head>
+    ...
+    <mj-attributes>
       <mj-class name="benefit" padding="20px 5px 0 5px" />
-      <mj-class name="benefit-img" align="center" width="100px" height="100px" />
-      <mj-class name="benefit-title" padding-top="15px" align="center" font-size="14px" font-weight="700" line-height="18px" />
-      <mj-class name="benefit-content" padding-top="10px" align="center" font-size="12px" line-height="18px" />
+      <mj-class
+        name="benefit-img"
+        align="center"
+        width="100px"
+        height="100px"
+      />
+      <mj-class
+        name="benefit-title"
+        padding-top="15px"
+        align="center"
+        font-size="14px"
+        font-weight="700"
+        line-height="18px"
+      />
+      <mj-class
+        name="benefit-content"
+        padding-top="10px"
+        align="center"
+        font-size="12px"
+        line-height="18px"
+      />
     </mj-attributes>
-...
+    ...
+  </mj-head>
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Benefits -->
     <mj-wrapper padding="10px 20px 20px" background-color="#FFFFFF">
       ...
       <mj-section background-color="#E2E3E5" padding="0 15px">
         <mj-column mj-class="benefit">
-          <mj-image mj-class="benefit-img" src="images/benefit-1.jpeg" alt="playing first-person shooter game on a laptop" />
+          <mj-image
+            mj-class="benefit-img"
+            src="images/benefit-1.jpeg"
+            alt="playing first-person shooter game on a laptop"
+          />
           <mj-text mj-class="benefit-title">
             Nulla rhoncus augue rhoncus
           </mj-text>
           <mj-text mj-class="benefit-content">
-            Suspendisse mauris ligula, rhoncus non efficitur non, dictum eu dui. Nunc mi lorem, ornare eget felis a.
+            Suspendisse mauris ligula, rhoncus non efficitur non, dictum eu dui.
+            Nunc mi lorem, ornare eget felis a.
           </mj-text>
         </mj-column>
         <mj-column mj-class="benefit">
-          <mj-image mj-class="benefit-img" src="images/benefit-2.jpeg" alt="a big house in the woods" />
+          <mj-image
+            mj-class="benefit-img"
+            src="images/benefit-2.jpeg"
+            alt="a big house in the woods"
+          />
           <mj-text mj-class="benefit-title">
             Quisque tincidunt nulla eros
           </mj-text>
           <mj-text mj-class="benefit-content">
-            Fusce sem est vel, convallis tellus vel, semper venenatis lacus. Suspendisse congue malesuada nisi.
+            Fusce sem est vel, convallis tellus vel, semper venenatis lacus.
+            Suspendisse congue malesuada nisi.
           </mj-text>
         </mj-column>
         <mj-column mj-class="benefit">
-          <mj-image mj-class="benefit-img" src="images/benefit-3.jpeg" alt="a bird house outside the house" />
+          <mj-image
+            mj-class="benefit-img"
+            src="images/benefit-3.jpeg"
+            alt="a bird house outside the house"
+          />
           <mj-text mj-class="benefit-title">
             Sit amet tempus mi maximus quis
           </mj-text>
           <mj-text mj-class="benefit-content">
-            Cras cursus finibus tellus, non fringilla turpis auctor eget. Aliquam a urna velit. Vestibulum ante ipsum primis.
+            Cras cursus finibus tellus, non fringilla turpis auctor eget.
+            Aliquam a urna velit. Vestibulum ante ipsum primis.
           </mj-text>
         </mj-column>
       </mj-section>
     </mj-wrapper>
     <!-- End Benefits -->
+  </mj-body>
+</mjml>
 ```
 
 And to finish off this section, let's add in the code for the button below the section of the columns. Remember we created an `mj-class` called `btn` specifically to share the styles with this button, so let's use that and also apply the specific styles:
 
-```
-...
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Benefits -->
+    <mj-wrapper padding="10px 20px 20px" background-color="#FFFFFF">
+      ...
       <mj-section background-color="#E2E3E5" border-radius="0 0 5px 5px">
         <mj-group>
           <mj-column>
-            <mj-button href="https://www.example.com/" target="_blank" mj-class="btn" padding="35px 15px 20px" background-color="#343A40" color="#FFFFFF">
+            <mj-button
+              href="https://www.example.com/"
+              target="_blank"
+              mj-class="btn"
+              padding="35px 15px 20px"
+              background-color="#343A40"
+              color="#FFFFFF"
+            >
               Vivamus Rhoncus
             </mj-button>
           </mj-column>
         </mj-group>
       </mj-section>
-...
+    </mj-wrapper>
+    <!-- End Benefits -->
+  </mj-body>
+</mjml>
 ```
 
 Once you save the changes, the email template now should look like this:
@@ -441,36 +651,78 @@ Once you save the changes, the email template now should look like this:
 Alright, we've done the difficult sections, the next sections would be easy now. Let's write the following code below:
 
 ```
-...
+<mjml>
+  <mj-head>
+    ...
+    <mj-style inline="inline">
+      ...
       .text-blue {
         color: #007BFF;
       }
     </mj-style>
-...
+  </mj-head>
+  ...
+</mjml>
+```
+
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Company Footer -->
-    <mj-section border-top="2px solid #343A40" background-color="#E2E3E5" padding="15px 20px">
+    <mj-section
+      border-top="2px solid #343A40"
+      background-color="#E2E3E5"
+      padding="15px 20px"
+    >
       <mj-column>
         <mj-text mj-class="body-text">
-          Suspendisse luctus nibh a est condimentum, <br>
+          Suspendisse luctus nibh a est condimentum, <br />
           <span class="text-gray">cras sollicitudin leo.</span>
         </mj-text>
       </mj-column>
       <mj-column>
-        <mj-image href="https://www.example.com/" target="_blank" src="images/logo.jpeg" alt="logo" width="93px" height="25px" align="right" padding="10px 0" />
+        <mj-image
+          href="https://www.example.com/"
+          target="_blank"
+          src="images/logo.jpeg"
+          alt="logo"
+          width="93px"
+          height="25px"
+          align="right"
+          padding="10px 0"
+        />
       </mj-column>
     </mj-section>
     <!-- End Company Footer -->
-...
+  </mj-body>
+</mjml>
 ```
 
 ## Footer section
 
 And to finish off the last piece of our email template, let's write the code for the final section:
 
-```
+```html
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      ...
       <mj-class name="footer-text" font-size="12px" line-height="18px" />
     </mj-attributes>
-...
+    ...
+  </mj-head>
+  ...
+</mjml>
+```
+
+```
+<mjml>
+  <mj-head>
+    ...
+    <mj-style inline="inline">
+      ...
       .footer-anchor-text {
         display: inline;
         color: #2C2C2C;
@@ -484,33 +736,54 @@ And to finish off the last piece of our email template, let's write the code for
         color: #007BFF;
       }
     </mj-style>
-...
+  </mj-head>
+  ...
+</mjml>
+```
+
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
     <!-- Footer -->
     <mj-section>
-      <mj-column css-class="footer" padding="20px 0">
+      <mj-column padding="20px 0">
         <mj-text mj-class="footer-text">
           <strong>In ac ultricies libero?</strong> Ac blandit libero
-          <a href="mailto:contact@example.com" class="footer-anchor-text text-blue">
-            contact@example.com</a>
+          <a
+            href="mailto:contact@example.com"
+            class="footer-anchor-text text-blue"
+          >
+            contact@example.com</a
+          >
         </mj-text>
         <mj-text mj-class="footer-text" padding-top="15px">
-          <a href="https://www.example.com/" target="_blank" class="footer-anchor-text text-gray">
-            Terms of Service</a>
+          <a
+            href="https://www.example.com/"
+            target="_blank"
+            class="footer-anchor-text text-gray"
+          >
+            Terms of Service</a
+          >
           |
-          <a href="https://www.example.com/" target="_blank" class="footer-anchor-text text-gray">
-            Privacy Policy</a>
+          <a
+            href="https://www.example.com/"
+            target="_blank"
+            class="footer-anchor-text text-gray"
+          >
+            Privacy Policy</a
+          >
         </mj-text>
         <mj-text mj-class="footer-text" padding-top="5px">
-          Copyright © 2021 | All rights reserved.<br>
-          Aenean Molestie - Iaculis Turpis Vel Condimentum<br>
+          Copyright © 2021 | All rights reserved.<br />
+          Aenean Molestie - Iaculis Turpis Vel Condimentum<br />
           Aliquam Egestas Vitae Nulla Vitae Congue 123456 | Call
-          <a href="tel:0012345678" class="footer-anchor-text">
-            +00 1234 5678</a>
+          <a href="tel:0012345678" class="footer-anchor-text"> +00 1234 5678</a>
         </mj-text>
       </mj-column>
     </mj-section>
     <!-- End Footer -->
-
   </mj-body>
 </mjml>
 ```
@@ -528,7 +801,12 @@ But wait, there's more! Let's try see how the mobile view is looking right now. 
 The alignment of the logo should be on the left and there should be some padding for the bottom section. This is where `<mj-style>` without the "inline" attribute comes in and we can write the media queries inside it just like how you override styles in HTML on certain breakpoints. We will have to use the `!important` rule to override the inline styles of the elements.
 
 ```
-...
+<mjml>
+  <mj-head>
+    ...
+    <mj-style inline="inline=">
+      ...
+    </mj-style>
     <mj-style>
       @media only screen and (max-width: 599px) {
         .company-footer-img {
@@ -542,21 +820,47 @@ The alignment of the logo should be on the left and there should be some padding
         }
       }
     </mj-style>
-...
-    <!-- Company Footer -->
+  </mj-head>
+  ...
+</mjml>
+```
+
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
     ...
-        <mj-image href="https://www.example.com/" target="_blank" css-class="company-footer-img" src="images/logo.jpeg" alt="logo" width="93px" height="25px" align="right" padding="10px 0" />
+    <!-- Company Footer -->
+    <mj-section
+      border-top="2px solid #343A40"
+      background-color="#E2E3E5"
+      padding="15px 20px"
+    >
+      ...
+      <mj-column>
+        <mj-image
+          href="https://www.example.com/"
+          target="_blank"
+          css-class="company-footer-img"
+          src="images/logo.jpeg"
+          alt="logo"
+          width="93px"
+          height="25px"
+          align="right"
+          padding="10px 0"
+        />
+      </mj-column>
+    </mj-section>
     ...
     <!-- End Company Footer -->
 
     <!-- Footer -->
-    ...
-      <mj-column css-class="footer" padding="20px 0">
-        ...
-      </mj-column>
-    ...
+    <mj-section>
+      <mj-column css-class="footer" padding="20px 0"> ... </mj-column>
+    </mj-section>
     <!-- End Footer -->
-...
+  </mj-body>
+</mjml>
 ```
 
 ![Screenshot of fixed mobile footer section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-footer-mobile-fixed.png)
@@ -568,7 +872,9 @@ It looks good now!
 The `<mj-style>` without the "inline" attribute is also useful for `:hover` styles. To finish off our email template, let's add in the hover styles for our buttons and anchor tags:
 
 ```
-...
+<mjml>
+  <mj-head>
+    ...
     <mj-style>
       .body-anchor-text:hover,
       .footer-anchor-text:hover {
@@ -593,7 +899,70 @@ The `<mj-style>` without the "inline" attribute is also useful for `:hover` styl
         ...
       }
     </mj-style>
+  </mj-head>
+  ...
+</mjml>
 ...
+```
+
+Then, you would need to add `css-class` for the buttons because they are MJML components:
+
+```html
+<mjml>
+  ...
+  <mj-body background-color="#F2F2F2">
+    ...
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF">
+      <mj-group>
+        <mj-column padding="20px">
+          ...
+          <mj-text mj-class="body-text" padding-top="20px">
+            Aenean a neque non tortor faucibus auctor? <br />
+            ...
+          </mj-text>
+          <mj-button
+            href="https://www.example.com/"
+            target="_blank"
+            mj-class="btn"
+            padding-top="20px"
+            border="1px solid #343A40"
+            background-color="transparent"
+            color="#343A40"
+            css-class="btn-outline-dark"
+          >
+            Proin Vestibulum Dui
+          </mj-button>
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <!-- End Main Content -->
+    ...
+    <!-- Benefits -->
+    <mj-wrapper padding="10px 20px 20px" background-color="#FFFFFF">
+      ...
+      <mj-section background-color="#E2E3E5" border-radius="0 0 5px 5px">
+        <mj-group>
+          <mj-column>
+            <mj-button
+              href="https://www.example.com/"
+              target="_blank"
+              mj-class="btn"
+              padding="35px 15px 20px"
+              background-color="#343A40"
+              color="#FFFFFF"
+              css-class="btn-dark"
+            >
+              Vivamus Rhoncus
+            </mj-button>
+          </mj-column>
+        </mj-group>
+      </mj-section>
+    </mj-wrapper>
+    <!-- End Benefits -->
+    ...
+  </mj-body>
+</mjml>
 ```
 
 And we are **done**! You've just built an email template with MJML framework with just a few lines of code - 296 to be exact. Just compare that amount of code against the generated `index.html`, it's half the amount of code and definitely much cleaner and easier to maintain than when you build the email template in regular HTML. And we didn't have to struggle much with regards to responsiveness, MJML handles most of it for us.

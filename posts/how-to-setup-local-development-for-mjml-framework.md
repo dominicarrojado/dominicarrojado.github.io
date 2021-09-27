@@ -18,7 +18,7 @@ If you're already on board and ready to get started, I'll now teach you how to s
 
 If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can clone by typing the command below:
 
-```
+```bash
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git my-email-template
 ```
 
@@ -37,7 +37,7 @@ We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE]
 
 Now, create your folder and give it a name that best describes your email template. This will be the root folder of your code.
 
-```
+```bash
 mkdir sample-email-template
 ```
 
@@ -49,7 +49,7 @@ Now, open the terminal in Visual Studio Code. The keyboard shortcut would be ` C
 
 Then, initiliaze Yarn using the command below:
 
-```
+```bash
 yarn init -y
 ```
 
@@ -61,13 +61,13 @@ Then create an empty `yarn.lock` in the root folder because you might receive an
 
 Okay, let's now install MJML library as `devDependencies` using the the command below:
 
-```
+```bash
 yarn add -D mjml
 ```
 
 Once installed, open your `package.json` and modify it to add the MJML build command in the scripts. This command will generate the HTML file based from your MJML file.
 
-```
+```json
 {
   ...
   "scripts": {
@@ -84,7 +84,7 @@ Then click on the "Extensions" tab and look for "MJML" and install it. You can a
 
 One of the feature of this extension is that it can beautify the MJML code. To enable that feature, create a folder in your root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. This is done to have a project-specific settings for Visual Studio Code. Let's update the created file to add the code below:
 
-```
+```json
 {
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
@@ -104,14 +104,12 @@ Let's try out the preview feature of MJML extension. Open your `index.mjml`, it 
 
 Now, update your `index.mjml` to add the code below:
 
-```
+```html
 <mjml>
   <mj-body background-color="#eeeeee">
     <mj-section>
       <mj-column>
-        <mj-text>
-          Hello World
-        </mj-text>
+        <mj-text> Hello World </mj-text>
       </mj-column>
     </mj-section>
   </mj-body>
@@ -124,7 +122,7 @@ You should be able to see the text on the preview side. Very cool!
 
 When you're done writing MJML code, you can generate the HTML by running the command below:
 
-```
+```bash
 yarn build
 ```
 
@@ -134,13 +132,13 @@ If you're coding in a smaller-sized screen or prefer to have a wider screen for 
 
 Install the [Live Server](https://github.com/tapio/live-server) and [Concurrently](https://github.com/open-cli-tools/concurrently) using the command below. Live Server will create a server locally, it will help us serve the generated `index.html` by MJML so you can preview it in a browser. Concurrently will let us run multiple scripts with one script so you don't have to open multiple terminal windows to achieve the same thing.
 
-```
+```bash
 yarn add -D live-server concurrently
 ```
 
 Once installed, open your `package.json` again and update the scripts with the following code below:
 
-```
+```json
   "scripts": {
     "start": "mjml --watch src/index.mjml --output src/index.html",
     "server": "live-server --host=localhost --open=src",
@@ -153,7 +151,7 @@ Let's understand each command that was newly added. The `start` script is basica
 
 Let's run our `dev` script by typing the command below on our terminal:
 
-```
+```bash
 yarn run dev
 ```
 
@@ -161,11 +159,9 @@ This command will open your default browser and go to `http://localhost:8080/src
 
 Now go back to Visual Studio Code and try do make some changes in the `index.mjml` file.
 
-```
+```html
 ...
-  <mj-text>
-    Hello Moon
-  </mj-text>
+<mj-text> Hello Moon </mj-text>
 ...
 ```
 
@@ -175,7 +171,7 @@ Once you save the file, it will be automatically update the `index.html` and ref
 
 If you're ready to commit your changes in git, you can create a `.gitignore` file and add the following below:
 
-```
+```bash
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
