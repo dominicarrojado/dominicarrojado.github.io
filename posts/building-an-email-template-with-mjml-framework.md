@@ -18,7 +18,7 @@ To start, you would need to setup your local development for MJML framework, I'v
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git mjml-sample-edm
 ```
 
-This is the [link](/mjml-sample-edm/) to the email template we'll accomplish by the end of this post, you can open it in a new tab to see or use it as your reference throughout this tutorial.
+This is the [link](/mjml-sample-edm/) to the email template we'll accomplish by the end of this post, you can use it as your reference throughout this tutorial.
 
 By the way, upon writing this post, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
 
@@ -173,7 +173,7 @@ Once you save the changes, our email template should look like this:
 
 ## Company Header section
 
-Let's move on to the next section. Before we do some code changes, open [this link](/mjml-sample-edm/images/logo.jpeg) in another tab and download the image. Put the image inside the `/src/images/` folder.
+Let's move on to the next section. Before we do some code changes, open [this link](/mjml-sample-edm/images/logo.jpeg) and download the image. Put the image inside the `/src/images/` folder.
 
 After you've done that, let's add the following code just below the previous section:
 
@@ -212,7 +212,7 @@ Once you save the changes, this is how our email template should look like now:
 
 ## Hero section
 
-The next section is relatively similar to the previous section, it's just an image as well. You can open [this link](/mjml-sample-edm/images/hero.jpeg) in another tab and download the image. Put the image inside the `/src/images/` folder.
+The next section is relatively similar to the previous section, it's just an image as well. You can open [this link](/mjml-sample-edm/images/hero.jpeg) and download the image. Put the image inside the `/src/images/` folder.
 
 Then write the following code for the section:
 
@@ -521,7 +521,7 @@ We're already half way there! Let's move on to the next section. As you can see 
 
 After that, let's construct the 3 columns below the title.
 
-Before we do some code changes, open the following links ([benefit 1](/mjml-sample-edm/images/benefit-1.jpeg), [benefit 2](/mjml-sample-edm/images/benefit-2.jpeg), [benefit 3](/mjml-sample-edm/images/benefit-3.jpeg)) in another tab and download the images. Put the images inside the `/src/images/` folder.
+Before we do some code changes, open the following links ([benefit 1](/mjml-sample-edm/images/benefit-1.jpeg), [benefit 2](/mjml-sample-edm/images/benefit-2.jpeg), [benefit 3](/mjml-sample-edm/images/benefit-3.jpeg)) and download the images. Put the images inside the `/src/images/` folder.
 
 In mobile, we want them to stack on top of each other so we should not wrap the `<mj-column>` tag in `<mj-group>` tag. Let's also use `mj-class` as these columns share the same styles. Type the following code:
 

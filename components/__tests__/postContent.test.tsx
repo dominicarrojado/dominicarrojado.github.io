@@ -344,7 +344,7 @@ describe('<PostContent />', () => {
 
         expect(anchorEl?.tagName).toBe('A');
         expect(anchorEl).toHaveAttribute('href', anchorHref);
-        expect(anchorEl).not.toHaveAttribute('target');
+        expect(anchorEl).toHaveAttribute('target', '_blank');
         expect(anchorEl).not.toHaveAttribute('rel');
       });
 

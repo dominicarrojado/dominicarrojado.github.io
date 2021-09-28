@@ -132,7 +132,7 @@ function PostMarkdown({ content }: { content: string }) {
       }
     }
 
-    return <AnchorLink {...props} isExternal={!isInternal} />;
+    return <AnchorLink {...props} target="_blank" isExternal={!isInternal} />;
   };
 
   return (

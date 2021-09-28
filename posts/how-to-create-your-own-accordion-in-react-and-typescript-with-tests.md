@@ -12,7 +12,7 @@ Accordions (or collapsible content) are useful for when you have large amount of
 
 ## Prerequisites
 
-This is the [link](/react-typescript-accordion/) to the accordion which we'll accomplish by the end of this post, you can open it in a new tab to see, play around with it or use it as your reference throughout this tutorial.
+This is the [link](/react-typescript-accordion/) to the accordion which we'll accomplish by the end of this post, you can see and play around with it or use it as your reference throughout this tutorial.
 
 By the way, upon writing this post, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [React](https://reactjs.org/).
 
