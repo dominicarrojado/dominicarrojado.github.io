@@ -132,6 +132,10 @@ module.exports = {
             },
             pre: {
               backgroundColor: 'rgba(44, 44, 52, 1)',
+              code: {
+                display: 'inline',
+                overflow: 'visible',
+              },
             },
           },
         },
