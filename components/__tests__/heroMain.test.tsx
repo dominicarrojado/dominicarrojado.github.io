@@ -48,12 +48,14 @@ describe('<HeroMain />', () => {
 
     it('should hide logo', () => {
       const logoEl = screen.queryByTestId('logo');
-      const logoPart1El = screen.queryByTestId('logo-part-1');
-      const logoPart2El = screen.queryByTestId('logo-part-2');
+      const logoPartEls = screen.queryAllByTestId('logo-part');
 
       expect(logoEl).toHaveClass('opacity-0');
-      expect(logoPart1El).toHaveClass('opacity-0');
-      expect(logoPart2El).toHaveClass('opacity-0');
+      expect(logoPartEls).toHaveLength(2);
+
+      logoPartEls.forEach((logoPartEl) => {
+        expect(logoPartEl).toHaveClass('opacity-0');
+      });
     });
 
     it('should hide title', () => {
@@ -102,12 +104,14 @@ describe('<HeroMain />', () => {
 
     it('should display logo', () => {
       const logoEl = screen.queryByTestId('logo');
-      const logoPart1El = screen.queryByTestId('logo-part-1');
-      const logoPart2El = screen.queryByTestId('logo-part-2');
+      const logoPartEls = screen.queryAllByTestId('logo-part');
 
       expect(logoEl).not.toHaveClass('opacity-0');
-      expect(logoPart1El).not.toHaveClass('opacity-0');
-      expect(logoPart2El).not.toHaveClass('opacity-0');
+      expect(logoPartEls).toHaveLength(2);
+
+      logoPartEls.forEach((logoPartEl) => {
+        expect(logoPartEl).not.toHaveClass('opacity-0');
+      });
     });
 
     it('should display title', () => {

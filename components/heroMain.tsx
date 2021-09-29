@@ -14,6 +14,7 @@ import SvgArrowDown from './svgArrowDown';
 import Spinner from './spinner';
 import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
+import SvgLessThan from './svgLessThan';
 
 export default function HeroMain() {
   const shouldDisplay = useMounted();
@@ -105,21 +106,7 @@ function Logo() {
 
   return (
     <div ref={titleRef} className="relative inline-flex" style={{ opacity }}>
-      <div
-        className={cn(
-          'absolute top-3 -left-14 text-white text-9xl tracking-normal leading-none select-none',
-          'transform transition duration-1250 delay-700',
-          'sm:-top-1 sm:-left-24 sm:text-10xl',
-          'md:top-0 md:-left-32 md:text-11xl',
-          'xl:-top-5 xl:-left-44 xl:text-12xl',
-          {
-            [!shouldDisplay ? 'opacity-0 translate-x-3' : 'opacity-40']: true,
-          }
-        )}
-        data-testid="logo-part-1"
-      >
-        &lt;
-      </div>
+      <LogoPart shouldDisplay={shouldDisplay} isLeft />
       <SvgLogo
         className={cn(
           'w-40 h-40 text-white transform transition duration-1250 delay-700',
@@ -132,22 +119,37 @@ function Logo() {
         )}
         data-testid="logo"
       />
-      <div
-        className={cn(
-          'absolute top-3 -right-14 text-white text-9xl tracking-normal leading-none select-none',
-          ' transform transition duration-1250 delay-700',
-          'sm:-top-1 sm:-right-24 sm:text-10xl',
-          'md:top-0 md:-right-32 md:text-11xl',
-          'xl:-top-5 xl:-right-44 xl:text-12xl',
-          {
-            [!shouldDisplay ? 'opacity-0 -translate-x-3' : 'opacity-40']: true,
-          }
-        )}
-        data-testid="logo-part-2"
-      >
-        &gt;
-      </div>
+      <LogoPart shouldDisplay={shouldDisplay} />
     </div>
+  );
+}
+
+function LogoPart({
+  shouldDisplay,
+  isLeft,
+}: {
+  shouldDisplay: boolean;
+  isLeft?: boolean;
+}) {
+  return (
+    <SvgLessThan
+      className={cn(
+        'absolute top-12 w-14 h-14 text-white',
+        'transform transition duration-1250 delay-700',
+        'sm:top-16 sm:w-24 sm:h-24',
+        'md:top-20 md:w-32 md:h-32',
+        'xl:top-24 xl:w-40 xl:h-40',
+        {
+          [isLeft
+            ? '-left-14 sm:-left-24 md:-left-32 xl:-left-40'
+            : '-right-14 sm:-right-24 md:-right-32 xl:-right-40 rotate-180']: true,
+          [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
+          ['translate-x-3']: !shouldDisplay && isLeft,
+          ['-translate-x-3']: !shouldDisplay && !isLeft,
+        }
+      )}
+      data-testid="logo-part"
+    />
   );
 }
 
