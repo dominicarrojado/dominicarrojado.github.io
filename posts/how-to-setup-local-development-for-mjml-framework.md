@@ -45,7 +45,7 @@ Open the created folder in your Visual Studio Code.
 
 Then create a folder and name it `src`. Inside it, create a file named `index.mjml`.
 
-Now, open the terminal in Visual Studio Code. The keyboard shortcut would be ` Ctrl` + `` ` ``.
+Now, open the terminal in Visual Studio Code. The keyboard shortcut would be `Ctrl` + `` ` ``.
 
 Then, initiliaze Yarn using the command below:
 

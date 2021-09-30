@@ -28,11 +28,34 @@ Some prerequisites below. Make sure to install them if you haven't!
 - [MJML Extension in Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml)
 - [Yarn](https://classic.yarnpkg.com/lang/en/)
 
-Alright, let's start by opening our project in [Visual Studio Code](https://code.visualstudio.com/) and open the main file `src/index.mjml`.
+Alright, let's start by opening our project in [Visual Studio Code](https://code.visualstudio.com/).
+
+Then, open the terminal in Visual Studio Code. The keyboard shortcut would be `Ctrl` + `` ` ``.
+
+Next, type the following below in your terminal to install the dependencies of the boilerplate:
+
+```bash
+yarn install
+```
+
+Once installed, you can run the local development by typing the script in your terminal:
+
+```bash
+yarn run dev
+```
+
+This command will open your default browser and go to `http://localhost:8080/src/`. If it doesn't, you can do it yourself too. You should be able to see the boilerplate with the text `Hello World` displayed on your browser. If you end up seeing the directory of `/src/`, just refresh the page and you should see your email template. This is the `index.html` served by our local server.
+
+## Clean up the project
+
+Now, let's clean up our project. We won't be needing some of them. Delete or clear the contents of the following below:
+
+- src/images/logo-mjml.png (delete)
+- src/index.mjml (clear contents)
 
 ## Initial structure
 
-Let's setup the initial structure of our MJML code. Type the following below:
+Let's setup the initial structure of our MJML code. Open the main file `src/index.mjml` and type the following below:
 
 ```html
 <mjml>
