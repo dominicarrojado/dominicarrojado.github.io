@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react';
+import { forceVisible } from 'react-lazyload';
 import { getRandomPostId } from '../../../lib/test-helpers';
 import * as customHooks from '../../../lib/custom-hooks';
 import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostContent from '../../../components/postContent';
-import { Post, PostData } from '../../../lib/types';
+import { PostData } from '../../../lib/types';
 import PostIndex, { getStaticPaths, getStaticProps } from '../[id].page';
 
 describe('<PostIndex />', () => {
@@ -16,6 +17,12 @@ describe('<PostIndex />', () => {
     // mock to prevent re-render of hero section
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
+    // mock to prevent re-render of post content
+    jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
+      windowWidth: 0,
+      windowHeight: 0,
+    });
+
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const postContentSpy = jest.spyOn(PostContent, 'default');
@@ -26,32 +33,9 @@ describe('<PostIndex />', () => {
       params: { id: postId },
     })) as any;
 
-    expect(staticProps).toEqual({
-      props: {
-        postData: expect.objectContaining({
-          id: expect.any(String),
-          title: expect.any(String),
-          category: expect.any(String),
-          date: expect.any(String),
-          excerpt: expect.any(String),
-          videoUrl: expect.any(String),
-          content: expect.any(String),
-        }),
-      },
-    });
-
-    const expectPost = (post: Post) => {
-      expect(post).toMatchObject({
-        id: expect.any(String),
-        title: expect.any(String),
-        category: expect.any(String),
-        date: expect.any(String),
-        excerpt: expect.any(String),
-        videoUrl: expect.any(String),
-      });
-    };
-
     const postData = staticProps.props.postData as PostData;
+
+    expect(typeof postData.content).toBe('string');
 
     const expectAdjacentPostData = (adjacentPostData: any) => {
       expect(adjacentPostData).toEqual(
@@ -93,6 +77,8 @@ describe('<PostIndex />', () => {
     }
 
     render(<PostIndex postData={postData} />);
+
+    forceVisible();
 
     expect(seoTagsSpy).toBeCalledTimes(1);
     expect(seoTagsSpy).toBeCalledWith(

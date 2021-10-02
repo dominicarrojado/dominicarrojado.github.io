@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import ReactMarkdown from 'react-markdown';
+import remarkUnwrapImages from 'remark-unwrap-images';
+import LazyLoad from 'react-lazyload';
 // @ts-ignore: using an old rehype-highlight version that has no declaration file
 import rehypeHighlight from 'rehype-highlight';
 import { useWindowLoaded } from '../lib/custom-hooks';
@@ -111,35 +113,49 @@ function PostHeader({ date, category }: { date: string; category: string }) {
 }
 
 function PostMarkdown({ content }: { content: string }) {
-  const anchorComponent = (props: HTMLProps<HTMLAnchorElement>) => {
-    const { href, ...otherProps } = props;
-    const isInternal = typeof href === 'string' && href.startsWith(Route.HOME);
-
-    if (isInternal) {
-      const anchorHref = href as string;
-      const isNextRoute =
-        anchorHref === Route.HOME ||
-        ROUTES.some(
-          (route) => route !== Route.HOME && anchorHref.startsWith(route)
-        );
-
-      if (isNextRoute) {
-        return (
-          <Link href={anchorHref}>
-            <a {...otherProps} />
-          </Link>
-        );
-      }
-    }
-
-    return <AnchorLink {...props} target="_blank" isExternal={!isInternal} />;
-  };
-
   return (
     <Content className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}>
       <ReactMarkdown
         rehypePlugins={[rehypeHighlight]}
-        components={{ a: anchorComponent }}
+        remarkPlugins={[remarkUnwrapImages]}
+        components={{
+          a: ({ node, ...props }) => {
+            const { href, ...otherProps } = props;
+            const isInternal =
+              typeof href === 'string' && href.startsWith(Route.HOME);
+
+            if (isInternal) {
+              const anchorHref = href as string;
+              const isNextRoute =
+                anchorHref === Route.HOME ||
+                ROUTES.some(
+                  (route) =>
+                    route !== Route.HOME && anchorHref.startsWith(route)
+                );
+
+              if (isNextRoute) {
+                return (
+                  <Link href={anchorHref}>
+                    <a {...otherProps} />
+                  </Link>
+                );
+              }
+            }
+
+            return (
+              <AnchorLink {...props} target="_blank" isExternal={!isInternal} />
+            );
+          },
+          img: ({ node, ...props }) => {
+            const altText = props.alt as string;
+
+            return (
+              <LazyLoad once>
+                <img {...props} alt={altText} />
+              </LazyLoad>
+            );
+          },
+        }}
       >
         {content}
       </ReactMarkdown>

@@ -33,8 +33,6 @@ describe('<ProjectItem />', () => {
 
     beforeEach(() => {
       render(<ProjectItem project={project} />);
-
-      forceVisible();
     });
 
     it('should render the highlight', () => {
@@ -55,7 +53,15 @@ describe('<ProjectItem />', () => {
       expect(descEl).toBeInTheDocument();
     });
 
-    it('should render the image', () => {
+    it('should NOT render the image by default', () => {
+      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
+
+      expect(imgEl).not.toBeInTheDocument();
+    });
+
+    it('should render the image on lazy load', () => {
+      forceVisible();
+
       const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
 
       expect(imgEl).toHaveAttribute('src', project.imageUrl);
@@ -83,8 +89,6 @@ describe('<ProjectItem />', () => {
 
     beforeEach(() => {
       render(<ProjectItem project={project} />);
-
-      forceVisible();
     });
 
     it('should NOT render the highlight', () => {
@@ -105,7 +109,15 @@ describe('<ProjectItem />', () => {
       expect(descEl).toBeInTheDocument();
     });
 
-    it('should render the image', () => {
+    it('should NOT render the image by default', () => {
+      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
+
+      expect(imgEl).not.toBeInTheDocument();
+    });
+
+    it('should render the image on lazy load', () => {
+      forceVisible();
+
       const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
 
       expect(imgEl).toHaveAttribute('src', project.imageUrl);

@@ -1,4 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
+import { forceVisible } from 'react-lazyload';
 import {
   fireEventTransitionEnd,
   getFakeDate,
@@ -365,6 +366,57 @@ describe('<PostContent />', () => {
         expect(anchorEl).toHaveAttribute('target', '_blank');
         expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
       });
+    });
+  });
+
+  describe('image elements', () => {
+    it('should NOT render image by default', () => {
+      const imgSrc = getFakeUrl();
+      const imgAlt = getFakeSentence();
+      const postData = {
+        ...generatePostData(),
+        content: `![${imgAlt}](${imgSrc})`,
+      };
+
+      renderComponent({ postData });
+
+      const imgEl = screen.queryByAltText(imgAlt);
+
+      expect(imgEl).not.toBeInTheDocument();
+    });
+
+    it('should render image on lazy load', () => {
+      const imgSrc = getFakeUrl();
+      const imgAlt = getFakeSentence();
+      const postData = {
+        ...generatePostData(),
+        content: `![${imgAlt}](${imgSrc})`,
+      };
+
+      renderComponent({ postData });
+
+      forceVisible();
+
+      const imgEl = screen.queryByAltText(imgAlt);
+
+      expect(imgEl?.tagName).toBe('IMG');
+    });
+
+    it('should NOT be a descendant of <p>', () => {
+      const imgSrc = getFakeUrl();
+      const imgAlt = getFakeSentence();
+      const postData = {
+        ...generatePostData(),
+        content: `![${imgAlt}](${imgSrc})`,
+      };
+
+      renderComponent({ postData });
+
+      forceVisible();
+
+      const imgEl = screen.queryByAltText(imgAlt);
+
+      expect(imgEl?.closest('p')).toBeNull();
     });
   });
 });
