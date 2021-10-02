@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
-import Date from './date';
+import DateText from './dateText';
 import ButtonArrowLink from './buttonArrowLink';
 import { Post, Route } from '../lib/types';
 
@@ -40,7 +40,7 @@ function PostItem({
         >
           <article className="flex flex-col w-full">
             <div className="flex justify-between items-center">
-              <Date
+              <DateText
                 dateString={post.date}
                 className={cn('text-xs', 'md:text-sm')}
               />

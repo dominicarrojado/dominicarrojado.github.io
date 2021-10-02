@@ -12,7 +12,7 @@ import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
 import Section from './section';
-import Date from './date';
+import DateText from './dateText';
 import TextArrowLink from './textArrowLink';
 import Content from './content';
 import AnchorLink from './anchorLink';
@@ -96,7 +96,7 @@ function PostHeader({ date, category }: { date: string; category: string }) {
           'xl:text-lg'
         )}
       >
-        Last Updated: <Date dateString={date} />
+        Last Updated: <DateText dateString={date} />
       </div>
       <div
         className={cn(
