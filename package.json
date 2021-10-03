@@ -11,7 +11,6 @@
     "export": "next export",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
-    "predeploy": "yarn build",
     "deploy": "gh-pages -d out"
   },
   "dependencies": {
