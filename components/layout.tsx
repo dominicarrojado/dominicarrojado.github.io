@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import PreLoadTags from './preLoadTags';
 import Header from './header';
 import Footer from './footer';
@@ -9,10 +10,14 @@ function Layout({ route, children }: { route: Route; children: ReactNode }) {
   return (
     <>
       <Head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <PreLoadTags />
+      </Head>
+
+      {/* Google Tag Manager */}
+      <Script
+        id="gtm"
+        dangerouslySetInnerHTML={{
+          __html: `
               if (window.location.hostname !== 'localhost') {
                 (function (w, d, s, l, i) {
                   w[l] = w[l] || [];
@@ -26,14 +31,9 @@ function Layout({ route, children }: { route: Route; children: ReactNode }) {
                 })(window, document, 'script', 'dataLayer', 'GTM-TSMLTPT');
               }
             `,
-          }}
-        />
-        {/* End Google Tag Manager */}
+        }}
+      />
 
-        <PreLoadTags />
-      </Head>
-
-      {/* Google Tag Manager */}
       <noscript
         dangerouslySetInnerHTML={{
           __html: `
