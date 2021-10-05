@@ -287,7 +287,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'Play Game',
-        url: 'https://hashtag-interactive-christmas.meteorapp.com/',
+        url: '/hashtag-interactive-christmas-game/',
       },
     ],
     imageUrl:
