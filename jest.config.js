@@ -10,5 +10,6 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>/lib/types.ts',
     '<rootDir>/lib/test-helpers.ts',
+    '<rootDir>/pages/_document.page.tsx',
   ],
 };
