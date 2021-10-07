@@ -376,7 +376,7 @@ export const BEST_PROJECTS = PROJECTS.filter(({ isBest }) => isBest);
 export const SOCIAL_LINKS: Array<Social> = [
   {
     name: SocialName.DONATE,
-    title: 'Show your support and donate!',
+    title: 'Buy me a protein shake!',
     url: ExternalUrl.PERSONAL_PAYPAL,
     icon: SvgDonate,
     shouldCopyOnClick: false,
