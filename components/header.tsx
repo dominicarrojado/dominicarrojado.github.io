@@ -176,7 +176,6 @@ function ThemeButton({
       )}
       onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}
-      tabIndex={2}
     >
       <SwitchTransition>
         <Transition key={text} nodeRef={containerRef} timeout={100}>
@@ -280,7 +279,6 @@ function MenuButton({
       )}
       onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}
-      tabIndex={1}
     >
       {stacks.map((stack) => {
         const isTop = stack === 0;

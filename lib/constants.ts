@@ -2,6 +2,7 @@ import SvgDonate from '../components/svgDonate';
 import SvgLinkedIn from '../components/svgLinkedIn';
 import SvgGitHub from '../components/svgGitHub';
 import SvgEnvelope from '../components/svgEnvelope';
+import SvgYouTube from '../components/svgYouTube';
 import {
   ExternalUrl,
   Project,
@@ -11,7 +12,6 @@ import {
   SocialName,
   Testimonial,
 } from './types';
-import SvgYouTube from '../components/svgYouTube';
 
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_AUTHOR = 'Dominic Arrojado';

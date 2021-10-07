@@ -180,7 +180,6 @@ function SocialItems() {
               )}
               onMouseLeave={() => socialOnMouseLeave(social)}
               onClick={(e) => socialOnClick(e, social)}
-              tabIndex={idx + 3}
               isExternal
             >
               {social.icon({

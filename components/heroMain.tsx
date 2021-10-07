@@ -245,7 +245,6 @@ function ScrollDownButton() {
         className="group relative inline-flex flex-col items-center pb-2"
         onMouseLeave={btnOnMouseLeave}
         onClick={btnOnClick}
-        tabIndex={2}
       >
         <div
           className={cn(
