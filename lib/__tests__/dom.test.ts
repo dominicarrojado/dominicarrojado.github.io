@@ -1,24 +1,29 @@
+import { getFakeNumber, setReadOnlyProperty } from '../test-helpers';
 import { copyTextToClipboard, getTouchEventData } from '../dom';
-import { getFakeNumber } from '../test-helpers';
 
 describe('dom utilities', () => {
   describe('copyTextToClipboard()', () => {
-    const execCommandOrig = document.execCommand;
+    const clipboardOrig = navigator.clipboard;
+
+    beforeEach(() => {
+      setReadOnlyProperty(navigator, 'clipboard', {});
+    });
 
     afterEach(() => {
-      document.execCommand = execCommandOrig;
+      setReadOnlyProperty(navigator, 'clipboard', clipboardOrig);
     });
 
     it('should copy text to clipboard', () => {
-      const execCommandMock = jest.fn();
+      const writeTextMock = jest.fn();
 
-      document.execCommand = execCommandMock;
+      navigator.clipboard.writeText = writeTextMock;
 
-      const res = copyTextToClipboard('Hello World');
+      const text = 'Hello World';
+      const res = copyTextToClipboard(text);
 
       expect(res).toBe(true);
-      expect(execCommandMock).toBeCalledTimes(1);
-      expect(execCommandMock).toBeCalledWith('copy');
+      expect(writeTextMock).toBeCalledTimes(1);
+      expect(writeTextMock).toBeCalledWith(text);
     });
 
     it('should handle unexpected error', () => {
@@ -29,7 +34,7 @@ describe('dom utilities', () => {
 
       const unexpectedError = 'unexpected error';
 
-      document.execCommand = jest.fn(() => {
+      navigator.clipboard.writeText = jest.fn(() => {
         throw unexpectedError;
       });
 

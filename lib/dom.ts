@@ -5,6 +5,7 @@ export function copyTextToClipboard(text: string) {
   const input = document.createElement('input');
 
   input.value = text;
+
   document.body.appendChild(input);
 
   // select the text field
@@ -15,7 +16,7 @@ export function copyTextToClipboard(text: string) {
   let copied;
 
   try {
-    document.execCommand('copy');
+    navigator.clipboard.writeText(text);
     copied = true;
   } catch (err) {
     console.error('Error on copy text to clipboard:', err);
