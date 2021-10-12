@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postbuild": "next-sitemap",
     "export": "next export",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -47,6 +48,7 @@
     "faker": "^5.5.3",
     "gh-pages": "^3.2.3",
     "jest": "^27.0.6",
+    "next-sitemap": "^1.6.179",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.6",
     "typescript": "4.3.5"
