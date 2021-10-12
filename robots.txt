@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://dominicarrojado.com
+
+# Sitemaps
+Sitemap: https://dominicarrojado.com/sitemap.xml
