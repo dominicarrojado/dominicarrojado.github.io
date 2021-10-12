@@ -25,7 +25,7 @@ function SeoTags({
   imageHeight?: number;
 }) {
   const isIndex = path === Route.HOME;
-  const metaUrl = isIndex ? MAIN_URL : `${MAIN_URL}${path}/`;
+  const metaUrl = `${MAIN_URL}${path}${!isIndex ? '/' : ''}`;
   const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
   const fullImgUrl = `${MAIN_URL}${imageUrl}`;
 

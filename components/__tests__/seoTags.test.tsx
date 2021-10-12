@@ -95,9 +95,10 @@ describe('<SeoTags />', () => {
     it('should render url tags', () => {
       const linkCanonical = document.querySelector('link[rel="canonical"]');
       const metaOgUrl = document.querySelector('meta[property="og:url"]');
+      const metaUrl = `${MAIN_URL}${path}`;
 
-      expect(linkCanonical).toHaveAttribute('href', MAIN_URL);
-      expect(metaOgUrl).toHaveAttribute('content', MAIN_URL);
+      expect(linkCanonical).toHaveAttribute('href', metaUrl);
+      expect(metaOgUrl).toHaveAttribute('content', metaUrl);
     });
 
     it('should render title tags', () => {
