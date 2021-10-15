@@ -26,6 +26,7 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
           <PostItem
             key={idx}
             post={post}
+            headingLevel={3}
             anchorClassName="bg-white dark:bg-gray-650"
           />
         ))}

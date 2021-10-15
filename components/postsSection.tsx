@@ -22,22 +22,26 @@ function PostsSection({ posts }: { posts: Array<Post> }) {
       >
         {posts.map((post, idx) => {
           const isOlder = idx >= POSTS_DISPLAY_LATEST_MAX;
-          const shouldDisplay = isWindowLoaded && (shouldShowAll || !isOlder);
+          const shouldDisplayOlder = shouldShowAll || !isOlder;
+          const shouldDisplay = isWindowLoaded && shouldDisplayOlder;
 
           return (
             <PostItem
               key={idx}
               post={post}
+              headingLevel={2}
               className={cn(
                 'transform transition-transform-opacity duration-700',
                 {
                   'opacity-0 translate-y-10': !shouldDisplay,
+                  'h-0 pointer-events-none': !shouldDisplayOlder,
                 }
               )}
               style={{
                 transitionDelay: !isOlder
                   ? `${idx * 150 + 1500}ms`
                   : `${(idx - POSTS_DISPLAY_LATEST_MAX) * 150}ms`,
+                margin: !shouldDisplayOlder ? 0 : undefined,
               }}
               anchorClassName="bg-gray-100 dark:bg-gray-750"
             />

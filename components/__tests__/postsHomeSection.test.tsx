@@ -65,7 +65,7 @@ describe('<PostsHomeSection />', () => {
     latestPosts.forEach((post, idx) => {
       expect(postItemSpy).toHaveBeenNthCalledWith(
         idx + 1,
-        expect.objectContaining({ post }),
+        expect.objectContaining({ post, headingLevel: 3 }),
         {}
       );
     });

@@ -22,7 +22,10 @@ describe('<PostItem />', () => {
     excerpt: getFakeSentences(),
     videoUrl: getFakeUrl(),
   } as Post;
+  const getRandomHeadingLevel = () =>
+    getFakeNumber({ min: 2, max: 3 }) as 2 | 3;
   const renderComponent = (props: {
+    headingLevel: 2 | 3;
     className?: string;
     style?: CSSProperties;
     anchorClassName?: string;
@@ -32,7 +35,7 @@ describe('<PostItem />', () => {
 
   describe('content', () => {
     beforeEach(() => {
-      renderComponent({});
+      renderComponent({ headingLevel: getRandomHeadingLevel() });
     });
 
     it('should have expected url', () => {
@@ -62,7 +65,7 @@ describe('<PostItem />', () => {
     it('should render the title', () => {
       const titleEl = screen.queryByText(post.title);
 
-      expect(titleEl?.tagName).toBe('H3');
+      expect(titleEl).toBeInTheDocument();
     });
 
     it('should render the excerpt', () => {
@@ -79,10 +82,28 @@ describe('<PostItem />', () => {
   });
 
   describe('other props', () => {
+    describe('headingLevel prop', () => {
+      it('should have expected heading tag for level 2', () => {
+        renderComponent({ headingLevel: 2 });
+
+        const titleEl = screen.queryByText(post.title);
+
+        expect(titleEl?.tagName).toBe('H2');
+      });
+
+      it('should have expected heading tag for level 3', () => {
+        renderComponent({ headingLevel: 3 });
+
+        const titleEl = screen.queryByText(post.title);
+
+        expect(titleEl?.tagName).toBe('H3');
+      });
+    });
+
     it('should accept className prop', () => {
       const className = getFakeWord();
 
-      renderComponent({ className });
+      renderComponent({ className, headingLevel: getRandomHeadingLevel() });
 
       const titleEl = screen.queryByText(post.title);
       const listEl = titleEl?.closest('li') as HTMLLIElement;
@@ -96,7 +117,7 @@ describe('<PostItem />', () => {
         height: `${getFakeNumber()}px`,
       };
 
-      renderComponent({ style });
+      renderComponent({ style, headingLevel: getRandomHeadingLevel() });
 
       const titleEl = screen.queryByText(post.title);
       const listEl = titleEl?.closest('li') as HTMLLIElement;
@@ -107,7 +128,10 @@ describe('<PostItem />', () => {
     it('should accept anchorClassName prop', () => {
       const anchorClassName = getFakeWord();
 
-      renderComponent({ anchorClassName });
+      renderComponent({
+        anchorClassName,
+        headingLevel: getRandomHeadingLevel(),
+      });
 
       const titleEl = screen.queryByText(post.title);
       const anchorEl = titleEl?.closest('a') as HTMLAnchorElement;

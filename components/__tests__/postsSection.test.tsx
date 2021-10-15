@@ -40,6 +40,7 @@ describe('<PostsSection />', () => {
           idx + 1,
           expect.objectContaining({
             post,
+            headingLevel: 2,
           }),
           {}
         );
@@ -104,6 +105,7 @@ describe('<PostsSection />', () => {
           idx + 1,
           expect.objectContaining({
             post,
+            headingLevel: 2,
           }),
           {}
         );
@@ -137,9 +139,12 @@ describe('<PostsSection />', () => {
 
       postItemEls.forEach((postItemEl, idx) => {
         if (idx < POSTS_DISPLAY_LATEST_MAX) {
-          expect(postItemEl).not.toHaveClass('opacity-0');
+          expect(postItemEl).not.toHaveClass(
+            'opacity-0 h-0 pointer-events-none'
+          );
         } else {
-          expect(postItemEl).toHaveClass('opacity-0');
+          expect(postItemEl).toHaveClass('opacity-0 h-0 pointer-events-none');
+          expect(postItemEl).toHaveStyle({ margin: '0px' });
         }
       });
     });
@@ -163,7 +168,7 @@ describe('<PostsSection />', () => {
       const postItemEls = postsListEl.childNodes;
 
       postItemEls.forEach((postItemEl) => {
-        expect(postItemEl).not.toHaveClass('opacity-0');
+        expect(postItemEl).not.toHaveClass('opacity-0 h-0 pointer-events-none');
       });
     });
   });

@@ -7,15 +7,24 @@ import { Post, Route } from '../lib/types';
 
 function PostItem({
   post,
+  headingLevel,
   className,
   style,
   anchorClassName,
 }: {
   post: Post;
+  headingLevel: 2 | 3;
   className?: string;
   style?: CSSProperties;
   anchorClassName?: string;
 }) {
+  const titleClassName = cn(
+    'mt-2 font-bold text-lg',
+    'sm:text-xl',
+    'md:text-2xl',
+    'xl:text-3xl'
+  );
+
   return (
     <li
       className={cn(
@@ -55,16 +64,11 @@ function PostItem({
                 {post.category}
               </div>
             </div>
-            <h3
-              className={cn(
-                'mt-2 font-bold text-lg',
-                'sm:text-xl',
-                'md:text-2xl',
-                'xl:text-3xl'
-              )}
-            >
-              {post.title}
-            </h3>
+            {headingLevel === 2 ? (
+              <h2 className={titleClassName}>{post.title}</h2>
+            ) : (
+              <h3 className={titleClassName}>{post.title}</h3>
+            )}
             <p className="mt-4">{post.excerpt}</p>
             <div className="mt-6">
               <ButtonArrowLink>Read More</ButtonArrowLink>
