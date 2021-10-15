@@ -24,7 +24,7 @@ describe('<AboutHomeSection />', () => {
   });
 
   it('should have expected anchors', () => {
-    const footerAnchorEl = screen.queryByText('Read More');
+    const footerAnchorEl = screen.queryByText('Read My Story');
     const pgfAnchorEl = screen.queryByText('PropertyGuru Finance');
     const youtubeAnchorEl = screen.queryByText('videos');
     const externalLinkEls = [pgfAnchorEl, youtubeAnchorEl];

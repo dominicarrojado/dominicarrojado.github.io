@@ -117,7 +117,8 @@ function Logo() {
             ['opacity-0 -translate-y-4']: !shouldDisplay,
           }
         )}
-        data-testid="logo"
+        role="img"
+        aria-label="Dominic Arrojado logo"
       />
       <LogoPart shouldDisplay={shouldDisplay} />
     </div>

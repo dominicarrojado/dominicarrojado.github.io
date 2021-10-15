@@ -33,7 +33,7 @@ function AboutHomeSection() {
         </SectionContent>
         <div className="mt-12 text-center">
           <Link href={Route.ABOUT} passHref>
-            <TextArrowLink>Read More</TextArrowLink>
+            <TextArrowLink>Read My Story</TextArrowLink>
           </Link>
         </div>
       </div>

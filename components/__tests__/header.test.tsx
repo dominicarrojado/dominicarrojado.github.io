@@ -154,7 +154,7 @@ describe('<Header />', () => {
       });
 
       it('should NOT display logo by default', () => {
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).toHaveClass('opacity-0');
       });
@@ -164,7 +164,7 @@ describe('<Header />', () => {
           Window.emit('load');
         });
 
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).toHaveClass('opacity-0');
       });
@@ -177,13 +177,13 @@ describe('<Header />', () => {
           Window.emit('scroll');
         });
 
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).not.toHaveClass('opacity-0');
       });
 
       it('should NOT have animation delay by default', () => {
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).not.toHaveClass('delay-700');
       });
@@ -205,7 +205,7 @@ describe('<Header />', () => {
       });
 
       it('should NOT display logo by default', () => {
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).toHaveClass('opacity-0');
       });
@@ -215,19 +215,21 @@ describe('<Header />', () => {
           Window.emit('load');
         });
 
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).not.toHaveClass('opacity-0');
       });
 
       it('should have animation delay by default', () => {
-        const logoEl = screen.queryByTestId('logo');
+        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).toHaveClass('delay-700');
       });
 
       it('should NOT have animation delay by default on transition end of opacity', () => {
-        const logoEl = screen.queryByTestId('logo') as HTMLAnchorElement;
+        const logoEl = screen.queryByLabelText(
+          'Dominic Arrojado logo'
+        ) as HTMLAnchorElement;
 
         fireEventTransitionEnd(logoEl, 'opacity');
 
@@ -235,7 +237,9 @@ describe('<Header />', () => {
       });
 
       it('should have animation delay on transition end of other prop name', () => {
-        const logoEl = screen.queryByTestId('logo') as HTMLAnchorElement;
+        const logoEl = screen.queryByLabelText(
+          'Dominic Arrojado logo'
+        ) as HTMLAnchorElement;
 
         fireEventTransitionEnd(logoEl, getFakeWord());
 

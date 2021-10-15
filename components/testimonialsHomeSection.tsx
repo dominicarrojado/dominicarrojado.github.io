@@ -204,6 +204,7 @@ export default function TestimonialsHomeSection() {
                     : 'bg-gray-200 dark:bg-gray-500'
                 }
                 onClick={() => indicatorOnClick(idx)}
+                aria-label={`Slide ${idx + 1}`}
               />
             ))}
           </div>

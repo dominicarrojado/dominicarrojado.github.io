@@ -47,7 +47,7 @@ describe('<HeroMain />', () => {
     });
 
     it('should hide logo', () => {
-      const logoEl = screen.queryByTestId('logo');
+      const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
       const logoPartEls = screen.queryAllByTestId('logo-part');
 
       expect(logoEl).toHaveClass('opacity-0');
@@ -103,7 +103,7 @@ describe('<HeroMain />', () => {
     });
 
     it('should display logo', () => {
-      const logoEl = screen.queryByTestId('logo');
+      const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
       const logoPartEls = screen.queryAllByTestId('logo-part');
 
       expect(logoEl).not.toHaveClass('opacity-0');

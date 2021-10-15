@@ -154,12 +154,10 @@ describe('<TestimonialsHomeSection />', () => {
       listWidth = containerWidth * testimonialsLen;
       listItemWidth = containerWidth;
 
-      jest
-        .spyOn(customHooks, 'useWindowSize')
-        .mockReturnValue({
-          windowWidth,
-          windowHeight: getFakeNumber({ min: 1 }),
-        });
+      jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
+        windowWidth,
+        windowHeight: getFakeNumber({ min: 1 }),
+      });
 
       setReadOnlyProperty(window, 'innerWidth', windowWidth);
 
@@ -329,6 +327,19 @@ describe('<TestimonialsHomeSection />', () => {
       fireEvent.touchEnd(listEl);
 
       expect(trackEventSpy).not.toBeCalled();
+    });
+
+    it('should display indicators', () => {
+      const indicatorsEl = screen.queryByTestId('indicators');
+      const indicatorsEls =
+        indicatorsEl?.childNodes as NodeListOf<HTMLButtonElement>;
+
+      expect(indicatorsEls).toHaveLength(testimonialsLen);
+
+      indicatorsEls.forEach((indicatorEl, idx) => {
+        expect(indicatorEl.tagName).toBe('BUTTON');
+        expect(indicatorEl).toHaveAttribute('aria-label', `Slide ${idx + 1}`);
+      });
     });
 
     it('should swipe on indicator click', () => {

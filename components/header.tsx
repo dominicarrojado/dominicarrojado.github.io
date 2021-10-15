@@ -97,7 +97,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
         )}
         onClick={closeMenu}
         onTransitionEnd={onTransitionEnd}
-        data-testid="logo"
+        aria-label="Dominic Arrojado logo"
       >
         <SvgLogo
           className={cn(
