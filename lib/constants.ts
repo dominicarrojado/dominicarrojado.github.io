@@ -258,27 +258,12 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://hashtag-interactive-tmv.meteorapp.com/',
+        url: '/hashtag-interactive-valentines-day-card-app/',
       },
     ],
     imageUrl:
       '/images/projects/hashtag-interactive-to-my-valentine-web-app.png',
     gifUrl: '/images/projects/hashtag-interactive-to-my-valentine-web-app.gif',
-  },
-  {
-    title: 'CNY: Fortune Teller',
-    description:
-      "Quirky lil' 2017 horoscope app to see what the Year of the Rooster has in store for you.",
-    links: [
-      {
-        title: 'View Web App',
-        url: 'https://hashtag-interactive-cny.meteorapp.com/',
-      },
-    ],
-    imageUrl:
-      '/images/projects/hashtag-interactive-cny-fortune-teller-web-app.png',
-    gifUrl:
-      '/images/projects/hashtag-interactive-cny-fortune-teller-web-app.gif',
   },
   {
     title: 'Holly Jolly Memory Game',
