@@ -1,5 +1,3 @@
-import { GoogleAnalyticsEvents, SocialName } from '../types';
-import { trackEvent } from '../google-analytics';
 import {
   getFakeDomainWord,
   getFakeSentence,
@@ -7,6 +5,8 @@ import {
   getFakeWord,
   setReadOnlyProperty,
 } from '../test-helpers';
+import { GoogleAnalyticsEvents, SocialName } from '../types';
+import { trackEvent } from '../google-analytics';
 
 describe('google-analytics utilities', () => {
   describe('trackEvent()', () => {
