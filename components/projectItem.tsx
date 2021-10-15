@@ -22,10 +22,12 @@ export default function ProjectItem({
   project,
   className,
   style,
+  headingLevel,
 }: {
   project: Project;
   className?: string;
   style?: CSSProperties;
+  headingLevel: 2 | 3;
 }) {
   return (
     <li
@@ -44,6 +46,7 @@ export default function ProjectItem({
         title={project.title}
       />
       <Info
+        headingLevel={headingLevel}
         title={project.title}
         description={project.description}
         links={project.links}
@@ -290,16 +293,25 @@ function GifLoader({
 }
 
 function Info({
+  headingLevel,
   title,
   description,
   links,
   isBest,
 }: {
+  headingLevel: 2 | 3;
   title: string;
   description: string;
   links: Array<ProjectLink>;
   isBest?: boolean;
 }) {
+  const titleClassName = cn(
+    'inline-flex items-center font-bold text-lg',
+    'sm:text-xl',
+    'md:text-2xl',
+    'xl:text-3xl'
+  );
+
   return (
     <div
       className={cn(
@@ -309,16 +321,11 @@ function Info({
         'xl:px-14'
       )}
     >
-      <h3
-        className={cn(
-          'inline-flex items-center font-bold text-lg',
-          'sm:text-xl',
-          'md:text-2xl',
-          'xl:text-3xl'
-        )}
-      >
-        {title}
-      </h3>
+      {headingLevel === 2 ? (
+        <h2 className={titleClassName}>{title}</h2>
+      ) : (
+        <h3 className={titleClassName}>{title}</h3>
+      )}
       {isBest && <Highlight />}
       <p className={cn('mt-1', 'md:mt-4')}>{description}</p>
       <div className={cn('mt-6', 'md:mt-8')}>

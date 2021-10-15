@@ -25,6 +25,7 @@ describe('<ProjectsSection />', () => {
         idx + 1,
         expect.objectContaining({
           project,
+          headingLevel: 2,
         }),
         {}
       );

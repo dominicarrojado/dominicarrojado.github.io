@@ -18,7 +18,7 @@ function ProjectsHomeSection() {
         data-testid="projects-list"
       >
         {BEST_PROJECTS.map((project, idx) => (
-          <ProjectItem key={idx} project={project} />
+          <ProjectItem key={idx} project={project} headingLevel={3} />
         ))}
       </ul>
       <div

@@ -14,6 +14,7 @@ function ProjectsSection() {
           <ProjectItem
             key={idx}
             project={project}
+            headingLevel={2}
             className={cn(
               'transform transition-transform-opacity duration-700',
               {

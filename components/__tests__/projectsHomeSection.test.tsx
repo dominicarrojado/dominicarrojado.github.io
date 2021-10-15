@@ -50,7 +50,7 @@ describe('<ProjectsHomeSection />', () => {
       BEST_PROJECTS.forEach((project, idx) => {
         expect(projectItemSpy).toHaveBeenNthCalledWith(
           idx + 1,
-          { project },
+          { project, headingLevel: 3 },
           {}
         );
       });

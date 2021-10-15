@@ -28,11 +28,16 @@ jest.useFakeTimers();
 config.disabled = true; // disable react-transitions-group transitions
 
 describe('<ProjectItem />', () => {
+  const getRandomHeadingLevel = () =>
+    getFakeNumber({ min: 2, max: 3 }) as 2 | 3;
+
   describe('all props defined', () => {
     const project = createProject(true);
 
     beforeEach(() => {
-      render(<ProjectItem project={project} />);
+      render(
+        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
+      );
     });
 
     it('should render the highlight', () => {
@@ -44,7 +49,7 @@ describe('<ProjectItem />', () => {
     it('should render the title', () => {
       const titleEl = screen.queryByText(project.title);
 
-      expect(titleEl?.tagName).toBe('H3');
+      expect(titleEl).toBeInTheDocument();
     });
 
     it('should render the description', () => {
@@ -88,7 +93,9 @@ describe('<ProjectItem />', () => {
     const project = createProject(false);
 
     beforeEach(() => {
-      render(<ProjectItem project={project} />);
+      render(
+        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
+      );
     });
 
     it('should NOT render the highlight', () => {
@@ -100,7 +107,7 @@ describe('<ProjectItem />', () => {
     it('should render the title', () => {
       const titleEl = screen.queryByText(project.title);
 
-      expect(titleEl?.tagName).toBe('H3');
+      expect(titleEl).toBeInTheDocument();
     });
 
     it('should render the description', () => {
@@ -140,13 +147,44 @@ describe('<ProjectItem />', () => {
     });
   });
 
+  describe('<Info />', () => {
+    const project = createProject(getFakeBoolean());
+    const renderComponent = (headingLevel: 2 | 3) => {
+      const component = render(
+        <ProjectItem project={project} headingLevel={headingLevel} />
+      );
+
+      forceVisible();
+
+      return component;
+    };
+
+    it('should have expected heading tag for level 2', () => {
+      renderComponent(2);
+
+      const titleEl = screen.queryByText(project.title);
+
+      expect(titleEl?.tagName).toBe('H2');
+    });
+
+    it('should have expected heading tag for level 3', () => {
+      renderComponent(3);
+
+      const titleEl = screen.queryByText(project.title);
+
+      expect(titleEl?.tagName).toBe('H3');
+    });
+  });
+
   describe('<LinkItem />', () => {
     const project = createProject(getFakeBoolean());
     const projectTitle = project.title;
     const projectLinks = project.links;
 
     beforeEach(() => {
-      render(<ProjectItem project={project} />);
+      render(
+        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
+      );
 
       forceVisible();
     });
@@ -221,7 +259,12 @@ describe('<ProjectItem />', () => {
     const windowPageYOffset = window.pageYOffset;
     const requestAnimationFrameOrig = window.requestAnimationFrame;
     const renderComponent = () => {
-      const component = render(<ProjectItem project={project} />);
+      const component = render(
+        <ProjectItem
+          project={project}
+          headingLevel={getFakeNumber({ min: 2, max: 3 }) as 2 | 3}
+        />
+      );
 
       forceVisible();
 
