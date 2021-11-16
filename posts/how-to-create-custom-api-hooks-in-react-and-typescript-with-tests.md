@@ -12,6 +12,8 @@ One of my favorite features that [React](https://reactjs.org/) introduced is [Re
 
 ## Prerequisites
 
+This is the [link](/react-typescript-api-hooks/) to the web application which we'll accomplish by the end of this post, you can see and play around with it or use it as your reference throughout this tutorial.
+
 Upon writing this post, I assume that you have some web development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [React](https://reactjs.org/).
 
 Fastest way to start a new project with React is using [Create React App](https://create-react-app.dev/). It is an officially supported way to create single-page React applications. It offers a modern build setup with no configuration so you can focus on code, not build tools.
