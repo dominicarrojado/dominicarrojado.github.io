@@ -11,10 +11,10 @@ import { getMoveTo } from '../lib/imports';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgArrowDown from './svgArrowDown';
+import SvgLessThan from './svgLessThan';
 import Spinner from './spinner';
 import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
-import SvgLessThan from './svgLessThan';
 
 export default function HeroMain() {
   const shouldDisplay = useMounted();

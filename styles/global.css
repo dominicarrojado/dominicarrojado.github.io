@@ -88,10 +88,6 @@
     @apply antialiased;
   }
 
-  *:focus {
-    @apply outline-none;
-  }
-
   html,
   body,
   body > div:first-child {

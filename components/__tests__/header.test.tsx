@@ -11,11 +11,12 @@ import {
   getRandomRoute,
   setReadOnlyProperty,
 } from '../../lib/test-helpers';
+import { Route } from '../../lib/types';
+import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
 import * as ga from '../../lib/google-analytics';
 import * as dom from '../../lib/dom';
-import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
-import { Route } from '../../lib/types';
-import Header from '../header';
+import * as Transition from '../transition';
+import Header, { MenuContainer } from '../header';
 
 config.disabled = true; // disable react-transitions-group transitions
 
@@ -589,6 +590,44 @@ describe('<Header />', () => {
       fireEvent.mouseLeave(btnEl);
 
       expect(trackEventSpy).not.toBeCalled();
+    });
+  });
+
+  describe('<MenuContainer />', () => {
+    const renderMenuContainerComponent = (props: {
+      isMenuOpen: boolean;
+      closeMenu: () => void;
+    }) => render(<MenuContainer {...props} />);
+
+    it('should be hidden by default', () => {
+      renderMenuContainerComponent({ isMenuOpen: true, closeMenu: jest.fn() });
+
+      const menuContainerEl = screen.queryByTestId('menu-container');
+
+      expect(menuContainerEl).toHaveClass('hidden');
+    });
+
+    it('should display container on enter', () => {
+      let onEnterFunc = () => {};
+
+      jest
+        .spyOn(Transition, 'default')
+        .mockImplementationOnce(({ children, onEnter }: any) => {
+          onEnterFunc = onEnter;
+          return children('entered');
+        });
+
+      renderMenuContainerComponent({ isMenuOpen: true, closeMenu: jest.fn() });
+
+      act(() => {
+        onEnterFunc();
+      });
+
+      const menuContainerEl = screen.queryByTestId('menu-container');
+
+      expect(menuContainerEl).not.toHaveClass(
+        'w-0 h-0 pointer-events-none hidden'
+      );
     });
   });
 

@@ -1,7 +1,7 @@
 import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
-import { SwitchTransition, Transition } from 'react-transition-group';
+import { SwitchTransition } from 'react-transition-group';
 import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
 import { useDarkModeEnabled, useWindowLoaded } from '../lib/custom-hooks';
@@ -12,6 +12,7 @@ import SvgSun from './svgSun';
 import SvgMoon from './svgMoon';
 import Tooltip from './tooltip';
 import AnchorLink from './anchorLink';
+import Transition from './transition';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../lib/constants';
 
@@ -37,19 +38,7 @@ export default function Header({ route }: { route: Route }) {
         </div>
       </header>
       <MenuBackground isMenuOpen={isMenuOpen} />
-      <div
-        className={cn('fixed inset-0 z-40 overflow-y-auto overflow-x-hidden', {
-          'w-0 h-0 pointer-events-none': !isMenuOpen,
-        })}
-        data-testid="menu-container"
-      >
-        <div className="flex justify-center items-center min-h-full">
-          <div className={cn('py-10 pl-8', 'sm:pl-0')}>
-            <MenuItems isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
-            <SocialItems isMenuOpen={isMenuOpen} />
-          </div>
-        </div>
-      </div>
+      <MenuContainer isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
     </>
   );
 }
@@ -356,6 +345,52 @@ function MenuButton({
         </Transition>
       </SwitchTransition>
     </button>
+  );
+}
+
+export function MenuContainer({
+  isMenuOpen,
+  closeMenu,
+}: {
+  isMenuOpen: boolean;
+  closeMenu: () => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const onEnter = () => setIsDisplayed(true);
+
+  return (
+    <Transition
+      in={isMenuOpen}
+      nodeRef={containerRef}
+      timeout={100}
+      onEnter={onEnter}
+    >
+      {(state) => {
+        const shouldDisplay = state === 'entered';
+
+        return (
+          <div
+            ref={containerRef}
+            className={cn(
+              'fixed inset-0 z-40 overflow-y-auto overflow-x-hidden',
+              {
+                'w-0 h-0 pointer-events-none': !shouldDisplay,
+                hidden: !isDisplayed,
+              }
+            )}
+            data-testid="menu-container"
+          >
+            <div className="flex justify-center items-center min-h-full">
+              <div className={cn('py-10 pl-8', 'sm:pl-0')}>
+                <MenuItems isMenuOpen={shouldDisplay} closeMenu={closeMenu} />
+                <SocialItems isMenuOpen={shouldDisplay} />
+              </div>
+            </div>
+          </div>
+        );
+      }}
+    </Transition>
   );
 }
 

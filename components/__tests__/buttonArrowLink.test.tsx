@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence } from '../../lib/test-helpers';
+import { getFakeBoolean, getFakeSentence } from '../../lib/test-helpers';
 import ButtonArrowLink from '../buttonArrowLink';
 
 describe('<ButtonArrowLink />', () => {
@@ -14,17 +14,21 @@ describe('<ButtonArrowLink />', () => {
     render(<ButtonArrowLink withIcon={withIcon}>{children}</ButtonArrowLink>);
   };
 
+  it('should render children', () => {
+    const text = getFakeSentence();
+
+    renderComponent({ children: text, withIcon: getFakeBoolean() });
+
+    const btnEl = screen.queryByText(text);
+
+    expect(btnEl?.tagName).toBe('BUTTON');
+  });
+
   describe('withIcon prop is undefined', () => {
     const text = getFakeSentence();
 
     beforeEach(() => {
       renderComponent({ children: text });
-    });
-
-    it('should render children', () => {
-      const btnEl = screen.queryByText(text);
-
-      expect(btnEl?.tagName).toBe('BUTTON');
     });
 
     it('should render the icon by default', () => {
@@ -40,12 +44,6 @@ describe('<ButtonArrowLink />', () => {
 
     beforeEach(() => {
       renderComponent({ children: text, withIcon: false });
-    });
-
-    it('should render children', () => {
-      const btnEl = screen.queryByText(text);
-
-      expect(btnEl?.tagName).toBe('BUTTON');
     });
 
     it('should NOT render the icon', () => {
