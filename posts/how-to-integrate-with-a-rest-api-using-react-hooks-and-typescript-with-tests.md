@@ -1,7 +1,7 @@
 ---
-title: 'How to create custom API hooks in React and TypeScript with tests'
+title: 'How to integrate with a REST API using React Hooks and TypeScript with tests'
 date: '2021-11-16'
-excerpt: 'Learn how to integrate with your REST API in a reactive and reusable way'
+excerpt: 'Learn how to integrate with a REST API in a reactive and reusable way'
 category: 'technology'
 videoUrl: ''
 ---
@@ -195,7 +195,7 @@ export default App;
 
 Once you saved it, your React application should display something like this:
 
-![Screenshot of unstyled React API hook UI](/images/posts/how-to-create-custom-api-hooks-in-react-and-typescript-with-tests/unstyled.png)
+![Screenshot of unstyled React API hook UI](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/unstyled.png)
 
 Now before we interact we it, let's update the styles to make our application slightly prettier.
 
@@ -250,11 +250,11 @@ body {
 
 Alright, now try clicking the "Get Posts" button. You should briefly see the loading state:
 
-![Screenshot of React API hook UI in loading state](/images/posts/how-to-create-custom-api-hooks-in-react-and-typescript-with-tests/loading.png)
+![Screenshot of React API hook UI in loading state](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/loading.png)
 
 Then eventually the list of posts:
 
-![Screenshot of React API hook UI in success state](/images/posts/how-to-create-custom-api-hooks-in-react-and-typescript-with-tests/success.png)
+![Screenshot of React API hook UI in success state](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/success.png)
 
 Alright, everything is working fine as expected.
 
@@ -275,7 +275,7 @@ If you would like to see the error state. Simple add a `throw` inside the `getPo
 
 When you click the "Get Posts" button again. It will display something like this:
 
-![Screenshot of React API hook UI in error state](/images/posts/how-to-create-custom-api-hooks-in-react-and-typescript-with-tests/error.png)
+![Screenshot of React API hook UI in error state](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/error.png)
 
 Awesome! Remove the `throw` code and we can start writing tests.
 
@@ -594,7 +594,7 @@ And they're you have it!
 
 By now, you should have achieved 100% test coverage and all looking green in your terminal just like this:
 
-![Screenshot of React API hook UI 100% Test Coverage](/images/posts/how-to-create-custom-api-hooks-in-react-and-typescript-with-tests/test-coverage.png)
+![Screenshot of React API hook UI 100% Test Coverage](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/test-coverage.png)
 
 If you're up for a challenge, try creating your own custom API hook with the rest of the APIs by JSONPlaceholder [here](https://jsonplaceholder.typicode.com/guide/) using what you've learned from this post.
 
