@@ -1,6 +1,6 @@
 ---
 title: 'How to integrate with a REST API using React Hooks and TypeScript with tests'
-date: '2021-11-16'
+date: '2021-12-04'
 excerpt: 'Learn how to integrate with a REST API in a reactive and reusable way'
 category: 'technology'
 videoUrl: ''
@@ -146,7 +146,6 @@ import './App.css';
 
 function App() {
   const [posts, fetchState, getPosts] = useGetPosts();
-  const btnOnClick = () => getPosts();
 
   return (
     <div className="container">
@@ -154,37 +153,33 @@ function App() {
       {fetchState === FetchState.DEFAULT && (
         <>
           <p>
-            Hello there, click the button below to get the list of posts from{' '}
-            <a
-              href="https://jsonplaceholder.typicode.com/"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >
-              JSONPlaceholder - Free Fake REST API
-            </a>
-            .
+            Hello there, click the button below to get the list of posts from
+            the API.
           </p>
-          <button onClick={btnOnClick}>Get Posts</button>
+          <button onClick={getPosts}>Get Posts</button>
         </>
       )}
       {fetchState === FetchState.LOADING && <p>Fetching posts...</p>}
       {fetchState === FetchState.ERROR && (
         <>
           <p>Oops! Something went wrong. Please try again.</p>
-          <button onClick={btnOnClick}>Get Posts</button>
+          <button onClick={getPosts}>Get Posts</button>
         </>
       )}
       {fetchState === FetchState.SUCCESS && (
-        <ul className="posts-list">
-          {posts.map((post) => (
-            <li key={post.id} className="post">
-              <h3>
-                {post.id} - {post.title}
-              </h3>
-              <p>{post.body}</p>
-            </li>
-          ))}
-        </ul>
+        <>
+          <p>Here's the list of posts:</p>
+          <ul className="posts-list">
+            {posts.map((post) => (
+              <li key={post.id} className="post">
+                <h3>
+                  {post.id} - {post.title}
+                </h3>
+                <p>{post.body}</p>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
