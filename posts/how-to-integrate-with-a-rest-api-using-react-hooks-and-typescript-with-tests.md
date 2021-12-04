@@ -3,7 +3,7 @@ title: 'How to integrate with a REST API using React Hooks and TypeScript with t
 date: '2021-12-04'
 excerpt: 'Learn how to integrate with a REST API in a reactive and reusable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/LkumZ2Z7bbs'
 ---
 
 ## Introduction
