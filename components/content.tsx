@@ -11,6 +11,7 @@ function Content({ className, children, ...props }: HTMLProps<HTMLElement>) {
         'xl:prose-xl',
         className
       )}
+      data-clarity-region="article"
       data-testid="content"
       {...props}
     >

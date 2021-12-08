@@ -24,4 +24,14 @@ describe('<Content />', () => {
 
     expect(contentEl).toHaveClass(className);
   });
+
+  it('should have expected data attribute', () => {
+    const children = getFakeSentences();
+
+    renderComponent({ children });
+
+    const contentEl = screen.queryByText(children);
+
+    expect(contentEl).toHaveAttribute('data-clarity-region', 'article');
+  });
 });
