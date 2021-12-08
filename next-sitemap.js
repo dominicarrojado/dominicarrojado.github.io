@@ -7,8 +7,6 @@ module.exports = {
     await config.transform(config, '/axa-smart-travel-2-edm/'),
     await config.transform(config, '/axa-mothers-day-edm/'),
     await config.transform(config, '/axa-shield-edm/'),
-    await config.transform(config, '/axa-mothers-day-edm/'),
-    await config.transform(config, '/axa-shield-edm/'),
     await config.transform(config, '/axa-smart-home-edm/'),
     await config.transform(config, '/axa-singtel-edm/'),
     await config.transform(config, '/axa-september-promo-edm/'),
@@ -43,5 +41,10 @@ module.exports = {
 
     // razer apps
     await config.transform(config, '/mouse-accuracy-game/'),
+
+    // blog examples
+    await config.transform(config, '/mjml-sample-edm/'),
+    await config.transform(config, '/react-typescript-accordion/'),
+    await config.transform(config, '/react-typescript-api-hooks/'),
   ],
 };
