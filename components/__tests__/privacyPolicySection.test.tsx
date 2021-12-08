@@ -30,7 +30,10 @@ describe('<PrivacyPolicySection />', () => {
     const googleTagManagerAnchorEl =
       screen.queryAllByText('Google Tag Manager')[1];
     const googleTagManagerPolicyAnchorEl = screen.queryAllByText('here')[3];
-    const cookiesAnchorEl = screen.queryAllByText('here')[4];
+    const microsoftClarityAnchorEl = screen.queryByText('Clarity');
+    const microsoftAnchorEl = screen.queryByText('Microsoft');
+    const microsoftClarityPolicyAnchorEl = screen.queryAllByText('here')[4];
+    const cookiesAnchorEl = screen.queryAllByText('here')[5];
     const externalLinkEls = [
       githubPagesAnchorEl,
       githubAnchorEl,
@@ -122,6 +125,21 @@ describe('<PrivacyPolicySection />', () => {
       'https://support.google.com/tagmanager/answer/9323295'
     );
 
+    expect(microsoftClarityAnchorEl).toHaveAttribute(
+      'href',
+      'https://clarity.microsoft.com/'
+    );
+
+    expect(microsoftAnchorEl).toHaveAttribute(
+      'href',
+      'https://www.microsoft.com/'
+    );
+
+    expect(microsoftClarityPolicyAnchorEl).toHaveAttribute(
+      'href',
+      'https://docs.microsoft.com/en-us/clarity/faq#privacy'
+    );
+
     expect(cookiesAnchorEl).toHaveAttribute(
       'href',
       'https://en.wikipedia.org/wiki/HTTP_cookie'
@@ -130,7 +148,7 @@ describe('<PrivacyPolicySection />', () => {
 
   test('should have expected updated date', () => {
     const dateEl = screen.queryByText(
-      'This document was last updated on August 21, 2021'
+      'This document was last updated on December 9, 2021'
     );
 
     expect(dateEl).toBeInTheDocument();

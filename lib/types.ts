@@ -77,6 +77,9 @@ export enum ExternalUrl {
   COOKIES = 'https://en.wikipedia.org/wiki/HTTP_cookie',
   FONT_AWESOME = 'https://fontawesome.com/',
   FONT_AWESOME_LICENSE = 'https://fontawesome.com/license/free',
+  MICROSOFT = 'https://www.microsoft.com/',
+  MICROSOFT_CLARITY = 'https://clarity.microsoft.com/',
+  MICROSOFT_CLARITY_FAQ = 'https://docs.microsoft.com/en-us/clarity/faq#privacy',
 }
 
 export type Nullish<T> = T | null | undefined;

@@ -125,6 +125,24 @@ function PrivacyPolicySection() {
           </AnchorLink>
           .
         </p>
+        <h2>Microsoft Clarity</h2>
+        <p>
+          The Website currently uses{' '}
+          <AnchorLink href={ExternalUrl.MICROSOFT_CLARITY} isExternal>
+            Clarity
+          </AnchorLink>
+          , a user behavior analytics tool by{' '}
+          <AnchorLink href={ExternalUrl.MICROSOFT} isExternal>
+            Microsoft
+          </AnchorLink>
+          . We use this tool to help us understand how users are interacting
+          with the Website through session replays and heatmaps. For more
+          information about how it collects and processes data, please refer{' '}
+          <AnchorLink href={ExternalUrl.MICROSOFT_CLARITY_FAQ} isExternal>
+            here
+          </AnchorLink>
+          .
+        </p>
         <h2>Use and processing of collected information</h2>
         <p>
           In order to make the Website and Services available to you, or to meet
@@ -391,7 +409,7 @@ function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on August 21, 2021
+          This document was last updated on December 9, 2021
         </div>
       </PageContent>
     </Section>
