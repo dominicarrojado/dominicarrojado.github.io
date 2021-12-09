@@ -20,14 +20,14 @@ function PrivacyPolicySection() {
           website ("Website" or "Service") and any of its related products and
           services (collectively, "Services") is collected, protected and used.
           It also describes the choices available to you regarding our use of
-          your Personal Information and how you can access and update this
-          information. This Policy is a legally binding agreement between you
-          ("User", "you" or "your") and this Website operator ("Operator", "we",
-          "us" or "our"). By accessing and using the Website and Services, you
-          acknowledge that you have read, understood, and agree to be bound by
-          the terms of this Policy. This Policy does not apply to the practices
-          of companies that we do not own or control, or to individuals that we
-          do not employ or manage.
+          your Personal Information (for example, your name and e-mail address)
+          and how you can access and update this information. This Policy is a
+          legally binding agreement between you ("User", "you" or "your") and
+          this Website operator ("Operator", "we", "us" or "our"). By accessing
+          and using the Website and Services, you acknowledge that you have
+          read, understood, and agree to be bound by the terms of this Policy.
+          This Policy does not apply to the practices of companies that we do
+          not own or control, or to individuals that we do not employ or manage.
         </p>
         <h2>GitHub Pages</h2>
         <p>
@@ -75,19 +75,19 @@ function PrivacyPolicySection() {
           </Link>{' '}
           hosted on this Website are solely for portfolio or demo purposes only.
           If, however, you wish to use some of the features of a project, you
-          may be asked to provide certain Personal Information (for example,
-          your name and e-mail address). We receive and store any information
-          you knowingly provide to us when you fill any online forms on the
-          Website. Some of the information we collect is directly from you via
-          the Website and Services. You can choose not to provide us with your
-          Personal Information, but then you may not be able to take advantage
-          of some of the features of a project. Users who are uncertain about
-          what information is mandatory are welcome to contact us. Projects that
-          are not hosted in this Website are not owned or controlled by us,
-          please be aware that we are not responsible for the privacy practices
-          of these projects. We encourage you to be aware when you leave the
-          Website and Services and to read the privacy statements of each and
-          every project that may collect Personal Information.
+          may be asked to provide certain Personal Information. We receive and
+          store any information you knowingly provide to us when you fill any
+          online forms on the Website. Some of the information we collect is
+          directly from you via the Website and Services. You can choose not to
+          provide us with your Personal Information, but then you may not be
+          able to take advantage of some of the features of a project. Users who
+          are uncertain about what information is mandatory are welcome to
+          contact us. Projects that are not hosted in this Website are not owned
+          or controlled by us, please be aware that we are not responsible for
+          the privacy practices of these projects. We encourage you to be aware
+          when you leave the Website and Services and to read the privacy
+          statements of each and every project that may collect Personal
+          Information.
         </p>
         <h2>Google Analytics</h2>
         <p>
@@ -136,7 +136,9 @@ function PrivacyPolicySection() {
             Microsoft
           </AnchorLink>
           . We use this tool to help us understand how users are interacting
-          with the Website through session replays and heatmaps. For more
+          with the Website through session replays and heatmaps. Please note
+          that Personal Information through session replays are masked to
+          prevent actual texts from being sent to Microsoft's servers. For more
           information about how it collects and processes data, please refer{' '}
           <AnchorLink href={ExternalUrl.MICROSOFT_CLARITY_FAQ} isExternal>
             here
