@@ -8,7 +8,12 @@ import {
   getFakeSentences,
   getRandomRoute,
 } from '../../lib/test-helpers';
-import { MAIN_AUTHOR, MAIN_TITLE, MAIN_URL } from '../../lib/constants';
+import {
+  MAIN_AUTHOR,
+  MAIN_TITLE,
+  MAIN_URL,
+  SITE_NAME,
+} from '../../lib/constants';
 import SeoTags from '../seoTags';
 
 describe('<SeoTags />', () => {
@@ -103,16 +108,12 @@ describe('<SeoTags />', () => {
 
     it('should render title tags', () => {
       const metaOgTitle = document.querySelector('meta[property="og:title"]');
-      const metaSiteName = document.querySelector(
-        'meta[property="og:site_name"]'
-      );
       const metaTwitterTitle = document.querySelector(
         'meta[name="twitter:title"]'
       );
       const titleEl = document.querySelector('title');
 
       expect(metaOgTitle).toHaveAttribute('content', title);
-      expect(metaSiteName).toHaveAttribute('content', title);
       expect(metaTwitterTitle).toHaveAttribute('content', title);
       expect(titleEl).toHaveTextContent(title);
     });
@@ -144,6 +145,14 @@ describe('<SeoTags />', () => {
       expect(metaOgImg).toHaveAttribute('content', fullImgUrl);
       expect(metaOgSecureImg).toHaveAttribute('content', fullImgUrl);
       expect(metaTwitterImg).toHaveAttribute('content', fullImgUrl);
+    });
+
+    it('should render site name tag', () => {
+      const metaSiteName = document.querySelector(
+        'meta[property="og:site_name"]'
+      );
+
+      expect(metaSiteName).toHaveAttribute('content', SITE_NAME);
     });
 
     it('should render image width tags', () => {
@@ -198,9 +207,6 @@ describe('<SeoTags />', () => {
 
     it('should render title tags', () => {
       const metaOgTitle = document.querySelector('meta[property="og:title"]');
-      const metaSiteName = document.querySelector(
-        'meta[property="og:site_name"]'
-      );
       const metaTwitterTitle = document.querySelector(
         'meta[name="twitter:title"]'
       );
@@ -208,7 +214,6 @@ describe('<SeoTags />', () => {
       const expectedTitle = `${title} - ${MAIN_TITLE}`;
 
       expect(metaOgTitle).toHaveAttribute('content', expectedTitle);
-      expect(metaSiteName).toHaveAttribute('content', expectedTitle);
       expect(metaTwitterTitle).toHaveAttribute('content', expectedTitle);
       expect(titleEl).toHaveTextContent(expectedTitle);
     });
@@ -240,6 +245,14 @@ describe('<SeoTags />', () => {
       expect(metaOgImg).toHaveAttribute('content', fullImgUrl);
       expect(metaOgSecureImg).toHaveAttribute('content', fullImgUrl);
       expect(metaTwitterImg).toHaveAttribute('content', fullImgUrl);
+    });
+
+    it('should render site name tag', () => {
+      const metaSiteName = document.querySelector(
+        'meta[property="og:site_name"]'
+      );
+
+      expect(metaSiteName).toHaveAttribute('content', SITE_NAME);
     });
 
     it('should render image width tags', () => {

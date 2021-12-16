@@ -13,6 +13,7 @@ import {
   Testimonial,
 } from './types';
 
+export const SITE_NAME = 'Dominic Arrojado';
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_AUTHOR = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
