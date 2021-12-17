@@ -10,21 +10,23 @@ import {
   SITE_NAME,
 } from '../lib/constants';
 
-function SeoTags({
-  path,
-  title,
-  description,
-  imageUrl = SEO_DEFAULT_IMAGE,
-  imageWidth = SEO_DEFAULT_IMAGE_WIDTH,
-  imageHeight = SEO_DEFAULT_IMAGE_HEIGHT,
-}: {
+export type Props = {
   path: string;
   title: string;
   description: string;
   imageUrl?: string;
   imageWidth?: number;
   imageHeight?: number;
-}) {
+};
+
+export default function SeoTags({
+  path,
+  title,
+  description,
+  imageUrl = SEO_DEFAULT_IMAGE,
+  imageWidth = SEO_DEFAULT_IMAGE_WIDTH,
+  imageHeight = SEO_DEFAULT_IMAGE_HEIGHT,
+}: Props) {
   const isIndex = path === Route.HOME;
   const metaUrl = `${MAIN_URL}${path}${!isIndex ? '/' : ''}`;
   const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
@@ -58,5 +60,3 @@ function SeoTags({
     </Head>
   );
 }
-
-export default SeoTags;

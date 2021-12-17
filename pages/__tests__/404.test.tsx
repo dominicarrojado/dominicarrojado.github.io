@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
 import * as SeoTags from '../../components/seoTags';
 import * as HeroSub from '../../components/heroSub';
-import Page404 from '../404.page';
+import Custom404 from '../404.page';
 
-describe('<Page404 />', () => {
+describe('<Custom404 />', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -16,7 +16,7 @@ describe('<Page404 />', () => {
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
 
-    render(<Page404 />);
+    render(<Custom404 />);
 
     const title = '404 - Page Not Found';
     const shortDesc = "Sorry, we couldn't find what you're looking for.";
