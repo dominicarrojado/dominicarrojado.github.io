@@ -19,7 +19,7 @@ function AdUnit({ className }: Props) {
         crossOrigin="anonymous"
       />
       <ins
-        className="adsbygoogle"
+        className="adsbygoogle block"
         data-ad-client="ca-pub-3632473845121107"
         data-ad-slot="4984498713"
         data-ad-format="auto"
