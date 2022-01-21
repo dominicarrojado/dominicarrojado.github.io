@@ -317,25 +317,27 @@ function PrivacyPolicySection() {
         </p>
         <p>
           We may use cookies to collect, store, and track information for
-          statistical purposes to operate the Website and Services.
-        </p>
-        <p>
-          We also use third-party advertisement. Some of these advertisers may
-          use technology such as cookies and web beacons when they advertise on
-          the Website, which will also send these advertisers (such as Google
-          through the Google AdSense program) information including your IP
-          address, your ISP, the browser you used to visit the Website. This is
-          generally used for geotargeting purposes (for example, showing
-          Singapore real estate ads to someone in Singapore) or showing certain
-          ads based on specific sites visited (such as showing cooking ads to
-          someone who frequently visits cooking sites).
-        </p>
-        <p>
-          You have the ability to accept or decline cookies. Most web browsers
-          automatically accept cookies, but you can usually modify your browser
-          setting to decline cookies if you prefer. You may learn more about
-          cookies and how they work{' '}
+          statistical purposes to operate the Website and Services. You have the
+          ability to accept or decline cookies. Most web browsers automatically
+          accept cookies, but you can usually modify your browser setting to
+          decline cookies if you prefer. You may learn more about cookies and
+          how they work{' '}
           <AnchorLink href={ExternalUrl.COOKIES} isExternal>
+            here
+          </AnchorLink>
+          .
+        </p>
+        <p>
+          We also use third-party advertisement through Google AdSense Program.
+          Google AdSense uses cookies to improve advertising, this is generally
+          used to target advertising based on what's relevant to a user, to
+          improve reporting on campaign performance, and to avoid showing ads
+          the user has already seen. Cookies themselves contain no personally
+          identifiable information. Depending on the publisher's and the user's
+          settings, information associated with cookies used in advertising may
+          be added to the user's Google Account. You can learn more about how
+          Google AdSense uses cookies{' '}
+          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE_COOKIE_USE} isExternal>
             here
           </AnchorLink>
           .

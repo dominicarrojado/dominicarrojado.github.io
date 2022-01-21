@@ -36,6 +36,7 @@ describe('<PrivacyPolicySection />', () => {
     const microsoftAnchorEl = screen.queryByText('Microsoft');
     const microsoftClarityPolicyAnchorEl = screen.queryAllByText('here')[5];
     const cookiesAnchorEl = screen.queryAllByText('here')[6];
+    const googleAdsenseCookieHowAnchorEl = screen.queryAllByText('here')[7];
     const externalLinkEls = [
       githubPagesAnchorEl,
       githubAnchorEl,
@@ -51,6 +52,7 @@ describe('<PrivacyPolicySection />', () => {
       googleTagManagerAnchorEl,
       googleTagManagerPolicyAnchorEl,
       cookiesAnchorEl,
+      googleAdsenseCookieHowAnchorEl,
     ];
 
     internalLinkEls.forEach((internalLinkEl) => {
@@ -157,6 +159,11 @@ describe('<PrivacyPolicySection />', () => {
     expect(cookiesAnchorEl).toHaveAttribute(
       'href',
       'https://en.wikipedia.org/wiki/HTTP_cookie'
+    );
+
+    expect(googleAdsenseCookieHowAnchorEl).toHaveAttribute(
+      'href',
+      'https://support.google.com/adsense/answer/7549925'
     );
   });
 
