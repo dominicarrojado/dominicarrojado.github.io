@@ -1,6 +1,8 @@
 import Script from 'next/script';
 import React, { useEffect } from 'react';
+import cn from 'classnames';
 import { displayAd } from '../lib/google-adsense';
+import styles from './adUnit.module.css';
 
 export type Props = {
   className?: string;
@@ -19,12 +21,12 @@ function AdUnit({ className }: Props) {
         crossOrigin="anonymous"
       />
       <ins
-        className="adsbygoogle block"
+        className={cn('adsbygoogle block', styles.adunit)}
         data-ad-client="ca-pub-3632473845121107"
         data-ad-slot="4984498713"
         data-ad-format="auto"
         data-full-width-responsive="true"
-      ></ins>
+      />
     </div>
   );
 }
