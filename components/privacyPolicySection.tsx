@@ -107,26 +107,6 @@ function PrivacyPolicySection() {
           </AnchorLink>
           .
         </p>
-        <h2>Google AdSense</h2>
-        <p>
-          The Website is currently part of{' '}
-          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE} isExternal>
-            Google AdSense Program
-          </AnchorLink>
-          , a program run by{' '}
-          <AnchorLink href={ExternalUrl.GOOGLE} isExternal>
-            Google
-          </AnchorLink>{' '}
-          through which website publishers in the Google Network of content
-          sites serve text, images, video, or interactive media advertisements
-          that are targeted to the site content and audience. We use it in order
-          to support the Website. For more information about the program
-          policies, please refer{' '}
-          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE_POLICY} isExternal>
-            here
-          </AnchorLink>
-          .
-        </p>
         <h2>Google Tag Manager</h2>
         <p>
           The Website currently uses{' '}
@@ -137,10 +117,9 @@ function PrivacyPolicySection() {
           <AnchorLink href={ExternalUrl.GOOGLE} isExternal>
             Google
           </AnchorLink>
-          . We use it to deploy our Google Analytics, Google AdSense and
-          measurement tag configurations from a web-based user interface. For
-          more information about how it collects and processes data, please
-          refer{' '}
+          . We use it to deploy our Google Analytics and measurement tag
+          configurations from a web-based user interface. For more information
+          about how it collects and processes data, please refer{' '}
           <AnchorLink href={ExternalUrl.GOOGLE_TAG_MANAGER_POLICY} isExternal>
             here
           </AnchorLink>
@@ -317,24 +296,11 @@ function PrivacyPolicySection() {
         </p>
         <p>
           We may use cookies to collect, store, and track information for
-          statistical purposes to operate the Website and Services.
-        </p>
-        <p>
-          We also use third-party advertisement. Some of these advertisers may
-          use technology such as cookies and web beacons when they advertise on
-          the Website, which will also send these advertisers (such as Google
-          through the Google AdSense program) information including your IP
-          address, your ISP, the browser you used to visit the Website. This is
-          generally used for geotargeting purposes (for example, showing
-          Singapore real estate ads to someone in Singapore) or showing certain
-          ads based on specific sites visited (such as showing cooking ads to
-          someone who frequently visits cooking sites).
-        </p>
-        <p>
-          You have the ability to accept or decline cookies. Most web browsers
-          automatically accept cookies, but you can usually modify your browser
-          setting to decline cookies if you prefer. You may learn more about
-          cookies and how they work{' '}
+          statistical purposes to operate the Website and Services. You have the
+          ability to accept or decline cookies. Most web browsers automatically
+          accept cookies, but you can usually modify your browser setting to
+          decline cookies if you prefer. You may learn more about cookies and
+          how they work{' '}
           <AnchorLink href={ExternalUrl.COOKIES} isExternal>
             here
           </AnchorLink>
@@ -445,7 +411,7 @@ function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on January 21, 2022
+          This document was last updated on December 9, 2021
         </div>
       </PageContent>
     </Section>

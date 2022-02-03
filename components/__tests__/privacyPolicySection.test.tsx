@@ -23,19 +23,17 @@ describe('<PrivacyPolicySection />', () => {
     const meteorAnchorEl = screen.queryByText('Meteor');
     const meteorCloudAnchorEl = screen.queryAllByText('Meteor Cloud')[1];
     const meteorCloudPolicyAnchorEl = screen.queryAllByText('here')[1];
-    const googleAnchorEls = screen.queryAllByText('Google');
     const googleAnalyticsAnchorEl =
       screen.queryAllByText('Google Analytics')[1];
+    const googleAnchorEls = screen.queryAllByText('Google');
     const googleAnalyticsPolicyAnchorEl = screen.queryAllByText('here')[2];
-    const googleAdsenseAnchorEl = screen.queryByText('Google AdSense Program');
-    const googleAdsensePolicyAnchorEl = screen.queryAllByText('here')[3];
     const googleTagManagerAnchorEl =
       screen.queryAllByText('Google Tag Manager')[1];
-    const googleTagManagerPolicyAnchorEl = screen.queryAllByText('here')[4];
+    const googleTagManagerPolicyAnchorEl = screen.queryAllByText('here')[3];
     const microsoftClarityAnchorEl = screen.queryByText('Clarity');
     const microsoftAnchorEl = screen.queryByText('Microsoft');
-    const microsoftClarityPolicyAnchorEl = screen.queryAllByText('here')[5];
-    const cookiesAnchorEl = screen.queryAllByText('here')[6];
+    const microsoftClarityPolicyAnchorEl = screen.queryAllByText('here')[4];
+    const cookiesAnchorEl = screen.queryAllByText('here')[5];
     const externalLinkEls = [
       githubPagesAnchorEl,
       githubAnchorEl,
@@ -43,11 +41,9 @@ describe('<PrivacyPolicySection />', () => {
       meteorAnchorEl,
       meteorCloudAnchorEl,
       meteorCloudPolicyAnchorEl,
-      ...googleAnchorEls,
       googleAnalyticsAnchorEl,
+      ...googleAnchorEls,
       googleAnalyticsPolicyAnchorEl,
-      googleAdsenseAnchorEl,
-      googleAdsensePolicyAnchorEl,
       googleTagManagerAnchorEl,
       googleTagManagerPolicyAnchorEl,
       cookiesAnchorEl,
@@ -104,29 +100,19 @@ describe('<PrivacyPolicySection />', () => {
       'https://cloud-guide.meteor.com/security.html'
     );
 
-    expect(googleAnchorEls.length).toBe(3);
-    googleAnchorEls.forEach((googleAnchorEl) => {
-      expect(googleAnchorEl).toHaveAttribute('href', 'https://www.google.com/');
-    });
-
     expect(googleAnalyticsAnchorEl).toHaveAttribute(
       'href',
       'https://analytics.google.com/'
     );
 
+    expect(googleAnchorEls.length).toBe(2);
+    googleAnchorEls.forEach((googleAnchorEl) => {
+      expect(googleAnchorEl).toHaveAttribute('href', 'https://www.google.com/');
+    });
+
     expect(googleAnalyticsPolicyAnchorEl).toHaveAttribute(
       'href',
       'https://support.google.com/analytics/answer/6004245'
-    );
-
-    expect(googleAdsenseAnchorEl).toHaveAttribute(
-      'href',
-      'https://www.google.com/adsense/start/'
-    );
-
-    expect(googleAdsensePolicyAnchorEl).toHaveAttribute(
-      'href',
-      'https://support.google.com/adsense/answer/48182'
     );
 
     expect(googleTagManagerAnchorEl).toHaveAttribute(
@@ -162,7 +148,7 @@ describe('<PrivacyPolicySection />', () => {
 
   test('should have expected updated date', () => {
     const dateEl = screen.queryByText(
-      'This document was last updated on January 21, 2022'
+      'This document was last updated on December 9, 2021'
     );
 
     expect(dateEl).toBeInTheDocument();
