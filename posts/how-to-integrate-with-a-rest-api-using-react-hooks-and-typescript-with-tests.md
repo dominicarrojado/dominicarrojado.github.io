@@ -195,7 +195,7 @@ Once you saved it, your React application should display something like this:
 Now before we interact we it, let's update the styles to make our application slightly prettier.
 
 ```css
-/* src/index.css */
+/* index.css */
 
 * {
   box-sizing: border-box;
