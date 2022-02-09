@@ -7,3 +7,4 @@ Host: https://dominicarrojado.com
 
 # Sitemaps
 Sitemap: https://dominicarrojado.com/sitemap.xml
+Sitemap: https://dominicarrojado.com/sitemap-0.xml
