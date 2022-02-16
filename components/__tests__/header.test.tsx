@@ -288,10 +288,9 @@ describe('<Header />', () => {
 
       const btnTextEl = screen.queryByText('Light');
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
-      const btnIconEl = btnIconContainerEl?.querySelector('svg');
 
       expect(btnTextEl).toHaveClass('opacity-0');
-      expect(btnIconEl).toHaveClass('opacity-0');
+      expect(btnIconContainerEl).toHaveClass('opacity-0');
     });
 
     it('should display on window load', () => {
@@ -303,10 +302,9 @@ describe('<Header />', () => {
 
       const btnTextEl = screen.queryByText('Light');
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
-      const btnIconEl = btnIconContainerEl?.querySelector('svg');
 
       expect(btnTextEl).not.toHaveClass('opacity-0');
-      expect(btnIconEl).not.toHaveClass('opacity-0');
+      expect(btnIconContainerEl).not.toHaveClass('opacity-0');
     });
 
     it('should have shorter transition duration on click', () => {
@@ -315,18 +313,16 @@ describe('<Header />', () => {
       let btnTextEl = screen.queryByText('Light');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
       let btnIconContainerEl = btnTextEl?.previousElementSibling;
-      let btnIconEl = btnIconContainerEl?.querySelector('svg');
 
-      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnIconContainerEl).toHaveClass('duration-700');
       expect(btnTextEl).toHaveClass('duration-700');
 
       fireEvent.click(btnEl);
 
       btnTextEl = screen.queryByText('Dark');
       btnIconContainerEl = btnTextEl?.previousElementSibling;
-      btnIconEl = btnIconContainerEl?.querySelector('svg');
 
-      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnIconContainerEl).toHaveClass('duration-150');
       expect(btnTextEl).toHaveClass('duration-150');
     });
 
@@ -335,14 +331,13 @@ describe('<Header />', () => {
 
       const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
-      const btnIconEl = btnIconContainerEl?.querySelector('svg');
 
-      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnIconContainerEl).toHaveClass('duration-700');
       expect(btnTextEl).toHaveClass('duration-700');
 
       fireEventTransitionEnd(btnTextEl, 'opacity');
 
-      expect(btnIconEl).toHaveClass('duration-150');
+      expect(btnIconContainerEl).toHaveClass('duration-150');
       expect(btnTextEl).toHaveClass('duration-150');
     });
 
@@ -351,11 +346,10 @@ describe('<Header />', () => {
 
       const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
-      const btnIconEl = btnIconContainerEl?.querySelector('svg');
 
       fireEventTransitionEnd(btnTextEl, getFakeString());
 
-      expect(btnIconEl).toHaveClass('duration-700');
+      expect(btnIconContainerEl).toHaveClass('duration-700');
       expect(btnTextEl).toHaveClass('duration-700');
     });
 

@@ -28,7 +28,7 @@ Once project is initiated, install the additional libraries which we'll be using
 
 ```bash
 cd react-typescript-api-hooks
-yarn add axios @testing-library/react-hooks faker @types/faker
+yarn add axios @testing-library/react-hooks faker@5.5.3 @types/faker@5.5.9
 ```
 
 To run our project, execute the command below:

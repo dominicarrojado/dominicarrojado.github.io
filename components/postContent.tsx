@@ -4,6 +4,7 @@ import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import ReactMarkdown from 'react-markdown';
 import remarkUnwrapImages from 'remark-unwrap-images';
+import remarkGfm from 'remark-gfm';
 import LazyLoad from 'react-lazyload';
 // @ts-ignore: using an old rehype-highlight version that has no declaration file
 import rehypeHighlight from 'rehype-highlight';
@@ -117,7 +118,7 @@ function PostMarkdown({ content }: { content: string }) {
     <Content className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}>
       <ReactMarkdown
         rehypePlugins={[rehypeHighlight]}
-        remarkPlugins={[remarkUnwrapImages]}
+        remarkPlugins={[remarkUnwrapImages, remarkGfm]}
         components={{
           a: ({ node, ...props }) => {
             const { href, ...otherProps } = props;
@@ -249,7 +250,7 @@ function AdjacentPostLink({
         </div>
         <Icon
           className={cn(
-            'absolute top-0 bottom-0 m-auto flex-shrink-0 w-2 h-2 text-black opacity-30',
+            'absolute top-0 bottom-0 m-auto shrink-0 w-2 h-2 text-black opacity-30',
             'dark:text-white',
             'transform transition-transform-opacity duration-300 group-hover:opacity-100',
             'sm:w-2.5 sm:h-2.5',

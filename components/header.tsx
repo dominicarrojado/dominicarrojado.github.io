@@ -170,26 +170,27 @@ function ThemeButton({
         <Transition key={text} nodeRef={containerRef} timeout={100}>
           {(state) => (
             <div ref={containerRef} className="flex items-center flex-col">
-              <div className={cn(iconStyle, 'relative')}>
-                <Icon
-                  className={cn(
-                    'absolute inset-0 m-auto',
-                    'transform transition-transform-opacity-color',
-                    !animationDone
-                      ? {
-                          'duration-700 delay-700': true,
-                          [shouldDisplay
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-2']: true,
-                        }
-                      : {
-                          'duration-150': true,
-                          [state === 'entered'
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-2']: true,
-                        }
-                  )}
-                />
+              <div
+                className={cn(
+                  iconStyle,
+                  'relative',
+                  'transform transition-transform-opacity-color',
+                  !animationDone
+                    ? {
+                        'duration-700 delay-700': true,
+                        [shouldDisplay
+                          ? 'opacity-100 translate-y-0'
+                          : 'opacity-0 translate-y-2']: true,
+                      }
+                    : {
+                        'duration-150': true,
+                        [state === 'entered'
+                          ? 'opacity-100 translate-y-0'
+                          : 'opacity-0 translate-y-2']: true,
+                      }
+                )}
+              >
+                <Icon className="absolute inset-0 m-auto" />
               </div>
               <div
                 className={cn(

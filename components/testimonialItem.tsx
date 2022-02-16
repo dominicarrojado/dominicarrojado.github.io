@@ -6,7 +6,7 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
   return (
     <li
       className={cn(
-        'group w-full flex flex-shrink-0 px-3',
+        'group w-full flex shrink-0 px-3',
         'xs:w-11/12',
         'sm:w-5/6',
         'md:w-7/12',

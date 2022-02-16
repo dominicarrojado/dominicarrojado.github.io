@@ -93,7 +93,7 @@ Alright, once the changes are done. That should make our Prettier work.
 Lastly, let's install a library called [faker](https://github.com/Marak/faker.js) which gives us random data when we write tests. Why do we want random data? It makes our tests more reliable as opposed to hardcoding the data we use in testing. Run the command below on your terminal to install it along with its type:
 
 ```bash
-yarn add -D faker@5.5.3 @types/faker
+yarn add faker@5.5.3 @types/faker@5.5.9
 ```
 
 Since our project uses TypeScript, when installing libraries, we would have to install their types as well, because if not TypeScript would display an error that it couldn't find the library's type declarations.

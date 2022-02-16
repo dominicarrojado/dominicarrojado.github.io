@@ -1,7 +1,10 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     screens: {
@@ -135,6 +138,16 @@ module.exports = {
               code: {
                 display: 'inline',
                 overflow: 'visible',
+                border: 'none',
+                backgroundColor: 'transparent',
+                padding: '0',
+                color: theme('colors.gray.300'),
+              },
+            },
+            thead: {
+              th: {
+                color: theme('colors.gray.800'),
+                fontWeight: theme('fontWeight.normal'),
               },
             },
           },
@@ -184,20 +197,14 @@ module.exports = {
                 color: theme('colors.gray.100'),
               },
             },
+            thead: {
+              th: {
+                color: theme('colors.gray.100'),
+              },
+            },
           },
         },
       }),
-    },
-  },
-  variants: {
-    extend: {
-      inset: ['group-hover'],
-      width: ['group-hover'],
-      margin: ['first'],
-      translate: ['group-hover'],
-      rotate: ['even', 'odd'],
-      cursor: ['active'],
-      typography: ['dark'],
     },
   },
   plugins: [require('@tailwindcss/typography')],

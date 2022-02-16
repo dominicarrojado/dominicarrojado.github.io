@@ -46,5 +46,6 @@ module.exports = {
     await config.transform(config, '/mjml-sample-edm/'),
     await config.transform(config, '/react-typescript-accordion/'),
     await config.transform(config, '/react-typescript-api-hooks/'),
+    await config.transform(config, '/react-typescript-swiper/'),
   ],
 };

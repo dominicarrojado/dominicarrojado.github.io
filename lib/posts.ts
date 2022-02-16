@@ -41,7 +41,7 @@ export function getAllPostsData() {
     };
   });
 
-  return sortArrayByKeys(posts, { date: -1 });
+  return sortArrayByKeys(posts, { date: -1, title: -1 });
 }
 
 export function getAllPostIds() {

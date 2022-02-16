@@ -30,16 +30,14 @@ To create our project with React and TypeScript, run this command in your termin
 yarn create react-app react-typescript-accordion --template typescript
 ```
 
-Once installed, let's run our project to see if everything is working fine:
+Once installed, let's run our project to see if everything is working fine by executing the command below:
 
 ```bash
 cd react-typescript-accordion
 yarn start
 ```
 
-This command will open your default browser and go to `http://localhost:3000/`. If it doesn't, you can do it yourself too. The page should show something like this:
-
-![Screenshot of Create React App default page](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/create-react-app-default-page.png)
+This command will open your default browser and go to `http://localhost:3000/`. If it doesn't, you can do it yourself too.
 
 This setup comes with live-editing or hot reloading which means when we save file changes, it will automatically update the app and reload on the browser. That's great for local development!
 
@@ -484,7 +482,7 @@ Alright, time to write tests for the components we've built. Tests are really gr
 Before we start, let's install a library called [faker](https://github.com/Marak/faker.js) which gives us random data. Why do we want random data? It makes our tests more reliable as opposed to hardcoding the data we use in testing. Run the command below on your terminal to install it along with its type:
 
 ```bash
-yarn add -D faker@5.5.3 @types/faker
+yarn add faker@5.5.3 @types/faker@5.5.9
 ```
 
 Since our project uses TypeScript, when installing libraries, we would have to install their types as well, because if not TypeScript would display an error that it couldn't find the library's type declarations.
