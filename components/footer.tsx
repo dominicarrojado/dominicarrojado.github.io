@@ -7,11 +7,11 @@ import React, {
   useState,
 } from 'react';
 import cn from 'classnames';
+import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import { getRefValue } from '../lib/hooks';
 import { useWindowLoaded } from '../lib/custom-hooks';
-import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
-import AnchorLink from './anchorLink';
+import AnchorLink, { Props as AnchorLinkProps } from './anchorLink';
 import Tooltip from './tooltip';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
 import {
@@ -104,7 +104,6 @@ function Quotes() {
 function SocialItems() {
   const isBtnClickedRef: MutableRefObject<Record<string, boolean>> = useRef({});
   const shouldDisplay = useWindowLoaded();
-  const [copiedItem, setCopiedItem] = useState('');
   const socialOnMouseLeave = (social: Social) => {
     const socialName = social.name;
 
@@ -117,10 +116,7 @@ function SocialItems() {
       });
     }
   };
-  const socialOnClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    social: Social
-  ) => {
+  const socialOnClick = (social: Social) => {
     const socialName = social.name;
 
     isBtnClickedRef.current[socialName] = true;
@@ -131,22 +127,7 @@ function SocialItems() {
       linkText: social.title,
       linkUrl: social.url,
     });
-
-    if (!social.shouldCopyOnClick) {
-      return;
-    }
-
-    const textToCopy = social.url.replace('mailto:', '');
-    const copied = copyTextToClipboard(textToCopy);
-
-    if (!copied) {
-      return;
-    }
-
-    e.preventDefault();
-    setCopiedItem(social.name);
   };
-  const tooltipOnHidden = () => setCopiedItem('');
 
   return (
     <ul
@@ -172,34 +153,53 @@ function SocialItems() {
               transitionDelay: `${(idx + 1) * 150 + 1900}ms`,
             }}
           >
-            <AnchorLink
-              href={social.url}
-              className={cn(
-                'group relative inline-flex p-3 cursor-pointer',
-                'sm:p-4'
-              )}
+            <SocialItemTooltip
+              social={social}
               onMouseLeave={() => socialOnMouseLeave(social)}
-              onClick={(e) => socialOnClick(e, social)}
-              isExternal
-            >
-              {social.icon({
-                className: cn(
-                  'w-7 h-7 text-gray-400',
-                  'dark:text-gray-300',
-                  'transition-colors group-hover:text-gray-500',
-                  'dark:group-hover:text-white',
-                  'sm:w-8 sm:h-8',
-                  'xl:w-9 xl:h-9'
-                ),
-              })}
-              <Tooltip onHidden={tooltipOnHidden}>
-                {name !== copiedItem ? social.title : 'Copied!'}
-              </Tooltip>
-            </AnchorLink>
+              onClick={() => socialOnClick(social)}
+            />
           </li>
         );
       })}
     </ul>
+  );
+}
+
+function SocialItemTooltip({
+  social,
+  ...otherProps
+}: { social: Social } & AnchorLinkProps) {
+  const anchorRef = useRef<HTMLAnchorElement>(null);
+  const tooltip = useTooltipState({
+    baseId: `tooltip-${social.name}`,
+    animated: 300,
+    placement: 'top',
+  });
+
+  return (
+    <TooltipReference
+      {...tooltip}
+      {...otherProps}
+      as={AnchorLink}
+      ref={anchorRef}
+      href={social.url}
+      className={cn('group inline-flex p-3 cursor-pointer', 'sm:p-4')}
+      aria-label={social.title}
+      isExternal
+    >
+      {social.icon({
+        className: cn(
+          'w-7 h-7 text-gray-400',
+          'dark:text-gray-300',
+          'transition-colors group-hover:text-gray-500',
+          'dark:group-hover:text-white',
+          'sm:w-8 sm:h-8',
+          'xl:w-9 xl:h-9'
+        ),
+      })}
+
+      <Tooltip tooltip={tooltip}>{social.title}</Tooltip>
+    </TooltipReference>
   );
 }
 

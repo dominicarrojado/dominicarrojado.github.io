@@ -74,10 +74,10 @@ describe('<PostItem />', () => {
       expect(excerptEl?.tagName).toBe('P');
     });
 
-    it('should render the button', () => {
+    it('should render the button as span', () => {
       const btnEl = screen.queryByText('Read More');
 
-      expect(btnEl?.tagName).toBe('BUTTON');
+      expect(btnEl?.tagName).toBe('SPAN');
     });
   });
 

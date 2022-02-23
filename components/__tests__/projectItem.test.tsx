@@ -296,7 +296,7 @@ describe('<ProjectItem />', () => {
 
       const tooltipEl = screen.queryByText('Downloading GIF...');
 
-      expect(tooltipEl).not.toBeInTheDocument();
+      expect(tooltipEl).toHaveClass('opacity-0');
     });
 
     it('should download GIF if project is in view', async () => {
@@ -414,7 +414,6 @@ describe('<ProjectItem />', () => {
 
       onCancelMock({ durationMs: cancelDurationMs, progress: cancelProgress });
 
-      expect(screen.queryByText(downloadingText)).not.toBeInTheDocument();
       expect(screen.queryByText(downloadProgress)).not.toBeInTheDocument();
 
       // expect to track GIF download cancel

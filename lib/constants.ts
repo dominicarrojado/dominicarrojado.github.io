@@ -365,35 +365,30 @@ export const SOCIAL_LINKS: Array<Social> = [
     title: 'Buy me a protein shake!',
     url: ExternalUrl.PERSONAL_PAYPAL,
     icon: SvgDonate,
-    shouldCopyOnClick: false,
   },
   {
     name: SocialName.YOUTUBE,
     title: 'Watch my tech videos!',
     url: ExternalUrl.PERSONAL_YOUTUBE,
     icon: SvgYouTube,
-    shouldCopyOnClick: false,
   },
   {
     name: SocialName.LINKEDIN,
     title: "Let's connect on LinkedIn!",
     url: ExternalUrl.PERSONAL_LINKEDIN,
     icon: SvgLinkedIn,
-    shouldCopyOnClick: false,
   },
   {
     name: SocialName.GITHUB,
     title: 'Follow me on GitHub!',
     url: ExternalUrl.PERSONAL_GITHUB,
     icon: SvgGitHub,
-    shouldCopyOnClick: false,
   },
   {
     name: SocialName.EMAIL,
     title: 'Email me!',
     url: `mailto:${PERSONAL_EMAIL}`,
     icon: SvgEnvelope,
-    shouldCopyOnClick: true,
   },
 ];
 
@@ -513,3 +508,4 @@ export const MENU_ITEMS = [
     title: 'Blog',
   },
 ];
+export const MENU_ITEMS_LENGTH = MENU_ITEMS.length;

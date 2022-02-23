@@ -2,29 +2,37 @@ import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
+import {
+  useDialogState,
+  Dialog,
+  DialogBackdrop,
+  DialogDisclosure,
+  DialogStateReturn,
+} from 'reakit/Dialog';
+import { Button } from 'reakit/Button';
+import { Checkbox } from 'reakit/Checkbox';
 import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
 import { useDarkModeEnabled, useWindowLoaded } from '../lib/custom-hooks';
-import { copyTextToClipboard } from '../lib/dom';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgSun from './svgSun';
 import SvgMoon from './svgMoon';
-import Tooltip from './tooltip';
 import AnchorLink from './anchorLink';
 import Transition from './transition';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
-import { MENU_ITEMS, SOCIAL_LINKS } from '../lib/constants';
+import { MENU_ITEMS, MENU_ITEMS_LENGTH, SOCIAL_LINKS } from '../lib/constants';
 
 export default function Header({ route }: { route: Route }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen((isOpen) => !isOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const dialog = useDialogState({
+    baseId: 'dialog-menu',
+    animated: MENU_ITEMS_LENGTH * 75 + 100,
+  });
 
   return (
     <>
       <header>
-        <Logo route={route} closeMenu={closeMenu} />
+        <Logo route={route} closeMenu={dialog.hide} />
         <div
           className={cn(
             'fixed flex items-end top-3 right-1 z-50',
@@ -34,11 +42,10 @@ export default function Header({ route }: { route: Route }) {
           )}
         >
           <ThemeButtonContainer />
-          <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          <MenuButton dialog={dialog} />
         </div>
       </header>
-      <MenuBackground isMenuOpen={isMenuOpen} />
-      <MenuContainer isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
+      <MenuContainer dialog={dialog} />
     </>
   );
 }
@@ -154,7 +161,9 @@ function ThemeButton({
   };
 
   return (
-    <button
+    <Checkbox
+      as={Button}
+      checked={isDarkModeEnabled}
       className={cn(
         'group min-w-11.5 pt-2 pb-2 px-2 text-gray-400',
         'dark:text-gray-300',
@@ -163,8 +172,9 @@ function ThemeButton({
         'md:min-w-15 md:px-3',
         'lg:min-w-18'
       )}
+      aria-label="Switch between dark and light mode"
+      onChange={btnOnClick}
       onMouseLeave={btnOnMouseLeave}
-      onClick={btnOnClick}
     >
       <SwitchTransition>
         <Transition key={text} nodeRef={containerRef} timeout={100}>
@@ -220,17 +230,12 @@ function ThemeButton({
           )}
         </Transition>
       </SwitchTransition>
-    </button>
+    </Checkbox>
   );
 }
 
-function MenuButton({
-  isMenuOpen,
-  toggleMenu,
-}: {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
-}) {
+function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
+  const isMenuOpen = dialog.visible;
   const textRef = useRef<HTMLDivElement>(null);
   const isBtnClickedRef = useRef(false);
   const stacks = Array.from(Array(3).keys());
@@ -253,7 +258,6 @@ function MenuButton({
   const btnOnClick = () => {
     isBtnClickedRef.current = true;
     setAnimationDone(true); // in case it was clicked during initial transitioning
-    toggleMenu();
     trackEvent({
       event: GoogleAnalyticsEvents.HEADER_BTN_CLICK,
       linkText: text,
@@ -261,7 +265,8 @@ function MenuButton({
   };
 
   return (
-    <button
+    <DialogDisclosure
+      state={dialog}
       className={cn(
         'group flex items-center flex-col min-w-12 rounded pt-3 pb-2 px-2',
         'md:min-w-15.5 md:px-3',
@@ -345,68 +350,56 @@ function MenuButton({
           )}
         </Transition>
       </SwitchTransition>
-    </button>
+    </DialogDisclosure>
   );
 }
 
-export function MenuContainer({
-  isMenuOpen,
-  closeMenu,
-}: {
-  isMenuOpen: boolean;
-  closeMenu: () => void;
-}) {
+function MenuContainer({ dialog }: { dialog: DialogStateReturn }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDisplayed, setIsDisplayed] = useState(false);
-  const onEnter = () => setIsDisplayed(true);
 
   return (
-    <Transition
-      in={isMenuOpen}
-      nodeRef={containerRef}
-      timeout={100}
-      onEnter={onEnter}
-    >
+    <Transition in={dialog.visible} nodeRef={containerRef} timeout={100}>
       {(state) => {
         const shouldDisplay = state === 'entered';
 
         return (
-          <div
-            ref={containerRef}
+          <DialogBackdrop
+            {...dialog}
             className={cn(
-              'fixed inset-0 z-40 overflow-y-auto overflow-x-hidden',
+              'fixed top-0 right-0 z-30 w-full h-full bg-gray-750',
+              'transition-opacity duration-500',
               {
-                'w-0 h-0 pointer-events-none': !shouldDisplay,
-                hidden: !isDisplayed,
+                ['opacity-0 pointer-events-none delay-100']: !shouldDisplay,
               }
             )}
-            data-testid="menu-container"
+            data-testid="menu-background"
           >
-            <div className="flex justify-center items-center min-h-full">
-              <div className={cn('py-10 pl-8', 'sm:pl-0')}>
-                <MenuItems isMenuOpen={shouldDisplay} closeMenu={closeMenu} />
-                <SocialItems isMenuOpen={shouldDisplay} />
+            <Dialog
+              {...dialog}
+              ref={containerRef}
+              className={cn(
+                'fixed inset-0 z-40 overflow-y-auto overflow-x-hidden',
+                {
+                  'w-0 h-0 pointer-events-none': !shouldDisplay,
+                }
+              )}
+              aria-label="Menu"
+              data-testid="menu-container"
+            >
+              <div className="flex justify-center items-center min-h-full">
+                <div className={cn('py-10 pl-8', 'sm:pl-0')}>
+                  <MenuItems
+                    isMenuOpen={shouldDisplay}
+                    closeMenu={dialog.hide}
+                  />
+                  <SocialItems isMenuOpen={shouldDisplay} />
+                </div>
               </div>
-            </div>
-          </div>
+            </Dialog>
+          </DialogBackdrop>
         );
       }}
     </Transition>
-  );
-}
-
-function MenuBackground({ isMenuOpen }: { isMenuOpen: boolean }) {
-  return (
-    <div
-      className={cn(
-        'fixed top-0 right-0 z-30 w-full h-full bg-gray-750',
-        'transition-opacity duration-500',
-        {
-          ['opacity-0 pointer-events-none delay-100']: !isMenuOpen,
-        }
-      )}
-      data-testid="menu-background"
-    />
   );
 }
 
@@ -499,11 +492,7 @@ function SocialItem({
   isMenuOpen: boolean;
 }) {
   const isBtnClickedRef = useRef(false);
-  const [isUrlCopied, setIsUrlCopied] = useState(false);
-  const tipContainerRef = useRef<HTMLDivElement>(null);
   const onMouseLeave = () => {
-    setIsUrlCopied(false);
-
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
         event: GoogleAnalyticsEvents.SOCIAL_HOVER,
@@ -522,20 +511,6 @@ function SocialItem({
       linkUrl: social.url,
       socialName: social.name,
     });
-
-    if (!social.shouldCopyOnClick) {
-      return;
-    }
-
-    const textToCopy = social.url.replace('mailto:', '');
-    const copied = copyTextToClipboard(textToCopy);
-
-    if (!copied) {
-      return;
-    }
-
-    e.preventDefault();
-    setIsUrlCopied(true);
   };
 
   return (
@@ -568,19 +543,6 @@ function SocialItem({
             'md:w-11 md:h-11'
           ),
         })}
-        <Transition
-          in={isUrlCopied}
-          nodeRef={tipContainerRef}
-          timeout={300}
-          mountOnEnter
-          unmountOnExit
-        >
-          {(state) => (
-            <div ref={tipContainerRef}>
-              <Tooltip show={state === 'entered'}>Copied!</Tooltip>
-            </div>
-          )}
-        </Transition>
       </AnchorLink>
     </li>
   );

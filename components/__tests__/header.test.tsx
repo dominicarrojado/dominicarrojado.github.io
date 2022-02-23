@@ -14,9 +14,7 @@ import {
 import { Route } from '../../lib/types';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
 import * as ga from '../../lib/google-analytics';
-import * as dom from '../../lib/dom';
-import * as Transition from '../transition';
-import Header, { MenuContainer } from '../header';
+import Header from '../header';
 
 config.disabled = true; // disable react-transitions-group transitions
 
@@ -578,50 +576,13 @@ describe('<Header />', () => {
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
 
       fireEvent.click(btnEl);
+      fireEvent.click(btnEl);
 
       trackEventSpy.mockClear();
 
       fireEvent.mouseLeave(btnEl);
 
       expect(trackEventSpy).not.toBeCalled();
-    });
-  });
-
-  describe('<MenuContainer />', () => {
-    const renderMenuContainerComponent = (props: {
-      isMenuOpen: boolean;
-      closeMenu: () => void;
-    }) => render(<MenuContainer {...props} />);
-
-    it('should be hidden by default', () => {
-      renderMenuContainerComponent({ isMenuOpen: true, closeMenu: jest.fn() });
-
-      const menuContainerEl = screen.queryByTestId('menu-container');
-
-      expect(menuContainerEl).toHaveClass('hidden');
-    });
-
-    it('should display container on enter', () => {
-      let onEnterFunc = () => {};
-
-      jest
-        .spyOn(Transition, 'default')
-        .mockImplementationOnce(({ children, onEnter }: any) => {
-          onEnterFunc = onEnter;
-          return children('entered');
-        });
-
-      renderMenuContainerComponent({ isMenuOpen: true, closeMenu: jest.fn() });
-
-      act(() => {
-        onEnterFunc();
-      });
-
-      const menuContainerEl = screen.queryByTestId('menu-container');
-
-      expect(menuContainerEl).not.toHaveClass(
-        'w-0 h-0 pointer-events-none hidden'
-      );
     });
   });
 
@@ -693,83 +654,6 @@ describe('<Header />', () => {
       renderComponent(getRandomRoute());
     });
 
-    it('should handle normal links', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        if (social.shouldCopyOnClick) {
-          return;
-        }
-
-        const copyTextToClipboardMock = jest.spyOn(dom, 'copyTextToClipboard');
-
-        const { title } = social;
-        const copySuccessText = 'Copied!';
-        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
-
-        fireEvent.click(anchorEl);
-
-        expect(copyTextToClipboardMock).not.toBeCalled();
-        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
-
-        copyTextToClipboardMock.mockClear();
-      });
-    });
-
-    it('should handle copy text if available', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        if (!social.shouldCopyOnClick) {
-          return;
-        }
-
-        const copyTextToClipboardMock = jest
-          .spyOn(dom, 'copyTextToClipboard')
-          .mockReturnValue(true);
-
-        const { title } = social;
-        const textToCopy = social.url.replace('mailto:', '');
-        const copySuccessText = 'Copied!';
-        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
-
-        // expect text to be copied on click
-        fireEvent.click(anchorEl);
-
-        expect(copyTextToClipboardMock).toBeCalledTimes(1);
-        expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
-        expect(screen.queryByText(copySuccessText)).toBeInTheDocument();
-
-        // expect "Copied!" to be hidden on mouse leave
-        fireEvent.mouseLeave(anchorEl);
-
-        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
-
-        copyTextToClipboardMock.mockClear();
-      });
-    });
-
-    it('should handle copy text if unavailable', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        if (!social.shouldCopyOnClick) {
-          return;
-        }
-
-        const copyTextToClipboardMock = jest
-          .spyOn(dom, 'copyTextToClipboard')
-          .mockReturnValue(false);
-
-        const { title } = social;
-        const textToCopy = social.url.replace('mailto:', '');
-        const copySuccessText = 'Copied!';
-        const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
-
-        fireEvent.click(anchorEl);
-
-        expect(copyTextToClipboardMock).toBeCalledTimes(1);
-        expect(copyTextToClipboardMock).toBeCalledWith(textToCopy);
-        expect(screen.queryByText(copySuccessText)).not.toBeInTheDocument();
-
-        copyTextToClipboardMock.mockClear();
-      });
-    });
-
     it('should track as hover if NOT clicked', () => {
       SOCIAL_LINKS.forEach((social) => {
         const trackEventSpy = jest.spyOn(ga, 'trackEvent');
@@ -795,8 +679,6 @@ describe('<Header />', () => {
       SOCIAL_LINKS.forEach((social) => {
         const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
-        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
-
         const { title } = social;
         const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;
 
@@ -817,8 +699,6 @@ describe('<Header />', () => {
     it('should NOT track as hover if clicked', () => {
       SOCIAL_LINKS.forEach((social) => {
         const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        jest.spyOn(dom, 'copyTextToClipboard').mockImplementation();
 
         const { title } = social;
         const anchorEl = screen.queryByTitle(title) as HTMLAnchorElement;

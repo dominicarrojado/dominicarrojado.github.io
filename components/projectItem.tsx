@@ -1,7 +1,8 @@
+import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
-import { CSSProperties, useEffect, useRef, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Transition } from 'react-transition-group';
+import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
@@ -15,7 +16,6 @@ import {
   Project,
   ProjectLink,
   Route,
-  TooltipPosition,
 } from '../lib/types';
 
 export default function ProjectItem({
@@ -232,6 +232,15 @@ function GifLoader({
   progress: number;
   title: string;
 }) {
+  const projectId = useMemo(
+    () => title.toLowerCase().replace(/[ :.]/g, '-'),
+    [title]
+  );
+  const tooltip = useTooltipState({
+    baseId: `tooltip-${projectId}`,
+    animated: 300,
+    placement: 'left',
+  });
   const containerRef = useRef<HTMLDivElement>(null);
   const isMounted = useMounted();
   const text = 'Downloading GIF...';
@@ -244,51 +253,54 @@ function GifLoader({
   };
 
   return (
-    <Transition
-      in={isMounted && shouldDisplay}
-      nodeRef={containerRef}
-      timeout={300}
-      mountOnEnter
-      unmountOnExit
-    >
-      {(state) => (
-        <div
-          ref={containerRef}
-          className={cn(
-            'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
-            'transition-opacity duration-300',
-            'sm:top-4 sm:right-4',
-            {
-              [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
-            }
-          )}
-          data-testid="gif-loader"
-          onMouseEnter={loaderOnMouseEnter}
-        >
-          <Spinner
+    <>
+      <Transition
+        in={isMounted && shouldDisplay}
+        nodeRef={containerRef}
+        timeout={300}
+        mountOnEnter
+        unmountOnExit
+      >
+        {(state) => (
+          <TooltipReference
+            {...tooltip}
+            ref={containerRef}
             className={cn(
-              'w-7 h-7 border-2',
-              'transition-opacity duration-1000',
-              'sm:w-9 sm:h-9',
-              'md:w-11 md:h-11 md:border-4'
+              'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
+              'transition-opacity duration-300',
+              'sm:top-4 sm:right-4',
+              {
+                [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
+              }
             )}
-            color="#ffffff"
-          />
-          <div
-            className={cn(
-              'absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs',
-              'sm:text-sm',
-              'md:text-base'
-            )}
+            data-testid="gif-loader"
+            onMouseEnter={loaderOnMouseEnter}
           >
-            {progress}
-          </div>
-          <Tooltip position={TooltipPosition.LEFT} className="mr-3">
-            {text}
-          </Tooltip>
-        </div>
-      )}
-    </Transition>
+            <Spinner
+              className={cn(
+                'w-7 h-7 border-2',
+                'transition-opacity duration-1000',
+                'sm:w-9 sm:h-9',
+                'md:w-11 md:h-11 md:border-4'
+              )}
+              color="#ffffff"
+            />
+            <div
+              className={cn(
+                'absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs',
+                'sm:text-sm',
+                'md:text-base'
+              )}
+            >
+              {progress}
+            </div>
+          </TooltipReference>
+        )}
+      </Transition>
+      <Tooltip tooltip={tooltip} className="mr-3">
+        {text}
+      </Tooltip>
+    </>
   );
 }
 

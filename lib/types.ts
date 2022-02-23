@@ -22,13 +22,6 @@ export enum SocialName {
   EMAIL = 'email',
 }
 
-export enum TooltipPosition {
-  TOP = 'top',
-  RIGHT = 'right',
-  BOTTOM = 'bottom',
-  LEFT = 'left',
-}
-
 export enum PostCategory {
   TECHNOLOGY = 'technology',
 }
@@ -103,7 +96,6 @@ export type Social = {
   title: string;
   url: string;
   icon: (props: HTMLAttributes<SVGElement>) => ReactNode;
-  shouldCopyOnClick: boolean;
 };
 
 export type Quote = {

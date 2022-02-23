@@ -1,5 +1,7 @@
-import React, { HTMLProps, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
+import { Button } from 'reakit/Button';
+import { VisuallyHidden } from 'reakit/VisuallyHidden';
 import { useWindowSize } from '../lib/custom-hooks';
 import { getRefValue, useStateRef } from '../lib/hooks';
 import { getTouchEventData } from '../lib/dom';
@@ -196,16 +198,22 @@ export default function TestimonialsHomeSection() {
             data-testid="indicators"
           >
             {indicators.map((idx) => (
-              <IndicatorButton
+              <Button
                 key={idx}
-                className={
+                className={cn(
+                  'w-1 h-1 ml-1 first:ml-0 rounded-full cursor-pointer',
+                  'transition-colors',
+                  'md:w-1.5 md:h-1.5',
+                  'lg:w-2 lg:h-2 lg:ml-1.5',
+                  'xl:w-2.5 xl:h-2.5 xl:ml-2',
                   idx === swipeIdx
                     ? 'bg-gray-400 dark:bg-gray-300'
                     : 'bg-gray-200 dark:bg-gray-500'
-                }
+                )}
                 onClick={() => indicatorOnClick(idx)}
-                aria-label={`Slide ${idx + 1}`}
-              />
+              >
+                <VisuallyHidden>Slide {idx + 1}</VisuallyHidden>
+              </Button>
             ))}
           </div>
         </div>
@@ -228,25 +236,5 @@ export default function TestimonialsHomeSection() {
         </small>
       </div>
     </Section>
-  );
-}
-
-function IndicatorButton({
-  type,
-  className,
-  ...props
-}: HTMLProps<HTMLButtonElement>) {
-  return (
-    <button
-      className={cn(
-        'w-1 h-1 ml-1 first:ml-0 rounded-full cursor-pointer',
-        'transition-colors',
-        'md:w-1.5 md:h-1.5',
-        'lg:w-2 lg:h-2 lg:ml-1.5',
-        'xl:w-2.5 xl:h-2.5 xl:ml-2',
-        className
-      )}
-      {...props}
-    />
   );
 }

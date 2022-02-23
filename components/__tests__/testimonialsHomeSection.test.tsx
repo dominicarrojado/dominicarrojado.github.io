@@ -287,7 +287,7 @@ describe('<TestimonialsHomeSection />', () => {
 
       indicatorsEls.forEach((indicatorEl, idx) => {
         expect(indicatorEl.tagName).toBe('BUTTON');
-        expect(indicatorEl).toHaveAttribute('aria-label', `Slide ${idx + 1}`);
+        expect(indicatorEl).toHaveTextContent(`Slide ${idx + 1}`);
       });
     });
 

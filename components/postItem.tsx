@@ -71,7 +71,7 @@ function PostItem({
             )}
             <p className="mt-4">{post.excerpt}</p>
             <div className="mt-6">
-              <ButtonArrowLink>Read More</ButtonArrowLink>
+              <ButtonArrowLink as="span">Read More</ButtonArrowLink>
             </div>
           </article>
         </a>

@@ -144,7 +144,12 @@ function PostMarkdown({ content }: { content: string }) {
             }
 
             return (
-              <AnchorLink {...props} target="_blank" isExternal={!isInternal} />
+              <AnchorLink
+                {...props}
+                target="_blank"
+                isExternal={!isInternal}
+                ref={undefined}
+              />
             );
           },
           img: ({ node, ...props }) => {

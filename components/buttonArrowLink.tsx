@@ -1,26 +1,29 @@
 import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
+import { Button } from 'reakit/Button';
 import SvgChevronRight from './svgChevronRight';
+
+export type Props = HTMLAttributes<HTMLButtonElement> & {
+  as?: 'button' | 'span';
+  withIcon?: boolean;
+};
 
 const ButtonArrowLink = forwardRef(
   (
-    {
-      children,
-      withIcon = true,
-      ...props
-    }: HTMLAttributes<HTMLButtonElement> & { withIcon?: boolean },
+    { children, as = 'button', withIcon = true, ...props }: Props,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    return (
-      <button
-        ref={ref}
-        className={cn(
-          'group inline-block items-center font-normal select-none',
-          'transition-colors duration-300 hover:text-black group-hover:text-black',
-          'dark:hover:text-white dark:group-hover:text-white'
-        )}
-        {...props}
-      >
+    const combinedProps = {
+      ...props,
+      ref,
+      className: cn(
+        'group inline-block items-center font-normal select-none',
+        'transition-colors duration-300 hover:text-black group-hover:text-black',
+        'dark:hover:text-white dark:group-hover:text-white'
+      ),
+    };
+    const body = (
+      <>
         {children}
         {withIcon && (
           <SvgChevronRight
@@ -34,8 +37,14 @@ const ButtonArrowLink = forwardRef(
             )}
           />
         )}
-      </button>
+      </>
     );
+
+    if (as === 'button') {
+      return <Button {...combinedProps}>{body}</Button>;
+    } else {
+      return <span {...combinedProps}>{body}</span>;
+    }
   }
 );
 
