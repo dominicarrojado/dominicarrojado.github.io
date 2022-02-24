@@ -5,6 +5,7 @@ import PreLoadTags from './preLoadTags';
 import Header from './header';
 import Footer from './footer';
 import { Route } from '../lib/types';
+import { MAIN_ELEMENT_ID } from '../lib/constants';
 
 function Layout({ route, children }: { route: Route; children: ReactNode }) {
   return (
@@ -48,11 +49,14 @@ function Layout({ route, children }: { route: Route; children: ReactNode }) {
       />
       {/* End Google Tag Manager */}
 
-      <Header route={route} />
+      <div tabIndex={-1} className="h-full outline-none">
+        <Header route={route} />
 
-      {children}
+        <div id={MAIN_ELEMENT_ID} />
+        {children}
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }

@@ -181,6 +181,50 @@ describe('<Header />', () => {
         expect(logoEl).not.toHaveClass('opacity-0');
       });
 
+      it('should display logo on focus', () => {
+        act(() => {
+          Window.emit('load');
+        });
+
+        const logoEl = screen.queryByLabelText(
+          'Dominic Arrojado logo'
+        ) as HTMLAnchorElement;
+
+        fireEvent.focus(logoEl);
+
+        expect(logoEl).not.toHaveClass('opacity-0');
+      });
+
+      it('should NOT display logo on blur', () => {
+        act(() => {
+          Window.emit('load');
+        });
+
+        const logoEl = screen.queryByLabelText(
+          'Dominic Arrojado logo'
+        ) as HTMLAnchorElement;
+
+        fireEvent.focus(logoEl);
+        fireEvent.blur(logoEl);
+
+        expect(logoEl).toHaveClass('opacity-0');
+      });
+
+      it('should NOT display logo on click', () => {
+        act(() => {
+          Window.emit('load');
+        });
+
+        const logoEl = screen.queryByLabelText(
+          'Dominic Arrojado logo'
+        ) as HTMLAnchorElement;
+
+        fireEvent.focus(logoEl);
+        fireEvent.click(logoEl);
+
+        expect(logoEl).toHaveClass('opacity-0');
+      });
+
       it('should NOT have animation delay by default', () => {
         const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 

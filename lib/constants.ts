@@ -41,6 +41,8 @@ export const FONTS = [
 
 export const SCREEN_LG = 1024;
 
+export const MAIN_ELEMENT_ID = 'main';
+
 export const PROJECTS: Array<Project> = [
   {
     title: 'THX Spatial Audio',

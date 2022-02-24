@@ -21,7 +21,12 @@ import SvgMoon from './svgMoon';
 import AnchorLink from './anchorLink';
 import Transition from './transition';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
-import { MENU_ITEMS, MENU_ITEMS_LENGTH, SOCIAL_LINKS } from '../lib/constants';
+import {
+  MAIN_ELEMENT_ID,
+  MENU_ITEMS,
+  MENU_ITEMS_LENGTH,
+  SOCIAL_LINKS,
+} from '../lib/constants';
 
 export default function Header({ route }: { route: Route }) {
   const dialog = useDialogState({
@@ -32,11 +37,12 @@ export default function Header({ route }: { route: Route }) {
   return (
     <>
       <header>
+        <SkipToMainContentAnchor />
         <Logo route={route} closeMenu={dialog.hide} />
         <div
           className={cn(
             'fixed flex items-end top-3 right-1 z-50',
-            'sm:top-3 sm:right-2',
+            'sm:right-2',
             'md:top-6 md:right-4',
             'xl:top-7'
           )}
@@ -50,10 +56,34 @@ export default function Header({ route }: { route: Route }) {
   );
 }
 
+function SkipToMainContentAnchor() {
+  return (
+    <a
+      href={`#${MAIN_ELEMENT_ID}`}
+      tabIndex={0}
+      className={cn(
+        'absolute -top-96 -left-96 w-px h-px text-center text-white overflow-hidden -z-50',
+        'focus:top-4 focus:inset-x-0 focus:m-auto focus:w-44 focus:h-auto focus:z-50',
+        'focus:sm:w-52',
+        'focus:xl:w-56'
+      )}
+    >
+      Skip to main content
+    </a>
+  );
+}
+
 function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
   const isWindowLoaded = useWindowLoaded();
   const [animationDone, setAnimationDone] = useState(false);
+  const [isLogoFocused, setIsLogoFocused] = useState(false);
   const [isPastHeroSection, setIsPastHeroSection] = useState(false);
+  const onClick = () => {
+    setIsLogoFocused(false);
+    closeMenu();
+  };
+  const onFocus = () => setIsLogoFocused(true);
+  const onBlur = () => setIsLogoFocused(false);
   const onTransitionEnd = (e: TransitionEvent<HTMLAnchorElement>) => {
     if (e.propertyName === 'opacity') {
       setAnimationDone(true);
@@ -61,7 +91,8 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
   };
   const withAnimationDelay = route !== Route.HOME && !animationDone;
   const shouldDisplay =
-    isWindowLoaded && (route !== Route.HOME || isPastHeroSection);
+    isWindowLoaded &&
+    (route !== Route.HOME || isPastHeroSection || isLogoFocused);
 
   useEffect(() => {
     const onScroll = () => {
@@ -91,7 +122,9 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
             ['opacity-0 -translate-y-full']: !shouldDisplay,
           }
         )}
-        onClick={closeMenu}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
         onTransitionEnd={onTransitionEnd}
         aria-label="Dominic Arrojado logo"
       >
