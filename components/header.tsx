@@ -198,10 +198,11 @@ function ThemeButton({
       as={Button}
       checked={isDarkModeEnabled}
       className={cn(
-        'group min-w-11.5 pt-2 pb-2 px-2 text-gray-400',
+        'group min-w-11.5 pt-2 pb-2 px-2 text-gray-400 outline-none',
         'dark:text-gray-300',
         'hover:text-gray-500',
         'dark:hover:text-gray-100',
+        'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-gray-400',
         'md:min-w-15 md:px-3',
         'lg:min-w-18'
       )}
@@ -301,7 +302,8 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
     <DialogDisclosure
       state={dialog}
       className={cn(
-        'group flex items-center flex-col min-w-12 rounded pt-3 pb-2 px-2',
+        'group flex items-center flex-col min-w-12 pt-3 pb-2 px-2 outline-none',
+        'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-gray-400',
         'md:min-w-15.5 md:px-3',
         'xl:min-w-18.5'
       )}
@@ -469,8 +471,9 @@ function MenuItems({
           <Link href={item.path}>
             <a
               className={cn(
-                'group relative pb-2 text-3xl text-gray-300 select-none',
-                'transition-colors duration-300 hover:text-white focus:text-white',
+                'group relative pb-2 text-3xl text-gray-300 select-none outline-none',
+                'transition-colors duration-300 hover:text-white',
+                'focus-visible:outline focus:outline-offset-8 focus-visible:outline-1 focus-visible:outline-white',
                 'sm:text-4xl',
                 'md:pb-3 md:text-5xl',
                 'xl:pb-4 xl:text-6xl'
@@ -563,7 +566,12 @@ function SocialItem({
       <AnchorLink
         href={social.url}
         title={social.title}
-        className={cn('flex items-center p-3.5', 'sm:p-5', 'md:p-6')}
+        className={cn(
+          'flex items-center p-3.5 outline-none',
+          'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-white',
+          'sm:p-5',
+          'md:p-6'
+        )}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
         isExternal
@@ -571,7 +579,7 @@ function SocialItem({
         {social.icon({
           className: cn(
             'w-8 h-8 text-gray-300',
-            'transition-colors hover:text-white focus:text-white',
+            'transition-colors hover:text-white',
             'sm:w-10 sm:h-10',
             'md:w-11 md:h-11'
           ),
