@@ -62,7 +62,7 @@ describe('<Home />', () => {
     expect(seoTagsSpy).toBeCalledWith(
       {
         path: '/',
-        title: 'Dominic Arrojado - Tech Blog',
+        title: 'Tech Blog',
         description:
           "My name is Dominic Arrojado. I'm a web developer and this is your guides, tips and tricks to web development. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.",
       },

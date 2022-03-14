@@ -9,13 +9,13 @@ import TestimonialsHomeSection from '../components/testimonialsHomeSection';
 import { Post, Route } from '../lib/types';
 
 export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
-  const title = 'Dominic Arrojado - Tech Blog';
-  const desc =
-    "My name is Dominic Arrojado. I'm a web developer and this is your guides, tips and tricks to web development. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.";
-
   return (
     <>
-      <SeoTags path={Route.HOME} title={title} description={desc} />
+      <SeoTags
+        path={Route.HOME}
+        title="Tech Blog"
+        description="My name is Dominic Arrojado. I'm a web developer and this is your guides, tips and tricks to web development. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences."
+      />
       <HeroMain />
       <AboutHomeSection />
       <ProjectsHomeSection />

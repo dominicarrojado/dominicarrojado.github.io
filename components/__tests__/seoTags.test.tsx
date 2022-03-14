@@ -121,12 +121,11 @@ describe('<SeoTags />', () => {
 
   describe('path is index', () => {
     const path = '/';
-    const title = getFakeSentence();
 
     beforeEach(() => {
       renderComponent({
         path,
-        title,
+        title: getFakeSentence(),
         description: getFakeSentences(),
         imageUrl: getFakeImageUrl(),
         imageWidth: getFakeNumber(),
@@ -141,18 +140,6 @@ describe('<SeoTags />', () => {
 
       expect(linkCanonical).toHaveAttribute('href', metaUrl);
       expect(metaOgUrl).toHaveAttribute('content', metaUrl);
-    });
-
-    it('should render expected title tags', () => {
-      const metaOgTitle = document.querySelector('meta[property="og:title"]');
-      const metaTwitterTitle = document.querySelector(
-        'meta[name="twitter:title"]'
-      );
-      const titleEl = document.querySelector('title');
-
-      expect(metaOgTitle).toHaveAttribute('content', title);
-      expect(metaTwitterTitle).toHaveAttribute('content', title);
-      expect(titleEl).toHaveTextContent(title);
     });
   });
 
@@ -186,7 +173,7 @@ describe('<SeoTags />', () => {
         'meta[name="twitter:title"]'
       );
       const titleEl = document.querySelector('title');
-      const expectedTitle = `${title} - ${MAIN_TITLE}`;
+      const expectedTitle = `${title} | ${MAIN_TITLE}`;
 
       expect(metaOgTitle).toHaveAttribute('content', expectedTitle);
       expect(metaTwitterTitle).toHaveAttribute('content', expectedTitle);

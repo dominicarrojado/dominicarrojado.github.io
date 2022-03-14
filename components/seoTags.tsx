@@ -29,7 +29,7 @@ export default function SeoTags({
 }: Props) {
   const isIndex = path === Route.HOME;
   const metaUrl = `${MAIN_URL}${path}${!isIndex ? '/' : ''}`;
-  const metaTitle = isIndex ? title : `${title} - ${MAIN_TITLE}`;
+  const metaTitle = `${title} | ${MAIN_TITLE}`;
   const fullImgUrl = `${MAIN_URL}${imageUrl}`;
 
   return (
