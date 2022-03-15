@@ -13,8 +13,8 @@ export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
     <>
       <SeoTags
         path={Route.HOME}
-        title="Tech Blog"
-        description="My name is Dominic Arrojado. I'm a web developer and this is your guides, tips and tricks to web development. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences."
+        title="Guides, Tips and Tricks to Web Development"
+        description="My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences."
       />
       <HeroMain />
       <AboutHomeSection />

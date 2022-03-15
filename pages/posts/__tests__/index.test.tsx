@@ -40,7 +40,7 @@ describe('<Posts />', () => {
 
     render(<Posts posts={posts} />);
 
-    const title = 'Blog';
+    const title = 'Tech Blog';
     const desc =
       'A place to share my knowledge and learnings from my web development experiences';
 

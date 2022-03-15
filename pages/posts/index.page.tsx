@@ -6,7 +6,7 @@ import SeoTags from '../../components/seoTags';
 import { Post, Route } from '../../lib/types';
 
 export default function Posts({ posts }: { posts: Array<Post> }) {
-  const title = 'Blog';
+  const title = 'Tech Blog';
   const desc =
     'A place to share my knowledge and learnings from my web development experiences';
 
