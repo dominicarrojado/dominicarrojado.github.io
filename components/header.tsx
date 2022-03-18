@@ -1,4 +1,4 @@
-import { TransitionEvent, useEffect, useRef, useState } from 'react';
+import { TransitionEvent, useEffect, useRef, useState, useMemo } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
@@ -20,6 +20,7 @@ import SvgSun from './svgSun';
 import SvgMoon from './svgMoon';
 import AnchorLink from './anchorLink';
 import Transition from './transition';
+import HeaderSocialItems from './socialItems';
 import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
 import {
   MAIN_ELEMENT_ID,
@@ -33,6 +34,19 @@ export default function Header({ route }: { route: Route }) {
     baseId: 'dialog-menu',
     animated: MENU_ITEMS_LENGTH * 75 + 100,
   });
+  const dialogVisible = dialog.visible;
+  const commonStyle = useMemo(() => {
+    if (!dialogVisible) {
+      return undefined;
+    }
+    
+    const bodyEl = document.body;
+    const scrollBarWidth = window.innerWidth - bodyEl.offsetWidth;
+
+    return {
+      paddingRight: scrollBarWidth,
+    };
+  }, [dialogVisible]);
 
   return (
     <>
@@ -46,9 +60,18 @@ export default function Header({ route }: { route: Route }) {
             'md:top-6 md:right-4',
             'xl:top-7'
           )}
+          style={commonStyle}
+          data-testid="header-buttons"
         >
           <ThemeButtonContainer />
           <MenuButton dialog={dialog} />
+        </div>
+        <div
+          className="hidden lg:block lg:fixed lg:bottom-3 lg:right-7 lg:z-40"
+          style={commonStyle}
+          data-testid="header-social"
+        >
+          <HeaderSocialItems className="lg:mt-0" />
         </div>
       </header>
       <MenuContainer dialog={dialog} />
@@ -538,7 +561,7 @@ function SocialItem({
       });
     }
   };
-  const onClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const onClick = () => {
     isBtnClickedRef.current = true;
 
     trackEvent({

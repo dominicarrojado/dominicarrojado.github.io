@@ -97,6 +97,17 @@ describe('<Header />', () => {
         expect(listEl).toHaveClass('opacity-0');
       });
     });
+
+    it('should NOT add padding to fixed elements based on scroll bar width', () => {
+      const socialItemsEl = screen.queryByTestId('header-social');
+      const buttonsEl = screen.queryByTestId('header-buttons');
+      const bodyEl = document.body;
+      const scrollBarWidth = window.innerWidth - bodyEl.offsetWidth;
+      const expectedStyle = { paddingRight: `${scrollBarWidth}px` };
+
+      expect(buttonsEl).not.toHaveStyle(expectedStyle);
+      expect(socialItemsEl).not.toHaveStyle(expectedStyle);
+    });
   });
 
   describe('menu is opened', () => {
@@ -137,6 +148,17 @@ describe('<Header />', () => {
 
         expect(listEl).not.toHaveClass('opacity-0');
       });
+    });
+
+    it('should add padding to fixed elements based on scroll bar width', () => {
+      const socialItemsEl = screen.queryByTestId('header-social');
+      const buttonsEl = screen.queryByTestId('header-buttons');
+      const bodyEl = document.body;
+      const scrollBarWidth = window.innerWidth - bodyEl.offsetWidth;
+      const expectedStyle = { paddingRight: `${scrollBarWidth}px` };
+
+      expect(buttonsEl).toHaveStyle(expectedStyle);
+      expect(socialItemsEl).toHaveStyle(expectedStyle);
     });
   });
 
