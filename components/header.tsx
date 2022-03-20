@@ -39,7 +39,7 @@ export default function Header({ route }: { route: Route }) {
     if (!dialogVisible) {
       return undefined;
     }
-    
+
     const bodyEl = document.body;
     const scrollBarWidth = window.innerWidth - bodyEl.offsetWidth;
 
@@ -223,9 +223,8 @@ function ThemeButton({
       className={cn(
         'group min-w-11.5 pt-2 pb-2 px-2 text-gray-400 outline-none',
         'dark:text-gray-300',
-        'hover:text-gray-500',
-        'dark:hover:text-gray-100',
-        'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-gray-400',
+        'hover:text-gray-500 focus-visible:text-gray-500',
+        'dark:hover:text-white dark:focus-visible:text-white',
         'md:min-w-15 md:px-3',
         'lg:min-w-18'
       )}
@@ -326,7 +325,6 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
       state={dialog}
       className={cn(
         'group flex items-center flex-col min-w-12 pt-3 pb-2 px-2 outline-none',
-        'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-gray-400',
         'md:min-w-15.5 md:px-3',
         'xl:min-w-18.5'
       )}
@@ -344,8 +342,8 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
             className={cn(
               'w-6 h-0.5 bg-gray-400 rounded',
               'dark:bg-gray-300',
-              'transform transition group-hover:bg-gray-500',
-              'dark:group-hover:bg-white',
+              'transform transition group-hover:bg-gray-500 group-focus-visible:bg-gray-500',
+              'dark:group-hover:bg-white dark:group-focus-visible:bg-white',
               'md:w-7 md:h-1',
               'xl:w-8',
               { 'mt-1.5': !isTop },
@@ -441,6 +439,7 @@ function MenuContainer({ dialog }: { dialog: DialogStateReturn }) {
                   'w-0 h-0 pointer-events-none': !shouldDisplay,
                 }
               )}
+              hideOnClickOutside={false}
               aria-label="Menu"
               data-testid="menu-container"
             >
@@ -495,8 +494,7 @@ function MenuItems({
             <a
               className={cn(
                 'group relative pb-2 text-3xl text-gray-300 select-none outline-none',
-                'transition-colors duration-300 hover:text-white',
-                'focus-visible:outline focus:outline-offset-8 focus-visible:outline-1 focus-visible:outline-white',
+                'transition-colors duration-300 hover:text-white focus-visible:text-white',
                 'sm:text-4xl',
                 'md:pb-3 md:text-5xl',
                 'xl:pb-4 xl:text-6xl'
@@ -508,7 +506,8 @@ function MenuItems({
               <div
                 className={cn(
                   'absolute bottom-0 right-0 z-10 w-0 h-px bg-white pointer-events-none',
-                  'transition-width duration-300 group-hover:right-auto group-hover:left-0 group-hover:w-full'
+                  'transition-width duration-300 group-hover:right-auto group-hover:left-0 group-hover:w-full',
+                  'group-focus-visible:right-auto group-focus-visible:left-0 group-focus-visible:w-full'
                 )}
               />
             </a>
@@ -590,8 +589,7 @@ function SocialItem({
         href={social.url}
         title={social.title}
         className={cn(
-          'flex items-center p-3.5 outline-none',
-          'focus-visible:outline focus:outline-offset-0 focus-visible:outline-1 focus-visible:outline-white',
+          'group flex items-center p-3.5 outline-none',
           'sm:p-5',
           'md:p-6'
         )}
@@ -602,7 +600,7 @@ function SocialItem({
         {social.icon({
           className: cn(
             'w-8 h-8 text-gray-300',
-            'transition-colors hover:text-white',
+            'transition-colors group-hover:text-white group-focus-visible:text-white',
             'sm:w-10 sm:h-10',
             'md:w-11 md:h-11'
           ),
