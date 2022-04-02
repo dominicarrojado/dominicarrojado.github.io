@@ -12,12 +12,12 @@ function AboutSection() {
         <figure className={cn('md:float-left md:mr-16', 'xl:mr-20')}>
           <img
             className="w-72 h-auto mx-auto shadow-3xl"
-            src="/images/about/my-fiancee-and-i.jpeg"
-            alt="A photo of my fiancée and I"
+            src="/images/about/my-wife-and-i.jpeg"
+            alt="A photo of my wife and I"
             draggable="false"
           />
           <figcaption className="text-gray-400 text-center">
-            My fiancée and I.
+            My wife and I.
           </figcaption>
         </figure>
         <p>
@@ -45,8 +45,8 @@ function AboutSection() {
         </p>
         <p>
           I'm originally from the Philippines and found an opportunity to move
-          here in Singapore to be with my girlfriend (now fiancée!) and further
-          my career. I've been here since 2018 and my knowledge and experiences
+          here in Singapore to be with my girlfriend (now wife!) and further my
+          career. I've been here since 2018 and my knowledge and experiences
           have grown exponentially since then. With Singapore being a
           multi-ethnic society and a regional hub, I'm able to work with
           competitive people from different walks of life. This gave me the
