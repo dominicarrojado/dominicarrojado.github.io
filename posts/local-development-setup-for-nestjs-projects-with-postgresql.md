@@ -1,5 +1,5 @@
 ---
-title: 'Local development setup for NestJS projects'
+title: 'Local development setup for NestJS projects with PostgreSQL'
 date: '2022-04-14'
 excerpt: 'A quick way to get started with NestJS integrated with TypeScript, PostgreSQL and pgAdmin4 using Docker Compose'
 category: 'technology'
@@ -71,7 +71,7 @@ Let's install [Prettier](https://prettier.io/), it's a code formatter that forma
 
 Click on the "Extensions" tab and look for "Prettier" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
 
-![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/local-development-setup-for-nestjs-projects/install-prettier-extension-in-visual-studio-code.png)
+![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/install-prettier-extension-in-visual-studio-code.png)
 
 After Prettier is installed, we still need to enable the formatting feature by updating our settings in Visual Studio Code. Let's create a folder in the root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. Then update the created file with the code below:
 
@@ -140,11 +140,11 @@ Let's build our first Docker image. Do remember to start your Docker Desktop app
 docker build --tag nest-docker .
 ```
 
-![Screenshot of docker build result](/images/posts/local-development-setup-for-nestjs-projects/docker-build-result.png)
+![Screenshot of docker build result](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-build-result.png)
 
 If you open your Docker Desktop, you'll see our `nest-docker` image in the "Images" tab.
 
-![Screenshot of Docker Desktop images](/images/posts/local-development-setup-for-nestjs-projects/docker-desktop-images.png)
+![Screenshot of Docker Desktop images](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-desktop-images.png)
 
 ## Run our image as a container
 
@@ -160,7 +160,7 @@ docker run --detach --publish 3000:3000 nest-docker
 
 We have 2 parameters in this command, that's `--detach` and `--publish 3000:3000`. So remember that contianers runs in isolation, hence we are not able to connect to it unless we publish it. To publish a port for our container, we used the `--publish` flag (-p for short) on the docker run command. The format of the `--publish` command is `[host port]:[container port]`. We can then access our application running in the `container port` via the `host port`. While `--detach` basically runs our container in detached mode or in the background so that our terminal (which where we ran the command) will not have it connected.
 
-![Screenshot of Docker Desktop containers](/images/posts/local-development-setup-for-nestjs-projects/docker-desktop-containers.png)
+![Screenshot of Docker Desktop containers](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-desktop-containers.png)
 
 Now that the application is running, open your browser and go to `http://localhost:3000/`. You should see the same `Hello World!` message.
 
@@ -299,11 +299,11 @@ yarn docker-compose:dev
 
 Once all the environments are up and running, open your browser and go to `http://localhost:5050/`. You will be redirected to log in to pgAdmin4. Type in the default email and password we have provided in the `docker-compose.yml`.
 
-![Screenshot of log in to pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects/pgadmin4-log-in.png)
+![Screenshot of log in to pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-log-in.png)
 
 After successfully logging in, do a right-click on the "Servers" located at the left-hand side of the portal then click "Register - Server". It will open up a modal, under the "General" tab, give the server a name (e.g. "Nest Docker"). Then, go to the "Connection" tab and input the following:
 
-![Screenshot of register server in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects/pgadmin4-register-server.png)
+![Screenshot of register server in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-register-server.png)
 
 Hit "Save" and if there was no error means that our pgAdmin4 was able to connect to our PostgreSQL database successfully. The "Nest Docker" would be added under the "Servers", and you can go through that to see and interact with the database. Here's how you can go to the tables: `Servers` -> `Nest Docker` -> `postgres` -> `Schemas` -> `public` -> `Tables`.
 
@@ -430,7 +430,7 @@ It should return a status of `200 OK` and return you an empty array `[]`.
 
 If you still don't trust it, create a new row in our `user` table using pgAdmin4.
 
-![Screenshot of creating a user row in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects/pgadmin4-create-user-row.png)
+![Screenshot of creating a user row in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-create-user-row.png)
 
 And if you repeat the same `GET` request, it should now return you an array with the user object:
 
