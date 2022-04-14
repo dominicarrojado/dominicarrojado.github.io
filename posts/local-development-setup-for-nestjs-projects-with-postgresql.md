@@ -18,7 +18,7 @@ If you don't want to go through the steps below and you just want to get the boi
 git clone git@github.com:dominicarrojado/nestjs-postgres-boilerplate.git my-app
 ```
 
-Don't forget to ⭐ and share the [repo](https://www.geeksforgeeks.org/what-is-a-git-repository/) if you like it!
+Don't forget to ⭐ and share the [repo](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) if you like it!
 
 ## Prerequisites
 

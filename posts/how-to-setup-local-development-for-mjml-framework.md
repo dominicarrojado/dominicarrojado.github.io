@@ -22,7 +22,7 @@ If you don't want to go through the steps below and you just want to get the boi
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git my-email-template
 ```
 
-Don't forget to ⭐ and share the [repo](https://www.geeksforgeeks.org/what-is-a-git-repository/) if you like it!
+Don't forget to ⭐ and share the [repo](https://github.com/dominicarrojado/mjml-email-framework-boilerplate) if you like it!
 
 ## Prerequisites
 
