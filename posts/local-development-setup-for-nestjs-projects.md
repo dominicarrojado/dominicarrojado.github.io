@@ -12,11 +12,13 @@ This is a guide on how to setup a local development for [NestJS](https://docs.ne
 
 ## Skip
 
-If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can clone it instead using the command below:
+If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can [clone it here](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) or run the [git](https://git-scm.com/) command below:
 
 ```bash
 git clone git@github.com:dominicarrojado/nestjs-postgres-boilerplate.git my-app
 ```
+
+Don't forget to ⭐ and share the [repo](https://www.geeksforgeeks.org/what-is-a-git-repository/) if you like it!
 
 ## Prerequisites
 

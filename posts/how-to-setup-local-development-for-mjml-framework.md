@@ -16,11 +16,13 @@ If you're already on board and ready to get started, I'll now teach you how to s
 
 ## Skip
 
-If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can clone by typing the command below:
+If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can [clone it here](https://github.com/dominicarrojado/mjml-email-framework-boilerplate) or run the [git](https://git-scm.com/) command below:
 
 ```bash
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git my-email-template
 ```
+
+Don't forget to ⭐ and share the [repo](https://www.geeksforgeeks.org/what-is-a-git-repository/) if you like it!
 
 ## Prerequisites
 
