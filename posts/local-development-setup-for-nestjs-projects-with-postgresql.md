@@ -1,6 +1,6 @@
 ---
 title: 'Local development setup for NestJS projects with PostgreSQL'
-date: '2022-04-14'
+date: '2022-04-15'
 excerpt: 'A quick way to get started with NestJS integrated with TypeScript, PostgreSQL and pgAdmin4 using Docker Compose'
 category: 'technology'
 videoUrl: ''
@@ -273,16 +273,16 @@ Let's update our `docker-compose.yml` to include their respective docker images:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres
 
   dbadmin:
-    image: pgadmin4
+    image: dpage/pgadmin4
     restart: always
     ports:
       - 5050:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD: pgadmin4
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin4
 ```
 
 PostgreSQL image runs on port `5432` by default and we are just exposing the same port for our application to connect to. The only environment variable required is `POSTGRES_PASSWORD`, the rest are optional or will use the default values. Hence, we have defined a password here. You can read more about the other environment variables for PostgreSQL [here](https://hub.docker.com/_/postgres). The default value for `POSTGRES_USERNAME` and `POSTGRES_DATABASE` would be `postgres`.
@@ -461,7 +461,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.env.stage.${process.env.STAGE}`],
+      envFilePath: [`stage.${process.env.STAGE}.env`],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -488,7 +488,7 @@ export class AppModule {}
 
 In order to use the `ConfigModule` when initializing the `TypeOrmModule`, we'll need to switch from using `forRoot` to `forRootAsync` and take advantage of the dependency injection as written above.
 
-We'll be using `STAGE` from the environment variables as the definition on which `.env` file will be loaded. Go ahead and create `.env.stage.dev` and add the following config (you can create a file `.env.stage.prod` later when you're ready to deploy your application to production):
+We'll be using `STAGE` from the environment variables as the definition on which `.env` file will be loaded. Go ahead and create `stage.dev.env` and add the following config (you can create a file `stage.prod.env` later when you're ready to deploy your application to production):
 
 ```
 PORT=3000
@@ -558,6 +558,7 @@ import * as Joi from 'joi';
 
 export const configValidationSchema = Joi.object({
   STAGE: Joi.string().required(),
+  PORT: Joi.number().default(3000).required(),
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().default(5432).required(),
   DB_USERNAME: Joi.string().required(),
@@ -575,7 +576,7 @@ import { configValidationSchema } from './config.schema';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.env.stage.${process.env.STAGE}`],
+      envFilePath: [`stage.${process.env.STAGE}.env`],
       validationSchema: configValidationSchema,
     }),
     ...
@@ -585,7 +586,7 @@ import { configValidationSchema } from './config.schema';
 export class AppModule {}
 ```
 
-That's all you need to do. Try removing `DB_USERNAME` in `.env.stage.dev` and run the Docker Compose environments. You'll get an error in the end stating: `Error: Config validation error: "DB_USERNAME" is required`. That's really helpful for knowing what went wrong while trying to run your application instead of getting a generic error `Unable to connect to the database` if we didn't do the config schema validation otherwise.
+That's all you need to do. Try removing `DB_USERNAME` in `stage.dev.env` and run the Docker Compose environments. You'll get an error in the end stating: `Error: Config validation error: "DB_USERNAME" is required`. That's really helpful for knowing what went wrong while trying to run your application instead of getting a generic error `Unable to connect to the database` if we didn't do the config schema validation otherwise.
 
 ## Production and test environments
 
@@ -615,6 +616,17 @@ FROM base AS prod
 
 Note that for `test:watch` to know what has change within the application code, it relies on [git](https://git-scm.com/), so we had some additional instructions for it.
 
+Let's create `production.yml` in the root folder with the following content:
+
+```yml
+services:
+  app:
+    build:
+      target: prod
+```
+
+It doesn't contain much as we only want to change the target because this will be appended to the original `docker-compose.yml`.
+
 Then create `test.yml` in the root folder with the following content:
 
 ```yml
@@ -624,7 +636,14 @@ services:
       target: test
 ```
 
-It doesn't contain much as we only want to change the target because this will be appended to the original `docker-compose.yml`.
+Then create `test-cov.yml` in the root folder with the following content:
+
+```yml
+services:
+  app:
+    build:
+      target: test-cov
+```
 
 Then create `test-watch.yml` in the root folder with the following content:
 
@@ -638,15 +657,6 @@ services:
 ```
 
 You should already be familiar with `volumes`. Here, we are basically syncing our `.git` folder from our current directory with the `.git` folder of the application container. That is how it will know what files were changed in the application code and only run the test related to those changes.
-
-Then create `test-cov.yml` in the root folder with the following content:
-
-```yml
-services:
-  app:
-    build:
-      target: test-cov
-```
 
 Lastly, update the `package.json` to add new scripts and utilize these new Docker Compose targets:
 
