@@ -3,7 +3,7 @@ title: 'Local development setup for NestJS projects with PostgreSQL'
 date: '2022-04-15'
 excerpt: 'A quick way to get started with NestJS integrated with TypeScript, PostgreSQL and pgAdmin4 using Docker Compose'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/pZNE1YMdbio'
 ---
 
 ## Introduction
