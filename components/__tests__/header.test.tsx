@@ -2,6 +2,7 @@ import { cloneElement } from 'react';
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
 import * as Link from 'next/link';
+import Router from 'next/router';
 import Window from '../../modules/Window';
 import DarkMode from '../../modules/DarkMode';
 import {
@@ -159,6 +160,28 @@ describe('<Header />', () => {
 
       expect(buttonsEl).toHaveStyle(expectedStyle);
       expect(socialItemsEl).toHaveStyle(expectedStyle);
+    });
+  });
+
+  describe('<ProgressBar />', () => {
+    beforeEach(() => {
+      renderComponent(getRandomRoute());
+    });
+
+    it('should NOT display progress bar by default', () => {
+      const progressBarEl = screen.queryByRole('progressbar');
+
+      expect(progressBarEl).not.toBeInTheDocument();
+    });
+
+    it('should display progress by on route change', () => {
+      act(() => {
+        Router.events.emit('routeChangeStart');
+      });
+
+      const progressBarEl = screen.queryByRole('progressbar');
+
+      expect(progressBarEl).toBeInTheDocument();
     });
   });
 

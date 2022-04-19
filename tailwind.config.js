@@ -76,6 +76,7 @@ module.exports = {
       animation: {
         slide: 'slide 200s linear infinite',
         spin: 'spin 1s ease infinite',
+        stripes: 'stripes 1s linear infinite',
       },
       keyframes: {
         slide: {
@@ -84,6 +85,11 @@ module.exports = {
           },
           '100%': {
             'background-position': 'center 0',
+          },
+        },
+        stripes: {
+          '0%': {
+            'background-position-x': '1rem',
           },
         },
       },
