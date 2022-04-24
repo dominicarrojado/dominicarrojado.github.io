@@ -34,8 +34,8 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
       <div
         className={cn('mt-12 text-center', 'md:mt-16', 'lg:mt-18', 'xl:mt-20')}
       >
-        <Link href={Route.POSTS} passHref>
-          <TextArrowLink>See All Blog</TextArrowLink>
+        <Link href={`${Route.POSTS_PAGE}/2`} passHref>
+          <TextArrowLink>See More Posts</TextArrowLink>
         </Link>
       </div>
     </Section>

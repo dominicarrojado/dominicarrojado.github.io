@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import cn from 'classnames';
 import { useWindowLoaded } from '../lib/custom-hooks';
 import Section from './section';
 import PostItem from './postItem';
-import ButtonArrowLink from './buttonArrowLink';
+import PostsPagination from './postsPagination';
 import { Post } from '../lib/types';
-import { POSTS_DISPLAY_LATEST_MAX } from '../lib/constants';
 
-function PostsSection({ posts }: { posts: Array<Post> }) {
-  const isWindowLoaded = useWindowLoaded();
-  const [shouldShowAll, setShouldShowAll] = useState(false);
-  const hasMorePosts =
-    isWindowLoaded && !shouldShowAll && posts.length > POSTS_DISPLAY_LATEST_MAX;
-  const showAllOnClick = () => setShouldShowAll(true);
+export type Props = {
+  currentPage: number;
+  lastPage: number;
+  posts: Array<Post>;
+};
+
+export default function PostsSection({ posts, currentPage, lastPage }: Props) {
+  const shouldDisplay = useWindowLoaded();
 
   return (
     <Section id="posts">
@@ -20,50 +20,25 @@ function PostsSection({ posts }: { posts: Array<Post> }) {
         className="relative flex flex-col max-w-screen-3xl mx-auto"
         data-testid="posts-list"
       >
-        {posts.map((post, idx) => {
-          const isOlder = idx >= POSTS_DISPLAY_LATEST_MAX;
-          const shouldDisplayOlder = shouldShowAll || !isOlder;
-          const shouldDisplay = isWindowLoaded && shouldDisplayOlder;
-
-          return (
-            <PostItem
-              key={idx}
-              post={post}
-              headingLevel={2}
-              className={cn(
-                'transform transition-transform-opacity duration-700',
-                {
-                  'opacity-0 translate-y-10': !shouldDisplay,
-                  'h-0 pointer-events-none': !shouldDisplayOlder,
-                }
-              )}
-              style={{
-                transitionDelay: !isOlder
-                  ? `${idx * 150 + 1500}ms`
-                  : `${(idx - POSTS_DISPLAY_LATEST_MAX) * 150}ms`,
-                margin: !shouldDisplayOlder ? 0 : undefined,
-              }}
-              anchorClassName="bg-gray-100 dark:bg-gray-750"
-            />
-          );
-        })}
+        {posts.map((post, idx) => (
+          <PostItem
+            key={idx}
+            post={post}
+            headingLevel={2}
+            className={cn(
+              'transform transition-transform-opacity duration-700',
+              {
+                'opacity-0 translate-y-10': !shouldDisplay,
+              }
+            )}
+            style={{
+              transitionDelay: `${idx * 150 + 1500}ms`,
+            }}
+            anchorClassName="bg-gray-100 dark:bg-gray-750"
+          />
+        ))}
       </ul>
-      {hasMorePosts && (
-        <div
-          className={cn(
-            'mt-12 text-center',
-            'md:mt-16',
-            'lg:mt-18',
-            'xl:mt-20'
-          )}
-        >
-          <ButtonArrowLink withIcon={false} onClick={showAllOnClick}>
-            Show All Posts
-          </ButtonArrowLink>
-        </div>
-      )}
+      <PostsPagination currentPage={currentPage} lastPage={lastPage} />
     </Section>
   );
 }
-
-export default PostsSection;

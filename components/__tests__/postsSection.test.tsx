@@ -10,166 +10,73 @@ import {
 } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
 import * as PostItem from '../postItem';
+import * as PostsPagination from '../postsPagination';
 import { Post } from '../../lib/types';
-import { POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
-import PostsSection from '../postsSection';
+import { POSTS_PER_PAGE } from '../../lib/constants';
+import PostsSection, { Props } from '../postsSection';
 
 describe('<PostsSection />', () => {
-  const renderComponent = (posts: Array<Post>) => {
-    render(<PostsSection posts={posts} />);
+  const renderComponent = (props: Props) => {
+    render(<PostsSection {...props} />);
   };
 
-  describe('posts less than max', () => {
-    const posts = createPosts(
-      getFakeNumber({ min: 1, max: POSTS_DISPLAY_LATEST_MAX - 1 })
-    );
+  it('should render expected components', () => {
+    const postItemSpy = jest.spyOn(PostItem, 'default');
+    const postsPaginationSpy = jest.spyOn(PostsPagination, 'default');
 
-    afterEach(() => {
-      jest.restoreAllMocks();
+    const currentPage = 1;
+    const lastPage = getFakeNumber({ max: POSTS_PER_PAGE });
+    const posts = createPosts(getFakeNumber({ min: 1, max: POSTS_PER_PAGE }));
+
+    renderComponent({ posts, currentPage, lastPage });
+
+    expect(postItemSpy).toBeCalledTimes(posts.length);
+
+    posts.forEach((post, idx) => {
+      expect(postItemSpy).toHaveBeenNthCalledWith(
+        idx + 1,
+        expect.objectContaining({
+          post,
+          headingLevel: 2,
+        }),
+        {}
+      );
     });
 
-    it('should render all posts', () => {
-      const postItemSpy = jest.spyOn(PostItem, 'default');
+    expect(postsPaginationSpy).toBeCalledTimes(1);
+  });
 
-      renderComponent(posts);
+  it('should NOT display all posts by default', () => {
+    const currentPage = 1;
+    const lastPage = getFakeNumber({ max: POSTS_PER_PAGE });
+    const posts = createPosts(getFakeNumber({ min: 1, max: POSTS_PER_PAGE }));
 
-      expect(postItemSpy).toBeCalledTimes(posts.length);
+    renderComponent({ posts, currentPage, lastPage });
 
-      posts.forEach((post, idx) => {
-        expect(postItemSpy).toHaveBeenNthCalledWith(
-          idx + 1,
-          expect.objectContaining({
-            post,
-            headingLevel: 2,
-          }),
-          {}
-        );
-      });
-    });
+    const postsListEl = screen.queryByTestId('posts-list') as HTMLUListElement;
+    const postItemEls = postsListEl.childNodes;
 
-    it('should NOT display all posts by default', () => {
-      renderComponent(posts);
-
-      const postsListEl = screen.queryByTestId(
-        'posts-list'
-      ) as HTMLUListElement;
-      const postItemEls = postsListEl.childNodes;
-
-      postItemEls.forEach((postItemEl) => {
-        expect(postItemEl).toHaveClass('opacity-0');
-      });
-    });
-
-    it('should display all posts on window load', () => {
-      renderComponent(posts);
-
-      act(() => {
-        Window.emit('load');
-      });
-
-      const postsListEl = screen.queryByTestId(
-        'posts-list'
-      ) as HTMLUListElement;
-      const postItemEls = postsListEl.childNodes;
-
-      postItemEls.forEach((postItemEl) => {
-        expect(postItemEl).not.toHaveClass('opacity-0');
-      });
-    });
-
-    it('should NOT display show all button', () => {
-      const btnEl = screen.queryByText('Show All Posts');
-
-      expect(btnEl).not.toBeInTheDocument();
+    postItemEls.forEach((postItemEl) => {
+      expect(postItemEl).toHaveClass('opacity-0');
     });
   });
 
-  describe('posts more than max', () => {
-    const posts = createPosts(
-      getFakeNumber({ min: POSTS_DISPLAY_LATEST_MAX + 1, max: 10 })
-    );
+  it('should display all posts on window load', () => {
+    const currentPage = 1;
+    const lastPage = getFakeNumber({ max: POSTS_PER_PAGE });
+    const posts = createPosts(getFakeNumber({ min: 1, max: POSTS_PER_PAGE }));
 
-    afterEach(() => {
-      jest.restoreAllMocks();
+    renderComponent({ posts, currentPage, lastPage });
+
+    act(() => {
+      Window.emit('load');
     });
 
-    it('should render all posts', () => {
-      const postItemSpy = jest.spyOn(PostItem, 'default');
+    const postsListEl = screen.queryByTestId('posts-list') as HTMLUListElement;
+    const postItemEls = postsListEl.childNodes;
 
-      renderComponent(posts);
-
-      expect(postItemSpy).toBeCalledTimes(posts.length);
-
-      posts.forEach((post, idx) => {
-        expect(postItemSpy).toHaveBeenNthCalledWith(
-          idx + 1,
-          expect.objectContaining({
-            post,
-            headingLevel: 2,
-          }),
-          {}
-        );
-      });
-    });
-
-    it('should NOT display all posts by default', () => {
-      renderComponent(posts);
-
-      const postsListEl = screen.queryByTestId(
-        'posts-list'
-      ) as HTMLUListElement;
-      const postItemEls = postsListEl.childNodes;
-
-      postItemEls.forEach((postItemEl) => {
-        expect(postItemEl).toHaveClass('opacity-0');
-      });
-    });
-
-    it('should display latest posts on window load', () => {
-      renderComponent(posts);
-
-      act(() => {
-        Window.emit('load');
-      });
-
-      const postsListEl = screen.queryByTestId(
-        'posts-list'
-      ) as HTMLUListElement;
-      const postItemEls = postsListEl.childNodes;
-
-      postItemEls.forEach((postItemEl, idx) => {
-        if (idx < POSTS_DISPLAY_LATEST_MAX) {
-          expect(postItemEl).not.toHaveClass(
-            'opacity-0 h-0 pointer-events-none'
-          );
-        } else {
-          expect(postItemEl).toHaveClass('opacity-0 h-0 pointer-events-none');
-          expect(postItemEl).toHaveStyle({ margin: '0px' });
-        }
-      });
-    });
-
-    it('should display all posts on click', () => {
-      renderComponent(posts);
-
-      act(() => {
-        Window.emit('load');
-      });
-
-      const btnEl = screen.queryByText('Show All Posts') as HTMLButtonElement;
-
-      fireEvent.click(btnEl);
-
-      expect(btnEl).not.toBeInTheDocument();
-
-      const postsListEl = screen.queryByTestId(
-        'posts-list'
-      ) as HTMLUListElement;
-      const postItemEls = postsListEl.childNodes;
-
-      postItemEls.forEach((postItemEl) => {
-        expect(postItemEl).not.toHaveClass('opacity-0 h-0 pointer-events-none');
-      });
+    postItemEls.forEach((postItemEl) => {
+      expect(postItemEl).not.toHaveClass('opacity-0');
     });
   });
 });

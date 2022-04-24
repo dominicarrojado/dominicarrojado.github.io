@@ -10,6 +10,7 @@ export enum Route {
   ABOUT = '/about',
   PROJECTS = '/projects',
   POSTS = '/posts',
+  POSTS_PAGE = '/posts/page',
   PRIVACY_POLICY = '/privacy-policy',
   DISCLAIMER = '/disclaimer',
 }

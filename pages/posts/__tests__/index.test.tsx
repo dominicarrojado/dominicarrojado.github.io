@@ -19,10 +19,13 @@ describe('<Posts />', () => {
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const postsSectionSpy = jest.spyOn(PostsSection, 'default');
 
-    const staticProps = (await getStaticProps({})) as any;
+    const staticPropsRes = (await getStaticProps({})) as any;
+    const staticProps = staticPropsRes.props;
 
-    expect(staticProps).toEqual({
+    expect(staticPropsRes).toEqual({
       props: {
+        currentPage: expect.any(Number),
+        lastPage: expect.any(Number),
         posts: expect.arrayContaining([
           {
             id: expect.any(String),
@@ -36,9 +39,15 @@ describe('<Posts />', () => {
       },
     });
 
-    const posts = staticProps.props.posts as Array<Post>;
+    const { currentPage, lastPage } = staticProps;
 
-    render(<Posts posts={posts} />);
+    expect(currentPage).toBeLessThanOrEqual(lastPage);
+
+    const posts = staticProps.posts as Array<Post>;
+
+    render(
+      <Posts currentPage={currentPage} lastPage={lastPage} posts={posts} />
+    );
 
     const title = 'Tech Blog';
     const desc =

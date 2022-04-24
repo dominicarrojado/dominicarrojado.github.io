@@ -5,7 +5,7 @@ import HeroSub from '../../components/heroSub';
 import PostContent from '../../components/postContent';
 import { PostData, Route } from '../../lib/types';
 
-function Post({ postData }: { postData: PostData }) {
+export default function Post({ postData }: { postData: PostData }) {
   return (
     <>
       <SeoTags
@@ -33,5 +33,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   };
 };
-
-export default Post;

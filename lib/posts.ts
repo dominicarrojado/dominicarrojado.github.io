@@ -2,24 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { sortArrayByKeys } from './array';
-import { POSTS_DISPLAY_LATEST_MAX } from './constants';
+import { POSTS_PER_PAGE } from './constants';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
-
-export function getLatestPostsData(posts = getAllPostsData()) {
-  const postsLen = posts.length;
-  const latestPosts = [];
-
-  for (let i = 0; i < postsLen; i++) {
-    if (i >= POSTS_DISPLAY_LATEST_MAX) {
-      break;
-    }
-
-    latestPosts.push(posts[i]);
-  }
-
-  return latestPosts;
-}
 
 export function getAllPostsData() {
   // get file names under /posts
@@ -44,6 +29,12 @@ export function getAllPostsData() {
   return sortArrayByKeys(posts, { date: -1, title: -1 });
 }
 
+export function getAllPostsLastPage() {
+  const fileNames = fs.readdirSync(postsDirectory);
+
+  return Math.ceil(fileNames.length / POSTS_PER_PAGE);
+}
+
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
 
@@ -52,6 +43,21 @@ export function getAllPostIds() {
       id: fileName.replace(/\.md$/, ''),
     },
   }));
+}
+
+export function getAllPostPages() {
+  const lastPage = getAllPostsLastPage();
+  const pages: Array<{ params: { number: string } }> = [];
+
+  for (let i = 1; i <= lastPage; i++) {
+    pages.push({
+      params: {
+        number: i.toString(),
+      },
+    });
+  }
+
+  return pages;
 }
 
 export async function getPostData(id: string) {

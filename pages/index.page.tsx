@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { getLatestPostsData } from '../lib/posts';
+import { getAllPostsData } from '../lib/posts';
 import SeoTags from '../components/seoTags';
 import HeroMain from '../components/heroMain';
 import AboutHomeSection from '../components/aboutHomeSection';
@@ -7,6 +7,7 @@ import ProjectsHomeSection from '../components/projectsHomeSection';
 import PostsHomeSection from '../components/postsHomeSection';
 import TestimonialsHomeSection from '../components/testimonialsHomeSection';
 import { Post, Route } from '../lib/types';
+import { POSTS_PER_PAGE } from '../lib/constants';
 
 export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
   return (
@@ -28,7 +29,7 @@ export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
 export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
-      latestPosts: getLatestPostsData(),
+      latestPosts: getAllPostsData().splice(0, POSTS_PER_PAGE),
     },
   };
 };

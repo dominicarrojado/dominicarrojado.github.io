@@ -22,7 +22,7 @@ export const PRIVACY_EMAIL = 'privacy@dominicarrojado.com';
 export const DISCLAIMER_EMAIL = 'disclaimer@dominicarrojado.com';
 export const ROUTES = Object.values(Route);
 export const SCROLL_DOWN_DURATION = 1500;
-export const POSTS_DISPLAY_LATEST_MAX = 4;
+export const POSTS_PER_PAGE = 4;
 export const SEO_DEFAULT_IMAGE =
   '/images/pages/guides-tips-and-tricks-to-web-development.png';
 export const SEO_DEFAULT_IMAGE_WIDTH = 2400;
@@ -518,3 +518,5 @@ export const MENU_ITEMS = [
   },
 ];
 export const MENU_ITEMS_LENGTH = MENU_ITEMS.length;
+
+export const PAGINATION_MAX_LENGTH = 7; // must be odd

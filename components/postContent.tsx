@@ -206,7 +206,7 @@ function PostFooter({
       </div>
       <div className="mt-16 text-center">
         <Link href={Route.POSTS} passHref>
-          <TextArrowLink>See All Blog</TextArrowLink>
+          <TextArrowLink>See Latest Posts</TextArrowLink>
         </Link>
       </div>
     </div>

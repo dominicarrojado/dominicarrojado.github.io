@@ -136,7 +136,7 @@ describe('<PostContent />', () => {
     });
 
     it('should have expected anchor', () => {
-      const anchorEl = screen.queryByText('See All Blog');
+      const anchorEl = screen.queryByText('See Latest Posts');
 
       expect(anchorEl?.tagName).toBe('A');
       expect(anchorEl).toHaveAttribute('href', '/posts');

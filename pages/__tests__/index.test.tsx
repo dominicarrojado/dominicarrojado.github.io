@@ -7,7 +7,7 @@ import * as ProjectsHomeSection from '../../components/projectsHomeSection';
 import * as PostsHomeSection from '../../components/postsHomeSection';
 import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
 import { Post } from '../../lib/types';
-import { POSTS_DISPLAY_LATEST_MAX } from '../../lib/constants';
+import { POSTS_PER_PAGE } from '../../lib/constants';
 import Home, { getStaticProps } from '../index.page';
 
 describe('<Home />', () => {
@@ -54,7 +54,7 @@ describe('<Home />', () => {
 
     const latestPosts = staticProps.props.latestPosts as Array<Post>;
 
-    expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
+    expect(latestPosts.length).toBeLessThanOrEqual(POSTS_PER_PAGE);
 
     render(<Home latestPosts={latestPosts} />);
 

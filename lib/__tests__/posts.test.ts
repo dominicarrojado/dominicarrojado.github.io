@@ -1,5 +1,6 @@
 import {
   getFakeDate,
+  getFakeNumber,
   getFakeSentence,
   getFakeSentences,
   getFakeUrl,
@@ -8,84 +9,16 @@ import {
   getRandomPostId,
 } from '../test-helpers';
 import { Post } from '../types';
-import { POSTS_DISPLAY_LATEST_MAX } from '../constants';
 import {
   getAdjacentPosts,
   getAllPostIds,
+  getAllPostPages,
   getAllPostsData,
-  getLatestPostsData,
+  getAllPostsLastPage,
   getPostData,
 } from '../posts';
 
 describe('posts utilities', () => {
-  describe('getLatestPostsData()', () => {
-    it('should return expected value', () => {
-      const latestPosts = getLatestPostsData();
-
-      expect(latestPosts).toEqual(
-        expect.arrayContaining([
-          {
-            id: expect.any(String),
-            title: expect.any(String),
-            category: expect.any(String),
-            date: expect.any(String),
-            excerpt: expect.any(String),
-            videoUrl: expect.any(String),
-          },
-        ])
-      );
-
-      expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
-
-      // expect sorting is correct
-      let minDate = Infinity;
-
-      latestPosts.forEach((post) => {
-        const date = new Date(post.date).getTime();
-
-        expect(date).toBeLessThanOrEqual(minDate);
-
-        minDate = date;
-      });
-    });
-
-    it('should handle posts less than max', () => {
-      const posts = [
-        {
-          id: getFakeUuid(),
-          title: getFakeSentence(),
-          category: getFakeWord(),
-          date: getFakeDate(),
-          excerpt: getFakeSentences(),
-          videoUrl: getFakeUrl(),
-        },
-      ] as Array<Post>;
-
-      const latestPosts = getLatestPostsData(posts);
-
-      expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
-    });
-
-    it('should handle posts more than max', () => {
-      const posts = [];
-
-      for (let i = 0; i < POSTS_DISPLAY_LATEST_MAX + 1; i++) {
-        posts.push({
-          id: getFakeUuid(),
-          title: getFakeSentence(),
-          category: getFakeWord(),
-          date: getFakeDate(),
-          excerpt: getFakeSentences(),
-          videoUrl: getFakeUrl(),
-        } as Post);
-      }
-
-      const latestPosts = getLatestPostsData(posts);
-
-      expect(latestPosts.length).toBeLessThanOrEqual(POSTS_DISPLAY_LATEST_MAX);
-    });
-  });
-
   describe('getAllPostsData()', () => {
     it('should return expected value', () => {
       const posts = getAllPostsData();
@@ -116,6 +49,15 @@ describe('posts utilities', () => {
     });
   });
 
+  describe('getAllPostsLastPage()', () => {
+    it('should return expected value', () => {
+      const lastPage = getAllPostsLastPage();
+
+      expect(typeof lastPage).toBe('number');
+      expect(lastPage).toBeGreaterThan(0);
+    });
+  });
+
   describe('getAllPostIds()', () => {
     it('should return expected value', () => {
       const postIds = getAllPostIds();
@@ -125,6 +67,22 @@ describe('posts utilities', () => {
           {
             params: {
               id: expect.any(String),
+            },
+          },
+        ])
+      );
+    });
+  });
+
+  describe('getAllPostPages()', () => {
+    it('should return expected value', () => {
+      const postPages = getAllPostPages();
+
+      expect(postPages).toEqual(
+        expect.arrayContaining([
+          {
+            params: {
+              number: expect.any(String),
             },
           },
         ])
