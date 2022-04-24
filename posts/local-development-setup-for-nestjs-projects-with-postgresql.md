@@ -67,7 +67,7 @@ yarn start:prod
 
 ## Install extensions in Visual Studio Code
 
-Let's install [Prettier](https://prettier.io/), it's a code formatter that formats the code for us when we save file changes which is a time-saver.
+Open the created project in your Visual Studio Code. Let's install [Prettier](https://prettier.io/), it's a code formatter that formats the code for us when we save file changes which is a time-saver.
 
 Click on the "Extensions" tab and look for "Prettier" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
 
@@ -541,7 +541,7 @@ bootstrap();
 
 Run the Docker Compose environments again and everything should work fine as before.
 
-## Schema validation
+## Config schema validation
 
 It is standard practice to throw an exception during application startup if required environment variables haven't been provided or if they don't meet certain validation rules. The `@nestjs/config` package enables two different ways to do this as mentioned [here](https://docs.nestjs.com/techniques/configuration#schema-validation). [Joi](https://github.com/sideway/joi) is one of them which is what we're going to use.
 

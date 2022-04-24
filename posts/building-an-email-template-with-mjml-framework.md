@@ -12,7 +12,7 @@ If you haven't heard about it yet, there's already an email framework that makes
 
 ## Prerequisites
 
-To start, you would need to setup your local development for MJML framework, I've written a [separate post](/posts/how-to-setup-local-development-for-mjml-framework/) just for that, but you can also just clone the boilerplate to save time:
+To start, you would need to setup your local development for MJML framework, I've written a [separate post](/posts/how-to-setup-local-development-for-mjml-framework/) just for that, but you can also just clone the [boilerplate](https://github.com/dominicarrojado/mjml-email-framework-boilerplate) to save time:
 
 ```bash
 git clone git@github.com:dominicarrojado/mjml-email-framework-boilerplate.git mjml-sample-edm
