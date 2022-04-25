@@ -1,4 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
+import Window from '../../modules/Window';
 import { queryByTextIgnoreHTML } from '../../lib/test-helpers';
 import { QUOTES, SOCIAL_LINKS } from '../../lib/constants';
 import Footer from '../footer';
@@ -49,6 +50,22 @@ describe('<Footer />', () => {
       expect(privacyAnchorEl).toHaveAttribute('href', '/privacy-policy');
 
       expect(disclaimerAnchorEl).toHaveAttribute('href', '/disclaimer');
+    });
+
+    it('should NOT display by default', () => {
+      const footerEl = screen.queryByTestId('footer');
+
+      expect(footerEl).toHaveClass('opacity-0');
+    });
+
+    it('should display on window load', () => {
+      act(() => {
+        Window.emit('load');
+      });
+
+      const footerEl = screen.queryByTestId('footer');
+
+      expect(footerEl).not.toHaveClass('opacity-0');
     });
   });
 

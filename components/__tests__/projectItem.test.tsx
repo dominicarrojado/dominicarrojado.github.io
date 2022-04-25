@@ -30,6 +30,25 @@ config.disabled = true; // disable react-transitions-group transitions
 describe('<ProjectItem />', () => {
   const getRandomHeadingLevel = () =>
     getFakeNumber({ min: 2, max: 3 }) as 2 | 3;
+  const createProject = (isBest: boolean) => {
+    return {
+      isBest,
+      title: getFakeSentence(),
+      description: getFakeSentences(),
+      links: [
+        {
+          title: getFakeSentence(),
+          url: getFakeUrl(),
+        },
+        {
+          title: getFakeSentence(),
+          url: getFakeDirectoryPath(), // for internal link check
+        },
+      ],
+      imageUrl: getFakeImageUrl(),
+      gifUrl: getFakeImageUrl(),
+    };
+  };
 
   describe('all props defined', () => {
     const project = createProject(true);
@@ -506,23 +525,3 @@ describe('<ProjectItem />', () => {
     });
   });
 });
-
-function createProject(isBest: boolean) {
-  return {
-    isBest,
-    title: getFakeSentence(),
-    description: getFakeSentences(),
-    links: [
-      {
-        title: getFakeSentence(),
-        url: getFakeUrl(),
-      },
-      {
-        title: getFakeSentence(),
-        url: getFakeDirectoryPath(), // for internal link check
-      },
-    ],
-    imageUrl: getFakeImageUrl(),
-    gifUrl: getFakeImageUrl(),
-  };
-}

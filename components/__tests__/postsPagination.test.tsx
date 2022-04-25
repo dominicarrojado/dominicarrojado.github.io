@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { getFakeNumber } from '../../lib/test-helpers';
+import Window from '../../modules/Window';
 import { PAGINATION_MAX_LENGTH } from '../../lib/constants';
 import PostsPagination, { Props } from '../postsPagination';
 
@@ -135,5 +136,37 @@ describe('<PostsPagination />', () => {
 
     verifyPaginationArrow('Previous', currentPage - 1);
     verifyPaginationArrow('Next', currentPage + 1);
+  });
+
+  it('should NOT display by default', () => {
+    const lastPage = getFakeNumber({ min: 1 });
+    const currentPage = getFakeNumber({ min: 1, max: lastPage });
+
+    renderComponent({
+      currentPage,
+      lastPage,
+    });
+
+    const navigationEl = screen.queryByLabelText('Pagination');
+
+    expect(navigationEl).toHaveClass('opacity-0');
+  });
+
+  it('should display on window load', () => {
+    const lastPage = getFakeNumber({ min: 1 });
+    const currentPage = getFakeNumber({ min: 1, max: lastPage });
+
+    renderComponent({
+      currentPage,
+      lastPage,
+    });
+
+    act(() => {
+      Window.emit('load');
+    });
+
+    const navigationEl = screen.queryByLabelText('Pagination');
+
+    expect(navigationEl).not.toHaveClass('opacity-0');
   });
 });

@@ -2,17 +2,25 @@ import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
+import { useWindowLoaded } from '../lib/custom-hooks';
 import SocialItems from './socialItems';
 import { Route } from '../lib/types';
 import { QUOTES, QUOTES_INTERVAL, QUOTES_LENGTH } from '../lib/constants';
 
 export default function Footer() {
+  const shouldDisplay = useWindowLoaded();
+
   return (
     <footer
       className={cn(
         'py-20 px-6 bg-gray-100 dark:bg-gray-850 overflow-hidden',
-        'lg:overflow-auto'
+        'lg:overflow-auto',
+        'transition-opacity duration-1000 delay-1750',
+        {
+          'opacity-0': !shouldDisplay,
+        }
       )}
+      data-testid="footer"
     >
       <Quotes />
       <SocialItems className="lg:hidden" />

@@ -19,6 +19,22 @@ describe('<PostsSection />', () => {
   const renderComponent = (props: Props) => {
     render(<PostsSection {...props} />);
   };
+  const createPosts = (count: number) => {
+    const posts = [];
+
+    for (let i = 0; i < count; i++) {
+      posts.push({
+        id: getFakeUuid(),
+        title: getFakeSentence(),
+        category: getFakeWord(),
+        date: getFakeDate(),
+        excerpt: getFakeSentences(),
+        videoUrl: getFakeUrl(),
+      } as Post);
+    }
+
+    return posts;
+  };
 
   it('should render expected components', () => {
     const postItemSpy = jest.spyOn(PostItem, 'default');
@@ -80,20 +96,3 @@ describe('<PostsSection />', () => {
     });
   });
 });
-
-function createPosts(count: number) {
-  const posts = [];
-
-  for (let i = 0; i < count; i++) {
-    posts.push({
-      id: getFakeUuid(),
-      title: getFakeSentence(),
-      category: getFakeWord(),
-      date: getFakeDate(),
-      excerpt: getFakeSentences(),
-      videoUrl: getFakeUrl(),
-    } as Post);
-  }
-
-  return posts;
-}
