@@ -6,7 +6,7 @@ import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
-import { useDownloadGif, useMounted, useWindowSize } from '../lib/custom-hooks';
+import { useDownloadGif, useMounted } from '../lib/custom-hooks';
 import SvgStar from './svgStar';
 import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
@@ -42,6 +42,8 @@ export default function ProjectItem({
     >
       <ImageContainer
         imageUrl={project.imageUrl}
+        imageWidth={project.imageWidth}
+        imageHeight={project.imageHeight}
         gifUrl={project.gifUrl}
         title={project.title}
       />
@@ -58,16 +60,19 @@ export default function ProjectItem({
 
 function ImageContainer({
   imageUrl,
+  imageWidth,
+  imageHeight,
   gifUrl,
   title,
 }: {
   imageUrl: string;
+  imageWidth: number;
+  imageHeight: number;
   gifUrl: string;
   title: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const { windowHeight } = useWindowSize();
   const [isScrolling, setIsScrolling] = useState(false);
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [isImgInView, setIsImgInView] = useState(false);
@@ -104,6 +109,13 @@ function ImageContainer({
     },
   });
   const imgOnLoad = () => setIsImgLoaded(true);
+  const imgCommonProps = {
+    width: imageWidth,
+    height: imageHeight,
+    className: 'z-10 max-w-full h-auto shadow-3xl',
+    style: { aspectRatio: `${imageWidth} / ${imageHeight}` },
+    draggable: false,
+  };
   const shouldDisplayGifLoader = Boolean(
     isImgLoaded && isImgInView && !isScrolling && gifProgress !== 100
   );
@@ -167,12 +179,16 @@ function ImageContainer({
         className="relative inline-flex min-w-11 min-h-24"
       >
         {!isImgLoaded && <ImageLoader />}
-        <LazyLoad offset={windowHeight} once>
+        <LazyLoad
+          placeholder={
+            <img {...imgCommonProps} alt={`Placeholder of ${title}`} />
+          }
+          once
+        >
           <img
+            {...imgCommonProps}
             src={imageUrl}
             alt={`Screenshot of ${title}`}
-            className="z-10 max-w-full h-auto shadow-3xl"
-            draggable={false}
             onLoad={imgOnLoad}
           />
         </LazyLoad>
@@ -214,7 +230,7 @@ function ImageLoader() {
   return (
     <Spinner
       className={cn(
-        'absolute inset-0 z-0 w-7 h-7 my-10 mx-auto border-2',
+        'absolute inset-0 z-0 w-7 h-7 m-auto border-2',
         'sm:w-9 sm:h-9',
         'md:w-11 md:h-11 md:border-4'
       )}

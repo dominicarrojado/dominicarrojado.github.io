@@ -88,6 +88,8 @@ export type Project = {
   description: string;
   links: Array<ProjectLink>;
   imageUrl: string;
+  imageWidth: number;
+  imageHeight: number;
   gifUrl: string;
   isBest?: boolean;
 };

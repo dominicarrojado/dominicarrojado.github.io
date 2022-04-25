@@ -6,6 +6,14 @@ describe('<AboutSection />', () => {
     render(<AboutSection />);
   });
 
+  it('should have expected image', () => {
+    const imageEl = screen.queryByAltText('A photo of my wife and I');
+
+    expect(imageEl).toHaveAttribute('src', '/images/about/my-wife-and-i.jpeg');
+    expect(imageEl).toHaveAttribute('width', '1440');
+    expect(imageEl).toHaveAttribute('height', '1440');
+  });
+
   it('should have expected anchors', () => {
     const blogAnchorEl = screen.queryByText('tech blogs');
     const pgfAnchorEls = screen.queryAllByText('PropertyGuru Finance');

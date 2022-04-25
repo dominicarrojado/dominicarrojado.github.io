@@ -55,6 +55,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/thx-spatial-audio-web-app.png',
+    imageWidth: 1004,
+    imageHeight: 725,
     gifUrl: '/images/projects/thx-spatial-audio-web-app.gif',
   },
   {
@@ -68,6 +70,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-training-mode-virus-edition-app.png',
+    imageWidth: 1280,
+    imageHeight: 720,
     gifUrl: '/images/projects/razer-training-mode-virus-edition-app.gif',
   },
   {
@@ -81,6 +85,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-chroma-studio-web-app.png',
+    imageWidth: 1920,
+    imageHeight: 1039,
     gifUrl: '/images/projects/razer-chroma-studio-web-app.gif',
     isBest: true,
   },
@@ -95,6 +101,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-streamer-companion-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/razer-streamer-companion-web-app.gif',
   },
   {
@@ -108,6 +116,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-7.1-surround-sound-web-app.png',
+    imageWidth: 600,
+    imageHeight: 568,
     gifUrl: '/images/projects/razer-7.1-surround-sound-web-app.gif',
   },
   {
@@ -121,6 +131,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-developer-portal-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/razer-developer-portal-web-app.gif',
   },
   {
@@ -134,6 +146,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/razer-id-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/razer-id-web-app.gif',
   },
   {
@@ -151,6 +165,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/qwerk-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/qwerk-web-app.gif',
     isBest: true,
   },
@@ -165,6 +181,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/maybank-fc-barcelona-website.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/maybank-fc-barcelona-website.gif',
   },
   {
@@ -178,6 +196,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/food-republic-capsule-surprise-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/food-republic-capsule-surprise-web-app.gif',
   },
   {
@@ -192,6 +212,8 @@ export const PROJECTS: Array<Project> = [
     ],
     imageUrl:
       '/images/projects/aptamil-build-your-babys-foundation-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/aptamil-build-your-babys-foundation-web-app.gif',
   },
   {
@@ -205,6 +227,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/kronenbourg-website.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/kronenbourg-website.gif',
   },
   {
@@ -222,6 +246,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/singtel-data-x-infinity-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/singtel-data-x-infinity-web-app.gif',
   },
   {
@@ -239,6 +265,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/cnb-anti-drug-abuse-campaign-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/cnb-anti-drug-abuse-campaign-web-app.gif',
   },
   {
@@ -252,6 +280,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/hashtag-interactive-website.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/hashtag-interactive-website.gif',
   },
   {
@@ -266,6 +296,8 @@ export const PROJECTS: Array<Project> = [
     ],
     imageUrl:
       '/images/projects/hashtag-interactive-to-my-valentine-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/hashtag-interactive-to-my-valentine-web-app.gif',
   },
   {
@@ -280,6 +312,8 @@ export const PROJECTS: Array<Project> = [
     ],
     imageUrl:
       '/images/projects/hashtag-interactive-holly-jolly-memory-game-web-app.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl:
       '/images/projects/hashtag-interactive-holly-jolly-memory-game-web-app.gif',
   },
@@ -294,6 +328,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/hashtag-interactive-welcome-email-template.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/hashtag-interactive-welcome-email-template.gif',
   },
   {
@@ -319,6 +355,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/m1-email-template.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/m1-email-template.gif',
   },
   {
@@ -356,6 +394,8 @@ export const PROJECTS: Array<Project> = [
       },
     ],
     imageUrl: '/images/projects/axa-email-template.png',
+    imageWidth: 1440,
+    imageHeight: 900,
     gifUrl: '/images/projects/axa-email-template.gif',
   },
 ];

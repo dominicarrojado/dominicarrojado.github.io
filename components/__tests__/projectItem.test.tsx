@@ -46,6 +46,8 @@ describe('<ProjectItem />', () => {
         },
       ],
       imageUrl: getFakeImageUrl(),
+      imageWidth: getFakeNumber({ min: 1 }),
+      imageHeight: getFakeNumber({ min: 1 }),
       gifUrl: getFakeImageUrl(),
     };
   };
@@ -78,17 +80,35 @@ describe('<ProjectItem />', () => {
     });
 
     it('should NOT render the image by default', () => {
-      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
+      const { title, imageWidth, imageHeight } = project;
+      const imgEl = screen.queryByAltText(`Screenshot of ${title}`);
+      const placeholderEl = screen.queryByAltText(`Placeholder of ${title}`);
 
       expect(imgEl).not.toBeInTheDocument();
+      expect(placeholderEl).not.toHaveAttribute('src');
+      expect(placeholderEl).toHaveAttribute('width', `${imageWidth}`);
+      expect(placeholderEl).toHaveAttribute('height', `${imageHeight}`);
+
+      // .toHaveStyle() not working properly with aspectRatio
+      expect(placeholderEl?.style.aspectRatio).toBe(
+        `${imageWidth} / ${imageHeight}`
+      );
     });
 
     it('should render the image on lazy load', () => {
       forceVisible();
 
-      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
+      const { title, imageWidth, imageHeight } = project;
+      const placeholderEl = screen.queryByAltText(`Placeholder of ${title}`);
+      const imgEl = screen.queryByAltText(`Screenshot of ${title}`);
 
+      expect(placeholderEl).not.toBeInTheDocument();
       expect(imgEl).toHaveAttribute('src', project.imageUrl);
+      expect(imgEl).toHaveAttribute('width', `${imageWidth}`);
+      expect(imgEl).toHaveAttribute('height', `${imageHeight}`);
+
+      // .toHaveStyle() not working properly with aspectRatio
+      expect(imgEl?.style.aspectRatio).toBe(`${imageWidth} / ${imageHeight}`);
     });
 
     it('should render the links', () => {

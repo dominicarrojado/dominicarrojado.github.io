@@ -11,9 +11,11 @@ function AboutSection() {
       <PageContent>
         <figure className={cn('md:float-left md:mr-16', 'xl:mr-20')}>
           <img
-            className="w-72 h-auto mx-auto shadow-3xl"
+            className="w-72 h-auto mx-auto shadow-3xl aspect-square"
             src="/images/about/my-wife-and-i.jpeg"
             alt="A photo of my wife and I"
+            width="1440"
+            height="1440"
             draggable="false"
           />
           <figcaption className="text-gray-400 text-center">
