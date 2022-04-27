@@ -179,12 +179,7 @@ function ImageContainer({
         className="relative inline-flex min-w-11 min-h-24"
       >
         {!isImgLoaded && <ImageLoader />}
-        <LazyLoad
-          placeholder={
-            <img {...imgCommonProps} alt={`Placeholder of ${title}`} />
-          }
-          once
-        >
+        <LazyLoad height={imageHeight} once>
           <img
             {...imgCommonProps}
             src={imageUrl}
