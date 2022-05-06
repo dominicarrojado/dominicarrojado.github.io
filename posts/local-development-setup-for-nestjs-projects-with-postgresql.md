@@ -26,7 +26,7 @@ Upon writing this post, I assume that you have some server-side application deve
 
 Please make sure to install [Yarn](https://classic.yarnpkg.com/lang/en/) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) in your system if you haven't. We use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_. While we use [Docker](https://www.docker.com/) throughout the development lifecycle for fast, easy and portable application development.
 
-We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) in setting this local development setup as we will utilize a few extensions from their [marketplace](https://marketplace.visualstudio.com/vscode)
+We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) in setting this local development setup as we will utilize a few extensions from their [marketplace](https://marketplace.visualstudio.com/vscode).
 
 You can also use [Postman](https://www.postman.com/) to interact with the API but that's optional as this won't be a full Nest tutorial.
 
@@ -314,8 +314,10 @@ Let's continue and set up a database connection to our Nest application. We'll b
 To use TypeORM in Nest. First, install the following dependencies:
 
 ```bash
-yarn add typeorm @nestjs/typeorm pg
+yarn add @nestjs/typeorm typeorm@0.2 pg
 ```
+
+> Note that we're using TypeORM v0.2, which isn't the latest version of TypeORM. The latter has substantial modifications and duplicate methods which are used on this post. You can read about typeorm@0.3.0 changes [on their repository](https://github.com/typeorm/typeorm/releases/tag/0.3.0).
 
 Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts`:
 

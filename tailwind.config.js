@@ -157,6 +157,10 @@ module.exports = {
                 fontWeight: theme('fontWeight.normal'),
               },
             },
+            blockquote: {
+              color: theme('colors.gray.500'),
+              fontWeight: theme('fontWeight.normal'),
+            },
           },
         },
         lg: {
@@ -208,6 +212,11 @@ module.exports = {
               th: {
                 color: theme('colors.gray.100'),
               },
+            },
+            blockquote: {
+              color: theme('colors.gray.300'),
+              fontWeight: theme('fontWeight.normal'),
+              borderLeftColor: theme('colors.gray.500'),
             },
           },
         },
