@@ -19,6 +19,16 @@ import {
 
 describe('hooks utilities', () => {
   describe('useMounted()', () => {
+    const requestAnimationFrameOrig = window.requestAnimationFrame;
+
+    beforeEach(() => {
+      window.requestAnimationFrame = jest.fn((callback: any) => callback());
+    });
+
+    afterEach(() => {
+      window.requestAnimationFrame = requestAnimationFrameOrig;
+    });
+
     it('should return true on mount', () => {
       const hook = renderHook(() => useMounted());
 

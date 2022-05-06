@@ -18,17 +18,19 @@ import {
   Route,
 } from '../lib/types';
 
+export type Props = {
+  project: Project;
+  className?: string;
+  style?: CSSProperties;
+  headingLevel: 2 | 3;
+};
+
 export default function ProjectItem({
   project,
   className,
   style,
   headingLevel,
-}: {
-  project: Project;
-  className?: string;
-  style?: CSSProperties;
-  headingLevel: 2 | 3;
-}) {
+}: Props) {
   return (
     <li
       className={cn(

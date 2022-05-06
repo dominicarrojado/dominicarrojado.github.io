@@ -14,14 +14,18 @@ import {
 } from '../../lib/test-helpers';
 import { Route } from '../../lib/types';
 import { MENU_ITEMS, SOCIAL_LINKS } from '../../lib/constants';
+import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
-import Header from '../header';
+import Header, { Props } from '../header';
 
 config.disabled = true; // disable react-transitions-group transitions
 
 describe('<Header />', () => {
-  const renderComponent = (route: Route) => {
-    render(<Header route={route} />);
+  const renderComponent = (props: Props) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
+    return render(<Header {...props} />);
   };
 
   beforeEach(() => {
@@ -40,7 +44,7 @@ describe('<Header />', () => {
 
   describe('content', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     it('should have expected menu items', () => {
@@ -66,7 +70,7 @@ describe('<Header />', () => {
 
   describe('menu is NOT opened', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     it('should have expected button text', () => {
@@ -113,7 +117,7 @@ describe('<Header />', () => {
 
   describe('menu is opened', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const btnTextEl = screen.queryByText('Menu');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
@@ -165,7 +169,7 @@ describe('<Header />', () => {
 
   describe('<ProgressBar />', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     it('should NOT display progress bar by default', () => {
@@ -201,7 +205,7 @@ describe('<Header />', () => {
       const windowPageYOffset = window.pageYOffset;
 
       beforeEach(() => {
-        renderComponent(Route.HOME);
+        renderComponent({ route: Route.HOME });
       });
 
       afterEach(() => {
@@ -288,7 +292,7 @@ describe('<Header />', () => {
       };
 
       beforeEach(() => {
-        renderComponent(getRandomRouteExceptHome());
+        renderComponent({ route: getRandomRouteExceptHome() });
       });
 
       it('should display logo on mount', () => {
@@ -344,7 +348,7 @@ describe('<Header />', () => {
     });
 
     it('should have expected text for light theme', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       expect(screen.queryByText('Light')).toBeInTheDocument();
       expect(screen.queryByText('Dark')).not.toBeInTheDocument();
@@ -353,14 +357,14 @@ describe('<Header />', () => {
     it('should have expected text for dark theme', () => {
       DarkMode.enabled = true;
 
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       expect(screen.queryByText('Dark')).toBeInTheDocument();
       expect(screen.queryByText('Light')).not.toBeInTheDocument();
     });
 
     it('should display on mount', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const btnTextEl = screen.queryByText('Light');
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
@@ -370,7 +374,7 @@ describe('<Header />', () => {
     });
 
     it('should have shorter transition duration on click', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       let btnTextEl = screen.queryByText('Light');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
@@ -389,7 +393,7 @@ describe('<Header />', () => {
     });
 
     it('should have shorter transition duration on transition end of opacity', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
@@ -404,7 +408,7 @@ describe('<Header />', () => {
     });
 
     it('should have shorter transition duration on transition end of other prop name', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const btnTextEl = screen.queryByText('Light') as HTMLDivElement;
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
@@ -416,7 +420,7 @@ describe('<Header />', () => {
     });
 
     it('should change text on click', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const btnTextEl = screen.queryByText('Light');
       const btnEl = btnTextEl?.closest('button') as HTMLButtonElement;
@@ -433,7 +437,7 @@ describe('<Header />', () => {
     });
 
     it('should track as hover if NOT clicked', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
@@ -450,7 +454,7 @@ describe('<Header />', () => {
     });
 
     it('should track menu click', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
@@ -467,7 +471,7 @@ describe('<Header />', () => {
     });
 
     it('should track close click', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
@@ -488,7 +492,7 @@ describe('<Header />', () => {
     });
 
     it('should NOT track as hover if clicked', () => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
@@ -507,7 +511,7 @@ describe('<Header />', () => {
 
   describe('<MenuButton />', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     it('should display on mount', () => {
@@ -637,7 +641,7 @@ describe('<Header />', () => {
 
   describe('<MenuItems />', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     MENU_ITEMS.forEach((menu) => {
@@ -700,7 +704,7 @@ describe('<Header />', () => {
 
   describe('<Social />', () => {
     beforeEach(() => {
-      renderComponent(getRandomRoute());
+      renderComponent({ route: getRandomRoute() });
     });
 
     it('should track as hover if NOT clicked', () => {

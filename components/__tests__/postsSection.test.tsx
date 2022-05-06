@@ -17,7 +17,10 @@ import PostsSection, { Props } from '../postsSection';
 
 describe('<PostsSection />', () => {
   const renderComponent = (props: Props) => {
-    render(<PostsSection {...props} />);
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
+    return render(<PostsSection {...props} />);
   };
   const createPosts = (count: number) => {
     const posts = [];
@@ -41,9 +44,6 @@ describe('<PostsSection />', () => {
   });
 
   it('should render expected components', () => {
-    // mock to prevent re-render
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
-
     const postItemSpy = jest.spyOn(PostItem, 'default');
     const postsPaginationSpy = jest.spyOn(PostsPagination, 'default');
 

@@ -21,7 +21,11 @@ import { ExternalUrl, Post, PostData, Route } from '../lib/types';
 import { ROUTES } from '../lib/constants';
 import 'highlight.js/styles/vs2015.css';
 
-export default function PostContent({ postData }: { postData: PostData }) {
+export type Props = {
+  postData: PostData;
+};
+
+export default function PostContent({ postData }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
   const [animationDone, setAnimationDone] = useState(false);
   const shouldDisplay = useMounted();

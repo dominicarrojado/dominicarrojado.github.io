@@ -21,19 +21,17 @@ export function getPagination(currentPage: number, lastPage: number) {
     pages.push(j);
   }
 
-  const isEqualOrGreaterThanMax = lastPage >= PAGINATION_MAX_LENGTH;
-
-  if (isEqualOrGreaterThanMax) {
+  if (pages.length < PAGINATION_MAX_LENGTH) {
     leftSideStart -= 1;
 
-    while (pages.length < PAGINATION_MAX_LENGTH) {
+    while (pages.length < PAGINATION_MAX_LENGTH && leftSideStart !== 0) {
       pages.unshift(leftSideStart);
       leftSideStart -= 1;
     }
   }
 
   // ellipsis (...) logic
-  if (isEqualOrGreaterThanMax) {
+  if (lastPage > PAGINATION_MAX_LENGTH) {
     const firstIndex = 0;
     const secondIndex = firstIndex + 1;
     const lastIndex = PAGINATION_MAX_LENGTH - 1;

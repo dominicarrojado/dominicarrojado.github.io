@@ -3,11 +3,9 @@ import { HTMLProps } from 'react';
 import { useMounted } from '../lib/custom-hooks';
 import Content from './content';
 
-function PageContent({
-  className,
-  children,
-  ...props
-}: HTMLProps<HTMLElement>) {
+export type Props = HTMLProps<HTMLElement>;
+
+export default function PageContent({ className, children, ...props }: Props) {
   const shouldDisplay = useMounted();
 
   return (
@@ -26,5 +24,3 @@ function PageContent({
     </Content>
   );
 }
-
-export default PageContent;

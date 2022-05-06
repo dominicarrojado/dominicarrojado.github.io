@@ -15,11 +15,15 @@ import {
 } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
 import { Post, PostData, Route } from '../../lib/types';
-import PostContent from '../postContent';
+import * as customHooks from '../../lib/custom-hooks';
+import PostContent, { Props } from '../postContent';
 
 describe('<PostContent />', () => {
-  const renderComponent = ({ postData }: { postData: PostData }) => {
-    render(<PostContent postData={postData} />);
+  const renderComponent = (props: Props, isMounted = false) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(isMounted);
+
+    return render(<PostContent {...props} />);
   };
   const generatePostData = () =>
     ({
@@ -144,12 +148,6 @@ describe('<PostContent />', () => {
       expect(anchorEl).not.toHaveAttribute('target');
     });
 
-    it('should display section on mount', () => {
-      const sectionEl = screen.queryByTestId('section');
-
-      expect(sectionEl).not.toHaveClass('opacity-0');
-    });
-
     it('should have shorter delay by default', () => {
       act(() => {
         Window.emit('load');
@@ -271,6 +269,27 @@ describe('<PostContent />', () => {
       const helperEl = screen.queryByText('Next Post');
 
       expect(helperEl).not.toBeInTheDocument();
+    });
+  });
+
+  describe('animations on mount', () => {
+    const postData = generatePostData();
+
+    it('should NOT display section by default', () => {
+      renderComponent({ postData });
+
+      const sectionEl = screen.queryByTestId('section');
+
+      expect(sectionEl).toHaveClass('opacity-0');
+    });
+
+    it('should display section on mount', () => {
+      renderComponent({ postData }, true);
+      forceVisible();
+
+      const sectionEl = screen.queryByTestId('section');
+
+      expect(sectionEl).not.toHaveClass('opacity-0');
     });
   });
 

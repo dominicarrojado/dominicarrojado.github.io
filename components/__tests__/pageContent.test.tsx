@@ -1,17 +1,14 @@
-import { ReactNode } from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getFakeSentences, getFakeWord } from '../../lib/test-helpers';
-import PageContent from '../pageContent';
+import * as customHooks from '../../lib/custom-hooks';
+import PageContent, { Props } from '../pageContent';
 
 describe('<PageContent />', () => {
-  const renderComponent = ({
-    className,
-    children,
-  }: {
-    className?: string;
-    children: ReactNode;
-  }) => {
-    render(<PageContent className={className}>{children}</PageContent>);
+  const renderComponent = ({ children, ...props }: Props) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
+    return render(<PageContent {...props}>{children}</PageContent>);
   };
 
   it('should display about on mount', () => {

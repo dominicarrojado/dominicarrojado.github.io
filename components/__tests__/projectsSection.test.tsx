@@ -6,7 +6,10 @@ import ProjectsSection from '../projectsSection';
 
 describe('<ProjectsSection />', () => {
   const renderComponent = () => {
-    render(<ProjectsSection />);
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
+    return render(<ProjectsSection />);
   };
 
   afterEach(() => {
@@ -14,9 +17,6 @@ describe('<ProjectsSection />', () => {
   });
 
   it('should render all projects', () => {
-    // mock to prevent re-render
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
-
     const projectItemSpy = jest.spyOn(ProjectItem, 'default');
 
     renderComponent();

@@ -30,7 +30,11 @@ import {
   SOCIAL_LINKS,
 } from '../lib/constants';
 
-export default function Header({ route }: { route: Route }) {
+export type Props = {
+  route: Route;
+};
+
+export default function Header({ route }: Props) {
   const dialog = useDialogState({
     baseId: 'dialog-menu',
     animated: MENU_ITEMS_LENGTH * 75 + 100,

@@ -2,10 +2,14 @@ import { act, render, screen } from '@testing-library/react';
 import { getFakeNumber } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
 import { PAGINATION_MAX_LENGTH } from '../../lib/constants';
+import * as customHooks from '../../lib/custom-hooks';
 import PostsPagination, { Props } from '../postsPagination';
 
 describe('<PostsPagination />', () => {
   const renderComponent = (props: Props) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     return render(<PostsPagination {...props} />);
   };
   const verifyPaginationItems = (paginationItems: Array<number>) => {

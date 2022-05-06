@@ -1,69 +1,103 @@
 import { render, screen, act } from '@testing-library/react';
 import { config } from 'react-transition-group';
-import Window from '../../modules/Window';
-import HeroSub from '../heroSub';
 import { getFakeSentence, getFakeSentences } from '../../lib/test-helpers';
+import Window from '../../modules/Window';
+import * as customHooks from '../../lib/custom-hooks';
+import HeroSub, { Props } from '../heroSub';
 
 config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeroSub />', () => {
-  const title = getFakeSentence();
-  const desc = getFakeSentences();
-  const renderComponent = (isMinHeightFull?: boolean) => {
-    render(
-      <HeroSub
-        title={title}
-        description={desc}
-        isMinHeightFull={isMinHeightFull}
-      />
-    );
+  const renderComponent = (props: Props, isMounted = false) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(isMounted);
+
+    return render(<HeroSub {...props} />);
   };
 
   describe('content', () => {
+    const title = getFakeSentence();
+    const description = getFakeSentences();
+
     beforeEach(() => {
-      renderComponent();
+      renderComponent({
+        title,
+        description,
+      });
     });
 
-    it('should render title', () => {
+    it('should have expected title', () => {
       const titleEl = screen.queryByText(title);
 
       expect(titleEl?.tagName).toBe('H1');
     });
 
-    it('should render description', () => {
-      const descEl = screen.queryByText(desc);
+    it('should have expected description', () => {
+      const descEl = screen.queryByText(description);
 
       expect(descEl).toBeInTheDocument();
     });
   });
 
   describe('animations on mount', () => {
-    beforeEach(() => {
-      renderComponent();
+    const title = getFakeSentence();
+    const description = getFakeSentences();
+
+    describe('isMounted is false', () => {
+      beforeEach(() => {
+        renderComponent({ title, description });
+      });
+
+      it('should NOT display container', () => {
+        const containerEl = screen.queryByTestId('container');
+
+        expect(containerEl).not.toHaveClass('translate-y-0');
+      });
+
+      it('should NOT display title', () => {
+        const titleEl = screen.queryByText(title);
+
+        expect(titleEl).toHaveClass('opacity-0');
+      });
+
+      it('should NOT display description', () => {
+        const descEl = screen.queryByText(description);
+
+        expect(descEl).toHaveClass('opacity-0');
+      });
     });
 
-    it('should display container', () => {
-      const containerEl = screen.queryByTestId('container');
+    describe('isMounted is true', () => {
+      beforeEach(() => {
+        renderComponent({ title, description }, true);
+      });
 
-      expect(containerEl).toHaveClass('translate-y-0');
-    });
+      it('should display container', () => {
+        const containerEl = screen.queryByTestId('container');
 
-    it('should display title', () => {
-      const titleEl = screen.queryByText(title);
+        expect(containerEl).toHaveClass('translate-y-0');
+      });
 
-      expect(titleEl).not.toHaveClass('opacity-0');
-    });
+      it('should display title', () => {
+        const titleEl = screen.queryByText(title);
 
-    it('should display description', () => {
-      const descEl = screen.queryByText(desc);
+        expect(titleEl).not.toHaveClass('opacity-0');
+      });
 
-      expect(descEl).not.toHaveClass('opacity-0');
+      it('should display description', () => {
+        const descEl = screen.queryByText(description);
+
+        expect(descEl).not.toHaveClass('opacity-0');
+      });
     });
   });
 
   describe('background', () => {
     beforeEach(() => {
-      renderComponent();
+      renderComponent({
+        title: getFakeSentence(),
+        description: getFakeSentences(),
+      });
     });
 
     it('should NOT display by default', () => {
@@ -85,7 +119,10 @@ describe('<HeroSub />', () => {
 
   describe('isMinHeightFull prop', () => {
     test('should have smaller min height by default', () => {
-      renderComponent();
+      renderComponent({
+        title: getFakeSentence(),
+        description: getFakeSentences(),
+      });
 
       const containerEl = screen.queryByTestId('container');
 
@@ -94,7 +131,11 @@ describe('<HeroSub />', () => {
     });
 
     test('should have full min height if isMinHeightFull is true', () => {
-      renderComponent(true);
+      renderComponent({
+        title: getFakeSentence(),
+        description: getFakeSentences(),
+        isMinHeightFull: true,
+      });
 
       const containerEl = screen.queryByTestId('container');
 

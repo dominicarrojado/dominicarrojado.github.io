@@ -11,15 +11,17 @@ import {
   useWindowLoaded,
 } from '../lib/custom-hooks';
 
+export type Props = {
+  title: string;
+  description: string;
+  isMinHeightFull?: boolean;
+};
+
 export default function HeroSub({
   title,
   description,
   isMinHeightFull,
-}: {
-  title: string;
-  description: string;
-  isMinHeightFull?: boolean;
-}) {
+}: Props) {
   const shouldDisplay = useMounted();
   const sectionRef = useRef<HTMLElement>(null);
 

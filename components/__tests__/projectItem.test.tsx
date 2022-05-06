@@ -21,13 +21,19 @@ import {
 import * as customHooks from '../../lib/custom-hooks';
 import * as hooks from '../../lib/hooks';
 import * as ga from '../../lib/google-analytics';
-import ProjectItem from '../projectItem';
+import ProjectItem, { Props } from '../projectItem';
 
 jest.useFakeTimers();
 
 config.disabled = true; // disable react-transitions-group transitions
 
 describe('<ProjectItem />', () => {
+  const renderComponent = (props: Props) => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
+    return render(<ProjectItem {...props} />);
+  };
   const getRandomHeadingLevel = () =>
     getFakeNumber({ min: 2, max: 3 }) as 2 | 3;
   const createProject = (isBest: boolean) => {
@@ -56,9 +62,10 @@ describe('<ProjectItem />', () => {
     const project = createProject(true);
 
     beforeEach(() => {
-      render(
-        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
-      );
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
     });
 
     it('should render the highlight', () => {
@@ -120,9 +127,10 @@ describe('<ProjectItem />', () => {
     const project = createProject(false);
 
     beforeEach(() => {
-      render(
-        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
-      );
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
     });
 
     it('should NOT render the highlight', () => {
@@ -175,19 +183,11 @@ describe('<ProjectItem />', () => {
   });
 
   describe('<Info />', () => {
-    const project = createProject(getFakeBoolean());
-    const renderComponent = (headingLevel: 2 | 3) => {
-      const component = render(
-        <ProjectItem project={project} headingLevel={headingLevel} />
-      );
-
-      forceVisible();
-
-      return component;
-    };
-
     it('should have expected heading tag for level 2', () => {
-      renderComponent(2);
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({ project, headingLevel: 2 });
+      forceVisible();
 
       const titleEl = screen.queryByText(project.title);
 
@@ -195,7 +195,10 @@ describe('<ProjectItem />', () => {
     });
 
     it('should have expected heading tag for level 3', () => {
-      renderComponent(3);
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({ project, headingLevel: 3 });
+      forceVisible();
 
       const titleEl = screen.queryByText(project.title);
 
@@ -209,10 +212,10 @@ describe('<ProjectItem />', () => {
     const projectLinks = project.links;
 
     beforeEach(() => {
-      render(
-        <ProjectItem project={project} headingLevel={getRandomHeadingLevel()} />
-      );
-
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
       forceVisible();
     });
 
@@ -281,22 +284,9 @@ describe('<ProjectItem />', () => {
   });
 
   describe('GIF logic', () => {
-    const project = createProject(getFakeBoolean());
     const windowHeightOrig = window.innerHeight;
     const windowPageYOffset = window.pageYOffset;
     const requestAnimationFrameOrig = window.requestAnimationFrame;
-    const renderComponent = () => {
-      const component = render(
-        <ProjectItem
-          project={project}
-          headingLevel={getFakeNumber({ min: 2, max: 3 }) as 2 | 3}
-        />
-      );
-
-      forceVisible();
-
-      return component;
-    };
 
     beforeEach(() => {
       window.requestAnimationFrame = jest.fn((callback: any) => callback());
@@ -311,7 +301,13 @@ describe('<ProjectItem />', () => {
     });
 
     it('should NOT display GIF by default', () => {
-      renderComponent();
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+      forceVisible();
 
       const gifEl = screen.queryByAltText(`GIF of ${project.title}`);
 
@@ -319,7 +315,13 @@ describe('<ProjectItem />', () => {
     });
 
     it('should NOT display Downloading GIF by default', () => {
-      renderComponent();
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+      forceVisible();
 
       const tooltipEl = screen.queryByText('Downloading GIF...');
 
@@ -372,7 +374,13 @@ describe('<ProjectItem />', () => {
         .spyOn(console, 'error')
         .mockImplementation();
 
-      renderComponent();
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+      forceVisible();
 
       // set isImgLoaded to "true"
       const imgEl = screen.queryByAltText(
@@ -510,7 +518,13 @@ describe('<ProjectItem />', () => {
         offsetHeight: 0,
       });
 
-      renderComponent();
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+      forceVisible();
 
       act(() => {
         Window.emit('scroll');
@@ -521,7 +535,13 @@ describe('<ProjectItem />', () => {
     });
 
     it('should handle container not found when route changes before request animation frame gets executed', () => {
-      const { container } = renderComponent();
+      const project = createProject(getFakeBoolean());
+      const { container } = renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+
+      forceVisible();
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue(null);
 

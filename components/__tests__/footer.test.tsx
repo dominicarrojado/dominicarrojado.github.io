@@ -1,13 +1,16 @@
 import { render, screen, act } from '@testing-library/react';
-import Window from '../../modules/Window';
 import { queryByTextIgnoreHTML } from '../../lib/test-helpers';
 import { QUOTES, SOCIAL_LINKS } from '../../lib/constants';
+import * as customHooks from '../../lib/custom-hooks';
 import Footer from '../footer';
 
 jest.useFakeTimers();
 
 describe('<Footer />', () => {
   beforeEach(() => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     render(<Footer />);
   });
 
