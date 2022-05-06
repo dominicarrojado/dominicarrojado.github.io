@@ -319,6 +319,13 @@ yarn add @nestjs/typeorm typeorm@0.2 pg
 
 > Note that we're using TypeORM v0.2, which isn't the latest version of TypeORM. The latter has substantial modifications and duplicate methods which are used on this post. You can read about typeorm@0.3.0 changes [on their repository](https://github.com/typeorm/typeorm/releases/tag/0.3.0).
 
+When installing `typeorm@0.2`, you might need to move `@types/node` from `devDependencies` to `dependencies` as a workaround for [this error](https://www.youtube.com/redirect?event=comments&redir_token=QUFFLUhqblp2VV95bWt1UEQ3LUFrOGVhUzYtUnlfc3lOUXxBQ3Jtc0ttYmJFaGtjTzYtWEN1VFZDUGI0NGUtLVN1LTdaYml6d3l1Q3c0YkNZTFB5Y2NIRGRPUFgxanFlWkJQbG1HNEFPUndSUF9GYXdFMzVNTVU5R1RjS3dPamdEalBXUEg2bUlxSzJGT2Q1dnRBWlZLbHNxNA&q=https%3A%2F%2Fgithub.com%2Ftypeorm%2Ftypeorm%2Fissues%2F8951&stzid=UgxAj6GtvBroqzilZOd4AaABAg).
+
+```bash
+yarn remove @types/node
+yarn add @types/node
+```
+
 Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts`:
 
 ```ts
