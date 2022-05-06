@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { HTMLProps } from 'react';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import Content from './content';
 
 function PageContent({
@@ -8,7 +8,7 @@ function PageContent({
   children,
   ...props
 }: HTMLProps<HTMLElement>) {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
 
   return (
     <Content

@@ -138,21 +138,7 @@ describe('<PostsPagination />', () => {
     verifyPaginationArrow('Next', currentPage + 1);
   });
 
-  it('should NOT display by default', () => {
-    const lastPage = getFakeNumber({ min: 1 });
-    const currentPage = getFakeNumber({ min: 1, max: lastPage });
-
-    renderComponent({
-      currentPage,
-      lastPage,
-    });
-
-    const navigationEl = screen.queryByLabelText('Pagination');
-
-    expect(navigationEl).toHaveClass('opacity-0');
-  });
-
-  it('should display on window load', () => {
+  it('should display on mount', () => {
     const lastPage = getFakeNumber({ min: 1 });
     const currentPage = getFakeNumber({ min: 1, max: lastPage });
 

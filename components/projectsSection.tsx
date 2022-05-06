@@ -1,11 +1,11 @@
 import cn from 'classnames';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import Section from './section';
 import ProjectItem from './projectItem';
 import { PROJECTS } from '../lib/constants';
 
 function ProjectsSection() {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
 
   return (
     <Section id="projects">

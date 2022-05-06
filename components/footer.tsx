@@ -2,13 +2,13 @@ import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import SocialItems from './socialItems';
 import { Route } from '../lib/types';
 import { QUOTES, QUOTES_INTERVAL, QUOTES_LENGTH } from '../lib/constants';
 
 export default function Footer() {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
 
   return (
     <footer

@@ -1,4 +1,4 @@
-import { render, screen, act, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import {
   getFakeDate,
   getFakeNumber,
@@ -8,7 +8,7 @@ import {
   getFakeUuid,
   getFakeWord,
 } from '../../lib/test-helpers';
-import Window from '../../modules/Window';
+import * as customHooks from '../../lib/custom-hooks';
 import * as PostItem from '../postItem';
 import * as PostsPagination from '../postsPagination';
 import { Post } from '../../lib/types';
@@ -36,7 +36,14 @@ describe('<PostsSection />', () => {
     return posts;
   };
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should render expected components', () => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     const postItemSpy = jest.spyOn(PostItem, 'default');
     const postsPaginationSpy = jest.spyOn(PostsPagination, 'default');
 
@@ -62,31 +69,12 @@ describe('<PostsSection />', () => {
     expect(postsPaginationSpy).toBeCalledTimes(1);
   });
 
-  it('should NOT display all posts by default', () => {
+  it('should display all posts on mount', () => {
     const currentPage = 1;
     const lastPage = getFakeNumber({ max: POSTS_PER_PAGE });
     const posts = createPosts(getFakeNumber({ min: 1, max: POSTS_PER_PAGE }));
 
     renderComponent({ posts, currentPage, lastPage });
-
-    const postsListEl = screen.queryByTestId('posts-list') as HTMLUListElement;
-    const postItemEls = postsListEl.childNodes;
-
-    postItemEls.forEach((postItemEl) => {
-      expect(postItemEl).toHaveClass('opacity-0');
-    });
-  });
-
-  it('should display all posts on window load', () => {
-    const currentPage = 1;
-    const lastPage = getFakeNumber({ max: POSTS_PER_PAGE });
-    const posts = createPosts(getFakeNumber({ min: 1, max: POSTS_PER_PAGE }));
-
-    renderComponent({ posts, currentPage, lastPage });
-
-    act(() => {
-      Window.emit('load');
-    });
 
     const postsListEl = screen.queryByTestId('posts-list') as HTMLUListElement;
     const postItemEls = postsListEl.childNodes;

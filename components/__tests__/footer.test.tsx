@@ -52,17 +52,7 @@ describe('<Footer />', () => {
       expect(disclaimerAnchorEl).toHaveAttribute('href', '/disclaimer');
     });
 
-    it('should NOT display by default', () => {
-      const footerEl = screen.queryByTestId('footer');
-
-      expect(footerEl).toHaveClass('opacity-0');
-    });
-
-    it('should display on window load', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
+    it('should display on mount', () => {
       const footerEl = screen.queryByTestId('footer');
 
       expect(footerEl).not.toHaveClass('opacity-0');

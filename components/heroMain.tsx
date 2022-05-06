@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import cn from 'classnames';
-import { Transition } from 'react-transition-group';
 import { getRefValue } from '../lib/hooks';
 import {
   useMounted,
@@ -12,7 +11,6 @@ import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgArrowDown from './svgArrowDown';
 import SvgLessThan from './svgLessThan';
-import Spinner from './spinner';
 import { GoogleAnalyticsEvents } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
@@ -32,7 +30,6 @@ export default function HeroMain() {
       )}
       data-testid="container"
     >
-      <Loader />
       <Background />
       <div className="z-10 w-full -mt-16 text-center">
         <Logo />
@@ -40,44 +37,6 @@ export default function HeroMain() {
       </div>
       <ScrollDownButton />
     </section>
-  );
-}
-
-function Loader() {
-  const spinnerRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const isWindowLoaded = useWindowLoaded();
-  const shouldDisplay = isMounted && !isWindowLoaded;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  return (
-    <Transition
-      in={shouldDisplay}
-      nodeRef={spinnerRef}
-      timeout={1000}
-      mountOnEnter
-      unmountOnExit
-    >
-      {(state) => (
-        <Spinner
-          ref={spinnerRef}
-          className={cn(
-            'absolute inset-0 m-auto w-8 h-8 border-2',
-            'transition-opacity duration-1000',
-            'sm:w-10 sm:h-10 sm:border-4',
-            'md:w-12 md:h-12',
-            'xl:w-14 xl:h-14',
-            {
-              [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
-            }
-          )}
-          color="#ffffff"
-        />
-      )}
-    </Transition>
   );
 }
 
@@ -89,6 +48,7 @@ function Background() {
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
         'animate-slide transition-opacity duration-1250 delay-700',
+        'motion-reduce:animate-none',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -101,7 +61,7 @@ function Background() {
 
 function Logo() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -156,7 +116,7 @@ function LogoPart({
 
 function Title() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -184,7 +144,8 @@ function ScrollDownButton() {
   const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
   const isBtnClickedRef = useRef(false);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
+  const shouldImportLib = useWindowLoaded();
   const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
@@ -205,7 +166,7 @@ function ScrollDownButton() {
   useEffect(() => {
     let unregisterTrigger: () => void | undefined;
 
-    if (shouldDisplay) {
+    if (shouldImportLib) {
       (async function registerMoveToTrigger() {
         const MoveTo = await getMoveTo();
 
@@ -226,7 +187,7 @@ function ScrollDownButton() {
         unregisterTrigger();
       }
     };
-  }, [shouldDisplay]);
+  }, [shouldImportLib]);
 
   return (
     <div

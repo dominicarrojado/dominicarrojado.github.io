@@ -174,7 +174,7 @@ describe('<Header />', () => {
       expect(progressBarEl).not.toBeInTheDocument();
     });
 
-    it('should display progress by on route change', () => {
+    it('should display progress by on route change start', () => {
       act(() => {
         Router.events.emit('routeChangeStart');
       });
@@ -182,6 +182,17 @@ describe('<Header />', () => {
       const progressBarEl = screen.queryByRole('progressbar');
 
       expect(progressBarEl).toBeInTheDocument();
+    });
+
+    it('should NOT display progress bar on route change complete', () => {
+      act(() => {
+        Router.events.emit('routeChangeStart');
+        Router.events.emit('routeChangeComplete');
+      });
+
+      const progressBarEl = screen.queryByRole('progressbar');
+
+      expect(progressBarEl).not.toBeInTheDocument();
     });
   });
 
@@ -203,20 +214,8 @@ describe('<Header />', () => {
         expect(logoEl).toHaveClass('opacity-0');
       });
 
-      it('should NOT display logo on window load', () => {
-        act(() => {
-          Window.emit('load');
-        });
-
-        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
-
-        expect(logoEl).toHaveClass('opacity-0');
-      });
-
       it('should display logo on scroll past hero section (window height)', () => {
         act(() => {
-          Window.emit('load');
-
           setReadOnlyProperty(window, 'pageYOffset', window.innerHeight);
           Window.emit('scroll');
         });
@@ -292,17 +291,7 @@ describe('<Header />', () => {
         renderComponent(getRandomRouteExceptHome());
       });
 
-      it('should NOT display logo by default', () => {
-        const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
-
-        expect(logoEl).toHaveClass('opacity-0');
-      });
-
-      it('should display logo on window load', () => {
-        act(() => {
-          Window.emit('load');
-        });
-
+      it('should display logo on mount', () => {
         const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
         expect(logoEl).not.toHaveClass('opacity-0');
@@ -370,22 +359,8 @@ describe('<Header />', () => {
       expect(screen.queryByText('Light')).not.toBeInTheDocument();
     });
 
-    it('should NOT display by default', () => {
+    it('should display on mount', () => {
       renderComponent(getRandomRoute());
-
-      const btnTextEl = screen.queryByText('Light');
-      const btnIconContainerEl = btnTextEl?.previousElementSibling;
-
-      expect(btnTextEl).toHaveClass('opacity-0');
-      expect(btnIconContainerEl).toHaveClass('opacity-0');
-    });
-
-    it('should display on window load', () => {
-      renderComponent(getRandomRoute());
-
-      act(() => {
-        Window.emit('load');
-      });
 
       const btnTextEl = screen.queryByText('Light');
       const btnIconContainerEl = btnTextEl?.previousElementSibling;
@@ -535,22 +510,7 @@ describe('<Header />', () => {
       renderComponent(getRandomRoute());
     });
 
-    it('should NOT display by default', () => {
-      const btnTextEl = screen.queryByText('Menu');
-      const stacks = screen.queryAllByTestId('menu-stack');
-
-      expect(btnTextEl).toHaveClass('opacity-0');
-
-      stacks.forEach((stack) => {
-        expect(stack).toHaveClass('opacity-0');
-      });
-    });
-
-    it('should display on window load', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
+    it('should display on mount', () => {
       const btnTextEl = screen.queryByText('Menu') as HTMLDivElement;
       const stacks = screen.queryAllByTestId('menu-stack');
 

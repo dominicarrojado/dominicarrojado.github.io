@@ -2,7 +2,7 @@ import React, { MutableRefObject, useRef } from 'react';
 import cn from 'classnames';
 import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import { getRefValue } from '../lib/hooks';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import AnchorLink, { Props as AnchorLinkProps } from './anchorLink';
 import Tooltip from './tooltip';
@@ -15,7 +15,7 @@ export type Props = {
 
 export default function SocialItems({ className }: Props) {
   const isBtnClickedRef: MutableRefObject<Record<string, boolean>> = useRef({});
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const socialOnMouseLeave = (social: Social) => {
     const socialName = social.name;
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import cn from 'classnames';
 import {
   SwitchTransition,
@@ -10,7 +10,6 @@ import {
   useScrollOpacityEffect,
   useWindowLoaded,
 } from '../lib/custom-hooks';
-import Spinner from './spinner';
 
 export default function HeroSub({
   title,
@@ -50,7 +49,6 @@ export default function HeroSub({
             )}
             data-testid="container"
           >
-            <Loader />
             <Background />
             <Title title={title} state={state} />
             <Desc description={description} state={state} />
@@ -58,44 +56,6 @@ export default function HeroSub({
         )}
       </Transition>
     </SwitchTransition>
-  );
-}
-
-function Loader() {
-  const spinnerRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const isWindowLoaded = useWindowLoaded();
-  const shouldDisplay = isMounted && !isWindowLoaded;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  return (
-    <Transition
-      in={shouldDisplay}
-      nodeRef={spinnerRef}
-      timeout={1000}
-      mountOnEnter
-      unmountOnExit
-    >
-      {(state) => (
-        <Spinner
-          ref={spinnerRef}
-          className={cn(
-            'absolute inset-0 m-auto w-8 h-8 border-2',
-            'transition-opacity duration-1000 delay-1250',
-            'sm:w-10 sm:h-10 sm:border-4',
-            'md:w-12 md:h-12',
-            'xl:w-14 xl:h-14',
-            {
-              [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
-            }
-          )}
-          color="#ffffff"
-        />
-      )}
-    </Transition>
   );
 }
 
@@ -107,6 +67,7 @@ function Background() {
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
         'animate-slide transition-opacity duration-1250 delay-500',
+        'motion-reduce:animate-none',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -119,7 +80,7 @@ function Background() {
 
 function Title({ title, state }: { title: string; state: TransitionStatus }) {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -153,7 +114,7 @@ function Desc({
   state: TransitionStatus;
 }) {
   const descRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(descRef);
 
   return (

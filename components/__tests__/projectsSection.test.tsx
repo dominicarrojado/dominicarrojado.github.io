@@ -1,5 +1,5 @@
-import { render, screen, act } from '@testing-library/react';
-import Window from '../../modules/Window';
+import { render, screen } from '@testing-library/react';
+import * as customHooks from '../../lib/custom-hooks';
 import * as ProjectItem from '../projectItem';
 import { PROJECTS } from '../../lib/constants';
 import ProjectsSection from '../projectsSection';
@@ -14,6 +14,9 @@ describe('<ProjectsSection />', () => {
   });
 
   it('should render all projects', () => {
+    // mock to prevent re-render
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     const projectItemSpy = jest.spyOn(ProjectItem, 'default');
 
     renderComponent();
@@ -32,25 +35,8 @@ describe('<ProjectsSection />', () => {
     });
   });
 
-  it('should NOT display all projects by default', () => {
+  it('should display all projects on mount', () => {
     renderComponent();
-
-    const projectsListEl = screen.queryByTestId(
-      'projects-list'
-    ) as HTMLUListElement;
-    const projectItemEls = projectsListEl.childNodes;
-
-    projectItemEls.forEach((projectItemEl) => {
-      expect(projectItemEl).toHaveClass('opacity-0');
-    });
-  });
-
-  it('should display all projects on window load', () => {
-    renderComponent();
-
-    act(() => {
-      Window.emit('load');
-    });
 
     const projectsListEl = screen.queryByTestId(
       'projects-list'

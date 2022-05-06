@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { getFakeSentences, getFakeWord } from '../../lib/test-helpers';
-import Window from '../../modules/Window';
 import PageContent from '../pageContent';
 
 describe('<PageContent />', () => {
@@ -15,20 +14,8 @@ describe('<PageContent />', () => {
     render(<PageContent className={className}>{children}</PageContent>);
   };
 
-  it('should NOT display about by default', () => {
+  it('should display about on mount', () => {
     renderComponent({ children: getFakeSentences() });
-
-    const pageContentEl = screen.queryByTestId('page-content');
-
-    expect(pageContentEl).toHaveClass('opacity-0');
-  });
-
-  it('should display about on window load', () => {
-    renderComponent({ children: getFakeSentences() });
-
-    act(() => {
-      Window.emit('load');
-    });
 
     const pageContentEl = screen.queryByTestId('page-content');
 

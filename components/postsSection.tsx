@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import Section from './section';
 import PostItem from './postItem';
 import PostsPagination from './postsPagination';
@@ -12,7 +12,7 @@ export type Props = {
 };
 
 export default function PostsSection({ posts, currentPage, lastPage }: Props) {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
 
   return (
     <Section id="posts">

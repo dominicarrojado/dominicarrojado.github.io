@@ -14,7 +14,7 @@ import { Button } from 'reakit/Button';
 import { Checkbox } from 'reakit/Checkbox';
 import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
-import { useDarkModeEnabled, useWindowLoaded } from '../lib/custom-hooks';
+import { useDarkModeEnabled, useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgSun from './svgSun';
@@ -154,7 +154,7 @@ function SkipToMainContentAnchor() {
 }
 
 function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
-  const isWindowLoaded = useWindowLoaded();
+  const isMounted = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
   const [isLogoFocused, setIsLogoFocused] = useState(false);
   const [isPastHeroSection, setIsPastHeroSection] = useState(false);
@@ -171,8 +171,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
   };
   const withAnimationDelay = route !== Route.HOME && !animationDone;
   const shouldDisplay =
-    isWindowLoaded &&
-    (route !== Route.HOME || isPastHeroSection || isLogoFocused);
+    isMounted && (route !== Route.HOME || isPastHeroSection || isLogoFocused);
 
   useEffect(() => {
     const onScroll = () => {
@@ -243,7 +242,7 @@ function ThemeButton({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isBtnClickedRef = useRef(false);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
   const Icon = !isDarkModeEnabled ? SvgSun : SvgMoon;
   const iconStyle = !isDarkModeEnabled
@@ -352,7 +351,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
   const textRef = useRef<HTMLDivElement>(null);
   const isBtnClickedRef = useRef(false);
   const stacks = Array.from(Array(3).keys());
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
   const text = !isMenuOpen ? 'Menu' : 'Close';
   const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {

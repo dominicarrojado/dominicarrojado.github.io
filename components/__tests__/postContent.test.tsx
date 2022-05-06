@@ -144,17 +144,7 @@ describe('<PostContent />', () => {
       expect(anchorEl).not.toHaveAttribute('target');
     });
 
-    it('should NOT display section by default', () => {
-      const sectionEl = screen.queryByTestId('section');
-
-      expect(sectionEl).toHaveClass('opacity-0');
-    });
-
-    it('should display section on window load', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
+    it('should display section on mount', () => {
       const sectionEl = screen.queryByTestId('section');
 
       expect(sectionEl).not.toHaveClass('opacity-0');

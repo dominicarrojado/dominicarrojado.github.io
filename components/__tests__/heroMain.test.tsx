@@ -7,12 +7,18 @@ import HeroMain from '../heroMain';
 
 config.disabled = true; // disable react-transitions-group transitions
 
+const renderComponent = () => render(<HeroMain />);
+
 describe('<HeroMain />', () => {
-  beforeEach(() => {
-    render(<HeroMain />);
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('content and tags', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
     it('should have expected title', () => {
       const title = 'Guides, Tips and Tricks to Web Development';
       const titleEl = screen.queryByText(title);
@@ -27,79 +33,15 @@ describe('<HeroMain />', () => {
     });
   });
 
-  describe('window is NOT loaded', () => {
-    it('should display container', () => {
-      const containerEl = screen.queryByTestId('container');
-
-      expect(containerEl).toHaveClass('translate-y-0');
-    });
-
-    it('should display spinner', () => {
-      const spinnerEl = screen.queryByTestId('spinner');
-
-      expect(spinnerEl).toBeInTheDocument();
-    });
-
-    it('should hide background', () => {
-      const backgroundEl = screen.queryByTestId('background');
-
-      expect(backgroundEl).toHaveClass('opacity-0');
-    });
-
-    it('should hide logo', () => {
-      const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
-      const logoPartEls = screen.queryAllByTestId('logo-part');
-
-      expect(logoEl).toHaveClass('opacity-0');
-      expect(logoPartEls).toHaveLength(2);
-
-      logoPartEls.forEach((logoPartEl) => {
-        expect(logoPartEl).toHaveClass('opacity-0');
-      });
-    });
-
-    it('should hide title', () => {
-      const titleEl = screen.queryByTestId('title');
-
-      expect(titleEl).toHaveClass('opacity-0');
-    });
-
-    it('should hide scroll down button', () => {
-      const scrollDownBtnEl = screen.queryByTestId('scroll-down-btn');
-
-      expect(scrollDownBtnEl).toHaveClass('opacity-0');
-    });
-
-    it('should NOT import MoveTo', () => {
-      const getMoveToSpy = jest.spyOn(imports, 'getMoveTo');
-
-      expect(getMoveToSpy).not.toBeCalled();
-    });
-  });
-
-  describe('window is loaded', () => {
+  describe('animations on mount', () => {
     beforeEach(() => {
-      act(() => {
-        Window.emit('load');
-      });
+      renderComponent();
     });
 
     it('should display container', () => {
       const containerEl = screen.queryByTestId('container');
 
       expect(containerEl).toHaveClass('translate-y-0');
-    });
-
-    it('should hide spinner', () => {
-      const spinnerEl = screen.queryByTestId('spinner');
-
-      expect(spinnerEl).not.toBeInTheDocument();
-    });
-
-    it('should display background', () => {
-      const backgroundEl = screen.queryByTestId('background');
-
-      expect(backgroundEl).not.toHaveClass('opacity-0');
     });
 
     it('should display logo', () => {
@@ -125,9 +67,47 @@ describe('<HeroMain />', () => {
 
       expect(scrollDownBtnEl).not.toHaveClass('opacity-0');
     });
+  });
 
-    it('should import MoveTo', () => {
+  describe('background', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
+    it('should NOT display by default', () => {
+      const backgroundEl = screen.queryByTestId('background');
+
+      expect(backgroundEl).toHaveClass('opacity-0');
+    });
+
+    it('should display on window load', () => {
+      act(() => {
+        Window.emit('load');
+      });
+
+      const backgroundEl = screen.queryByTestId('background');
+
+      expect(backgroundEl).not.toHaveClass('opacity-0');
+    });
+  });
+
+  describe('MoveTo', () => {
+    it('should NOT import by default', () => {
       const getMoveToSpy = jest.spyOn(imports, 'getMoveTo');
+
+      renderComponent();
+
+      expect(getMoveToSpy).not.toBeCalled();
+    });
+
+    it('should import on window load', () => {
+      const getMoveToSpy = jest.spyOn(imports, 'getMoveTo');
+
+      renderComponent();
+
+      act(() => {
+        Window.emit('load');
+      });
 
       expect(getMoveToSpy).toBeCalled();
     });
@@ -142,7 +122,7 @@ describe('<ScrollDownButton />', () => {
   it('should handle undefined MoveTo', () => {
     jest.spyOn(imports, 'getMoveTo').mockResolvedValue(undefined);
 
-    const { container } = render(<HeroMain />);
+    const { container } = renderComponent();
 
     act(() => {
       Window.emit('load');
@@ -153,7 +133,7 @@ describe('<ScrollDownButton />', () => {
 
   describe('analytics', () => {
     beforeEach(() => {
-      render(<HeroMain />);
+      renderComponent();
     });
 
     it('should track as hover if NOT clicked', () => {

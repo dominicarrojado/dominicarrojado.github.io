@@ -25,20 +25,7 @@ describe('<SocialItems />', () => {
       jest.restoreAllMocks();
     });
 
-    it('should NOT display by default', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        const anchorEl = screen.queryByLabelText(social.title);
-        const listItemEl = anchorEl?.closest('li') as HTMLLIElement;
-
-        expect(listItemEl).toHaveClass('lg:opacity-0');
-      });
-    });
-
-    it('should display on window load', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
+    it('should display on mount', () => {
       SOCIAL_LINKS.forEach((social) => {
         const anchorEl = screen.queryByLabelText(social.title);
         const listItemEl = anchorEl?.closest('li') as HTMLLIElement;

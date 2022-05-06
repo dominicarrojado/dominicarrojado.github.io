@@ -37,7 +37,7 @@ describe('<HeroSub />', () => {
     });
   });
 
-  describe('window is NOT loaded', () => {
+  describe('animations on mount', () => {
     beforeEach(() => {
       renderComponent();
     });
@@ -46,58 +46,6 @@ describe('<HeroSub />', () => {
       const containerEl = screen.queryByTestId('container');
 
       expect(containerEl).toHaveClass('translate-y-0');
-    });
-
-    it('should display spinner', () => {
-      const spinnerEl = screen.queryByTestId('spinner');
-
-      expect(spinnerEl).toBeInTheDocument();
-    });
-
-    it('should hide background', () => {
-      const backgroundEl = screen.queryByTestId('background');
-
-      expect(backgroundEl).toHaveClass('opacity-0');
-    });
-
-    it('should hide title', () => {
-      const titleEl = screen.queryByText(title);
-
-      expect(titleEl).toHaveClass('opacity-0');
-    });
-
-    it('should hide description', () => {
-      const descEl = screen.queryByText(desc);
-
-      expect(descEl).toHaveClass('opacity-0');
-    });
-  });
-
-  describe('window is loaded', () => {
-    beforeEach(() => {
-      renderComponent();
-
-      act(() => {
-        Window.emit('load');
-      });
-    });
-
-    it('should display container', () => {
-      const containerEl = screen.queryByTestId('container');
-
-      expect(containerEl).toHaveClass('translate-y-0');
-    });
-
-    it('should hide spinner', () => {
-      const spinnerEl = screen.queryByTestId('spinner');
-
-      expect(spinnerEl).not.toBeInTheDocument();
-    });
-
-    it('should display background', () => {
-      const backgroundEl = screen.queryByTestId('background');
-
-      expect(backgroundEl).not.toHaveClass('opacity-0');
     });
 
     it('should display title', () => {
@@ -106,10 +54,32 @@ describe('<HeroSub />', () => {
       expect(titleEl).not.toHaveClass('opacity-0');
     });
 
-    it('should display title', () => {
+    it('should display description', () => {
       const descEl = screen.queryByText(desc);
 
       expect(descEl).not.toHaveClass('opacity-0');
+    });
+  });
+
+  describe('background', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
+    it('should NOT display by default', () => {
+      const backgroundEl = screen.queryByTestId('background');
+
+      expect(backgroundEl).toHaveClass('opacity-0');
+    });
+
+    it('should display on window load', () => {
+      act(() => {
+        Window.emit('load');
+      });
+
+      const backgroundEl = screen.queryByTestId('background');
+
+      expect(backgroundEl).not.toHaveClass('opacity-0');
     });
   });
 

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
 import { getPagination } from '../lib/common';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import AnchorLink from './anchorLink';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
@@ -14,7 +14,7 @@ export type Props = {
 };
 
 export default function PostsPagination({ currentPage, lastPage }: Props) {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const paginationItems = getPagination(currentPage, lastPage);
 
   return (

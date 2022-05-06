@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 import LazyLoad from 'react-lazyload';
 // @ts-ignore: using an old rehype-highlight version that has no declaration file
 import rehypeHighlight from 'rehype-highlight';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
@@ -24,7 +24,7 @@ import 'highlight.js/styles/vs2015.css';
 export default function PostContent({ postData }: { postData: PostData }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [animationDone, setAnimationDone] = useState(false);
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
   const onTransitionEnd = (e: TransitionEvent<HTMLElement>) => {
     if (e.propertyName === 'opacity') {
       setAnimationDone(true);
