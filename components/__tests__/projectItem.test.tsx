@@ -62,6 +62,8 @@ describe('<ProjectItem />', () => {
     const project = createProject(true);
 
     beforeEach(() => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       renderComponent({
         project,
         headingLevel: getRandomHeadingLevel(),
@@ -127,6 +129,8 @@ describe('<ProjectItem />', () => {
     const project = createProject(false);
 
     beforeEach(() => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       renderComponent({
         project,
         headingLevel: getRandomHeadingLevel(),
@@ -183,6 +187,10 @@ describe('<ProjectItem />', () => {
   });
 
   describe('<Info />', () => {
+    beforeEach(() => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+    });
+
     it('should have expected heading tag for level 2', () => {
       const project = createProject(getFakeBoolean());
 
@@ -212,6 +220,8 @@ describe('<ProjectItem />', () => {
     const projectLinks = project.links;
 
     beforeEach(() => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       renderComponent({
         project,
         headingLevel: getRandomHeadingLevel(),
@@ -301,6 +311,8 @@ describe('<ProjectItem />', () => {
     });
 
     it('should NOT display GIF by default', () => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       const project = createProject(getFakeBoolean());
 
       renderComponent({
@@ -315,6 +327,8 @@ describe('<ProjectItem />', () => {
     });
 
     it('should NOT display Downloading GIF by default', () => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       const project = createProject(getFakeBoolean());
 
       renderComponent({
@@ -368,6 +382,8 @@ describe('<ProjectItem />', () => {
         offsetTop: 0,
         offsetHeight: 0,
       });
+
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
 
       const trackEventSpy = jest.spyOn(ga, 'trackEvent');
       const consoleErrorMock = jest
@@ -495,7 +511,57 @@ describe('<ProjectItem />', () => {
       );
     });
 
+    it('should NOT download GIF if project is in view and motion safe is false', async () => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(false);
+
+      const startDownloadGifMock = jest.fn();
+
+      jest.spyOn(customHooks, 'useDownloadGif').mockReturnValue({
+        startDownloadGif: startDownloadGifMock,
+        cancelDownloadGif: jest.fn(),
+      });
+
+      // mock HTML properties that makes image to be in view
+      setReadOnlyProperty(window, 'pageYOffset', 1);
+      setReadOnlyProperty(window, 'innerHeight', 2);
+
+      jest.spyOn(hooks, 'getRefValue').mockReturnValue({
+        getBoundingClientRect: jest.fn(() => ({
+          top: 0,
+          height: 2,
+        })),
+
+        // for Tooltip component
+        offsetTop: 0,
+        offsetHeight: 0,
+      });
+
+      const project = createProject(getFakeBoolean());
+
+      renderComponent({
+        project,
+        headingLevel: getRandomHeadingLevel(),
+      });
+      forceVisible();
+
+      // set isImgLoaded to "true"
+      const imgEl = screen.queryByAltText(
+        `Screenshot of ${project.title}`
+      ) as HTMLImageElement;
+
+      fireEvent.load(imgEl);
+
+      // set isImgInView to "true"
+      act(() => {
+        Window.emit('scroll');
+      });
+
+      expect(startDownloadGifMock).not.toBeCalled();
+    });
+
     it('should cancel download GIF if project is NOT in view', async () => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       const startDownloadGifMock = jest.fn();
       const cancelDownloadGifMock = jest.fn();
 
@@ -535,6 +601,8 @@ describe('<ProjectItem />', () => {
     });
 
     it('should handle container not found when route changes before request animation frame gets executed', () => {
+      jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
       const project = createProject(getFakeBoolean());
       const { container } = renderComponent({
         project,

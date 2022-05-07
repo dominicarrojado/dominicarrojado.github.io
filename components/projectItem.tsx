@@ -6,7 +6,7 @@ import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
-import { useDownloadGif, useMounted } from '../lib/custom-hooks';
+import { useDownloadGif, useMotionSafe, useMounted } from '../lib/custom-hooks';
 import SvgStar from './svgStar';
 import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
@@ -80,6 +80,7 @@ function ImageContainer({
   const [isImgInView, setIsImgInView] = useState(false);
   const [gifProgress, setGifProgress] = useState(0);
   const [gifData, setGifData] = useState('');
+  const isMotionSafe = useMotionSafe();
   const { startDownloadGif, cancelDownloadGif } = useDownloadGif({
     url: gifUrl,
     onStart: () => {
@@ -119,9 +120,15 @@ function ImageContainer({
     draggable: false,
   };
   const shouldDisplayGifLoader = Boolean(
-    isImgLoaded && isImgInView && !isScrolling && gifProgress !== 100
+    isMotionSafe &&
+      isImgLoaded &&
+      isImgInView &&
+      !isScrolling &&
+      gifProgress !== 100
   );
-  const shouldDisplayGifImg = Boolean(gifData && isImgInView && !isScrolling);
+  const shouldDisplayGifImg = Boolean(
+    isMotionSafe && gifData && isImgInView && !isScrolling
+  );
 
   useEffect(() => {
     let timeout: number;
@@ -165,14 +172,16 @@ function ImageContainer({
   }, []);
 
   useEffect(() => {
-    if (!gifData) {
+    if (isMotionSafe && !gifData) {
       if (isImgInView) {
         startDownloadGif();
       } else {
         cancelDownloadGif();
       }
     }
-  }, [startDownloadGif, cancelDownloadGif, isImgInView, gifData]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMotionSafe, isImgInView, gifData]);
 
   return (
     <div className={cn('flex justify-center items-center w-full', 'lg:w-4/6')}>

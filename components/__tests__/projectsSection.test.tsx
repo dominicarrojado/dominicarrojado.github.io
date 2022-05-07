@@ -9,6 +9,9 @@ describe('<ProjectsSection />', () => {
     // mock to prevent re-render
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
+    // mock for ProjectItem component
+    jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
     return render(<ProjectsSection />);
   };
 

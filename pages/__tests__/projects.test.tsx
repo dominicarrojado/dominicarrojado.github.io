@@ -14,6 +14,9 @@ describe('<Projects />', () => {
     // mock to prevent re-render of hero section
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
+    // mock for ProjectItem component
+    jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const projectsSectionSpy = jest.spyOn(ProjectsSection, 'default');

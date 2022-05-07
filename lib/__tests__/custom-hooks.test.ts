@@ -13,6 +13,7 @@ import {
   useDarkModeEnabled,
   useDownloadGif,
   useMounted,
+  useMotionSafe,
   useScrollOpacityEffect,
   useWindowLoaded,
 } from '../custom-hooks';
@@ -143,6 +144,48 @@ describe('hooks utilities', () => {
       const { isDarkModeEnabled } = hook.result.current;
 
       expect(isDarkModeEnabled).toBe(true);
+    });
+  });
+
+  describe('useMotionSafe()', () => {
+    const matchMediaOrig = window.matchMedia;
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+
+      window.matchMedia = matchMediaOrig;
+    });
+
+    it('should return true if matches is true', () => {
+      const matchMediaMock = jest.fn(
+        () => ({ matches: true, addEventListener: jest.fn() } as any)
+      );
+
+      window.matchMedia = matchMediaMock;
+
+      const hook = renderHook(() => useMotionSafe());
+
+      expect(hook.result.current).toBe(true);
+      expect(matchMediaMock).toBeCalledTimes(1);
+      expect(matchMediaMock).toBeCalledWith(
+        '(prefers-reduced-motion: no-preference)'
+      );
+    });
+
+    it('should return false if matches is false', () => {
+      const matchMediaMock = jest.fn(
+        () => ({ matches: false, addEventListener: jest.fn() } as any)
+      );
+
+      window.matchMedia = matchMediaMock;
+
+      const hook = renderHook(() => useMotionSafe());
+
+      expect(hook.result.current).toBe(false);
+      expect(matchMediaMock).toBeCalledTimes(1);
+      expect(matchMediaMock).toBeCalledWith(
+        '(prefers-reduced-motion: no-preference)'
+      );
     });
   });
 

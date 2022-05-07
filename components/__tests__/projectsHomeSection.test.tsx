@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BEST_PROJECTS } from '../../lib/constants';
+import * as customHooks from '../../lib/custom-hooks';
 import * as ProjectItem from '../projectItem';
 import ProjectsHomeSection from '../projectsHomeSection';
 
@@ -7,6 +8,15 @@ describe('<ProjectsHomeSection />', () => {
   const renderComponent = () => {
     render(<ProjectsHomeSection />);
   };
+
+  beforeEach(() => {
+    // mock for ProjectItem component
+    jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
   describe('content', () => {
     beforeEach(() => {

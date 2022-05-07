@@ -25,6 +25,9 @@ describe('<Home />', () => {
       windowHeight: 0,
     });
 
+    // mock for ProjectItem component
+    jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
+
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroMainSpy = jest.spyOn(HeroMain, 'default');
     const aboutHomeSectionSpy = jest.spyOn(AboutHomeSection, 'default');

@@ -85,6 +85,27 @@ export function useDarkModeEnabled() {
   };
 }
 
+export function useMotionSafe() {
+  const [isMotionSafe, setIsMotionSafe] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      '(prefers-reduced-motion: no-preference)'
+    );
+    const mediaQueryOnChange = () => setIsMotionSafe(mediaQuery.matches);
+
+    mediaQueryOnChange();
+
+    mediaQuery.addEventListener('change', mediaQueryOnChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', mediaQueryOnChange);
+    };
+  }, []);
+
+  return isMotionSafe;
+}
+
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
   const [opacity, setOpacity] = useState(1);
 
