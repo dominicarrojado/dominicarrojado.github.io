@@ -43,6 +43,7 @@ export default function PostContent({ postData }: Props) {
             ref={sectionRef}
             className={cn(
               'transform transition-transform-opacity duration-1000',
+              'motion-reduce:transition-none',
               {
                 [animationDone ? 'delay-2500' : 'delay-1500']: true,
                 [shouldDisplay && state === 'entered'
@@ -75,6 +76,7 @@ function PostVideoLink({ videoUrl }: { videoUrl: string }) {
           className={cn(
             'w-6 h-6 mr-2 text-gray-400',
             'transition-colors duration-300 group-hover:text-red',
+            'motion-reduce:transition-none',
             'dark:group-hover:text-white',
             'sm:w-7 sm:h-7 sm:mr-3',
             'xl:w-8 xl:h-8'
@@ -242,6 +244,7 @@ function AdjacentPostLink({
             className={cn(
               'font-normal',
               'transition-colors duration-300 group-hover:text-black',
+              'motion-reduce:transition-none',
               'dark:group-hover:text-white'
             )}
           >
@@ -251,6 +254,7 @@ function AdjacentPostLink({
             className={cn(
               'text-gray-400',
               'transition-colors duration-300 group-hover:text-black',
+              'motion-reduce:transition-none',
               'dark:group-hover:text-white'
             )}
           >
@@ -262,6 +266,7 @@ function AdjacentPostLink({
             'absolute top-0 bottom-0 m-auto shrink-0 w-2 h-2 text-black opacity-30',
             'dark:text-white',
             'transform transition-transform-opacity duration-300 group-hover:opacity-100',
+            'motion-reduce:transition-none',
             'sm:w-2.5 sm:h-2.5',
             'md:w-3 md:h-3',
             'xl:w-3.5 xl:h-3.5',

@@ -16,6 +16,7 @@ export default function Footer() {
         'py-20 px-6 bg-gray-100 dark:bg-gray-850 overflow-hidden',
         'lg:overflow-auto',
         'transition-opacity duration-1000 delay-1750',
+        'motion-reduce:transition-none',
         {
           'opacity-0': !shouldDisplay,
         }
@@ -65,6 +66,7 @@ function Quotes() {
       className={cn(
         'relative text-center overflow-hidden',
         'transition-height duration-1000',
+        'motion-reduce:transition-none',
         'sm:text-lg',
         'xl:text-xl'
       )}
@@ -80,6 +82,7 @@ function Quotes() {
             className={cn(
               'absolute top-0 left-0 w-full',
               'transition-opacity duration-1000',
+              'motion-reduce:transition-none',
               {
                 'opacity-0 pointer-events-none': !isActive,
               }

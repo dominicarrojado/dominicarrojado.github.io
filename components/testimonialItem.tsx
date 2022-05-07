@@ -13,6 +13,7 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
         'lg:w-1/2',
         'xl:w-1/3',
         'transform transition-transform duration-300 even:rotate-1 odd:-rotate-1 hover:rotate-0',
+        'motion-reduce:transition-none',
         'md:px-5'
       )}
     >
@@ -20,7 +21,8 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
         className={cn(
           'border rounded-lg shadow-md overflow-hidden',
           'dark:border-gray-400 dark:border-opacity-30',
-          'transition-shadow hover:shadow-xl'
+          'transition-shadow hover:shadow-xl',
+          'motion-reduce:transition-none'
         )}
       >
         <blockquote

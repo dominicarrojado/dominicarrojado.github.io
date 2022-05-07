@@ -40,6 +40,7 @@ export default function HeroSub({
             className={cn(
               'relative flex flex-col justify-center bg-gray-750 py-28 px-6 text-center overflow-hidden',
               'transform transition-transform ease-in-out duration-500',
+              'motion-reduce:transition-none',
               'sm:px-20',
               'lg:px-32',
               {
@@ -68,8 +69,8 @@ function Background() {
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
-        'animate-slide transition-opacity duration-1250 delay-500',
-        'motion-reduce:animate-none',
+        'motion-safe:animate-slide transition-opacity duration-1250 delay-500',
+        'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -91,6 +92,7 @@ function Title({ title, state }: { title: string; state: TransitionStatus }) {
         className={cn(
           'text-3xl font-bold text-white leading-tight',
           'transform transition duration-1000 delay-500',
+          'motion-reduce:transition-none',
           'sm:text-4xl',
           'md:text-5xl',
           'lg:text-6xl',
@@ -125,6 +127,7 @@ function Desc({
         className={cn(
           'font-light text-white',
           'transform transition duration-1000 delay-1000',
+          'motion-reduce:transition-none',
           'xl:text-2xl',
           {
             [shouldDisplay && state === 'entered'

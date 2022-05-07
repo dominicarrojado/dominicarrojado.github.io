@@ -22,6 +22,7 @@ export default function PostsPagination({ currentPage, lastPage }: Props) {
       aria-label="Pagination"
       className={cn(
         'transform transition-transform-opacity duration-700 delay-2250',
+        'motion-reduce:transition-none',
         {
           'opacity-0 translate-y-10': !shouldDisplay,
         }
@@ -92,6 +93,7 @@ function PaginationArrow({
     withHref
       ? cn(
           'transition transform duration-300',
+          'motion-reduce:transition-none',
           'group-hover:opacity-100',
           isPrevious
             ? 'group-hover:-translate-x-1.5'
@@ -152,6 +154,7 @@ function PaginationItem({
           className={cn(
             className,
             'transition-colors',
+            'motion-reduce:transition-none',
             'hover:text-gray-700 hover:bg-gray-100 hover:opacity-100',
             'dark:hover:text-white dark:hover:bg-gray-750'
           )}

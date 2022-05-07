@@ -183,4 +183,12 @@
     @apply left-0;
     @apply w-full;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    p a,
+    p a::after,
+    .dark p a::after {
+      @apply transition-none;
+    }
+  }
 }

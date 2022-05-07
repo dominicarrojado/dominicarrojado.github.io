@@ -179,6 +179,7 @@ export default function TestimonialsHomeSection() {
             className={cn(
               'relative mt-8 flex flex-row items-center cursor-grab active:cursor-grabbing select-none',
               'transform transition-transform ease-out',
+              'motion-reduce:transition-none',
               'sm:mt-10',
               'lg:mt-12',
               {
@@ -203,12 +204,13 @@ export default function TestimonialsHomeSection() {
                 className={cn(
                   'w-1 h-1 ml-1 first:ml-0 rounded-full cursor-pointer',
                   'transition-colors',
+                  'motion-reduce:transition-none',
                   'md:w-1.5 md:h-1.5',
                   'lg:w-2 lg:h-2 lg:ml-1.5',
                   'xl:w-2.5 xl:h-2.5 xl:ml-2',
                   idx === swipeIdx
                     ? 'bg-gray-400 dark:bg-gray-300'
-                    : 'bg-gray-200 dark:bg-gray-500'
+                    : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400'
                 )}
                 onClick={() => indicatorOnClick(idx)}
               >
@@ -222,6 +224,7 @@ export default function TestimonialsHomeSection() {
             'absolute top-5 right-16 flex items-center border border-transparent bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
             'dark:bg-gray-650 dark:border-gray-400 dark:border-opacity-20',
             'transform transition-transform-opacity duration-700',
+            'motion-reduce:transition-none',
             'md:right-20',
             {
               'opacity-0': !shouldDisplayTip,

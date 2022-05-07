@@ -12,6 +12,7 @@ export default function PageContent({ className, children, ...props }: Props) {
     <Content
       className={cn(
         'transform transition-transform-opacity duration-700 delay-1500',
+        'motion-reduce:transition-none',
         {
           ['opacity-0 translate-y-10']: !shouldDisplay,
         },

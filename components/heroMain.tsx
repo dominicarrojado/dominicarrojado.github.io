@@ -22,6 +22,7 @@ export default function HeroMain() {
       className={cn(
         'relative flex flex-col bg-gray-750 items-center justify-center overflow-hidden min-h-full py-32',
         'transform transition-transform ease-in-out duration-700',
+        'motion-reduce:transition-none',
         'sm:px-20',
         'lg:px-32',
         {
@@ -47,8 +48,8 @@ function Background() {
     <div
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
-        'animate-slide transition-opacity duration-1250 delay-700',
-        'motion-reduce:animate-none',
+        'motion-safe:animate-slide transition-opacity duration-1250 delay-700',
+        'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,
         }
@@ -69,7 +70,9 @@ function Logo() {
       <LogoPart shouldDisplay={shouldDisplay} isLeft />
       <SvgLogo
         className={cn(
-          'w-40 h-40 text-white transform transition duration-1250 delay-700',
+          'w-40 h-40 text-white',
+          'transform transition-transform-opacity duration-1250 delay-700',
+          'motion-reduce:transition-none',
           'sm:w-60 sm:h-60',
           'md:w-80 md:h-80',
           'xl:w-96 xl:h-96',
@@ -97,6 +100,7 @@ function LogoPart({
       className={cn(
         'absolute top-12 w-14 h-14 text-white',
         'transform transition duration-1250 delay-700',
+        'motion-reduce:transition-none',
         'sm:top-16 sm:w-24 sm:h-24',
         'md:top-20 md:w-32 md:h-32',
         'xl:top-24 xl:w-40 xl:h-40',
@@ -125,6 +129,7 @@ function Title() {
         className={cn(
           'mt-2 px-4 text-base font-light text-white',
           'transform transition duration-1000 delay-1250',
+          'motion-reduce:transition-none',
           'sm:text-lg',
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
@@ -194,6 +199,7 @@ function ScrollDownButton() {
       className={cn(
         'absolute bottom-0 left-0 w-full z-10 text-center',
         'transform transition duration-1000 delay-1750',
+        'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,
           ['-translate-y-3']: !shouldDisplay,
@@ -212,6 +218,7 @@ function ScrollDownButton() {
           className={cn(
             'relative inline-flex pt-1 pb-0.5 text-gray-400 text-2xs select-none',
             'transform transition duration-300 group-hover:translate-y-0.5 group-hover:text-white',
+            'motion-reduce:transition-none',
             'md:mb-1 md:text-sm md:group-hover:translate-y-1',
             'xl:mb-2 xl:text-lg'
           )}
@@ -221,14 +228,16 @@ function ScrollDownButton() {
           <div
             className={cn(
               'absolute bottom-0 right-0 w-0 h-px bg-white z-10 pointer-events-none',
-              'transition-width duration-500 group-hover:right-auto group-hover:left-0 group-hover:w-full'
+              'transition-width duration-500 group-hover:right-auto group-hover:left-0 group-hover:w-full',
+              'motion-reduce:transition-none'
             )}
           />
         </div>
         <SvgArrowDown
           className={cn(
             'inline-flex mt-2 w-2 h-2 text-gray-600',
-            'animate-bounce transition-colors duration-300 group-hover:text-gray-300',
+            'motion-safe:animate-bounce transition-colors duration-300 group-hover:text-gray-300',
+            'motion-reduce:transition-none',
             'md:w-3 md:h-3',
             'xl:w-4 xl:h-4'
           )}

@@ -98,7 +98,7 @@ describe('<TestimonialsHomeSection />', () => {
     let listItemWidth: number;
 
     beforeEach(() => {
-      windowWidth = getFakeNumber({ min: 1 });
+      windowWidth = getFakeNumber({ min: swipeSuccessDiff });
       containerWidth = Math.round(getFakeNumber({ max: windowWidth }) / 2) * 2; // needs to be even because of swipeWidth can be rounded by browser
       listWidth = containerWidth * TESTIMONIALS_LENGTH;
       listItemWidth = containerWidth;

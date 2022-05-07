@@ -204,6 +204,7 @@ function ImageContainer({
               className={cn(
                 'absolute top-0 left-0 w-full h-full z-20',
                 'transition-opacity duration-300',
+                'motion-reduce:transition-none',
                 {
                   [state === 'entered' ? 'opacity-100 delay-300' : 'opacity-0']:
                     true,
@@ -281,6 +282,7 @@ function GifLoader({
             className={cn(
               'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
               'transition-opacity duration-300',
+              'motion-reduce:transition-none',
               'sm:top-4 sm:right-4',
               {
                 [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
@@ -293,6 +295,7 @@ function GifLoader({
               className={cn(
                 'w-7 h-7 border-2',
                 'transition-opacity duration-1000',
+                'motion-reduce:transition-none',
                 'sm:w-9 sm:h-9',
                 'md:w-11 md:h-11 md:border-4'
               )}

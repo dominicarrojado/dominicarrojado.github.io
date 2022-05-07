@@ -57,6 +57,7 @@ export default function SocialItems({ className }: Props) {
             className={cn(
               'flex',
               'lg:transform lg:transition lg:ease-in-out lg:duration-500',
+              'motion-reduce:lg:transition-none',
               {
                 ['lg:opacity-0 lg:translate-y-full']: !shouldDisplay,
               }
@@ -104,6 +105,7 @@ function SocialItemTooltip({
           'w-7 h-7 text-gray-400',
           'dark:text-gray-300',
           'transition-colors group-hover:text-gray-500',
+          'motion-reduce:transition-none',
           'dark:group-hover:text-white',
           'sm:w-8 sm:h-8',
           'xl:w-9 xl:h-9'

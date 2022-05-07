@@ -27,6 +27,7 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
             headingLevel={2}
             className={cn(
               'transform transition-transform-opacity duration-700',
+              'motion-reduce:transition-none',
               {
                 'opacity-0 translate-y-10': !shouldDisplay,
               }

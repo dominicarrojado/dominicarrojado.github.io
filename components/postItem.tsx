@@ -41,6 +41,7 @@ function PostItem({
           className={cn(
             'group flex w-full shadow-md py-6 px-4',
             'transition-shadow duration-300 hover:shadow-xl',
+            'motion-reduce:transition-none',
             'sm:px-6',
             'md:p-8',
             'xl:p-10',

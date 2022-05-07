@@ -119,6 +119,7 @@ function ProgressBar() {
           className={cn(
             'fixed top-0 left-0 flex w-full h-1.5 overflow-hidden z-50',
             'transition-transform duration-300',
+            'motion-reduce:transition-none',
             state === 'entered' ? 'translate-y-0' : '-translate-y-2'
           )}
         >
@@ -126,7 +127,7 @@ function ProgressBar() {
             className={cn(
               'w-full flex flex-col justify-center overflow-hidden bg-gray-600',
               'bg-[length:1rem_1rem]',
-              'animate-stripes'
+              'motion-safe:animate-stripes'
             )}
             style={{
               backgroundImage:
@@ -197,6 +198,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
         className={cn(
           'group fixed top-3.5 left-3.5 z-50 flex shadow-3xl border border-white bg-gray-750 bg-opacity-90 p-1.5',
           'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
+          'motion-reduce:transition-none',
           'sm:top-4 sm:left-4',
           'md:top-6 md:left-8 md:border-2',
           'xl:left-9 xl:p-2',
@@ -301,6 +303,7 @@ function ThemeButton({
                   iconStyle,
                   'relative',
                   'transform transition-transform-opacity-color',
+                  'motion-reduce:transition-none',
                   !animationDone
                     ? {
                         'duration-700 delay-700': true,
@@ -322,6 +325,7 @@ function ThemeButton({
                 className={cn(
                   'mt-1 text-3xs font-normal uppercase select-none',
                   'transform transition-transform-opacity-color',
+                  'motion-reduce:transition-none',
                   'md:text-2xs',
                   'xl:text-xs',
                   !animationDone
@@ -403,6 +407,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
               'w-6 h-0.5 bg-gray-400 rounded',
               'dark:bg-gray-300',
               'transform transition group-hover:bg-gray-500 group-focus-visible:bg-gray-500',
+              'motion-reduce:transition-none',
               'dark:group-hover:bg-white dark:group-focus-visible:bg-white',
               'md:w-7 md:h-1',
               'xl:w-8',
@@ -442,6 +447,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
                 'mt-1.5 text-gray-400 text-3xs font-normal uppercase select-none',
                 'dark:text-gray-300',
                 'transform transition-transform-opacity-color group-hover:text-gray-500',
+                'motion-reduce:transition-none',
                 'dark:group-hover:text-gray-100',
                 'md:mt-2 md:text-2xs',
                 'xl:text-xs',
@@ -535,6 +541,7 @@ function MenuItems({
           className={cn(
             'flex mb-8',
             'transform',
+            'motion-reduce:transition-none',
             'sm:mb-10',
             'md:mb-12',
             'xl:mb-14',
@@ -555,6 +562,7 @@ function MenuItems({
               className={cn(
                 'group relative pb-2 text-3xl text-gray-300 select-none outline-none',
                 'transition-colors duration-300 hover:text-white focus-visible:text-white',
+                'motion-reduce:transition-none',
                 'sm:text-4xl',
                 'md:pb-3 md:text-5xl',
                 'xl:pb-4 xl:text-6xl'
@@ -567,6 +575,7 @@ function MenuItems({
                 className={cn(
                   'absolute bottom-0 right-0 z-10 w-0 h-px bg-white pointer-events-none',
                   'transition-width duration-300 group-hover:right-auto group-hover:left-0 group-hover:w-full',
+                  'motion-reduce:transition-none',
                   'group-focus-visible:right-auto group-focus-visible:left-0 group-focus-visible:w-full'
                 )}
               />
@@ -634,7 +643,7 @@ function SocialItem({
   return (
     <li
       key={social.name}
-      className={cn('transform', {
+      className={cn('transform', 'motion-reduce:transition-none', {
         [!isMenuOpen
           ? 'opacity-0 transition-transform translate-y-1/2 duration-300'
           : 'opacity-100 transition translate-y-0 duration-500']: true,
@@ -661,6 +670,7 @@ function SocialItem({
           className: cn(
             'w-8 h-8 text-gray-300',
             'transition-colors group-hover:text-white group-focus-visible:text-white',
+            'motion-reduce:transition-none',
             'sm:w-10 sm:h-10',
             'md:w-11 md:h-11'
           ),
