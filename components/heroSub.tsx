@@ -38,7 +38,8 @@ export default function HeroSub({
           <section
             ref={sectionRef}
             className={cn(
-              'relative flex flex-col justify-center bg-gray-750 py-28 px-6 text-center overflow-hidden',
+              'relative flex flex-col justify-center bg-gray-550 py-28 px-6 text-center overflow-hidden',
+              'dark:bg-gray-750',
               'transform transition-transform ease-in-out duration-500',
               'motion-reduce:transition-none',
               'sm:px-20',
@@ -68,7 +69,8 @@ function Background() {
   return (
     <div
       className={cn(
-        'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
+        'absolute top-0 left-0 w-full h-full bg-repeat bg-center invert-[.1]',
+        'dark:invert-0',
         'motion-safe:animate-slide transition-opacity duration-1250 delay-500',
         'motion-reduce:transition-none',
         {

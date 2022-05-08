@@ -35,6 +35,7 @@ module.exports = {
         96: '24rem',
       },
       backgroundColor: {
+        'gray-550': 'rgba(61, 61, 66, 1)',
         'gray-650': 'rgba(57, 57, 65, 1)',
         'gray-750': 'rgba(44, 44, 52, 1)',
         'gray-850': 'rgba(31, 31, 39, 1)',

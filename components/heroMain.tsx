@@ -20,7 +20,8 @@ export default function HeroMain() {
   return (
     <section
       className={cn(
-        'relative flex flex-col bg-gray-750 items-center justify-center overflow-hidden min-h-full py-32',
+        'relative flex flex-col bg-gray-550 items-center justify-center overflow-hidden min-h-full py-32',
+        'dark:bg-gray-750',
         'transform transition-transform ease-in-out duration-700',
         'motion-reduce:transition-none',
         'sm:px-20',
@@ -47,7 +48,8 @@ function Background() {
   return (
     <div
       className={cn(
-        'absolute top-0 left-0 w-full h-full bg-repeat bg-center',
+        'absolute top-0 left-0 w-full h-full bg-repeat bg-center invert-[.1]',
+        'dark:invert-0',
         'motion-safe:animate-slide transition-opacity duration-1250 delay-700',
         'motion-reduce:transition-none',
         {
@@ -235,7 +237,8 @@ function ScrollDownButton() {
         </div>
         <SvgArrowDown
           className={cn(
-            'inline-flex mt-2 w-2 h-2 text-gray-600',
+            'inline-flex mt-2 w-2 h-2 text-gray-500',
+            'dark:text-gray-600',
             'motion-safe:animate-bounce transition-colors duration-300 group-hover:text-gray-300',
             'motion-reduce:transition-none',
             'md:w-3 md:h-3',

@@ -488,7 +488,8 @@ function MenuContainer({ dialog }: { dialog: DialogStateReturn }) {
           <DialogBackdrop
             {...dialog}
             className={cn(
-              'fixed top-0 right-0 z-30 w-full h-full bg-gray-750',
+              'fixed top-0 right-0 z-30 w-full h-full bg-gray-550',
+              'dark:bg-gray-750',
               'transition-opacity duration-500',
               {
                 ['opacity-0 pointer-events-none delay-100']: !shouldDisplay,
