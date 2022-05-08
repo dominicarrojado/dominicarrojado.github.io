@@ -5,6 +5,7 @@ import DarkMode from '../../modules/DarkMode';
 import {
   getFakeBoolean,
   getFakeNumber,
+  getMatchMediaMock,
   setReadOnlyProperty,
 } from '../test-helpers';
 import * as axiosHelpers from '../axios';
@@ -76,7 +77,7 @@ describe('hooks utilities', () => {
     const matchMediaOrig = window.matchMedia;
 
     beforeEach(() => {
-      window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+      window.matchMedia = getMatchMediaMock({ matches: false });
 
       DarkMode.init();
       DarkMode.initialized = false;
@@ -191,11 +192,18 @@ describe('hooks utilities', () => {
 
   describe('useScrollOpacityEffect()', () => {
     const pageYOffsetOrig = window.pageYOffset;
+    const matchMediaOrig = window.matchMedia;
+
+    beforeEach(() => {
+      window.matchMedia = getMatchMediaMock({ matches: true });
+    });
 
     afterEach(() => {
       jest.restoreAllMocks();
 
       setReadOnlyProperty(window, 'pageYOffset', pageYOffsetOrig);
+
+      window.matchMedia = matchMediaOrig;
     });
 
     it('should return initial value', () => {
@@ -232,12 +240,30 @@ describe('hooks utilities', () => {
     });
 
     it('should handle element NOT found', () => {
-      const pageYOffset = getFakeNumber();
-
-      setReadOnlyProperty(window, 'pageYOffset', pageYOffset);
+      setReadOnlyProperty(window, 'pageYOffset', getFakeNumber());
 
       const elementRef = { current: null };
       const hook = renderHook(() => useScrollOpacityEffect(elementRef));
+
+      act(() => {
+        Window.emit('scroll');
+      });
+
+      expect(hook.result.current).toBe(1);
+    });
+
+    it('should handle isMotionSafe is false', () => {
+      setReadOnlyProperty(window, 'pageYOffset', getFakeNumber());
+
+      window.matchMedia = getMatchMediaMock({ matches: false });
+
+      const element = {
+        offsetTop: getFakeNumber(),
+        offsetHeight: getFakeNumber(),
+      } as HTMLElement;
+      const hook = renderHook(() =>
+        useScrollOpacityEffect({ current: element })
+      );
 
       act(() => {
         Window.emit('scroll');
@@ -256,6 +282,8 @@ describe('hooks utilities', () => {
       const hook = renderHook(() =>
         useScrollOpacityEffect({ current: element })
       );
+
+      windowOffSpy.mockClear();
 
       hook.unmount();
 

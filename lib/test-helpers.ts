@@ -86,6 +86,25 @@ export function getRandomPostId() {
   return posts[getFakeNumber(posts.length - 1)];
 }
 
+export function getMatchMediaMock(
+  customResponse = {} as Partial<MediaQueryList>
+) {
+  return jest.fn(
+    (media: string) =>
+      ({
+        media,
+        matches: getFakeBoolean(),
+        dispatchEvent: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        onchange: jest.fn(),
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        ...customResponse,
+      } as MediaQueryList)
+  );
+}
+
 export function getFakeBoolean() {
   return faker.datatype.boolean();
 }

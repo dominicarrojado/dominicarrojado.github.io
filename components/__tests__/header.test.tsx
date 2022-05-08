@@ -9,6 +9,7 @@ import {
   fireEventTransitionEnd,
   getFakeString,
   getFakeWord,
+  getMatchMediaMock,
   getRandomRoute,
   setReadOnlyProperty,
 } from '../../lib/test-helpers';
@@ -331,9 +332,8 @@ describe('<Header />', () => {
 
   describe('<ThemeButton />', () => {
     const matchMediaOrig = window.matchMedia;
-
     beforeEach(() => {
-      window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+      window.matchMedia = getMatchMediaMock({ matches: false });
 
       DarkMode.init();
     });

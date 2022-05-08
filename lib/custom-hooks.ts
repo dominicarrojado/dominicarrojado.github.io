@@ -107,6 +107,7 @@ export function useMotionSafe() {
 }
 
 export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
+  const isMotionSafe = useMotionSafe();
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
@@ -126,14 +127,18 @@ export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
       setOpacity(newOpacity);
     };
 
-    Window.on('scroll', windowOnScroll);
+    if (isMotionSafe) {
+      Window.on('scroll', windowOnScroll);
+    } else {
+      setOpacity(1);
+    }
 
     return () => {
       Window.off('scroll', windowOnScroll);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isMotionSafe]);
 
   return opacity;
 }

@@ -14,10 +14,11 @@ describe('<PostIndex />', () => {
   });
 
   it('should render expected components', async () => {
-    // mock to prevent re-render of hero section
+    // mock for HeroMain/HeroSub component (prevent re-render & window.matchMedia not a func)
+    jest.spyOn(customHooks, 'useScrollOpacityEffect').mockReturnValue(1);
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
-    // mock to prevent re-render of post content
+    // mock for PostContent component (prevent re-render)
     jest.spyOn(customHooks, 'useWindowSize').mockReturnValue({
       windowWidth: 0,
       windowHeight: 0,

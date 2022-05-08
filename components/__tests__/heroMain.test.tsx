@@ -10,6 +10,9 @@ config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeroMain />', () => {
   const renderComponent = (isMounted = false) => {
+    // mock to prevent window.matchMedia not a func error
+    jest.spyOn(customHooks, 'useScrollOpacityEffect').mockReturnValue(1);
+
     // mock to prevent re-render
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(isMounted);
 

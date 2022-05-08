@@ -10,7 +10,8 @@ describe('<Custom404 />', () => {
   });
 
   it('should render expected components', async () => {
-    // mock to prevent re-render of hero section
+    // mock for HeroMain/HeroSub component (prevent re-render & window.matchMedia not a func)
+    jest.spyOn(customHooks, 'useScrollOpacityEffect').mockReturnValue(1);
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
