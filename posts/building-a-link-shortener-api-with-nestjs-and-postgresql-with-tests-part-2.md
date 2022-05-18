@@ -1,6 +1,6 @@
 ---
 title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part 2)'
-date: '2022-05-06'
+date: '2022-05-18'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
 videoUrl: ''
@@ -328,7 +328,7 @@ app_1      |       ✓ should NOT accept invalid data (94 ms)
 
 Great, it passed as well!
 
-To complete the test cases for this feature, let's validate where we now pass a **valid** data to the API. Update the file `src/links/links.spec.ts` with the following code below:
+Let's now validate where we now pass a **valid** data to the API. Update the file `src/links/links.spec.ts` with the following code below:
 
 ```ts
 ...
@@ -372,6 +372,86 @@ app_1      | PASS src/links/links.spec.ts (12.948 s)
 app_1      |     /links (POST)
 app_1      |       ✓ should NOT accept invalid data (133 ms)
 app_1      |       ✓ should accept valid data (49 ms)
+```
+
+There's another case we need to cover. Remember that we don't allow link creation if the (short) `name` already exists? Let's write the test case to validate that. Update the file `src/links/links.spec.ts` with the following code below:
+
+```ts
+...
+
+describe('Links', () => {
+  ...
+
+  describe('/links (POST)', () => {
+    ...
+
+    it('should handle already exists', async () => {
+      const existingLink = await createLinkItem();
+      const linkBody = createLinkBody();
+
+      const res = await request(app.getHttpServer()).post('/links').send({
+        name: existingLink.name,
+        url: linkBody.url,
+      });
+      const resBody = res.body;
+
+      expect(res.status).toBe(409);
+      expect(resBody.error).toBe('Conflict');
+      expect(resBody.message).toBe('Short name already exists');
+    });
+  });
+});
+```
+
+Once the changes are saved, this test case validation should be successful:
+
+```bash
+app_1      | PASS src/links/links.spec.ts (13.512 s)
+...
+app_1      |     /links (POST)
+...
+app_1      |       ✓ should handle already exists (26 ms)
+```
+
+Since we have an `if/else` conditional statements where the `if` condition will handle the "already exists" error which we have just validated in the previous test case, we will also need to validate the `else` condition to achieve complete test coverage for this feature. To do that, we can mock the `linksRepository.save()` function with the help of `jest.spyOn()` and throw an error using `.mockRejectedValue()` and pass an empty object `{}` so that `err.code` will be `undefined` - this will be handled by the `else` condition. Do note that if we mock a function, it will affect other test cases unless we restore it back to its original state using `.mockRestore()`. To write that in code, update the file `src/links/links.spec.ts` with the following below:
+
+```ts
+...
+
+describe('Links', () => {
+  ...
+
+  describe('/links (POST)', () => {
+    ...
+    it('should handle unexpected error', async () => {
+      const linksRepositorySaveMock = jest
+        .spyOn(linksRepository, 'save')
+        .mockRejectedValue({});
+
+      const linkBody = createLinkBody();
+
+      const res = await request(app.getHttpServer())
+        .post('/links')
+        .send(linkBody);
+      const resBody = res.body;
+
+      expect(res.status).toBe(500);
+      expect(resBody.message).toBe('Internal Server Error');
+
+      linksRepositorySaveMock.mockRestore();
+    });
+  });
+});
+```
+
+After saving the changes, the test case should pass:
+
+```bash
+app_1      | PASS src/links/links.spec.ts (13.422 s)
+...
+app_1      |     /links (POST)
+...
+app_1      |       ✓ should handle unexpected error (14 ms)
 ```
 
 I hope that you're slowly getting the hang of it and let's move to the next feature!

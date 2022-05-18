@@ -1,6 +1,6 @@
 ---
 title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part 1)'
-date: '2022-05-06'
+date: '2022-05-18'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
 videoUrl: ''
@@ -736,9 +736,52 @@ Alright, let's test out the validations. Let's open our Postman API client and d
 
 As you can see, it comes with nice and descriptive error messages. This can definitely save us some time rather than us coming up with these messages.
 
+## Error handling if link already exists
+
+For creating a link, we also need to handle the case where we create a link with a `name` that already exists in our database. Currently if we created a link twice with the same `name`, the last request would throw an `500 Internal Server Error`. Obviously, we don't want to show that to our users. If you check the terminal logs from our NestJS app, you should see something like this: `ERROR [ExceptionsHandler] duplicate key value violates unique constraint "UQ_519b799f714024e18a740e8cca7"`, so basically PostgreSQL has thrown an error and we did not handle it. So to fix that, let's update `srcs/links/links.repository.ts` with the following code:
+
+```ts
+...
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
+
+@EntityRepository(Link)
+export class LinksRepository extends Repository<Link> {
+  async createLink(createLinkDto: CreateLinkDto): Promise<Link> {
+    ...
+
+    try {
+      await this.save(link);
+    } catch (err) {
+      if (err.code === '23505') {
+        throw new ConflictException('Short name already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
+
+    return link;
+  }
+}
+```
+
+So by wrapping the `save()` function in a `try/catch` we are able to get the error code from PostgreSQL. Based from [PostgreSQL documentation](https://www.postgresql.org/docs/current/errcodes-appendix.html), `23505` is a unique constraint violation. So we have thrown a `ConflictException` which is from `@nestjs/common` with a descriptive error message. For any other cases we will throw an `InternalServerErrorException`, which is the default error for internal server error.
+
+Once you saved the changes and do a `POST` request to `http://localhost:3000/links` **_twice_** with the same body or payload, it should return a status of `409 Conflict` and return you with a JSON object like this:
+
+```json
+{
+  "statusCode": 409,
+  "message": "Short name already exists",
+  "error": "Conflict"
+}
+```
+
 ## Error handling if link does not exist
 
-Apart from the validations, we also need to handle the case where we get a link by an `id` or a `name` that does not exist in our database. We can simply do that by updating `src/links/links.service.ts` with the following:
+For getting, updating or deleting a link, we also need to handle the case where we get a link by an `id` or a `name` that does not exist in our database. We can simply do that by updating `src/links/links.service.ts` with the following:
 
 ```ts
 import { Injectable, NotFoundException } from '@nestjs/common';
