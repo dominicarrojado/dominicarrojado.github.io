@@ -3,7 +3,7 @@ title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part
 date: '2022-05-18'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/ysvUh_z7wjc'
 ---
 
 ## Introduction

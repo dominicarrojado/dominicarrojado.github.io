@@ -3,7 +3,7 @@ title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part
 date: '2022-05-18'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/c81MhWCuHbI'
 ---
 
 ## Introduction
@@ -269,7 +269,7 @@ That's how simple it is in Nest! You can open your Postman API client and do a `
 
 It should return a status of `200 OK` and return you an empty array `[]` because we didn't create any links yet.
 
-## Creat a link feature
+## Create a link feature
 
 The next feature we need to implement now is to be able to create a link. Let's create a new function in `src/links/links.service.ts`:
 
