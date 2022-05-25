@@ -34,10 +34,10 @@ export default function HeroMain() {
     >
       <Background />
       <div className="z-10 w-full -mt-16 text-center">
-        <Logo />
-        <Title />
+        <Logo shouldDisplay={shouldDisplay} />
+        <Title shouldDisplay={shouldDisplay} />
       </div>
-      <ScrollDownButton />
+      <ScrollDownButton shouldDisplay={shouldDisplay} />
     </section>
   );
 }
@@ -62,9 +62,8 @@ function Background() {
   );
 }
 
-function Logo() {
+function Logo({ shouldDisplay }: { shouldDisplay: boolean }) {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -120,9 +119,8 @@ function LogoPart({
   );
 }
 
-function Title() {
+function Title({ shouldDisplay }: { shouldDisplay: boolean }) {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -147,11 +145,10 @@ function Title() {
   );
 }
 
-function ScrollDownButton() {
+function ScrollDownButton({ shouldDisplay }: { shouldDisplay: boolean }) {
   const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
   const isBtnClickedRef = useRef(false);
-  const shouldDisplay = useMounted();
   const shouldImportLib = useWindowLoaded();
   const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {

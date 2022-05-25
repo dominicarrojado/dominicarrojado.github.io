@@ -1,15 +1,12 @@
 import { useRef } from 'react';
 import cn from 'classnames';
-import {
-  SwitchTransition,
-  Transition,
-  TransitionStatus,
-} from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 import {
   useMounted,
   useScrollOpacityEffect,
   useWindowLoaded,
 } from '../lib/custom-hooks';
+import { checkShouldAnimate } from '../lib/transition-group';
 
 export type Props = {
   title: string;
@@ -22,19 +19,15 @@ export default function HeroSub({
   description,
   isMinHeightFull,
 }: Props) {
-  const shouldDisplay = useMounted();
+  const isMounted = useMounted();
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <SwitchTransition>
-      <Transition
-        key={title}
-        nodeRef={sectionRef}
-        timeout={500}
-        mountOnEnter
-        unmountOnExit
-      >
-        {(state) => (
+    <Transition in={isMounted} nodeRef={sectionRef} timeout={0}>
+      {(state) => {
+        const shouldDisplay = checkShouldAnimate(state);
+
+        return (
           <section
             ref={sectionRef}
             className={cn(
@@ -46,20 +39,18 @@ export default function HeroSub({
               'lg:px-32',
               {
                 [!isMinHeightFull ? 'min-h-96' : 'min-h-full']: true,
-                [shouldDisplay && state === 'entered'
-                  ? 'translate-y-0'
-                  : '-translate-y-full']: true,
+                [shouldDisplay ? 'translate-y-0' : '-translate-y-full']: true,
               }
             )}
             data-testid="container"
           >
             <Background />
-            <Title title={title} state={state} />
-            <Desc description={description} state={state} />
+            <Title title={title} shouldDisplay={shouldDisplay} />
+            <Desc description={description} shouldDisplay={shouldDisplay} />
           </section>
-        )}
-      </Transition>
-    </SwitchTransition>
+        );
+      }}
+    </Transition>
   );
 }
 
@@ -83,9 +74,14 @@ function Background() {
   );
 }
 
-function Title({ title, state }: { title: string; state: TransitionStatus }) {
+function Title({
+  title,
+  shouldDisplay,
+}: {
+  title: string;
+  shouldDisplay: boolean;
+}) {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -100,7 +96,7 @@ function Title({ title, state }: { title: string; state: TransitionStatus }) {
           'lg:text-6xl',
           'xl:text-7xl',
           {
-            [shouldDisplay && state === 'entered'
+            [shouldDisplay
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-full']: true,
           }
@@ -114,13 +110,12 @@ function Title({ title, state }: { title: string; state: TransitionStatus }) {
 
 function Desc({
   description,
-  state,
+  shouldDisplay,
 }: {
   description: string;
-  state: TransitionStatus;
+  shouldDisplay: boolean;
 }) {
   const descRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(descRef);
 
   return (
@@ -132,7 +127,7 @@ function Desc({
           'motion-reduce:transition-none',
           'xl:text-2xl',
           {
-            [shouldDisplay && state === 'entered'
+            [shouldDisplay
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-full']: true,
           }

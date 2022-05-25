@@ -16,6 +16,7 @@ import Window from '../modules/Window';
 import { getRefValue } from '../lib/hooks';
 import { useDarkModeEnabled, useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
+import { checkShouldAnimate } from '../lib/transition-group';
 import SvgLogo from './svgLogo';
 import SvgSun from './svgSun';
 import SvgMoon from './svgMoon';
@@ -120,7 +121,7 @@ function ProgressBar() {
             'fixed top-0 left-0 flex w-full h-1.5 overflow-hidden z-50',
             'transition-transform duration-300',
             'motion-reduce:transition-none',
-            state === 'entered' ? 'translate-y-0' : '-translate-y-2'
+            checkShouldAnimate(state) ? 'translate-y-0' : '-translate-y-2'
           )}
         >
           <div
@@ -313,7 +314,7 @@ function ThemeButton({
                       }
                     : {
                         'duration-150': true,
-                        [state === 'entered'
+                        [checkShouldAnimate(state)
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 translate-y-2']: true,
                       }
@@ -337,7 +338,7 @@ function ThemeButton({
                       }
                     : {
                         'duration-150': true,
-                        [state === 'entered'
+                        [checkShouldAnimate(state)
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-3']: true,
                       }
@@ -460,7 +461,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
                     }
                   : {
                       'duration-150': true,
-                      [state === 'entered'
+                      [checkShouldAnimate(state)
                         ? 'opacity-100 translate-y-0'
                         : 'opacity-0 -translate-y-3']: true,
                     }
@@ -482,7 +483,7 @@ function MenuContainer({ dialog }: { dialog: DialogStateReturn }) {
   return (
     <Transition in={dialog.visible} nodeRef={containerRef} timeout={100}>
       {(state) => {
-        const shouldDisplay = state === 'entered';
+        const shouldDisplay = checkShouldAnimate(state);
 
         return (
           <DialogBackdrop

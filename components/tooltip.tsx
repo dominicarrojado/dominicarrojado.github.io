@@ -1,6 +1,7 @@
 import { ReactNode, useRef } from 'react';
 import cn from 'classnames';
 import { Tooltip as ReakitTooltip, TooltipStateReturn } from 'reakit/Tooltip';
+import { checkShouldAnimate } from '../lib/transition-group';
 import Transition from './transition';
 
 export type Props = {
@@ -19,7 +20,7 @@ export default function Tooltip({ tooltip, children, className }: Props) {
   return (
     <Transition in={tooltip.visible} nodeRef={containerRef} timeout={100}>
       {(state) => {
-        const shouldDisplay = state === 'entered';
+        const shouldDisplay = checkShouldAnimate(state);
 
         return (
           <ReakitTooltip {...tooltip}>

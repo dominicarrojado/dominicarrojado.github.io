@@ -7,6 +7,7 @@ import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
 import { useDownloadGif, useMotionSafe, useMounted } from '../lib/custom-hooks';
+import { checkShouldAnimate } from '../lib/transition-group';
 import SvgStar from './svgStar';
 import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
@@ -215,8 +216,9 @@ function ImageContainer({
                 'transition-opacity duration-300',
                 'motion-reduce:transition-none',
                 {
-                  [state === 'entered' ? 'opacity-100 delay-300' : 'opacity-0']:
-                    true,
+                  [checkShouldAnimate(state)
+                    ? 'opacity-100 delay-300'
+                    : 'opacity-0']: true,
                 }
               )}
               draggable={false}
@@ -294,7 +296,7 @@ function GifLoader({
               'motion-reduce:transition-none',
               'sm:top-4 sm:right-4',
               {
-                [state === 'entered' ? 'opacity-100' : 'opacity-0']: true,
+                [checkShouldAnimate(state) ? 'opacity-100' : 'opacity-0']: true,
               }
             )}
             data-testid="gif-loader"

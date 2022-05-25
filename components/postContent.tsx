@@ -1,8 +1,9 @@
 import cn from 'classnames';
 import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
-import { SwitchTransition, Transition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 import { useMounted } from '../lib/custom-hooks';
+import { checkShouldAnimate } from '../lib/transition-group';
 import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
@@ -37,55 +38,53 @@ export default function PostContent({ postData }: Props) {
   };
 
   return (
-    <SwitchTransition>
-      <Transition key={postData.id} nodeRef={sectionRef} timeout={0}>
-        {(state) => (
-          <Section
-            ref={sectionRef}
+    <Transition in={shouldDisplay} nodeRef={sectionRef} timeout={0}>
+      {(state) => (
+        <Section
+          ref={sectionRef}
+          className={cn(
+            'transform transition-transform-opacity duration-1000',
+            'motion-reduce:transition-none',
+            {
+              [animationDone ? 'delay-2500' : 'delay-1500']: true,
+              [checkShouldAnimate(state)
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10']: true,
+            }
+          )}
+          onTransitionEnd={onTransitionEnd}
+          data-testid="section"
+        >
+          <AdUnit
+            adSlot={GoogleAdSenseUnit.POST_HEADER}
+            adFormat={GoogleAdSenseUnitFormat.AUTO}
             className={cn(
-              'transform transition-transform-opacity duration-1000',
-              'motion-reduce:transition-none',
-              {
-                [animationDone ? 'delay-2500' : 'delay-1500']: true,
-                [shouldDisplay && state === 'entered'
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10']: true,
-              }
+              'w-11/12 max-w-screen-3xl -mt-8 mx-auto pb-8',
+              'sm:-mt-10 sm:pb-10',
+              'md:-mt-12 md:pb-12',
+              'lg:w-5/6'
             )}
-            onTransitionEnd={onTransitionEnd}
-            data-testid="section"
-          >
-            <AdUnit
-              adSlot={GoogleAdSenseUnit.POST_HEADER}
-              adFormat={GoogleAdSenseUnitFormat.AUTO}
-              className={cn(
-                'w-11/12 max-w-screen-3xl -mt-8 mx-auto pb-8',
-                'sm:-mt-10 sm:pb-10',
-                'md:-mt-12 md:pb-12',
-                'lg:w-5/6'
-              )}
-            />
-            <PostHeader date={postData.date} category={postData.category} />
-            <PostVideoLink videoUrl={postData.videoUrl} />
-            <PostContentMarkdown content={postData.content} />
-            <PostFooter
-              previousPost={postData.previousPost}
-              nextPost={postData.nextPost}
-            />
-            <AdUnit
-              adSlot={GoogleAdSenseUnit.POST_FOOTER}
-              adFormat={GoogleAdSenseUnitFormat.AUTO}
-              className={cn(
-                'w-11/12 max-w-screen-3xl -mb-8 mx-auto pt-8',
-                'sm:-mb-10 sm:pt-10',
-                'md:-mb-12 md:pt-12',
-                'lg:w-5/6'
-              )}
-            />
-          </Section>
-        )}
-      </Transition>
-    </SwitchTransition>
+          />
+          <PostHeader date={postData.date} category={postData.category} />
+          <PostVideoLink videoUrl={postData.videoUrl} />
+          <PostContentMarkdown content={postData.content} />
+          <PostFooter
+            previousPost={postData.previousPost}
+            nextPost={postData.nextPost}
+          />
+          <AdUnit
+            adSlot={GoogleAdSenseUnit.POST_FOOTER}
+            adFormat={GoogleAdSenseUnitFormat.AUTO}
+            className={cn(
+              'w-11/12 max-w-screen-3xl -mb-8 mx-auto pt-8',
+              'sm:-mb-10 sm:pt-10',
+              'md:-mb-12 md:pt-12',
+              'lg:w-5/6'
+            )}
+          />
+        </Section>
+      )}
+    </Transition>
   );
 }
 
