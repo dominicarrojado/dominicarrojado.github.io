@@ -135,7 +135,7 @@ If you're coding in a smaller-sized screen or prefer to have a wider screen for 
 Install the [Live Server](https://github.com/tapio/live-server) and [Concurrently](https://github.com/open-cli-tools/concurrently) using the command below. Live Server will create a server locally, it will help us serve the generated `index.html` by MJML so you can preview it in a browser. Concurrently will let us run multiple scripts with one script so you don't have to open multiple terminal windows to achieve the same thing.
 
 ```bash
-yarn add -D live-server concurrently
+yarn add -D live-server@1.2.1 concurrently
 ```
 
 Once installed, open your `package.json` again and update the scripts with the following code below:
