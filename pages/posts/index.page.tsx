@@ -1,8 +1,9 @@
 import { GetStaticProps } from 'next';
 import { getAllPostsLastPage, getAllPostsData } from '../../lib/posts';
-import HeroSub from '../../components/heroSub';
-import PostsSection from '../../components/postsSection';
 import SeoTags from '../../components/seoTags';
+import HeroSub from '../../components/heroSub';
+import AdUnitScript from '../../components/adUnitScript';
+import PostsSection from '../../components/postsSection';
 import { Post, Route } from '../../lib/types';
 import { POSTS_PER_PAGE } from '../../lib/constants';
 
@@ -26,6 +27,7 @@ export default function Posts(props: Props) {
         description={desc}
       />
       <HeroSub title={title} description={desc} />
+      <AdUnitScript />
       <PostsSection {...props} />
     </>
   );

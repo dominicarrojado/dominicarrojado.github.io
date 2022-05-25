@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import * as customHooks from '../../../lib/custom-hooks';
 import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
+import * as AdUnitScript from '../../../components/adUnitScript';
 import * as PostsSection from '../../../components/postsSection';
 import { Post } from '../../../lib/types';
 import Posts, { getStaticProps } from '../index.page';
@@ -18,6 +19,7 @@ describe('<Posts />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
+    const adUnitScriptSpy = jest.spyOn(AdUnitScript, 'default');
     const postsSectionSpy = jest.spyOn(PostsSection, 'default');
 
     const staticPropsRes = (await getStaticProps({})) as any;
@@ -66,6 +68,8 @@ describe('<Posts />', () => {
 
     expect(heroSubSpy).toBeCalledTimes(1);
     expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
+
+    expect(adUnitScriptSpy).toBeCalledTimes(1);
 
     expect(postsSectionSpy).toBeCalledTimes(1);
   });

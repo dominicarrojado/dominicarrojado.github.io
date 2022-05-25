@@ -18,11 +18,6 @@ function AdUnit({ adSlot, className }: Props) {
 
   return (
     <div className={className}>
-      <Script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADSENSE_CLIENT_ID}`}
-        crossOrigin="anonymous"
-      />
       <ins
         className={cn('adsbygoogle', styles.adunit)}
         data-ad-client={GOOGLE_ADSENSE_CLIENT_ID}
@@ -30,6 +25,7 @@ function AdUnit({ adSlot, className }: Props) {
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-testid="ad-unit"
+        // data-adtest="on" // for local testing only
         style={{ display: 'block' }}
       />
     </div>

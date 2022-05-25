@@ -4,6 +4,7 @@ import { getRandomPostId } from '../../../lib/test-helpers';
 import * as customHooks from '../../../lib/custom-hooks';
 import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
+import * as AdUnitScript from '../../../components/adUnitScript';
 import * as PostContent from '../../../components/postContent';
 import { PostData } from '../../../lib/types';
 import PostIndex, { getStaticPaths, getStaticProps } from '../[id].page';
@@ -26,6 +27,7 @@ describe('<PostIndex />', () => {
 
     const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
+    const adUnitScriptSpy = jest.spyOn(AdUnitScript, 'default');
     const postContentSpy = jest.spyOn(PostContent, 'default');
 
     const postId = getRandomPostId();
@@ -96,6 +98,8 @@ describe('<PostIndex />', () => {
       { title: postData.title, description: postData.excerpt },
       {}
     );
+
+    expect(adUnitScriptSpy).toBeCalledTimes(1);
 
     expect(postContentSpy).toBeCalledTimes(1);
     expect(postContentSpy).toBeCalledWith({ postData }, {});
