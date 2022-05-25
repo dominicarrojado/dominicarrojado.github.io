@@ -11,7 +11,7 @@ import { trackEvent } from '../lib/google-analytics';
 import SvgLogo from './svgLogo';
 import SvgArrowDown from './svgArrowDown';
 import SvgLessThan from './svgLessThan';
-import { GoogleAnalyticsEvents } from '../lib/types';
+import { GoogleAnalyticsEvent } from '../lib/types';
 import { SCROLL_DOWN_DURATION } from '../lib/constants';
 
 export default function HeroMain() {
@@ -156,7 +156,7 @@ function ScrollDownButton() {
   const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
-        event: GoogleAnalyticsEvents.SCROLL_HOVER,
+        event: GoogleAnalyticsEvent.SCROLL_HOVER,
         hoverText: text,
       });
     }
@@ -165,7 +165,7 @@ function ScrollDownButton() {
     e.currentTarget.blur();
     isBtnClickedRef.current = true;
     trackEvent({
-      event: GoogleAnalyticsEvents.SCROLL_CLICK,
+      event: GoogleAnalyticsEvent.SCROLL_CLICK,
       linkText: text,
     });
   };

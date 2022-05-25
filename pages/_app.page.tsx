@@ -5,7 +5,7 @@ import Window from '../modules/Window';
 import DarkMode from '../modules/DarkMode';
 import Layout from '../components/layout';
 import '../styles/global.css';
-import { GoogleAnalyticsEvents, Route } from '../lib/types';
+import { GoogleAnalyticsEvent, Route } from '../lib/types';
 
 function App({ Component, pageProps, router }: AppProps) {
   const routerEvents = router.events;
@@ -17,7 +17,7 @@ function App({ Component, pageProps, router }: AppProps) {
 
   useEffect(() => {
     const onRouteChangeComplete = (_url: string) => {
-      trackEvent({ event: GoogleAnalyticsEvents.PAGE_VIEW });
+      trackEvent({ event: GoogleAnalyticsEvent.PAGE_VIEW });
     };
 
     routerEvents.on('routeChangeComplete', onRouteChangeComplete);

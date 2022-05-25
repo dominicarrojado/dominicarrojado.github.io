@@ -1,4 +1,4 @@
-import { GoogleAnalyticsEvents, SocialName } from './types';
+import { GoogleAnalyticsEvent, SocialName } from './types';
 import { checkIsLocalhost } from './location';
 
 declare global {
@@ -8,88 +8,88 @@ declare global {
 }
 
 type EventPageView = {
-  event: GoogleAnalyticsEvents.PAGE_VIEW;
+  event: GoogleAnalyticsEvent.PAGE_VIEW;
 };
 
 type EventHeaderMenuHover = {
-  event: GoogleAnalyticsEvents.HEADER_BTN_HOVER;
+  event: GoogleAnalyticsEvent.HEADER_BTN_HOVER;
   hoverText: string;
 };
 
 type EventHeaderMenuClick = {
-  event: GoogleAnalyticsEvents.HEADER_BTN_CLICK;
+  event: GoogleAnalyticsEvent.HEADER_BTN_CLICK;
   linkText: string;
 };
 
 type EventThemeButtonHover = {
-  event: GoogleAnalyticsEvents.THEME_BTN_HOVER;
+  event: GoogleAnalyticsEvent.THEME_BTN_HOVER;
   hoverText: string;
 };
 
 type EventThemeButtonClick = {
-  event: GoogleAnalyticsEvents.THEME_BTN_CLICK;
+  event: GoogleAnalyticsEvent.THEME_BTN_CLICK;
   linkText: string;
 };
 
 type EventScrollDownHover = {
-  event: GoogleAnalyticsEvents.SCROLL_HOVER;
+  event: GoogleAnalyticsEvent.SCROLL_HOVER;
   hoverText: string;
 };
 
 type EventScrollDownClick = {
-  event: GoogleAnalyticsEvents.SCROLL_CLICK;
+  event: GoogleAnalyticsEvent.SCROLL_CLICK;
   linkText: string;
 };
 
 type EventSocialHover = {
-  event: GoogleAnalyticsEvents.SOCIAL_HOVER;
+  event: GoogleAnalyticsEvent.SOCIAL_HOVER;
   socialName: SocialName;
   hoverText: string;
   hoverUrl: string;
 };
 
 type EventSocialClick = {
-  event: GoogleAnalyticsEvents.SOCIAL_CLICK;
+  event: GoogleAnalyticsEvent.SOCIAL_CLICK;
   socialName: SocialName;
   linkText: string;
   linkUrl: string;
 };
 
 type EventProjectHover = {
-  event: GoogleAnalyticsEvents.PROJECT_HOVER;
+  event: GoogleAnalyticsEvent.PROJECT_HOVER;
   projectTitle: string;
   hoverText: string;
   hoverUrl: string;
 };
 
 type EventProjectClick = {
-  event: GoogleAnalyticsEvents.PROJECT_CLICK;
+  event: GoogleAnalyticsEvent.PROJECT_CLICK;
   projectTitle: string;
   linkText: string;
   linkUrl: string;
 };
 
 type EventProjectInfoHover = {
-  event: GoogleAnalyticsEvents.PROJECT_INFO_HOVER;
+  event: GoogleAnalyticsEvent.PROJECT_INFO_HOVER;
   projectTitle: string;
   hoverText: string;
 };
 
 type EventGifAutoPlayStart = {
-  event: GoogleAnalyticsEvents.GIF_AUTO_PLAY_START;
+  event: GoogleAnalyticsEvent.GIF_AUTO_PLAY_START;
   projectTitle: string;
   gifLoadTime: number;
 };
 
 type EventGifAutoPlayCancel = {
-  event: GoogleAnalyticsEvents.GIF_AUTO_PLAY_CANCEL;
+  event: GoogleAnalyticsEvent.GIF_AUTO_PLAY_CANCEL;
   projectTitle: string;
   gifCancelTime: number;
   gifCancelProgress: number;
 };
 
 type EventTestimonialsSwipe = {
-  event: GoogleAnalyticsEvents.TESTIMONIALS_SWIPE;
+  event: GoogleAnalyticsEvent.TESTIMONIALS_SWIPE;
 };
 
 export function trackEvent(

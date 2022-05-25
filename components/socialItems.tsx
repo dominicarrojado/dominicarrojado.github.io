@@ -6,7 +6,7 @@ import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import AnchorLink, { Props as AnchorLinkProps } from './anchorLink';
 import Tooltip from './tooltip';
-import { GoogleAnalyticsEvents, Social } from '../lib/types';
+import { GoogleAnalyticsEvent, Social } from '../lib/types';
 import { SOCIAL_LINKS } from '../lib/constants';
 
 export type Props = {
@@ -22,7 +22,7 @@ export default function SocialItems({ className }: Props) {
     if (!getRefValue(isBtnClickedRef)[socialName]) {
       trackEvent({
         socialName,
-        event: GoogleAnalyticsEvents.SOCIAL_HOVER,
+        event: GoogleAnalyticsEvent.SOCIAL_HOVER,
         hoverText: social.title,
         hoverUrl: social.url,
       });
@@ -35,7 +35,7 @@ export default function SocialItems({ className }: Props) {
 
     trackEvent({
       socialName,
-      event: GoogleAnalyticsEvents.SOCIAL_CLICK,
+      event: GoogleAnalyticsEvent.SOCIAL_CLICK,
       linkText: social.title,
       linkUrl: social.url,
     });

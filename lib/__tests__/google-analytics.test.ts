@@ -5,7 +5,7 @@ import {
   getFakeWord,
   setReadOnlyProperty,
 } from '../test-helpers';
-import { GoogleAnalyticsEvents, SocialName } from '../types';
+import { GoogleAnalyticsEvent, SocialName } from '../types';
 import { trackEvent } from '../google-analytics';
 
 describe('google-analytics utilities', () => {
@@ -29,7 +29,7 @@ describe('google-analytics utilities', () => {
       });
 
       const event = {
-        event: GoogleAnalyticsEvents.SCROLL_CLICK,
+        event: GoogleAnalyticsEvent.SCROLL_CLICK,
         linkText: getFakeSentence(),
       } as const;
 
@@ -44,7 +44,7 @@ describe('google-analytics utilities', () => {
       });
 
       const event = {
-        event: GoogleAnalyticsEvents.SOCIAL_HOVER,
+        event: GoogleAnalyticsEvent.SOCIAL_HOVER,
         socialName: SocialName.EMAIL,
         hoverText: getFakeWord(),
         hoverUrl: getFakeUrl(),
@@ -63,7 +63,7 @@ describe('google-analytics utilities', () => {
 
       const currentDataLayer = [
         {
-          event: GoogleAnalyticsEvents.PROJECT_HOVER,
+          event: GoogleAnalyticsEvent.PROJECT_HOVER,
           projectTitle: getFakeSentence(),
           hoverText: getFakeSentence(),
           hoverUrl: getFakeUrl(),
@@ -73,7 +73,7 @@ describe('google-analytics utilities', () => {
       window.dataLayer = [...currentDataLayer];
 
       const event = {
-        event: GoogleAnalyticsEvents.PROJECT_CLICK,
+        event: GoogleAnalyticsEvent.PROJECT_CLICK,
         projectTitle: getFakeSentence(),
         linkText: getFakeSentence(),
         linkUrl: getFakeUrl(),

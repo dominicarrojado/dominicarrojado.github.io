@@ -12,7 +12,7 @@ import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
 import Tooltip from './tooltip';
 import {
-  GoogleAnalyticsEvents,
+  GoogleAnalyticsEvent,
   Project,
   ProjectLink,
   Route,
@@ -94,14 +94,14 @@ function ImageContainer({
       setGifData(data);
 
       trackEvent({
-        event: GoogleAnalyticsEvents.GIF_AUTO_PLAY_START,
+        event: GoogleAnalyticsEvent.GIF_AUTO_PLAY_START,
         projectTitle: title,
         gifLoadTime: durationMs,
       });
     },
     onCancel: ({ durationMs, progress }) => {
       trackEvent({
-        event: GoogleAnalyticsEvents.GIF_AUTO_PLAY_CANCEL,
+        event: GoogleAnalyticsEvent.GIF_AUTO_PLAY_CANCEL,
         projectTitle: title,
         gifCancelTime: durationMs,
         gifCancelProgress: progress,
@@ -269,7 +269,7 @@ function GifLoader({
   const text = 'Downloading GIF...';
   const loaderOnMouseEnter = () => {
     trackEvent({
-      event: GoogleAnalyticsEvents.PROJECT_INFO_HOVER,
+      event: GoogleAnalyticsEvent.PROJECT_INFO_HOVER,
       projectTitle: title,
       hoverText: text,
     });
@@ -407,7 +407,7 @@ function LinkItem({
     if (!getRefValue(isClickedRef)) {
       trackEvent({
         projectTitle,
-        event: GoogleAnalyticsEvents.PROJECT_HOVER,
+        event: GoogleAnalyticsEvent.PROJECT_HOVER,
         hoverText: title,
         hoverUrl: url,
       });
@@ -417,7 +417,7 @@ function LinkItem({
     isClickedRef.current = true;
     trackEvent({
       projectTitle,
-      event: GoogleAnalyticsEvents.PROJECT_CLICK,
+      event: GoogleAnalyticsEvent.PROJECT_CLICK,
       linkText: title,
       linkUrl: url,
     });

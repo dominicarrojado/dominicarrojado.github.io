@@ -12,7 +12,7 @@ import SectionTitle from './sectionTitle';
 import TestimonialItem from './testimonialItem';
 import SvgMousePointer from './svgMousePointer';
 import SvgHandPointer from './svgHandPointer';
-import { GoogleAnalyticsEvents } from '../lib/types';
+import { GoogleAnalyticsEvent } from '../lib/types';
 import {
   SCREEN_LG,
   TESTIMONIALS,
@@ -87,7 +87,7 @@ export default function TestimonialsHomeSection() {
       if (!getRefValue(isSwipeTrackedRef)) {
         isSwipeTrackedRef.current = true;
         trackEvent({
-          event: GoogleAnalyticsEvents.TESTIMONIALS_SWIPE,
+          event: GoogleAnalyticsEvent.TESTIMONIALS_SWIPE,
         });
       }
     }

@@ -22,7 +22,7 @@ import SvgMoon from './svgMoon';
 import AnchorLink from './anchorLink';
 import Transition from './transition';
 import HeaderSocialItems from './socialItems';
-import { GoogleAnalyticsEvents, Route, Social } from '../lib/types';
+import { GoogleAnalyticsEvent, Route, Social } from '../lib/types';
 import {
   MAIN_ELEMENT_ID,
   MENU_ITEMS,
@@ -263,7 +263,7 @@ function ThemeButton({
   const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
-        event: GoogleAnalyticsEvents.THEME_BTN_HOVER,
+        event: GoogleAnalyticsEvent.THEME_BTN_HOVER,
         hoverText: text,
       });
     }
@@ -273,7 +273,7 @@ function ThemeButton({
     setAnimationDone(true); // in case it was clicked during initial transitioning
     toggleDarkMode();
     trackEvent({
-      event: GoogleAnalyticsEvents.THEME_BTN_CLICK,
+      event: GoogleAnalyticsEvent.THEME_BTN_CLICK,
       linkText: text,
     });
   };
@@ -370,7 +370,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
   const btnOnMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
-        event: GoogleAnalyticsEvents.HEADER_BTN_HOVER,
+        event: GoogleAnalyticsEvent.HEADER_BTN_HOVER,
         hoverText: text,
       });
     }
@@ -379,7 +379,7 @@ function MenuButton({ dialog }: { dialog: DialogStateReturn }) {
     isBtnClickedRef.current = true;
     setAnimationDone(true); // in case it was clicked during initial transitioning
     trackEvent({
-      event: GoogleAnalyticsEvents.HEADER_BTN_CLICK,
+      event: GoogleAnalyticsEvent.HEADER_BTN_CLICK,
       linkText: text,
     });
   };
@@ -623,7 +623,7 @@ function SocialItem({
   const onMouseLeave = () => {
     if (!getRefValue(isBtnClickedRef)) {
       trackEvent({
-        event: GoogleAnalyticsEvents.SOCIAL_HOVER,
+        event: GoogleAnalyticsEvent.SOCIAL_HOVER,
         hoverText: social.title,
         hoverUrl: social.url,
         socialName: social.name,
@@ -634,7 +634,7 @@ function SocialItem({
     isBtnClickedRef.current = true;
 
     trackEvent({
-      event: GoogleAnalyticsEvents.SOCIAL_CLICK,
+      event: GoogleAnalyticsEvent.SOCIAL_CLICK,
       linkText: social.title,
       linkUrl: social.url,
       socialName: social.name,
