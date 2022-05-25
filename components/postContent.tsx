@@ -17,6 +17,7 @@ import DateText from './dateText';
 import TextArrowLink from './textArrowLink';
 import Content from './content';
 import AnchorLink from './anchorLink';
+import AdUnit from './adUnit';
 import { ExternalUrl, Post, PostData, Route } from '../lib/types';
 import { ROUTES } from '../lib/constants';
 import 'highlight.js/styles/vs2015.css';
@@ -54,6 +55,14 @@ export default function PostContent({ postData }: Props) {
             onTransitionEnd={onTransitionEnd}
             data-testid="section"
           >
+            <AdUnit
+              className={cn(
+                '-mt-8 w-11/12 max-w-screen-3xl mx-auto pb-8',
+                'sm:-mt-10 sm:pb-10',
+                'md:-mt-12 md:pb-12',
+                'lg:w-5/6'
+              )}
+            />
             <PostHeader date={postData.date} category={postData.category} />
             <PostVideoLink videoUrl={postData.videoUrl} />
             <PostMarkdown content={postData.content} />
