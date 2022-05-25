@@ -7,12 +7,16 @@ declare global {
 }
 
 export function displayAd() {
-  if (checkIsLocalhost()) {
-    return;
-  }
+  try {
+    if (checkIsLocalhost()) {
+      return;
+    }
 
-  window.adsbygoogle = Array.isArray(window.adsbygoogle)
-    ? window.adsbygoogle
-    : [];
-  window.adsbygoogle.push({});
+    window.adsbygoogle = Array.isArray(window.adsbygoogle)
+      ? window.adsbygoogle
+      : [];
+    window.adsbygoogle.push({});
+  } catch (err) {
+    console.error('Error on displaying Google AdSense unit', err);
+  }
 }

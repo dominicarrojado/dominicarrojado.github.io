@@ -5,6 +5,7 @@ import SvgEnvelope from '../components/svgEnvelope';
 import SvgYouTube from '../components/svgYouTube';
 import {
   ExternalUrl,
+  GoogleAdSenseUnit,
   Project,
   Quote,
   Route,
@@ -21,6 +22,7 @@ export const PERSONAL_EMAIL = 'dominicarrojado@gmail.com';
 export const PRIVACY_EMAIL = 'privacy@dominicarrojado.com';
 export const DISCLAIMER_EMAIL = 'disclaimer@dominicarrojado.com';
 export const ROUTES = Object.values(Route);
+export const ROUTES_LENGTH = ROUTES.length;
 export const SCROLL_DOWN_DURATION = 1500;
 export const POSTS_PER_PAGE = 4;
 export const SEO_DEFAULT_IMAGE =
@@ -42,6 +44,10 @@ export const FONTS = [
 export const SCREEN_LG = 1024;
 
 export const MAIN_ELEMENT_ID = 'main';
+
+export const GOOGLE_ADSENSE_CLIENT_ID = 'ca-pub-3632473845121107';
+export const GOOGLE_ADSENSE_UNITS = Object.values(GoogleAdSenseUnit);
+export const GOOGLE_ADSENSE_UNITS_LENGTH = GOOGLE_ADSENSE_UNITS.length;
 
 export const PROJECTS: Array<Project> = [
   {

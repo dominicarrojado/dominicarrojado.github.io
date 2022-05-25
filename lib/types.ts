@@ -45,6 +45,13 @@ export enum GoogleAnalyticsEvents {
   TESTIMONIALS_SWIPE = 'testimonials_swipe',
 }
 
+export enum GoogleAdSenseUnit {
+  POST_HEADER = '4984498713',
+  POST_FOOTER = '6892691691',
+  POSTS_HEADER = '2766540582',
+  POSTS_FOOTER = '1540540084',
+}
+
 export enum ExternalUrl {
   PERSONAL_PAYPAL = 'https://www.paypal.com/paypalme/DominicArrojado',
   PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',

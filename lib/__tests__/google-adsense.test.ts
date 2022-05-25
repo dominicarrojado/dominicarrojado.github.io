@@ -1,25 +1,25 @@
-import { getFakeDomainWord, setReadOnlyProperty } from '../test-helpers';
+import { getFakeSentence } from '../test-helpers';
+import * as locationHelpers from '../location';
 import { displayAd } from '../google-adsense';
 
 describe('google-adsense utilities', () => {
   describe('displayAd()', () => {
     const adsByGoogleOrig = window.adsbygoogle;
-    const locationOrig = window.location;
 
     beforeEach(() => {
+      jest.spyOn(locationHelpers, 'checkIsLocalhost').mockReturnValue(false);
+
       delete (window as any).googleads;
-      delete (window as any).location;
     });
 
     afterEach(() => {
+      jest.restoreAllMocks();
+
       window.adsbygoogle = adsByGoogleOrig;
-      setReadOnlyProperty(window, 'location', locationOrig);
     });
 
     it('should NOT track event on local development', () => {
-      setReadOnlyProperty(window, 'location', {
-        hostname: 'localhost',
-      });
+      jest.spyOn(locationHelpers, 'checkIsLocalhost').mockReturnValue(true);
 
       displayAd();
 
@@ -27,20 +27,12 @@ describe('google-adsense utilities', () => {
     });
 
     it('should track event if adsbygoogle is NOT defined yet', () => {
-      setReadOnlyProperty(window, 'location', {
-        hostname: getFakeDomainWord(),
-      });
-
       displayAd();
 
       expect(window.adsbygoogle).toEqual([{}]);
     });
 
     it('should track event if adsbygoogle is defined', () => {
-      setReadOnlyProperty(window, 'location', {
-        hostname: getFakeDomainWord(),
-      });
-
       const currentAdsByGoogle = [{}];
 
       window.adsbygoogle = [...currentAdsByGoogle];
@@ -48,6 +40,26 @@ describe('google-adsense utilities', () => {
       displayAd();
 
       expect(window.adsbygoogle).toEqual([...currentAdsByGoogle, {}]);
+    });
+
+    it('should handle unexpected error', () => {
+      const consoleErrorMock = jest
+        .spyOn(console, 'error')
+        .mockImplementation();
+      const unexpectedError = getFakeSentence();
+
+      window.adsbygoogle = [{}];
+      window.adsbygoogle.push = jest.fn().mockImplementation(() => {
+        throw unexpectedError;
+      });
+
+      displayAd();
+
+      expect(consoleErrorMock).toBeCalledTimes(1);
+      expect(consoleErrorMock).toBeCalledWith(
+        'Error on displaying Google AdSense unit',
+        unexpectedError
+      );
     });
   });
 });

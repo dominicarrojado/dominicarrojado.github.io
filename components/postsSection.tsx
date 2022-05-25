@@ -4,7 +4,7 @@ import Section from './section';
 import PostItem from './postItem';
 import PostsPagination from './postsPagination';
 import AdUnit from './adUnit';
-import { Post } from '../lib/types';
+import { GoogleAdSenseUnit, Post } from '../lib/types';
 
 export type Props = {
   currentPage: number;
@@ -25,12 +25,14 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
   return (
     <Section id="posts">
       <AdUnit
+        adSlot={GoogleAdSenseUnit.POSTS_HEADER}
         className={cn(
           'max-w-screen-3xl -mt-8 mx-auto pb-8',
-          'delay-1250',
+          'delay-1500',
           'motion-reduce:transition-none',
           'sm:-mt-10 sm:pb-10',
           'md:-mt-12 md:pb-12',
+          'lg:w-5/6',
           commonTransitionClass
         )}
       />
@@ -53,12 +55,14 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
       </ul>
       <PostsPagination currentPage={currentPage} lastPage={lastPage} />
       <AdUnit
+        adSlot={GoogleAdSenseUnit.POSTS_FOOTER}
         className={cn(
           'max-w-screen-3xl -mb-8 mx-auto pt-8',
           'delay-2500',
           'motion-reduce:transition-none',
           'sm:-mb-10 sm:pt-10',
           'md:-mb-12 md:pt-12',
+          'lg:w-5/6',
           commonTransitionClass
         )}
       />

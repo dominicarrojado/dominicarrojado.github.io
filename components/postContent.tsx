@@ -18,7 +18,13 @@ import TextArrowLink from './textArrowLink';
 import Content from './content';
 import AnchorLink from './anchorLink';
 import AdUnit from './adUnit';
-import { ExternalUrl, Post, PostData, Route } from '../lib/types';
+import {
+  ExternalUrl,
+  GoogleAdSenseUnit,
+  Post,
+  PostData,
+  Route,
+} from '../lib/types';
 import { ROUTES } from '../lib/constants';
 import 'highlight.js/styles/vs2015.css';
 
@@ -56,6 +62,7 @@ export default function PostContent({ postData }: Props) {
             data-testid="section"
           >
             <AdUnit
+              adSlot={GoogleAdSenseUnit.POST_HEADER}
               className={cn(
                 'w-11/12 max-w-screen-3xl -mt-8 mx-auto pb-8',
                 'sm:-mt-10 sm:pb-10',
@@ -71,6 +78,7 @@ export default function PostContent({ postData }: Props) {
               nextPost={postData.nextPost}
             />
             <AdUnit
+              adSlot={GoogleAdSenseUnit.POST_FOOTER}
               className={cn(
                 'w-11/12 max-w-screen-3xl -mb-8 mx-auto pt-8',
                 'sm:-mb-10 sm:pt-10',

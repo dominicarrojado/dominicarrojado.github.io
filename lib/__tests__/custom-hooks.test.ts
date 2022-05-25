@@ -5,6 +5,7 @@ import DarkMode from '../../modules/DarkMode';
 import {
   getFakeBoolean,
   getFakeNumber,
+  getFakeSentence,
   getMatchMediaMock,
   setReadOnlyProperty,
 } from '../test-helpers';
@@ -463,7 +464,7 @@ describe('hooks utilities', () => {
     });
 
     it('should call onError', async () => {
-      const unexpectedError = 'unexpected error';
+      const unexpectedError = getFakeSentence();
 
       jest.spyOn(axios, 'get').mockRejectedValue(unexpectedError);
 

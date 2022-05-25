@@ -3,7 +3,12 @@ import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
 import { Nullish } from './types';
-import { ROUTES } from './constants';
+import {
+  GOOGLE_ADSENSE_UNITS,
+  GOOGLE_ADSENSE_UNITS_LENGTH,
+  ROUTES,
+  ROUTES_LENGTH,
+} from './constants';
 
 type GetFakeNumber = {
   (max?: number): number;
@@ -70,7 +75,7 @@ export function getMonthName(monthIdx: number) {
 }
 
 export function getRandomRoute() {
-  return ROUTES[getFakeNumber(ROUTES.length - 1)];
+  return ROUTES[getFakeNumber(ROUTES_LENGTH - 1)];
 }
 
 export function getRandomPostId() {
@@ -84,6 +89,10 @@ export function getRandomPostId() {
   });
 
   return posts[getFakeNumber(posts.length - 1)];
+}
+
+export function getRandomGoogleAdSenseUnit() {
+  return GOOGLE_ADSENSE_UNITS[getFakeNumber(GOOGLE_ADSENSE_UNITS_LENGTH - 1)];
 }
 
 export function getMatchMediaMock(

@@ -13,6 +13,8 @@ describe('imports utilities', () => {
 
   it('should handle unexpected error', async () => {
     const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation();
+
+    // getFakeSentence() not allowed to be called for when using jest.mock()
     const unexpectedError = 'unexpected error';
 
     jest.mock('moveto', () => {
