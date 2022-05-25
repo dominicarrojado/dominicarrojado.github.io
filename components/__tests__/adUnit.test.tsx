@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 import {
   getFakeWord,
   getRandomGoogleAdSenseUnit,
+  getRandomGoogleAdSenseUnitFormat,
+  getRandomGoogleAdsenseUnitLayout,
 } from '../../lib/test-helpers';
 import { GOOGLE_ADSENSE_CLIENT_ID } from '../../lib/constants';
 import AdUnit, { Props } from '../adUnit';
@@ -11,9 +13,10 @@ describe('<AdUnit />', () => {
 
   describe('content', () => {
     const adSlot = getRandomGoogleAdSenseUnit();
+    const adFormat = getRandomGoogleAdSenseUnitFormat();
 
     beforeEach(() => {
-      renderComponent({ adSlot });
+      renderComponent({ adSlot, adFormat });
     });
 
     it('should have expected client ID', () => {
@@ -31,10 +34,10 @@ describe('<AdUnit />', () => {
       expect(adUnitEl).toHaveAttribute('data-ad-slot', adSlot);
     });
 
-    it('should have expected format', () => {
+    it('should have expected ad format', () => {
       const adUnitEl = screen.queryByTestId('ad-unit');
 
-      expect(adUnitEl).toHaveAttribute('data-ad-format', 'auto');
+      expect(adUnitEl).toHaveAttribute('data-ad-format', adFormat);
     });
 
     it('should have expected full width responsive', () => {
@@ -56,12 +59,27 @@ describe('<AdUnit />', () => {
     });
   });
 
+  it('should accept adLayout prop', () => {
+    const adLayout = getRandomGoogleAdsenseUnitLayout();
+
+    renderComponent({
+      adLayout,
+      adSlot: getRandomGoogleAdSenseUnit(),
+      adFormat: getRandomGoogleAdSenseUnitFormat(),
+    });
+
+    const adUnitEl = screen.queryByTestId('ad-unit');
+
+    expect(adUnitEl).toHaveAttribute('data-ad-layout', adLayout);
+  });
+
   it('should accept className prop', () => {
     const className = getFakeWord();
 
     const { container } = renderComponent({
       className,
       adSlot: getRandomGoogleAdSenseUnit(),
+      adFormat: getRandomGoogleAdSenseUnitFormat(),
     });
 
     expect(container.firstChild).toHaveClass(className);

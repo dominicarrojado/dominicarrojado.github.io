@@ -46,6 +46,8 @@ yarn run dev
 
 This command will open your default browser and go to `http://localhost:8080/src/`. If it doesn't, you can do it yourself too. You should be able to see the boilerplate with the text `Hello World` displayed on your browser. If you end up seeing the directory of `/src/`, just refresh the page and you should see your email template. This is the `index.html` served by our local server.
 
+---
+
 ## Clean up the project
 
 Now, let's clean up our project. We won't be needing some of them. Delete or clear the contents of the following below:
@@ -98,6 +100,8 @@ Next, let's define a default style for our MJML components. We can define them i
 ```
 
 Using `<mj-all>` tag makes it easier to override style of MJML components via one tag. I have also set the `padding` to `0` because some components have default padding, by resetting it to `0` will make it easier for us to construct our template especially when following the expected design. We can add MJML component tags (like `<mj-section>`, `<mj-column>`, `<mj-text>`, etc.) inside `<mj-attributes>` tag to override the default settings on a specific component. We can also apply styles to a group of components using `<mj-class>` tag to help us reduce duplications in our code, we'll get to use that later as well.
+
+---
 
 ## Body
 
@@ -194,6 +198,8 @@ Once you save the changes, our email template should look like this:
 
 ![Screenshot of email title section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-email-title.png)
 
+---
+
 ## Company Header section
 
 Let's move on to the next section. Before we do some code changes, open [this link](/mjml-sample-edm/images/logo.jpeg) and download the image. Put the image inside the `/src/images/` folder.
@@ -233,6 +239,8 @@ Once you save the changes, this is how our email template should look like now:
 
 ![Screenshot of company header section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-company-header.png)
 
+---
+
 ## Hero section
 
 The next section is relatively similar to the previous section, it's just an image as well. You can open [this link](/mjml-sample-edm/images/hero.jpeg) and download the image. Put the image inside the `/src/images/` folder.
@@ -265,6 +273,8 @@ If you noticed, we didn't provide `width` or `height`. This is because we want i
 Let's look at how our email template looks like now:
 
 ![Screenshot of hero section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-hero.png)
+
+---
 
 ## Main Content section
 
@@ -343,6 +353,8 @@ Then we can update the MJML components that will make use of the shared styles b
   </mj-body>
 </mjml>
 ```
+
+---
 
 Great! Now let's add in the code for the list which is between the two paragraphs that we just coded. Since we know it would have the same styles for each item on the list, let's create another `<mj-class>` tag for it and apply to the components:
 
@@ -453,6 +465,8 @@ Next, let's create the button below the list, we can use the `<mj-button>` tag f
 
 There's two attributes in the `btn` class that's probably not familiar to you. First one is the `inner-padding` attribute, which is the padding inside the button. While the `padding` attribute would apply to the button's container, we can use that for the margin spacing against other components. Then the second one is `fluid-on-mobile` attribute, if set to "true", will be full width on mobile even if width is set. This makes our button responsive on mobile.
 
+---
+
 And before we forget it, there's also a link to a text located at the last paragraph which is "Cras Porta Dapibus" in particular. Since the text is inside the `<mj-text>` tag, we can't use `<mj-text>` again or any other MJML component. We will need to use regular HTML tags. We can declare styles in MJML and set them as "inline" so that we can style these HTML tags. Let's add in the code along with the class name and styles:
 
 ```
@@ -510,6 +524,8 @@ In case you get confused, just remember for sharing styles, `mj-class` declared 
 Alright, once you save the changes, the email template now should look like this:
 
 ![Screenshot of main content section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-main-content.png)
+
+---
 
 ## Benefits section
 
@@ -633,6 +649,8 @@ In mobile, we want them to stack on top of each other so we should not wrap the 
 </mjml>
 ```
 
+---
+
 And to finish off this section, let's add in the code for the button below the section of the columns. Remember we created an `mj-class` called `btn` specifically to share the styles with this button, so let's use that and also apply the specific styles:
 
 ```html
@@ -668,6 +686,8 @@ And to finish off this section, let's add in the code for the button below the s
 Once you save the changes, the email template now should look like this:
 
 ![Screenshot of benefits section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-benefits.png)
+
+---
 
 ## Company Footer section
 
@@ -722,6 +742,8 @@ Alright, we've done the difficult sections, the next sections would be easy now.
   </mj-body>
 </mjml>
 ```
+
+---
 
 ## Footer section
 
@@ -815,6 +837,8 @@ Our template should now look like what we wanted to accomplish from the start:
 
 ![Screenshot of footer section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-footer.png)
 
+---
+
 ## Mobile styles
 
 But wait, there's more! Let's try see how the mobile view is looking right now. All is well until you reach the footer section:
@@ -889,6 +913,8 @@ The alignment of the logo should be on the left and there should be some padding
 ![Screenshot of fixed mobile footer section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-footer-mobile-fixed.png)
 
 It looks good now!
+
+---
 
 ## Hover styles
 
@@ -989,6 +1015,8 @@ Then, you would need to add `css-class` for the buttons because they are MJML co
 ```
 
 And we are **done**! You've just built an email template with MJML framework with just a few lines of code - 296 to be exact. Just compare that amount of code against the generated `index.html`, it's half the amount of code and definitely much cleaner and easier to maintain than when you build the email template in regular HTML. And we didn't have to struggle much with regards to responsiveness, MJML handles most of it for us.
+
+---
 
 If you need the final code of this template, this is the [link](https://github.com/dominicarrojado/mjml-sample-edm) to the GitHub repository.
 

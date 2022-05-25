@@ -6,6 +6,10 @@ import { Nullish } from './types';
 import {
   GOOGLE_ADSENSE_UNITS,
   GOOGLE_ADSENSE_UNITS_LENGTH,
+  GOOGLE_ADSENSE_UNIT_FORMATS,
+  GOOGLE_ADSENSE_UNIT_FORMATS_LENGTH,
+  GOOGLE_ADSENSE_UNIT_LAYOUTS,
+  GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH,
   ROUTES,
   ROUTES_LENGTH,
 } from './constants';
@@ -93,6 +97,18 @@ export function getRandomPostId() {
 
 export function getRandomGoogleAdSenseUnit() {
   return GOOGLE_ADSENSE_UNITS[getFakeNumber(GOOGLE_ADSENSE_UNITS_LENGTH - 1)];
+}
+
+export function getRandomGoogleAdSenseUnitFormat() {
+  return GOOGLE_ADSENSE_UNIT_FORMATS[
+    getFakeNumber(GOOGLE_ADSENSE_UNIT_FORMATS_LENGTH - 1)
+  ];
+}
+
+export function getRandomGoogleAdsenseUnitLayout() {
+  return GOOGLE_ADSENSE_UNIT_LAYOUTS[
+    getFakeNumber(GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH - 1)
+  ];
 }
 
 export function getMatchMediaMock(

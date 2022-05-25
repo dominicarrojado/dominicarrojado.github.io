@@ -77,6 +77,8 @@ export async function clearRepositories(dbConnection: Connection) {
 
 This just iterates all the entities from the database connection, get their repository and clear it. We are accepting `dbConnection` as an argument because we could only get this once the Nest application is created, using the `onBeforeInit()`. You'll get to see this in a bit.
 
+---
+
 ## Write tests for get all the links feature
 
 Now that the utility functions are created, let's use them and setup the tests. Create a file `src/links/links.spec.ts` and add the following code:
@@ -235,6 +237,8 @@ app_1      |       ✓ should handle with data (472 ms)
 ```
 
 Great, we're done with testing this feature. Let's move to the next one ~
+
+---
 
 ## Write tests for create a link feature
 
@@ -456,6 +460,8 @@ app_1      |       ✓ should handle unexpected error (14 ms)
 
 I hope that you're slowly getting the hang of it and let's move to the next feature!
 
+---
+
 ## Write tests for delete a link feature
 
 Next feature to write tests for is when we delete a link. Do note that for this feature, you'll always get a `string` for the `id` since it is part of the URL, though it might not be in a valid `uuid` format. So for the first test case of this feature, let's validate that. And yes, you might have guessed it, we will create a utility function that generates a set of invalid `id` so we could reuse it later for the update a link feature:
@@ -582,6 +588,8 @@ app_1      |       ✓ should handle delete (39 ms)
 ```
 
 Let's move to the next feature to be tested ~
+
+---
 
 ## Write tests for update a link feature
 
@@ -710,6 +718,8 @@ app_1      | PASS src/links/links.spec.ts (12.185 s)
 ...
 app_1      |       ✓ should handle update (30 ms)
 ```
+
+---
 
 ## Write tests for redirect to URL by name feature
 

@@ -47,9 +47,19 @@ export enum GoogleAnalyticsEvent {
 
 export enum GoogleAdSenseUnit {
   POST_HEADER = '4984498713',
+  POST_BODY = '3748487753',
   POST_FOOTER = '6892691691',
   POSTS_HEADER = '2766540582',
   POSTS_FOOTER = '1540540084',
+}
+
+export enum GoogleAdSenseUnitLayout {
+  IN_ARTICLE = 'in-article',
+}
+
+export enum GoogleAdSenseUnitFormat {
+  AUTO = 'auto',
+  FLUID = 'fluid',
 }
 
 export enum ExternalUrl {

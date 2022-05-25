@@ -65,6 +65,8 @@ yarn build
 yarn start:prod
 ```
 
+---
+
 ## Install extensions in Visual Studio Code
 
 Open the created project in your Visual Studio Code. Let's install [Prettier](https://prettier.io/), it's a code formatter that formats the code for us when we save file changes which is a time-saver.
@@ -128,6 +130,8 @@ dist
 
 Files or directories added in this file will get excluded in the build context. This will increase the build's performance and improve the context load time.
 
+---
+
 ## Build image
 
 Now that we've created our `Dockerfile`, let's build our image. You are able to do this by the `docker build` command. The `docker build` command builds Docker images from a `Dockerfile` and a "context". A build's context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in the context.
@@ -165,6 +169,8 @@ We have 2 parameters in this command, that's `--detach` and `--publish 3000:3000
 Now that the application is running, open your browser and go to `http://localhost:3000/`. You should see the same `Hello World!` message.
 
 Now we have successfully containerized our application.
+
+---
 
 ## Multi-stage builds
 
@@ -254,6 +260,8 @@ Let's add this `docker-compose` command in our `package.json` scripts so that we
 }
 ```
 
+---
+
 ## PostgreSQL and pgAdmin4
 
 In this post, we'll use [PostgreSQL](https://www.postgresql.org/) as our database and [pgAdmin4](https://www.pgadmin.org/) for our database admin tool to complete our local development setup.
@@ -306,6 +314,8 @@ After successfully logging in, do a right-click on the "Servers" located at the 
 ![Screenshot of register server in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-register-server.png)
 
 Hit "Save" and if there was no error means that our pgAdmin4 was able to connect to our PostgreSQL database successfully. The "Nest Docker" would be added under the "Servers", and you can go through that to see and interact with the database. Here's how you can go to the tables: `Servers` -> `Nest Docker` -> `postgres` -> `Schemas` -> `public` -> `Tables`.
+
+---
 
 ## TypeORM
 
@@ -447,6 +457,8 @@ And if you repeat the same `GET` request, it should now return you an array with
 [{ "id": 1, "firstName": "Dominic", "lastName": "Arrojado", "isActive": true }]
 ```
 
+---
+
 ## ConfigModule
 
 There's another thing we need to do, so remember the values we used in initializing `TypeOrmModule`, passing configuration settings such as `host`, `port`, `username`, etc. Applications often run in different environments. Depending on the environment, different configuration settings should be used. Best practice is to store configuration variables in the environment.
@@ -549,6 +561,8 @@ bootstrap();
 ```
 
 Run the Docker Compose environments again and everything should work fine as before.
+
+---
 
 ## Config schema validation
 
@@ -684,6 +698,8 @@ Lastly, update the `package.json` to add new scripts and utilize these new Docke
 ```
 
 With the `-f` option, we are able to use a second configuration file along with the original `docker-compose.yml`. For `docker-compose:test` and `docker-compose:test:cov`, we have a special option `--exit-code-from`, that's because we don't want the services in the Docker Compose to keep running even after completing all the tests, so we should ideally exit from `app`, which is the name of our Nest application container in the `docker-compose.yml`, and stop all the services.
+
+---
 
 ## Final words
 

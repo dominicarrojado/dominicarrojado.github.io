@@ -51,6 +51,8 @@ This command will open your default browser and go to `http://localhost:3000/`. 
 
 This setup comes with live-editing or hot reloading which means when we save file changes, it will automatically update the app and reload on the browser. That's great for local development!
 
+---
+
 ## Clean up the project
 
 We're ready to code! Let's clean up our project which was created by Create React App. We won't be needing some of them. Delete or clear the contents of the following below:
@@ -118,6 +120,8 @@ export default function Swiper() {
   );
 }
 ```
+
+---
 
 ## Swiper styles
 
@@ -214,6 +218,8 @@ You might ask, how do we define an _optional_ field? You can do that by adding a
 
 Alright, we're not done yet. I already forsee that we would be reusing the same type in our `Swiper` component. So what I normally like to do is place reusable types in a single file. Let's go ahead and do that.
 
+---
+
 ## Create the type
 
 Create `src/types.ts`. This will be the place we could put shared types across components to reduce code duplication, although for this guide, we are only going to add one type, that would be the `SwiperItemType`. So update the file with the following code:
@@ -280,6 +286,8 @@ function Swiper({ items }: Props) {
 export default Swiper;
 ```
 
+---
+
 ## Sample data
 
 We're almost there to seeing something in our browser. We would need some sample data. I found [some images](https://mdn.github.io/learning-area/javascript/building-blocks/gallery/) we could use from [MDN Web Docs](https://developer.mozilla.org/en-US/). I don't own these images and I hope they don't mind if we use them for this tutorial, all credits goes to them. Please open the images below in another tab and download them:
@@ -337,6 +345,8 @@ Once you save the changes, you should see something like this:
 ![Screenshot of React Swiper 1](/images/posts/how-to-create-your-own-swiper-in-react-and-typescript-with-tests/swiper-1.png)
 
 I know, there's a creepy eye looking at us! But in the bright side, that's when we know everything is working fine as expected. You could also see that there's a scroll bar below the image, you can scroll to see the other images. For the next steps, this scroll bar should be hidden and we should be able to swipe through our gallery of images by doing a drag action in desktop or swipe in mobile. So let's continue!
+
+---
 
 ## Touch/Drag logic
 
@@ -416,6 +426,8 @@ const numberRef = useRef(0);
 getRefValue(numberRef);
 ```
 
+---
+
 Finally, go to `src/components/Swiper.tsx` and let's try to think how do we move the images the way we do when there was a scroll bar. If you guessed it right, we can use a transform function in CSS to move the parent element of the images. We can use [`translateX`](<https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateX()>) or [`translate3d`](<https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate3d()>). Let's use `translate3d` instead because I've seen popular swiper libraries often use it for better performance. We need to store the value required for `translate3d` as a state. Let's call this value as `offsetX`. Let's use `useStateRef` for that instead of `useState` because we need to access the state value as a `ref` in one of our event listeners later on.
 
 ```tsx
@@ -489,6 +501,8 @@ function Swiper({ items }: Props) {
 
 ...
 ```
+
+---
 
 In our `onMouseDown` function, we can also save the starting `x` position returned from the event data. Let's name it `startX` and we could use this value later to calculate the offset required for the images to follow our mouse cursor. Update `src/components/Swiper.tsx` with the following code below:
 
@@ -569,6 +583,8 @@ Here, we took the `x` position from the event data and named it `currentX`. We t
 
 Once all of the changes are done, you should be able to drag using your mouse to move the container of images horizontally. Isn't that great? I think yes!
 
+---
+
 To apply the same logic for mobile. Create a file `src/lib/dom.ts` and add the following code:
 
 ```tsx
@@ -638,6 +654,8 @@ If you try dragging using your mouse, it should still work like before. If your 
 ![Screenshot of React Swiper in device toolbar](/images/posts/how-to-create-your-own-swiper-in-react-and-typescript-with-tests/swiper-mobile.png)
 
 Okay, we're not done yet though. You might have already noticed it while testing. When you swipe or drag too far away from the first image or last image, you'll see nothing. For user experience, that's not really great. We should prevent that.
+
+---
 
 ## Prevent swiping on both ends
 
@@ -739,6 +757,8 @@ function Swiper({ items }: Props) {
 After saving the changes, you can go back and try swiping through your swiper and you wouldn't be able to swipe if you are at either both ends. Cool!
 
 Next thing we need to solve is the difficulty in swiping through the images, our Swiper component should be able to let us swipe easily to the next image and place the next image in display properly because we want our users to do less swiping and also let them view each images in full, not in split view.
+
+---
 
 ## Auto swipe to nearest image
 
@@ -899,6 +919,8 @@ function Swiper({ items }: Props) {
 
 I hope that wasn't too difficult to understand. Once you save all the changes, try doing a lazy swipe or drag (at least 40 pixel difference!) and see that how our swiper will swipe it to the next or previous image.
 
+---
+
 ## Swiper indicators
 
 Okay, before we wrap this up. There's one more feature I want to add to our swiper. We can have an indicator to let our users know how many images are in the swiper for them to see and what position the image they're currently looking at. This can also give users an option to click on the indicators to move around the images.
@@ -992,6 +1014,8 @@ Then update `src/components/Swiper.css` to add the styles for our indicators:
   background-color: #777777;
 }
 ```
+
+---
 
 Once you save the changes, should be able to see the swiper with the indicator:
 

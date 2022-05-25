@@ -41,6 +41,8 @@ This command will open your default browser and go to `http://localhost:3000/`. 
 
 This setup comes with live-editing or hot reloading which means when we save file changes, it will automatically update the app and reload on the browser. That's great for local development!
 
+---
+
 ## Clean up the project
 
 Now, let's clean up our project which was created by Create React App. We won't be needing some of them. Delete or clear the contents of the following below:
@@ -89,6 +91,8 @@ body {
   line-height: 1.6;
 }
 ```
+
+---
 
 ## Sample data + Accordion component
 
@@ -165,6 +169,8 @@ export default App;
 
 If you save the changes we would get errors in the meantime as we would still need to create the `Accordion` component. So create a folder under `src` and name it `components`. We can put our reusable components in this folder. After that, create a file named `Accordion.tsx` inside the `components` folder.
 
+---
+
 Then, let's add the code for `src/components/Accordion.tsx`:
 
 ```tsx
@@ -203,6 +209,8 @@ Now if we didn't pass the expected data or type for `items` props to our accordi
 ![Screenshot of inline error by TypeScript in Visual Studio Code](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/inline-error-by-typescript-in-visual-studio-code.png)
 
 This is why TypeScript is really helpful for catching errors early while you're still writing the code.
+
+---
 
 ## Accordion Item component
 
@@ -246,6 +254,8 @@ import AccordionItem from './AccordionItem';
 Once you save the changes, our web app should be working fine now without any errors and display something like this:
 
 ![Screenshot of accordion partially built in React and TypeScript](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/accordion-partial-unstyled.png)
+
+---
 
 ## Accordion styles
 
@@ -340,6 +350,8 @@ Once you saved the changes, our component should look like this now:
 
 ![Screenshot of accordion partially built in React and TypeScript](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/accordion-partial-styled.png)
 
+---
+
 ## Accordion Item props
 
 That's looking like an accordion now. We just need to make it collapsible. Let's start with the logic for `AccordionItem.tsx`. It should accept a prop `isOpen` to determine whether to display the content or not. We can simply use a conditional statement like this:
@@ -424,6 +436,8 @@ When `isOpen` is true, we should also add an `active` class so that the icon wou
 
 I've also added a new prop `btnOnClick` which accepts a callback when the button is clicked. We'll use this later to control when to display or hide our content from the parent component.
 
+---
+
 ## Accordion logic (open one at a time)
 
 Moving on to the `Accordion.tsx`, this is where we'll be adding the logic for each accordion items. When an accordion button is clicked, then we should show the contents. We could store a state of which item is displayed, it should be something unique to that item, since our items doesn't have an identifier (or ID) in their data, we could use the `index` of each items. I could think of two ways an accordion behaves, the one that we'll do in this post (which is my favorite by the way!) is opening an accordion one at a time, meaning when there's an accordion that's currently opened, when I click another one, it will close or hide the previous one and display the content of what I last clicked upon. To do that logic, update the `Accordion` component with the following code below:
@@ -474,6 +488,8 @@ But wait there's one last thing you need to do. If we click on the same accordio
 ```
 
 And there you go, you've just built your own accordion in React and TypeScript!
+
+---
 
 ## Write tests for Accordion.tsx
 
@@ -545,6 +561,8 @@ describe('<Accordion />', () => {
 That's a lot of new code! Don't worry, let me go through it one by one and explain it to you. So first, we created an `items` array which would contain an object of `AccordionData`. We are using `faker` library to help us generate random title and content. You can checkout their API [here](https://github.com/marak/faker.js#api) to know all the other data it can randomly generate. We've added three items which should be enough but you can increase or decrease it if you want, but do note that it should have at least two items in order to test our accordion logic. We then pass this array as a props to our `Accordion` component. Using one of the Testing Library's methods, `render`, helps to render our component in a test environment, do note this environment is not a browser, so there are some limitations and mockings we would have to do which you'll see later on. To learn more about the `render` method, you can go [here](https://testing-library.com/docs/react-testing-library/api/#render). After that, we can do our checks to validate that our items are rendered. To do that, we looped through the items and did a query by text using another method of Testing Library which is `screen.queryByText`. To know all the possible queries you can do with screen, you can go [here](https://testing-library.com/docs/queries/about). Then finally using one of Jest's global functions, we can call `expect` method and pass the elements returned by the query, and run what we call a matcher method `toBeInTheDocument()`. This is one of many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods.
 
 Alright, I hoped that explained it.
+
+---
 
 Now let's check if our component passed the test by running the command below in your terminal:
 
@@ -633,6 +651,8 @@ Now once we save the changes, our coverage should look like this:
 
 Cool! If you look at `AccordionItem.tsx` it already has `100%` coverage as well. That's because it is also used in `Accordion.tsx` test cases. But it's always good to have each component or function to have its own test cases as well, because that will make our code more robust.
 
+---
+
 ## Write tests for AccordionItem.tsx
 
 Create a file under `src/components/__tests__` and name it `AccordionItem.test.tsx`. If we want to see how much is covered in `AccordionItem.tsx` while we write tests for it and ignore `Accordion.test.tsx` test cases from running, we can do so by running the test script like this:
@@ -675,6 +695,8 @@ These should look familiar to you as we did the same for our first test case in 
 After saving the changes, the terminal should display this:
 
 ![Screenshot of incomplete Accordion Item test coverage](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/accordion-item-test-coverage-incomplete.png)
+
+---
 
 Here, the uncovered lines for `AccordionItem.tsx` is 19-21, but it could be line 23 on your side because we are passing a random `boolean` for `isOpen` props in our first test case. So let's create two new test cases, one for when `isOpen` is `false` and one for when `isOpen` is `true` and we can validate whether the accordion is open or not by checking if there is an `active` class in the list element or not. Write the following code below:
 
@@ -741,6 +763,8 @@ export function getRefValue<C>(ref: RefObject<C>) {
 ```
 
 This is a utility for getting the value of a `RefObject`. I use this a lot in my projects and it is extremely helpful when writing tests to achieve `100%` coverage, especially those components that uses `RefObject` for elements. If you're new to TypeScript, you might be wonder what is this `C` around the code? It can be any letter by the way or word if you would like, and it is called [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html), it makes our utility function here accept the type defined when the `RefObject` is passed because it can have any type. Using Generics, our function here would be able to return the same type.
+
+---
 
 Then let's update our `AccordionItem.tsx`:
 
@@ -865,6 +889,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 });
 ```
 
+---
+
 ## Write tests for hooks.ts
 
 I've mentioned it earlier that each component or function we create should have their own tests. So as a bonus, here's the test case for the hooks utility we created earlier, the code below should be added inside `src/lib/__tests__/hooks.test.ts`:
@@ -903,6 +929,8 @@ describe('<App />', () => {
   });
 });
 ```
+
+---
 
 When you run the all the tests again via `yarn test --coverage`, it will look very satifying as the terminal would display all green and all 100% covered:
 

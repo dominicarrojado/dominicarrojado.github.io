@@ -2,7 +2,7 @@ import Script from 'next/script';
 import React from 'react';
 import { GOOGLE_ADSENSE_CLIENT_ID } from '../lib/constants';
 
-export default function AdUnitScript() {
+function AdUnitScript() {
   return (
     <Script
       async
@@ -11,3 +11,5 @@ export default function AdUnitScript() {
     />
   );
 }
+
+export default React.memo(AdUnitScript);

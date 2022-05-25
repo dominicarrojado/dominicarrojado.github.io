@@ -75,6 +75,8 @@ The `--coverage` parameter will show you which how many percentage you have cove
 
 Cool, first test and we immediately hit 100% for `SwiperItem.tsx`! I can't promise the same for `Swiper.tsx` though, that will have many test cases but would be good for our learning. Alright, let's move on.
 
+---
+
 ## Write tests for Swiper.tsx
 
 Before we start writing test for `Swiper.tsx`, please make sure the contents of your `Swiper.tsx` is the same as mine, since we added quite a bit of code over there, there's a high possibility we have some difference. To ensure we are looking at the same lines of code when dealing with uncovered lines upon writing tests, please copy the code below:
@@ -215,6 +217,8 @@ export default Swiper;
 
 Alright, don't forget to save the changes!
 
+---
+
 Create the file - `src/components/__tests__/Swiper.test.tsx` and let's add the first test case for it which just checks whether the images are rendered:
 
 ```tsx
@@ -273,6 +277,8 @@ export function setReadOnlyProperty<
   });
 }
 ```
+
+---
 
 If you're new to TypeScript, you already know Generics from when we created the `getRefValue` but you might be new to `extends` and `keyof`. Just like a [Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) in JavaScript, you can also [extend types](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types). While [`keyof`](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html) type operator takes an object type and produces a string or numeric literal union of its keys. In combination with Generics, I can then extend `O` and expect it to be an object (`Record<string, any`>), then extend `K` to be a key (or property) of `O`, while `V` could be `any` which literally means it could be anything. With this type definition, when you use the function pass an object and a key, the key you have given must exist in the object, otherwise TypeScript would complain.
 
@@ -384,6 +390,8 @@ The current test case should still pass once we save the changes and if we check
 
 ![Screenshot of incomplete React Swiper test coverage](/images/posts/how-to-create-your-own-swiper-in-react-and-typescript-with-tests/test-coverage-incomplete-4.png)
 
+---
+
 Alright. Let's move on to cover line `61` which is not to auto-swipe to the next or previous image if the `x` offset difference is less than or equal to `40`. Add the following code below in the same test case:
 
 ```tsx
@@ -457,6 +465,8 @@ Pass again! We're almost there. Let's try to cover two lines this time, which is
 Save the changes and let's look at our current test coverage:
 
 ![Screenshot of incomplete React Swiper test coverage](/images/posts/how-to-create-your-own-swiper-in-react-and-typescript-with-tests/test-coverage-incomplete-6.png)
+
+---
 
 We're left with lines `93` - `97` and `122` which are the logic when clicking one of the indicators. Before that, I just want to remind you we only covered mouse events, but I still have the touch events. I'm not sure why `Jest` is not displaying line `103` as uncovered though. Anyway, they work very similarly hence, we can just copy the codes from our second test case - `should swipe items on mouse move`, create a new test case - `should swipe items on touch move`, paste the copied codes and simply replace the fired events like this:
 
@@ -577,6 +587,8 @@ Cool! We're at our last test case for our `Swiper` component, let's start by cop
 ...
 ```
 
+---
+
 Next, let's verify that the current "active" indicator is the first indicator since we are initially displaying the first image. We determine an indicator is active by adding an `active` class into it. To do that, we can use another matcher function `.toHaveClass()` from the Testing Library. But first, how do we query for the first indicator? We can't simply use `screen.queryAllByRole('listitem')` because it would return the images with it. Remember we added an attribute to our indicator, this one `data-testid="indicator"`? Yes, with that attribute, we can use the query `screen.queryAllByTestId('indicator')` and that would return an array of the indicator list items. To write it in code, it would be like this:
 
 ```tsx
@@ -636,6 +648,8 @@ Lastly, let's trigger a mouse click event and verify that the list element conta
   });
 ...
 ```
+
+---
 
 Now once you save the changes, we should be able to achieve 100% coverage with our `Swiper` component:
 

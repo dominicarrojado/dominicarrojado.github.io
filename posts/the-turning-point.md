@@ -16,6 +16,8 @@ One day, one of our teachers asked us to submit an assignment. I wasn't worried 
 
 "Dominic, did you do/write this?"
 
+---
+
 It was pretty obvious it wasn't my handwriting even if I lied.
 
 "No, miss…" 😔

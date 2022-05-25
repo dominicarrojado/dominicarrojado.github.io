@@ -6,6 +6,8 @@ import SvgYouTube from '../components/svgYouTube';
 import {
   ExternalUrl,
   GoogleAdSenseUnit,
+  GoogleAdSenseUnitFormat,
+  GoogleAdSenseUnitLayout,
   Project,
   Quote,
   Route,
@@ -48,6 +50,16 @@ export const MAIN_ELEMENT_ID = 'main';
 export const GOOGLE_ADSENSE_CLIENT_ID = 'ca-pub-3632473845121107';
 export const GOOGLE_ADSENSE_UNITS = Object.values(GoogleAdSenseUnit);
 export const GOOGLE_ADSENSE_UNITS_LENGTH = GOOGLE_ADSENSE_UNITS.length;
+export const GOOGLE_ADSENSE_UNIT_FORMATS = Object.values(
+  GoogleAdSenseUnitFormat
+);
+export const GOOGLE_ADSENSE_UNIT_FORMATS_LENGTH =
+  GOOGLE_ADSENSE_UNIT_FORMATS.length;
+export const GOOGLE_ADSENSE_UNIT_LAYOUTS = Object.values(
+  GoogleAdSenseUnitLayout
+);
+export const GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH =
+  GOOGLE_ADSENSE_UNIT_LAYOUTS.length;
 
 export const PROJECTS: Array<Project> = [
   {

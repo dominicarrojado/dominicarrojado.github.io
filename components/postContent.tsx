@@ -2,12 +2,6 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
-import ReactMarkdown from 'react-markdown';
-import remarkUnwrapImages from 'remark-unwrap-images';
-import remarkGfm from 'remark-gfm';
-import LazyLoad from 'react-lazyload';
-// @ts-ignore: using an old rehype-highlight version that has no declaration file
-import rehypeHighlight from 'rehype-highlight';
 import { useMounted } from '../lib/custom-hooks';
 import SvgYouTube from './svgYouTube';
 import SvgChevronLeft from './svgChevronLeft';
@@ -15,17 +9,17 @@ import SvgChevronRight from './svgChevronRight';
 import Section from './section';
 import DateText from './dateText';
 import TextArrowLink from './textArrowLink';
-import Content from './content';
 import AnchorLink from './anchorLink';
+import PostContentMarkdown from './postContentMarkdown';
 import AdUnit from './adUnit';
 import {
   ExternalUrl,
   GoogleAdSenseUnit,
+  GoogleAdSenseUnitFormat,
   Post,
   PostData,
   Route,
 } from '../lib/types';
-import { ROUTES } from '../lib/constants';
 import 'highlight.js/styles/vs2015.css';
 
 export type Props = {
@@ -63,6 +57,7 @@ export default function PostContent({ postData }: Props) {
           >
             <AdUnit
               adSlot={GoogleAdSenseUnit.POST_HEADER}
+              adFormat={GoogleAdSenseUnitFormat.AUTO}
               className={cn(
                 'w-11/12 max-w-screen-3xl -mt-8 mx-auto pb-8',
                 'sm:-mt-10 sm:pb-10',
@@ -72,13 +67,14 @@ export default function PostContent({ postData }: Props) {
             />
             <PostHeader date={postData.date} category={postData.category} />
             <PostVideoLink videoUrl={postData.videoUrl} />
-            <PostMarkdown content={postData.content} />
+            <PostContentMarkdown content={postData.content} />
             <PostFooter
               previousPost={postData.previousPost}
               nextPost={postData.nextPost}
             />
             <AdUnit
               adSlot={GoogleAdSenseUnit.POST_FOOTER}
+              adFormat={GoogleAdSenseUnitFormat.AUTO}
               className={cn(
                 'w-11/12 max-w-screen-3xl -mb-8 mx-auto pt-8',
                 'sm:-mb-10 sm:pt-10',
@@ -141,62 +137,6 @@ function PostHeader({ date, category }: { date: string; category: string }) {
         {category}
       </div>
     </div>
-  );
-}
-
-function PostMarkdown({ content }: { content: string }) {
-  return (
-    <Content className={cn('mt-8', 'sm:mt-10', 'xl:mt-14')}>
-      <ReactMarkdown
-        rehypePlugins={[rehypeHighlight]}
-        remarkPlugins={[remarkUnwrapImages, remarkGfm]}
-        components={{
-          a: ({ node, ...props }) => {
-            const { href, ...otherProps } = props;
-            const isInternal =
-              typeof href === 'string' && href.startsWith(Route.HOME);
-
-            if (isInternal) {
-              const anchorHref = href as string;
-              const isNextRoute =
-                anchorHref === Route.HOME ||
-                ROUTES.some(
-                  (route) =>
-                    route !== Route.HOME && anchorHref.startsWith(route)
-                );
-
-              if (isNextRoute) {
-                return (
-                  <Link href={anchorHref}>
-                    <a {...otherProps} />
-                  </Link>
-                );
-              }
-            }
-
-            return (
-              <AnchorLink
-                {...props}
-                target="_blank"
-                isExternal={!isInternal}
-                ref={undefined}
-              />
-            );
-          },
-          img: ({ node, ...props }) => {
-            const altText = props.alt as string;
-
-            return (
-              <LazyLoad once>
-                <img {...props} alt={altText} />
-              </LazyLoad>
-            );
-          },
-        }}
-      >
-        {content}
-      </ReactMarkdown>
-    </Content>
   );
 }
 

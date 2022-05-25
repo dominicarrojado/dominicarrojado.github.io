@@ -20,6 +20,8 @@ We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE]
 
 We'll also use [Postman](https://www.postman.com/) to interact with the API.
 
+---
+
 ## Initialize your project
 
 To start, you would need to setup your local development for NestJS projects with PostgreSQL, I've written a [separate post](/posts/local-development-setup-for-nestjs-projects-with-postgresql/) if you would like to know the details of that setup, but you can also choose to skip that and just clone the [boilerplate](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) to save time:
@@ -80,6 +82,8 @@ import { configValidationSchema } from './config.schema';
 export class AppModule {}
 ```
 
+---
+
 ## Create LinksModule
 
 Since we're going to be working with links for our URL shortener API, we need a module for it. A (feature) module in Nest simply organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries. This helps us manage complexity and develop with [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, especially as the size of the application and/or team grow.
@@ -122,6 +126,8 @@ nest g service links --no-spec
 
 This command will create a file `src/links/links.service.ts` and the new controller gets imported in our links module by updating `src/links/links.module.ts`.
 
+---
+
 ## TypeORM
 
 We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use PostgreSQL today and maybe use [MongoDB](https://www.mongodb.com/) tomorrow by just changing the configuration when initializing TypeORM.
@@ -163,6 +169,8 @@ Since database tables consist of columns, your entities must consist of columns 
 In TypeORM you can use both the Active Record and the Data Mapper patterns. Using the Active Record approach, you define all your query methods inside the model itself, and you save, remove, and load objects using model methods. Simply said, the Active Record pattern is an approach to access your database within your models. Using the Data Mapper approach, you define all your query methods in separate classes called "repositories", and you save, remove, and load objects using repositories. In data mapper your entities are very dumb - they just define their properties and may have some "dummy" methods. Simply said, data mapper is an approach to access your database within repositories instead of models. You can read more about them in detail [here](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
 
 We'll be using the **Data Mapper** approach as it is more cleaner and more organized that way which results in a more maintainable code, which is more effective in larger applications.
+
+---
 
 ## Create LinksRepository
 
@@ -268,6 +276,8 @@ export class LinksController {
 That's how simple it is in Nest! You can open your Postman API client and do a `GET` request to `http://localhost:3000/links`. Remember that your server must be running by executing the command `yarn start:dev` on your terminal.
 
 It should return a status of `200 OK` and return you an empty array `[]` because we didn't create any links yet.
+
+---
 
 ## Create a link feature
 
@@ -380,6 +390,8 @@ export class LinksService {
 
 You can open your Postman API client and do the previous requests we did earlier (use a unique `name` for every new link) and everything should still work properly as before. Cool! Let's continue ~
 
+---
+
 ## Data Transfer Objects (DTO)
 
 You may have already noticed how many times we had to refer to the properties of a link within our code, in particular, the `name` and `url` is passed around from the controller to the service, just to create the link. In the real-world, requirements change and having multiple reference at difference places adds complexity to our application and makes it more difficult to maintain and scale it.
@@ -453,6 +465,8 @@ export class LinksController {
 ```
 
 You can open your Postman API client again and do the previous requests we did earlier (use a unique `name` for every new link) and everything should still work properly as before. Great!
+
+---
 
 ## Redirect to URL by name feature
 
@@ -545,6 +559,8 @@ Let's again open our Postman API client. Do a `GET` request to `http://localhost
 
 You might be wondering why not just use the `AppController` from earlier? That's because if we create the controller there (e.g. `Get('/:name')`), it will take precedence against all GET requests from other controllers. For example, a GET request to `/links` will be routed to the `AppController` instead of the `LinksController` which is not ideal. That's why we had to create `WildcardController` instead so that it will be created and handle routes only after other controllers first.
 
+---
+
 ## Delete a link feature
 
 If we can create links, we should be able to delete them as well. Let's go ahead and implement the feature to delete a link. You know the drill, let's first create the delete function in the links service `src/links/links.service.ts`:
@@ -589,6 +605,8 @@ export class UpdateLinkDto {
 ```
 
 Although it's the same shape as `CreateLinkDto` right now, it is still a good idea to separate them per use case so that it is future-proof.
+
+---
 
 ## Update a link feature
 
@@ -653,6 +671,8 @@ You can open your Postman API client, repeat the steps previously for creating a
 ```
 
 It should return a status of `200 OK`. When you do a request to get all the links, the updated link should be returned in the response.
+
+---
 
 ## Nest Pipes
 
@@ -736,6 +756,8 @@ Alright, let's test out the validations. Let's open our Postman API client and d
 
 As you can see, it comes with nice and descriptive error messages. This can definitely save us some time rather than us coming up with these messages.
 
+---
+
 ## Error handling if link already exists
 
 For creating a link, we also need to handle the case where we create a link with a `name` that already exists in our database. Currently if we created a link twice with the same `name`, the last request would throw an `500 Internal Server Error`. Obviously, we don't want to show that to our users. If you check the terminal logs from our NestJS app, you should see something like this: `ERROR [ExceptionsHandler] duplicate key value violates unique constraint "UQ_519b799f714024e18a740e8cca7"`, so basically PostgreSQL has thrown an error and we did not handle it. So to fix that, let's update `srcs/links/links.repository.ts` with the following code:
@@ -778,6 +800,8 @@ Once you saved the changes and do a `POST` request to `http://localhost:3000/lin
   "error": "Conflict"
 }
 ```
+
+---
 
 ## Error handling if link does not exist
 

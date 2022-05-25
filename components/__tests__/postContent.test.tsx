@@ -3,18 +3,16 @@ import { forceVisible } from 'react-lazyload';
 import {
   fireEventTransitionEnd,
   getFakeDate,
-  getFakeDirectoryPath,
   getFakeSentence,
   getFakeSentences,
   getFakeUrl,
   getFakeUuid,
   getFakeWord,
   getMonthName,
-  getRandomRoute,
   queryByTextIgnoreHTML,
 } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
-import { Post, PostData, Route } from '../../lib/types';
+import { Post, PostData } from '../../lib/types';
 import * as customHooks from '../../lib/custom-hooks';
 import PostContent, { Props } from '../postContent';
 
@@ -290,142 +288,6 @@ describe('<PostContent />', () => {
       const sectionEl = screen.queryByTestId('section');
 
       expect(sectionEl).not.toHaveClass('opacity-0');
-    });
-  });
-
-  describe('<PostMarkdown />', () => {
-    describe('anchor elements', () => {
-      it('should render home link', () => {
-        const anchorText = getFakeSentence();
-        const anchorHref = '/';
-        const postData = {
-          ...generatePostData(),
-          content: `[${anchorText}](${anchorHref})`,
-        };
-
-        renderComponent({ postData });
-
-        const anchorEl = screen.queryByText(anchorText);
-
-        expect(anchorEl?.tagName).toBe('A');
-        expect(anchorEl).toHaveAttribute('href', anchorHref);
-        expect(anchorEl).not.toHaveAttribute('target');
-        expect(anchorEl).not.toHaveAttribute('rel');
-      });
-
-      it('should render internal link', () => {
-        const getRandomRouteExceptHome = (): Route => {
-          const route = getRandomRoute();
-
-          if (route === Route.HOME) {
-            return getRandomRouteExceptHome();
-          }
-
-          return route;
-        };
-        const anchorText = getFakeSentence();
-        const anchorHref = `${getRandomRouteExceptHome()}${getFakeDirectoryPath()}`;
-        const postData = {
-          ...generatePostData(),
-          content: `[${anchorText}](${anchorHref})`,
-        };
-
-        renderComponent({ postData });
-
-        const anchorEl = screen.queryByText(anchorText);
-
-        expect(anchorEl?.tagName).toBe('A');
-        expect(anchorEl).toHaveAttribute('href', anchorHref);
-        expect(anchorEl).not.toHaveAttribute('target');
-        expect(anchorEl).not.toHaveAttribute('rel');
-      });
-
-      it('should render project link', () => {
-        const anchorText = getFakeSentence();
-        const anchorHref = getFakeDirectoryPath();
-        const postData = {
-          ...generatePostData(),
-          content: `[${anchorText}](${anchorHref})`,
-        };
-
-        renderComponent({ postData });
-
-        const anchorEl = screen.queryByText(anchorText);
-
-        expect(anchorEl?.tagName).toBe('A');
-        expect(anchorEl).toHaveAttribute('href', anchorHref);
-        expect(anchorEl).toHaveAttribute('target', '_blank');
-        expect(anchorEl).not.toHaveAttribute('rel');
-      });
-
-      it('should render external link', () => {
-        const anchorText = getFakeSentence();
-        const anchorHref = getFakeUrl();
-        const postData = {
-          ...generatePostData(),
-          content: `[${anchorText}](${anchorHref})`,
-        };
-
-        renderComponent({ postData });
-
-        const anchorEl = screen.queryByText(anchorText);
-
-        expect(anchorEl?.tagName).toBe('A');
-        expect(anchorEl).toHaveAttribute('href', anchorHref);
-        expect(anchorEl).toHaveAttribute('target', '_blank');
-        expect(anchorEl).toHaveAttribute('rel', 'noopener noreferrer nofollow');
-      });
-    });
-  });
-
-  describe('image elements', () => {
-    it('should NOT render image by default', () => {
-      const imgSrc = getFakeUrl();
-      const imgAlt = getFakeSentence();
-      const postData = {
-        ...generatePostData(),
-        content: `![${imgAlt}](${imgSrc})`,
-      };
-
-      renderComponent({ postData });
-
-      const imgEl = screen.queryByAltText(imgAlt);
-
-      expect(imgEl).not.toBeInTheDocument();
-    });
-
-    it('should render image on lazy load', () => {
-      const imgSrc = getFakeUrl();
-      const imgAlt = getFakeSentence();
-      const postData = {
-        ...generatePostData(),
-        content: `![${imgAlt}](${imgSrc})`,
-      };
-
-      renderComponent({ postData });
-
-      forceVisible();
-
-      const imgEl = screen.queryByAltText(imgAlt);
-
-      expect(imgEl?.tagName).toBe('IMG');
-    });
-
-    it('should NOT be a descendant of <p>', () => {
-      const imgSrc = getFakeUrl();
-      const imgAlt = getFakeSentence();
-      const postData = {
-        ...generatePostData(),
-        content: `![${imgAlt}](${imgSrc})`,
-      };
-
-      renderComponent({ postData });
-
-      forceVisible();
-
-      const imgEl = screen.queryByAltText(imgAlt);
-
-      expect(imgEl?.closest('p')).toBeNull();
     });
   });
 });

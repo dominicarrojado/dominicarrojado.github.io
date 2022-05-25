@@ -39,6 +39,8 @@ yarn start
 
 We'll also be using [JSONPlaceholder - Free Fake REST API](https://jsonplaceholder.typicode.com/) for this tutorial as our back-end server.
 
+---
+
 ## Knowing your API
 
 Before we start creating our custom API hook, it is good to know the details about the API that we'll be integrating with the UI.
@@ -82,6 +84,8 @@ export type PostData = {
   body: string;
 };
 ```
+
+---
 
 ## Create the custom API hook
 
@@ -132,6 +136,8 @@ You may ask, why didn't we do the same for `fetchState`. That's because if the i
 Another thing to take note, we also had to do [type assertion](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) for the `res.data` returned from the API, we can safely do so because we have the knowledge and expectation that the API would always return an array of `PostData`. Without it, TypeScript would give it a `type` of `any` which will again not be helpful for us.
 
 At the last part of the code, we added `as const` for the returned array to tell TypeScript that this is a read-only array.
+
+---
 
 ## Use the custom API hook in a component
 
@@ -187,6 +193,8 @@ function App() {
 
 export default App;
 ```
+
+---
 
 Once you saved it, your React application should display something like this:
 
@@ -274,6 +282,8 @@ When you click the "Get Posts" button again. It will display something like this
 
 Awesome! Remove the `throw` code and we can start writing tests.
 
+---
+
 ## Write tests for App component
 
 Update the code of `App.test.tsx` for our first test case which is to check the default state:
@@ -347,6 +357,8 @@ describe('<App />', () => {
 ```
 
 When mocking functions, we would need to call `jest.restoreAllMocks()` after each tests using `afterEach` to revert it back to its original state to prevent it from affecting other test cases.
+
+---
 
 Let's add the code for the third test case to check the error state, it would be similar from the previous test case:
 
@@ -429,6 +441,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 ```
 
 We are using [fireEvent](https://testing-library.com/docs/dom-testing-library/api-events/) function by Testing Library to fire a click event. It only accepts an element so we had to do a type assertion when querying the button element.
+
+---
 
 If you check the coverage on your terminal, it should be 100% now for `App.tsx`.
 
@@ -524,6 +538,8 @@ For the third test case, we need to check whether we are getting the expected st
 
 As you would notice, we didn't do an `await` for the `act` function right away, we had to store it in a variable and do an `await` at the end because if we didn't, we would be getting `FetchState.SUCCESS` instead which is for a later test case.
 
+---
+
 For the fourth test case, we need to check whether we are getting the expected state when the API fails. Add the following code below to do so:
 
 ```ts
@@ -584,6 +600,8 @@ import faker from 'faker';
     });
   ...
 ```
+
+---
 
 And they're you have it!
 

@@ -45,6 +45,8 @@ This command will open your default browser and go to `http://localhost:3000/`. 
 
 This setup comes with live-editing or hot reloading which means when we save file changes, it will automatically update the app and reload on the browser. That's great for local development!
 
+---
+
 ## Install ES7 React Snippets extension in Visual Studio Code
 
 Next, let's install [ES7 React Snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets). You can think of it like a shortcut that helps you create the basic structure of a component in React, for example I want to create a functional component, I have to write the code to import React first, then write the function component then lastly write the code to export it. With this extension, I can achieve the same by typing `rfce` and it will show a suggestion for `reactFunctionalComponentExport` and I just have to press enter and it will write the code for us. This saves us time and energy when writing components.
@@ -87,6 +89,8 @@ Next, create another file in the root directory and name it `.prettierrc`. Updat
 This will be the config for Prettier to follow when formatting the code. These configs can be updated according to your preference.
 
 Alright, once the changes are done. That should make our Prettier work.
+
+---
 
 ## Generating random data for tests
 

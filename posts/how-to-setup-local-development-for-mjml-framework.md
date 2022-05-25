@@ -35,6 +35,8 @@ Some prerequisites below. Make sure to install them if you haven't!
 
 We'll be using [Visual Studio Code](https://code.visualstudio.com/) as our [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) in this tutorial as we will utilize a few extensions from their [marketplace](https://marketplace.visualstudio.com/vscode). And we'll use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_.
 
+---
+
 ## Initialize your project
 
 Now, create your folder and give it a name that best describes your email template. This will be the root folder of your code.
@@ -77,6 +79,8 @@ Once installed, open your `package.json` and modify it to add the MJML build com
   }
 }
 ```
+
+---
 
 ## Install MJML Extension in Visual Studio Code
 
@@ -128,6 +132,8 @@ When you're done writing MJML code, you can generate the HTML by running the com
 yarn build
 ```
 
+---
+
 ## Local development scripts
 
 If you're coding in a smaller-sized screen or prefer to have a wider screen for your code or maybe just an `Alt` + `Tab` kind of developer, then let's continue for the additional setup.
@@ -168,6 +174,8 @@ Now go back to Visual Studio Code and try do make some changes in the `index.mjm
 ```
 
 Once you save the file, it will be automatically update the `index.html` and refresh the page on the browser.
+
+---
 
 ## Commit your changes
 
