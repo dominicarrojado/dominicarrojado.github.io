@@ -8,7 +8,7 @@ export type Props = {
   className?: string;
 };
 
-function AdUnit({ className }: Props) {
+export default function AdUnit({ className }: Props) {
   useEffect(() => {
     displayAd();
   }, []);
@@ -30,5 +30,3 @@ function AdUnit({ className }: Props) {
     </div>
   );
 }
-
-export default React.memo(AdUnit);

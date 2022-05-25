@@ -57,7 +57,7 @@ export default function PostContent({ postData }: Props) {
           >
             <AdUnit
               className={cn(
-                '-mt-8 w-11/12 max-w-screen-3xl mx-auto pb-8',
+                'w-11/12 max-w-screen-3xl -mt-8 mx-auto pb-8',
                 'sm:-mt-10 sm:pb-10',
                 'md:-mt-12 md:pb-12',
                 'lg:w-5/6'
@@ -69,6 +69,14 @@ export default function PostContent({ postData }: Props) {
             <PostFooter
               previousPost={postData.previousPost}
               nextPost={postData.nextPost}
+            />
+            <AdUnit
+              className={cn(
+                'w-11/12 max-w-screen-3xl -mb-8 mx-auto pt-8',
+                'sm:-mb-10 sm:pt-10',
+                'md:-mb-12 md:pt-12',
+                'lg:w-5/6'
+              )}
             />
           </Section>
         )}
