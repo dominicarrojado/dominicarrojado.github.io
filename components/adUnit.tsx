@@ -25,7 +25,6 @@ function AdUnit({ adSlot, className }: Props) {
         data-ad-format="auto"
         data-full-width-responsive="true"
         data-testid="ad-unit"
-        // data-adtest="on" // for local testing only
         style={{ display: 'block' }}
       />
     </div>
