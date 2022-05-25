@@ -107,6 +107,26 @@ function PrivacyPolicySection() {
           </AnchorLink>
           .
         </p>
+        <h2>Google AdSense</h2>
+        <p>
+          The Website is currently part of{' '}
+          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE} isExternal>
+            Google AdSense Program
+          </AnchorLink>
+          , a program run by{' '}
+          <AnchorLink href={ExternalUrl.GOOGLE} isExternal>
+            Google
+          </AnchorLink>{' '}
+          through which website publishers in the Google Network of content
+          sites serve text, images, video, or interactive media advertisements
+          that are targeted to the site content and audience. We use it in order
+          to support the Website. For more information about the program
+          policies, please refer{' '}
+          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE_POLICY} isExternal>
+            here
+          </AnchorLink>
+          .
+        </p>
         <h2>Google Tag Manager</h2>
         <p>
           The Website currently uses{' '}
@@ -117,9 +137,10 @@ function PrivacyPolicySection() {
           <AnchorLink href={ExternalUrl.GOOGLE} isExternal>
             Google
           </AnchorLink>
-          . We use it to deploy our Google Analytics and measurement tag
-          configurations from a web-based user interface. For more information
-          about how it collects and processes data, please refer{' '}
+          . We use it to deploy our Google Analytics, Google AdSense and
+          measurement tag configurations from a web-based user interface. For
+          more information about how it collects and processes data, please
+          refer{' '}
           <AnchorLink href={ExternalUrl.GOOGLE_TAG_MANAGER_POLICY} isExternal>
             here
           </AnchorLink>
@@ -306,6 +327,21 @@ function PrivacyPolicySection() {
           </AnchorLink>
           .
         </p>
+        <p>
+          We also use third-party advertisement through Google AdSense Program.
+          Google AdSense uses cookies to improve advertising, this is generally
+          used to target advertising based on what's relevant to a user, to
+          improve reporting on campaign performance, and to avoid showing ads
+          the user has already seen. Cookies themselves contain no personally
+          identifiable information. Depending on the publisher's and the user's
+          settings, information associated with cookies used in advertising may
+          be added to the user's Google Account. You can learn more about how
+          Google AdSense uses cookies{' '}
+          <AnchorLink href={ExternalUrl.GOOGLE_ADSENSE_COOKIE_USE} isExternal>
+            here
+          </AnchorLink>
+          .
+        </p>
         <h2>Do Not Track signals</h2>
         <p>
           Some browsers incorporate a Do Not Track feature that signals to
@@ -411,7 +447,7 @@ function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on December 9, 2021
+          This document was last updated on May 25, 2022
         </div>
       </PageContent>
     </Section>
