@@ -51,12 +51,6 @@ describe('<AdUnit />', () => {
 
       expect(adUnitEl).not.toHaveAttribute('data-adtest');
     });
-
-    it('should have expected inline style', () => {
-      const adUnitEl = screen.queryByTestId('ad-unit');
-
-      expect(adUnitEl).toHaveStyle({ display: 'block' });
-    });
   });
 
   it('should accept adLayout prop', () => {

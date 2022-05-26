@@ -24,14 +24,16 @@ function AdUnit({ adSlot, adFormat, adLayout, className }: Props) {
   return (
     <div className={className}>
       <ins
-        className={cn('adsbygoogle', styles.adunit)}
+        className={cn(
+          'adsbygoogle block max-w-[1200px] mx-auto',
+          styles.adunit
+        )}
         data-ad-client={GOOGLE_ADSENSE_CLIENT_ID}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-ad-layout={adLayout}
         data-full-width-responsive="true"
         data-testid="ad-unit"
-        style={{ display: 'block' }}
       />
     </div>
   );
