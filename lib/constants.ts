@@ -275,7 +275,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://cnb-adac.meteorapp.com/',
+        url: '/cnb-anti-drug-abuse-campaign-app/',
       },
       {
         title: 'View Slideshow',
