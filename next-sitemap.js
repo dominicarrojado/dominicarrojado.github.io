@@ -102,6 +102,18 @@ module.exports = {
 
       // cnb apps
       await config.transform(config, '/cnb-anti-drug-abuse-campaign-app/'),
+      await config.transform(
+        config,
+        '/cnb-anti-drug-abuse-campaign-app/enter/'
+      ),
+      await config.transform(
+        config,
+        '/cnb-anti-drug-abuse-campaign-app/gallery/'
+      ),
+      await config.transform(
+        config,
+        '/cnb-anti-drug-abuse-campaign-app/gallery/view/'
+      ),
 
       // kronenbourg website
       await config.transform(config, '/kronenbourg-website/'),
