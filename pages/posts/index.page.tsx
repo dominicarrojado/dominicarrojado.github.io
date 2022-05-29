@@ -1,6 +1,8 @@
 import { GetStaticProps } from 'next';
+import { useMemo } from 'react';
+import { NextSeo } from 'next-seo';
+import { getMetaTitle, getRouteCanonical } from '../../lib/meta';
 import { getAllPostsLastPage, getAllPostsData } from '../../lib/posts';
-import SeoTags from '../../components/seoTags';
 import HeroSub from '../../components/heroSub';
 import AdUnitScript from '../../components/adUnitScript';
 import PostsSection from '../../components/postsSection';
@@ -15,16 +17,25 @@ export type Props = {
 };
 
 export default function Posts(props: Props) {
+  const propsPath = props.path;
+  const metaUrl = useMemo(
+    () =>
+      getRouteCanonical(
+        (propsPath || Route.POSTS) as Exclude<Route, Route.HOME>
+      ),
+    [propsPath]
+  );
   const title = 'Tech Blog';
   const desc =
     'A place to share my knowledge and learnings from my web development experiences';
 
   return (
     <>
-      <SeoTags
-        path={props.path || Route.POSTS}
-        title={title}
+      <NextSeo
+        canonical={metaUrl}
+        title={getMetaTitle(title)}
         description={desc}
+        openGraph={{ url: metaUrl }}
       />
       <HeroSub title={title} description={desc} />
       <AdUnitScript />

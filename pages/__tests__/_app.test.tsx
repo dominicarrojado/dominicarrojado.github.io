@@ -7,6 +7,9 @@ import {
 } from '../../lib/test-helpers';
 import Events from '../../modules/Events';
 import * as ga from '../../lib/google-analytics';
+import * as SeoTags from '../../components/seoTags';
+import * as FontPreLoader from '../../components/fontPreLoader';
+import * as TagManager from '../../components/tagManager';
 import * as Layout from '../../components/layout';
 import App from '../_app.page';
 
@@ -24,7 +27,10 @@ describe('<App />', () => {
     window.matchMedia = matchMediaOrig;
   });
 
-  it('should render with layout', () => {
+  it('should render expected components', () => {
+    const seoTagsSpy = jest.spyOn(SeoTags, 'default');
+    const fontPreLoaderSpy = jest.spyOn(FontPreLoader, 'default');
+    const tagManagerSpy = jest.spyOn(TagManager, 'default');
     const layoutSpy = jest.spyOn(Layout, 'default');
     const route = getRandomRoute();
 
@@ -33,6 +39,9 @@ describe('<App />', () => {
       Component: jest.fn(() => <>{getFakeSentence()}</>),
     } as any);
 
+    expect(seoTagsSpy).toBeCalledTimes(1);
+    expect(fontPreLoaderSpy).toBeCalledTimes(1);
+    expect(tagManagerSpy).toBeCalledTimes(1);
     expect(layoutSpy).toBeCalledTimes(1);
     expect(layoutSpy).toBeCalledWith(expect.objectContaining({ route }), {});
   });

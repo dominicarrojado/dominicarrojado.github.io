@@ -1,10 +1,15 @@
 import { render } from '@testing-library/react';
 import { FONTS } from '../../lib/constants';
-import PreLoadTags from '../preLoadTags';
+import * as Head from 'next/head';
+import FontPreLoader from '../fontPreLoader';
 
-describe('<PreLoadTags />', () => {
+describe('<FontPreLoader />', () => {
+  const renderComponent = () => render(<FontPreLoader />);
+
   beforeEach(() => {
-    render(<PreLoadTags />);
+    jest
+      .spyOn(Head, 'default')
+      .mockImplementation(({ children }) => <>{children}</>);
   });
 
   afterEach(() => {
@@ -12,6 +17,8 @@ describe('<PreLoadTags />', () => {
   });
 
   it('should render preload font tags', () => {
+    renderComponent();
+
     const origin = location.origin;
     const linkEls = document.querySelectorAll('link');
     const fontHrefMap = FONTS.reduce((map: Record<string, any>, font) => {

@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import * as Head from 'next/head';
 import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
 import * as customHooks from '../../lib/custom-hooks';
-import * as PreLoadTags from '../preLoadTags';
 import * as Header from '../header';
 import * as Footer from '../footer';
 import Layout from '../layout';
@@ -24,17 +22,11 @@ describe('<Layout />', () => {
     // mock to prevent re-render of footer section
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
-    const preLoadTagsSpy = jest.spyOn(PreLoadTags, 'default');
-    const headSpy = jest
-      .spyOn(Head, 'default')
-      .mockImplementation(({ children }) => <>{children}</>);
     const headerSpy = jest.spyOn(Header, 'default');
     const footerSpy = jest.spyOn(Footer, 'default');
 
     render(<Layout route={getRandomRoute()}>{getFakeSentence()}</Layout>);
 
-    expect(preLoadTagsSpy).toBeCalledTimes(1);
-    expect(headSpy).toBeCalledTimes(1);
     expect(headerSpy).toBeCalledTimes(1);
     expect(footerSpy).toBeCalledTimes(1);
   });

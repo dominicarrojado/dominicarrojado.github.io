@@ -1,15 +1,23 @@
-import SeoTags from '../components/seoTags';
+import { NextSeo } from 'next-seo';
+import { useMemo } from 'react';
+import { getMetaTitle, getRouteCanonical } from '../lib/meta';
 import HeroSub from '../components/heroSub';
 import ProjectsSection from '../components/projectsSection';
 import { Route } from '../lib/types';
 
 function Projects() {
+  const metaUrl = useMemo(() => getRouteCanonical(Route.PROJECTS), []);
   const title = 'Featured Projects';
   const desc = "A selection of projects I've done so far";
 
   return (
     <>
-      <SeoTags path={Route.PROJECTS} title={title} description={desc} />
+      <NextSeo
+        canonical={metaUrl}
+        title={getMetaTitle(title)}
+        description={desc}
+        openGraph={{ url: metaUrl }}
+      />
       <HeroSub title={title} description={desc} />
       <ProjectsSection />
     </>

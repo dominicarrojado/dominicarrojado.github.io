@@ -3,6 +3,9 @@ import { AppProps } from 'next/app';
 import { trackEvent } from '../lib/google-analytics';
 import Window from '../modules/Window';
 import DarkMode from '../modules/DarkMode';
+import SeoTags from '../components/seoTags';
+import FontPreLoader from '../components/fontPreLoader';
+import TagManager from '../components/tagManager';
 import Layout from '../components/layout';
 import '../styles/global.css';
 import { GoogleAnalyticsEvent, Route } from '../lib/types';
@@ -28,9 +31,14 @@ function App({ Component, pageProps, router }: AppProps) {
   }, [routerEvents]);
 
   return (
-    <Layout route={router.route as Route}>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <SeoTags />
+      <FontPreLoader />
+      <TagManager />
+      <Layout route={router.route as Route}>
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 }
 

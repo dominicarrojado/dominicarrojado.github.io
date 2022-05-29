@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import * as customHooks from '../../../lib/custom-hooks';
-import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostsSection from '../../../components/postsSection';
 import { Post } from '../../../lib/types';
@@ -16,7 +15,6 @@ describe('<Posts />', () => {
     jest.spyOn(customHooks, 'useScrollOpacityEffect').mockReturnValue(1);
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
-    const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const postsSectionSpy = jest.spyOn(PostsSection, 'default');
 
@@ -50,22 +48,15 @@ describe('<Posts />', () => {
       <Posts currentPage={currentPage} lastPage={lastPage} posts={posts} />
     );
 
-    const title = 'Tech Blog';
-    const desc =
-      'A place to share my knowledge and learnings from my web development experiences';
-
-    expect(seoTagsSpy).toBeCalledTimes(1);
-    expect(seoTagsSpy).toBeCalledWith(
+    expect(heroSubSpy).toBeCalledTimes(1);
+    expect(heroSubSpy).toBeCalledWith(
       {
-        title,
-        path: '/posts',
-        description: desc,
+        title: 'Tech Blog',
+        description:
+          'A place to share my knowledge and learnings from my web development experiences',
       },
       {}
     );
-
-    expect(heroSubSpy).toBeCalledTimes(1);
-    expect(heroSubSpy).toBeCalledWith({ title, description: desc }, {});
 
     expect(postsSectionSpy).toBeCalledTimes(1);
   });

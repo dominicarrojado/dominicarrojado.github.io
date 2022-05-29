@@ -34,7 +34,7 @@ describe('<PostContentMarkdown />', () => {
     });
 
     it('should render internal link', () => {
-      const getRandomRouteExceptHome = (): Route => {
+      const getRandomRouteExceptHome = (): Exclude<Route, Route.HOME> => {
         const route = getRandomRoute();
 
         if (route === Route.HOME) {

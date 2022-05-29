@@ -1,9 +1,10 @@
+import Head from 'next/head';
 import { Fragment } from 'react';
 import { FONTS } from '../lib/constants';
 
-function PreLoadTags() {
+export default function FontPreLoader() {
   return (
-    <>
+    <Head>
       {FONTS.map((font, idx) => (
         <Fragment key={idx}>
           <link
@@ -22,8 +23,6 @@ function PreLoadTags() {
           />
         </Fragment>
       ))}
-    </>
+    </Head>
   );
 }
-
-export default PreLoadTags;

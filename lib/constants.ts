@@ -18,6 +18,8 @@ import {
 
 export const SITE_NAME = 'Dominic Arrojado';
 export const MAIN_TITLE = 'Dominic Arrojado';
+export const MAIN_DESC =
+  'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.';
 export const MAIN_AUTHOR = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
 export const PERSONAL_EMAIL = 'dominicarrojado@gmail.com';
@@ -27,10 +29,12 @@ export const ROUTES = Object.values(Route);
 export const ROUTES_LENGTH = ROUTES.length;
 export const SCROLL_DOWN_DURATION = 1500;
 export const POSTS_PER_PAGE = 4;
-export const SEO_DEFAULT_IMAGE =
-  '/images/pages/guides-tips-and-tricks-to-web-development.png';
-export const SEO_DEFAULT_IMAGE_WIDTH = 2400;
-export const SEO_DEFAULT_IMAGE_HEIGHT = 1254;
+export const META_IMAGE = `${MAIN_URL}/images/pages/guides-tips-and-tricks-to-web-development.png`;
+export const META_IMAGE_WIDTH = 2400;
+export const META_IMAGE_HEIGHT = 1254;
+export const META_IMAGE_ALT =
+  'Dominic Arrojado | Guides, Tips and Tricks to Web Development';
+export const META_IMAGE_TYPE = 'image/png';
 
 export const FONTS = [
   'Roboto-Light',

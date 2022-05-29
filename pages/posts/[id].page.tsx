@@ -1,18 +1,40 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { NextSeo } from 'next-seo';
+import { getMetaTitle, getRouteCanonical } from '../../lib/meta';
 import { getAllPostIds, getPostData } from '../../lib/posts';
-import SeoTags from '../../components/seoTags';
 import HeroSub from '../../components/heroSub';
 import AdUnitScript from '../../components/adUnitScript';
 import PostContent from '../../components/postContent';
 import { PostData, Route } from '../../lib/types';
+import { useMemo } from 'react';
 
 export default function Post({ postData }: { postData: PostData }) {
+  const postId = postData.id;
+  const postDate = postData.date;
+  const metaUrl = useMemo(
+    () =>
+      getRouteCanonical(
+        `${Route.POSTS}/${postId}` as Exclude<Route, Route.HOME>
+      ),
+    [postId]
+  );
+  const metaModifiedTime = useMemo(() => `${postDate}T14:00:00Z`, []);
+
   return (
     <>
-      <SeoTags
-        path={`${Route.POSTS}/${postData.id}`}
-        title={postData.title}
+      <NextSeo
+        canonical={metaUrl}
+        title={getMetaTitle(postData.title)}
         description={postData.excerpt}
+        openGraph={{
+          url: metaUrl,
+          type: 'article',
+          article: {
+            publishedTime: metaModifiedTime,
+            modifiedTime: metaModifiedTime,
+            authors: [getRouteCanonical(Route.ABOUT)],
+          },
+        }}
       />
       <HeroSub title={postData.title} description={postData.excerpt} />
       <AdUnitScript />

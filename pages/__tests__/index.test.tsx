@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import * as customHooks from '../../lib/custom-hooks';
-import * as SeoTags from '../../components/seoTags';
 import * as HeroMain from '../../components/heroMain';
 import * as AboutHomeSection from '../../components/aboutHomeSection';
 import * as ProjectsHomeSection from '../../components/projectsHomeSection';
@@ -29,7 +28,6 @@ describe('<Home />', () => {
     // mock for ProjectItem component
     jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(true);
 
-    const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroMainSpy = jest.spyOn(HeroMain, 'default');
     const aboutHomeSectionSpy = jest.spyOn(AboutHomeSection, 'default');
     const projectsHomeSectionSpy = jest.spyOn(ProjectsHomeSection, 'default');
@@ -61,17 +59,6 @@ describe('<Home />', () => {
     expect(latestPosts.length).toBeLessThanOrEqual(POSTS_PER_PAGE);
 
     render(<Home latestPosts={latestPosts} />);
-
-    expect(seoTagsSpy).toBeCalledTimes(1);
-    expect(seoTagsSpy).toBeCalledWith(
-      {
-        path: '/',
-        title: 'Guides, Tips and Tricks to Web Development',
-        description:
-          'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.',
-      },
-      {}
-    );
 
     expect(heroMainSpy).toBeCalledTimes(1);
     expect(aboutHomeSectionSpy).toBeCalledTimes(1);

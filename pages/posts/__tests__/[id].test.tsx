@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import { forceVisible } from 'react-lazyload';
 import { getRandomPostId } from '../../../lib/test-helpers';
 import * as customHooks from '../../../lib/custom-hooks';
-import * as SeoTags from '../../../components/seoTags';
 import * as HeroSub from '../../../components/heroSub';
 import * as PostContent from '../../../components/postContent';
 import { PostData } from '../../../lib/types';
@@ -24,7 +23,6 @@ describe('<PostIndex />', () => {
       windowHeight: 0,
     });
 
-    const seoTagsSpy = jest.spyOn(SeoTags, 'default');
     const heroSubSpy = jest.spyOn(HeroSub, 'default');
     const postContentSpy = jest.spyOn(PostContent, 'default');
 
@@ -80,16 +78,6 @@ describe('<PostIndex />', () => {
     render(<PostIndex postData={postData} />);
 
     forceVisible();
-
-    expect(seoTagsSpy).toBeCalledTimes(1);
-    expect(seoTagsSpy).toBeCalledWith(
-      {
-        path: `/posts/${postId}`,
-        title: postData.title,
-        description: postData.excerpt,
-      },
-      {}
-    );
 
     expect(heroSubSpy).toBeCalledTimes(1);
     expect(heroSubSpy).toBeCalledWith(
