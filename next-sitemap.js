@@ -100,6 +100,9 @@ module.exports = {
         '/hashtag-interactive-website/what-we-do.html'
       ),
 
+      // cnb apps
+      await config.transform(config, '/cnb-anti-drug-abuse-campaign-app/'),
+
       // kronenbourg website
       await config.transform(config, '/kronenbourg-website/'),
       await config.transform(
