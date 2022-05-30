@@ -2,7 +2,7 @@
 
 ![CI/CD](https://github.com/dominicarrojado/dominicarrojado.github.io/workflows/CI/CD/badge.svg) [![codecov](https://codecov.io/gh/dominicarrojado/dominicarrojado.github.io/branch/develop/graph/badge.svg?token=6W0VKYWOKI)](https://codecov.io/gh/dominicarrojado/dominicarrojado.github.io)
 
-A static tech blog website built with [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
+A static tech blog website built with [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Quick Start
 
@@ -50,3 +50,9 @@ yarn export
 ```
 
 2. The `out` directory can be served by any static hosting service or CDN.
+
+## VSCode Extensions
+
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
