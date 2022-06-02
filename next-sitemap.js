@@ -115,6 +115,21 @@ module.exports = {
         '/cnb-anti-drug-abuse-campaign-app/gallery/view/'
       ),
 
+      // singtel apps
+      await config.transform(config, '/singtel-data-x-infinity-event-app/'),
+      await config.transform(
+        config,
+        '/singtel-data-x-infinity-event-app/enter/'
+      ),
+      await config.transform(
+        config,
+        '/singtel-data-x-infinity-event-app/gallery/'
+      ),
+      await config.transform(
+        config,
+        '/singtel-data-x-infinity-event-app/gallery/view/'
+      ),
+
       // kronenbourg website
       await config.transform(config, '/kronenbourg-website/'),
       await config.transform(

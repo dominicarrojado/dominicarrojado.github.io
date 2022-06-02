@@ -260,7 +260,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://singtel-data-x-infinity.meteorapp.com/',
+        url: '/singtel-data-x-infinity-event-app/',
       },
       {
         title: 'View Slideshow',
