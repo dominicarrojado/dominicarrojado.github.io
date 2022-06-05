@@ -1,5 +1,4 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import Window from '../../modules/Window';
 import {
   getFakeSentence,
   getFakeWord,
