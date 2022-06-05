@@ -3,9 +3,12 @@ import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
 import * as customHooks from '../../lib/custom-hooks';
 import * as Header from '../header';
 import * as Footer from '../footer';
-import Layout from '../layout';
+import Layout, { Props } from '../layout';
 
 describe('<Layout />', () => {
+  const renderComponent = ({ children, ...props }: Props) =>
+    render(<Layout {...props}>{children}</Layout>);
+
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -13,7 +16,10 @@ describe('<Layout />', () => {
   it('should render children', () => {
     const text = getFakeSentence();
 
-    render(<Layout route={getRandomRoute()}>{text}</Layout>);
+    renderComponent({
+      route: getRandomRoute(),
+      children: text,
+    });
 
     expect(screen.queryByText(text)).toBeInTheDocument();
   });
@@ -25,7 +31,10 @@ describe('<Layout />', () => {
     const headerSpy = jest.spyOn(Header, 'default');
     const footerSpy = jest.spyOn(Footer, 'default');
 
-    render(<Layout route={getRandomRoute()}>{getFakeSentence()}</Layout>);
+    renderComponent({
+      route: getRandomRoute(),
+      children: getFakeSentence(),
+    });
 
     expect(headerSpy).toBeCalledTimes(1);
     expect(footerSpy).toBeCalledTimes(1);

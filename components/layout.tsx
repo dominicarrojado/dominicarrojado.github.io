@@ -1,12 +1,27 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
+import { getRefValue } from '../lib/hooks';
 import Header from './header';
 import Footer from './footer';
 import { Route } from '../lib/types';
 import { MAIN_ELEMENT_ID } from '../lib/constants';
 
-function Layout({ route, children }: { route: Route; children: ReactNode }) {
+export type Props = { route: Route; children: ReactNode };
+
+export default function Layout({ route, children }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // clear styles applied to next root element and layout container by libraries
+    // (e.g. height: auto!important) which causes issue with full-height sections
+    const nextRoot = document.querySelector('body > div:first-child');
+    const containerEl = getRefValue(containerRef);
+
+    containerEl.removeAttribute('style');
+    nextRoot?.removeAttribute('style');
+  }, [route]);
+
   return (
-    <div tabIndex={-1} className="h-full outline-none">
+    <div ref={containerRef} tabIndex={-1} className="h-full outline-none">
       <Header route={route} />
 
       <div id={MAIN_ELEMENT_ID} />
@@ -16,5 +31,3 @@ function Layout({ route, children }: { route: Route; children: ReactNode }) {
     </div>
   );
 }
-
-export default Layout;
