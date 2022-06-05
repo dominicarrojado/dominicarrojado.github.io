@@ -1,27 +1,34 @@
 import Link, { LinkProps } from 'next/link';
-import React, { ReactElement, useMemo } from 'react';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import React, { ReactElement, useState } from 'react';
 import { Route } from '../lib/types';
 
 export type Props = LinkProps & { href: string; children: ReactElement };
 
 export default function NextLink({ children, href, ...props }: Props) {
-  const isWindowLoaded = useWindowLoaded();
-  const shouldReload = useMemo(() => {
-    return (
-      isWindowLoaded &&
+  const child = React.Children.only(children);
+  const [shouldReload, setShouldReload] = useState(false);
+
+  const onMouseEnter = () => {
+    if (
+      !shouldReload &&
       href.startsWith(Route.POSTS) &&
       (window.adsbygoogle as any)?.loaded
-    );
-  }, [isWindowLoaded, href]);
+    ) {
+      setShouldReload(true);
+    }
+
+    if (typeof child.props.onMouseEnter === 'function') {
+      child.props.onMouseEnter();
+    }
+  };
 
   if (shouldReload) {
-    return React.cloneElement(React.Children.only(children), { href });
+    return React.cloneElement(child, { href });
   }
 
   return (
     <Link {...props} href={href}>
-      {children}
+      {React.cloneElement(child, { onMouseEnter })}
     </Link>
   );
 }
