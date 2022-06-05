@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
-import Link from 'next/link';
 import cn from 'classnames';
 import DateText from './dateText';
 import ButtonArrowLink from './buttonArrowLink';
+import NextLink from './nextLink';
 import { Post, Route } from '../lib/types';
 
 function PostItem({
@@ -36,7 +36,7 @@ function PostItem({
       )}
       style={style}
     >
-      <Link href={`${Route.POSTS}/${post.id}`} passHref>
+      <NextLink href={`${Route.POSTS}/${post.id}`}>
         <a
           className={cn(
             'group flex w-full shadow-md py-6 px-4',
@@ -76,7 +76,7 @@ function PostItem({
             </div>
           </article>
         </a>
-      </Link>
+      </NextLink>
     </li>
   );
 }

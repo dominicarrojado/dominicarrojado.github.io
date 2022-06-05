@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import cn from 'classnames';
 import Section from './section';
 import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import TextArrowLink from './textArrowLink';
 import ProjectItem from './projectItem';
+import NextLink from './nextLink';
 import { Route } from '../lib/types';
 import { BEST_PROJECTS } from '../lib/constants';
 
@@ -24,9 +24,9 @@ function ProjectsHomeSection() {
       <div
         className={cn('mt-12 text-center', 'md:mt-16', 'lg:mt-24', 'xl:mt-28')}
       >
-        <Link href={Route.PROJECTS} passHref>
+        <NextLink href={Route.PROJECTS} passHref>
           <TextArrowLink>See All Projects</TextArrowLink>
-        </Link>
+        </NextLink>
       </div>
     </Section>
   );

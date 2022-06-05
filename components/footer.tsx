@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
 import { useMounted } from '../lib/custom-hooks';
 import SocialItems from './socialItems';
+import NextLink from './nextLink';
 import { Route } from '../lib/types';
 import { QUOTES, QUOTES_INTERVAL, QUOTES_LENGTH } from '../lib/constants';
 
@@ -112,13 +112,13 @@ function Legal() {
       <span className="font-normal">©{currentYear} Dominic Arrojado</span>{' '}
       <span className="block mt-1 sm:hidden" />
       <span className="hidden sm:inline">·</span>{' '}
-      <Link href={Route.PRIVACY_POLICY}>
+      <NextLink href={Route.PRIVACY_POLICY}>
         <a>Privacy Policy</a>
-      </Link>{' '}
+      </NextLink>{' '}
       ·{' '}
-      <Link href={Route.DISCLAIMER}>
+      <NextLink href={Route.DISCLAIMER}>
         <a>Disclaimer</a>
-      </Link>
+      </NextLink>
     </p>
   );
 }

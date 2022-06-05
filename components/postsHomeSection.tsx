@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import cn from 'classnames';
 import Section from './section';
 import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import TextArrowLink from './textArrowLink';
 import PostItem from './postItem';
+import NextLink from './nextLink';
 import { Post, Route } from '../lib/types';
 
 function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
@@ -34,9 +34,9 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
       <div
         className={cn('mt-12 text-center', 'md:mt-16', 'lg:mt-18', 'xl:mt-20')}
       >
-        <Link href={`${Route.POSTS_PAGE}/2`} passHref>
+        <NextLink href={`${Route.POSTS_PAGE}/2`} passHref>
           <TextArrowLink>See More Posts</TextArrowLink>
-        </Link>
+        </NextLink>
       </div>
     </Section>
   );

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
 import { getPagination } from '../lib/common';
@@ -6,6 +5,7 @@ import { useMounted } from '../lib/custom-hooks';
 import AnchorLink from './anchorLink';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
+import NextLink from './nextLink';
 import { Route } from '../lib/types';
 
 export type Props = {
@@ -118,9 +118,9 @@ function PaginationArrow({
     body = <span className={cn(className, 'opacity-40')}>{icon}</span>;
   } else {
     body = (
-      <Link href={href} passHref>
+      <NextLink href={href} passHref>
         <a className={className}>{icon}</a>
-      </Link>
+      </NextLink>
     );
   }
 
@@ -149,7 +149,7 @@ function PaginationItem({
     return <span className={className}>{children}</span>;
   } else {
     return (
-      <Link href={href} passHref>
+      <NextLink href={href} passHref>
         <AnchorLink
           className={cn(
             className,
@@ -161,7 +161,7 @@ function PaginationItem({
         >
           {children}
         </AnchorLink>
-      </Link>
+      </NextLink>
     );
   }
 }

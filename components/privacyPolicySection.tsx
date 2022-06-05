@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import Link from 'next/link';
 import AnchorLink from './anchorLink';
 import Section from './section';
+import PageContent from './pageContent';
+import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 import { PRIVACY_EMAIL } from '../lib/constants';
-import PageContent from './pageContent';
 
 function PrivacyPolicySection() {
   return (
@@ -14,9 +14,9 @@ function PrivacyPolicySection() {
           This privacy policy ("Policy") describes how the personally
           identifiable information ("Personal Information") you may provide on
           the{' '}
-          <Link href={Route.HOME}>
+          <NextLink href={Route.HOME}>
             <a>dominicarrojado.com</a>
-          </Link>{' '}
+          </NextLink>{' '}
           website ("Website" or "Service") and any of its related products and
           services (collectively, "Services") is collected, protected and used.
           It also describes the choices available to you regarding our use of
@@ -50,9 +50,9 @@ function PrivacyPolicySection() {
         </p>
         <h2>Meteor Cloud</h2>
         <p>
-          <Link href={Route.PROJECTS}>
+          <NextLink href={Route.PROJECTS}>
             <a>Projects</a>
-          </Link>{' '}
+          </NextLink>{' '}
           that are built with{' '}
           <AnchorLink href={ExternalUrl.METEOR} isExternal>
             Meteor
@@ -70,9 +70,9 @@ function PrivacyPolicySection() {
         </p>
         <h2>Featured Projects</h2>
         <p>
-          <Link href={Route.PROJECTS}>
+          <NextLink href={Route.PROJECTS}>
             <a>Projects</a>
-          </Link>{' '}
+          </NextLink>{' '}
           hosted on this Website are solely for portfolio or demo purposes only.
           If, however, you wish to use some of the features of a project, you
           may be asked to provide certain Personal Information. We receive and

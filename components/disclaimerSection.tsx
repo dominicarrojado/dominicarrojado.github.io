@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import AnchorLink from './anchorLink';
 import PageContent from './pageContent';
 import Section from './section';
+import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 import { DISCLAIMER_EMAIL } from '../lib/constants';
 
@@ -29,9 +29,9 @@ function DisclaimerSection() {
         </p>
         <h2>Featured Projects</h2>
         <p>
-          <Link href={Route.PROJECTS}>
+          <NextLink href={Route.PROJECTS}>
             <a>Projects</a>
-          </Link>{' '}
+          </NextLink>{' '}
           hosted on this Website are solely for portfolio or demo purposes only.
           The Operator of this Website contributed to the software development
           of these projects during the time of employment with previous and

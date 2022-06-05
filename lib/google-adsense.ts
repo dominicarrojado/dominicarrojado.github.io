@@ -2,7 +2,7 @@ import { checkIsLocalhost } from './location';
 
 declare global {
   interface Window {
-    adsbygoogle: Array<{}>;
+    adsbygoogle?: Array<{}>;
   }
 }
 

@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import Link from 'next/link';
 import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { useMounted } from '../lib/custom-hooks';
@@ -13,6 +12,7 @@ import TextArrowLink from './textArrowLink';
 import AnchorLink from './anchorLink';
 import PostContentMarkdown from './postContentMarkdown';
 import AdUnit from './adUnit';
+import NextLink from './nextLink';
 import {
   ExternalUrl,
   GoogleAdSenseUnit,
@@ -175,9 +175,9 @@ function PostFooter({
         )}
       </div>
       <div className="mt-16 text-center">
-        <Link href={Route.POSTS} passHref>
+        <NextLink href={Route.POSTS} passHref>
           <TextArrowLink>See Latest Posts</TextArrowLink>
-        </Link>
+        </NextLink>
       </div>
     </div>
   );
@@ -196,7 +196,7 @@ function AdjacentPostLink({
   const Icon = isPrevious ? SvgChevronLeft : SvgChevronRight;
 
   return (
-    <Link href={href} passHref>
+    <NextLink href={href} passHref>
       <a
         className={cn('group relative', {
           [isPrevious ? 'pr-2' : 'pl-2']: true,
@@ -243,6 +243,6 @@ function AdjacentPostLink({
           )}
         />
       </a>
-    </Link>
+    </NextLink>
   );
 }

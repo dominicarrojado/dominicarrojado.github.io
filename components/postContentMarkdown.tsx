@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import cn from 'classnames';
 import ReactMarkdown from 'react-markdown';
@@ -10,6 +9,7 @@ import rehypeHighlight from 'rehype-highlight';
 import Content from './content';
 import AnchorLink from './anchorLink';
 import AdUnit from './adUnit';
+import NextLink from './nextLink';
 import {
   GoogleAdSenseUnit,
   GoogleAdSenseUnitFormat,
@@ -44,9 +44,9 @@ function PostContentMarkdown({ content }: Props) {
 
               if (isNextRoute) {
                 return (
-                  <Link href={anchorHref}>
+                  <NextLink href={anchorHref}>
                     <a {...otherProps} />
-                  </Link>
+                  </NextLink>
                 );
               }
             }

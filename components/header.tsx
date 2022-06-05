@@ -1,5 +1,4 @@
 import { TransitionEvent, useEffect, useRef, useState, useMemo } from 'react';
-import Link from 'next/link';
 import Router from 'next/router';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
@@ -23,6 +22,7 @@ import SvgMoon from './svgMoon';
 import AnchorLink from './anchorLink';
 import Transition from './transition';
 import HeaderSocialItems from './socialItems';
+import NextLink from './nextLink';
 import { GoogleAnalyticsEvent, Route, Social } from '../lib/types';
 import {
   MAIN_ELEMENT_ID,
@@ -194,7 +194,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
   }, []);
 
   return (
-    <Link href={Route.HOME}>
+    <NextLink href={Route.HOME}>
       <a
         className={cn(
           'group fixed top-3.5 left-3.5 z-50 flex shadow-3xl border border-white bg-gray-750 bg-opacity-90 p-1.5',
@@ -224,7 +224,7 @@ function Logo({ route, closeMenu }: { route: string; closeMenu: () => void }) {
           )}
         />
       </a>
-    </Link>
+    </NextLink>
   );
 }
 
@@ -559,7 +559,7 @@ function MenuItems({
               : undefined
           }
         >
-          <Link href={item.path}>
+          <NextLink href={item.path}>
             <a
               className={cn(
                 'group relative pb-2 text-3xl text-gray-300 select-none outline-none',
@@ -582,7 +582,7 @@ function MenuItems({
                 )}
               />
             </a>
-          </Link>
+          </NextLink>
         </li>
       ))}
     </ul>

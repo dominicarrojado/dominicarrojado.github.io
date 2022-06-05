@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import Section from './section';
 import SectionTitle from './sectionTitle';
 import SectionContent from './sectionContent';
 import AnchorLink from './anchorLink';
 import TextArrowLink from './textArrowLink';
+import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 
 function AboutHomeSection() {
@@ -13,9 +13,9 @@ function AboutHomeSection() {
         <SectionTitle>About Me</SectionTitle>
         <SectionContent>
           My name is Dominic Arrojado. I write{' '}
-          <Link href={Route.POSTS}>
+          <NextLink href={Route.POSTS}>
             <a>tech blogs</a>
-          </Link>{' '}
+          </NextLink>{' '}
           and create{' '}
           <AnchorLink href={ExternalUrl.PERSONAL_YOUTUBE} isExternal>
             videos
@@ -32,9 +32,9 @@ function AboutHomeSection() {
           as a Senior Software Engineer.
         </SectionContent>
         <div className="mt-12 text-center">
-          <Link href={Route.ABOUT} passHref>
+          <NextLink href={Route.ABOUT} passHref>
             <TextArrowLink>Read My Story</TextArrowLink>
-          </Link>
+          </NextLink>
         </div>
       </div>
     </Section>

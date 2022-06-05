@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import cn from 'classnames';
 import Section from './section';
 import AnchorLink from './anchorLink';
 import PageContent from './pageContent';
+import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 
 function AboutSection() {
@@ -80,9 +80,9 @@ function AboutSection() {
           Being an introvert and a man of few words, I didn't imagine myself to
           be doing this tech blog, but one day I suddenly had the urge to start
           writing{' '}
-          <Link href={Route.POSTS}>
+          <NextLink href={Route.POSTS}>
             <a>tech blogs</a>
-          </Link>{' '}
+          </NextLink>{' '}
           and create{' '}
           <AnchorLink href={ExternalUrl.PERSONAL_YOUTUBE} isExternal>
             videos
