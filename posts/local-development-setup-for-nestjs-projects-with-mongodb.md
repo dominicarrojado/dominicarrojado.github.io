@@ -1,28 +1,28 @@
 ---
-title: 'Local development setup for NestJS projects with PostgreSQL'
-date: '2022-04-15'
-excerpt: 'A quick way to get started with NestJS integrated with TypeScript, PostgreSQL and pgAdmin4 using Docker Compose'
+title: 'Local development setup for NestJS projects with MongoDB'
+date: '2022-06-06'
+excerpt: 'A quick way to get started with NestJS integrated with TypeScript, MongoDB and mongo-express using Docker Compose'
 category: 'technology'
-videoUrl: 'https://youtu.be/pZNE1YMdbio'
+videoUrl: ''
 ---
 
 ## Introduction
 
-This is a guide on how to setup a local development for [NestJS](https://docs.nestjs.com/) (a progressive [Node.js](https://nodejs.org/en/) framework) projects with [TypeScript](https://www.typescriptlang.org/), [PostgreSQL](https://www.postgresql.org/) and [pgAdmin4](https://www.pgadmin.org/) using [Docker Compose](https://docs.docker.com/compose/). We'll be using [TypeORM](https://typeorm.io/) to connect and talk to our PostgreSQL database. This is your quick way to get started with Nest and it also involves extensions and libraries that helps us save time and energy when writing our code.
+This is a guide on how to setup a local development for [NestJS](https://docs.nestjs.com/) (a progressive [Node.js](https://nodejs.org/en/) framework) projects with [TypeScript](https://www.typescriptlang.org/), [MongoDB](https://www.mongodb.com/) and [mongo-express](https://github.com/mongo-express/mongo-express) using [Docker Compose](https://docs.docker.com/compose/). We'll be using [TypeORM](https://typeorm.io/) to connect and talk to our MongoDB database. This is your quick way to get started with Nest and it also involves extensions and libraries that helps us save time and energy when writing our code.
 
 ## Skip
 
-If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can [clone it here](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) or run the [git](https://git-scm.com/) command below:
+If you don't want to go through the steps below and you just want to get the boilerplate to save time, you can [clone it here](https://github.com/dominicarrojado/nestjs-mongodb-boilerplate) or run the [git](https://git-scm.com/) command below:
 
 ```bash
-git clone git@github.com:dominicarrojado/nestjs-postgres-boilerplate.git my-app
+git clone git@github.com:dominicarrojado/nestjs-mongodb-boilerplate.git my-app
 ```
 
-Don't forget to ⭐ and share the [repo](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) if you like it!
+Don't forget to ⭐ and share the [repo](https://github.com/dominicarrojado/nestjs-mongodb-boilerplate) if you like it!
 
 ## Prerequisites
 
-Upon writing this post, I assume that you have some server-side application development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Node.js](https://nodejs.org/en/), [NestJS](https://docs.nestjs.com/), [TypeORM](https://typeorm.io/) and [PostgreSQL](https://www.postgresql.org/).
+Upon writing this post, I assume that you have some server-side application development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Node.js](https://nodejs.org/en/), [NestJS](https://docs.nestjs.com/), [TypeORM](https://typeorm.io/) and [MongoDB](https://www.mongodb.com/).
 
 Please make sure to install [Yarn](https://classic.yarnpkg.com/lang/en/) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) in your system if you haven't. We use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_. While we use [Docker](https://www.docker.com/) throughout the development lifecycle for fast, easy and portable application development.
 
@@ -72,8 +72,6 @@ yarn start:prod
 Open the created project in your Visual Studio Code. Let's install [Prettier](https://prettier.io/), it's a code formatter that formats the code for us when we save file changes which is a time-saver.
 
 Click on the "Extensions" tab and look for "Prettier" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
-
-![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/install-prettier-extension-in-visual-studio-code.png)
 
 After Prettier is installed, we still need to enable the formatting feature by updating our settings in Visual Studio Code. Let's create a folder in the root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. Then update the created file with the code below:
 
@@ -144,11 +142,11 @@ Let's build our first Docker image. Do remember to start your Docker Desktop app
 docker build --tag nest-docker .
 ```
 
-![Screenshot of docker build result](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-build-result.png)
+![Screenshot of docker build result](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/docker-build-result.png)
 
 If you open your Docker Desktop, you'll see our `nest-docker` image in the "Images" tab.
 
-![Screenshot of Docker Desktop images](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-desktop-images.png)
+![Screenshot of Docker Desktop images](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/docker-desktop-images.png)
 
 ## Run our image as a container
 
@@ -164,7 +162,7 @@ docker run --detach --publish 3000:3000 nest-docker
 
 We have 2 parameters in this command, that's `--detach` and `--publish 3000:3000`. So remember that contianers runs in isolation, hence we are not able to connect to it unless we publish it. To publish a port for our container, we used the `--publish` flag (-p for short) on the docker run command. The format of the `--publish` command is `[host port]:[container port]`. We can then access our application running in the `container port` via the `host port`. While `--detach` basically runs our container in detached mode or in the background so that our terminal (which where we ran the command) will not have it connected.
 
-![Screenshot of Docker Desktop containers](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/docker-desktop-containers.png)
+![Screenshot of Docker Desktop containers](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/docker-desktop-containers.png)
 
 Now that the application is running, open your browser and go to `http://localhost:3000/`. You should see the same `Hello World!` message.
 
@@ -264,9 +262,9 @@ Let's add this `docker-compose` command in our `package.json` scripts so that we
 
 ---
 
-## PostgreSQL and pgAdmin4
+## MongoDB and mongo-express
 
-In this post, we'll use [PostgreSQL](https://www.postgresql.org/) as our database and [pgAdmin4](https://www.pgadmin.org/) for our database admin tool to complete our local development setup.
+In this post, we'll use [MongoDB](https://www.mongodb.com/) as our database and [mongo-express](https://github.com/mongo-express/mongo-express) for our database admin tool to complete our local development setup.
 
 Let's update our `docker-compose.yml` to include their respective docker images:
 
@@ -278,28 +276,33 @@ Let's update our `docker-compose.yml` to include their respective docker images:
       - db
 
   db:
-    image: postgres
+    image: mongo
     restart: always
     ports:
-      - 5432:5432
+      - 27017:27017
     environment:
-      POSTGRES_PASSWORD: postgres
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
 
   dbadmin:
-    image: dpage/pgadmin4
+    image: mongo-express
     restart: always
     ports:
-      - 5050:80
+      - 8081:8081
+    depends_on:
+      - db
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: pgadmin4
+      ME_CONFIG_MONGODB_URL: mongodb://root:password@db:27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: mexpress
+
 ```
 
-PostgreSQL image runs on port `5432` by default and we are just exposing the same port for our application to connect to. The only environment variable required is `POSTGRES_PASSWORD`, the rest are optional or will use the default values. Hence, we have defined a password here. You can read more about the other environment variables for PostgreSQL [here](https://hub.docker.com/_/postgres). The default value for `POSTGRES_USERNAME` and `POSTGRES_DATABASE` would be `postgres`.
+MongoDB image runs on port `27017` by default and we are just exposing the same port for our application and database admin portal to connect to. The only environment variables required are `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`, the `MONGO_INITDB_DATABASE` is optional so we'll leave it be. You can read more about the MongoDB docker image [here](https://hub.docker.com/_/mongo).
 
-On the other hand, pgAdmin4 image runs on port `80` by default and we are making it accessible outside the container on port `5050`. There are two environment variables required: `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD`. You can read more about the other environment variables for pgAdmin4 [here](https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html).
+On the other hand, mongo-express image runs on port `8081` by default and we are also just exposing the same port. There are three environment variables required: `ME_CONFIG_MONGODB_URL`, `ME_CONFIG_BASICAUTH_USERNAME` and `ME_CONFIG_BASICAUTH_PASSWORD`. You can read more about the other environment variables for mongo-express [here](https://hub.docker.com/_/mongo-express).
 
-We can control the order of service startup and shutdown with the `depends_on` option. Hence we have added `db` as a dependency for our `app` service.
+We can control the order of service startup and shutdown with the `depends_on` option. Hence we have added `db` as a dependency for our `app` and `dbadmin` service.
 
 Let's build and run our Docker Compose and everything should be working fine:
 
@@ -307,26 +310,24 @@ Let's build and run our Docker Compose and everything should be working fine:
 yarn docker-compose:dev
 ```
 
-Once all the environments are up and running, open your browser and go to `http://localhost:5050/`. You will be redirected to log in to pgAdmin4. Type in the default email and password we have provided in the `docker-compose.yml`.
+Once all the environments are up and running, open your browser and go to `http://localhost:8081/`. You will be prompt to log in to mongo-express. Type in the username (`admin`) and password (`mexpress`) we have provided in the `docker-compose.yml`.
 
-![Screenshot of log in to pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-log-in.png)
+After successfully logging in, you should see something like this:
 
-After successfully logging in, do a right-click on the "Servers" located at the left-hand side of the portal then click "Register - Server". It will open up a modal, under the "General" tab, give the server a name (e.g. "Nest Docker"). Then, go to the "Connection" tab and input the following:
+![Screenshot of databases in mongo-express](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/mongo-express-databases.png)
 
-![Screenshot of register server in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-register-server.png)
-
-Hit "Save" and if there was no error means that our pgAdmin4 was able to connect to our PostgreSQL database successfully. The "Nest Docker" would be added under the "Servers", and you can go through that to see and interact with the database. Here's how you can go to the tables: `Servers` -> `Nest Docker` -> `postgres` -> `Schemas` -> `public` -> `Tables`.
+That means our MongoDB and mongo-express containers are set up successfully.
 
 ---
 
 ## TypeORM
 
-Let's continue and set up a database connection to our Nest application. We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use PostgreSQL now and maybe use [MongoDB](https://www.mongodb.com/) tomorrow by just changing the configuration when initializing TypeORM and minor changes to the shape of your entities.
+Let's continue and set up a database connection to our Nest application. We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use MongoDB now and maybe use [PostgreSQL](https://www.postgresql.org/) tomorrow by just changing the configuration when initializing TypeORM and minor changes to the shape of your entities.
 
 To use TypeORM in Nest. First, install the following dependencies:
 
 ```bash
-yarn add @nestjs/typeorm typeorm@0.2 pg
+yarn add @nestjs/typeorm typeorm@0.2 mongodb@^3.6.0
 ```
 
 > Note that we're using TypeORM v0.2, which isn't the latest version of TypeORM. The latter has substantial modifications and duplicate methods which are used on this post. You can read about typeorm@0.3.0 changes [on their repository](https://github.com/typeorm/typeorm/releases/tag/0.3.0).
@@ -347,12 +348,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'db',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'postgres',
+      type: 'mongodb',
+      url: 'mongodb://root:password@db/test?authSource=admin',
+      port: 27017,
       autoLoadEntities: true,
       synchronize: true,
     }),
@@ -370,15 +368,15 @@ nest g controller users --no-spec
 nest g service users --no-spec
 ```
 
-Next, we need to create an entity for `User`. In TypeORM, an entity is a class that maps to a database table (or collection when using MongoDB). Create a file `src/users/user.entity.ts` and add the following code:
+Next, we need to create an entity for `User`. In TypeORM, an entity is a class that maps to a database collection (or table when using PostgreSQL). Create a file `src/users/user.entity.ts` and add the following code:
 
 ```ts
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  _id: string;
 
   @Column()
   firstName: string;
@@ -449,14 +447,21 @@ You can open your Postman API client (or simply open your browser) and do a `GET
 
 It should return a status of `200 OK` and return you an empty array `[]`.
 
-If you still don't trust it, create a new row in our `user` table using pgAdmin4.
+If you still don't trust it, open the mongo-express tab in your browser. Create a database called `test`, then create a `user` collection and lastly add a new document as seen below:
 
-![Screenshot of creating a user row in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-create-user-row.png)
+![Screenshot of creating a user document in mongo-express](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/mongo-express-create-user-document.png)
 
 And if you repeat the same `GET` request, it should now return you an array with the user object:
 
 ```json
-[{ "id": 1, "firstName": "Dominic", "lastName": "Arrojado", "isActive": true }]
+[
+  {
+    "_id": "629dc03db62e3877b07ce81a",
+    "firstName": "Dominic",
+    "lastName": "Arrojado",
+    "isActive": true
+  }
+]
 ```
 
 ---
@@ -469,7 +474,7 @@ In Node.js applications, it's common to use `.env` files, holding key-value pair
 
 A good approach for using this technique in Nest is to create a `ConfigModule` that exposes a `ConfigService` which loads the appropriate .env file. While you may choose to write such a module yourself, for convenience Nest provides the `@nestjs/config` package out-of-the box.
 
-To begin using it, let's install the required dependency:
+To begin using it, let's install the required dependencies:
 
 ```bash
 yarn add @nestjs/config cross-env
@@ -491,12 +496,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          type: 'postgres',
-          host: configService.get('DB_HOST'),
+          type: 'mongodb',
+          url: configService.get('DB_URL'),
           port: configService.get('DB_PORT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
           autoLoadEntities: true,
           synchronize: true,
         };
@@ -515,11 +517,8 @@ We'll be using `STAGE` from the environment variables as the definition on which
 
 ```
 PORT=3000
-DB_HOST=db
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=postgres
-DB_DATABASE=postgres
+DB_URL=mongodb://root:password@db/test?authSource=admin
+DB_PORT=27017
 ```
 
 Then update `package.json` to include `STAGE` environment variable depending on the script:
@@ -586,11 +585,8 @@ import * as Joi from 'joi';
 export const configValidationSchema = Joi.object({
   STAGE: Joi.string().required(),
   PORT: Joi.number().default(3000).required(),
-  DB_HOST: Joi.string().required(),
-  DB_PORT: Joi.number().default(5432).required(),
-  DB_USERNAME: Joi.string().required(),
-  DB_PASSWORD: Joi.string().required(),
-  DB_DATABASE: Joi.string().required(),
+  DB_URL: Joi.string().required(),
+  DB_PORT: Joi.number().default(27017).required(),
 });
 ```
 
@@ -718,13 +714,12 @@ Also, with the `-f` option, we are able to use a second configuration file along
 
 ## Final words
 
-Well, there you have it! You now have a full-fledged local development setup. Go ahead and start coding your Nest applications from this setup! I hope this was helpful for you, do share this post if you feel that it will be helpful for someone else too. By the way, I did [a post](/building-a-link-shortener-api-with-nestjs-and-postgresql-with-tests-part-1/) on how to build an application using NestJS framework leveraging on this setup in case you're intestered. Thanks for reading ~
+Well, there you have it! You now have a full-fledged local development setup. Go ahead and start coding your Nest applications from this setup! I hope this was helpful for you, do share this post if you feel that it will be helpful for someone else too. I'll be doing another post soon on how to build an application using NestJS framework leveraging on this setup so stay tuned if you're intestered. ~
 
 ## Online references
 
 - [Nest Documentation](https://docs.nestjs.com/)
 - [Docker Docs](https://docs.docker.com/)
-- [PostgreSQL in Dockerhub](https://hub.docker.com/_/postgres)
-- [pgAdmin4 in Dockerhub](https://hub.docker.com/r/dpage/pgadmin4/)
-- [pgAdmin4 Container Deployment](https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html)
+- [MongoDB in Dockerhub](https://hub.docker.com/_/mongo)
+- [mongo-express in Dockerhub](https://hub.docker.com/_/mongo-express)
 - [NestJS Zero to Hero Udemy Course](https://www.udemy.com/course/nestjs-zero-to-hero/)
