@@ -368,6 +368,8 @@ nest g controller users --no-spec
 nest g service users --no-spec
 ```
 
+---
+
 Next, we need to create an entity for `User`. In TypeORM, an entity is a class that maps to a database collection (or table when using PostgreSQL). Create a file `src/users/user.entity.ts` and add the following code:
 
 ```ts
@@ -611,6 +613,8 @@ export class AppModule {}
 
 That's all you need to do. Try removing `DB_USERNAME` in `stage.dev.env` and run the Docker Compose environments. You'll get an error in the end stating: `Error: Config validation error: "DB_USERNAME" is required`. That's really helpful for knowing what went wrong while trying to run your application instead of getting a generic error `Unable to connect to the database` if we didn't do the config schema validation otherwise.
 
+---
+
 ## Production and test environments
 
 To finish off our local development setup, we want to be able to run tests using Docker Compose as well.
@@ -685,6 +689,52 @@ services:
 
 Same as above. Here, we are syncing the `.git` folder from our current directory with the `.git` folder of the application container. That is how it will know what files were changed in the application code and only run the test related to those changes.
 
+---
+
+Let's also move the `dbadmin` service block from `docker-compose.yml` to a new separate file called `dbadmin.yml` as it will only be utilized during `development` but we don't need to that service when we're just running tests.
+
+```yml
+services:
+  dbadmin:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:password@db:27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: mexpress
+```
+
+The updated `docker-compose.yml` should look like this now:
+
+```yml
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - db
+
+  db:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+```
+
 Lastly, update the `package.json` to add new scripts and utilize these new Docker Compose targets:
 
 ```json
@@ -696,10 +746,11 @@ Lastly, update the `package.json` to add new scripts and utilize these new Docke
     "test:watch": "cross-env STAGE=dev jest --runInBand --watch",
     "test:cov": "cross-env STAGE=dev jest --runInBand --coverage",
     ...
+    "docker-compose:dev": "docker-compose -f docker-compose.yml -f dbadmin.yml up --build",
     "docker-compose:test": "docker-compose -f docker-compose.yml -f test.yml up --build --exit-code-from app",
     "docker-compose:test:cov": "docker-compose -f docker-compose.yml -f test-cov.yml up --build --exit-code-from app",
     "docker-compose:test:watch": "docker-compose -f docker-compose.yml -f test-watch.yml up --build",
-    "docker-compose:prod": "docker-compose -f docker-compose.yml -f production.yml up --build",
+    "docker-compose:prod": "docker-compose -f docker-compose.yml -f production.yml -f dbadmin.yml up --build",
     "docker-compose:prod:build-only": "docker-compose -f docker-compose.yml -f production.yml build"
   },
   ...

@@ -370,6 +370,8 @@ nest g controller users --no-spec
 nest g service users --no-spec
 ```
 
+---
+
 Next, we need to create an entity for `User`. In TypeORM, an entity is a class that maps to a database table (or collection when using MongoDB). Create a file `src/users/user.entity.ts` and add the following code:
 
 ```ts
@@ -615,6 +617,8 @@ export class AppModule {}
 
 That's all you need to do. Try removing `DB_USERNAME` in `stage.dev.env` and run the Docker Compose environments. You'll get an error in the end stating: `Error: Config validation error: "DB_USERNAME" is required`. That's really helpful for knowing what went wrong while trying to run your application instead of getting a generic error `Unable to connect to the database` if we didn't do the config schema validation otherwise.
 
+---
+
 ## Production and test environments
 
 To finish off our local development setup, we want to be able to run tests using Docker Compose as well.
@@ -689,6 +693,48 @@ services:
 
 Same as above. Here, we are syncing the `.git` folder from our current directory with the `.git` folder of the application container. That is how it will know what files were changed in the application code and only run the test related to those changes.
 
+---
+
+Let's also move the `dbadmin` service block from `docker-compose.yml` to a new separate file called `dbadmin.yml` as it will only be utilized during `development` but we don't need to that service when we're just running tests.
+
+```yml
+services:
+  dbadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin4
+```
+
+The updated `docker-compose.yml` should look like this now:
+
+```yml
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+```
+
 Lastly, update the `package.json` to add new scripts and utilize these new Docker Compose targets:
 
 ```json
@@ -700,10 +746,11 @@ Lastly, update the `package.json` to add new scripts and utilize these new Docke
     "test:watch": "cross-env STAGE=dev jest --runInBand --watch",
     "test:cov": "cross-env STAGE=dev jest --runInBand --coverage",
     ...
+    "docker-compose:dev": "docker-compose -f docker-compose.yml -f dbadmin.yml up --build",
     "docker-compose:test": "docker-compose -f docker-compose.yml -f test.yml up --build --exit-code-from app",
     "docker-compose:test:cov": "docker-compose -f docker-compose.yml -f test-cov.yml up --build --exit-code-from app",
     "docker-compose:test:watch": "docker-compose -f docker-compose.yml -f test-watch.yml up --build",
-    "docker-compose:prod": "docker-compose -f docker-compose.yml -f production.yml up --build",
+    "docker-compose:prod": "docker-compose -f docker-compose.yml -f production.yml -f dbadmin.yml up --build",
     "docker-compose:prod:build-only": "docker-compose -f docker-compose.yml -f production.yml build"
   },
   ...
