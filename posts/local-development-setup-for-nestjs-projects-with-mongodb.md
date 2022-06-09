@@ -339,7 +339,7 @@ yarn remove @types/node
 yarn add @types/node
 ```
 
-Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts`:
+Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts` and configure the database connection:
 
 ```ts
 ...
@@ -373,12 +373,12 @@ nest g service users --no-spec
 Next, we need to create an entity for `User`. In TypeORM, an entity is a class that maps to a database collection (or table when using PostgreSQL). Create a file `src/users/user.entity.ts` and add the following code:
 
 ```ts
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @ObjectIdColumn()
-  _id: string;
+  _id: ObjectID;
 
   @Column()
   firstName: string;

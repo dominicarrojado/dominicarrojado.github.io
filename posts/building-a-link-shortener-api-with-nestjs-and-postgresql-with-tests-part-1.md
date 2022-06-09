@@ -130,7 +130,7 @@ This command will create a file `src/links/links.service.ts` and the new control
 
 ## TypeORM
 
-We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use PostgreSQL today and maybe use [MongoDB](https://www.mongodb.com/) tomorrow by just changing the configuration when initializing TypeORM.
+We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use PostgreSQL today and maybe use [MongoDB](https://www.mongodb.com/) tomorrow by just changing the configuration when initializing TypeORM and minor changes to the shape of your entities.
 
 This local development setup for NestJS that we're using already has TypeORM set up, we don't have to do anything extra.
 
@@ -190,6 +190,7 @@ We now have a repository for our links, to make it available in our links module
 
 ```ts
 ...
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { LinksRepository } from './links.repository';
 
 @Module({

@@ -338,7 +338,7 @@ yarn remove @types/node
 yarn add @types/node
 ```
 
-Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts`:
+Once the installation process is complete, we can import the `TypeOrmModule` into the root `AppModule` in `src/app.module.ts` and configure the database connection:
 
 ```ts
 ...
