@@ -10,6 +10,16 @@ videoUrl: 'https://youtu.be/V0dfhBc2lj8'
 
 This is a continuation from [Part 1](/posts/how-to-create-your-own-swiper-in-react-and-typescript-with-tests-part-1).
 
+## Prerequisites
+
+To get started with testing, first install the following package:
+
+```bash
+yarn add @testing-library/react-hooks faker@5.5.3 @types/faker@5.5.9
+```
+
+So [`@testing-library/react-hooks`](https://github.com/testing-library/react-hooks-testing-library) allows us to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of our custom hook. This library aims to provide a testing experience as close as possible to natively using your hook from within a real component. While `faker` helps us generate massive amounts of fake (but realistic) data for testing.
+
 ## Write tests for SwiperItem.tsx
 
 For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Now, create a new folder named `__tests__` under the `src/components`. This is where we will put the test files for the components under `src/components`.
@@ -31,6 +41,8 @@ Aside from importing the component that we will test, we also imported the type 
 Next we can add a test case inside the `describe` block:
 
 ```tsx
+import SwiperItem, { Props } from '../SwiperItem';
+
 describe('<SwiperItem />', () => {
   it('should accept imageSrc and imageAlt props', () => {});
 });
@@ -59,7 +71,7 @@ describe('<SwiperItem />', () => {
 });
 ```
 
-Okay don't panic! I'll explain the added code one by one. So first, I created a reusable function `renderComponent` inside the `describe` block, it accepts the props of our component as an argument and calls the `render()` method from Testing Library to render our component with the passed props in a test environment. Since our test files are also in TypeScript, we still need to define the type it, that's why we imported the type `Props` here too. To learn more about the `render()` method, you can go [here](https://testing-library.com/docs/react-testing-library/api/#render). Then inside the `it` block, we generated a random image source and alternative text using `faker` library which we installed earlier. We then pass these as props to our `SwiperItem` component. After that, we can do our checks to validate that the image is rendered. To do that, we did a query by its alternative text using another method of Testing Library which is `screen.queryByAltText()`. To know all the possible queries you can do with screen, you can go [here](https://testing-library.com/docs/queries/about). Then finally using one of Jest's global functions, we can call the `expect()` method and pass the element returned by the query, and run what we call a matcher method `.toHaveAttribute()`, it can accept two arguments, first argument being the element attribute that you want to check and second argument is what the attribute value should match. This is one of the many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods.
+Okay don't panic! I'll explain the added code one by one. So first, I created a reusable function `renderComponent` inside the `describe` block, it accepts the props of our component as an argument and calls the `render()` method from Testing Library to render our component with the passed props in a test environment. Since our test files are also in TypeScript, we still need to define the type it, that's why we imported the type `Props` here too. To learn more about the `render()` method, you can go [here](https://testing-library.com/docs/react-testing-library/api/#render). Then inside the `it` block, we generated a random image source and alternative text using `faker` library which we installed earlier. We then pass these as props to our `SwiperItem` component. After that, we can do our checks to validate that the image is rendered. To do that, we did a query by its alternative text using another method of Testing Library which is `screen.queryByAltText()`. To know all the possible queries you can do with `screen`, you can go [here](https://testing-library.com/docs/queries/about). Then finally using one of Jest's global functions, we can call the `expect()` method and pass the element returned by the query, and run what we call a matcher method `.toHaveAttribute()`, it can accept two arguments, first argument being the element attribute that you want to check and second argument is what the attribute value should match. This is one of the many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods.
 
 Alright, I hoped that explained it.
 
