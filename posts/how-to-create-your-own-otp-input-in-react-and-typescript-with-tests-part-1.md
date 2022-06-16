@@ -95,6 +95,8 @@ body {
 
 That's about it. This will be the container of our OTP input component.
 
+---
+
 ## OtpInput component
 
 Now let's create our component `src/components/OtpInput.tsx` and add the following code:
@@ -145,6 +147,8 @@ With `autocomplete="one-time-code"` whenever a user receives an SMS message whil
 While the `pattern="\d{1}"` specifies the format that the entered OTP must match which in this case constrains the OTP to a one digit string.
 
 And lastly, `maxLength={valueLength}` to only restrict maximum digits per input box. You might wonder, why not just use one `1` as the value for `maxLength`. That's because we will allow [pasting](https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event) of code and at the same time allow the autocomplete logic to work. You'll get to see this making more sense later - keep those doubts to yourself for now.
+
+---
 
 ## OtpInput styles
 
@@ -205,6 +209,8 @@ So for example we are given a `value` prop of `'654321'`, we convert it into an 
 How do we do this?
 
 We can utilize `useMemo` and use `value` and `valueLength` prop as dependencies, then do a loop using `valueLength` as the max index. Using the current index `i` in the loop, we check whether the character from the `value` string exists and it's a number. We can't simply use `typeof` and check if it's `number` because that will also be true for `NaN`, so we use a [regular expression `RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) - that would be `/^\d+$/`. This regular expression contains metacharacters such as `\d` which finds a digit, then `^` means to begin with, and `$` which means to end with. You can visit [this page](https://www.w3schools.com/jsref/jsref_obj_regexp.asp) to know more about the JavaScript RegExp syntax, modifiers, brackets and other metacharacters. By combining them, this regular expression can test or check if a character is a digit (or a `number`). We can use this to check and push characters that are digits to the constructed array, and if it is _not_ a digit then we simply push an empty string `''` instead. This way we can construct an array that meets the length of the `valueLength`. If what I said here doesn't make any sense, the code hopefully might help.
+
+---
 
 First create a constant variable in `src/constants.ts` to keep our regular expression that checks or tests whether a `string` is a digit because we'll be using it more than once.
 
@@ -268,6 +274,8 @@ Great, that means our logic works. You can try changing the default value to som
 
 Alright. After you're done testing it, revert the default value back to an empty string `''` and let's proceed to the next logic.
 
+---
+
 ## Allow typing digits in input boxes
 
 If you try to type anything on the inputs, it will not change, because the values are hardcoded to the array we constructed, and the said array only changes if the `value` prop changes from the parent `App` component. Currently, we're not doing anything to change the `value` prop from the parent component. So let's handle that.
@@ -313,6 +321,8 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 
 If you're new to TypeScript, we need to define the type for the arguments in `inputOnChange` function here. The type for the `onChange` attribute in React is `React.ChangeEvent` from the imported `react` library which accepts the type of the element as an argument and that would be `HTMLInputElement` that is already available globally without importing it from anywhere.
 
+---
+
 Save the changes and let's see what happens when we try to input digits in the first input box. You'll notice the first digit we input is displayed correctly, but as you type more digits in the same input box, the other input boxes gets populated but the focus is still in the same input box. This looks wrong and let's fix that by focusing on the next input box or the [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling). Update the file `src/components/OtpInput.tsx` with the following code:
 
 ```tsx
@@ -348,6 +358,8 @@ Alright, once you save the changes. Let's try typing digits into the input boxes
 Wow, that looks smooth and it gives you a nice user experience!
 
 What's next?
+
+---
 
 ## Allow deleting digits from input boxes
 
@@ -437,6 +449,8 @@ Once you save the changes, you can now delete each digit from the input boxes an
 
 Are we done? Nope. There's still a couple more things we need to do to make this OTP input better. Let's continue ~
 
+---
+
 ## Select digit on focus event
 
 When we have typed the digits completely, and let's say we have input one incorrect digit in the middle, when we click on that input box, the input cursor caret may land on the right side of the digit and when that happens and you typed another digit, it messes up the digits from other input boxes. To fix that, simply do a selection of the digit using [`.setSelectionRange()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange) in the input box on [focus event](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event). We should also do the same logic during keydown event because when we focus on an input box and replaced it with the same digit, it will not trigger the change event and the input cursor goes to the right and again that messes up the digits from other inputs once you type again.
@@ -479,6 +493,8 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 ```
 
 Once the changes are saved, try it out! Type in the digits until the last input box, then focus on the input box in the middle, change it into another digit, it will get updated and focus on the next input box. If you input the same digit, the focus will remain in the input box - keeping everything as is. Great!
+
+---
 
 ## Handle paste event
 
@@ -539,6 +555,8 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 We also did a `target.blur()` here to focus out of the input boxes since after you paste the code, most likely you won't be interacting with the input boxes anymore and your next step would be to submit the code.
 
 Now try copying a 6 digit code (or depending on the value you passed in `valueLength` prop from the parent `App` component) and paste it in any of the input boxes, it doesn't matter if the input boxes have already been filled - it will still work and replace the previous digits. That's great!
+
+---
 
 ## Improve accessibility
 

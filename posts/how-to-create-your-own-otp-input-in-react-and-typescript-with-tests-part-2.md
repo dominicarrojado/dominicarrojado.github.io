@@ -20,6 +20,8 @@ yarn add @faker-js/faker
 
 [`@faker-js/faker`](https://github.com/faker-js/faker) helps us generate massive amounts of fake (but realistic) data for testing. Check out the guide for `faker` [here](https://fakerjs.dev/guide/).
 
+---
+
 ## Write tests for props
 
 For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Create a new folder named `__tests__` under the `src/components`. This is where we will put the test files for the components under `src/components` folder.
@@ -67,6 +69,8 @@ Now, before we can render our component using the reusable function we need to p
 
 How about `onChange` prop? We can actually just pass our own simple function but it would be better to create a mock function using `jest.fn()` which we allows us to capture the calls of it amongst other things you could do. To know more about mock functions and what you can do with it, you can read more [here](https://jestjs.io/docs/mock-functions).
 
+---
+
 Here's the following changes to the code:
 
 ```tsx
@@ -111,6 +115,8 @@ describe('<OtpInput />', () => {
   });
 });
 ```
+
+---
 
 Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of the many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods. Here's how the code looks like:
 
@@ -172,6 +178,8 @@ describe('<OtpInput />', () => {
 
 And, our first test should still passed. Let's move on to the next test case.
 
+---
+
 ## Write tests to allow typing of digits
 
 Next test case would be to check when we type digits it should trigger the `onChange` function from the props and also focus on the next input element. If there's no next input element, the focus should remain on the current element.
@@ -232,6 +240,8 @@ Alright, save the changes above and check your terminal, the coverage now should
 
 ![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-2.png)
 
+---
+
 ## Write tests to not allow typing of non-digits
 
 Alright, now since we allow typing of digits in the input boxes, we should also check that we are not allowing typing of non-digits in the input boxes. The code for this test case would look similar to our previous test case with minor changes, here it is:
@@ -278,6 +288,8 @@ Save your changes and let's verify this test case:
 ![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-3.png)
 
 And the test case passes. Great!
+
+---
 
 ## Write tests to allow deleting of digits (focus on previous element)
 
@@ -344,6 +356,8 @@ Once the changes are saved, let's check the terminal and see what's displayed no
 
 Awesome, it still `PASS` and the uncovered lines are getting lesser. Let's keep it going ~
 
+---
+
 ## Write tests to allow deleting of digits (do not focus on previous element)
 
 So this test case is kind of a duplicate of the above with minor changes to cover line `99` of `OtpInput.tsx`. When the deletion happens but the input element wasn't previously empty, we should not focus on the previous element. Here's the test case for that:
@@ -392,6 +406,8 @@ describe('<OtpInput />', () => {
 Since our previous test case already checks the `onChange` logic during deletion, here we just have to check that the previous element was not in focus when we trigger a keydown event with a key of `Backspace` and the `target` during the event had a `value`.
 
 Alright, once you save the changes, and check the terminal, line `99` is removed from the uncovered lines. Sweet!
+
+---
 
 ## Write tests to allow pasting of digits
 
@@ -474,6 +490,8 @@ describe('<OtpInput />', () => {
 
 Once you save the changes, this test case should pass as well.
 
+---
+
 ## Write tests for handling arrow keys
 
 And for our last test case, we should cover the keydown events with arrow keys. This was implemented to improve the accessibility of our input boxes. Just a recap, if we press the right or down arrow keys on the keyboard, the focus should be on the next input element. And if we press the left or up arrow keys on the keyboard, the focus should be on the previous input element. These are all handled by the keydown event handler.
@@ -514,6 +532,8 @@ describe('<OtpInput />', () => {
 Here I did it manually so that it is easier to understand. First I triggered a keydown event with a key of `ArrowRight` to the first input element then checked that the second input element has the focus. Then I triggered another keydown event with a key of `ArrowDown` to the second input element then checked that the third input element has the focus.
 
 Now by just merely changing the variables and the keys, you can cover the left and up arrow keys. Try it yourself!
+
+---
 
 Once you're done, check that the changes you did are about the same as mine:
 
