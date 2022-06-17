@@ -3,7 +3,7 @@ title: 'How to create your own OTP input in React and TypeScript with tests (Par
 date: '2022-06-16'
 excerpt: 'Learn how to build a modern OTP input component in a reactive and reusable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/s6MFjcCen2A'
 ---
 
 ## Introduction
