@@ -618,6 +618,8 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
       return focusToPrevInput(target);
     }
 
+    const targetValue = target.value;
+
     ...
 
     if (e.key !== 'Backspace' || targetValue !== '') {
