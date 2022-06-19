@@ -77,7 +77,7 @@ describe('<AboutSection />', () => {
 
     expect(youtubeAnchorEl).toHaveAttribute(
       'href',
-      'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg'
+      'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg/videos?view=0&sort=dd'
     );
   });
 });

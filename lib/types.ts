@@ -64,7 +64,7 @@ export enum GoogleAdSenseUnitFormat {
 
 export enum ExternalUrl {
   PERSONAL_PAYPAL = 'https://www.paypal.com/paypalme/DominicArrojado',
-  PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg',
+  PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg/videos?view=0&sort=dd',
   PERSONAL_LINKEDIN = 'https://www.linkedin.com/in/dominic-arrojado-75ba03a9/',
   PERSONAL_GITHUB = 'https://github.com/dominicarrojado/',
   PERSONAL_GITHUB_WEBSITE_ISSUES = 'https://github.com/dominicarrojado/dominicarrojado.github.io/issues',
