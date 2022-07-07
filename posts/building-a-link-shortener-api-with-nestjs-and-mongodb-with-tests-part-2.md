@@ -1,14 +1,14 @@
 ---
-title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part 2)'
-date: '2022-05-18'
+title: 'Building a URL shortener API with NestJS and MongoDB with tests (Part 2)'
+date: '2022-06-07'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
-videoUrl: 'https://youtu.be/ysvUh_z7wjc'
+videoUrl: ''
 ---
 
 ## Introduction
 
-This is a continuation from [Part 1](/posts/building-a-link-shortener-api-with-nestjs-and-postgresql-with-tests-part-1).
+This is a continuation from [Part 2](/posts/building-a-link-shortener-api-with-nestjs-and-mongodb-with-tests-part-1).
 
 ## Prerequisites for testing
 
@@ -61,17 +61,17 @@ In the same file `src/test-helpers.ts`, add the following code for the second ut
 
 ```ts
 ...
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 ...
 
-export async function clearRepositories(dbConnection: Connection) {
+export async function clearRepositories(dbConnection: DataSource) {
   const entities = dbConnection.entityMetadatas;
-  const promises: Array<Promise<void>> = [];
+  const promises: Array<Promise<DeleteResult>> = [];
 
   for (const entity of entities) {
     const repository = dbConnection.getRepository(entity.name);
-    promises.push(repository.clear());
+    promises.push(repository.delete({}));
   }
 
   await Promise.all(promises);
@@ -207,26 +207,24 @@ describe('Links', () => {
     ...
 
     it('should handle with data', async () => {
-      const promises: Array<Promise<Link>> = [];
+      const links: Array<Link> = [];
       const linksCount = 3;
 
       for (let i = 0; i < linksCount; i++) {
-        promises.push(createLinkItem());
+        links.push(await createLinkItem());
       }
 
-      const links = await Promise.all(promises);
       const res = await request(app.getHttpServer()).get('/links');
       const resBody = res.body;
 
       expect(res.status).toBe(200);
-      expect(resBody).toEqual(expect.arrayContaining(links));
-      expect(resBody).toHaveLength(linksCount);
+      expect(resBody).toEqual(JSON.parse(JSON.stringify(links)));
     });
   });
 });
 ```
 
-You might wonder why we didn't just do `expect(res.body).toEqual(links)`, that's because the order of the links in the array might be different once it is created in the database, so we used `arrayContaining()` instead to check that each items are in the expected array and we also checked that the number of items are the same using `toHaveLength()`.
+You might wonder why we had to `stringify` and `parse` the `links` array, that's because when they were created, the `id` is an `ObjectID` while from the response body it is converted to a `string`.
 
 Once we save the changes, it will automatically rerun all the tests as it is in **watch** mode and log the following:
 
@@ -339,6 +337,7 @@ Let's now validate where we now pass a **valid** data to the API. Update the fil
 
 ```ts
 ...
+import { ObjectId } from 'mongodb';
 
 describe('Links', () => {
   ...
@@ -361,9 +360,11 @@ describe('Links', () => {
       });
 
       const linkId = resBody.id;
-      const link = await linksRepository.findOne({ id: linkId });
+      const link = await linksRepository.findOne({
+        where: { _id: new ObjectId(linkId) } as Partial<Link>,
+      });
 
-      expect(link).toEqual(resBody);
+      expect(resBody).toEqual(JSON.parse(JSON.stringify(link)));
     });
   });
 });
@@ -476,7 +477,7 @@ Next feature to write tests for is when we delete a link. Do note that for this 
 describe('Links', () => {
   ...
   const createInvalidLinkIds = () => {
-    return [faker.datatype.number(), faker.word.noun()];
+    return [faker.datatype.uuid(), faker.datatype.number(), faker.word.noun()];
   };
 
   ...
@@ -530,7 +531,7 @@ describe('Links', () => {
     ...
 
     it('should handle not found', async () => {
-      const linkId = faker.datatype.uuid();
+      const linkId = faker.datatype.mongodbObjectId();
       const res = await request(app.getHttpServer()).delete(`/links/${linkId}`);
       const resBody = res.body;
 
@@ -631,7 +632,7 @@ describe('Links', () => {
     });
 
     it('should NOT accept invalid data', async () => {
-      const linkId = faker.datatype.uuid();
+      const linkId = faker.datatype.mongodbObjectId();
       const invalidData = createInvalidLinkBodies();
       const promises: Array<Promise<void>> = [];
 
@@ -656,7 +657,7 @@ describe('Links', () => {
     });
 
     it('should handle not found', async () => {
-      const linkId = faker.datatype.uuid();
+      const linkId = faker.datatype.mongodbObjectId();
       const linkBody = createLinkBody();
       const res = await request(app.getHttpServer())
         .put(`/links/${linkId}`)
@@ -839,6 +840,6 @@ You should see that we have achieved 100% coverage for both `LinksModule` and `W
 
 And we are done! To be honest, I'm quite new in building applications with NestJS and writing this post was my way in sharpening my knowledge with this framework. So I hope you have learned a lot from this post as I have. Please don't forget to share this post if you found it helpful, share it with your friends and colleagues who might find this helpful too.
 
-In case you need the final code of the URL shortener application as a reference, here's the [GitHub repository](https://github.com/dominicarrojado/nestjs-postgres-url-shortener).
+In case you need the final code of the URL shortener application as a reference, here's the [GitHub repository](https://github.com/dominicarrojado/nestjs-mongodb-url-shortener).
 
 I'll probably extend this post in the future and try to implement caching using [Redis](https://redis.io/) or how to deploy this application to production so if you're interested, you can come back to my blog and check it out once it is published. You can also subscribe to my [YouTube channel](https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg/videos?view=0&sort=dd) and hit that notification button. Hope to see you here again!

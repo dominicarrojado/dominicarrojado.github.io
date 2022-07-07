@@ -1,9 +1,9 @@
 ---
-title: 'Building a URL shortener API with NestJS and PostgreSQL with tests (Part 1)'
-date: '2022-05-18'
+title: 'Building a URL shortener API with NestJS and MongoDB with tests (Part 1)'
+date: '2022-06-07'
 excerpt: 'Learn how to build server-side applications in an efficient, reliable and scalable way'
 category: 'technology'
-videoUrl: 'https://youtu.be/c81MhWCuHbI'
+videoUrl: ''
 ---
 
 ## Introduction
@@ -12,7 +12,7 @@ I started a server-side application late of 2020 which was my way of sharpening 
 
 ## Prerequisites
 
-Upon writing this post, I assume that you have some server-side application development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Node.js](https://nodejs.org/en/), [NestJS](https://docs.nestjs.com/), [TypeORM](https://typeorm.io/) and [PostgreSQL](https://www.postgresql.org/).
+Upon writing this post, I assume that you have some server-side application development background and basic knowledge regarding [npm](https://www.npmjs.com/), [yarn](https://classic.yarnpkg.com/lang/en/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Node.js](https://nodejs.org/en/), [NestJS](https://docs.nestjs.com/), [TypeORM](https://typeorm.io/) and [MongoDB](https://www.mongodb.com/).
 
 Please make sure to install [Yarn](https://classic.yarnpkg.com/lang/en/) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) in your system if you haven't. We use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_. While we use [Docker](https://www.docker.com/) throughout the development lifecycle for fast, easy and portable application development.
 
@@ -24,10 +24,10 @@ We'll also use [Postman](https://www.postman.com/) to interact with the API.
 
 ## Initialize your project
 
-To start, you would need to setup your local development for NestJS projects with PostgreSQL, I've written a [separate post](/posts/local-development-setup-for-nestjs-projects-with-postgresql/) if you would like to know the details of that setup, but you can also choose to skip that and just clone the [boilerplate](https://github.com/dominicarrojado/nestjs-postgres-boilerplate) to save time:
+To start, you would need to setup your local development for NestJS projects with MongoDB, I've written a [separate post](/posts/local-development-setup-for-nestjs-projects-with-mongodb/) if you would like to know the details of that setup, but you can also choose to skip that and just clone the [boilerplate](https://github.com/dominicarrojado/nestjs-mongodb-boilerplate) to save time:
 
 ```bash
-git clone git@github.com:dominicarrojado/nestjs-postgres-boilerplate.git url-shortener
+git clone git@github.com:dominicarrojado/nestjs-mongodb-boilerplate.git url-shortener
 ```
 
 We'll be utilizing the Nest CLI commands throughout this post so do install the npm package of it as well.
@@ -130,7 +130,7 @@ This command will create a file `src/links/links.service.ts` and the new control
 
 ## TypeORM
 
-We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use PostgreSQL today and maybe use [MongoDB](https://www.mongodb.com/) tomorrow by just changing the configuration when initializing TypeORM and minor changes to the shape of your entities.
+We'll be using [TypeORM](https://typeorm.io/) which is an [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can help us develop any kind of application that uses databases in a JavaScript or TypeScript friendly way to communicate to the database rather than sending plain queries directly. It also handles a lot of things automatically such as database handling, data types, relations, etc. It also has database abstraction and they support a number of databases, that means we're not tied to a specific database, we can use MongoDB today and maybe use [PostgreSQL](https://www.postgresql.org/) tomorrow by just changing the configuration when initializing TypeORM and minor changes to the shape of your entities.
 
 This local development setup for NestJS that we're using already has TypeORM set up, we don't have to do anything extra.
 
@@ -147,12 +147,12 @@ You can create an entity by defining a new class and mark it with a decorator `@
 Now you have a better understanding of entities and decorators. Let's go ahead and update `src/links/link.entity.ts` with the following code:
 
 ```ts
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class Link {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @ObjectIdColumn()
+  id: ObjectID;
 
   @Column({ unique: true })
   name: string;
@@ -162,7 +162,7 @@ export class Link {
 }
 ```
 
-Since database tables consist of columns, your entities must consist of columns too. Each entity class property you marked with a decorator `@Column()` will be mapped to a database table column. A column can accept options such as `unique` that marks the column as unique column (creates unique constraint). You can see the other options [here](https://typeorm.io/entities#column-options). Each entity must have at least one primary column. There are several types of primary columns found [here](https://typeorm.io/entities#primary-columns). We'll be using `@PrimaryGeneratedColumn('uuid')` which the value will be automatically generated with uuid. Uuid is a unique string id. You don't have to manually assign its value before save - value will be automatically generated.
+Since database tables consist of columns, your entities must consist of columns too. Each entity class property you marked with a decorator `@Column()` will be mapped to a database table column. A column can accept options such as `unique` that marks the column as unique column (creates unique constraint). You can see the other options [here](https://typeorm.io/entities#column-options). Each entity must have a primary column, and since we're using MongoDB, our primary column with be an `ObjectId`. Therefore, we use `@ObjectIdColumn()`.
 
 ## Active Record vs. Data Mapper patterns
 
@@ -179,23 +179,33 @@ Since we'll be using the Data Mapper approach, we need to create a repository fo
 Let's create a file `srcs/links/links.repository.ts` and add the following code:
 
 ```ts
-import { EntityRepository, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { DataSource, Repository } from 'typeorm';
 import { Link } from './link.entity';
 
-@EntityRepository(Link)
-export class LinksRepository extends Repository<Link> {}
+@Injectable()
+export class LinksRepository extends Repository<Link> {
+  constructor(private dataSource: DataSource) {
+    super(Link, dataSource.createEntityManager());
+  }
+}
 ```
+
+From the `constructor` block, we have access to `DataSource` that was from the `Repository` class. With this we can call `dataSource.createEntityManager()` and inherit the entity functions (insert, update, delete, load, etc.) to our repository.
 
 We now have a repository for our links. To make it available in our links module, go to `src/links/links.module.ts` and import it:
 
 ```ts
 ...
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Link } from './link.entity';
+import { LinksController } from './links.controller';
 import { LinksRepository } from './links.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LinksRepository])],
-  ...
+  imports: [TypeOrmModule.forFeature([Link])],
+  controllers: [LinksController],
+  providers: [LinksService, LinksRepository],
 })
 export class LinksModule {}
 ```
@@ -208,7 +218,6 @@ First, open the file `src/links/links.service.ts` and update the code with the f
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Link } from './link.entity';
 import { LinksRepository } from './links.repository';
 
@@ -216,9 +225,7 @@ import { LinksRepository } from './links.repository';
 export class LinksService {
   linksRepository: LinksRepository;
 
-  constructor(
-    @InjectRepository(LinksRepository) linksRepository: LinksRepository
-  ) {
+  constructor(linksRepository: LinksRepository) {
     this.linksRepository = linksRepository;
   }
 
@@ -228,16 +235,16 @@ export class LinksService {
 }
 ```
 
-Here we did a dependency injection, we injected the links repository into our service via the `constructor` with the help of the `@InjectRepository` decorator provided by `@nestjs/typeorm`. We then use the links repository to make a database call to find all the links and return it. Notice that we have used our `Link` entity as the return type as well.
+Here we did a dependency injection, we injected the links repository into our service via the `constructor`. We then use the links repository to make a database call to find all the links and return it. Notice that we have used our `Link` entity as the return type as well.
 
 We can further shorten the injection of the repository by doing it like this:
 
 ```ts
 ...
 export class LinksService {
-  constructor(
-    @InjectRepository(LinksRepository) private readonly linksRepository: LinksRepository,
-  ) {}
+  constructor(private readonly linksRepository: LinksRepository) {
+    this.linksRepository = linksRepository;
+  }
 
   ...
 }
@@ -268,7 +275,7 @@ export class LinksController {
   constructor(private readonly linksService: LinksService) {}
 
   @Get()
-  getAllLinks() {
+  getAllLinks(): Promise<Array<Link>> {
     return this.linksService.getAllLinks();
   }
 }
@@ -477,13 +484,13 @@ Go to `src/links/links.service.ts` and create a new function:
 
 ```ts
 ...
-import { FindConditions } from 'typeorm';
+import { FindOneOptions } from 'typeorm';
 
 @Injectable()
 export class LinksService {
   ...
 
-  async getLink(conditions: FindConditions<Link>): Promise<Link> {
+  async getLink(conditions: FindOneOptions<Link>): Promise<Link> {
     return this.linksRepository.findOne(conditions);
   }
 }
@@ -550,7 +557,7 @@ export class WildcardController {
     @Param('name') name: string,
     @Res() res: Response
   ): Promise<void> {
-    const link = await this.linksService.getLink({ name });
+    const link = await this.linksService.getLink({ where: { name } });
     return res.redirect(301, link.url);
   }
 }
@@ -572,7 +579,7 @@ export class LinksService {
   ...
 
   async deleteLink(id: string): Promise<void> {
-    await this.linksRepository.delete({ id });
+    await this.linksRepository.delete(id);
   }
 }
 ```
@@ -615,6 +622,7 @@ Now we can update the service `src/links/links.service.ts` to add the feature to
 
 ```ts
 ...
+import { ObjectId } from 'mongodb';
 import { UpdateLinkDto } from './dto/update-link.dto';
 
 @Injectable()
@@ -622,7 +630,9 @@ export class LinksService {
   ...
 
   async updateLink(id: string, updateLinkDto: UpdateLinkDto): Promise<Link> {
-    const link = await this.getLink({ id });
+    const link = await this.getLink({
+      where: { _id: new ObjectId(id) } as Partial<Link>,
+    });
     const { name, url } = updateLinkDto;
 
     link.name = name;
@@ -635,9 +645,9 @@ export class LinksService {
 }
 ```
 
-Here we are able to reuse a service function `getLink` which we created earlier since we need to get the link first before we can update and save it in the database.
+Here we are able to reuse a service function `getLink` which we created earlier since we need to get the link first before we can update and save it in the database. Unfortunately, as I'm writing this post, searching for a document in TypeORM + MongoDB is not as friendly as I thought it would be. I can't directly use the key `id` to search for it, it must be `_id` and the value must be an `ObjectId` instead of a `string`. Since `_id` does not exist in the entity type `Link`, I did a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) `as Partial<Link>` to resolve the TypeScript error.
 
-Then update the controller `src/links/links.controller.ts` to use the function from the service:
+Let's then update the controller `src/links/links.controller.ts` to use the function from the service:
 
 ```ts
 import {
@@ -763,24 +773,27 @@ As you can see, it comes with nice and descriptive error messages. This can defi
 
 ## Error handling if link already exists
 
-For creating a link, we also need to handle the case where we create a link with a `name` that already exists in our database. Currently if we created a link twice with the same `name`, the last request would throw an `500 Internal Server Error`. Obviously, we don't want to show that to our users. If you check the terminal logs from our NestJS app, you should see something like this: `ERROR [ExceptionsHandler] duplicate key value violates unique constraint "UQ_519b799f714024e18a740e8cca7"`, so basically PostgreSQL has thrown an error and we did not handle it. So to fix that, let's update `srcs/links/links.repository.ts` with the following code:
+For creating a link, we also need to handle the case where we create a link with a `name` that already exists in our database. Currently if we created a link twice with the same `name`, the last request would throw an `500 Internal Server Error`. Obviously, we don't want to show that to our users. If you check the terminal logs from our NestJS app, you should see something like this: `ERROR [ExceptionsHandler] E11000 duplicate key error collection: test.link index: UQ_519b799f714024e18a740e8cca7 dup key: { name: "longestintheworld" }`, so basically MongoDB has thrown an error and we did not handle it. So to fix that, let's update `srcs/links/links.repository.ts` with the following code:
 
 ```ts
 ...
 import {
   ConflictException,
+  Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
 
-@EntityRepository(Link)
+@Injectable()
 export class LinksRepository extends Repository<Link> {
+  ...
+
   async createLink(createLinkDto: CreateLinkDto): Promise<Link> {
     ...
 
     try {
       await this.save(link);
     } catch (err) {
-      if (err.code === '23505') {
+      if (err.code === 11000) {
         throw new ConflictException('Short name already exists');
       } else {
         throw new InternalServerErrorException();
@@ -792,7 +805,7 @@ export class LinksRepository extends Repository<Link> {
 }
 ```
 
-So by wrapping the `save()` function in a `try/catch` we are able to get the error code from PostgreSQL. Based from [PostgreSQL documentation](https://www.postgresql.org/docs/current/errcodes-appendix.html), `23505` is a unique constraint violation. So we have thrown a `ConflictException` which is from `@nestjs/common` with a descriptive error message. For any other cases we will throw an `InternalServerErrorException`, which is the default error for internal server error.
+So by wrapping the `save()` function in a `try/catch` we are able to get the error code from MongoDB. Based from [MongoDB error codes](https://github.com/mongodb/mongo-c-driver/blob/master/src/libmongoc/src/mongoc/mongoc-error.h), `11000` is a duplicate key error. So we have thrown a `ConflictException` which is from `@nestjs/common` with a descriptive error message. For any other cases we will throw an `InternalServerErrorException`, which is the default error for internal server error.
 
 Once you saved the changes and do a `POST` request to `http://localhost:3000/links` **_twice_** with the same body or payload, it should return a status of `409 Conflict` and return you with a JSON object like this:
 
@@ -841,13 +854,13 @@ Once you saved the changes and do a `GET` request to `http://localhost:3000/does
 
 So by just from throwing a `NotFoundException` from Nest, it will bubble up and automatically construct this JSON object for us to return to the client. We didn't even had to touch our controller to handle this which is the right way based from what we said earlier about services handling the business logics. Since we are reusing `getLink` method when updating a link, it will also handle cases where link does not exist.
 
-You can also try updating a link by an `id` that does not exist and you will get the same response. Do note that if you try to pass an `id` that's not in `uuid` format, you will still get `500 Internal Server Error`. To fix that, we can create a new DTO `src/links/dto/get-link.dto.ts` and add the following code below:
+You can also try updating a link by an `id` that does not exist and you will get the same response. Do note that if you try to pass an `id` that's not in MongoDB `ObjectId` format, you will still get `500 Internal Server Error`. To fix that, we can create a new DTO `src/links/dto/get-link.dto.ts` and add the following code below:
 
 ```ts
-import { IsUUID } from 'class-validator';
+import { IsMongoId } from 'class-validator';
 
 export class GetLinkDto {
-  @IsUUID()
+  @IsMongoId()
   id: string;
 }
 ```
@@ -889,7 +902,7 @@ export class LinksService {
 
   async deleteLink(getLinkDto: GetLinkDto): Promise<void> {
     const { id } = getLinkDto;
-    await this.linksRepository.delete({ id });
+    await this.linksRepository.delete(id);
   }
 
   async updateLink(
@@ -897,7 +910,9 @@ export class LinksService {
     updateLinkDto: UpdateLinkDto,
   ): Promise<Link> {
     const { id } = getLinkDto;
-    const link = await this.getLink({ id });
+    const link = await this.getLink({
+      where: { _id: new ObjectId(id) } as Partial<Link>,
+    });
     ...
   }
 }
@@ -908,7 +923,7 @@ It should now return a `400 Bad Request` if you pass an `id` that's not in `uuid
 ```json
 {
   "statusCode": 400,
-  "message": ["id must be a UUID"],
+  "message": ["id must be a mongodb id"],
   "error": "Bad Request"
 }
 ```
@@ -946,4 +961,4 @@ As you can see, we can add custom message as an argument for `NotFoundException`
 
 We've completed the set of APIs for our URL shortener application. It's now time to write tests!
 
-Proceed to the [next part](/posts/building-a-link-shortener-api-with-nestjs-and-postgresql-with-tests-part-2).
+Proceed to the [next part](/posts/building-a-link-shortener-api-with-nestjs-and-mongodb-with-tests-part-2).
