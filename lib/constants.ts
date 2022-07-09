@@ -283,7 +283,7 @@ export const PROJECTS: Array<Project> = [
       },
       {
         title: 'View Slideshow',
-        url: 'https://cnb-adac-ss.meteorapp.com/',
+        url: '/cnb-anti-drug-abuse-campaign-slideshow/',
       },
     ],
     imageUrl: '/images/projects/cnb-anti-drug-abuse-campaign-web-app.png',

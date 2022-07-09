@@ -114,6 +114,10 @@ module.exports = {
         config,
         '/cnb-anti-drug-abuse-campaign-app/gallery/view/'
       ),
+      await config.transform(
+        config,
+        '/cnb-anti-drug-abuse-campaign-slideshow/'
+      ),
 
       // singtel apps
       await config.transform(config, '/singtel-data-x-infinity-event-app/'),
