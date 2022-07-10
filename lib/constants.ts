@@ -264,7 +264,7 @@ export const PROJECTS: Array<Project> = [
       },
       {
         title: 'View Slideshow',
-        url: 'https://singtel-data-x-infinity-ss.meteorapp.com/',
+        url: '/singtel-data-x-infinity-event-slideshow/',
       },
     ],
     imageUrl: '/images/projects/singtel-data-x-infinity-web-app.png',

@@ -133,6 +133,10 @@ module.exports = {
         config,
         '/singtel-data-x-infinity-event-app/gallery/view/'
       ),
+      await config.transform(
+        config,
+        '/singtel-data-x-infinity-event-slideshow/'
+      ),
 
       // kronenbourg website
       await config.transform(config, '/kronenbourg-website/'),
