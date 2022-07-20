@@ -49,7 +49,7 @@ This setup comes with live-editing or hot reloading which means when we save fil
 
 ## Install ES7 React Snippets extension in Visual Studio Code
 
-Next, let's install [ES7 React Snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets). You can think of it like a shortcut that helps you create the basic structure of a component in React, for example I want to create a functional component, I have to write the code to import React first, then write the function component then lastly write the code to export it. With this extension, I can achieve the same by typing `rfce` and it will show a suggestion for `reactFunctionalComponentExport` and I just have to press enter and it will write the code for us. This saves us time and energy when writing components.
+Next, let's install [ES7 React Snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets). You can think of it like a shortcut that helps you create the basic structure of a component in React, for example I want to create a functional component, I have to write the code to import React first, then write the function component then lastly write the code to export it. With this extension, I can easily press enterachieve the same by typing `rfce` and it will show a suggestion for `reactFunctionalComponentExport` and I just have to press _ENTER_ and it will write the code for us. This saves us time and energy when writing components.
 
 Click on the "Extensions" tab and look for "ES7 React" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets).
 
