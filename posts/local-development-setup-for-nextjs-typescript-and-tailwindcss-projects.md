@@ -69,7 +69,7 @@ Now, let's set up [Prettier](https://prettier.io/). It's a code formatter that f
 
 In Visual Studio Code, click on the "Extensions" tab and look for "Prettier" and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
 
-![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/local-development-setup-for-react-and-typescript-projects/install-prettier-extension-in-visual-studio-code.png)
+![Screenshot of how to install Prettier extension in Visual Studio Code](/images/posts/local-development-setup-for-nextjs-typescript-and-tailwindcss-projects/install-prettier-extension-in-visual-studio-code.png)
 
 After Prettier is installed, we still need to enable the formatting feature by updating our settings in Visual Studio Code. Create a file `.vscode/settings.json` and update it with the following code below:
 
@@ -265,7 +265,11 @@ export default Home;
 }
 ```
 
-Open your browser to check if our application still works and looks the same as before. It still works but it might not be 100% accurate as before but at least we're now using TailwindCSS classes in the code and that's what matters.
+Open your browser to check if our application is still working fine and looks the same as before. It should still work fine although it won't be a 100% accurate as before but at least we're now using TailwindCSS classes in the code and that's what matters.
+
+For a better development experience with TailwindCSS, look for "Tailwind CSS IntelliSense" in the "Extensions" tab of Visual Studio Code and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
+
+![Screenshot of how to install Tailwind CSS IntelliSense extension in Visual Studio Code](/images/posts/local-development-setup-for-nextjs-typescript-and-tailwindcss-projects/install-tailwind-css-intellisense-extension-in-visual-studio-code.png)
 
 ## Set up Jest and React Testing Library
 
@@ -784,7 +788,7 @@ We can duplicate the changes we've made in `ci.yml` in another file `.github/wor
 name: PR
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
