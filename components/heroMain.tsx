@@ -109,7 +109,7 @@ function LogoPart({
           [isLeft
             ? '-left-14 sm:-left-24 md:-left-32 xl:-left-40'
             : '-right-14 sm:-right-24 md:-right-32 xl:-right-40 rotate-180']: true,
-          [!shouldDisplay ? 'opacity-0' : 'opacity-40']: true,
+          [!shouldDisplay ? 'text-opacity-0' : 'text-opacity-30']: true,
           ['translate-x-3']: !shouldDisplay && isLeft,
           ['-translate-x-3']: !shouldDisplay && !isLeft,
         }

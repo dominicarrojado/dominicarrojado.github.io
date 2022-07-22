@@ -63,7 +63,7 @@ describe('<HeroMain />', () => {
         expect(logoPartEls).toHaveLength(2);
 
         logoPartEls.forEach((logoPartEl) => {
-          expect(logoPartEl).toHaveClass('opacity-0');
+          expect(logoPartEl).toHaveClass('text-opacity-0');
         });
       });
 
@@ -99,7 +99,7 @@ describe('<HeroMain />', () => {
         expect(logoPartEls).toHaveLength(2);
 
         logoPartEls.forEach((logoPartEl) => {
-          expect(logoPartEl).not.toHaveClass('opacity-0');
+          expect(logoPartEl).not.toHaveClass('text-opacity-0');
         });
       });
 
