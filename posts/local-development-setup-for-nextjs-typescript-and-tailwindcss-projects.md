@@ -3,7 +3,7 @@ title: 'Local development setup for Next.js projects with TypeScript and Tailwin
 date: '2022-07-20'
 excerpt: 'A quick way to get started with the React framework for production'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/2Zb93oc0068'
 ---
 
 ## Introduction
