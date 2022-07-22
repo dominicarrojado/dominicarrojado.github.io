@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/2Zb93oc0068'
 
 ## Introduction
 
-[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to production whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository). This setup will also involve extensions and libraries that helps us write our code efficiently.
+[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to [GitHub Pages](https://pages.github.com/) whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository) and this will automated using [GitHub Actions](https://github.com/features/actions). This setup will also involve extensions and libraries that helps us write our code efficiently.
 
 ## Skip
 
@@ -401,11 +401,9 @@ import Home from '../index.page';
 
 ## Set up GitHub Actions CI/CD workflow and automatically deploy to GitHub Pages
 
-Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to production whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository). So in this post, I'll also teach you how to deploy your Next.js project to [GitHub Pages](https://pages.github.com/) using [GitHub Actions](https://github.com/features/actions).
-
 GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub, optionally runs the files through a build process, and publishes a website. You can host your site on GitHub's `github.io` domain or your own custom domain. It's free to use as long as your repository is set to _public_.
 
-With [GitHub Actions](https://github.com/features/actions), it's easier than ever to bring CI/CD directly into your workflow right from your repository.
+With GitHub Actions, it's easier than ever to bring CI/CD directly into your workflow right from your repository.
 
 I am actually using these two technologies to deploy this tech blog website of mine that you're currently looking at.
 
