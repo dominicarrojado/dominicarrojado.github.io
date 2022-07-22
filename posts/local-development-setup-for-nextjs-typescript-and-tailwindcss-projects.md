@@ -8,7 +8,7 @@ videoUrl: ''
 
 ## Introduction
 
-[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. This also involves extensions and libraries that helps us write our code efficiently.
+[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to production whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository). This setup will also involve extensions and libraries that helps us write our code efficiently.
 
 ## Skip
 
@@ -305,12 +305,7 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  moduleNameMapper: {
-    // Handle module aliases (this will be automatically configured for you soon)
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-
-    '^@/pages/(.*)$': '<rootDir>/pages/$1',
-  },
+  moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
 };
 
@@ -416,13 +411,7 @@ I am actually using these two technologies to deploy this tech blog website of m
 
 To get started, delete the `pages/api` folder since we'll only be deploying the static files of our Next.js project.
 
-Then let's install [`gh-pages`](https://github.com/tschaub/gh-pages) package via yarn:
-
-```
-yarn add --dev gh-pages
-```
-
-The `gh-pages` library publishes files to a `gh-pages` branch on GitHub by default.
+Then let's add `next export` into the scripts under `package.json`. `next export` allows us to export our Next.js application to static HTML, which can be run standalone without the need of a Node.js server. This script will generate an `out` directory. The `out` directory can be served by any static hosting service or CDN.
 
 Update `package.json` file to add the deployment scripts:
 
@@ -431,14 +420,11 @@ Update `package.json` file to add the deployment scripts:
   ...
   "scripts": {
     ...
-    "export": "next export",
-    "deploy": "gh-pages -d out"
+    "export": "next export"
   },
   ...
 }
 ```
-
-`next export` allows us to export our Next.js application to static HTML, which can be run standalone without the need of a Node.js server. This script will generate an `out` directory. The `out` directory can be served by any static hosting service or CDN. Running `gh-pages -d out` script will publish the `out` directory to a `gh-pages` branch.
 
 GitHub Pages will deploy our build directory in this URL format `https://{YOUR_GITHUB_USERNAME}.github.io/{YOUR_REPOSITORY_NAME}/`. So if our repository name is `my-app`, then it will be deployed in this URL `https://{YOUR_GITHUB_USERNAME}.github.io/my-app/`. GitHub Pages will append a trailing slash at the end of the URL. To deploy a Next.js application under a sub-path of a domain we can use the `basePath` config option. Also, to add trailing slash when redirecting to other pages, we can use `trailingSlash` config option. With these, let's update `next.config.js` with the following code:
 
@@ -808,18 +794,20 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
+      - name: Get cache directory path
+        id: nestjs-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache dependencies
+      - name: Cache dependencies and build outputs
         uses: actions/cache@v3
-        id: yarn-cache
+        id: nestjs-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            ${{ steps.nestjs-cache-dir-path.outputs.dir }}
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
