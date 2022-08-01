@@ -460,7 +460,7 @@ export const TESTIMONIALS_SUCCESS_SWIPE_DIFF = 40;
 export const TESTIMONIALS: Array<Testimonial> = [
   {
     name: 'Chirag Goel',
-    jobTitle: 'Engineering Manager',
+    jobTitle: 'Senior Engineering Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       'Thanks for leading and supporting the team and also addressing critical issues. Thanks for your great work, very well-coordinated and delivered before time. Good work on finding efficient ways of doing recurring things. Together we made some good progress in the FinTech business and reached several milestones. I look forward to more amazing things!',
