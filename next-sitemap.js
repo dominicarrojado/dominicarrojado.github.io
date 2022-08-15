@@ -181,6 +181,7 @@ module.exports = {
       await config.transform(config, '/react-typescript-api-hooks/'),
       await config.transform(config, '/react-typescript-swiper/'),
       await config.transform(config, '/react-typescript-otp-input/'),
+      await config.transform(config, '/react-typescript-pagination/'),
     ];
   },
 };
