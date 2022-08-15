@@ -1,12 +1,13 @@
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
-import { getPagination } from '../lib/common';
+import { getPaginationItems } from '../lib/pagination';
 import { useMounted } from '../lib/custom-hooks';
 import AnchorLink from './anchorLink';
 import SvgChevronLeft from './svgChevronLeft';
 import SvgChevronRight from './svgChevronRight';
 import NextLink from './nextLink';
 import { Route } from '../lib/types';
+import { PAGINATION_MAX_LENGTH } from '../lib/constants';
 
 export type Props = {
   currentPage: number;
@@ -15,7 +16,11 @@ export type Props = {
 
 export default function PostsPagination({ currentPage, lastPage }: Props) {
   const shouldDisplay = useMounted();
-  const paginationItems = getPagination(currentPage, lastPage);
+  const paginationItems = getPaginationItems(
+    currentPage,
+    lastPage,
+    PAGINATION_MAX_LENGTH
+  );
 
   return (
     <nav
@@ -158,6 +163,7 @@ function PaginationItem({
             'hover:text-gray-700 hover:bg-gray-100 hover:opacity-100',
             'dark:hover:text-white dark:hover:bg-gray-750'
           )}
+          aria-current={isCurrent ? 'page' : undefined}
         >
           {children}
         </AnchorLink>

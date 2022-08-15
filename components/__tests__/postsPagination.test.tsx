@@ -1,7 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { getFakeNumber } from '../../lib/test-helpers';
 import Window from '../../modules/Window';
-import { PAGINATION_MAX_LENGTH } from '../../lib/constants';
 import * as customHooks from '../../lib/custom-hooks';
 import PostsPagination, { Props } from '../postsPagination';
 
@@ -12,134 +11,110 @@ describe('<PostsPagination />', () => {
 
     return render(<PostsPagination {...props} />);
   };
-  const verifyPaginationItems = (paginationItems: Array<number>) => {
-    paginationItems.forEach((pageNumber) => {
-      const anchorEl = screen.queryByText(pageNumber);
-
-      expect(anchorEl?.tagName).toBe('A');
-      expect(anchorEl).toHaveAttribute('href', `/posts/page/${pageNumber}`);
-      expect(anchorEl).not.toHaveAttribute('target');
-      expect(anchorEl).not.toHaveAttribute('rel');
-    });
-  };
-  const verifyPaginationArrow = (
-    text: 'Previous' | 'Next',
-    pageNumber: number
+  const verifyPaginationItems = (
+    pageNums: Array<{
+      text: string;
+      page: number | undefined;
+    }>,
+    currentPage: number
   ) => {
-    const spanEl = screen.queryByText(text) as HTMLDivElement;
-    const anchorEl = spanEl.parentElement;
+    const navEl = screen.queryByLabelText('Pagination');
+    const navListEl = navEl?.firstElementChild;
 
-    expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute('href', `/posts/page/${pageNumber}`);
-    expect(anchorEl).not.toHaveAttribute('target');
-    expect(anchorEl).not.toHaveAttribute('rel');
+    expect(navListEl?.childElementCount).toBe(pageNums.length);
+
+    pageNums.forEach((pageItem, idx) => {
+      const listEl = navListEl?.childNodes[idx];
+      const anchorEl = listEl?.firstChild as HTMLElement;
+
+      expect(anchorEl).toHaveTextContent(pageItem.text);
+
+      if (pageItem.page) {
+        expect(anchorEl.tagName).toBe('A');
+        expect(anchorEl).toHaveAttribute(
+          'href',
+          `/posts/page/${pageItem.page}`
+        );
+        expect(anchorEl).not.toHaveAttribute('target');
+        expect(anchorEl).not.toHaveAttribute('rel');
+      } else {
+        expect(anchorEl.tagName).toBe('SPAN');
+      }
+
+      if (pageItem.page === currentPage) {
+        expect(anchorEl).toHaveAttribute('aria-current', 'page');
+      } else {
+        expect(anchorEl).not.toHaveAttribute('aria-current');
+      }
+    });
   };
 
-  it('should handle pagination less than max', () => {
-    const lastPage = getFakeNumber({
-      min: 1,
-      max: PAGINATION_MAX_LENGTH - 1,
-    });
-    const currentPage = getFakeNumber({ min: 1, max: lastPage });
-
-    renderComponent({ currentPage, lastPage });
-
-    const paginationItems = [];
-
-    for (let i = 1; i <= lastPage; i++) {
-      paginationItems.push(i);
-    }
-
-    verifyPaginationItems(paginationItems);
-
-    const ellipsisEl = screen.queryByText('...');
-
-    expect(ellipsisEl).not.toBeInTheDocument();
-  });
-
-  it('should handle pagination equal to max', () => {
-    const lastPage = PAGINATION_MAX_LENGTH;
-    const currentPage = getFakeNumber({ min: 1, max: lastPage });
-
-    renderComponent({ currentPage, lastPage });
-
-    const paginationItems = [];
-
-    for (let i = 1; i <= lastPage; i++) {
-      paginationItems.push(i);
-    }
-
-    verifyPaginationItems(paginationItems);
-
-    const ellipsisEl = screen.queryByText('...');
-
-    expect(ellipsisEl).not.toBeInTheDocument();
-  });
-
-  it('should handle current page in the front', () => {
-    const lastPage = getFakeNumber({ min: PAGINATION_MAX_LENGTH + 1 });
+  it('should handle "previous" disabled', () => {
     const currentPage = 1;
 
-    renderComponent({ currentPage, lastPage });
-
-    verifyPaginationItems([1, 2, 3, 4, 5, lastPage]);
-
-    const ellipsisEl = screen.queryByText('...');
-
-    expect(ellipsisEl?.tagName).toBe('SPAN');
-
-    const previousEl = screen.queryByText('Previous') as HTMLDivElement;
-    const previousAnchorEl = previousEl.parentElement;
-
-    expect(previousAnchorEl?.tagName).toBe('SPAN');
-
-    verifyPaginationArrow('Next', currentPage + 1);
-  });
-
-  it('should handle current page in the rear', () => {
-    const lastPage = getFakeNumber({ min: PAGINATION_MAX_LENGTH + 1 });
-    const currentPage = lastPage;
-
-    renderComponent({ currentPage, lastPage });
-
-    const paginationItems = [lastPage];
-
-    for (let i = lastPage - 1; i > lastPage - 5; i--) {
-      paginationItems.unshift(i);
-    }
-
-    verifyPaginationItems([1, ...paginationItems]);
-
-    const ellipsisEl = screen.queryByText('...');
-
-    expect(ellipsisEl?.tagName).toBe('SPAN');
-
-    const nextEl = screen.queryByText('Next') as HTMLDivElement;
-    const nextAnchorEl = nextEl.parentElement;
-
-    expect(nextAnchorEl?.tagName).toBe('SPAN');
-
-    verifyPaginationArrow('Previous', currentPage - 1);
-  });
-
-  it('should handle current page in the middle', () => {
-    const lastPage = getFakeNumber({ min: PAGINATION_MAX_LENGTH + 2 });
-    const currentPage = 5;
-
-    renderComponent({ currentPage, lastPage });
-
-    verifyPaginationItems([1, 4, 5, 6, lastPage]);
-
-    const ellipsisEls = screen.queryAllByText('...');
-
-    expect(ellipsisEls).toHaveLength(2);
-
-    ellipsisEls.forEach((ellipsisEl) => {
-      expect(ellipsisEl.tagName).toBe('SPAN');
+    renderComponent({
+      currentPage,
+      lastPage: 5,
     });
 
-    verifyPaginationArrow('Previous', currentPage - 1);
-    verifyPaginationArrow('Next', currentPage + 1);
+    verifyPaginationItems(
+      [
+        { text: 'Previous', page: undefined },
+        { text: '1', page: 1 },
+        { text: '2', page: 2 },
+        { text: '3', page: 3 },
+        { text: '4', page: 4 },
+        { text: '5', page: 5 },
+        { text: 'Next', page: 2 },
+      ],
+      currentPage
+    );
+  });
+
+  it('should handle "next" disabled', () => {
+    const currentPage = 5;
+
+    renderComponent({
+      currentPage,
+      lastPage: 5,
+    });
+
+    verifyPaginationItems(
+      [
+        { text: 'Previous', page: 4 },
+        { text: '1', page: 1 },
+        { text: '2', page: 2 },
+        { text: '3', page: 3 },
+        { text: '4', page: 4 },
+        { text: '5', page: 5 },
+        { text: 'Next', page: undefined },
+      ],
+      currentPage
+    );
+  });
+
+  it('should render ellipsis', () => {
+    const currentPage = 5;
+
+    renderComponent({
+      currentPage,
+      lastPage: 10,
+    });
+
+    verifyPaginationItems(
+      [
+        { text: 'Previous', page: 4 },
+        { text: '1', page: 1 },
+        { text: '...', page: undefined },
+        { text: '4', page: 4 },
+        { text: '5', page: 5 },
+        { text: '6', page: 6 },
+        { text: '...', page: undefined },
+        { text: '10', page: 10 },
+        { text: 'Next', page: 6 },
+      ],
+      currentPage
+    );
   });
 
   it('should display on mount', () => {
