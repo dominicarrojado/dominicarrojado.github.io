@@ -118,7 +118,7 @@ describe('<OtpInput />', () => {
 
 ---
 
-Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of the many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods. Here's how the code looks like:
+Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of matcher methods provided by the `jest` library. While you can check this [documentation](https://github.com/testing-library/jest-dom#custom-matchers) for the custom matcher methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
 
 ```tsx
 ...
