@@ -317,6 +317,7 @@ Now, let's add styles for this `Pagination` component in `src/components/Paginat
 ```css
 .pagination {
   display: flex;
+  flex-wrap: wrap;
 }
 ```
 
