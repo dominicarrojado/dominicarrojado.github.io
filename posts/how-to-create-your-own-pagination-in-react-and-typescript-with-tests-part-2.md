@@ -1,7 +1,7 @@
 ---
 title: 'How to create your own pagination in React and TypeScript with tests (Part 2)'
 date: '2022-08-15'
-excerpt: 'Learn how to build a modern pagination in a reactive and reusable way'
+excerpt: 'Learn how to build a modern page navigation in a reactive and reusable way'
 category: 'technology'
 videoUrl: 'https://youtu.be/FQA-6Nyr6kM'
 ---
