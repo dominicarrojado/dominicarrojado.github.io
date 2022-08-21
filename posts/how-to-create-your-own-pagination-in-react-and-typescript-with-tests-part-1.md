@@ -79,6 +79,7 @@ We will use the `App` component as the container of our pagination component. Ne
   max-width: 800px;
   margin: 0 auto;
   padding: 20px 15px;
+  user-select: none;
 }
 ```
 
@@ -231,7 +232,6 @@ export default function Pagination({
   return (
     <nav className="pagination" aria-label="Pagination">
       <PageLink
-        href="#"
         disabled={currentPage === 1}
         onClick={() => setCurrentPage(currentPage - 1)}
       >
@@ -240,7 +240,6 @@ export default function Pagination({
       {pageNums.map((pageNum, idx) => (
         <PageLink
           key={idx}
-          href="#"
           active={currentPage === pageNum}
           disabled={isNaN(pageNum)}
           onClick={() => setCurrentPage(pageNum)}
@@ -249,7 +248,6 @@ export default function Pagination({
         </PageLink>
       ))}
       <PageLink
-        href="#"
         disabled={currentPage === lastPage}
         onClick={() => setCurrentPage(currentPage + 1)}
       >
