@@ -353,7 +353,7 @@ If you're new to TypeScript, you'll notice I used `as HTMLInputElement | null` h
 
 Alright, once you save the changes. Let's try typing digits into the input boxes again:
 
-![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing.gif)
+![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing-1.gif)
 
 Wow, that looks smooth and it gives you a nice user experience!
 
@@ -445,7 +445,7 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 
 Once you save the changes, you can now delete each digit from the input boxes and it will also focus back to the previous input box if the current input box is already empty. Here's how it is in action:
 
-![GIF of deleting in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-deleting.gif)
+![GIF of deleting in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-deleting-1.gif)
 
 Are we done? Nope. There's still a couple more things we need to do to make this OTP input better. Let's continue ~
 
@@ -636,4 +636,86 @@ Save those changes and test it out! Here's a demo of all the features we have im
 
 ![GIF of React OTP Input demo](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-demo.gif)
 
-And that's were done with the implementation part! Please proceed to the [next part](/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests-part-2) to learn how to write tests for the OTP input component we have just built.
+---
+
+## Fix focus and deletion issues (Oct. 17, 2022)
+
+A few months later after I have posted the video version of this blog on [YouTube](https://youtu.be/Qpo4gUfv2Fs), I received a comment that there was an issue with the focus. Explaining it in words is kind of difficult so I created a [GIF](https://en.wikipedia.org/wiki/GIF) instead, here's the issue:
+
+![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing-2.gif)
+
+It doesn't look right when your focus is on the last input element but it starts typing out the digits on the first or other input elements. We need to fix this. I thought it would make sense to just focus from the first input element or from where the last digit was. I don't think most users will start writing the digits in random order. So for the fix, we can add a logic in the existing focus event listener of the input elements. Inside of it, we will first check if the previous input element has value. If there's value, then the focus remains on that input. If there's _NO_ value, then we focus on the previous input element and that will fire or trigger the same focus event listener again which will recursively check the condition.
+
+To implement this recursive condition check, let's update `src/components/OtpInput.tsx` with the following code:
+
+```tsx
+...
+
+export default function OtpInput({ value, valueLength, onChange }: Props) {
+  ...
+  const inputOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { target } = e;
+
+    // keep focusing back until previous input
+    // element has value
+    const prevInputEl =
+      target.previousElementSibling as HTMLInputElement | null;
+
+    if (prevInputEl && prevInputEl.value === '') {
+      return prevInputEl.focus();
+    }
+
+    target.setSelectionRange(0, target.value.length);
+  };
+  ...
+}
+```
+
+Once you saved the changes, it will fix the focus issue:
+
+![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing-3.gif)
+
+But... once this new logic has been implemented, it will introduce another issue. It is related with deleting digits in the middle. Here's the issue:
+
+![GIF of deleting in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-deleting-2.gif)
+
+So in the GIF, you can see if we start deleting digits in the middle. It leaves some digits on the right. When you try to focus on the digit on the right, you won't be able to because of the new logic we just imlemented. To fix this and make things simple, we simply won't allow deleting of digits in the middle by checking if the next input element has value.
+
+Here's the logic we need to add in ``src/components/OtpInput.tsx`:
+
+```tsx
+...
+
+export default function OtpInput({ value, valueLength, onChange }: Props) {
+  ...
+
+  const inputOnChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
+    ...
+
+    if (!isTargetValueDigit && targetValue !== '') {
+      return;
+    }
+
+    const nextInputEl = target.nextElementSibling as HTMLInputElement | null;
+
+    // only delete digit if next input element has no value
+    if (!isTargetValueDigit && nextInputEl && nextInputEl.value !== '') {
+      return;
+    }
+
+    targetValue = isTargetValueDigit ? targetValue : ' ';
+
+    ...
+  };
+  ...
+}
+```
+
+![GIF of deleting in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-deleting-3.gif)
+
+In the GIF, you can see that we are not able to delete digits in the middle, but we can still replace it with another digit.
+
+And that's it! We're done with the implementation part. Please proceed to the [next part](/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests-part-2) to learn how to write tests for the OTP input component we have just built.

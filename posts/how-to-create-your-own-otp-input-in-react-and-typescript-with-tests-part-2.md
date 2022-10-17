@@ -360,7 +360,7 @@ Awesome, it still `PASS` and the uncovered lines are getting lesser. Let's keep 
 
 ## Write tests to allow deleting of digits (do not focus on previous element)
 
-So this test case is kind of a duplicate of the above with minor changes to cover line `99` of `OtpInput.tsx`. When the deletion happens but the input element wasn't previously empty, we should not focus on the previous element. Here's the test case for that:
+So this test case is kind of a duplicate of the above with minor changes to cover line `106` of `OtpInput.tsx`. When the deletion happens but the input element wasn't previously empty, we should not focus on the previous element. Here's the test case for that:
 
 ```tsx
 ...
@@ -405,9 +405,53 @@ describe('<OtpInput />', () => {
 
 Since our previous test case already checks the `onChange` logic during deletion, here we just have to check that the previous element was not in focus when we trigger a keydown event with a key of `Backspace` and the `target` during the event had a `value`.
 
-Alright, once you save the changes, and check the terminal, line `99` is removed from the uncovered lines. Sweet!
+Alright, once you save the changes, and check the terminal, line `106` is removed from the uncovered lines. Sweet!
 
 ---
+
+## Write tests to not allow deleting of digits in the middle
+
+This is a test case for a fix we did on Oct. 17, 2022 related to the deleting of digits in the middle after implementing the fix for the focus issue. This test case should be pretty straightforward using what we've learned so far. Let's generate a random 6-digit value, then use that to fill in the OTP input component. Focus on any of the input elements in the middle, let's choose with the third input element. Then, trigger a change event on that element where the event target value is empty which means the digit is deleted. We can verify that it didn't allow deletion of digits by checking if the `onChange` function was not called.
+
+Here's the code for that test case:
+
+```tsx
+...
+
+describe('<OtpInput />', () => {
+  ...
+
+  it('should NOT allow deleting of digits in the middle', () => {
+    const value = faker.datatype
+      .number({ min: 100000, max: 999999 })
+      .toString();
+    const valueLength = value.length;
+    const onChange = jest.fn();
+
+    renderComponent({
+      value,
+      valueLength,
+      onChange,
+    });
+
+    const inputEls = screen.queryAllByRole('textbox');
+    const thirdInputEl = inputEls[2];
+    const target = { value: '' };
+
+    fireEvent.change(thirdInputEl, { target: { value: '' } });
+    fireEvent.keyDown(thirdInputEl, {
+      target,
+      key: 'Backspace',
+    });
+
+    expect(onChange).not.toBeCalled();
+  });
+});
+```
+
+Once you saved the changes, this should pass and cover line `61`!
+
+![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-5.png)
 
 ## Write tests to allow pasting of digits
 
@@ -454,9 +498,9 @@ Okay if my changes are relatively the same as yours, then give yourself pat in t
 
 The test coverage should look like this now:
 
-![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-5.png)
+![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-6.png)
 
-Since we're doing an `if` and `else if` conditions in the `inputOnChange` function in the `OtpInput.tsx`, line `72` will eventually be considered as uncovered lines because the `else` condition is not handled in our test cases yet. It may not show up now until you add the rest of the other test cases. So before that happens, let's just cover that now with the following code:
+Since we're doing an `if` and `else if` conditions in the `inputOnChange` function in the `OtpInput.tsx`, line `79` will eventually be considered as uncovered lines because the `else` condition is not handled in our test cases yet. It may not show up now until you add the rest of the other test cases. So before that happens, let's just cover that now with the following code:
 
 ```tsx
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -494,7 +538,7 @@ Once you save the changes, this test case should pass as well.
 
 ## Write tests for handling arrow keys
 
-And for our last test case, we should cover the keydown events with arrow keys. This was implemented to improve the accessibility of our input boxes. Just a recap, if we press the right or down arrow keys on the keyboard, the focus should be on the next input element. And if we press the left or up arrow keys on the keyboard, the focus should be on the previous input element. These are all handled by the keydown event handler.
+And for our next test case, we should cover the keydown events with arrow keys. This was implemented to improve the accessibility of our input boxes. Just a recap, if we press the right or down arrow keys on the keyboard, the focus should be on the next input element. And if we press the left or up arrow keys on the keyboard, the focus should be on the previous input element. These are all handled by the keydown event handler.
 
 Let's first cover the right and down arrow keys. Here's the test case for that:
 
@@ -569,6 +613,43 @@ describe('<OtpInput />', () => {
 ```
 
 Don't forget to save your changes before you check the terminal:
+
+![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-7.png)
+
+## Write tests to only focus to input if previous input has value
+
+This is the test case for a fix we did on Oct. 17, 2022 related to the focus issue. For this test case, it can be just a straightforward one by having an empty OTP input with a length of 6. Focus on the last input element and verify that the focus is in the first input element instead.
+
+Here's the test case for that:
+
+```tsx
+...
+
+describe('<OtpInput />', () => {
+  ...
+
+  it('should only focus to input if previous input has value', () => {
+    const valueLength = 6;
+
+    renderComponent({
+      valueLength,
+      value: '',
+      onChange: jest.fn(),
+    });
+
+    const inputEls = screen.queryAllByRole('textbox');
+    const lastInputEl = inputEls[valueLength - 1];
+
+    lastInputEl.focus();
+
+    const firstInputEl = inputEls[0];
+
+    expect(firstInputEl).toHaveFocus();
+  });
+});
+```
+
+Once you saved the changes, here's what you should see in your terminal:
 
 ![Screenshot of React OTP Input complete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-complete.png)
 
