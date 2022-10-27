@@ -229,7 +229,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://aptamil-bybftbosa.meteorapp.com/',
+        url: '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/',
       },
     ],
     imageUrl:

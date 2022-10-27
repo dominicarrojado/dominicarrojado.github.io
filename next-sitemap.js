@@ -157,6 +157,28 @@ module.exports = {
         '/kronenbourg-website/terms-of-use.html'
       ),
 
+      // aptamil apps
+      await config.transform(
+        config,
+        '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/'
+      ),
+      await config.transform(
+        config,
+        '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/1st-pillar-of-foundation-natural-defences/'
+      ),
+      await config.transform(
+        config,
+        '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/2nd-pillar-of-foundation-brain-development/'
+      ),
+      await config.transform(
+        config,
+        '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/how-to-win/'
+      ),
+      await config.transform(
+        config,
+        '/aptamil-build-your-babys-foundation-to-be-one-step-ahead-app/test-your-knowledge/'
+      ),
+
       // maybank website
       await config.transform(config, '/maybank-fc-barcelona-website/'),
 
