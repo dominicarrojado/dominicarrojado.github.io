@@ -59,7 +59,7 @@ We'll be using a simple [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/
 
 ## Create the type
 
-To get started, let's create the [enum](https://www.typescriptlang.org/docs/handbook/enums.html) for the different states our UI will go through as it fetches data from the API. `Enums` allows us to define a set of named constants. It can make it easier to document intent, or create a set of distinct cases.
+To get started, let's create an [enum](https://www.typescriptlang.org/docs/handbook/enums.html) for the different states our UI will go through as it fetches data from the API. `Enums` allows us to define a set of named constants. It can make it easier to document intent, or create a set of distinct cases.
 
 ```ts
 // src/types.ts
@@ -200,7 +200,7 @@ Once you saved it, your React application should display something like this:
 
 ![Screenshot of unstyled React API hook UI](/images/posts/how-to-integrate-with-a-rest-api-using-react-hooks-and-typescript-with-tests/unstyled.png)
 
-Now before we interact we it, let's update the styles to make our application slightly prettier.
+Now before we interact with it, let's update the styles to make our application slightly prettier.
 
 ```css
 /* src/index.css */
@@ -312,7 +312,7 @@ describe('<App />', () => {
 });
 ```
 
-Here we defined all the expected description for each states and check whether an element with a text of `defaultText` is in the document.
+Here we define all the expected descriptions for each state and check whether an element with a text of `defaultText` is in the document.
 
 To see if our test case passed along with the coverage, run this command on your terminal:
 
@@ -356,7 +356,7 @@ describe('<App />', () => {
 });
 ```
 
-When mocking functions, we would need to call `jest.restoreAllMocks()` after each tests using `afterEach` to revert it back to its original state to prevent it from affecting other test cases.
+When mocking functions, we would need to call `jest.restoreAllMocks()` after each test using `afterEach` to revert it back to its original state to prevent it from affecting other test cases.
 
 ---
 
@@ -440,7 +440,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
   });
 ```
 
-We are using [fireEvent](https://testing-library.com/docs/dom-testing-library/api-events/) function by Testing Library to fire a click event. It only accepts an element so we had to do a type assertion when querying the button element.
+We are using the [fireEvent](https://testing-library.com/docs/dom-testing-library/api-events/) function by the Testing Library to fire a click event. It only accepts an element so we had to do a type assertion when querying the button element.
 
 ---
 
@@ -509,7 +509,7 @@ import axios from 'axios';
   ...
 ```
 
-We are mocking the `axios` here to prevent doing an actual fetch. We also used [act](https://reactjs.org/docs/testing-recipes.html#act) function which makes sure all updates related to this action have been processed and applied to the DOM before we make any assertions. This is usually done when the function you executed in the test case makes an update on the React states. When also added `async` and `await` because `getPosts()` is an asynchronous function and ideally we should wait for it to be done before we do our checks.
+We are mocking the `axios` here to prevent doing an actual fetch. We also used the [act](https://reactjs.org/docs/testing-recipes.html#act) function which makes sure all updates related to this action have been processed and applied to the DOM before we make any assertions. This is usually done when the function you executed in the test case makes an update on the React states. When also added `async` and `await` because `getPosts()` is an asynchronous function and ideally we should wait for it to be done before we do our checks.
 
 For the third test case, we need to check whether we are getting the expected states on API call, we are expecting we will get a loading state while waiting for the API to return the response. Here's the code for that:
 
@@ -565,7 +565,7 @@ For the fourth test case, we need to check whether we are getting the expected s
 
 Here we are mocking `axios` with `.mockRejectedValue({})` in order to throw an error when fetching the data.
 
-For the last test case, we need to check whether we are getting the expected state when the API succeeds. This time the posts should not be an empty array. We will use `faker` library again to mock the data for us. Here's the code below:
+For the last test case, we need to check whether we are getting the expected state when the API succeeds. This time the posts should not be an empty array. We will use the `faker` library again to mock the data for us. Here's the code below:
 
 ```ts
 import faker from 'faker';
@@ -603,7 +603,7 @@ import faker from 'faker';
 
 ---
 
-And they're you have it!
+And there you have it!
 
 By now, you should have achieved 100% test coverage and all looking green in your terminal just like this:
 

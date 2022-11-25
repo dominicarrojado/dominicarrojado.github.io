@@ -51,7 +51,7 @@ Then create a folder and name it `src`. Inside it, create a file named `index.mj
 
 Now, open the terminal in Visual Studio Code. The keyboard shortcut would be `Ctrl` + `` ` ``.
 
-Then, initiliaze Yarn using the command below:
+Then, initialize Yarn using the command below:
 
 ```bash
 yarn init -y
@@ -69,7 +69,7 @@ Okay, let's now install MJML library as `devDependencies` using the the command 
 yarn add -D mjml
 ```
 
-Once installed, open your `package.json` and modify it to add the MJML build command in the scripts. This command will generate the HTML file based from your MJML file.
+Once installed, open your `package.json` and modify it to add the MJML build command in the scripts. This command will generate the HTML file based on your MJML file.
 
 ```json
 {
@@ -88,7 +88,7 @@ Then click on the "Extensions" tab and look for "MJML" and install it. You can a
 
 ![Screenshot of how to install MJML extension in Visual Studio Code](/images/posts/how-to-setup-local-development-for-mjml-framework/install-mjml-extension-in-visual-studio-code.png)
 
-One of the feature of this extension is that it can beautify the MJML code. To enable that feature, create a folder in your root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. This is done to have a project-specific settings for Visual Studio Code. Let's update the created file to add the code below:
+One of the features of this extension is that it can beautify the MJML code. To enable that feature, create a folder in your root directory and name it `.vscode`. Then, create a file inside it and name it `settings.json`. This is done to have project-specific settings for Visual Studio Code. Let's update the created file to add the code below:
 
 ```json
 {
@@ -106,7 +106,7 @@ Once updated, it will automatically format your MJML code when you do save. Feel
 
 Now, if you have a decent-sized monitor with a resolution of at least 1920 x 1080, then you're done with this setup! That's because the MJML extension already has a live preview for MJML files. Within Visual Studio code, you can click on the MJML logo located on the top right corner. It will split the screen between your code and the preview so you can see updates as you type. This extension can also show inline errors, provide code snippets and many more!
 
-Let's try out the preview feature of MJML extension. Open your `index.mjml`, it should show the MJML logo on the top right corder of your Visual Studio Code, click it and it will split the screen.
+Let's try out the preview feature of the MJML extension. Open your `index.mjml`, it should show the MJML logo on the top right corner of your Visual Studio Code, click it and it will split the screen.
 
 Now, update your `index.mjml` to add the code below:
 
@@ -136,7 +136,7 @@ yarn build
 
 ## Local development scripts
 
-If you're coding in a smaller-sized screen or prefer to have a wider screen for your code or maybe just an `Alt` + `Tab` kind of developer, then let's continue for the additional setup.
+If you're coding in a smaller-sized screen or prefer to have a wider screen for your code or maybe just an `Alt` + `Tab` kind of developer, then let's continue with the additional setup.
 
 Install the [Live Server](https://github.com/tapio/live-server) and [Concurrently](https://github.com/open-cli-tools/concurrently) using the command below. Live Server will create a server locally, it will help us serve the generated `index.html` by MJML so you can preview it in a browser. Concurrently will let us run multiple scripts with one script so you don't have to open multiple terminal windows to achieve the same thing.
 
@@ -155,7 +155,7 @@ Once installed, open your `package.json` again and update the scripts with the f
   },
 ```
 
-Let's understand each command that was newly added. The `start` script is basically the same as the `build` script but with a `--watch` parameter, which means it will be running in the background to watch for file changes and update the HTML file so we don't have to manually run the `build` script for every change. The `server` script is to start a server locally and serve the files inside the `src` folder, specifically our `index.html` so we can view it in the browser. Since we have 2 scripts that needs to run at the same time, we created the `dev` script which will utilize `concurrently` to run both the `start` and the `server` script.
+Let's understand each command that was newly added. The `start` script is basically the same as the `build` script but with a `--watch` parameter, which means it will be running in the background to watch for file changes and update the HTML file so we don't have to manually run the `build` script for every change. The `server` script is to start a server locally and serve the files inside the `src` folder, specifically our `index.html` so we can view it in the browser. Since we have 2 scripts that need to run at the same time, we created the `dev` script which will utilize `concurrently` to run both the `start` and the `server` script.
 
 Let's run our `dev` script by typing the command below on our terminal:
 
@@ -165,7 +165,7 @@ yarn run dev
 
 This command will open your default browser and go to `http://localhost:8080/src/`. If it doesn't, you can do it yourself too. You should be able to see the page with the text `Hello World` displayed on your browser. If you end up seeing the directory of `/src/`, just refresh the page and you should see your email template. This is the `index.html` served by our local server.
 
-Now go back to Visual Studio Code and try do make some changes in the `index.mjml` file.
+Now go back to Visual Studio Code and try to make some changes in the `index.mjml` file.
 
 ```html
 ...
@@ -173,7 +173,7 @@ Now go back to Visual Studio Code and try do make some changes in the `index.mjm
 ...
 ```
 
-Once you save the file, it will be automatically update the `index.html` and refresh the page on the browser.
+Once you save the file, it will automatically update the `index.html` and refresh the page on the browser.
 
 ---
 

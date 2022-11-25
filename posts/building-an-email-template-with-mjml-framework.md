@@ -57,7 +57,7 @@ Now, let's clean up our project. We won't be needing some of them. Delete or cle
 
 ## Initial structure
 
-Let's setup the initial structure of our MJML code. Open the main file `src/index.mjml` and type the following below:
+Let's set up the initial structure of our MJML code. Open the main file `src/index.mjml` and type the following below:
 
 ```html
 <mjml>
@@ -99,7 +99,7 @@ Next, let's define a default style for our MJML components. We can define them i
 </mjml>
 ```
 
-Using `<mj-all>` tag makes it easier to override style of MJML components via one tag. I have also set the `padding` to `0` because some components have default padding, by resetting it to `0` will make it easier for us to construct our template especially when following the expected design. We can add MJML component tags (like `<mj-section>`, `<mj-column>`, `<mj-text>`, etc.) inside `<mj-attributes>` tag to override the default settings on a specific component. We can also apply styles to a group of components using `<mj-class>` tag to help us reduce duplications in our code, we'll get to use that later as well.
+Using `<mj-all>` tag makes it easier to override the style of MJML components via one tag. I have also set the `padding` to `0` because some components have default padding, by resetting it to `0` will make it easier for us to construct our template especially when following the expected design. We can add MJML component tags (like `<mj-section>`, `<mj-column>`, `<mj-text>`, etc.) inside `<mj-attributes>` tag to override the default settings on a specific component. We can also apply styles to a group of components using `<mj-class>` tag to help us reduce duplications in our code; we'll get to use that later as well.
 
 ---
 
@@ -118,7 +118,7 @@ As you can tell by now, from setting our default styles to setting the body's ba
 
 ## Email Title section
 
-Now, let's build the first section of our email template. It's good to add a comment to your sections so it would be easier to locate them when maintaining it in the future. So below, I've added `<mj-section>` tag inside the `<mj-body>` tag. These tags are intended to be used as rows within our email template. They are used to structure the layout. By default, it has a width of `600px`, since that's also the width of our sections based on the design, then we don't need to specify the width.
+Now, let's build the first section of our email template. It's good to add a comment to your sections so it would be easier to locate them when maintaining it in the future. So below, I've added the `<mj-section>` tag inside the `<mj-body>` tag. These tags are intended to be used as rows within our email template. They are used to structure the layout. By default, it has a width of `600px`, since that's also the width of our sections based on the design, so we don't need to specify the width.
 
 ```html
 <mjml>
@@ -131,7 +131,7 @@ Now, let's build the first section of our email template. It's good to add a com
 </mjml>
 ```
 
-Next, let's add `<mj-group>` tag inside the `<mj-section>` tag. This tag prevents columns from stacking on mobile.
+Next, let's add the `<mj-group>` tag inside the `<mj-section>` tag. This tag prevents columns from stacking on mobile.
 
 ```html
 <mjml>
@@ -146,7 +146,7 @@ Next, let's add `<mj-group>` tag inside the `<mj-section>` tag. This tag prevent
 </mjml>
 ```
 
-Then, let's add `<mj-column>` tag inside the `<mj-group>` tag. This tag enables us to horizontally organize the content within our sections. Column width should be expressed in percentage to be responsive, if not defined will be 100% divided by the number of its siblings. Every single column has to contain something because they are responsive containers, and will be vertically stacked on a mobile view but in this case it won't because of its parent `<mj-group>` preventing it.
+Then, let's add the `<mj-column>` tag inside the `<mj-group>` tag. This tag enables us to horizontally organize the content within our sections. Column width should be expressed in percentage to be responsive, if not defined will be 100% divided by the number of its siblings. Every single column has to contain something because they are responsive containers, and will be vertically stacked on a mobile view but in this case it won't because of its parent `<mj-group>` preventing it.
 
 ```html
 <mjml>
@@ -268,7 +268,7 @@ Then write the following code for the section:
 </mjml>
 ```
 
-If you noticed, we didn't provide `width` or `height`. This is because we want it to take up 100% of it's parent column width. Since section's default width is `600px` then the image follows this width and the height will automatically adjust. The image will also become responsive on smaller viewport, you can resize your window to check it out.
+If you noticed, we didn't provide `width` or `height`. This is because we want it to take up 100% of its parent column width. Since the section's default width is `600px` then the image follows this width and the height will automatically adjust. The image will also become responsive on a smaller viewport, you can resize your window to check it out.
 
 Let's look at how our email template looks like now:
 
@@ -309,7 +309,7 @@ Alright, let's move on to the next section. Let's ignore the list and just write
 </mjml>
 ```
 
-The reason why we didn't write the code for the list yet is because I wanted to show you the similarities of the first and last paragraph. Notice that they have the same `font-size` and `line-height`. For such cases, we can make use of the `<mj-class>` tag to reduce the redundancy and make it easier to maintain in the future. Let's go scroll back up to our code where `<mj-attributes>` tag is located. Then create an `<mj-class>` tag inside it with a `name` value of `body-text` as well as the shared styles of the paragraphs:
+The reason why we didn't write the code for the list yet is because I wanted to show you the similarities of the first and last paragraph. Notice that they have the same `font-size` and `line-height`. For such cases, we can make use of the `<mj-class>` tag to reduce the redundancy and make it easier to maintain in the future. Let's scroll back up to our code where the `<mj-attributes>` tag is located. Then create an `<mj-class>` tag inside it with a `name` value of `body-text` as well as the shared styles of the paragraphs:
 
 ```html
 <mjml>
@@ -529,7 +529,7 @@ Alright, once you save the changes, the email template now should look like this
 
 ## Benefits section
 
-We're already half way there! Let's move on to the next section. As you can see from the design, this padded section has a white background and inside it is a container that's rounded with a gray background. How do we achieve this? We can use the `<mj-wrapper>` tag which enables us to wrap multiple sections together. It's especially useful to achieve nested layouts across sections. Let's write the following code below the previous section to construct the containers and the title:
+We're already halfway there! Let's move on to the next section. As you can see from the design, this padded section has a white background and inside it is a container that's rounded with a gray background. How do we achieve this? We can use the `<mj-wrapper>` tag which enables us to wrap multiple sections together. It's especially useful to achieve nested layouts across sections. Let's write the following code below the previous section to construct the containers and the title:
 
 ```html
 <mjml>
@@ -841,7 +841,7 @@ Our template should now look like what we wanted to accomplish from the start:
 
 ## Mobile styles
 
-But wait, there's more! Let's try see how the mobile view is looking right now. All is well until you reach the footer section:
+But wait, there's more! Let's try to see how the mobile view is looking right now. All is well until you reach the footer section:
 
 ![Screenshot of broken mobile footer section of MJML sample email template](/images/posts/building-an-email-template-with-mjml-framework/email-template-partial-footer-mobile-broken.png)
 

@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/Hn7iDjbPtVY'
 
 ## Introduction
 
-Accordions (or collapsible content) are useful for when you have large amount of content to display and allow users to toggle between showing and hiding the content. This can be seen a lot in different websites today. Learn how to build your own accordion in [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/). I'll also cover how to write tests for it and achieve 100% coverage using [Jest](https://jestjs.io/) and [Testing Library](https://testing-library.com/), these two libraries are used together to test React components. If you're new to TypeScript and Jest/Testing Library, this is a good way to start learning it with simple components like this. Alright, here we go ~
+Accordions (or collapsible content) are useful for when you have a large amount of content to display and allow users to toggle between showing and hiding the content. This can be seen a lot in different websites today. Learn how to build your own accordion in [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/). I'll also cover how to write tests for it and achieve 100% coverage using [Jest](https://jestjs.io/) and [Testing Library](https://testing-library.com/), these two libraries are used together to test React components. If you're new to TypeScript and Jest/Testing Library, this is a good way to start learning it with simple components like this. Alright, here we go ~
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ I've written a [separate post](/posts/local-development-setup-for-react-and-type
 
 ## Initialize your project
 
-Fastest way to get started with React is using [Create React App](https://create-react-app.dev/). It is an officially supported way to create single-page React applications. It offers a modern build setup with no configuration so you can focus on code, not build tools.
+Fastest way to get started with React is using the [Create React App](https://create-react-app.dev/). It is an officially supported way to create single-page React applications. It offers a modern build setup with no configuration so you can focus on code, not build tools.
 
 To create our project with React and TypeScript, run this command in your terminal:
 
@@ -96,7 +96,7 @@ body {
 
 ## Sample data + Accordion component
 
-Now, let's create a sample data that we can pass to our accordion component because we would want our accordion to be reusable, so it should accept data as props. We can initialize the data from a parent component so for our case, it would be `src/App.tsx`. I have a sample data that we can use here, update the code of it:
+Now, let's create sample data that we can pass to our accordion component because we would want our accordion to be reusable, so it should accept data as props. We can initialize the data from a parent component so for our case, it would be `src/App.tsx`. I have a sample data that we can use here, update the code of it:
 
 ```tsx
 import './App.css';
@@ -109,9 +109,9 @@ function App() {
       content: (
         <div>
           <strong>This is the first item's accordion body.</strong> It is hidden
-          by default, but shown when title is clicked. It will also be hidden if
-          the title is clicked again or when another item is clicked. You can
-          pass HTML tags in the content such as <u>underline tag</u>,{' '}
+          by default, but shown when the title is clicked. It will also be
+          hidden if the title is clicked again or when another item is clicked.
+          You can pass HTML tags in the content such as <u>underline tag</u>,{' '}
           <i>italic</i>, or even another list like this:
           <ul>
             <li>Bread</li>
@@ -126,10 +126,10 @@ function App() {
       content: (
         <div>
           <strong>This is the second item's accordion body.</strong> It is
-          hidden by default, but shown when title is clicked. It will also be
-          hidden if the title is clicked again or when another item is clicked.
-          You can pass HTML tags in the content such as <u>underline tag</u>,{' '}
-          <i>italic</i>, or even another list like this:
+          hidden by default, but shown when the title is clicked. It will also
+          be hidden if the title is clicked again or when another item is
+          clicked. You can pass HTML tags in the content such as{' '}
+          <u>underline tag</u>, <i>italic</i>, or even another list like this:
           <ul>
             <li>Bread</li>
             <li>Eggs</li>
@@ -143,9 +143,9 @@ function App() {
       content: (
         <div>
           <strong>This is the third item's accordion body.</strong> It is hidden
-          by default, but shown when title is clicked. It will also be hidden if
-          the title is clicked again or when another item is clicked. You can
-          pass HTML tags in the content such as <u>underline tag</u>,{' '}
+          by default, but shown when the title is clicked. It will also be
+          hidden if the title is clicked again or when another item is clicked.
+          You can pass HTML tags in the content such as <u>underline tag</u>,{' '}
           <i>italic</i>, or even another list like this:
           <ul>
             <li>Bread</li>
@@ -202,7 +202,7 @@ You can also `Cmd` + `click` (`Ctrl` + `click` on Windows) to view the type with
 
 ![Screenshot of checking a type in Visual Studio Code](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/checking-type-in-visual-studio-code.png)
 
-So we created `src/types.ts` so that it can be exported and imported across different components which you will see in a bit. Since `Accordion` component accepts an array of `AccordionData`, we wrapped it in type `Array` like this - `Array<AccordionData>`. You can also wrap it like this - `AccordionData[]`, I just prefer the former as it I can read it as "array of accordion data".
+So we created `src/types.ts` so that it can be exported and imported across different components which you will see in a bit. Since the `Accordion` component accepts an array of `AccordionData`, we wrapped it in type `Array` like this - `Array<AccordionData>`. You can also wrap it like this - `AccordionData[]`, I just prefer the former as I can read it as an "array of accordion data".
 
 Now if we didn't pass the expected data or type for `items` props to our accordion component, our IDE would display an inline error and hovering it would show something like this:
 
@@ -430,7 +430,7 @@ function AccordionItem({
 export default AccordionItem;
 ```
 
-And if you're new to TypeScript, you'll notice I used `as HTMLDivElement` here. This is called a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions). If we remove the type assertion, the type of `contentEl.current` would be `HTMLDivElement | null`, but we know in this case it will always have a value of `HTMLDivElement` when `useEffect` is executed. That's why type assertions are done when have information about the type of a value that TypeScript can't know about.
+And if you're new to TypeScript, you'll notice I used `as HTMLDivElement` here. This is called a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions). If we remove the type assertion, the type of `contentEl.current` would be `HTMLDivElement | null`, but we know in this case it will always have a value of `HTMLDivElement` when `useEffect` is executed. That's why type assertions are done when you have information about the type of a value that TypeScript can't know about.
 
 When `isOpen` is true, we should also add an `active` class so that the icon would rotate, it's a common transition effect whenever you toggle an accordion.
 
@@ -440,7 +440,7 @@ I've also added a new prop `btnOnClick` which accepts a callback when the button
 
 ## Accordion logic (open one at a time)
 
-Moving on to the `Accordion.tsx`, this is where we'll be adding the logic for each accordion items. When an accordion button is clicked, then we should show the contents. We could store a state of which item is displayed, it should be something unique to that item, since our items doesn't have an identifier (or ID) in their data, we could use the `index` of each items. I could think of two ways an accordion behaves, the one that we'll do in this post (which is my favorite by the way!) is opening an accordion one at a time, meaning when there's an accordion that's currently opened, when I click another one, it will close or hide the previous one and display the content of what I last clicked upon. To do that logic, update the `Accordion` component with the following code below:
+Moving on to the `Accordion.tsx`, this is where we'll be adding the logic for each accordion item. When an accordion button is clicked, then we should show the contents. We could store a state of which item is displayed, it should be something unique to that item, since our items don't have an identifier (or ID) in their data, we could use the `index` of each item. I could think of two ways an accordion behaves, the one that we'll do in this post (which is my favorite by the way!) is opening an accordion one at a time, meaning when there's an accordion that's currently opened, when I click another one, it will close or hide the previous one and display the content of what I last clicked upon. To do that logic, update the `Accordion` component with the following code below:
 
 ```tsx
 import { useState } from 'react';
@@ -493,7 +493,7 @@ And there you go, you've just built your own accordion in React and TypeScript!
 
 ## Write tests for Accordion.tsx
 
-Alright, time to write tests for the components we've built. Tests are really great as it helps us cover all the logics in our code and whenever we update the codebase, they help us determine whether we broke anything before it the changes get pushed to our repository.
+Alright, time to write tests for the components we've built. Tests are really great as it helps us cover all the logics in our code and whenever we update the codebase, they help us determine whether we broke anything before the changes get pushed to our repository.
 
 Before we start, let's install a library called [faker](https://github.com/Marak/faker.js) which gives us random data. Why do we want random data? It makes our tests more reliable as opposed to hardcoding the data we use in testing. Run the command below on your terminal to install it along with its type:
 
@@ -503,11 +503,11 @@ yarn add faker@5.5.3 @types/faker@5.5.9
 
 Since our project uses TypeScript, when installing libraries, we would have to install their types as well, because if not TypeScript would display an error that it couldn't find the library's type declarations.
 
-That's all we need to install because Create React App already set up and installed the necessary libraries for our testing environment such as Jest and Testing Library.
+That's all we need to install because the Create React App already set up and installed the necessary libraries for our testing environment such as Jest and Testing Library.
 
 For test files, I like to separate them in a folder so that it's less cluttered when viewing main files. Now, create a new folder named `__tests__` under the `src/components`. This is where we will put the test files for components under `src/components`.
 
-Alright, the first component we would be writing test is `Accordion.tsx`. Create a file under `src/components/__tests__` and name it `Accordion.test.tsx`.
+Alright, the first component we would be writing tests for is `Accordion.tsx`. Create a file under `src/components/__tests__` and name it `Accordion.test.tsx`.
 
 Then let's add in the structure of the test:
 
@@ -558,7 +558,7 @@ describe('<Accordion />', () => {
 });
 ```
 
-That's a lot of new code! Don't worry, let me go through it one by one and explain it to you. So first, we created an `items` array which would contain an object of `AccordionData`. We are using `faker` library to help us generate random title and content. You can checkout their API [here](https://github.com/marak/faker.js#api) to know all the other data it can randomly generate. We've added three items which should be enough but you can increase or decrease it if you want, but do note that it should have at least two items in order to test our accordion logic. We then pass this array as a props to our `Accordion` component. Using one of the Testing Library's methods, `render`, helps to render our component in a test environment, do note this environment is not a browser, so there are some limitations and mockings we would have to do which you'll see later on. To learn more about the `render` method, you can go [here](https://testing-library.com/docs/react-testing-library/api/#render). After that, we can do our checks to validate that our items are rendered. To do that, we looped through the items and did a query by text using another method of Testing Library which is `screen.queryByText`. To know all the possible queries you can do with screen, you can go [here](https://testing-library.com/docs/queries/about). Then finally using one of Jest's global functions, we can call `expect` method and pass the elements returned by the query, and run what we call a matcher method `toBeInTheDocument()`. This is one of many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods.
+That's a lot of new code! Don't worry, let me go through it one by one and explain it to you. So first, we created an `items` array which would contain an object of `AccordionData`. We are using `faker` library to help us generate random titles and content. You can check out their API [here](https://github.com/marak/faker.js#api) to know all the other data it can randomly generate. We've added three items which should be enough but you can increase or decrease it if you want, but do note that it should have at least two items in order to test our accordion logic. We then pass this array as a props to our `Accordion` component. Using one of the Testing Library's methods, `render`, helps to render our component in a test environment, do note this environment is not a browser, so there are some limitations and mockings we would have to do which you'll see later on. To learn more about the `render` method, you can go [here](https://testing-library.com/docs/react-testing-library/api/#render). After that, we can do our checks to validate that our items are rendered. To do that, we looped through the items and did a query by text using another method of Testing Library which is `screen.queryByText`. To know all the possible queries you can do with the `screen` object, you can go [here](https://testing-library.com/docs/queries/about). Then finally using one of Jest's global functions, we can call `expect` method and pass the elements returned by the query, and run what we call a matcher method `toBeInTheDocument()`. This is one of many custom matcher methods provided by the library called [jest-dom](https://github.com/testing-library/jest-dom#custom-matchers) which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). While you can check this [documentation](https://jestjs.io/docs/expect) for the more generic matcher methods.
 
 Alright, I hoped that explained it.
 
@@ -607,13 +607,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 });
 ```
 
-Here we did the same for generating random data for the props but inside the loop we're doing the checks differently. So first we query the element of the title and fired a click event on it using `fireEvent` which is imported from Testing Library. To fire other DOM events, you can check out the documentation [here](https://testing-library.com/docs/dom-testing-library/api-events/). Any query of element may result as `null` so we added a type assertion (`as HTMLButtonElement`) because `fireEvent` method doesn't accept `null` values, it is safe to use type assertion here because we are certain that the element is or should be in the DOM. Then we queried the list element with an `active` class and check whether it is the same element as the current item's list element, this verifies that our current item is opened. We also did an additional check to make sure that there's only one accordion that is opened at a time (or per loop) by checking that the length of all list item that has an `active` class should only be `1`.
+Here we did the same for generating random data for the props but inside the loop we're doing the checks differently. So first we query the element of the title and fire a click event on it using `fireEvent` which is imported from the Testing Library. To fire other DOM events, you can check out the documentation [here](https://testing-library.com/docs/dom-testing-library/api-events/). Any query of an element may result as `null` so we added a type assertion (`as HTMLButtonElement`) because `fireEvent` method doesn't accept `null` values, it is safe to use type assertion here because we are certain that the element is or should be in the DOM. Then we queried the list element with an `active` class and checked whether it is the same element as the current item's list element, this verifies that our current item is opened. We also did an additional check to make sure that there's only one accordion that is opened at a time (or per loop) by checking that the length of all list items that has an `active` class should only be `1`.
 
 Currently if you didn't stop the test script server, it will listen for file save changes and automatically run the tests again. This makes writing tests faster as we don't have to re-run the test script again on every change. Our test coverage should look like this now:
 
 ![Screenshot of incomplete Accordion test coverage](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/accordion-test-coverage-incomplete-2.png)
 
-Awesome, our second test case passed as well! But the line 9 is still uncovered though. If we check that line in our file, it is the logic for closing an opened accordion if it the title is clicked again. So for the last test case, we can achieve the full coverage for `Accordion.tsx` by writing the code below:
+Awesome, our second test case passed as well! But line 9 is still uncovered though. If we check that line in our file, it is the logic for closing an opened accordion if the title is clicked again. So for the last test case, we can achieve the full coverage for `Accordion.tsx` by writing the code below:
 
 ```tsx
 ...
@@ -643,7 +643,7 @@ Awesome, our second test case passed as well! But the line 9 is still uncovered 
 });
 ```
 
-Here we fired two click events and check that the current item's list element does not contain an `active` class which is a determinator that the accordion is opened.
+Here we fire two click events and check that the current item's list element does not contain an `active` class which is a determinator that the accordion is opened.
 
 Now once we save the changes, our coverage should look like this:
 
@@ -750,9 +750,9 @@ Once changes are saved, we would achieve `100%` test coverage for `AccordionItem
 
 ![Screenshot of complete Accordion Item test coverage](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/accordion-item-test-coverage-complete-1.png)
 
-You maybe wondering, `active` class just adds the style to rotate the arrow icon but is not really responsible for displaying or hiding the content. That is actually based on the `height` of the container. Can we test that too? Yes, but we will need to update our existing code in `AccordionItem.tsx` because in a test environment, values like `scrollHeight` is always `0` because it does not update measurements like a browser, this is the limitation that I've mentioned earlier. If that's the case, our test case for checking that the height is more than `0` when `isOpen` is `true` would fail. So what should we do?
+You may be wondering, `active` class just adds the style to rotate the arrow icon but is not really responsible for displaying or hiding the content. That is actually based on the `height` of the container. Can we test that too? Yes, but we will need to update our existing code in `AccordionItem.tsx` because in a test environment, values like `scrollHeight` is always `0` because it does not update measurements like a browser, this is the limitation that I've mentioned earlier. If that's the case, our test case for checking that the height is more than `0` when `isOpen` is `true` would fail. So what should we do?
 
-First, create a folder named `lib` under `src` folder. Then create a file under `src/lib` and name it `hooks.ts`. Add the following code inside the newly created file:
+First, create a folder named `lib` under the `src` folder. Then create a file under `src/lib` and name it `hooks.ts`. Add the following code inside the newly created file:
 
 ```ts
 import { RefObject } from 'react';
@@ -762,7 +762,7 @@ export function getRefValue<C>(ref: RefObject<C>) {
 }
 ```
 
-This is a utility for getting the value of a `RefObject`. I use this a lot in my projects and it is extremely helpful when writing tests to achieve `100%` coverage, especially those components that uses `RefObject` for elements. If you're new to TypeScript, you might be wonder what is this `C` around the code? It can be any letter by the way or word if you would like, and it is called [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html), it makes our utility function here accept the type defined when the `RefObject` is passed because it can have any type. Using Generics, our function here would be able to return the same type.
+This is a utility for getting the value of a `RefObject`. I use this a lot in my projects and it is extremely helpful when writing tests to achieve `100%` coverage, especially those components that use `RefObject` for elements. If you're new to TypeScript, you might be wondering what is this `C` around the code? It can be any letter by the way or word if you would like, and it is called [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html), it makes our utility function here accept the type defined when the `RefObject` is passed because it can have any type. Using Generics, our function here would be able to return the same type.
 
 ---
 
@@ -850,7 +850,7 @@ describe('<AccordionItem />', () => {
 });
 ```
 
-Let's analyse the updated code. First, we imported our `hooks` file using `* as hooks` in order to get an object of methods from `src/lib/hooks.ts`. We then use one of Jest's methods called `jest.spyOn` which tracks the calls to `object[methodName]` that you passed to it. It returns a Jest mock function which we can mock to return a different value using `.mockReturnValue()`. To see all mock functions you could do, check them out [here](https://jestjs.io/docs/mock-functions). When we do mocks in our test cases, it does not get restored back to their original value in the next test case, this might cause potential issues with the next test cases so it's good to call `jest.restoreAllMocks()` to prevent that. Instead of calling this function in the beginning of every test cases, we can put the call inside one of Jest's methods `beforeEach`, it accepts a callback which will be called before each test cases, and put it inside the `describe` call back right at the beginning before any test cases.
+Let's analyze the updated code. First, we imported our `hooks` file using `* as hooks` in order to get an object of methods from `src/lib/hooks.ts`. We then use one of Jest's methods called `jest.spyOn` which tracks the calls to `object[methodName]` that you passed to it. It returns a Jest mock function which we can mock to return a different value using `.mockReturnValue()`. To see all the mock functions you could do, check them out [here](https://jestjs.io/docs/mock-functions). When we do mocks in our test cases, it does not get restored back to their original value in the next test case, this might cause potential issues with the next test cases so it's good to call `jest.restoreAllMocks()` to prevent that. Instead of calling this function in the beginning of every test case, we can put the call inside one of Jest's methods `beforeEach`, it accepts a callback which will be called before each test case, and put it inside the `describe` call back right at the beginning before any test cases.
 
 So we mocked the scroll height of the content element with a random generated number (minimum should be `1` because `0` means the content is hidden) and did the checks based on our accordion item logic. If the accordion item is opened, the content element's container should have the same height as the scroll height of the content element. If it's closed, then the height should be `0px`.
 
@@ -893,7 +893,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 ## Write tests for hooks.ts
 
-I've mentioned it earlier that each component or function we create should have their own tests. So as a bonus, here's the test case for the hooks utility we created earlier, the code below should be added inside `src/lib/__tests__/hooks.test.ts`:
+I've mentioned earlier that each component or function we create should have their own tests. So as a bonus, here's the test case for the hooks utility we created earlier, the code below should be added inside `src/lib/__tests__/hooks.test.ts`:
 
 ```ts
 import faker from 'faker';
@@ -932,7 +932,7 @@ describe('<App />', () => {
 
 ---
 
-When you run the all the tests again via `yarn test --coverage`, it will look very satifying as the terminal would display all green and all 100% covered:
+When you run the all the tests again via `yarn test --coverage`, it will look very satisfying as the terminal would display all green and all 100% covered:
 
 ![Screenshot of complete test coverage](/images/posts/how-to-create-your-own-accordion-in-react-and-typescript-with-tests/test-coverage-complete.png)
 
