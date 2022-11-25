@@ -3,7 +3,7 @@ title: 'How to create your own bar graph in React and TypeScript with tests (Par
 date: '2022-11-25'
 excerpt: 'Learn how to build a bar graph with positive and negative values in a reactive and reusable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/IPQzaSfUm7U'
 ---
 
 ## Introduction
@@ -87,7 +87,6 @@ We will use the `App` component as the container of our bar graph component. Nex
   max-width: 800px;
   margin: 0 auto;
   padding: 20px 15px;
-  user-select: none;
 }
 ```
 
@@ -178,8 +177,8 @@ Then, create a CSS file with the path `src/components/BarGraph.css` to style our
 ```css
 .bar-graph {
   position: relative;
-  width: 400px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 400px;
   height: 170px;
 }
 

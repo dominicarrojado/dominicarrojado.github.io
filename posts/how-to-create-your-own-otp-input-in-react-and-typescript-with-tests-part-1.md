@@ -69,8 +69,8 @@ We will use the `App` component as the container of our OTP input. Then, add the
 
 ```css
 .container {
-  width: 800px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px 15px;
 }

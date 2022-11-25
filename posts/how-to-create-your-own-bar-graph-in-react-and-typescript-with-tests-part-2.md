@@ -3,7 +3,7 @@ title: 'How to create your own bar graph in React and TypeScript with tests (Par
 date: '2022-11-25'
 excerpt: 'Learn how to build a bar graph with positive and negative values in a reactive and reusable way'
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/P2LZ5waJRaU'
 ---
 
 ## Introduction
@@ -416,7 +416,7 @@ describe('<BarGraph />', () => {
       });
     });
 
-    barPercentageItems.forEach((element, idx) => {
+    barOffsetItems.forEach((element) => {
       expect(element).toHaveStyle({ height: '0%' });
     });
   });
@@ -522,6 +522,7 @@ describe('<BarGraph />', () => {
   it('should convert positive values and one negative value to percentages', () => {
     const expectedPercentages = ['56%', '33%', '22%', '78%'];
     const expectedOffsets = ['22%', '22%', '0%', '22%'];
+    const expectedBarsLine = '22%';
     const dataArray = [
       {
         value: 500,
