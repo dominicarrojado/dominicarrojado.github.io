@@ -18,7 +18,7 @@ By the way, upon writing this post, I assume that you have some web development 
 
 Make sure to install [Yarn](https://classic.yarnpkg.com/lang/en/) in your system if you haven't. We use [Yarn](https://classic.yarnpkg.com/lang/en/) as our package manager, it's just like [npm](https://www.npmjs.com/) but _faster_.
 
-I've written a [separate post](/posts/local-development-setup-for-react-and-typescript-projects/) about the [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) and extensions I use to help me save time and energy when writing my code in React. I highly suggest for you to check it out if you haven't!
+I've written a [separate post](/posts/local-development-setup-for-react-and-typescript-projects/) about the [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) and extensions I use to help me save time and energy when writing my code in React. I highly suggest that you check it out if you haven't!
 
 ## Initialize your project
 

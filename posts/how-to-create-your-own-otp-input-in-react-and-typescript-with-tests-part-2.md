@@ -93,7 +93,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use `screen` methods from Testing Library, and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as a role. To learn more about queries in Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
+So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from Testing Library, and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as a role. To learn more about queries in Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
 
 ```tsx
 ...
