@@ -22,7 +22,7 @@ The `@nestjs/testing` package provides a set of utilities that enable a more rob
 
 ## Test utilities
 
-There are two utility functions we would like to create and reuse when we write our test cases. First is creating the Nest application in a test environment that we could use for each test cases. Second is to clear the TypeORM repositories (tables or collections) in our database before running each test cases to keep any overflowing data that might affect the test results.
+There are two utility functions we would like to create and reuse when we write our test cases. First is creating the Nest application in a test environment that we could use for each test case. Second is to clear the TypeORM repositories (tables or collections) in our database before running each test case to keep any overflowing data that might affect the test results.
 
 To start, create a file `src/test-helpers.ts` and add the following code for the first utility function:
 
@@ -84,7 +84,7 @@ This just iterates all the entities from the database connection, get their repo
 
 ## Write tests for get all the links feature
 
-Now that the utility functions are created, let's use them and setup the tests. Create a file `src/links/links.spec.ts` and add the following code:
+Now that the utility functions are created, let's use them and set up the tests. Create a file `src/links/links.spec.ts` and add the following code:
 
 ```ts
 import { INestApplication } from '@nestjs/common';
@@ -115,7 +115,7 @@ describe('Links', () => {
 
 Remember this setup as it will look similar when we create another spec (short for specification) file for other features. If you could focus on the `onBeforeInit()` function, this is how easily we could get the module, in this case `dbConnection`, from the Nest application by just passing the `Connection` class from `typeorm`. We then pass it to the `clearRepositories()` function to clear all the repositories in our database.
 
-Now for the first test case, we can to test the feature of getting all the links. This is how we can do it:
+Now for the first test case, we can test the feature of getting all the links. This is how we can do it:
 
 ```ts
 ...
@@ -134,7 +134,7 @@ describe('Links', () => {
   });
 ```
 
-We started simple, we simulated an [HTTP GET method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request using `supertest` by executing `.get()` function with the path, waited for the response and check whether the `status` and `body` is what we expected. Since there's no data in the database, we expected it to return an empty array `[]`.
+We started simple, we simulated an [HTTP GET method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request using `supertest` by executing the `.get()` function with the path, waited for the response and checked whether the `status` and `body` is what we expected. Since there's no data in the database, we expected it to return an empty array `[]`.
 
 Let's run our application in test **watch** mode by executing the terminal command below:
 
@@ -335,7 +335,7 @@ app_1      |       ✓ should NOT accept invalid data (94 ms)
 
 Great, it passed as well!
 
-Let's now validate where we now pass a **valid** data to the API. Update the file `src/links/links.spec.ts` with the following code below:
+Let's now validate where we now pass **valid** data to the API. Update the file `src/links/links.spec.ts` with the following code below:
 
 ```ts
 ...
@@ -369,7 +369,7 @@ describe('Links', () => {
 });
 ```
 
-So here, we use one of the utility function `createLinkBody()` we created earlier to get a valid link body or data, passed that to the API and waited for the response, then checked whether we got the expected response. We then took the `id` from the response body and checked the database directly whether the link was created and has the same data. Cool ~
+So here, we used one of the utility functions called `createLinkBody()` that we created earlier to get a valid link body or data, passed that to the API and wait for the response, then checked whether we got the expected response. We then took the `id` from the response body and checked the database directly whether the link was created and has the same data. Cool ~
 
 Of course, it should pass as well:
 
@@ -420,7 +420,7 @@ app_1      |     /links (POST)
 app_1      |       ✓ should handle already exists (26 ms)
 ```
 
-Since we have an `if/else` conditional statements where the `if` condition will handle the "already exists" error which we have just validated in the previous test case, we will also need to validate the `else` condition to achieve complete test coverage for this feature. To do that, we can mock the `linksRepository.save()` function with the help of `jest.spyOn()` and throw an error using `.mockRejectedValue()` and pass an empty object `{}` so that `err.code` will be `undefined` - this will be handled by the `else` condition. Do note that if we mock a function, it will affect other test cases unless we restore it back to its original state using `.mockRestore()`. To write that in code, update the file `src/links/links.spec.ts` with the following below:
+Since we have an `if/else` conditional statement where the `if` condition will handle the "already exists" error which we have just validated in the previous test case, we will also need to validate the `else` condition to achieve complete test coverage for this feature. To do that, we can mock the `linksRepository.save()` function with the help of `jest.spyOn()` and throw an error using `.mockRejectedValue()` and pass an empty object `{}` so that `err.code` will be `undefined` - this will be handled by the `else` condition. Do note that if we mock a function, it will affect other test cases unless we restore it back to its original state using `.mockRestore()`. To write that in code, update the file `src/links/links.spec.ts` with the following below:
 
 ```ts
 ...
@@ -518,7 +518,7 @@ app_1      |     /links/:id (DELETE)
 app_1      |       ✓ should NOT accept invalid id (20 ms)
 ```
 
-For the next test case, it should be quite easy to write. Just to refresh our memory, every test case starts with an empty database due to the `clearRepositories()` function run before each test cases. So any `id` will not exist by default. We just need to generate a random `id`, call the API with that and expect to get a "not found" error in the response. To do that, make the following code changes:
+For the next test case, it should be quite easy to write. Just to refresh our memory, every test case starts with an empty database due to the `clearRepositories()` function run before each test case. So any `id` will not exist by default. We just need to generate a random `id`, call the API with that and expect to get a "not found" error in the response. To do that, make the following code changes:
 
 ```ts
 ...
@@ -542,7 +542,7 @@ describe('Links', () => {
 });
 ```
 
-You should be familiar on what was done here, but something new that we did though is that for the `message` in the response body, we did an exact check of the `string` value instead of just type checking, that's because we did defined that by ourselves earlier.
+You should be familiar with what was done here, but something new that we did though is that for the `message` in the response body, we did an exact check of the `string` value instead of just type checking, that's because we did define that by ourselves earlier.
 
 Once again this test case should pass:
 
@@ -597,7 +597,7 @@ Let's move to the next feature to be tested ~
 
 ## Write tests for update a link feature
 
-For update a link feature, all test cases except one is a combination of what we have already done for the previous features. We just have to replace the method to use `.put()`. Let's settle those first and add the following code:
+For updating a link feature, all test cases except one are a combination of what we have already done for the previous features. We just have to replace the method to use `.put()`. Let's settle those first and add the following code:
 
 ```ts
 ...
@@ -727,7 +727,7 @@ app_1      |       ✓ should handle update (30 ms)
 
 ## Write tests for redirect to URL by name feature
 
-For the final feature we need to write tests for is redirect to URL by its (short) name. Since this feature is located in another module (`WildcardModule`), let's create a new file `src/wildcard/wildcard.spec.ts` and add the same code we did for the setup earlier, let's also keep `createLinkItem()` function and `linksRepository` as we will be needing it here too:
+For the final feature we need to write tests for is the redirect to the URL by its (short) name. Since this feature is located in another module (`WildcardModule`), let's create a new file `src/wildcard/wildcard.spec.ts` and add the same code we did for the setup earlier, let's also keep `createLinkItem()` function and `linksRepository` as we will be needing it here too:
 
 ```ts
 import { INestApplication } from '@nestjs/common';
@@ -767,7 +767,7 @@ describe('Wildcard', () => {
 });
 ```
 
-Alright, for the first test case of this feature, we should get a "not found" error if simulate a GET request to a non-existing name. Since you should have quite an experience now with writing tests. That should be easy, right? Try it on your own before looking at the code below:
+Alright, for the first test case of this feature, we should get a "not found" error if we simulate a GET request to a non-existing name. Since you should have quite an experience now with writing tests. That should be easy, right? Try it on your own before looking at the code below:
 
 ```ts
 ...
@@ -787,7 +787,7 @@ describe('Wildcard', () => {
 });
 ```
 
-Did you did it on your own? I hope so! But if not, that's fine because reaching this stage is still an achievement!
+Did you do it on your own? I hope so! But if not, that's fine because reaching this stage is still an achievement!
 
 Once we save the changes, it should log something like this:
 
@@ -837,7 +837,7 @@ yarn docker-compose:test:cov
 
 You should see that we have achieved 100% coverage for both `LinksModule` and `WildcardModule`. That's awesome!
 
-And we are done! To be honest, I'm quite new in building applications with NestJS and writing this post was my way in sharpening my knowledge with this framework. So I hope you have learned a lot from this post as I have. Please don't forget to share this post if you found it helpful, share it with your friends and colleagues who might find this helpful too.
+And we are done! To be honest, I'm quite new in building applications with NestJS and writing this post was my way of sharpening my knowledge with this framework. So I hope you have learned a lot from this post as I have. Please don't forget to share this post if you found it helpful, share it with your friends and colleagues who might find this helpful too.
 
 In case you need the final code of the URL shortener application as a reference, here's the [GitHub repository](https://github.com/dominicarrojado/nestjs-postgres-url-shortener).
 

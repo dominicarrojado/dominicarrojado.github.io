@@ -8,7 +8,7 @@ videoUrl: ''
 
 ## Introduction
 
-This is a guide on how to setup a local development for [NestJS](https://docs.nestjs.com/) (a progressive [Node.js](https://nodejs.org/en/) framework) projects with [TypeScript](https://www.typescriptlang.org/), [MongoDB](https://www.mongodb.com/) and [mongo-express](https://github.com/mongo-express/mongo-express) using [Docker Compose](https://docs.docker.com/compose/). We'll be using [TypeORM](https://typeorm.io/) to connect and talk to our MongoDB database. This is your quick way to get started with Nest and it also involves extensions and libraries that helps us save time and energy when writing our code.
+This is a guide on how to set up a local development for [NestJS](https://docs.nestjs.com/) (a progressive [Node.js](https://nodejs.org/en/) framework) projects with [TypeScript](https://www.typescriptlang.org/), [MongoDB](https://www.mongodb.com/) and [mongo-express](https://github.com/mongo-express/mongo-express) using [Docker Compose](https://docs.docker.com/compose/). We'll be using [TypeORM](https://typeorm.io/) to connect and talk to our MongoDB database. This is your quick way to get started with Nest and it also involves extensions and libraries that helps us save time and energy when writing our code.
 
 ## Skip
 
@@ -93,7 +93,7 @@ You can also install [ESLint](https://marketplace.visualstudio.com/items?itemNam
 
 ## Dockerfile
 
-A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is text document that contains the instructions for Docker to assemble or build an image.
+A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text document that contains the instructions for Docker to assemble or build an image.
 
 Let's create a `Dockerfile` in the root folder of our application and add the following code below:
 
@@ -117,7 +117,7 @@ RUN yarn build
 CMD [ "yarn", "start:prod" ]
 ```
 
-If you're new to Docker or you need an explanation of what each line does, you can refer to the [section here](https://docs.docker.com/language/nodejs/build-images/#create-a-dockerfile-for-nodejs) from [Docker Documentation](https://docs.docker.com/), they explained it really well on while walking you through the process of creating a Dockerfile for Node.js. The `Dockerfile` we have created here is based from their example.
+If you're new to Docker or you need an explanation of what each line does, you can refer to the [section here](https://docs.docker.com/language/nodejs/build-images/#create-a-dockerfile-for-nodejs) from [Docker Documentation](https://docs.docker.com/), they explained it really well while walking you through the process of creating a Dockerfile for Node.js. The `Dockerfile` we have created here is based on their example.
 
 Next, let's create a `.dockerignore` file in the root folder with the following content:
 
@@ -160,7 +160,7 @@ To run an image inside of a container, we use the `docker run` command. Let's st
 docker run --detach --publish 3000:3000 nest-docker
 ```
 
-We have 2 parameters in this command, that's `--detach` and `--publish 3000:3000`. So remember that contianers runs in isolation, hence we are not able to connect to it unless we publish it. To publish a port for our container, we used the `--publish` flag (-p for short) on the docker run command. The format of the `--publish` command is `[host port]:[container port]`. We can then access our application running in the `container port` via the `host port`. While `--detach` basically runs our container in detached mode or in the background so that our terminal (which where we ran the command) will not have it connected.
+We have 2 parameters in this command, that's `--detach` and `--publish 3000:3000`. So remember that containers run in isolation, hence we are not able to connect to it unless we publish it. To publish a port for our container, we used the `--publish` flag (-p for short) on the docker run command. The format of the `--publish` command is `[host port]:[container port]`. We can then access our application running in the `container port` via the `host port`. While `--detach` basically runs our container in detached mode or in the background so that our terminal (which where we ran the command) will not have it connected.
 
 ![Screenshot of Docker Desktop containers](/images/posts/local-development-setup-for-nestjs-projects-with-mongodb/docker-desktop-containers.png)
 
@@ -172,7 +172,7 @@ Now we have successfully containerized our application.
 
 ## Multi-stage builds
 
-Currently, we only containerized our application for **production**. But how about for (local) **development**? [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds) is the way to go. With multi-stage builds, we can use multiple `FROM` statements in our Dockerfile. Each `FROM` instruction can use a different base, and each of them begins a new stage of the build.
+Currently, we only containerized our application for **production**. But how about for (local) **development**? [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds) are the way to go. With multi-stage builds, we can use multiple `FROM` statements in our Dockerfile. Each `FROM` instruction can use a different base, and each of them begins a new stage of the build.
 
 Let's update our `Dockerfile` with the following code:
 
@@ -310,7 +310,7 @@ Let's build and run our Docker Compose and everything should be working fine:
 yarn docker-compose:dev
 ```
 
-Once all the environments are up and running, open your browser and go to `http://localhost:8081/`. You will be prompt to log in to mongo-express. Type in the username (`admin`) and password (`mexpress`) we have provided in the `docker-compose.yml`.
+Once all the environments are up and running, open your browser and go to `http://localhost:8081/`. You will be prompted to log in to mongo-express. Type in the username (`admin`) and password (`mexpress`) we have provided in the `docker-compose.yml`.
 
 After successfully logging in, you should see something like this:
 
@@ -632,7 +632,7 @@ FROM base AS prod
 ...
 ```
 
-Note that for `test:watch` to know what has change within the application code, it relies on [git](https://git-scm.com/), so we had some additional instructions for it.
+Note that for `test:watch` to know what has changed within the application code, it relies on [git](https://git-scm.com/), so we had some additional instructions for it.
 
 Let's create `production.yml` in the root folder with the following content:
 
@@ -665,7 +665,7 @@ services:
       - ./coverage:/app/coverage
 ```
 
-You should already be familiar with `volumes`. Here, we we are basically syncing the `coverage` folder so that the coverage files generated from the application container will be synced with our current directory. Useful for [`CI/CD`](https://en.wikipedia.org/wiki/CI/CD) where you need to upload the test coverage to a service such as [`codecov`](https://about.codecov.io/).
+You should already be familiar with `volumes`. Here, we are basically syncing the `coverage` folder so that the coverage files generated from the application container will be synced with our current directory. Useful for [`CI/CD`](https://en.wikipedia.org/wiki/CI/CD) where you need to upload the test coverage to a service such as [`codecov`](https://about.codecov.io/).
 
 Then create `test-watch.yml` in the root folder with the following content:
 
@@ -682,7 +682,7 @@ Same as above. Here, we are syncing the `.git` folder from our current directory
 
 ---
 
-Let's also move the `dbadmin` service block from `docker-compose.yml` to a new separate file called `dbadmin.yml` as it will only be utilized during `development` but we don't need to that service when we're just running tests.
+Let's also move the `dbadmin` service block from `docker-compose.yml` to a new separate file called `dbadmin.yml` as it will only be utilized during `development` but we don't need that service when we're just running tests.
 
 ```yml
 services:
@@ -756,7 +756,7 @@ Also, with the `-f` option, we are able to use a second configuration file along
 
 ## Final words
 
-Well, there you have it! You now have a full-fledged local development setup. Go ahead and start coding your Nest applications from this setup! I hope this was helpful for you, do share this post if you feel that it will be helpful for someone else too. I'll be doing another post soon on how to build an application using NestJS framework leveraging on this setup so stay tuned if you're intestered. ~
+Well, there you have it! You now have a full-fledged local development setup. Go ahead and start coding your Nest applications from this setup! I hope this was helpful for you, do share this post if you feel that it will be helpful for someone else too. By the way, I did [a post](/building-a-link-shortener-api-with-nestjs-and-mongodb-with-tests-part-1/) on how to build an application using NestJS framework leveraging this setup in case you're interested. Thanks for reading ~
 
 ## Online references
 

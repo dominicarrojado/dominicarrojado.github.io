@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/2Zb93oc0068'
 
 ## Introduction
 
-[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to [GitHub Pages](https://pages.github.com/) whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository) and this will automated using [GitHub Actions](https://github.com/features/actions). This setup will also involve extensions and libraries that helps us write our code efficiently.
+[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to [GitHub Pages](https://pages.github.com/) whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository) and this will be automated using [GitHub Actions](https://github.com/features/actions). This setup will also involve extensions and libraries that help us write our code efficiently.
 
 ## Skip
 
@@ -254,7 +254,7 @@ export default Home;
 
 ---
 
-[Image Optimization](https://nextjs.org/docs/basic-features/image-optimization) is not compatible with `next export` which is what we're going to use later for the build and deployment. Hence, we are using `<img />` here instead of `<Image />` from `next/image`. Although, using `<img />` in the code will trigger an ESLint rule violation, so we need to update `.eslintrc.json` to disable that rule:
+[Image Optimization](https://nextjs.org/docs/basic-features/image-optimization) is not compatible with the `next export` which is what we're going to use later for the build and deployment. Hence, we are using `<img />` here instead of `<Image />` from `next/image`. Although, using `<img />` in the code will trigger an ESLint rule violation, so we need to update `.eslintrc.json` to disable that rule:
 
 ```json
 {
@@ -265,7 +265,7 @@ export default Home;
 }
 ```
 
-Open your browser to check if our application is still working fine and looks the same as before. It should still work fine although it won't be a 100% accurate as before but at least we're now using TailwindCSS classes in the code and that's what matters.
+Open your browser to check if our application is still working fine and looks the same as before. It should still work fine although it won't be 100% accurate as before but at least we're now using TailwindCSS classes in the code and that's what matters.
 
 For a better development experience with TailwindCSS, look for "Tailwind CSS IntelliSense" in the "Extensions" tab of Visual Studio Code and install it. You can also install it via this [link](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
 
@@ -367,7 +367,7 @@ You can also run `yarn test:watch` if you want to keep the local server running 
 
 ## Add page extensions config
 
-To colocate test files, generated files, or other files used by components in the `pages` directory, you can prefix the extensions with something like `page`.
+To collocate test files, generated files, or other files used by components in the `pages` directory, you can prefix the extensions with something like `page`.
 
 Open `next.config.js` and add the `pageExtensions` config:
 
@@ -409,7 +409,7 @@ I am actually using these two technologies to deploy this tech blog website of m
 
 To get started, delete the `pages/api` folder since we'll only be deploying the static files of our Next.js project.
 
-Then let's add `next export` into the scripts under `package.json`. `next export` allows us to export our Next.js application to static HTML, which can be run standalone without the need of a Node.js server. This script will generate an `out` directory. The `out` directory can be served by any static hosting service or CDN.
+Then let's add the `next export` into the scripts under `package.json`. `next export` allows us to export our Next.js application to static HTML, which can be run standalone without the need of a Node.js server. This script will generate an `out` directory. The `out` directory can be served by any static hosting service or CDN.
 
 Update `package.json` file to add the deployment scripts:
 
@@ -597,7 +597,7 @@ jobs:
         uses: actions/checkout@v3
 ```
 
-Then second step is to set up Node.js using the verson we defined in `strategy`:
+Then second step is to set up Node.js using the version we defined in `strategy`:
 
 ```yml
 jobs:
@@ -611,7 +611,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 ```
 
-These first two steps is pretty standard for Node.js projects such as Next.js. With these, we can install the npm package dependencies and run scripts in our `package.json`.
+These first two steps are pretty standard for Node.js projects such as Next.js. With these, we can install the npm package dependencies and run scripts in our `package.json`.
 
 ```yml
 jobs:
@@ -684,7 +684,7 @@ git remote add origin git@github.com:YOUR_GITHUB_USERNAME/my-app.git
 git push -u origin main
 ```
 
-Once you pushed your changes, it will trigger the GitHub Actions workflow. You can check its progress on your repository. You can type the link in your browser `https://github.com/YOUR_GITHUB_USERNAME/my-app/actions` and replace `YOUR_GITHUB_USERNAME` with your GitHub username.
+Once you push your changes, it will trigger the GitHub Actions workflow. You can check its progress on your repository. You can type the link in your browser `https://github.com/YOUR_GITHUB_USERNAME/my-app/actions` and replace `YOUR_GITHUB_USERNAME` with your GitHub username.
 
 It will take a few minutes to build and you should see something like on the page:
 
@@ -694,7 +694,7 @@ When we have the green tick or check icon for `pages build and deployment`, that
 
 ![Screenshot of broken Create Next App deployed on GitHub Pages](/images/posts/local-development-setup-for-nextjs-typescript-and-tailwindcss-projects/create-next-app-deployed-on-github-pages-broken.png)
 
-Yes, it doesn't look right and most of the assets are returning [404 or Not Found error](https://en.m.wikipedia.org/wiki/HTTP_404). Why is this happening? That's because GitHub pages by default goes to [Jekyll processing](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and files or directories with underscores (`_`) are considered by Jekyll to be special resources and does not copy them to the final site and the output of Next.js build have the assets inside the `_next/static` directory.
+Yes, it doesn't look right and most of the assets are returning [404 or Not Found errors](https://en.m.wikipedia.org/wiki/HTTP_404). Why is this happening? That's because GitHub pages by default goes to [Jekyll processing](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and files or directories with underscores (`_`) are considered by Jekyll to be special resources and does not copy them to the final site and the output of Next.js build have the assets inside the `_next/static` directory.
 
 To fix this, we can follow the advice from GitHub [here](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/).
 
@@ -766,7 +766,7 @@ Now our CI/CD workflow is complete.
 
 Next thing we want is to have a workflow that automatically runs when a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) is created from the repository. This will become our first line of defense before we approve the code and merge it to the `main` branch.
 
-We can duplicate the changes we've made in `ci.yml` in another file `.github/workflows/pr.yml`. We only have to do minor changes to it. First, of course is to update the `name` to `PR`. Then, on the `on` syntax, we want to use `pull_request` instead of `push`. Lastly, we want to remove both `permissions` syntax and `Deploy` step from the `steps` because the changes in a Pull Request is not meant to be deployed to production until it is approved and merged to the `main` branch. The final code for `.github/workflows/pr.yml` should look like this:
+We can duplicate the changes we've made in `ci.yml` in another file `.github/workflows/pr.yml`. We only have to make minor changes to it. First, of course is to update the `name` to `PR`. Then, on the `on` syntax, we want to use `pull_request` instead of `push`. Lastly, we want to remove both `permissions` syntax and `Deploy` step from the `steps` because the changes in a Pull Request are not meant to be deployed to production until it is approved and merged to the `main` branch. The final code for `.github/workflows/pr.yml` should look like this:
 
 ```yml
 name: PR
@@ -830,7 +830,7 @@ jobs:
 
 ## Set up GitHub Actions Code Scanning workflow
 
-Okay, we're almost done with the workflows. The last workflow we want to create is for code scanning. Code scanning helps us prevent security issues in the code. Luckily for us, [GitHub code scanning](https://github.com/features/security) was made [available on September 2020](https://github.blog/2020-09-30-code-scanning-is-now-available/). It is a developer-first, GitHub-native approach to easily find security vulnerabilities before they reach production. Code scanning integrates with GitHub Actions.
+Okay, we're almost done with the workflows. The last workflow we want to create is for code scanning. Code scanning helps us prevent security issues in the code. Luckily for us, [GitHub code scanning](https://github.com/features/security) was made [available in September 2020](https://github.blog/2020-09-30-code-scanning-is-now-available/). It is a developer-first, GitHub-native approach to easily find security vulnerabilities before they reach production. Code scanning integrates with GitHub Actions.
 
 To set up the code scanning workflow, simply create a file `.github/workflows/cs.yml` and add the following code:
 

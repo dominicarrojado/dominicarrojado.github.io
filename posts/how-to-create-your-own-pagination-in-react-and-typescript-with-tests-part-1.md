@@ -306,7 +306,7 @@ export default function Pagination({
 }
 ```
 
-This is just an example, your base URL may be different and the way how you handle the different page URLs may also be different, the page number could be in the query params instead of being part of the path. I hope I can leave that up to you - you can use the code above for your reference.
+This is just an example, your base URL may be different and the way you handle the different page URLs may also be different, the page number could be in the query params instead of being part of the path. I hope I can leave that up to you - you can use the code above for your reference.
 
 ---
 
@@ -344,7 +344,7 @@ export default function App() {
 }
 ```
 
-Once you saved the changes. This is how our component will look like on the page:
+Once you save the changes, this is how our component will look like on the page:
 
 ![Screenshot of pagination built in React and TypeScript](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/pagination.png)
 
@@ -554,7 +554,7 @@ export function getPaginationItems(
 
 ---
 
-You can actually change the type of the result array to `Array<number | string>` which we call a [union type in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#defining-a-union-type) and then push the ellipsis `...` string in the result array. But I just felt that keeping it as just `Array<number>` and pushing `NaN` as the ellipsis would be simpler especially when handling the "Previous" and "Next" buttons where we add or substruct the `currentPage` to get their page numbers. Then we can just do a logic in the [JSX](https://reactjs.org/docs/introducing-jsx.html) to display ellipsis `...` if the item in the result array is `NaN` using the [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) check.
+You can actually change the type of the result array to `Array<number | string>` which we call a [union type in TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#defining-a-union-type) and then push the ellipsis `...` string in the result array. But I just felt that keeping it as just `Array<number>` and pushing `NaN` as the ellipsis would be simpler especially when handling the "Previous" and "Next" buttons where we add or subtract the `currentPage` to get their page numbers. Then we can just do a logic in the [JSX](https://reactjs.org/docs/introducing-jsx.html) to display ellipsis `...` if the item in the result array is `NaN` using the [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) check.
 
 To complete the result array for this case, let's fill the result array with the numbers on the _right_ side of the ellipsis `...` by iterating from `lastPage` minus `sideLength` up to the `lastPage`:
 
@@ -600,14 +600,14 @@ getPaginationItems(6, 10, 7); // expected: [1, ..., 5, 6, 7, ..., 10]
 
 This is also considered to fall under the case where `lastPage` is more than `maxLength` and hence it will have an ellipsis `...` in the result array.
 
-Let's first determine in what case does the result array will contain two ellipsis `...`. Try to think about it for a moment and look at the examples again.
+Let's first determine in what case the result array will contain two ellipses `...`. Try to think about it for a moment and look at the examples again.
 
 ---
 
 Now see if your thoughts are the same as mine. It occurs if **both** of the conditions below are met:
 
-1. The difference of the `currentPage` and the first page is `4` and above (e.g. `5 - 1 = 4`, `6 - 1 = 5`).
-2. The difference of the `lastPage` and the `currentPage` is `4` and above (e.g. `10 - 5 = 5`, `10 - 6 = 4`).
+1. The difference between the `currentPage` and the first page is `4` and above (e.g. `5 - 1 = 4`, `6 - 1 = 5`).
+2. The difference between the `lastPage` and the `currentPage` is `4` and above (e.g. `10 - 5 = 5`, `10 - 6 = 4`).
 
 The same case as the earlier case, the value `4` here should be dynamic and should depend on the `maxLength`. This value should look familiar to you, that's because we already have this dynamic value earlier in the code. That would be the `deductedMaxLength`. Let's use that and update the code with the following:
 
@@ -643,10 +643,10 @@ export function getPaginationItems(
 }
 ```
 
-Alright, now that we know the condition for the case where we have two ellipsis, we can now proceed to fill in the result array with the page numbers. Let's start with a couple of observations below:
+Alright, now that we know the condition for the case where we have two ellipses, we can now proceed to fill in the result array with the page numbers. Let's start with a couple of observations below:
 
 1. The `currentPage` is always in the middle of the result array.
-2. The numbers surrounding the `currentPage` depends on the `maxLength`. The number needed on each side should be dynamic. If `7` is the `maxLength`, there's only one number on each side of the `currentPage`. If `9` is the `maxLength`, there should be two numbers on each side of the `currentPage`.
+2. The numbers surrounding the `currentPage` depend on the `maxLength`. The number needed on each side should be dynamic. If `7` is the `maxLength`, there's only one number on each side of the `currentPage`. If `9` is the `maxLength`, there should be two numbers on each side of the `currentPage`.
 3. The ellipsis `...` is always beside both the first page and the `lastPage`.
 
 Let's start with the easy change first. We just need to push the first page and `NaN` in the result array:
@@ -681,7 +681,7 @@ getPaginationItems(6, 10, 7); // current: [1, NaN] | expected: [1, NaN, 5, 6, 7,
 
 ---
 
-Now let's think of how to generate the numbers around the `currentPage`. If you remember in one of the observations, if `maxLength` is `7`, we need one number on each side. We can make use of another existing dynamic value which is the `sideLength`. The value of `sideLength` is `2` which is the length needed in each sides, since we already know that there is an ellipsis or `NaN` on each side of the result array, we can just have to deduct the `sideLength` by `1`: `2 - 1 = 1`. Now we get `1` which means we need to generate one number on each side of the `currentPage`. We can now do the iteration for the numbers around the `currentPage` or what we may call the numbers in the middle of the result array. After the iteration, we can just push the remaining items of the result array which are `NaN` and the `lastPage`, here's the code for that:
+Now let's think of how to generate the numbers around the `currentPage`. If you remember in one of the observations, if `maxLength` is `7`, we need one number on each side. We can make use of another existing dynamic value which is the `sideLength`. The value of `sideLength` is `2` which is the length needed in each side, since we already know that there is an ellipsis or `NaN` on each side of the result array, we can just have to deduct the `sideLength` by `1`: `2 - 1 = 1`. Now we get `1` which means we need to generate one number on each side of the `currentPage`. We can now do the iteration for the numbers around the `currentPage` or what we may call the numbers in the middle of the result array. After the iteration, we can just push the remaining items of the result array which are `NaN` and the `lastPage`, here's the code for that:
 
 ```ts
 export function getPaginationItems(

@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/Qpo4gUfv2Fs'
 
 ## Introduction
 
-There's tons of OTP (one-time password) or OTC (one-time code) input I have seen out there, but most of them were difficult to use or doesn't give me a great user experience. For example, when I get prompt with an OTP input on mobile that only accepts digits, once I focus on it, the mobile keyboard should only display numbers but for some web applications they display the alphabet keyboard. Another example is that if I receive an [SMS message](https://en.wikipedia.org/wiki/SMS) containing the one-time code I need to fill in, my phone should be able to automatically fill in or suggest the passcodes for the input but again some web apps don't follow the proper implementation. You want more examples? If the OTP input is implemented in separate input boxes where only one digit per input box is allowed, when I type in the digit, it should automatically focus to the next input and yet again some web apps aren't able to do that! Yes, you can tell I'm a little bit frustrated that I had to do this post. My solution here may not be perfect but I hope it still helps web developers out there to know what are the considerations and best practices when implementing the OTP input. Although, this post could be much shorter if we just implement the OTP input in one input box, but where's the challenge in that if we don't implement them in separate input boxes, right? So without further ado, let's get on with it ~
+There's tons of OTP (one-time password) or OTC (one-time code) input I have seen out there, but most of them were difficult to use or didn't give me a great user experience. For example, when I get a prompt with an OTP input on mobile that only accepts digits, once I focus on it, the mobile keyboard should only display numbers but for some web applications they display the alphabet keyboard. Another example is that if I receive an [SMS message](https://en.wikipedia.org/wiki/SMS) containing the one-time code I need to fill in, my phone should be able to automatically fill in or suggest the passcodes for the input but again some web apps don't follow the proper implementation. Do you want more examples? If the OTP input is implemented in separate input boxes where only one digit per input box is allowed, when I type in the digit, it should automatically focus on the next input and yet again some web apps aren't able to do that! Yes, you can tell I'm a little bit frustrated that I had to do this post. My solution here may not be perfect but I hope it still helps web developers out there to know what are the considerations and best practices when implementing the OTP input. Although, this post could be much shorter if we just implement the OTP input in one input box, but where's the challenge in that if we don't implement them in separate input boxes, right? So without further ado, let's get on with it ~
 
 ## Prerequisites
 
@@ -198,13 +198,13 @@ After saving the changes, we should see our web application in the browser like 
 
 ![Screenshot of React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-1.png)
 
-Great, that is looking like an OTP input now but it is lacking the logics that makes it an OTP input so let's proceed to implementing those.
+Great, that is looking like an OTP input now but it is lacking the logic that makes it an OTP input so let's proceed to implementing those.
 
 ## Construct array from value prop
 
-For the first logic we need to implement, is transforming the `value` string we get from the `props` into an array like we did earlier so it that we can loop it and display them as individual input boxes. This time instead of hardcoding the array, it will be a dynamic array instead.
+The first logic we need to implement is transforming the `value` string we get from the `props` into an array like we did earlier so that we can loop it and display them as individual input boxes. This time instead of hardcoding the array, it will be a dynamic array instead.
 
-So for example we are given a `value` prop of `'654321'`, we convert it into an array `[6, 5, 4, 3, 2, 1]`. This is achievable by just doing a JavaSript string method [`.split('')`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split). But what if we are only given a string with less than the expected length (e.g. `6`), let's say `'214'` which only has a length of `3` characters, our array should still be a length of `6` or the number we got from `valueLength` prop.
+So for example we are given a `value` prop of `'654321'`, we convert it into an array `[6, 5, 4, 3, 2, 1]`. This is achievable by just doing a JavaScript string method [`.split('')`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split). But what if we are only given a string with less than the expected length (e.g. `6`), let's say `'214'` which only has a length of `3` characters, our array should still be a length of `6` or the number we got from `valueLength` prop.
 
 How do we do this?
 
@@ -280,7 +280,7 @@ Alright. After you're done testing it, revert the default value back to an empty
 
 If you try to type anything on the inputs, it will not change, because the values are hardcoded to the array we constructed, and the said array only changes if the `value` prop changes from the parent `App` component. Currently, we're not doing anything to change the `value` prop from the parent component. So let's handle that.
 
-We can attach an [change event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event) listener to each input boxes. The challenging part right here is that, each input boxes is assigned to a position in the constructed array. So any change in a particular input boxes shouldn't affect the value from other inputs. We can make use of the index `idx` we got from looping the array to handle this along with the help of a JavaScript string method [`.substring()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) to construct the new `value` prop string. To change the `value` prop from the parent component, we can pass the new value to the `onChange()` prop function. We can also utilise here the regular expression we created earlier to only allow digits in the change event. If user tries to input a letter or a special character, that shouldn't be displayed in the input boxes or simply does not update the `value` prop string. To write this in code, we'll have something like this in `src/components/OtpInput.tsx`:
+We can attach an [change event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event) listener to each input box. The challenging part right here is that each input box is assigned to a position in the constructed array. So any change in a particular input box shouldn't affect the value from other inputs. We can make use of the index `idx` we got from looping the array to handle this along with the help of a JavaScript string method [`.substring()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) to construct the new `value` prop string. To change the `value` prop from the parent component, we can pass the new value to the `onChange()` prop function. We can also utilize here the regular expression we created earlier to only allow digits in the change event. If a user tries to input a letter or a special character, that shouldn't be displayed in the input boxes or simply does not update the `value` prop string. To write this in code, we'll have something like this in `src/components/OtpInput.tsx`:
 
 ```tsx
 import React, { useMemo } from 'react';
@@ -319,11 +319,11 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 }
 ```
 
-If you're new to TypeScript, we need to define the type for the arguments in `inputOnChange` function here. The type for the `onChange` attribute in React is `React.ChangeEvent` from the imported `react` library which accepts the type of the element as an argument and that would be `HTMLInputElement` that is already available globally without importing it from anywhere.
+If you're new to TypeScript, we need to define the type for the arguments in the `inputOnChange` function here. The type for the `onChange` attribute in React is `React.ChangeEvent` from the imported `react` library which accepts the type of the element as an argument and that would be `HTMLInputElement` that is already available globally without importing it from anywhere.
 
 ---
 
-Save the changes and let's see what happens when we try to input digits in the first input box. You'll notice the first digit we input is displayed correctly, but as you type more digits in the same input box, the other input boxes gets populated but the focus is still in the same input box. This looks wrong and let's fix that by focusing on the next input box or the [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling). Update the file `src/components/OtpInput.tsx` with the following code:
+Save the changes and let's see what happens when we try to input digits in the first input box. You'll notice the first digit we input is displayed correctly, but as you type more digits in the same input box, the other input boxes get populated but the focus is still in the same input box. This looks wrong and let's fix that by focusing on the next input box or the [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling). Update the file `src/components/OtpInput.tsx` with the following code:
 
 ```tsx
 ...
@@ -349,7 +349,7 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 }
 ```
 
-If you're new to TypeScript, you'll notice I used `as HTMLInputElement | null` here. This is called a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions). If we remove the type assertion, the type of `target.nextElementSibling` would just be `Element | null`, and if we leave it like that, it will have a TypeScript error stating that `.focus()` is not a function in `Element` but it does exists if the type is `HTMLInputElement`. That's why a type assertion is done here when we have information about the type of a value that TypeScript possibly can't know about.
+If you're new to TypeScript, you'll notice I used `as HTMLInputElement | null` here. This is called a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions). If we remove the type assertion, the type of `target.nextElementSibling` would just be `Element | null`, and if we leave it like that, it will have a TypeScript error stating that `.focus()` is not a function in `Element` but it does exist if the type is `HTMLInputElement`. That's why a type assertion is done here when we have information about the type of a value that TypeScript possibly can't know about.
 
 Alright, once you save the changes. Let's try typing digits into the input boxes again:
 
@@ -365,7 +365,7 @@ What's next?
 
 Currently, if you try to delete the digit from one of the input boxes using [backspace](https://en.wikipedia.org/wiki/Backspace) in your keyboard, it does _not_ do anything. Let's handle that.
 
-If we relook at our logic in `inputOnChange` function, we only allow digits. When we delete a digit, the change event will be triggered and the `targetValue` would be an empty string `''` which is _not_ a digit, but we can allow that to implement deletion. Once we allow an empty string `''` from `targetValue`, we need to replace that with a space `' '` so that the values from other input boxes won't break since each input boxes is assigned to the position based from the `value`, for example `value` prop is `123456` which displays the input boxes like this `[1][2][3][4][5][6]`. If we were to delete a digit in the middle (e.g. `3`) when there are digits (`4`, `5` and `6`) on the right; the input boxes should be displayed like this `[1][2][ ][4][5][6]`. Let's translate this into the code and update `src/components/OtpInput.tsx`:
+If we relook at our logic in the `inputOnChange` function, we only allow digits. When we delete a digit, the change event will be triggered and the `targetValue` would be an empty string `''` which is _not_ a digit, but we can allow that to implement deletion. Once we allow an empty string `''` from `targetValue`, we need to replace that with a space `' '` so that the values from other input boxes won't break since each input boxes is assigned to the position based from the `value`, for example `value` prop is `123456` which displays the input boxes like this `[1][2][3][4][5][6]`. If we were to delete a digit in the middle (e.g. `3`) when there are digits (`4`, `5` and `6`) on the right; the input boxes should be displayed like this `[1][2][ ][4][5][6]`. Let's translate this into the code and update `src/components/OtpInput.tsx`:
 
 ```tsx
 ...
@@ -408,7 +408,7 @@ export default function OtpInput({ value, valueLength, onChange }: Props) {
 }
 ```
 
-Now save the changes and try typing digits and then delete them. It will delete the digit in the input box you're currently focused in. To improve the experience when you try to delete when there's already no digit in the input box, it should focus on the previous input box [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling) and delete the digit in it. Do note that the change event will not be triggered if we try to press backspace where the input box is already empty. We will have to rely on the [keydown event](https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event) instead. Here's the code to handle that in `src/components/OtpInput.tsx`:
+Now save the changes and try typing digits and then delete them. It will delete the digit in the input box you're currently focused on. To improve the experience when you try to delete when there's already no digit in the input box, it should focus on the previous input box [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling) and delete the digit in it. Do note that the change event will not be triggered if we try to press backspace where the input box is already empty. We will have to rely on the [keydown event](https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event) instead. Here's the code to handle that in `src/components/OtpInput.tsx`:
 
 ```tsx
 ...
@@ -453,7 +453,7 @@ Are we done? Nope. There's still a couple more things we need to do to make this
 
 ## Select digit on focus event
 
-When we have typed the digits completely, and let's say we have input one incorrect digit in the middle, when we click on that input box, the input cursor caret may land on the right side of the digit and when that happens and you typed another digit, it messes up the digits from other input boxes. To fix that, simply do a selection of the digit using [`.setSelectionRange()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange) in the input box on [focus event](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event). We should also do the same logic during keydown event because when we focus on an input box and replaced it with the same digit, it will not trigger the change event and the input cursor goes to the right and again that messes up the digits from other inputs once you type again.
+When we have typed the digits completely, and let's say we have input one incorrect digit in the middle, when we click on that input box, the input cursor caret may land on the right side of the digit and when that happens and you typed another digit, it messes up the digits from other input boxes. To fix that, simply do a selection of the digit using [`.setSelectionRange()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange) in the input box on [focus event](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event). We should also do the same logic during the keydown event because when we focus on an input box and replace it with the same digit, it will not trigger the change event and the input cursor goes to the right and again that messes up the digits from other inputs once you type again.
 
 To handle this, let's update `src/components/OtpInput.tsx` with the following code:
 
@@ -560,7 +560,7 @@ Now try copying a 6 digit code (or depending on the value you passed in `valueLe
 
 ## Improve accessibility
 
-To further improve the accessibility of our OTP input component, we also want to implement the feature to go through the input boxes when pressing the [keyboard arrow keys](https://en.wikipedia.org/wiki/Arrow_keys). So if you are in the first input box, when you press either the right or down arrow keys, it should focus on the next input box and when you press either the left or up down arrow keys, it should focus on the previous input box. We already have the code to move the focus to the next or previous input box, so we can refactor the existing code to make them reusable and reduce duplication. We also already have the keydown event listener where we can add this new logic. Do note that these keys have default behaviour in an input text, so we need to prevent that by calling [`Event.preventDefault()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault).
+To further improve the accessibility of our OTP input component, we also want to implement the feature to go through the input boxes when pressing the [keyboard arrow keys](https://en.wikipedia.org/wiki/Arrow_keys). So if you are in the first input box, when you press either the right or down arrow keys, it should focus on the next input box and when you press either the left or up down arrow keys, it should focus on the previous input box. We already have the code to move the focus to the next or previous input box, so we can refactor the existing code to make them reusable and reduce duplication. We also already have the keydown event listener where we can add this new logic. Do note that these keys have default behavior in an input text, so we need to prevent that by calling [`Event.preventDefault()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault).
 
 To write this in code, simply update `src/components/OtpInput.tsx` with the following:
 
@@ -640,7 +640,7 @@ Save those changes and test it out! Here's a demo of all the features we have im
 
 ## Fix focus and deletion issues (Oct. 17, 2022)
 
-A few months later after I have posted the video version of this blog on [YouTube](https://youtu.be/Qpo4gUfv2Fs), I received a comment that there was an issue with the focus. Explaining it in words is kind of difficult so I created a [GIF](https://en.wikipedia.org/wiki/GIF) instead, here's the issue:
+A few months later after I posted the [video version of this blog](https://youtu.be/Qpo4gUfv2Fs) on YouTube, I received a comment that there was an issue with the focus. Explaining it in words is kind of difficult so I created a [GIF](https://en.wikipedia.org/wiki/GIF) instead, here's the issue:
 
 ![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing-2.gif)
 
@@ -675,11 +675,11 @@ Once you saved the changes, it will fix the focus issue:
 
 ![GIF of typing in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-typing-3.gif)
 
-But... once this new logic has been implemented, it will introduce another issue. It is related with deleting digits in the middle. Here's the issue:
+But... once this new logic has been implemented, it will introduce another issue. It is related to deleting digits in the middle. Here's the issue:
 
 ![GIF of deleting in React OTP Input](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/otp-input-deleting-2.gif)
 
-So in the GIF, you can see if we start deleting digits in the middle. It leaves some digits on the right. When you try to focus on the digit on the right, you won't be able to because of the new logic we just imlemented. To fix this and make things simple, we simply won't allow deleting of digits in the middle by checking if the next input element has value.
+So in the GIF, you can see if we start deleting digits in the middle. It leaves some digits on the right. When you try to focus on the digit on the right, you won't be able to because of the new logic we just implemented. To fix this and make things simple, we simply won't allow deleting of digits in the middle by checking if the next input element has value.
 
 Here's the logic we need to add in ``src/components/OtpInput.tsx`:
 

@@ -24,7 +24,7 @@ yarn add @faker-js/faker
 
 ## Add tests for getPaginationItems function
 
-For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Create a new folder named `__tests__` under the `src/lib`. This is where we will put the test files for the utility functions under `src/lib` folder.
+For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Create a new folder named `__tests__` under the `src/lib`. This is where we will put the test files for the utility functions under the `src/lib` folder.
 
 Since we are writing tests for the `getPaginationItems` function in `pagination.ts`, create a file under `src/lib/__tests__` and name it `pagination.test.ts`. This is a common naming convention for test files, make sure it matches the file name that you are testing then add the infix `test` for the test file name.
 
@@ -73,7 +73,7 @@ We just wrote our first test case! Pretty simple isn't it? We used the exact sam
 
 When writing tests, we often need to check that values meet certain conditions. [`expect()`](https://jestjs.io/docs/expect) is another one of Jest's global functions that gives us access to a number of "matchers" that let us validate different things. The matcher we're using here is [`.toEqual()`](https://jestjs.io/docs/expect#toequalvalue) which will compare recursively all properties of object instances (also known as "deep" equality).
 
-You might be thinking here why we didn't use `faker` to generate the arguments for us randomly. That's because we would need to create a function in the test file to generate the expected result depending on the arguments, we'll probably end up copying the code from the main file and that will make the test file complicated and difficult to understand. Hence, it would be better to hardcode the arguments along with the expected result array. If you want to have more confidence in the test cases, you can add more arguments to test.
+You might be thinking here why we didn't use `faker` to generate the arguments for us randomly. That's because we would need to create a function in the test file to generate the expected result depending on the arguments, we'll probably end up copying the code from the main file and that will make the test file complicated and difficult to understand. Hence, it would be better to hardcode the arguments along with the expected result array. If you want to have more confidence in the test cases, you can add more arguments to the test.
 
 Now save your changes and let's verify if this test case will pass or not. In your terminal, run the script command available in `package.json` to run the tests:
 
@@ -81,7 +81,7 @@ Now save your changes and let's verify if this test case will pass or not. In yo
 yarn test --coverage
 ```
 
-The `--coverage` parameter will show you which how many percentage you have covered in each files of your project and/or if you have missed any lines to test. Once the command ran successfully, the terminal should display something like this:
+The `--coverage` parameter will show you how many percentages you have covered in each file of your project and/or if you have missed any lines to test. Once the command ran successfully, the terminal should display something like this:
 
 ![Screenshot of get pagination items function incomplete test coverage](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/get-pagination-items-test-coverage-incomplete.png)
 
@@ -89,9 +89,9 @@ Of course, it will pass as expected because we already know that our function wa
 
 ---
 
-By the way, when you run `yarn test` in a Create React App project, Jest will launch in watch mode. Every time you save a file, it will re-run the tests, like how `yarn start` recompiles the code. That helps to save time when writing tests because we don't have to run the test command again and again on every file changes.
+By the way, when you run `yarn test` in a Create React App project, Jest will launch in watch mode. Every time you save a file, it will re-run the tests, like how `yarn start` recompiles the code. That helps to save time when writing tests because we don't have to run the test command again and again on every file change.
 
-Now that you know how to write a test. The other test cases should be easy enough for you to write on your own. Just remember the arguments from the examples earlier in part 1 and validate with their expected array result. You can use the comments we added in the code as your test cases same way I did for the first test case. Challenge yourself to write those test cases and you can compare it with my code below when you're done.
+Now that you know how to write a test. The other test cases should be easy enough for you to write on your own. Just remember the arguments from the examples earlier in part 1 and validate with their expected array result. You can use the comments we added in the code as your test cases the same way I did for the first test case. Challenge yourself to write those test cases and you can compare it with my code below when you're done.
 
 Done? Now check whether you did something similar with my code below. Here's the rest of test cases:
 
@@ -122,7 +122,7 @@ describe('pagination utilities', () => {
 
 I hope you got it right. If not, don't worry. Just keep learning and practicing and you'll get there!
 
-Once you saved the changes, you can check your terminal which keeps track of the files changes and runs test command and you'll see a whopping 100% test coverage!
+Once you save the changes, you can check your terminal which keeps track of the files changes and runs the test command and you'll see a whopping 100% test coverage!
 
 ![Screenshot of get pagination items function complete test coverage](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/get-pagination-items-test-coverage-complete.png)
 
@@ -132,9 +132,9 @@ I find it very satisfying to see them all green. Don't you too?
 
 ## Add tests for PageLink component
 
-Now moving on to adding tests for `PageLink` component.
+Now moving on to adding tests for the `PageLink` component.
 
-Let's start with a simple test case that the element rendered by our `PageLink` component is an [anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) by _default_ (because if `disabled` prop value is `true` then [span element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span) is rendered). We will need to provide a children when we render the component, so we can use `faker` to generate random data for us. Here's how the first test case for `PageLink` component in `src/components/__tests__/PageLink.test.tsx` will be:
+Let's start with a simple test case that the element rendered by our `PageLink` component is an [anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) by _default_ (because if `disabled` prop value is `true` then the [span element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span) is rendered. We will need to provide a children when we render the component, so we can use `faker` to generate random data for us. Here's how the first test case for `PageLink` component in `src/components/__tests__/PageLink.test.tsx` will be:
 
 ```tsx
 import { faker } from '@faker-js/faker';
@@ -154,15 +154,15 @@ describe('<PageLink />', () => {
 });
 ```
 
-So in the code above, we generated a random lorem ipsum sentence using `faker` as a text and used that as children for the `PageLink` component. Then, we executed [`render()`](https://testing-library.com/docs/react-testing-library/api/#render) method from Testing Library to render our `PageLink` component in a test environment.
+So in the code above, we generated a random lorem ipsum sentence using `faker` as a text and used that as children for the `PageLink` component. Then, we executed the [`render()`](https://testing-library.com/docs/react-testing-library/api/#render) method from the Testing Library to render our `PageLink` component in a test environment.
 
 After rendering the component, we queried for the element by using a method from Testing Library called [`screen`](https://testing-library.com/docs/queries/about/#screen), you can pass a [`queryOptions`](https://testing-library.com/docs/queries/about/#queryoptions) object with the query type. See the [documentation](https://testing-library.com/docs/queries/about/) for each query type to see available options such as [ByText API](https://testing-library.com/docs/queries/bytext).
 
-After getting the element, we did an assertion by using the `expect()` method and pass the element's tag name as the argument, and run the matcher method [`.toBe()`](https://jestjs.io/docs/expect#tobevalue) which compares primitive values or to check referential identity of object instances.
+After getting the element, we did an assertion by using the `expect()` method and passing the element's tag name as the argument, and running the matcher method [`.toBe()`](https://jestjs.io/docs/expect#tobevalue) which compares primitive values or to check referential identity of object instances.
 
 ---
 
-In case you're wondering, we also have [custom matchers](https://github.com/testing-library/jest-dom#custom-matchers) methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). We can actually use one right now. Usually for anchor elements, it will have an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href) attribute. Hence, we can further increase the realibility of this test case by generating a random [URL](https://en.wikipedia.org/wiki/URL) using `faker` and pass that as the value for the `href` prop and adding the check using the custom matcher [`.toHaveAttribute()`](https://github.com/testing-library/jest-dom#tohaveattribute):
+In case you're wondering, we also have [custom matchers](https://github.com/testing-library/jest-dom#custom-matchers) methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). We can actually use one right now. Usually for anchor elements, it will have an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href) attribute. Hence, we can further increase the reliability of this test case by generating a random [URL](https://en.wikipedia.org/wiki/URL) using `faker` and pass that as the value for the `href` prop and adding the check using the custom matcher [`.toHaveAttribute()`](https://github.com/testing-library/jest-dom#tohaveattribute):
 
 ```tsx
 ...
@@ -182,11 +182,11 @@ describe('<PageLink />', () => {
 
 ```
 
-In each test cases of a React component, we will have to render the component again because the `@testing-library/react@9.0.0` or higher automatically runs the [`cleanup`](https://testing-library.com/docs/react-testing-library/api/#cleanup) in [`afterEach`](https://jestjs.io/docs/api#aftereachfn-timeout). That's totally valid because we usually render the component with different props in each test cases.
+In each test case of a React component, we will have to render the component again because the `@testing-library/react@9.0.0` or higher automatically runs the [`cleanup`](https://testing-library.com/docs/react-testing-library/api/#cleanup) in [`afterEach`](https://jestjs.io/docs/api#aftereachfn-timeout). That's totally valid because we usually render the component with different props in each test case.
 
 ---
 
-Since we'll be writing a couple more test cases for `PageLink` component, instead of directly rendering the component using the `render` function, I'm going to create a reusable function that renders the component to reduce code duplications. This will also make it easier if ever next time we have to rename our component, we can just change it within the reusable function and not in different locations of the test file. We can create the function inside the `describe` block so all the test cases under it can use it. We will also import `Props` from the `PageLink` component file to use it as the type for the argument of this reusable function since we also utilize TypeScript when writing tests. Here's the code for that:
+Since we'll be writing a couple more test cases for the `PageLink` component, instead of directly rendering the component using the `render` function, I'm going to create a reusable function that renders the component to reduce code duplications. This will also make it easier if ever next time we have to rename our component, we can just change it within the reusable function and not in different locations of the test file. We can create the function inside the `describe` block so all the test cases under it can use it. We will also import `Props` from the `PageLink` component file to use it as the type for the argument of this reusable function since we also utilize TypeScript when writing tests. Here's the code for that:
 
 ```tsx
 ...
@@ -238,7 +238,7 @@ With changes saved, this test case should pass as well:
 
 ![Screenshot of PageLink component incomplete test coverage](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/page-link-test-coverage-incomplete-2.png)
 
-The next few test cases would be related to `active` and `disabled` props. If either of this two prop values are `true`, their class would be added in the element's class name. I think it's good to have a countercheck in our recent test case that `active` and `disabled` is not in the class since we didn't pass any values to these props. Here's the updated test case:
+The next few test cases would be related to `active` and `disabled` props. If either of these two prop values are `true`, their class would be added in the element's class name. I think it's good to have a counter check in our recent test case that `active` and `disabled` are not in the class since we didn't pass any values to these props. Here's the updated test case:
 
 ```tsx
 ...
@@ -278,7 +278,7 @@ Once the changes are saved, let's look at the terminal again and see the test re
 
 ![Screenshot of PageLink component incomplete test coverage](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/page-link-test-coverage-incomplete-3.png)
 
-In the test coverages above, we keep seeing the line `20` as an uncovered line for a while now. Well, it's time to address that! If you look at the code in `src/components/PageLink.tsx` and look for that line. You'll see that it is related to the `disabled` prop, so let's write the test case for when the `disabled` prop value is `true`. In the test case, we can do two checks. Can you guess what are those checks? Take a moment and after you've made your guess, see and compare it with my code for this test case:
+In the test coverage above, we keep seeing line `20` as an uncovered line for a while now. Well, it's time to address that! If you look at the code in `src/components/PageLink.tsx` and look for that line. You'll see that it is related to the `disabled` prop, so let's write the test case for when the `disabled` prop value is `true`. In the test case, we can do two checks. Can you guess what those checks are? Take a moment and after you've made your guess, see and compare it with my code for this test case:
 
 ```tsx
 ...
@@ -297,7 +297,7 @@ describe('<PageLink />', () => {
 });
 ```
 
-In the code above, we asserted that the element renderes is a [`span`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span) element and that it has a `disabled` class name.
+In the code above, we asserted that the element rendered is a [`span`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span) element and that it has a `disabled` class name.
 
 Okay, don't forget to save your changes. Now check how the test result and coverage is looking right now:
 
@@ -305,7 +305,7 @@ Okay, don't forget to save your changes. Now check how the test result and cover
 
 Boom, it passes as well and now with a 100% test coverage!
 
-Just to wrap up the test cases for the `PageLink` component, let's do an additional check in the first test case to validate that it doesn't have the `aria-current` attribute which will be a countercheck against the `active` prop test case:
+Just to wrap up the test cases for the `PageLink` component, let's do an additional check in the first test case to validate that it doesn't have the `aria-current` attribute which will be a counter check against the `active` prop test case:
 
 ```tsx
 ...
@@ -320,7 +320,7 @@ describe('<PageLink />', () => {
 });
 ```
 
-Alright! We're done with the tests for `PageLink` component.
+Alright! We're done with the tests for the `PageLink` component.
 
 ---
 
@@ -352,7 +352,7 @@ describe('<Pagination />', () => {
 });
 ```
 
-Here, I'm just reusing the same arguments again from one of the examples in part 1 to keep the test cases simple and easy to understand. As for the `setCurrentPage` prop value, we needed to pass a function but instead of passing an anonymous function `() => {}`, we passed `jest.fn()` or what we call a [mock function](https://jestjs.io/docs/mock-function-api) in Jest. They are also known also known as "spies", because they let you spy on the behavior of a function that is called indirectly by some other code, rather than only testing the output. We don't need to do anything with the mock function for now besides using it as a prop value.
+Here, I'm just reusing the same arguments again from one of the examples in part 1 to keep the test cases simple and easy to understand. As for the `setCurrentPage` prop value, we needed to pass a function but instead of passing an anonymous function `() => {}`, we passed `jest.fn()` or what we call a [mock function](https://jestjs.io/docs/mock-function-api) in Jest. They are also known as "spies", because they let you spy on the behavior of a function that is called indirectly by some other code, rather than only testing the output. We don't need to do anything with the mock function for now besides using it as a prop value.
 
 Now let's check whether this test case passes:
 
@@ -498,7 +498,7 @@ Once we save the changes and check the test result and coverage in the terminal,
 
 For the final test case, let's add the tests to cover the uncovered lines `25, 35-43`. If you look for these lines in `src/components/Pagination.tsx`, these are the `onClick` events for each of the `PageLink` components rendered.
 
-We can use the [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events/#fireevent) method which is also from Testing Library to trigger DOM events in the test environment such as a click event.
+We can use the [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events/#fireevent) method which is also from the Testing Library to trigger DOM events in the test environment such as a click event.
 
 Here's an example on how to use it:
 
@@ -510,7 +510,7 @@ fireEvent.click(el);
 
 First argument it accepts is the element you want the event to get fired to while optionally, you can pass a second argument to override the event data. To fire other DOM events, you can check out the [full list here](https://github.com/testing-library/dom-testing-library/blob/master/src/event-map.js).
 
-So how do we validate something happened when a `PageLink` component was clicked? Remember about "spying" of mock functions? We'll be doing exactly that. Here's in the initial code for the last test case:
+So how do we validate that something happened when a `PageLink` component was clicked? Remember about "spying" of mock functions? We'll be doing exactly that. Here's in the initial code for the last test case:
 
 ```tsx
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -540,7 +540,7 @@ describe('<Pagination />', () => {
 });
 ```
 
-In the code above, we stored the mock function in a variable called `setCurrentPageMock`. Right after rendering the component, we first check that the `setCurrentPageMock` was not called before as a countercheck. We then queried for the "Previous" anchor element and fired a click event. After that, we validated that `setCurrentPageMock` was called once and that it returned the new `currentPage` value which is `currentPage` minus `1` because that's what the "Previous" anchor element should return when clicked.
+In the code above, we stored the mock function in a variable called `setCurrentPageMock`. Right after rendering the component, we first check that the `setCurrentPageMock` was not called before as a counter check. We then queried for the "Previous" anchor element and fired a click event. After that, we validated that `setCurrentPageMock` was called once and that it returned the new `currentPage` value which is `currentPage` minus `1` because that's what the "Previous" anchor element should return when clicked.
 
 ---
 
@@ -548,7 +548,7 @@ Save the changes and this should cover line `25`. Let's verify that in the test 
 
 ![Screenshot of Pagination component incomplete test coverage](/images/posts/how-to-create-your-own-pagination-in-react-and-typescript-with-tests/pagination-test-coverage-incomplete-3.png)
 
-Great! Now to achieve a 100% test coverage for `Pagination` component, let's cover lines `35 - 43` in the same test case. Here's the code for that:
+Great! Now to achieve a 100% test coverage for the `Pagination` component, let's cover lines `35 - 43` in the same test case. Here's the code for that:
 
 ```tsx
 ...

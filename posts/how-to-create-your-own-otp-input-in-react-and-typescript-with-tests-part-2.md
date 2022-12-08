@@ -24,9 +24,9 @@ yarn add @faker-js/faker
 
 ## Write tests for props
 
-For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Create a new folder named `__tests__` under the `src/components`. This is where we will put the test files for the components under `src/components` folder.
+For test files, I like to separate them in a folder so that it's less cluttered when viewing the main files. Create a new folder named `__tests__` under the `src/components`. This is where we will put the test files for the components under the `src/components` folder.
 
-Since we are writing tests for `OtpInput` component, create a file under `src/components/__tests__` and name it `OtpInput.test.tsx`. This is a common naming convention for test files, make sure it matches the name of the component you are testing.
+Since we are writing tests for the `OtpInput` component, create a file under `src/components/__tests__` and name it `OtpInput.test.tsx`. This is a common naming convention for test files, make sure it matches the name of the component you are testing.
 
 Then let's add in the structure of the test:
 
@@ -50,7 +50,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-The `it` (or `test`) method is another global function by Jest that runs a test. This is where we can have different test cases. Let's start to populate our first test case. First you want to do is to create a reusable function `renderComponent` inside the `describe` block, it should accepts the props of our component as an argument and calls the `render()` method from Testing Library to render our component with the passed props in a test environment.
+The `it` (or `test`) method is another global function by Jest that runs a test. This is where we can have different test cases. Let's start to populate our first test case. First you want to create a reusable function `renderComponent` inside the `describe` block, it should accept the props of our component as an argument and call the `render()` method from Testing Library to render our component with the passed props in a test environment.
 
 ```tsx
 import { render } from '@testing-library/react';
@@ -65,9 +65,9 @@ describe('<OtpInput />', () => {
 
 Since we'll be having multiple test cases for this component, creating a reusable function to render the component will reduce the code duplication. This will also make it easier if ever next time you have to rename your component. Since we can just change it within these lines and not in multiple separate lines.
 
-Now, before we can render our component using the reusable function we need to provide the required props for it. This is where we use `faker` to generate random data for us. We need `digit` only so we can generate a random `number` then convert it into a `string` as `value` prop. It can be from `0` to `999999` which randomly generates a 1-digit code to a 6-digit code. For `valueLength`, we just use the length from the generated `value` prop.
+Now, before we can render our component using the reusable function we need to provide the required props for it. This is where we use `faker` to generate random data for us. We need digits only so we can generate a random `number` then convert it into a `string` as `value` prop. It can be from `0` to `999999` which randomly generates a 1-digit code to a 6-digit code. For `valueLength`, we just use the length from the generated `value` prop.
 
-How about `onChange` prop? We can actually just pass our own simple function but it would be better to create a mock function using `jest.fn()` which we allows us to capture the calls of it amongst other things you could do. To know more about mock functions and what you can do with it, you can read more [here](https://jestjs.io/docs/mock-functions).
+How about `onChange` prop? We can actually just pass our own simple function but it would be better to create a mock function using `jest.fn()` which allows us to capture the calls of it amongst other things you could do. To know more about mock functions and what you can do with it, you can read more [here](https://jestjs.io/docs/mock-functions).
 
 ---
 
@@ -93,7 +93,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from Testing Library, and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as a role. To learn more about queries in Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
+So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from Testing Library, and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as the role. To learn more about queries in the Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
 
 ```tsx
 ...
@@ -118,7 +118,7 @@ describe('<OtpInput />', () => {
 
 ---
 
-Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of matcher methods provided by the `jest` library. While you can check this [documentation](https://github.com/testing-library/jest-dom#custom-matchers) for the custom matcher methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
+Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of the matcher methods provided by the `jest` library. While you can check this [documentation](https://github.com/testing-library/jest-dom#custom-matchers) for the custom matcher methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
 
 ```tsx
 ...
@@ -148,7 +148,7 @@ And we just wrote our first test case! Save your changes and let's verify if thi
 yarn test --coverage
 ```
 
-The `--coverage` parameter will show you which how many percentage you have covered in each files of your project and/or if you have missed any line to test. Once the command ran successfully, the terminal should display something like this:
+The `--coverage` parameter will show you how many percentages you have covered in each file of your project and/or if you have missed any line to test. Once the command ran successfully, the terminal should display something like this:
 
 ![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-1.png)
 
@@ -176,7 +176,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-And, our first test should still passed. Let's move on to the next test case.
+And, our first test should still pass. Let's move on to the next test case.
 
 ---
 
@@ -184,7 +184,7 @@ And, our first test should still passed. Let's move on to the next test case.
 
 Next test case would be to check when we type digits it should trigger the `onChange` function from the props and also focus on the next input element. If there's no next input element, the focus should remain on the current element.
 
-We can use the `fireEvent` method which is also from Testing Library to trigger DOM events in the test environment. To fire other DOM events, you can check out the [documentation](https://testing-library.com/docs/dom-testing-library/api-events/). First argument it accepts is the element you want the event to get fired to while optionally, you can pass a second argument to provide event data or details related to the event such as `target` object which is what we'll be doing.
+We can use the `fireEvent` method which is also from the Testing Library to trigger DOM events in the test environment. To fire other DOM events, you can check out the [documentation](https://testing-library.com/docs/dom-testing-library/api-events/). First argument it accepts is the element you want the event to get fired to while optionally, you can pass a second argument to provide event data or details related to the event such as `target` object which is what we'll be doing.
 
 Here's the code for the second test case:
 
@@ -234,7 +234,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-I hope the comments helped in explaning the new codes.
+I hope the comments helped in explaining the new codes.
 
 Alright, save the changes above and check your terminal, the coverage now should look like this:
 
@@ -281,7 +281,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-As you can see here, we generated a random alphabet character and use that as the value on the change event. `onChange` mock function shouldn't be called because we are not supposed to do anything if the text is not a digit.
+As you can see here, we generated a random alphabet character and used that as the value on the change event. `onChange` mock function shouldn't be called because we are not supposed to do anything if the text is not a digit.
 
 Save your changes and let's verify this test case:
 
@@ -293,7 +293,7 @@ And the test case passes. Great!
 
 ## Write tests to allow deleting of digits (focus on previous element)
 
-Now it's time to write tests when we're deleting digits from the input boxes. The logic there is that when we delete the digit from an input box, it will be replaced with a sapce `' '` to keep the position of the digits in other input boxes. Also if a key down event was triggered with the input value already empty, it should focus to the previous element. Let's also ensure that there are values in the input boxes so that it can trigger the change event for deletion. This might be a little tough to write but here's the code for this test case:
+Now it's time to write tests when we're deleting digits from the input boxes. The logic there is that when we delete the digit from an input box, it will be replaced with a space `' '` to keep the position of the digits in other input boxes. Also if a key down event was triggered with the input value already empty, it should focus on the previous element. Let's also ensure that there are values in the input boxes so that it can trigger the change event for deletion. This might be a little tough to write but here's the code for this test case:
 
 ```tsx
 ...
@@ -449,7 +449,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-Once you saved the changes, this should pass and cover line `61`!
+Once you save the changes, this should pass and cover line `61`!
 
 ![Screenshot of React OTP Input incomplete test coverage](/images/posts/how-to-create-your-own-otp-input-in-react-and-typescript-with-tests/test-coverage-incomplete-5.png)
 
@@ -661,7 +661,7 @@ That's it! You've just built your own OTP input in React and TypeScript and also
 
 In case you need the final code of the OTP input component as a reference, here's the [GitHub repository](https://github.com/dominicarrojado/react-typescript-otp-input).
 
-I'll be writing more of posts about "building your own components in React and TypeScript with tests" so stay stuned and come back again to my blog to check out what's new.
+I'll be writing more posts about "building your own components in React and TypeScript with tests". So stay tuned and come back again to my blog to check out what's new.
 
 Cheers ~
 

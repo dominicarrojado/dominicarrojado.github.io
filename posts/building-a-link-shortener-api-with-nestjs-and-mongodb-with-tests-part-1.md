@@ -8,7 +8,7 @@ videoUrl: ''
 
 ## Introduction
 
-I started a server-side application late of 2020 which was my way of sharpening my back-end development skills on the side as I have been focused more on the front-end development in my recent jobs. It was built using [Express.js](https://expressjs.com/) which is a fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org/en/). But becuase of its unopinionated nature, there were a couple of things I had to set up and configure on my own such as [TypeScript](https://www.typescriptlang.org/). Although that might be a benefit for most cases, there's definitely some pitfalls as well such as not knowing what are some of the best practices when it comes to building server-side applications. You have to do your research and keep yourself up-to-date. The difficulties of those I've mentioned became more obvious when I chance upon myself with [NestJS](https://nestjs.com/), it is a progressive Node.js framework for building efficient, reliable and scalable server-side applications. NestJS is in fact built on top of Express. I took up a course to learn more about NestJS and how to build applications on top of it and I really liked it. It is extensible, versatile and progressive. It takes advantage of the latest JavaScript features, bringing design patterns and mature solutions to the Node.js world. I can't help but think how my server-side application could have been better in many ways if I built it using NestJS from the start. I wanted to improve my skills in NestJS by building something I have not done before, and that is a [URL](https://en.wikipedia.org/wiki/URL) shortener application. That is what I'm going to share with you in this post, so let's go ahead and start learning and building it together!
+I started a server-side application late of 2020 which was my way of sharpening my back-end development skills on the side as I have been focused more on the front-end development in my recent jobs. It was built using [Express.js](https://expressjs.com/) which is a fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org/en/). But because of its unopinionated nature, there were a couple of things I had to set up and configure on my own such as [TypeScript](https://www.typescriptlang.org/). Although that might be a benefit for most cases, there's definitely some pitfalls as well such as not knowing what are some of the best practices when it comes to building server-side applications. You have to do your research and keep yourself up-to-date. The difficulties of those I've mentioned became more obvious when I chance upon myself with [NestJS](https://nestjs.com/), it is a progressive Node.js framework for building efficient, reliable and scalable server-side applications. NestJS is in fact built on top of Express. I took up a course to learn more about NestJS and how to build applications on top of it and I really liked it. It is extensible, versatile and progressive. It takes advantage of the latest JavaScript features, bringing design patterns and mature solutions to the Node.js world. I can't help but think how my server-side application could have been better in many ways if I built it using NestJS from the start. I wanted to improve my skills in NestJS by building something I have not done before, and that is a [URL](https://en.wikipedia.org/wiki/URL) shortener application. That is what I'm going to share with you in this post, so let's go ahead and start learning and building it together!
 
 ## Prerequisites
 
@@ -86,7 +86,7 @@ export class AppModule {}
 
 ## Create LinksModule
 
-Since we're going to be working with links for our URL shortener API, we need a module for it. A (feature) module in Nest simply organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries. This helps us manage complexity and develop with [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, especially as the size of the application and/or team grow.
+Since we're going to be working with links for our URL shortener API, we need a module for it. A (feature) module in Nest simply organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries. This helps us manage complexity and develop with [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, especially as the size of the application and/or team grows.
 
 In Nest, modules are singletons by default, and thus you can share the same instance of any provider between multiple modules effortlessly. That's awesome because we can share features between modules without duplicating the code in another module.
 
@@ -110,11 +110,11 @@ nest g controller links --no-spec
 
 This command will create a file `src/links/links.controller.ts` and the new controller gets imported in our links module by updating `src/links/links.module.ts`.
 
-A command parameter `--no-spec` was added to prevent Nest CLI default behaviour of creating a `spec` file which where we write tests for our controller. Although we are going to write tests for it later, we don't need it at the moment.
+A command parameter `--no-spec` was added to prevent Nest CLI default behavior of creating a `spec` file where we write tests for our controller. Although we are going to write tests for it later, we don't need it at the moment.
 
 ## Create LinksService
 
-Services are responsible for business logics, such as data storage and retrieval, and is designed to be used by a controller. Service is a good candidate to be defined as a provider.
+Services are responsible for business logics, such as data storage and retrieval, and are designed to be used by a controller. Service is a good candidate to be defined as a provider.
 
 But what is a provider? From Nest documentation, providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers, and so on. The main idea of a provider is that it can be injected as dependency; this means objects can create various relationships with each other, and the function of "wiring up" instances of objects can largely be delegated to the Nest runtime system.
 
@@ -162,13 +162,13 @@ export class Link {
 }
 ```
 
-Since database tables consist of columns, your entities must consist of columns too. Each entity class property you marked with a decorator `@Column()` will be mapped to a database table column. A column can accept options such as `unique` that marks the column as unique column (creates unique constraint). You can see the other options [here](https://typeorm.io/entities#column-options). Each entity must have a primary column, and since we're using MongoDB, our primary column with be an `ObjectId`. Therefore, we use `@ObjectIdColumn()`.
+Since database tables consist of columns, your entities must consist of columns too. Each entity class property you marked with a decorator `@Column()` will be mapped to a database table column. A column can accept options such as `unique` that marks the column as unique column (creates unique constraint). You can see the other options [here](https://typeorm.io/entities#column-options). Each entity must have a primary column, and since we're using MongoDB, our primary column will be an `ObjectId`. Therefore, we use `@ObjectIdColumn()`.
 
 ## Active Record vs. Data Mapper patterns
 
 In TypeORM you can use both the Active Record and the Data Mapper patterns. Using the Active Record approach, you define all your query methods inside the model itself, and you save, remove, and load objects using model methods. Simply said, the Active Record pattern is an approach to access your database within your models. Using the Data Mapper approach, you define all your query methods in separate classes called "repositories", and you save, remove, and load objects using repositories. In data mapper your entities are very dumb - they just define their properties and may have some "dummy" methods. Simply said, data mapper is an approach to access your database within repositories instead of models. You can read more about them in detail [here](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
 
-We'll be using the **Data Mapper** approach as it is more cleaner and more organized that way which results in a more maintainable code, which is more effective in larger applications.
+We'll be using the **Data Mapper** approach as it is cleaner and more organized that way which results in a more maintainable code, which is more effective in larger applications.
 
 ---
 
@@ -311,7 +311,7 @@ export class LinksService {
 }
 ```
 
-Now `createLink` function is ready to be used. Let's go and update `src/links/links.controller.ts` to accept a `POST` request from `/links`, here's the code:
+Now the `createLink` function is ready to be used. Let's go and update `src/links/links.controller.ts` to accept a `POST` request from `/links`, here's the code:
 
 ```ts
 import { Body, Controller, Get, Post } from '@nestjs/common';
@@ -351,7 +351,7 @@ It should return a status of `201 Created` and return you with the same JSON obj
 }
 ```
 
-If you do a `GET` request to `http://localhost:3000/links`, it should now return an array containing the same JSON object above.
+If you make a `GET` request to `http://localhost:3000/links`, it should now return an array containing the same JSON object above.
 
 ```json
 [
@@ -402,11 +402,11 @@ You can open your Postman API client and do the previous requests we did earlier
 
 ## Data Transfer Objects (DTO)
 
-You may have already noticed how many times we had to refer to the properties of a link within our code, in particular, the `name` and `url` is passed around from the controller to the service, just to create the link. In the real-world, requirements change and having multiple reference at difference places adds complexity to our application and makes it more difficult to maintain and scale it.
+You may have already noticed how many times we had to refer to the properties of a link within our code, in particular, the `name` and `url` is passed around from the controller to the service, just to create the link. In the real-world, requirements change and having multiple references at different places adds complexity to our application and makes it more difficult to maintain and scale it.
 
-This is how [Data Transfer Objects (DTO)](https://en.wikipedia.org/wiki/Data_transfer_object) saves us from this complexity. It is a common concept in software development that is not specific to Nest. Not only it is helpful for encapsulating data between processes but can also be useful for data validations. Do note that DTO is not a model definition but defines the shape of data for a specific process, for example - creating a link.
+This is how [Data Transfer Objects (DTO)](https://en.wikipedia.org/wiki/Data_transfer_object) saves us from this complexity. It is a common concept in software development that is not specific to Nest. Not only is it helpful for encapsulating data between processes but can also be useful for data validations. Do note that DTO is not a model definition but defines the shape of data for a specific process, for example - creating a link.
 
-DTO, similar to model, can defined as classes or interfaces. As per Nest documentation, the recommended approach is to use classes. So let's go with that.
+DTO, similar to model, can be defined as classes or interfaces. As per Nest documentation, the recommended approach is to use classes. So let's go with that.
 
 ## Implement CreateLinkDto
 
@@ -478,7 +478,7 @@ You can open your Postman API client again and do the previous requests we did e
 
 ## Redirect to URL by name feature
 
-Now let's create the feature that makes our application a URL shortener. And that is to redirect to the actual URL by its (short) name, or if we combine with the [domain](https://en.wikipedia.org/wiki/Domain_name), by its short URL.
+Now let's create the feature that makes our application a URL shortener. And that is to redirect to the actual URL by its (short) name, or if we combine it with the [domain](https://en.wikipedia.org/wiki/Domain_name), by its short URL.
 
 Go to `src/links/links.service.ts` and create a new function:
 
@@ -498,7 +498,7 @@ export class LinksService {
 
 We defined the type of the argument of our newly created function as `FindConditions<Link>`, this is so we could reuse the same function later on for when we update a link via its `id`.
 
-We need to create another module with a controller that can handle the redirection logic. This controller will not have a path name (e.g. `/links`) so that our URL can be as short as possible. While we can have the a short domain that points to our server, we also don't need another level of path (e.g. `/links/my-short-url`) as part of the generated short URL.
+We need to create another module with a controller that can handle the redirection logic. This controller will not have a path name (e.g. `/links`) so that our URL can be as short as possible. While we can have a short domain that points to our server, we also don't need another level of path (e.g. `/links/my-short-url`) as part of the generated short URL.
 
 Using what we've learned so far for creating a module and controller, let's once again use Nest CLI:
 
@@ -674,7 +674,7 @@ export class LinksController {
 }
 ```
 
-You can open your Postman API client, repeat the steps previously for creating a link, remember to get the `id` as we'll need it later. Then do a `UPDATE` request to `http://localhost:3000/links/:id`, do replace `:id` with the `id` you got from creating a link or from getting all the links, with a JSON object containing `name` and `url`:
+You can open your Postman API client, repeat the steps previously for creating a link, and remember to get the `id` as we'll need it later. Then do a `UPDATE` request to `http://localhost:3000/links/:id`, do replace `:id` with the `id` you got from creating a link or from getting all the links, with a JSON object containing `name` and `url`:
 
 ```json
 {
@@ -683,7 +683,7 @@ You can open your Postman API client, repeat the steps previously for creating a
 }
 ```
 
-It should return a status of `200 OK`. When you do a request to get all the links, the updated link should be returned in the response.
+It should return a status of `200 OK`. When you make a request to get all the links, the updated link should be returned in the response.
 
 ---
 
@@ -698,7 +698,7 @@ Based from Nest documentation, we can say that:
 - Pipes can return data - either _original_ or _modified_ - which will be passed on to the route handler. Pipes can throw exceptions. Exceptions thrown will be handled by Nest and parsed into an error response.
 - Pipes can be asynchronous.
 - You can build your own [custom pipes](https://docs.nestjs.com/pipes#custom-pipes).
-- Pipes can on the parameter-level, handler-level and application level (global).
+- Pipes can be on the parameter-level, handler-level and application level (global).
 
 You can read more about pipes and how they operate right [here](https://docs.nestjs.com/pipes).
 
@@ -734,7 +734,7 @@ Don't forget to update `src/links/dto/update-link.dto.ts` with the same changes 
 
 From `class-validator` library, `@IsNotEmpty()` basically checks if the given value is not empty (`!== ''`, `!== null`, `!== undefined`), `@IsString()` checks if the given value is a string while `@IsUrl()` checks if the given value is a url.
 
-Our Nest app does not know what to do with these decorators yet until we use the `ValidationPipe`, we'll need to add it in the application level since it is going to be utilized to most of our handlers. Go to `src/main.ts` and update with the following code:
+Our Nest app does not know what to do with these decorators yet until we use the `ValidationPipe`, we'll need to add it at the application level since it is going to be utilized by most of our handlers. Go to `src/main.ts` and update with the following code:
 
 ```ts
 import { Logger, ValidationPipe } from '@nestjs/common';
@@ -805,7 +805,7 @@ export class LinksRepository extends Repository<Link> {
 }
 ```
 
-So by wrapping the `save()` function in a `try/catch` we are able to get the error code from MongoDB. Based from [MongoDB error codes](https://github.com/mongodb/mongo-c-driver/blob/master/src/libmongoc/src/mongoc/mongoc-error.h), `11000` is a duplicate key error. So we have thrown a `ConflictException` which is from `@nestjs/common` with a descriptive error message. For any other cases we will throw an `InternalServerErrorException`, which is the default error for internal server error.
+So by wrapping the `save()` function in a `try/catch` we are able to get the error code from MongoDB. Based on [MongoDB error codes](https://github.com/mongodb/mongo-c-driver/blob/master/src/libmongoc/src/mongoc/mongoc-error.h), `11000` is a duplicate key error. So we have thrown a `ConflictException` which is from `@nestjs/common` with a descriptive error message. For any other cases we will throw an `InternalServerErrorException`, which is the default error for internal server error.
 
 Once you saved the changes and do a `POST` request to `http://localhost:3000/links` **_twice_** with the same body or payload, it should return a status of `409 Conflict` and return you with a JSON object like this:
 
@@ -852,7 +852,7 @@ Once you saved the changes and do a `GET` request to `http://localhost:3000/does
 }
 ```
 
-So by just from throwing a `NotFoundException` from Nest, it will bubble up and automatically construct this JSON object for us to return to the client. We didn't even had to touch our controller to handle this which is the right way based from what we said earlier about services handling the business logics. Since we are reusing `getLink` method when updating a link, it will also handle cases where link does not exist.
+So by just throwing a `NotFoundException` from Nest, it will bubble up and automatically construct this JSON object for us to return to the client. We didn't even have to touch our controller to handle this, which is the right way based on what we said earlier about services handling the business logic. Since we are reusing the `getLink` method when updating a link, it will also handle cases where the link does not exist.
 
 You can also try updating a link by an `id` that does not exist and you will get the same response. Do note that if you try to pass an `id` that's not in MongoDB `ObjectId` format, you will still get `500 Internal Server Error`. To fix that, we can create a new DTO `src/links/dto/get-link.dto.ts` and add the following code below:
 
