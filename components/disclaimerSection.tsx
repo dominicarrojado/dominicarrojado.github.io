@@ -35,7 +35,7 @@ function DisclaimerSection() {
           hosted on this Website are solely for portfolio or demo purposes only.
           The Operator of this Website contributed to the software development
           of these projects during the time of employment with previous and
-          current employers. All rights goes to the respective owners of these
+          current employers. All rights go to the respective owners of these
           projects. If any company that owns these projects would like to
           request for removal of their projects on this Website, please contact
           us.
@@ -55,7 +55,7 @@ function DisclaimerSection() {
         </p>
         <h2>Links to other resources</h2>
         <p>
-          This Website contain links to other resources that are not owned or
+          This Website contains links to other resources that are not owned or
           controlled by us. Please be aware that we are not responsible for the
           content of such other resources or third parties.
         </p>

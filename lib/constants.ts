@@ -99,7 +99,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: 'Razer Chroma Studio Web',
     description:
-      'A module of Razer Synapse recreated in web that allows you to create various lighting effects and synchronize across multiple devices, while allowing you to follow the exact placement of your devices on your desktop.',
+      'A module of Razer Synapse recreated on the web that allows you to create various lighting effects and synchronize across multiple devices, while allowing you to follow the exact placement of your devices on your desktop.',
     links: [
       {
         title: 'Watch Demo',
@@ -175,7 +175,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: 'Qwerk',
     description:
-      'Project management + chat tool for productivity. It has notes and timer feature as well.',
+      'Project management + chat tool for productivity. It has notes and a timer feature as well.',
     links: [
       {
         title: 'View Web App',
@@ -210,7 +210,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: 'Food Republic: Capsule Surprise',
     description:
-      "A classic game for Food Republic's Wisma Atria re-opening. Food Republic is a food court chain run by the BreadTalk Group based in Singapore.",
+      "A classic game for Food Republic's Wisma Atria reopening. Food Republic is a food court chain run by the BreadTalk Group based in Singapore.",
     links: [
       {
         title: 'View Web App',
@@ -294,7 +294,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: 'Hashtag Interactive',
     description:
-      'Website for a boutique digital marketing agency that is optimised for a digital-centric world.',
+      'Website for a boutique digital marketing agency that is optimized for a digital-centric world.',
     links: [
       {
         title: 'View Website',
@@ -470,7 +470,7 @@ export const TESTIMONIALS: Array<Testimonial> = [
     jobTitle: 'Senior Product Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
-      "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
+      "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such an engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
   },
   {
     name: 'Rangana Chandrasena',
@@ -491,14 +491,14 @@ export const TESTIMONIALS: Array<Testimonial> = [
     jobTitle: 'Product Manager (Growth)',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
-      'In the few interactions I had with Dom, I can say that he has lot of enthusiasm to learn new things, takes initiative and is very knowledgable too. He not only voluntarily picked up a few growth tasks when he had time but also always contributed to making the team do better by providing his inputs wherever he sees scope for improvement.',
+      'In the few interactions I had with Dom, I can say that he has a lot of enthusiasm to learn new things, takes initiative and is very knowledgeable too. He not only voluntarily picked up a few growth tasks when he had time but also always contributed to making the team do better by providing his inputs wherever he sees scope for improvement.',
   },
   {
     name: 'Abhina Sathyan',
     jobTitle: 'Software Engineer',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
-      'Dominic has been a great colleague to work with. He is very much detail-oriented and is fast in execution of tasks. He helps a lot with code reviews and provides useful tips and suggestions. He is very proactive and always ready to help. I really appreciate his sharing sessions. He is also very knowledgable and is always eager to learn more.',
+      'Dominic has been a great colleague to work with. He is very much detail-oriented and is fast in execution of tasks. He helps a lot with code reviews and provides useful tips and suggestions. He is very proactive and always ready to help. I really appreciate his sharing sessions. He is also very knowledgeable and is always eager to learn more.',
   },
   {
     name: 'Hongzheng Liao (Jansen)',
@@ -512,7 +512,7 @@ export const TESTIMONIALS: Array<Testimonial> = [
     jobTitle: 'Senior UX Designer',
     companyName: 'Razer Inc.',
     quote:
-      "Not often do you find an engineer with an eye for design details, and Dominic happens to be one of them. I enjoyed working with him on some projects with complex UI (User Interface) design. Whenever he delivers, it's always a joy to see my design comes alive as I intended. Any designer would be lucky to have Dominic working on his/her design.",
+      "Not often do you find an engineer with an eye for design details, and Dominic happens to be one of them. I enjoyed working with him on some projects with complex UI (User Interface) design. Whenever he delivers, it's always a joy to see my design come alive as I intended. Any designer would be lucky to have Dominic working on his/her design.",
   },
   {
     name: 'Hao Long Chiang (Zack)',

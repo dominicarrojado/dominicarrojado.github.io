@@ -69,7 +69,7 @@ function AboutSection() {
             Spotify playlists
           </AnchorLink>
           . I'm also currently learning a new language, nope it's not a
-          programming one, it's Chinese and I'm learning it in{' '}
+          programming one, it's Chinese and I'm learning it in the{' '}
           <AnchorLink href={ExternalUrl.DUOLINGO} isExternal>
             Duolingo
           </AnchorLink>{' '}

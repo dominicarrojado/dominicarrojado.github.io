@@ -20,7 +20,7 @@ function PrivacyPolicySection() {
           website ("Website" or "Service") and any of its related products and
           services (collectively, "Services") is collected, protected and used.
           It also describes the choices available to you regarding our use of
-          your Personal Information (for example, your name and e-mail address)
+          your Personal Information (for example, your name and email address)
           and how you can access and update this information. This Policy is a
           legally binding agreement between you ("User", "you" or "your") and
           this Website operator ("Operator", "we", "us" or "our"). By accessing
@@ -328,7 +328,7 @@ function PrivacyPolicySection() {
           .
         </p>
         <p>
-          We also use third-party advertisement through Google AdSense Program.
+          We also use third-party advertisements through Google AdSense Program.
           Google AdSense uses cookies to improve advertising, this is generally
           used to target advertising based on what's relevant to a user, to
           improve reporting on campaign performance, and to avoid showing ads
@@ -408,7 +408,7 @@ function PrivacyPolicySection() {
         <h2>Changes and amendments</h2>
         <p>
           We reserve the right to modify this Policy or its terms relating to
-          the Website and Services from time to time in our discretion and will
+          the Website and Services from time to time at our discretion and will
           notify you of any material changes to the way in which we treat
           Personal Information. When we do, we will revise the updated date at
           the bottom of this page. We may also provide notice to you in other
@@ -419,7 +419,7 @@ function PrivacyPolicySection() {
           effective date of the revised Policy (or such other act specified at
           that time) will constitute your consent to those changes. However, we
           will not, without your consent, use your Personal Information in a
-          manner materially different than what was stated at the time your
+          manner materially different from what was stated at the time your
           Personal Information was collected.
         </p>
         <h2>Acceptance of this policy</h2>
@@ -447,7 +447,7 @@ function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on May 25, 2022
+          This document was last updated on December 15, 2022
         </div>
       </PageContent>
     </Section>
