@@ -45,6 +45,10 @@ export enum GoogleAnalyticsEvent {
   GIF_AUTO_PLAY_START = 'gif_auto_play_start',
   GIF_AUTO_PLAY_CANCEL = 'gif_auto_play_cancel',
   TESTIMONIALS_SWIPE = 'testimonials_swipe',
+  MODAL_OPEN = 'modal_open',
+  MODAL_CLOSE = 'modal_close',
+  SUBSCRIBE_FORM_SUBMIT = 'subscribe_form_submit',
+  UNSUBSCRIBE_FORM_SUBMIT = 'unsubscribe_form_submit',
 }
 
 export enum GoogleAdSenseUnit {

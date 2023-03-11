@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
 import { useMounted } from '../lib/custom-hooks';
 import { useUnsubscribe } from '../lib/api-hooks';
+import { trackEvent } from '../lib/google-analytics';
 import Input from './input';
 import Button from './button';
 import ModalTitle from './modalTitle';
@@ -11,8 +12,8 @@ import ModalDialog from './modalDialog';
 import ModalContent from './modalContent';
 import ButtonLoader from './buttonLoader';
 import ErrorText from './errorText';
-import { FetchState } from '../lib/types';
-import { MODAL_TRANSITION_PROPS } from '../lib/constants';
+import { FetchState, GoogleAnalyticsEvent } from '../lib/types';
+import { MAIN_TITLE, MODAL_TRANSITION_PROPS } from '../lib/constants';
 
 type Props = { onSuccess: () => void };
 
@@ -20,6 +21,7 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
   const shouldDisplay = useMounted();
   const [fetchState, unsubscribe] = useUnsubscribe();
   const isLoading = fetchState === FetchState.LOADING;
+  const btnText = 'Confirm';
   const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -28,6 +30,12 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
 
     if (isSuccess) {
       onSuccess();
+
+      trackEvent({
+        event: GoogleAnalyticsEvent.SUBSCRIBE_FORM_SUBMIT,
+        projectTitle: MAIN_TITLE,
+        buttonText: btnText,
+      });
     }
   };
 
@@ -52,7 +60,7 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
               />
               <Button type="submit" disabled={isLoading}>
                 {isLoading && <ButtonLoader />}
-                Confirm
+                {btnText}
               </Button>
             </InputGroup>
             {fetchState === FetchState.ERROR && (

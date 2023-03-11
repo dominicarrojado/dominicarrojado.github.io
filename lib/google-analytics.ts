@@ -92,6 +92,32 @@ type EventTestimonialsSwipe = {
   event: GoogleAnalyticsEvent.TESTIMONIALS_SWIPE;
 };
 
+type EventModalOpen = {
+  event: GoogleAnalyticsEvent.MODAL_OPEN;
+  projectTitle: string;
+  modalTitle: string;
+  buttonText: string;
+};
+
+type EventModalClose = {
+  event: GoogleAnalyticsEvent.MODAL_CLOSE;
+  projectTitle: string;
+  modalTitle: string;
+  buttonText: string;
+};
+
+type EventSubscribeFormSubmit = {
+  event: GoogleAnalyticsEvent.SUBSCRIBE_FORM_SUBMIT;
+  projectTitle: string;
+  buttonText: string;
+};
+
+type EventUnsubscribeFormSubmit = {
+  event: GoogleAnalyticsEvent.UNSUBSCRIBE_FORM_SUBMIT;
+  projectTitle: string;
+  buttonText: string;
+};
+
 export function trackEvent(
   data:
     | EventPageView
@@ -109,6 +135,10 @@ export function trackEvent(
     | EventGifAutoPlayStart
     | EventGifAutoPlayCancel
     | EventTestimonialsSwipe
+    | EventModalOpen
+    | EventModalClose
+    | EventSubscribeFormSubmit
+    | EventUnsubscribeFormSubmit
 ) {
   if (checkIsLocalhost()) {
     return;

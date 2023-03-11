@@ -1,13 +1,17 @@
-import { TransitionEvent, useEffect, useState } from 'react';
+import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog';
 import { useMounted, useUpdateVisibleDialogs } from '../lib/custom-hooks';
+import { getRefValue } from '../lib/hooks';
+import { trackEvent } from '../lib/google-analytics';
 import ModalSubscribe from './modalSubscribe';
 import ModalSubscribeSuccess from './modalSubscribeSuccess';
 import SvgBell from './svgBell';
-import { DialogName } from '../lib/types';
+import { DialogName, GoogleAnalyticsEvent } from '../lib/types';
+import { MAIN_TITLE } from '../lib/constants';
 
 export default function SubscribeButton() {
+  const isMountedRef = useRef(false);
   const shouldDisplay = useMounted();
   const dialogSubscribe = useDialogState({
     baseId: 'dialog-subscribe',
@@ -28,14 +32,39 @@ export default function SubscribeButton() {
       setAnimationDone(true);
     }
   };
+  const btnOnClick = () => {
+    trackEvent({
+      event: GoogleAnalyticsEvent.MODAL_OPEN,
+      projectTitle: MAIN_TITLE,
+      modalTitle: text,
+      buttonText: text,
+    });
+  };
   const subscribeOnSuccess = (value: string) => {
     setEmail(value);
 
     dialogSubscribeSuccess.show();
+
+    trackEvent({
+      event: GoogleAnalyticsEvent.SUBSCRIBE_FORM_SUBMIT,
+      projectTitle: MAIN_TITLE,
+      buttonText: text,
+    });
   };
 
   useEffect(() => {
+    if (!dialogSubscribeVisible && getRefValue(isMountedRef)) {
+      trackEvent({
+        event: GoogleAnalyticsEvent.MODAL_CLOSE,
+        projectTitle: MAIN_TITLE,
+        modalTitle: text,
+        buttonText: text,
+      });
+    }
+
     updateVisibleDialogs(DialogName.SUBSCRIBE, dialogSubscribeVisible);
+
+    isMountedRef.current = true;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogSubscribeVisible]);
@@ -59,6 +88,7 @@ export default function SubscribeButton() {
           'hover:text-gray-500 focus-visible:text-gray-500',
           'dark:hover:text-white dark:focus-visible:text-white'
         )}
+        onClick={btnOnClick}
         aria-label={text}
       >
         <div className="flex items-center flex-col">
