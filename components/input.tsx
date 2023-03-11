@@ -12,11 +12,12 @@ const Input = forwardRef(
       ref={ref}
       className={cn(
         className,
-        'block w-full rounded-none border-0 py-2 px-4 ring-1 ring-inset ring-gray-300 text-black outline-none placeholder:text-gray-400',
+        'block w-full rounded-none border py-2 px-4 border-gray-300 text-black outline-none placeholder:text-gray-400',
+        'transition-colors focus:border-black focus:ring-1 focus:ring-black',
+        'motion-reduce:transition-none',
         'disabled:opacity-40',
-        'dark:ring-gray-400 dark:bg-gray-850 dark:text-white dark:placeholder:text-gray-500',
-        'focus:ring-2 focus:ring-inset focus:ring-black',
-        'dark:focus:ring-white',
+        'dark:border-gray-400 dark:bg-gray-850 dark:text-white dark:placeholder:text-gray-500',
+        'dark:focus:border-white dark:focus:ring-white',
         'sm:py-3'
       )}
     />
