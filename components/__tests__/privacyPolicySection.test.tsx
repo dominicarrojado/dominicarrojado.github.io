@@ -11,10 +11,12 @@ describe('<PrivacyPolicySection />', () => {
     const homeAnchorEl = screen.queryByText('dominicarrojado.com');
     const projectsAnchorEls = screen.queryAllByText('Projects');
     const privacyEmailAnchorEl = screen.queryByText(privacyEmail);
+    const unsubscribeAnchorEl = screen.queryByText('unsubscribe page');
     const internalLinkEls = [
       homeAnchorEl,
       ...projectsAnchorEls,
       privacyEmailAnchorEl,
+      unsubscribeAnchorEl,
     ];
 
     const githubPagesAnchorEl = screen.queryAllByText('GitHub Pages')[1];
@@ -156,6 +158,8 @@ describe('<PrivacyPolicySection />', () => {
       'https://docs.microsoft.com/en-us/clarity/faq#privacy'
     );
 
+    expect(unsubscribeAnchorEl).toHaveAttribute('href', '/unsubscribe');
+
     expect(cookiesAnchorEl).toHaveAttribute(
       'href',
       'https://en.wikipedia.org/wiki/HTTP_cookie'
@@ -169,7 +173,7 @@ describe('<PrivacyPolicySection />', () => {
 
   test('should have expected updated date', () => {
     const dateEl = screen.queryByText(
-      'This document was last updated on December 15, 2022'
+      'This document was last updated on March 11, 2023'
     );
 
     expect(dateEl).toBeInTheDocument();

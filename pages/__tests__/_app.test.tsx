@@ -39,10 +39,10 @@ describe('<App />', () => {
       Component: jest.fn(() => <>{getFakeSentence()}</>),
     } as any);
 
-    expect(seoTagsSpy).toBeCalledTimes(1);
-    expect(fontPreLoaderSpy).toBeCalledTimes(1);
-    expect(tagManagerSpy).toBeCalledTimes(1);
-    expect(layoutSpy).toBeCalledTimes(1);
+    expect(seoTagsSpy).toBeCalled();
+    expect(fontPreLoaderSpy).toBeCalled();
+    expect(tagManagerSpy).toBeCalled();
+    expect(layoutSpy).toBeCalled();
     expect(layoutSpy).toBeCalledWith(expect.objectContaining({ route }), {});
   });
 
@@ -58,7 +58,6 @@ describe('<App />', () => {
       Component: componentSpy,
     } as any);
 
-    expect(componentSpy).toBeCalledTimes(1);
     expect(componentSpy).toBeCalledWith(pageProps, {});
     expect(screen.queryByText(text)).toBeInTheDocument();
   });

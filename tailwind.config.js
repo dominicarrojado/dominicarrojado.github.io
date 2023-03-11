@@ -19,13 +19,9 @@ module.exports = {
         px: '1px',
       },
       minWidth: {
+        8: '2rem',
+        10: '2.5rem',
         11: '2.75rem',
-        11.5: '2.865rem',
-        12: '3rem',
-        15: '3.75rem',
-        15.5: '3.875rem',
-        18: '4.5rem',
-        18.5: '4.625rem',
       },
       maxWidth: {
         'screen-3xl': '2880px',
@@ -53,6 +49,7 @@ module.exports = {
       transitionProperty: {
         width: 'width',
         height: 'height',
+        'opacity-color': 'opacity, color',
         'transform-opacity': 'transform, opacity',
         'transform-opacity-color': 'transform, opacity, color',
       },

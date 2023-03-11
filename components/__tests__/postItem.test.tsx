@@ -75,7 +75,7 @@ describe('<PostItem />', () => {
     });
 
     it('should render the button as span', () => {
-      const btnEl = screen.queryByText('Read More');
+      const btnEl = screen.queryByText('Read Post');
 
       expect(btnEl?.tagName).toBe('SPAN');
     });

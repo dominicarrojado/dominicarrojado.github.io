@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import { trackEvent } from '../lib/google-analytics';
 import Window from '../modules/Window';
@@ -9,9 +9,11 @@ import TagManager from '../components/tagManager';
 import Layout from '../components/layout';
 import '../styles/global.css';
 import { GoogleAnalyticsEvent, Route } from '../lib/types';
+import { StoreContext } from '../lib/store';
 
 function App({ Component, pageProps, router }: AppProps) {
   const routerEvents = router.events;
+  const [visibleDialogs, setVisibleDialogs] = useState<Array<string>>([]);
 
   useEffect(() => {
     Window.init();
@@ -35,9 +37,16 @@ function App({ Component, pageProps, router }: AppProps) {
       <SeoTags />
       <FontPreLoader />
       <TagManager />
-      <Layout route={router.route as Route}>
-        <Component {...pageProps} />
-      </Layout>
+      <StoreContext.Provider
+        value={{
+          visibleDialogs,
+          setVisibleDialogs,
+        }}
+      >
+        <Layout route={router.route as Route}>
+          <Component {...pageProps} />
+        </Layout>
+      </StoreContext.Provider>
     </>
   );
 }

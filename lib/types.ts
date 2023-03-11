@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { Dispatch, HTMLAttributes, ReactNode, SetStateAction } from 'react';
 
 export enum Theme {
   LIGHT = 'light',
@@ -13,6 +13,8 @@ export enum Route {
   POSTS_PAGE = '/posts/page',
   PRIVACY_POLICY = '/privacy-policy',
   DISCLAIMER = '/disclaimer',
+  SUBSCRIBE = '/subscribe',
+  UNSUBSCRIBE = '/unsubscribe',
 }
 
 export enum SocialName {
@@ -96,6 +98,26 @@ export enum ExternalUrl {
   MICROSOFT_CLARITY_FAQ = 'https://docs.microsoft.com/en-us/clarity/faq#privacy',
 }
 
+export enum DialogName {
+  MENU = 'menu',
+  SUBSCRIBE = 'subscribe',
+  SUBSCRIBE_SUCCESS = 'subscribe-success',
+}
+
+export enum ApiEndpoint {
+  SUBSCRIPTION_REQUESTS = '/subscription-requests',
+  SUBSCRIPTION_REQUEST_VERIFY = '/subscription-requests/:id/verify',
+  SUBSCRIPTION = '/subscriptions/contact-mode/:contact-mode/topics/:topic',
+}
+
+export enum FetchState {
+  DEFAULT = 'DEFAULT',
+  LOADING = 'LOADING',
+  SUCCESS = 'SUCCESS',
+  NOT_FOUND = 'NOT_FOUND',
+  ERROR = 'ERROR',
+}
+
 export type Nullish<T> = T | null | undefined;
 
 export type ProjectLink = {
@@ -146,4 +168,9 @@ export type Testimonial = {
   jobTitle: string;
   companyName: string;
   quote: string;
+};
+
+export type StoreContextType = {
+  visibleDialogs: Array<string>;
+  setVisibleDialogs: Dispatch<SetStateAction<Array<string>>>;
 };

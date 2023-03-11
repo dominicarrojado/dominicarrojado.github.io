@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import {
+  getFakeBoolean,
   getFakeSentence,
   getFakeWord,
   getRandomRoute,
@@ -11,18 +12,30 @@ import NextLink, { Props } from '../nextLink';
 describe('<NextLink />', () => {
   const renderComponent = ({ children, ...props }: Props) =>
     render(<NextLink {...props}>{children}</NextLink>);
-  const adsByGoogleOrig = window.adsbygoogle;
+  const getRoutePosts = () => {
+    return getFakeBoolean() ? Route.POSTS : Route.POSTS_PAGE;
+  };
+  const getRandomRouteExceptPosts = (): Exclude<
+    Route,
+    Route.POSTS | Route.POSTS_PAGE
+  > => {
+    const route = getRandomRoute();
+
+    if (route === Route.POSTS || route === Route.POSTS_PAGE) {
+      return getRandomRouteExceptPosts();
+    }
+
+    return route;
+  };
 
   afterEach(() => {
     jest.restoreAllMocks();
-
-    window.adsbygoogle = adsByGoogleOrig;
   });
 
-  it('should NOT reload next route if ads are hidden on hover', () => {
+  it('should NOT reload page if route does NOT start with /posts', async () => {
     const linkSpy = jest.spyOn(Link, 'default');
 
-    const href = getRandomRoute();
+    const href = getRandomRouteExceptPosts();
     const className = getFakeWord();
     const text = getFakeSentence();
     const children = <a className={className}>{text}</a>;
@@ -31,10 +44,6 @@ describe('<NextLink />', () => {
 
     const anchorEl = screen.queryByText(text) as HTMLAnchorElement;
 
-    act(() => {
-      fireEvent.mouseEnter(anchorEl);
-    });
-
     expect(anchorEl).toHaveAttribute('href', href);
     expect(anchorEl).toHaveClass(className);
 
@@ -42,12 +51,10 @@ describe('<NextLink />', () => {
     expect(linkSpy).toBeCalledWith(expect.objectContaining({ href }), {});
   });
 
-  it('should reload next route if ads are displayed on hover', () => {
+  it('should reload page if route starts with /posts', () => {
     const linkSpy = jest.spyOn(Link, 'default');
 
-    window.adsbygoogle = { loaded: true } as any;
-
-    const href = Route.POSTS;
+    const href = getRoutePosts();
     const className = getFakeWord();
     const text = getFakeSentence();
     const children = <a className={className}>{text}</a>;
@@ -58,10 +65,6 @@ describe('<NextLink />', () => {
 
     const anchorEl = screen.queryByText(text) as HTMLAnchorElement;
 
-    act(() => {
-      fireEvent.mouseEnter(anchorEl);
-    });
-
     expect(anchorEl).toHaveAttribute('href', href);
     expect(anchorEl).toHaveClass(className);
 
@@ -69,9 +72,7 @@ describe('<NextLink />', () => {
   });
 
   it('should call onMouseEnter from child prop on hover', () => {
-    window.adsbygoogle = { loaded: true } as any;
-
-    const href = Route.POSTS;
+    const href = getRandomRoute();
     const className = getFakeWord();
     const text = getFakeSentence();
     const onMouseEnterMock = jest.fn();

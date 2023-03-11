@@ -1,9 +1,11 @@
-import { useRef, useState, RefObject, useEffect } from 'react';
+import { useRef, useState, RefObject, useEffect, useContext } from 'react';
 import { AxiosStatic, CancelTokenSource } from 'axios';
 import Window from '../modules/Window';
 import DarkMode from '../modules/DarkMode';
 import { getImageDataFromResponse } from './axios';
 import { getRefValue } from './hooks';
+import { StoreContext } from './store';
+import { DialogName } from './types';
 
 export function useMounted() {
   const [isMounted, setIsMounted] = useState(false);
@@ -218,4 +220,33 @@ export function useDownloadGif({
   };
 
   return { startDownloadGif, cancelDownloadGif };
+}
+
+export function useUpdateVisibleDialogs() {
+  const { setVisibleDialogs } = useContext(StoreContext);
+  const updateVisibleDialogs = (dialogName: DialogName, isVisible: boolean) => {
+    if (isVisible) {
+      setVisibleDialogs((value) => [...value, dialogName]);
+    } else {
+      setVisibleDialogs((value) => value.filter((item) => item !== dialogName));
+    }
+  };
+
+  return updateVisibleDialogs;
+}
+
+export function useDialogOffsetWidth() {
+  const [dialogOffsetWidth, setDialogOffsetWidth] = useState(0);
+  const { visibleDialogs } = useContext(StoreContext);
+
+  useEffect(() => {
+    if (visibleDialogs.length === 0) {
+      const bodyEl = document.body;
+      const offsetWidth = window.innerWidth - bodyEl.offsetWidth;
+
+      setDialogOffsetWidth(offsetWidth);
+    }
+  }, [visibleDialogs]);
+
+  return dialogOffsetWidth;
 }

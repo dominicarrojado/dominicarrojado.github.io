@@ -15,6 +15,7 @@
     "deploy": "gh-pages -d out"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
     "axios": "^0.25.0",
     "classnames": "^2.3.1",
     "gray-matter": "^4.0.3",

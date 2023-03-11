@@ -248,6 +248,32 @@ function PrivacyPolicySection() {
           rectification and the right to data portability cannot be enforced
           after the expiration of the retention period.
         </p>
+        <h2>Subscription and unsubscribe process</h2>
+        <p>
+          We offer a subscription service to keep our users informed about our
+          latest updates, news, and special offers. If you choose to subscribe,
+          we will collect your email address and send you periodic emails. By
+          subscribing to our emails, you consent to the collection and use of
+          your personal information as described in our Privacy Policy.
+        </p>
+        <p>
+          If you no longer wish to receive our emails, you may unsubscribe at
+          any time by clicking on the unsubscribe link provided in every email
+          we send. Alternatively, you may visit the{' '}
+          <NextLink href={Route.UNSUBSCRIBE}>
+            <a>unsubscribe page</a>
+          </NextLink>{' '}
+          to request removal from our subscription list. However, please note
+          that we may still retain your email address in our records for legal
+          and administrative purposes, such as to comply with our legal
+          obligations, resolve disputes, and enforce our agreements.
+        </p>
+        <p>
+          If you would like us to delete your email address from our records,
+          you may contact us to make a request. We will process your request as
+          soon as practicable, subject to our legal and administrative
+          requirements.
+        </p>
         <h2>The rights of users</h2>
         <p>
           You may exercise certain rights regarding your information processed
@@ -342,6 +368,7 @@ function PrivacyPolicySection() {
           </AnchorLink>
           .
         </p>
+
         <h2>Do Not Track signals</h2>
         <p>
           Some browsers incorporate a Do Not Track feature that signals to
@@ -447,7 +474,7 @@ function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on December 15, 2022
+          This document was last updated on March 11, 2023
         </div>
       </PageContent>
     </Section>

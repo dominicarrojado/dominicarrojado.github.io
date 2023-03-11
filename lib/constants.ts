@@ -36,6 +36,8 @@ export const META_IMAGE_ALT =
   'Dominic Arrojado | Guides, Tips and Tricks to Web Development';
 export const META_IMAGE_TYPE = 'image/png';
 
+export const API_URL = 'https://api.dominicarrojado.com';
+
 export const FONTS = [
   'Roboto-Light',
   'Roboto-LightItalic',
@@ -582,3 +584,12 @@ export const MENU_ITEMS = [
 export const MENU_ITEMS_LENGTH = MENU_ITEMS.length;
 
 export const PAGINATION_MAX_LENGTH = 7; // must be odd
+
+export const MODAL_TRANSITION_PROPS = {
+  enter: 'ease-out duration-300',
+  enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+  enterTo: 'opacity-100 translate-y-0 sm:scale-100',
+  leave: 'ease-in duration-200',
+  leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
+  leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+};

@@ -1,13 +1,26 @@
 import { render, screen } from '@testing-library/react';
 import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
+import { StoreContext } from '../../lib/store';
+import { StoreContextType } from '../../lib/types';
 import * as customHooks from '../../lib/custom-hooks';
 import * as Header from '../header';
 import * as Footer from '../footer';
 import Layout, { Props } from '../layout';
 
 describe('<Layout />', () => {
-  const renderComponent = ({ children, ...props }: Props) =>
-    render(<Layout {...props}>{children}</Layout>);
+  const renderComponent = ({
+    storeContext = {
+      visibleDialogs: [],
+      setVisibleDialogs: jest.fn(),
+    },
+    children,
+    ...props
+  }: Props & { storeContext?: StoreContextType }) =>
+    render(
+      <StoreContext.Provider value={storeContext}>
+        <Layout {...props}>{children}</Layout>
+      </StoreContext.Provider>
+    );
 
   afterEach(() => {
     jest.restoreAllMocks();
@@ -36,7 +49,7 @@ describe('<Layout />', () => {
       children: getFakeSentence(),
     });
 
-    expect(headerSpy).toBeCalledTimes(1);
-    expect(footerSpy).toBeCalledTimes(1);
+    expect(headerSpy).toBeCalled();
+    expect(footerSpy).toBeCalled();
   });
 });

@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useRef } from 'react';
 import { getRefValue } from '../lib/hooks';
 import Header from './header';
 import Footer from './footer';
+import FooterFloating from './footerFloating';
 import { Route } from '../lib/types';
 import { MAIN_ELEMENT_ID } from '../lib/constants';
 
@@ -28,6 +29,7 @@ export default function Layout({ route, children }: Props) {
       {children}
 
       <Footer />
+      <FooterFloating />
     </div>
   );
 }

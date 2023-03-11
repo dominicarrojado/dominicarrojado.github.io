@@ -95,7 +95,8 @@
   }
 
   body,
-  button {
+  button,
+  input {
     @apply text-gray-500;
     @apply font-light;
     @apply text-base sm:text-lg xl:text-xl;
