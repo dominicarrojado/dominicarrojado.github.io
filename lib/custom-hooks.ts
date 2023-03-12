@@ -123,7 +123,7 @@ export function useScrollOpacityEffect(ref: RefObject<HTMLElement>) {
 
       const { offsetTop, offsetHeight } = element;
       const newOpacity = Math.max(
-        1 - window.pageYOffset / (offsetTop + offsetHeight),
+        1 - window.scrollY / (offsetTop + offsetHeight),
         0
       );
 

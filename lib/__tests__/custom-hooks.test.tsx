@@ -253,7 +253,7 @@ describe('hooks utilities', () => {
   });
 
   describe('useScrollOpacityEffect()', () => {
-    const pageYOffsetOrig = window.pageYOffset;
+    const scrollYOrig = window.scrollY;
     const matchMediaOrig = window.matchMedia;
 
     beforeEach(() => {
@@ -263,7 +263,7 @@ describe('hooks utilities', () => {
     afterEach(() => {
       jest.restoreAllMocks();
 
-      setReadOnlyProperty(window, 'pageYOffset', pageYOffsetOrig);
+      setReadOnlyProperty(window, 'scrollY', scrollYOrig);
 
       window.matchMedia = matchMediaOrig;
     });
@@ -280,16 +280,16 @@ describe('hooks utilities', () => {
     });
 
     it('should update value on scroll', () => {
-      const pageYOffset = getFakeNumber();
+      const scrollY = getFakeNumber();
 
-      setReadOnlyProperty(window, 'pageYOffset', pageYOffset);
+      setReadOnlyProperty(window, 'scrollY', scrollY);
 
       const offsetTop = getFakeNumber();
       const offsetHeight = getFakeNumber();
       const element = { offsetTop, offsetHeight } as HTMLElement;
       const elementRef = { current: element };
       const expectedOpacity = Math.max(
-        1 - pageYOffset / (offsetTop + offsetHeight),
+        1 - scrollY / (offsetTop + offsetHeight),
         0
       );
       const hook = renderHook(() => useScrollOpacityEffect(elementRef));
@@ -302,7 +302,7 @@ describe('hooks utilities', () => {
     });
 
     it('should handle element NOT found', () => {
-      setReadOnlyProperty(window, 'pageYOffset', getFakeNumber());
+      setReadOnlyProperty(window, 'scrollY', getFakeNumber());
 
       const elementRef = { current: null };
       const hook = renderHook(() => useScrollOpacityEffect(elementRef));
@@ -315,7 +315,7 @@ describe('hooks utilities', () => {
     });
 
     it('should handle isMotionSafe is false', () => {
-      setReadOnlyProperty(window, 'pageYOffset', getFakeNumber());
+      setReadOnlyProperty(window, 'scrollY', getFakeNumber());
 
       window.matchMedia = getMatchMediaMock({ matches: false });
 

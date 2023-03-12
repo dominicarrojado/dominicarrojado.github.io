@@ -142,13 +142,13 @@ function ImageContainer({
           return;
         }
 
-        const { pageYOffset, innerHeight } = window;
+        const { scrollY, innerHeight } = window;
         const { top, height } = containerEl.getBoundingClientRect();
 
         setIsScrolling(true);
 
         if (
-          pageYOffset !== 0 && // to prevent showing GIF when switching to projects page
+          scrollY !== 0 && // to prevent showing GIF when switching to projects page
           top >= 0 &&
           top + height <= innerHeight
         ) {
