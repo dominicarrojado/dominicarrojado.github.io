@@ -210,3 +210,7 @@ export function getFakeCompanyName() {
 export function getFakeJson() {
   return JSON.parse(faker.datatype.json()) as Record<string, any>;
 }
+
+export function getFakeEmail() {
+  return faker.internet.email();
+}
