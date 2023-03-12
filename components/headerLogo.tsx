@@ -1,25 +1,25 @@
 import { TransitionEvent, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useRouter } from 'next/router';
 import Window from '../modules/Window';
 import { useMounted } from '../lib/custom-hooks';
 import SvgLogo from './svgLogo';
 import NextLink from './nextLink';
 import { Route } from '../lib/types';
 
-export default function HeaderLogo({
-  route,
-  closeMenu,
-}: {
-  route: string;
-  closeMenu: () => void;
-}) {
+export type Props = {
+  onClick: () => void;
+};
+
+export default function HeaderLogo(props: Props) {
   const isMounted = useMounted();
+  const { route } = useRouter();
   const [animationDone, setAnimationDone] = useState(false);
   const [isLogoFocused, setIsLogoFocused] = useState(false);
   const [isPastHeroSection, setIsPastHeroSection] = useState(false);
   const onClick = () => {
     setIsLogoFocused(false);
-    closeMenu();
+    props.onClick();
   };
   const onFocus = () => setIsLogoFocused(true);
   const onBlur = () => setIsLogoFocused(false);
@@ -34,7 +34,7 @@ export default function HeaderLogo({
 
   useEffect(() => {
     const onScroll = () => {
-      setIsPastHeroSection(window.pageYOffset >= window.innerHeight);
+      setIsPastHeroSection(window.scrollY >= window.innerHeight);
     };
 
     Window.on('scroll', onScroll);

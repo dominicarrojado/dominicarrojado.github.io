@@ -1,4 +1,7 @@
-import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
+import {
+  getFakeSentence,
+  getRandomRouteExceptHome,
+} from '../../lib/test-helpers';
 import { Route } from '../../lib/types';
 import { MAIN_TITLE, MAIN_URL } from '../../lib/constants';
 import { getMetaTitle, getRouteCanonical } from '../meta';
@@ -14,16 +17,6 @@ describe('meta utilities', () => {
   });
 
   describe('getRouteCanonical()', () => {
-    const getRandomRouteExceptHome = (): Exclude<Route, Route.HOME> => {
-      const route = getRandomRoute();
-
-      if (route === Route.HOME) {
-        return getRandomRouteExceptHome();
-      }
-
-      return route;
-    };
-
     it('should return expected value', () => {
       const route = getRandomRouteExceptHome();
       const res = getRouteCanonical(route);

@@ -11,14 +11,10 @@ import HeaderLogo from './headerLogo';
 import HeaderMenuButton from './headerMenuButton';
 import HeaderMenu from './headerMenu';
 import SkipToMainContentAnchor from './skipToMainContentAnchor';
-import { DialogName, Route } from '../lib/types';
+import { DialogName } from '../lib/types';
 import { MENU_ITEMS_LENGTH } from '../lib/constants';
 
-export type Props = {
-  route: Route;
-};
-
-export default function Header({ route }: Props) {
+export default function Header() {
   const dialog = useDialogState({
     baseId: 'dialog-menu',
     animated: MENU_ITEMS_LENGTH * 75 + 100,
@@ -38,7 +34,7 @@ export default function Header({ route }: Props) {
       <HeaderProgressBar />
       <header className={cn('fixed flex items-center top-0 w-full z-50')}>
         <SkipToMainContentAnchor />
-        <HeaderLogo route={route} closeMenu={dialog.hide} />
+        <HeaderLogo onClick={dialog.hide} />
         <div
           className={cn(
             'absolute top-3.5 right-3.5 flex items-end gap-3 ml-auto',

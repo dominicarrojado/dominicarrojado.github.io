@@ -2,7 +2,7 @@ import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
-import { Nullish } from './types';
+import { Nullish, Route } from './types';
 import {
   DIALOG_NAMES,
   DIALOG_NAMES_LENGTH,
@@ -82,6 +82,16 @@ export function getMonthName(monthIdx: number) {
 
 export function getRandomRoute() {
   return ROUTES[getFakeNumber(ROUTES_LENGTH - 1)];
+}
+
+export function getRandomRouteExceptHome(): Exclude<Route, Route.HOME> {
+  const route = getRandomRoute();
+
+  if (route === Route.HOME) {
+    return getRandomRouteExceptHome();
+  }
+
+  return route;
 }
 
 export function getRandomPostId() {

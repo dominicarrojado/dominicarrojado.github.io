@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
 import { StoreContext } from '../../lib/store';
 import { StoreContextType } from '../../lib/types';
+import * as nextRouter from 'next/router';
 import * as customHooks from '../../lib/custom-hooks';
 import * as Header from '../header';
 import * as Footer from '../footer';
@@ -21,6 +22,12 @@ describe('<Layout />', () => {
         <Layout {...props}>{children}</Layout>
       </StoreContext.Provider>
     );
+
+  beforeEach(() => {
+    jest
+      .spyOn(nextRouter, 'useRouter')
+      .mockReturnValue({ route: getRandomRoute() } as nextRouter.NextRouter);
+  });
 
   afterEach(() => {
     jest.restoreAllMocks();

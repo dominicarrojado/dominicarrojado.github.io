@@ -6,6 +6,7 @@ import {
   getRandomRoute,
 } from '../../lib/test-helpers';
 import Events from '../../modules/Events';
+import * as nextRouter from 'next/router';
 import * as ga from '../../lib/google-analytics';
 import * as SeoTags from '../../components/seoTags';
 import * as FontPreLoader from '../../components/fontPreLoader';
@@ -21,6 +22,10 @@ describe('<App />', () => {
 
   beforeEach(() => {
     window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+
+    jest
+      .spyOn(nextRouter, 'useRouter')
+      .mockReturnValue({ route: getRandomRoute() } as nextRouter.NextRouter);
   });
 
   afterEach(() => {

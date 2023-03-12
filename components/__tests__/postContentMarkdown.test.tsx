@@ -4,7 +4,7 @@ import {
   getFakeDirectoryPath,
   getFakeSentence,
   getFakeUrl,
-  getRandomRoute,
+  getRandomRouteExceptHome,
 } from '../../lib/test-helpers';
 import {
   GoogleAdSenseUnit,
@@ -34,15 +34,6 @@ describe('<PostContentMarkdown />', () => {
     });
 
     it('should render internal link', () => {
-      const getRandomRouteExceptHome = (): Exclude<Route, Route.HOME> => {
-        const route = getRandomRoute();
-
-        if (route === Route.HOME) {
-          return getRandomRouteExceptHome();
-        }
-
-        return route;
-      };
       const anchorText = getFakeSentence();
       const anchorHref = `${getRandomRouteExceptHome()}${getFakeDirectoryPath()}`;
 

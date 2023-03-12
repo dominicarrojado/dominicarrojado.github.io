@@ -23,7 +23,7 @@ export default function Layout({ route, children }: Props) {
 
   return (
     <div ref={containerRef} tabIndex={-1} className="h-full outline-none">
-      <Header route={route} />
+      <Header />
 
       <div id={MAIN_ELEMENT_ID} />
       {children}
