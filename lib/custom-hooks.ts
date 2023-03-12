@@ -4,6 +4,7 @@ import Window from '../modules/Window';
 import DarkMode from '../modules/DarkMode';
 import { getImageDataFromResponse } from './axios';
 import { getRefValue } from './hooks';
+import { getScrollWidth } from './dom';
 import { StoreContext } from './store';
 import { DialogName } from './types';
 
@@ -240,13 +241,14 @@ export function useDialogOffsetWidth() {
   const { visibleDialogs } = useContext(StoreContext);
 
   useEffect(() => {
-    if (visibleDialogs.length === 0) {
-      const bodyEl = document.body;
-      const offsetWidth = window.innerWidth - bodyEl.offsetWidth;
+    setDialogOffsetWidth(getScrollWidth());
+  }, []);
 
-      setDialogOffsetWidth(offsetWidth);
+  useEffect(() => {
+    if (visibleDialogs.length === 0) {
+      setDialogOffsetWidth(getScrollWidth());
     }
   }, [visibleDialogs]);
 
-  return dialogOffsetWidth;
+  return visibleDialogs.length !== 0 ? dialogOffsetWidth : 0;
 }

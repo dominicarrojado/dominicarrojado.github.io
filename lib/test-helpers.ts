@@ -4,6 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import { Nullish } from './types';
 import {
+  DIALOG_NAMES,
+  DIALOG_NAMES_LENGTH,
   GOOGLE_ADSENSE_UNITS,
   GOOGLE_ADSENSE_UNITS_LENGTH,
   GOOGLE_ADSENSE_UNIT_FORMATS,
@@ -109,6 +111,10 @@ export function getRandomGoogleAdsenseUnitLayout() {
   return GOOGLE_ADSENSE_UNIT_LAYOUTS[
     getFakeNumber(GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH - 1)
   ];
+}
+
+export function getRandomDialogNames() {
+  return DIALOG_NAMES[getFakeNumber(DIALOG_NAMES_LENGTH - 1)];
 }
 
 export function getMatchMediaMock(

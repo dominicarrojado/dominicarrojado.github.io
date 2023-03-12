@@ -2,15 +2,18 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import axios from 'axios';
 import Window from '../../modules/Window';
 import DarkMode from '../../modules/DarkMode';
+import { StoreContext } from '../store';
 import {
   getFakeBoolean,
   getFakeNumber,
   getFakeSentence,
   getMatchMediaMock,
+  getRandomDialogNames,
   setReadOnlyProperty,
 } from '../test-helpers';
 import * as axiosHelpers from '../axios';
 import * as hooks from '../hooks';
+import * as dom from '../dom';
 import {
   useDarkModeEnabled,
   useDownloadGif,
@@ -18,7 +21,12 @@ import {
   useMotionSafe,
   useScrollOpacityEffect,
   useWindowLoaded,
+  useUpdateVisibleDialogs,
+  useDialogOffsetWidth,
+  useWindowSize,
 } from '../custom-hooks';
+import { ReactNode } from 'react';
+import { getScrollWidth } from 'lib/dom';
 
 describe('hooks utilities', () => {
   describe('useMounted()', () => {
@@ -71,6 +79,47 @@ describe('hooks utilities', () => {
       });
 
       expect(hook.result.current).toBe(true);
+    });
+  });
+
+  describe('useWindowSize()', () => {
+    const windowWidthOrig = window.innerWidth;
+    const windowHeightOrig = window.innerHeight;
+
+    afterEach(() => {
+      setReadOnlyProperty(window, 'innerWidth', windowWidthOrig);
+      setReadOnlyProperty(window, 'innerHeight', windowHeightOrig);
+    });
+
+    it('should return initial value', () => {
+      const windowWidth = getFakeNumber();
+      const windowHeight = getFakeNumber();
+
+      setReadOnlyProperty(window, 'innerWidth', windowWidth);
+      setReadOnlyProperty(window, 'innerHeight', windowHeight);
+
+      const hook = renderHook(() => useWindowSize());
+
+      expect(hook.result.current).toEqual({ windowWidth, windowHeight });
+    });
+
+    it('should update value on window resize', () => {
+      setReadOnlyProperty(window, 'innerWidth', getFakeNumber());
+      setReadOnlyProperty(window, 'innerHeight', getFakeNumber());
+
+      const hook = renderHook(() => useWindowSize());
+
+      const windowWidth = getFakeNumber();
+      const windowHeight = getFakeNumber();
+
+      setReadOnlyProperty(window, 'innerWidth', windowWidth);
+      setReadOnlyProperty(window, 'innerHeight', windowHeight);
+
+      act(() => {
+        Window.emit('resize');
+      });
+
+      expect(hook.result.current).toEqual({ windowWidth, windowHeight });
     });
   });
 
@@ -529,6 +578,106 @@ describe('hooks utilities', () => {
       expect(() => {
         cancelDownloadGif();
       }).not.toThrow();
+    });
+  });
+
+  describe('useUpdateVisibleDialogs()', () => {
+    it('should update visible dialogs if visible', () => {
+      const setVisibleDialogsMock = jest.fn();
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <StoreContext.Provider
+          value={{
+            visibleDialogs: [],
+            setVisibleDialogs: (fn: any) => setVisibleDialogsMock(fn([])),
+          }}
+        >
+          {children}
+        </StoreContext.Provider>
+      );
+      const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
+      const updateVisibleDialogs = hook.result.current;
+      const randomDialogName = getRandomDialogNames();
+
+      act(() => {
+        updateVisibleDialogs(randomDialogName, true);
+      });
+
+      expect(setVisibleDialogsMock).toBeCalledTimes(1);
+      expect(setVisibleDialogsMock).toBeCalledWith([randomDialogName]);
+    });
+
+    it('should update visible dialogs if NOT visible', () => {
+      const setVisibleDialogsMock = jest.fn();
+
+      const randomDialogName = getRandomDialogNames();
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <StoreContext.Provider
+          value={{
+            visibleDialogs: [],
+            setVisibleDialogs: (fn: any) =>
+              setVisibleDialogsMock(fn([randomDialogName])),
+          }}
+        >
+          {children}
+        </StoreContext.Provider>
+      );
+      const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
+      const updateVisibleDialogs = hook.result.current;
+
+      act(() => {
+        updateVisibleDialogs(randomDialogName, false);
+      });
+
+      expect(setVisibleDialogsMock).toBeCalledTimes(1);
+      expect(setVisibleDialogsMock).toBeCalledWith([]);
+    });
+  });
+
+  describe('useDialogOffsetWidth()', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should return zero if no visible dialogs', () => {
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <StoreContext.Provider
+          value={{
+            visibleDialogs: [],
+            setVisibleDialogs: jest.fn(),
+          }}
+        >
+          {children}
+        </StoreContext.Provider>
+      );
+
+      const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
+      const dialogOffsetWidth = hook.result.current;
+
+      expect(dialogOffsetWidth).toBe(0);
+    });
+
+    it('should return scroll width if there are visible dialogs', () => {
+      const scrollWidth = getFakeNumber({ min: 1 });
+
+      jest.spyOn(dom, 'getScrollWidth').mockReturnValue(scrollWidth);
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <StoreContext.Provider
+          value={{
+            visibleDialogs: [getRandomDialogNames()],
+            setVisibleDialogs: jest.fn(),
+          }}
+        >
+          {children}
+        </StoreContext.Provider>
+      );
+
+      const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
+      const dialogOffsetWidth = hook.result.current;
+
+      expect(dialogOffsetWidth).toBe(scrollWidth);
     });
   });
 });
