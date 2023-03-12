@@ -1,19 +1,23 @@
-import { getFakeDomainWord, setReadOnlyProperty } from '../test-helpers';
-import { checkIsLocalhost } from '../location';
+import {
+  getFakeDomainWord,
+  getFakeWord,
+  setReadOnlyProperty,
+} from '../test-helpers';
+import { checkIsLocalhost, getSearchParams } from '../location';
 
 describe('location utilities', () => {
+  const locationOrig = window.location;
+
+  beforeEach(() => {
+    // delete window.location in order to override it
+    delete (window as any).location;
+  });
+
+  afterEach(() => {
+    setReadOnlyProperty(window, 'location', locationOrig);
+  });
+
   describe('checkIsLocalhost()', () => {
-    const locationOrig = window.location;
-
-    beforeEach(() => {
-      // delete window.location in order to override it
-      delete (window as any).location;
-    });
-
-    afterEach(() => {
-      setReadOnlyProperty(window, 'location', locationOrig);
-    });
-
     it('should return true if localhost', () => {
       setReadOnlyProperty(window, 'location', {
         hostname: 'localhost',
@@ -28,6 +32,21 @@ describe('location utilities', () => {
       });
 
       expect(checkIsLocalhost()).toBe(false);
+    });
+  });
+
+  describe('getSearchParams()', () => {
+    it('should return expected value', () => {
+      const key = getFakeWord();
+      const value = getFakeWord();
+
+      setReadOnlyProperty(window, 'location', {
+        href: `${locationOrig.href}?${key}=${value}`,
+      });
+
+      const res = getSearchParams(key);
+
+      expect(res).toBe(value);
     });
   });
 });
