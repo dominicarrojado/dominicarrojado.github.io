@@ -1,8 +1,8 @@
+import { ReactNode } from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import axios from 'axios';
 import Window from '../../modules/Window';
 import DarkMode from '../../modules/DarkMode';
-import { StoreContext } from '../store';
 import {
   getFakeBoolean,
   getFakeNumber,
@@ -11,6 +11,8 @@ import {
   getRandomDialogNames,
   setReadOnlyProperty,
 } from '../test-helpers';
+import { StoreContextType } from '../../lib/types';
+import { StoreContext } from '../store';
 import * as axiosHelpers from '../axios';
 import * as hooks from '../hooks';
 import * as dom from '../dom';
@@ -25,10 +27,20 @@ import {
   useDialogOffsetWidth,
   useWindowSize,
 } from '../custom-hooks';
-import { ReactNode } from 'react';
-import { getScrollWidth } from 'lib/dom';
 
 describe('hooks utilities', () => {
+  const initiateWrapper = (value: StoreContextType) => {
+    return function StoreContextProvider({
+      children,
+    }: {
+      children: ReactNode;
+    }) {
+      return (
+        <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
+      );
+    };
+  };
+
   describe('useMounted()', () => {
     const requestAnimationFrameOrig = window.requestAnimationFrame;
 
@@ -585,16 +597,10 @@ describe('hooks utilities', () => {
     it('should update visible dialogs if visible', () => {
       const setVisibleDialogsMock = jest.fn();
 
-      const wrapper = ({ children }: { children: ReactNode }) => (
-        <StoreContext.Provider
-          value={{
-            visibleDialogs: [],
-            setVisibleDialogs: (fn: any) => setVisibleDialogsMock(fn([])),
-          }}
-        >
-          {children}
-        </StoreContext.Provider>
-      );
+      const wrapper = initiateWrapper({
+        visibleDialogs: [],
+        setVisibleDialogs: (fn: any) => setVisibleDialogsMock(fn([])),
+      });
       const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
       const updateVisibleDialogs = hook.result.current;
       const randomDialogName = getRandomDialogNames();
@@ -612,17 +618,11 @@ describe('hooks utilities', () => {
 
       const randomDialogName = getRandomDialogNames();
 
-      const wrapper = ({ children }: { children: ReactNode }) => (
-        <StoreContext.Provider
-          value={{
-            visibleDialogs: [],
-            setVisibleDialogs: (fn: any) =>
-              setVisibleDialogsMock(fn([randomDialogName])),
-          }}
-        >
-          {children}
-        </StoreContext.Provider>
-      );
+      const wrapper = initiateWrapper({
+        visibleDialogs: [],
+        setVisibleDialogs: (fn: any) =>
+          setVisibleDialogsMock(fn([randomDialogName])),
+      });
       const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
       const updateVisibleDialogs = hook.result.current;
 
@@ -641,17 +641,10 @@ describe('hooks utilities', () => {
     });
 
     it('should return zero if no visible dialogs', () => {
-      const wrapper = ({ children }: { children: ReactNode }) => (
-        <StoreContext.Provider
-          value={{
-            visibleDialogs: [],
-            setVisibleDialogs: jest.fn(),
-          }}
-        >
-          {children}
-        </StoreContext.Provider>
-      );
-
+      const wrapper = initiateWrapper({
+        visibleDialogs: [],
+        setVisibleDialogs: jest.fn(),
+      });
       const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
       const dialogOffsetWidth = hook.result.current;
 
@@ -663,17 +656,10 @@ describe('hooks utilities', () => {
 
       jest.spyOn(dom, 'getScrollWidth').mockReturnValue(scrollWidth);
 
-      const wrapper = ({ children }: { children: ReactNode }) => (
-        <StoreContext.Provider
-          value={{
-            visibleDialogs: [getRandomDialogNames()],
-            setVisibleDialogs: jest.fn(),
-          }}
-        >
-          {children}
-        </StoreContext.Provider>
-      );
-
+      const wrapper = initiateWrapper({
+        visibleDialogs: [getRandomDialogNames()],
+        setVisibleDialogs: jest.fn(),
+      });
       const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
       const dialogOffsetWidth = hook.result.current;
 
