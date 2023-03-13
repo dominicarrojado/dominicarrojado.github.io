@@ -2,11 +2,10 @@ import React, { forwardRef, ForwardedRef } from 'react';
 import { Input as ReakitInput, InputProps } from 'reakit/Input';
 import cn from 'classnames';
 
+export type Props = InputProps;
+
 const Input = forwardRef(
-  (
-    { className, ...props }: InputProps,
-    ref: ForwardedRef<HTMLInputElement>
-  ) => (
+  ({ className, ...props }: Props, ref: ForwardedRef<HTMLInputElement>) => (
     <ReakitInput
       {...props}
       ref={ref}
