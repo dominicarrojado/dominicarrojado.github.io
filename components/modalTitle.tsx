@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import cn from 'classnames';
 
-type Props = { children: ReactNode };
+export type Props = { children: ReactNode };
 
 export default function ModalTitle({ children }: Props) {
   return (
