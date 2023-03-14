@@ -1,7 +1,7 @@
 import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
 import cn from 'classnames';
 
-type Props = { children: ReactNode };
+export type Props = { children: ReactNode };
 
 const ModalDialog = forwardRef(
   ({ children }: Props, ref: ForwardedRef<HTMLDivElement>) => (
