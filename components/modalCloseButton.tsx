@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { Button, ButtonProps } from 'reakit/Button';
 
-type Props = ButtonProps;
+export type Props = ButtonProps;
 
 export default function ModalCloseButton({ className, ...props }: Props) {
   return (
