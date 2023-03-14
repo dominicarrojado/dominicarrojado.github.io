@@ -11,20 +11,10 @@ import { SCROLL_DOWN_DURATION } from '../lib/constants';
 export default function ScrollDownButton() {
   const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
-  const isBtnClickedRef = useRef(false);
   const shouldDisplay = useMounted();
   const shouldImportLib = useWindowLoaded();
-  const btnOnMouseLeave = () => {
-    if (!getRefValue(isBtnClickedRef)) {
-      trackEvent({
-        event: GoogleAnalyticsEvent.SCROLL_HOVER,
-        hoverText: text,
-      });
-    }
-  };
   const btnOnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.currentTarget.blur();
-    isBtnClickedRef.current = true;
     trackEvent({
       event: GoogleAnalyticsEvent.SCROLL_CLICK,
       linkText: text,
@@ -74,7 +64,6 @@ export default function ScrollDownButton() {
         ref={btnRef}
         href="#about"
         className="group relative inline-flex flex-col items-center pb-2"
-        onMouseLeave={btnOnMouseLeave}
         onClick={btnOnClick}
       >
         <div

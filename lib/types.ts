@@ -31,17 +31,11 @@ export enum PostCategory {
 
 export enum GoogleAnalyticsEvent {
   PAGE_VIEW = 'page_view',
-  HEADER_BTN_HOVER = 'header_btn_hover',
   HEADER_BTN_CLICK = 'header_btn_click',
-  THEME_BTN_HOVER = 'theme_btn_hover',
   THEME_BTN_CLICK = 'theme_btn_click',
-  SCROLL_HOVER = 'scroll_hover',
   SCROLL_CLICK = 'scroll_click',
-  SOCIAL_HOVER = 'social_hover',
   SOCIAL_CLICK = 'social_click',
-  PROJECT_HOVER = 'project_hover',
   PROJECT_CLICK = 'project_click',
-  PROJECT_INFO_HOVER = 'project_info_hover',
   GIF_AUTO_PLAY_START = 'gif_auto_play_start',
   GIF_AUTO_PLAY_CANCEL = 'gif_auto_play_cancel',
   TESTIMONIALS_SWIPE = 'testimonials_swipe',

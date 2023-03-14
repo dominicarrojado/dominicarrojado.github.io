@@ -17,6 +17,15 @@ export default function SubscribeButton() {
     baseId: 'dialog-subscribe',
     animated: 300,
   });
+  const dialogSubscribeHide = () => {
+    dialogSubscribe.hide();
+    trackEvent({
+      event: GoogleAnalyticsEvent.MODAL_CLOSE,
+      projectTitle: MAIN_TITLE,
+      modalTitle: text,
+      buttonText: text,
+    });
+  };
   const dialogSubscribeVisible = dialogSubscribe.visible;
   const dialogSubscribeSuccess = useDialogState({
     baseId: 'dialog-subscribe-success',
@@ -33,6 +42,7 @@ export default function SubscribeButton() {
     }
   };
   const btnOnClick = () => {
+    setAnimationDone(true); // in case it was clicked during initial transitioning
     trackEvent({
       event: GoogleAnalyticsEvent.MODAL_OPEN,
       projectTitle: MAIN_TITLE,
@@ -53,15 +63,6 @@ export default function SubscribeButton() {
   };
 
   useEffect(() => {
-    if (!dialogSubscribeVisible && getRefValue(isMountedRef)) {
-      trackEvent({
-        event: GoogleAnalyticsEvent.MODAL_CLOSE,
-        projectTitle: MAIN_TITLE,
-        modalTitle: text,
-        buttonText: text,
-      });
-    }
-
     updateVisibleDialogs(DialogName.SUBSCRIBE, dialogSubscribeVisible);
 
     isMountedRef.current = true;
@@ -132,7 +133,10 @@ export default function SubscribeButton() {
           </div>
         </div>
       </DialogDisclosure>
-      <ModalSubscribe dialog={dialogSubscribe} onSuccess={subscribeOnSuccess} />
+      <ModalSubscribe
+        dialog={{ ...dialogSubscribe, hide: dialogSubscribeHide }}
+        onSuccess={subscribeOnSuccess}
+      />
       <ModalSubscribeSuccess dialog={dialogSubscribeSuccess} email={email} />
     </>
   );

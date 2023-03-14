@@ -11,19 +11,9 @@ type EventPageView = {
   event: GoogleAnalyticsEvent.PAGE_VIEW;
 };
 
-type EventHeaderMenuHover = {
-  event: GoogleAnalyticsEvent.HEADER_BTN_HOVER;
-  hoverText: string;
-};
-
 type EventHeaderMenuClick = {
   event: GoogleAnalyticsEvent.HEADER_BTN_CLICK;
   linkText: string;
-};
-
-type EventThemeButtonHover = {
-  event: GoogleAnalyticsEvent.THEME_BTN_HOVER;
-  hoverText: string;
 };
 
 type EventThemeButtonClick = {
@@ -31,21 +21,9 @@ type EventThemeButtonClick = {
   linkText: string;
 };
 
-type EventScrollDownHover = {
-  event: GoogleAnalyticsEvent.SCROLL_HOVER;
-  hoverText: string;
-};
-
 type EventScrollDownClick = {
   event: GoogleAnalyticsEvent.SCROLL_CLICK;
   linkText: string;
-};
-
-type EventSocialHover = {
-  event: GoogleAnalyticsEvent.SOCIAL_HOVER;
-  socialName: SocialName;
-  hoverText: string;
-  hoverUrl: string;
 };
 
 type EventSocialClick = {
@@ -55,24 +33,11 @@ type EventSocialClick = {
   linkUrl: string;
 };
 
-type EventProjectHover = {
-  event: GoogleAnalyticsEvent.PROJECT_HOVER;
-  projectTitle: string;
-  hoverText: string;
-  hoverUrl: string;
-};
-
 type EventProjectClick = {
   event: GoogleAnalyticsEvent.PROJECT_CLICK;
   projectTitle: string;
   linkText: string;
   linkUrl: string;
-};
-
-type EventProjectInfoHover = {
-  event: GoogleAnalyticsEvent.PROJECT_INFO_HOVER;
-  projectTitle: string;
-  hoverText: string;
 };
 
 type EventGifAutoPlayStart = {
@@ -121,17 +86,11 @@ type EventUnsubscribeFormSubmit = {
 export function trackEvent(
   data:
     | EventPageView
-    | EventHeaderMenuHover
     | EventHeaderMenuClick
-    | EventThemeButtonHover
     | EventThemeButtonClick
-    | EventScrollDownHover
     | EventScrollDownClick
-    | EventSocialHover
     | EventSocialClick
-    | EventProjectHover
     | EventProjectClick
-    | EventProjectInfoHover
     | EventGifAutoPlayStart
     | EventGifAutoPlayCancel
     | EventTestimonialsSwipe

@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
 import { Button } from 'reakit/Button';
 import { Checkbox } from 'reakit/Checkbox';
-import { getRefValue } from '../lib/hooks';
 import { useDarkModeEnabled, useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { checkShouldAnimate } from '../lib/transition-group';
@@ -32,7 +31,6 @@ function ThemeButtonChildren({
   toggleDarkMode: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isBtnClickedRef = useRef(false);
   const shouldDisplay = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
   const Icon = !isDarkModeEnabled ? SvgSun : SvgMoon;
@@ -45,16 +43,7 @@ function ThemeButtonChildren({
       setAnimationDone(true);
     }
   };
-  const btnOnMouseLeave = () => {
-    if (!getRefValue(isBtnClickedRef)) {
-      trackEvent({
-        event: GoogleAnalyticsEvent.THEME_BTN_HOVER,
-        hoverText: text,
-      });
-    }
-  };
   const btnOnClick = () => {
-    isBtnClickedRef.current = true;
     setAnimationDone(true); // in case it was clicked during initial transitioning
     toggleDarkMode();
     trackEvent({
@@ -75,7 +64,6 @@ function ThemeButtonChildren({
       )}
       aria-label="Switch between dark and light mode"
       onChange={btnOnClick}
-      onMouseLeave={btnOnMouseLeave}
     >
       <SwitchTransition>
         <Transition key={text} nodeRef={containerRef} timeout={200}>

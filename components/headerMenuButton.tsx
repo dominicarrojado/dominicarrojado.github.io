@@ -2,7 +2,6 @@ import { TransitionEvent, useRef, useState } from 'react';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
 import { DialogDisclosure, DialogStateReturn } from 'reakit/Dialog';
-import { getRefValue } from '../lib/hooks';
 import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { checkShouldAnimate } from '../lib/transition-group';
@@ -16,7 +15,6 @@ export default function HeaderMenuButton({
 }) {
   const isMenuOpen = dialog.visible;
   const textRef = useRef<HTMLDivElement>(null);
-  const isBtnClickedRef = useRef(false);
   const stacks = Array.from(Array(3).keys());
   const shouldDisplay = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
@@ -26,16 +24,7 @@ export default function HeaderMenuButton({
       setAnimationDone(true);
     }
   };
-  const btnOnMouseLeave = () => {
-    if (!getRefValue(isBtnClickedRef)) {
-      trackEvent({
-        event: GoogleAnalyticsEvent.HEADER_BTN_HOVER,
-        hoverText: text,
-      });
-    }
-  };
   const btnOnClick = () => {
-    isBtnClickedRef.current = true;
     setAnimationDone(true); // in case it was clicked during initial transitioning
     trackEvent({
       event: GoogleAnalyticsEvent.HEADER_BTN_CLICK,
@@ -51,7 +40,6 @@ export default function HeaderMenuButton({
         'md:min-w-10',
         'xl:min-w-11'
       )}
-      onMouseLeave={btnOnMouseLeave}
       onClick={btnOnClick}
     >
       {stacks.map((stack) => {

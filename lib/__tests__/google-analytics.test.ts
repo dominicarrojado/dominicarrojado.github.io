@@ -44,10 +44,9 @@ describe('google-analytics utilities', () => {
       });
 
       const event = {
-        event: GoogleAnalyticsEvent.SOCIAL_HOVER,
+        event: GoogleAnalyticsEvent.SOCIAL_CLICK,
         socialName: SocialName.EMAIL,
-        hoverText: getFakeWord(),
-        hoverUrl: getFakeUrl(),
+        linkUrl: getFakeUrl(),
         linkText: getFakeSentence(),
       } as const;
 
@@ -63,10 +62,10 @@ describe('google-analytics utilities', () => {
 
       const currentDataLayer = [
         {
-          event: GoogleAnalyticsEvent.PROJECT_HOVER,
+          event: GoogleAnalyticsEvent.PROJECT_CLICK,
           projectTitle: getFakeSentence(),
-          hoverText: getFakeSentence(),
-          hoverUrl: getFakeUrl(),
+          linkText: getFakeSentence(),
+          linkUrl: getFakeUrl(),
         },
       ];
 

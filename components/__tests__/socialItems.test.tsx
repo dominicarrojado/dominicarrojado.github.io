@@ -34,29 +34,6 @@ describe('<SocialItems />', () => {
       });
     });
 
-    it('should track as hover if NOT clicked', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const socialTitle = social.title;
-        const anchorEl = screen.queryByLabelText(
-          socialTitle
-        ) as HTMLAnchorElement;
-
-        fireEvent.mouseLeave(anchorEl);
-
-        expect(trackEventSpy).toHaveBeenCalledTimes(1);
-        expect(trackEventSpy).toBeCalledWith({
-          event: 'social_hover',
-          socialName: social.name,
-          hoverText: socialTitle,
-          hoverUrl: social.url,
-        });
-
-        trackEventSpy.mockClear();
-      });
-    });
-
     it('should track click', () => {
       SOCIAL_LINKS.forEach((social) => {
         const trackEventSpy = jest.spyOn(ga, 'trackEvent');
@@ -77,25 +54,6 @@ describe('<SocialItems />', () => {
         });
 
         trackEventSpy.mockClear();
-      });
-    });
-
-    it('should NOT track as hover if clicked', () => {
-      SOCIAL_LINKS.forEach((social) => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const socialTitle = social.title;
-        const anchorEl = screen.queryByLabelText(
-          socialTitle
-        ) as HTMLAnchorElement;
-
-        fireEvent.click(anchorEl);
-
-        trackEventSpy.mockClear();
-
-        fireEvent.mouseLeave(anchorEl);
-
-        expect(trackEventSpy).not.toBeCalled();
       });
     });
   });

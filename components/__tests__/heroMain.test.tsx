@@ -174,54 +174,20 @@ describe('<HeroMain />', () => {
       expect(container).toBeInTheDocument();
     });
 
-    describe('analytics', () => {
-      beforeEach(() => {
-        renderComponent();
-      });
+    it('should track click', () => {
+      const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
-      it('should track as hover if NOT clicked', () => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
+      renderComponent();
 
-        const btnEl = screen.queryByText('Scroll Down');
-        const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
+      const btnEl = screen.queryByText('Scroll Down');
+      const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
 
-        fireEvent.mouseLeave(anchorEl);
+      fireEvent.click(anchorEl);
 
-        expect(trackEventSpy).toBeCalledTimes(1);
-        expect(trackEventSpy).toBeCalledWith({
-          event: 'scroll_hover',
-          hoverText: 'Scroll Down',
-        });
-      });
-
-      it('should track click', () => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const btnEl = screen.queryByText('Scroll Down');
-        const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
-
-        fireEvent.click(anchorEl);
-
-        expect(trackEventSpy).toBeCalledTimes(1);
-        expect(trackEventSpy).toBeCalledWith({
-          event: 'scroll_click',
-          linkText: 'Scroll Down',
-        });
-      });
-
-      it('should NOT track as hover if clicked', () => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const btnEl = screen.queryByText('Scroll Down');
-        const anchorEl = btnEl?.closest('a') as HTMLAnchorElement;
-
-        fireEvent.click(anchorEl);
-
-        trackEventSpy.mockClear();
-
-        fireEvent.mouseLeave(anchorEl);
-
-        expect(trackEventSpy).not.toBeCalled();
+      expect(trackEventSpy).toBeCalledTimes(1);
+      expect(trackEventSpy).toBeCalledWith({
+        event: 'scroll_click',
+        linkText: 'Scroll Down',
       });
     });
   });

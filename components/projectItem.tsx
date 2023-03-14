@@ -269,13 +269,6 @@ function GifLoader({
   const containerRef = useRef<HTMLDivElement>(null);
   const isMounted = useMounted();
   const text = 'Downloading GIF...';
-  const loaderOnMouseEnter = () => {
-    trackEvent({
-      event: GoogleAnalyticsEvent.PROJECT_INFO_HOVER,
-      projectTitle: title,
-      hoverText: text,
-    });
-  };
 
   return (
     <>
@@ -300,7 +293,6 @@ function GifLoader({
               }
             )}
             data-testid="gif-loader"
-            onMouseEnter={loaderOnMouseEnter}
           >
             <Spinner
               className={cn(
@@ -405,16 +397,6 @@ function LinkItem({
 }: ProjectLink & { projectTitle: string }) {
   const isClickedRef = useRef(false);
   const isExternal = !url.startsWith(Route.HOME);
-  const onMouseLeave = () => {
-    if (!getRefValue(isClickedRef)) {
-      trackEvent({
-        projectTitle,
-        event: GoogleAnalyticsEvent.PROJECT_HOVER,
-        hoverText: title,
-        hoverUrl: url,
-      });
-    }
-  };
   const onClick = () => {
     isClickedRef.current = true;
     trackEvent({
@@ -429,7 +411,6 @@ function LinkItem({
     <li className={cn('mt-4', 'sm:mt-2', 'lg:mt-1')}>
       <TextArrowLink
         href={url}
-        onMouseLeave={onMouseLeave}
         onClick={onClick}
         target="_blank"
         isExternal={isExternal}

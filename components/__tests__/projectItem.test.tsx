@@ -233,27 +233,6 @@ describe('<ProjectItem />', () => {
       jest.restoreAllMocks();
     });
 
-    it('should track as hover if NOT clicked', () => {
-      projectLinks.forEach((link) => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const linkTitle = link.title;
-        const linkEl = screen.queryByText(linkTitle) as HTMLAnchorElement;
-
-        fireEvent.mouseLeave(linkEl);
-
-        expect(trackEventSpy).toBeCalledTimes(1);
-        expect(trackEventSpy).toBeCalledWith({
-          projectTitle,
-          event: 'project_hover',
-          hoverText: linkTitle,
-          hoverUrl: link.url,
-        });
-
-        trackEventSpy.mockClear();
-      });
-    });
-
     it('should track click', () => {
       projectLinks.forEach((link) => {
         const trackEventSpy = jest.spyOn(ga, 'trackEvent');
@@ -272,23 +251,6 @@ describe('<ProjectItem />', () => {
         });
 
         trackEventSpy.mockClear();
-      });
-    });
-
-    it('should NOT track as hover if clicked', () => {
-      projectLinks.forEach((link) => {
-        const trackEventSpy = jest.spyOn(ga, 'trackEvent');
-
-        const linkTitle = link.title;
-        const linkEl = screen.queryByText(linkTitle) as HTMLAnchorElement;
-
-        fireEvent.click(linkEl);
-
-        trackEventSpy.mockClear();
-
-        fireEvent.mouseLeave(linkEl);
-
-        expect(trackEventSpy).not.toBeCalled();
       });
     });
   });
@@ -439,22 +401,6 @@ describe('<ProjectItem />', () => {
 
       expect(screen.queryByText(downloadProgress)).toBeInTheDocument();
 
-      // expect to track mouse enter on GIF loader
-      const gifLoaderEl = screen.queryByTestId('gif-loader') as HTMLDivElement;
-
-      fireEvent.mouseEnter(gifLoaderEl);
-
-      const projectTitle = project.title;
-
-      expect(trackEventSpy).toBeCalledTimes(1);
-      expect(trackEventSpy).toBeCalledWith({
-        projectTitle,
-        event: 'project_info_hover',
-        hoverText: downloadingText,
-      });
-
-      trackEventSpy.mockClear();
-
       // expect "Downloading GIF..." and progress NOT to be displayed if cancelled
       act(() => {
         Window.emit('scroll');
@@ -468,6 +414,8 @@ describe('<ProjectItem />', () => {
       expect(screen.queryByText(downloadProgress)).not.toBeInTheDocument();
 
       // expect to track GIF download cancel
+      const projectTitle = project.title;
+
       expect(trackEventSpy).toBeCalledTimes(1);
       expect(trackEventSpy).toBeCalledWith({
         projectTitle,

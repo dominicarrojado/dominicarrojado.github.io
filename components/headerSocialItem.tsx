@@ -1,7 +1,5 @@
-import { useRef } from 'react';
 import cn from 'classnames';
 import { Tooltip, TooltipReference, useTooltipState } from 'reakit/Tooltip';
-import { getRefValue } from '../lib/hooks';
 import { trackEvent } from '../lib/google-analytics';
 import AnchorLink from './anchorLink';
 import { GoogleAnalyticsEvent, Social } from '../lib/types';
@@ -16,20 +14,7 @@ export default function HeaderSocialItem({
   isMenuOpen: boolean;
 }) {
   const tooltip = useTooltipState();
-  const isBtnClickedRef = useRef(false);
-  const onMouseLeave = () => {
-    if (!getRefValue(isBtnClickedRef)) {
-      trackEvent({
-        event: GoogleAnalyticsEvent.SOCIAL_HOVER,
-        hoverText: social.title,
-        hoverUrl: social.url,
-        socialName: social.name,
-      });
-    }
-  };
   const onClick = () => {
-    isBtnClickedRef.current = true;
-
     trackEvent({
       event: GoogleAnalyticsEvent.SOCIAL_CLICK,
       linkText: social.title,
@@ -63,7 +48,6 @@ export default function HeaderSocialItem({
           'sm:p-5',
           'md:p-6'
         )}
-        onMouseLeave={onMouseLeave}
         onClick={onClick}
         isExternal
       >
