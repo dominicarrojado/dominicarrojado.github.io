@@ -2,13 +2,12 @@ import cn from 'classnames';
 import NextLink from './nextLink';
 import { MENU_ITEMS } from '../lib/constants';
 
-export default function HeaderMenuItems({
-  isMenuOpen,
-  closeMenu,
-}: {
-  isMenuOpen: boolean;
+export type Props = {
+  shouldDisplay: boolean;
   closeMenu: () => void;
-}) {
+};
+
+export default function HeaderMenuItems({ shouldDisplay, closeMenu }: Props) {
   return (
     <ul>
       {MENU_ITEMS.map((item, idx) => (
@@ -19,16 +18,15 @@ export default function HeaderMenuItems({
             'transform',
             'motion-reduce:transition-none',
             'sm:mb-10',
-            'md:mb-12',
-            'xl:mb-14',
+            'xl:mb-12',
             {
-              [!isMenuOpen
+              [!shouldDisplay
                 ? 'opacity-0 transition-transform translate-x-1/3 duration-300'
                 : 'opacity-100 transition translate-x-0 duration-700']: true,
             }
           )}
           style={
-            isMenuOpen
+            shouldDisplay
               ? { transitionDelay: `${(idx + 1) * 75 + 100}ms` }
               : undefined
           }

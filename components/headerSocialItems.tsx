@@ -1,16 +1,14 @@
 import cn from 'classnames';
-import { SOCIAL_LINKS } from '../lib/constants';
 import HeaderSocialItem from './headerSocialItem';
+import { SOCIAL_LINKS } from '../lib/constants';
 
-export default function HeaderSocialItems({
-  isMenuOpen,
-}: {
-  isMenuOpen: boolean;
-}) {
+export type Props = { shouldDisplay: boolean };
+
+export default function HeaderSocialItems({ shouldDisplay }: Props) {
   return (
     <ul
       className={cn(
-        'flex mt-10 transform -translate-x-4',
+        'flex flex-wrap transform -translate-x-7',
         'sm:-translate-x-5',
         'md:-translate-x-6'
       )}
@@ -20,7 +18,7 @@ export default function HeaderSocialItems({
           key={idx}
           idx={idx}
           social={social}
-          isMenuOpen={isMenuOpen}
+          shouldDisplay={shouldDisplay}
         />
       ))}
     </ul>

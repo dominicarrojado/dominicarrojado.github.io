@@ -43,10 +43,10 @@ export default function HeaderMenu({ dialog }: { dialog: DialogStateReturn }) {
               <div className="flex justify-center items-center min-h-full">
                 <div className={cn('py-10 pl-8', 'sm:pl-0')}>
                   <HeaderMenuItems
-                    isMenuOpen={shouldDisplay}
+                    shouldDisplay={shouldDisplay}
                     closeMenu={dialog.hide}
                   />
-                  <HeaderSocialItems isMenuOpen={shouldDisplay} />
+                  <HeaderSocialItems shouldDisplay={shouldDisplay} />
                 </div>
               </div>
             </Dialog>

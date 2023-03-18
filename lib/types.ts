@@ -137,6 +137,7 @@ export type Project = {
 export type Social = {
   name: SocialName;
   title: string;
+  subtitle: string;
   url: string;
   icon: (props: HTMLAttributes<SVGElement>) => ReactNode;
 };
