@@ -2,6 +2,7 @@ import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
+import { DialogStateReturn } from 'reakit/Dialog';
 import { Nullish, Route } from './types';
 import {
   DIALOG_NAMES,
@@ -144,6 +145,16 @@ export function getMatchMediaMock(
         ...customResponse,
       } as MediaQueryList)
   );
+}
+
+export function getDialogStateMock(
+  customData = {} as Partial<DialogStateReturn>
+) {
+  return {
+    visible: getFakeBoolean(),
+    hide: jest.fn(),
+    ...customData,
+  } as DialogStateReturn;
 }
 
 export function getFakeBoolean() {

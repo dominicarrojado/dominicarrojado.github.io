@@ -8,11 +8,11 @@ import { checkShouldAnimate } from '../lib/transition-group';
 import Transition from './transition';
 import { GoogleAnalyticsEvent } from '../lib/types';
 
-export default function HeaderMenuButton({
-  dialog,
-}: {
+export type Props = {
   dialog: DialogStateReturn;
-}) {
+};
+
+export default function HeaderMenuButton({ dialog }: Props) {
   const isMenuOpen = dialog.visible;
   const textRef = useRef<HTMLDivElement>(null);
   const stacks = Array.from(Array(3).keys());
@@ -40,6 +40,7 @@ export default function HeaderMenuButton({
         'md:min-w-10',
         'xl:min-w-11'
       )}
+      aria-label="Toggle menu"
       onClick={btnOnClick}
     >
       {stacks.map((stack) => {

@@ -168,7 +168,7 @@ describe('<PostContent />', () => {
       expect(sectionEl).not.toHaveClass('delay-2500');
     });
 
-    it('should have longer animation delay by default on transition end of opacity', () => {
+    it('should have longer animation delay on transition end of opacity', () => {
       act(() => {
         Window.emit('load');
       });
