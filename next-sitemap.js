@@ -3,7 +3,7 @@
 module.exports = {
   siteUrl: 'https://dominicarrojado.com',
   generateRobotsTxt: true,
-  exclude: ['/subscribe', '/unsubscribe'],
+  exclude: ['/subscribe'],
   additionalPaths: async (config) => {
     const configNoTrailingSlash = {
       ...config,
@@ -191,6 +191,16 @@ module.exports = {
 
       // razer apps
       await config.transform(config, '/mouse-accuracy-game/'),
+
+      // japan visa checker
+      await config.transform(
+        config,
+        '/japan-visa-appointment-booking-system-notifications/'
+      ),
+      await config.transform(
+        config,
+        '/japan-visa-appointment-booking-system-notifications/unsubscribe'
+      ),
 
       // blog examples
       await config.transform(config, '/mjml-sample-edm/'),
