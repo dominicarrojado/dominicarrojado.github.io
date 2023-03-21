@@ -1,6 +1,9 @@
+/** @type {import('next-sitemap').IConfig} */
+
 module.exports = {
   siteUrl: 'https://dominicarrojado.com',
   generateRobotsTxt: true,
+  exclude: ['/subscribe', '/unsubscribe'],
   additionalPaths: async (config) => {
     const configNoTrailingSlash = {
       ...config,
