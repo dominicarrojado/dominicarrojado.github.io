@@ -3,15 +3,17 @@ import { trackEvent } from '../lib/google-analytics';
 import AnchorLink from './anchorLink';
 import { GoogleAnalyticsEvent, Social } from '../lib/types';
 
+export type Props = {
+  idx: number;
+  social: Social;
+  shouldDisplay: boolean;
+};
+
 export default function HeaderSocialItem({
   idx,
   social,
   shouldDisplay,
-}: {
-  idx: number;
-  social: Social;
-  shouldDisplay: boolean;
-}) {
+}: Props) {
   const onClick = () => {
     trackEvent({
       event: GoogleAnalyticsEvent.SOCIAL_CLICK,
@@ -23,7 +25,6 @@ export default function HeaderSocialItem({
 
   return (
     <li
-      key={social.name}
       className={cn(
         'w-1/3',
         'transform',

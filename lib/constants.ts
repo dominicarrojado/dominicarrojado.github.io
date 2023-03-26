@@ -463,6 +463,7 @@ export const SOCIAL_LINKS: Array<Social> = [
     icon: SvgEnvelope,
   },
 ];
+export const SOCIAL_LINKS_LENGTH = SOCIAL_LINKS.length;
 
 export const TESTIMONIALS_SUCCESS_SWIPE_DIFF = 40;
 export const TESTIMONIALS: Array<Testimonial> = [

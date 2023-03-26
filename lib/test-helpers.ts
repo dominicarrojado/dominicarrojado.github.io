@@ -15,6 +15,8 @@ import {
   GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH,
   ROUTES,
   ROUTES_LENGTH,
+  SOCIAL_LINKS,
+  SOCIAL_LINKS_LENGTH,
 } from './constants';
 
 type GetFakeNumber = {
@@ -128,6 +130,10 @@ export function getRandomDialogNames() {
   return DIALOG_NAMES[getFakeNumber(DIALOG_NAMES_LENGTH - 1)];
 }
 
+export function getRandomSocialLink() {
+  return SOCIAL_LINKS[getFakeNumber(SOCIAL_LINKS_LENGTH - 1)];
+}
+
 export function getMatchMediaMock(
   customResponse = {} as Partial<MediaQueryList>
 ) {
@@ -182,7 +188,7 @@ export function getFakeColor() {
 }
 
 export function getFakeNumber<T = GetFakeNumber>(data?: T) {
-  return faker.datatype.number(data);
+  return faker.datatype.number(data as any);
 }
 
 export function getFakeDirectoryPath() {
