@@ -11,7 +11,7 @@ import ModalDescription from './modalDescription';
 import InputGroup from './inputGroup';
 import { FetchState } from '../lib/types';
 
-type Props = {
+export type Props = {
   dialog: DialogStateReturn;
   onSuccess: (email: string) => void;
 };
@@ -28,11 +28,11 @@ export default function ModalSubscribe({ dialog, onSuccess }: Props) {
   const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formEl = e.currentTarget as HTMLFormElement;
-    const isSuccess = await submitSubscriptionRequest(formEl.email.value);
+    const inputEmail = getRefValue(inputEmailRef);
+    const isSuccess = await submitSubscriptionRequest(inputEmail.value);
 
     if (isSuccess) {
-      onSuccess(formEl.email.value);
+      onSuccess(inputEmail.value);
       dialog.hide();
     }
   };
@@ -53,7 +53,6 @@ export default function ModalSubscribe({ dialog, onSuccess }: Props) {
             ref={inputEmailRef}
             type="email"
             autoComplete="email"
-            name="email"
             placeholder="Email address"
             disabled={isLoading}
             required
