@@ -39,11 +39,11 @@ describe('<HeaderMenuButton />', () => {
       dialog: getDialogStateMock(),
     });
 
-    const anchorEl = screen.queryByLabelText('Toggle menu');
+    const btnEl = screen.queryByLabelText('Toggle menu');
 
-    expect(anchorEl?.isEqualNode(container.firstElementChild)).toBe(true);
-    expect(anchorEl?.tagName).toBe('BUTTON');
-    expect(anchorEl).toHaveAttribute('type', 'button');
+    expect(btnEl?.isEqualNode(container.firstElementChild)).toBe(true);
+    expect(btnEl?.tagName).toBe('BUTTON');
+    expect(btnEl).toHaveAttribute('type', 'button');
   });
 
   it('should have expected class by default', () => {
