@@ -2,7 +2,6 @@ import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog';
 import { useMounted, useUpdateVisibleDialogs } from '../lib/custom-hooks';
-import { getRefValue } from '../lib/hooks';
 import { trackEvent } from '../lib/google-analytics';
 import ModalSubscribe from './modalSubscribe';
 import ModalSubscribeSuccess from './modalSubscribeSuccess';

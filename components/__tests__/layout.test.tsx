@@ -1,5 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
+import {
+  getFakeSentence,
+  getRandomRoute,
+  getStoreContextMock,
+} from '../../lib/test-helpers';
 import { StoreContext } from '../../lib/store';
 import { StoreContextType } from '../../lib/types';
 import * as nextRouter from 'next/router';
@@ -10,15 +14,12 @@ import Layout, { Props } from '../layout';
 
 describe('<Layout />', () => {
   const renderComponent = ({
-    storeContext = {
-      visibleDialogs: [],
-      setVisibleDialogs: jest.fn(),
-    },
+    storeContext,
     children,
     ...props
   }: Props & { storeContext?: StoreContextType }) =>
     render(
-      <StoreContext.Provider value={storeContext}>
+      <StoreContext.Provider value={getStoreContextMock(storeContext)}>
         <Layout {...props}>{children}</Layout>
       </StoreContext.Provider>
     );

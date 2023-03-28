@@ -3,7 +3,7 @@ import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
 import { DialogStateReturn } from 'reakit/Dialog';
-import { Nullish, Route } from './types';
+import { Nullish, Route, StoreContextType } from './types';
 import {
   DIALOG_NAMES,
   DIALOG_NAMES_LENGTH,
@@ -161,6 +161,16 @@ export function getDialogStateMock(
     hide: jest.fn(),
     ...customData,
   } as DialogStateReturn;
+}
+
+export function getStoreContextMock(
+  customData = {} as Partial<StoreContextType>
+) {
+  return {
+    visibleDialogs: [],
+    setVisibleDialogs: jest.fn(),
+    ...customData,
+  };
 }
 
 export function getFakeBoolean() {
