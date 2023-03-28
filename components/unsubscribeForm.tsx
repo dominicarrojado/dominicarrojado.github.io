@@ -3,6 +3,7 @@ import { Transition } from '@headlessui/react';
 import { useMounted } from '../lib/custom-hooks';
 import { useUnsubscribe } from '../lib/api-hooks';
 import { trackEvent } from '../lib/google-analytics';
+import { getRefValue } from '../lib/hooks';
 import Input from './input';
 import Button from './button';
 import ModalTitle from './modalTitle';
@@ -15,9 +16,10 @@ import ErrorText from './errorText';
 import { FetchState, GoogleAnalyticsEvent } from '../lib/types';
 import { MAIN_TITLE, MODAL_TRANSITION_PROPS } from '../lib/constants';
 
-type Props = { onSuccess: () => void };
+export type Props = { onSuccess: () => void };
 
 export default function UnsubscribeForm({ onSuccess }: Props) {
+  const inputEmailRef = React.useRef<HTMLInputElement>(null);
   const shouldDisplay = useMounted();
   const [fetchState, unsubscribe] = useUnsubscribe();
   const isLoading = fetchState === FetchState.LOADING;
@@ -25,8 +27,8 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
   const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formEl = e.currentTarget as HTMLFormElement;
-    const isSuccess = await unsubscribe(formEl.email.value);
+    const inputEmail = getRefValue(inputEmailRef);
+    const isSuccess = await unsubscribe(inputEmail.value);
 
     if (isSuccess) {
       onSuccess();
@@ -51,9 +53,9 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
             </ModalDescription>
             <InputGroup>
               <Input
+                ref={inputEmailRef}
                 type="email"
                 autoComplete="email"
-                name="email"
                 placeholder="Email address"
                 disabled={isLoading}
                 required

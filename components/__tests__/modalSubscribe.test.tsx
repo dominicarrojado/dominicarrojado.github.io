@@ -77,6 +77,33 @@ describe('<ModalSubscribe />', () => {
     expect(inputEl).toHaveFocus();
   });
 
+  it('should call API on submit', () => {
+    const submitSubscribeRequestMock = jest.fn().mockResolvedValue(true);
+
+    jest
+      .spyOn(apiHooks, 'useSubmitSubscribeRequest')
+      .mockReturnValue([FetchState.DEFAULT, submitSubscribeRequestMock]);
+
+    renderComponent({
+      dialog: { ...getDialogStateMock(), visible: true },
+      onSuccess: jest.fn(),
+    });
+
+    const inputEl = screen.queryByPlaceholderText(
+      'Email address'
+    ) as HTMLInputElement;
+    const email = getFakeEmail();
+
+    inputEl.value = email;
+
+    const btnEl = screen.queryByText('Join') as HTMLButtonElement;
+
+    fireEvent.submit(btnEl);
+
+    expect(submitSubscribeRequestMock).toBeCalledTimes(1);
+    expect(submitSubscribeRequestMock).toBeCalledWith(email);
+  });
+
   it('should should call onSuccess on success', async () => {
     jest
       .spyOn(apiHooks, 'useSubmitSubscribeRequest')
