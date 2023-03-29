@@ -9,8 +9,8 @@ describe('<HeroBackground />', () => {
     jest.restoreAllMocks();
   });
 
-  it('should be hidden if window NOT loaded', () => {
-    jest.spyOn(customHooks, 'useWindowLoaded').mockReturnValue(false);
+  it('should be hidden if NOT mounted', () => {
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(false);
 
     const { container } = renderComponent();
 
@@ -19,8 +19,8 @@ describe('<HeroBackground />', () => {
     expect(containerEl).toHaveClass('opacity-0');
   });
 
-  it('should NOT be hidden if window loaded', () => {
-    jest.spyOn(customHooks, 'useWindowLoaded').mockReturnValue(true);
+  it('should NOT be hidden if mounted', () => {
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
     const { container } = renderComponent();
 

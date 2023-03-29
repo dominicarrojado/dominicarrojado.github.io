@@ -1,8 +1,8 @@
 import cn from 'classnames';
-import { useWindowLoaded } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 
 export default function HeroBackground() {
-  const shouldDisplay = useWindowLoaded();
+  const shouldDisplay = useMounted();
 
   return (
     <div
