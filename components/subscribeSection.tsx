@@ -3,12 +3,12 @@ import cn from 'classnames';
 import { useVerifySubscription } from '../lib/api-hooks';
 import NextLink from './nextLink';
 import TextArrowLink from './textArrowLink';
-import HeroMainSection from './heroMainSection';
+import HeroBackground from './heroBackground';
+import HeroSection from './heroSection';
 import ModalDialog from './modalDialog';
 import ModalContent from './modalContent';
 import ModalTitle from './modalTitle';
 import ModalDescription from './modalDescription';
-import HeroMainBackground from './heroMainBackground';
 import { FetchState, Route } from '../lib/types';
 
 export default function SubscribeSection() {
@@ -21,8 +21,8 @@ export default function SubscribeSection() {
   }, []);
 
   return (
-    <HeroMainSection>
-      <HeroMainBackground />
+    <HeroSection>
+      <HeroBackground />
       <div className={cn('p-4', 'sm:p-0')}>
         <ModalDialog>
           <ModalContent>
@@ -73,6 +73,6 @@ export default function SubscribeSection() {
           </ModalContent>
         </ModalDialog>
       </div>
-    </HeroMainSection>
+    </HeroSection>
   );
 }
