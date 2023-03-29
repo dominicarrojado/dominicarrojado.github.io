@@ -57,7 +57,7 @@ describe('<HeaderMenuButton />', () => {
 
     menuStackEls.forEach((stackEl) => {
       expect(stackEl).toHaveClass('opacity-0');
-      expect(stackEl).toHaveClass('duration-1000');
+      expect(stackEl).toHaveClass('duration-700');
     });
   });
 
@@ -75,7 +75,7 @@ describe('<HeaderMenuButton />', () => {
 
     menuStackEls.forEach((stackEl) => {
       expect(stackEl).not.toHaveClass('opacity-0');
-      expect(stackEl).toHaveClass('duration-1000');
+      expect(stackEl).toHaveClass('duration-700');
     });
 
     expect(menuLabelEl).not.toHaveClass('opacity-0');
@@ -96,7 +96,7 @@ describe('<HeaderMenuButton />', () => {
 
     menuStackEls.forEach((stackEl) => {
       expect(stackEl).not.toHaveClass('opacity-0');
-      expect(stackEl).toHaveClass('duration-300');
+      expect(stackEl).toHaveClass('duration-200');
     });
   });
 
@@ -115,7 +115,7 @@ describe('<HeaderMenuButton />', () => {
 
     menuStackEls.forEach((stackEl) => {
       expect(stackEl).toHaveClass('opacity-0');
-      expect(stackEl).toHaveClass('duration-1000');
+      expect(stackEl).toHaveClass('duration-700');
     });
   });
 
@@ -136,7 +136,7 @@ describe('<HeaderMenuButton />', () => {
 
     menuStackEls.forEach((stackEl) => {
       expect(stackEl).not.toHaveClass('opacity-0');
-      expect(stackEl).toHaveClass('duration-300');
+      expect(stackEl).toHaveClass('duration-200');
     });
   });
 

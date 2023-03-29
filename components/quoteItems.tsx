@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
+import { useMounted } from '../lib/custom-hooks';
 import QuoteItem from './quoteItem';
 import { QUOTES, QUOTES_INTERVAL, QUOTES_LENGTH } from '../lib/constants';
 
 export default function QuoteItems() {
+  const isMounted = useMounted();
   const containerRef = useRef<HTMLLIElement>(null);
   const [activeQuote, setActiveQuote] = useState(0);
   const [height, setHeight] = useState(0);
@@ -39,10 +41,12 @@ export default function QuoteItems() {
     <ul
       className={cn(
         'relative text-center overflow-hidden',
-        'transition-height duration-1000',
         'motion-reduce:transition-none',
         'sm:text-lg',
-        'xl:text-xl'
+        'xl:text-xl',
+        {
+          'transition-height duration-1000': isMounted,
+        }
       )}
       style={{ height }}
     >

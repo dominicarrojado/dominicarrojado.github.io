@@ -62,13 +62,13 @@ export default function HeaderMenuButton({ dialog }: Props) {
               { 'mt-1.5': !isTop },
               !animationDone
                 ? {
-                    'duration-1000': true,
+                    'duration-700': true,
                     'opacity-0': !shouldDisplay,
                     'translate-x-1/2': (isTop || isBottom) && !shouldDisplay,
                     '-translate-x-1/2': isMid && !shouldDisplay,
                   }
                 : {
-                    'duration-300': true,
+                    'duration-200': true,
                     'translate-y-2 -rotate-45 md:translate-y-3':
                       isTop && isMenuOpen,
                     '-translate-y-2 rotate-45': isBottom && isMenuOpen,
@@ -78,7 +78,7 @@ export default function HeaderMenuButton({ dialog }: Props) {
             style={
               !animationDone
                 ? {
-                    transitionDelay: `${stack * 150 + 500}ms`,
+                    transitionDelay: `${stack * 100}ms`,
                   }
                 : undefined
             }
@@ -87,7 +87,7 @@ export default function HeaderMenuButton({ dialog }: Props) {
         );
       })}
       <SwitchTransition>
-        <Transition key={text} nodeRef={textRef} timeout={200}>
+        <Transition key={text} nodeRef={textRef} timeout={300}>
           {(state) => (
             <div
               ref={textRef}
@@ -101,7 +101,7 @@ export default function HeaderMenuButton({ dialog }: Props) {
                 'xl:text-xs',
                 !animationDone
                   ? {
-                      'duration-700 delay-1000': true,
+                      'duration-700': true,
                       [shouldDisplay
                         ? 'opacity-100 translate-y-0'
                         : 'opacity-0 -translate-y-3']: true,

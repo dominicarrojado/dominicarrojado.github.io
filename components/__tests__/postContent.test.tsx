@@ -1,7 +1,6 @@
 import { render, screen, act } from '@testing-library/react';
 import { forceVisible } from 'react-lazyload';
 import {
-  fireEventTransitionEnd,
   getFakeDate,
   getFakeSentence,
   getFakeSentences,
@@ -11,7 +10,6 @@ import {
   getMonthName,
   queryByTextIgnoreHTML,
 } from '../../lib/test-helpers';
-import Window from '../../modules/Window';
 import { Post, PostData } from '../../lib/types';
 import * as customHooks from '../../lib/custom-hooks';
 import PostContent, { Props } from '../postContent';
@@ -144,54 +142,6 @@ describe('<PostContent />', () => {
       expect(anchorEl).toHaveAttribute('href', '/posts');
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
-    });
-
-    it('should have shorter delay by default', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
-      const sectionEl = screen.queryByTestId('section');
-
-      expect(sectionEl).toHaveClass('delay-1500');
-      expect(sectionEl).not.toHaveClass('delay-2500');
-    });
-
-    it('should have shorter animation delay by default', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
-      const sectionEl = screen.queryByTestId('section');
-
-      expect(sectionEl).toHaveClass('delay-1500');
-      expect(sectionEl).not.toHaveClass('delay-2500');
-    });
-
-    it('should have longer animation delay on transition end of opacity', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
-      const sectionEl = screen.queryByTestId('section') as HTMLElement;
-
-      fireEventTransitionEnd(sectionEl, 'opacity');
-
-      expect(sectionEl).toHaveClass('delay-2500');
-      expect(sectionEl).not.toHaveClass('delay-1500');
-    });
-
-    it('should have shorter animation delay on transition end of other prop name', () => {
-      act(() => {
-        Window.emit('load');
-      });
-
-      const sectionEl = screen.queryByTestId('section') as HTMLElement;
-
-      fireEventTransitionEnd(sectionEl, getFakeWord());
-
-      expect(sectionEl).toHaveClass('delay-1500');
-      expect(sectionEl).not.toHaveClass('delay-2500');
     });
   });
 

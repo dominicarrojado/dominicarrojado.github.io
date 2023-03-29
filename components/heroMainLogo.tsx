@@ -15,7 +15,7 @@ export default function HeroMainLogo() {
       <SvgLogo
         className={cn(
           'w-40 h-40 text-white',
-          'transform transition-transform-opacity duration-1250 delay-700',
+          'transform transition-transform-opacity duration-1250',
           'motion-reduce:transition-none',
           'sm:w-60 sm:h-60',
           'md:w-80 md:h-80',

@@ -9,7 +9,7 @@ export default function HeroMainLogoPart({ isLeft }: { isLeft?: boolean }) {
     <SvgLessThan
       className={cn(
         'absolute top-12 w-14 h-14 text-white',
-        'transform transition duration-1250 delay-700',
+        'transform transition duration-1250',
         'motion-reduce:transition-none',
         'sm:top-16 sm:w-24 sm:h-24',
         'md:top-20 md:w-32 md:h-32',

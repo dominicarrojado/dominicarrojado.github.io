@@ -108,8 +108,8 @@ describe('<HeaderThemeButton />', () => {
 
     fireEventTransitionEnd(btnLabelEl, getFakeWord());
 
-    expect(btnLabelEl).toHaveClass('opacity-0 duration-700 delay-1000');
-    expect(iconEl).toHaveClass('opacity-0 duration-700 delay-700');
+    expect(btnLabelEl).toHaveClass('opacity-0 duration-700');
+    expect(iconEl).toHaveClass('opacity-0 duration-700');
   });
 
   it('should have expected class on transition end (opacity) and transition switch', () => {

@@ -12,7 +12,7 @@ export default function HeroMainTitle() {
       <h1
         className={cn(
           'mt-2 px-4 text-base font-light text-white',
-          'transform transition duration-1000 delay-1250',
+          'transform transition duration-700',
           'motion-reduce:transition-none',
           'sm:text-lg',
           'md:mt-3 md:text-2xl',

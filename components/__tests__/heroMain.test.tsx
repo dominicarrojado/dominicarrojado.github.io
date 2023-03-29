@@ -85,12 +85,6 @@ describe('<HeroMain />', () => {
         renderComponent(true);
       });
 
-      it('should display container', () => {
-        const containerEl = screen.queryByTestId('container');
-
-        expect(containerEl).toHaveClass('translate-y-0');
-      });
-
       it('should display logo', () => {
         const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
         const logoPartEls = screen.queryAllByTestId('logo-part');

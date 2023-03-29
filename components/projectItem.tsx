@@ -216,9 +216,8 @@ function ImageContainer({
                 'transition-opacity duration-300',
                 'motion-reduce:transition-none',
                 {
-                  [checkShouldAnimate(state)
-                    ? 'opacity-100 delay-300'
-                    : 'opacity-0']: true,
+                  [checkShouldAnimate(state) ? 'opacity-100' : 'opacity-0']:
+                    true,
                 }
               )}
               draggable={false}
@@ -297,7 +296,7 @@ function GifLoader({
             <Spinner
               className={cn(
                 'w-7 h-7 border-2',
-                'transition-opacity duration-1000',
+                'transition-opacity duration-700',
                 'motion-reduce:transition-none',
                 'sm:w-9 sm:h-9',
                 'md:w-11 md:h-11 md:border-4'

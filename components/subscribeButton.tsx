@@ -100,12 +100,12 @@ export default function SubscribeButton() {
               'md:w-7 md:h-7',
               !animationDone
                 ? {
-                    'duration-700 delay-700': true,
+                    'duration-700': true,
                     [shouldDisplay
                       ? 'opacity-100 translate-y-0'
                       : 'opacity-0 -translate-y-2']: true,
                   }
-                : 'duration-200'
+                : 'duration-300'
             )}
           >
             <SvgBell className="absolute inset-0 m-auto" />
@@ -119,12 +119,12 @@ export default function SubscribeButton() {
               'xl:text-xs',
               !animationDone
                 ? {
-                    'duration-700 delay-1000': true,
+                    'duration-700': true,
                     [shouldDisplay
                       ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 -translate-y-3']: true,
+                      : 'opacity-0 translate-y-3']: true,
                   }
-                : 'duration-200'
+                : 'duration-300'
             )}
             onTransitionEnd={!animationDone ? onTransitionEnd : undefined}
           >

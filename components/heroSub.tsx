@@ -33,14 +33,9 @@ export default function HeroSub({
             className={cn(
               'relative flex flex-col justify-center bg-gray-550 py-28 px-6 text-center overflow-hidden',
               'dark:bg-gray-750',
-              'transform transition-transform ease-in-out duration-500',
-              'motion-reduce:transition-none',
               'sm:px-20',
               'lg:px-32',
-              {
-                [!isMinHeightFull ? 'min-h-96' : 'min-h-full']: true,
-                [shouldDisplay ? 'translate-y-0' : '-translate-y-full']: true,
-              }
+              !isMinHeightFull ? 'min-h-96' : 'min-h-full'
             )}
             data-testid="container"
           >
@@ -62,7 +57,7 @@ function Background() {
       className={cn(
         'absolute top-0 left-0 w-full h-full bg-repeat bg-center invert-[.1]',
         'dark:invert-0',
-        'motion-safe:animate-slide transition-opacity duration-1250 delay-500',
+        'motion-safe:animate-slide transition-opacity duration-1250',
         'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,
@@ -89,7 +84,7 @@ function Title({
       <h1
         className={cn(
           'text-3xl font-bold text-white leading-tight',
-          'transform transition duration-1000 delay-500',
+          'transform transition duration-700',
           'motion-reduce:transition-none',
           'sm:text-4xl',
           'md:text-5xl',
@@ -123,7 +118,7 @@ function Desc({
       <p
         className={cn(
           'font-light text-white',
-          'transform transition duration-1000 delay-1000',
+          'transform transition duration-700',
           'motion-reduce:transition-none',
           'xl:text-2xl',
           {

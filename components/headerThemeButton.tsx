@@ -57,8 +57,10 @@ function ThemeButtonChildren({
       as={Button}
       checked={isDarkModeEnabled}
       className={cn(
-        'group text-gray-400 outline-none',
+        'group group flex items-center flex-col min-w-8 text-gray-400 outline-none',
         'dark:text-gray-300',
+        'md:min-w-9',
+        'xl:min-w-10',
         'hover:text-gray-500 focus-visible:text-gray-500',
         'dark:hover:text-white dark:focus-visible:text-white'
       )}
@@ -66,7 +68,7 @@ function ThemeButtonChildren({
       onChange={btnOnClick}
     >
       <SwitchTransition>
-        <Transition key={text} nodeRef={containerRef} timeout={200}>
+        <Transition key={text} nodeRef={containerRef} timeout={300}>
           {(state) => (
             <div ref={containerRef} className="flex items-center flex-col">
               <div
@@ -77,7 +79,7 @@ function ThemeButtonChildren({
                   'motion-reduce:transition-none',
                   !animationDone
                     ? {
-                        'duration-700 delay-700': true,
+                        'duration-700': true,
                         [shouldDisplay
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 translate-y-2']: true,
@@ -101,7 +103,7 @@ function ThemeButtonChildren({
                   'xl:text-xs',
                   !animationDone
                     ? {
-                        'duration-700 delay-1000': true,
+                        'duration-700': true,
                         [shouldDisplay
                           ? 'opacity-100 translate-y-0'
                           : 'opacity-0 -translate-y-3']: true,

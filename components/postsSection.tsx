@@ -15,10 +15,10 @@ export type Props = {
 export default function PostsSection({ posts, currentPage, lastPage }: Props) {
   const shouldDisplay = useMounted();
   const commonTransitionClass = cn(
-    'transform transition-transform-opacity duration-700',
+    'transform transition-opacity duration-700',
     'motion-reduce:transition-none',
     {
-      'opacity-0 translate-y-10': !shouldDisplay,
+      'opacity-0': !shouldDisplay,
     }
   );
 
@@ -29,7 +29,6 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
         adFormat={GoogleAdSenseUnitFormat.AUTO}
         className={cn(
           'max-w-screen-3xl -mt-8 mx-auto pb-8',
-          'delay-1500',
           'motion-reduce:transition-none',
           'sm:-mt-10 sm:pb-10',
           'md:-mt-12 md:pb-12',
@@ -48,7 +47,7 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
             headingLevel={2}
             className={commonTransitionClass}
             style={{
-              transitionDelay: `${idx * 150 + 1500}ms`,
+              transitionDelay: `${idx * 150}ms`,
             }}
             anchorClassName="bg-gray-100 dark:bg-gray-750"
           />
@@ -60,7 +59,6 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
         adFormat={GoogleAdSenseUnitFormat.AUTO}
         className={cn(
           'max-w-screen-3xl -mb-8 mx-auto pt-8',
-          'delay-2500',
           'motion-reduce:transition-none',
           'sm:-mb-10 sm:pt-10',
           'md:-mb-12 md:pt-12',

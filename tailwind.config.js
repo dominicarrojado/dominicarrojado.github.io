@@ -20,6 +20,7 @@ module.exports = {
       },
       minWidth: {
         8: '2rem',
+        9: '2.25rem',
         10: '2.5rem',
         11: '2.75rem',
       },
@@ -56,13 +57,6 @@ module.exports = {
       transitionDuration: {
         0: '0ms',
         1250: '1250ms',
-      },
-      transitionDelay: {
-        1250: '1250ms',
-        1500: '1500ms',
-        1750: '1750ms',
-        2250: '2250ms',
-        2500: '2500ms',
       },
       boxShadow: {
         '3xl':

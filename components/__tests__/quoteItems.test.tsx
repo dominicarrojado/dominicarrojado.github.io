@@ -1,4 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
+import * as customHooks from '../../lib/custom-hooks';
 import { QUOTES } from '../../lib/constants';
 import QuoteItems from '../quoteItems';
 
@@ -8,6 +9,8 @@ describe('<QuoteItems />', () => {
   const renderComponent = () => render(<QuoteItems />);
 
   beforeEach(() => {
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
+
     renderComponent();
   });
 

@@ -1,11 +1,8 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import Window from '../../modules/Window';
 import {
-  fireEventTransitionEnd,
   getFakeNumber,
-  getFakeWord,
   getRandomRoute,
-  getRandomRouteExceptHome,
   setReadOnlyProperty,
 } from '../../lib/test-helpers';
 import { Route } from '../../lib/types';
@@ -71,37 +68,6 @@ describe('<HeaderLogo />', () => {
     const anchorEl = container.firstElementChild as HTMLAnchorElement;
 
     expect(anchorEl).toHaveClass('opacity-0');
-    expect(anchorEl).not.toHaveClass('delay-700');
-  });
-
-  it('should have expected class if route is NOT home and transition has ended (other prop name)', () => {
-    jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
-      route: getRandomRouteExceptHome(),
-    } as nextRouter.NextRouter);
-
-    const { container } = renderComponent({ onClick: jest.fn() });
-    const anchorEl = container.firstElementChild as HTMLAnchorElement;
-
-    expect(anchorEl).toHaveClass('delay-700');
-
-    fireEventTransitionEnd(anchorEl, getFakeWord());
-
-    expect(anchorEl).toHaveClass('delay-700');
-  });
-
-  it('should have expected class if route is NOT home and transition has ended (opacity)', () => {
-    jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
-      route: getRandomRouteExceptHome(),
-    } as nextRouter.NextRouter);
-
-    const { container } = renderComponent({ onClick: jest.fn() });
-    const anchorEl = container.firstElementChild as HTMLAnchorElement;
-
-    expect(anchorEl).toHaveClass('delay-700');
-
-    fireEventTransitionEnd(anchorEl, 'opacity');
-
-    expect(anchorEl).not.toHaveClass('delay-700');
   });
 
   it('should have expected class on scroll', async () => {

@@ -26,10 +26,10 @@ export default function PostsPagination({ currentPage, lastPage }: Props) {
     <nav
       aria-label="Pagination"
       className={cn(
-        'transform transition-transform-opacity duration-700 delay-2250',
+        'transform transition-transform-opacity duration-700',
         'motion-reduce:transition-none',
         {
-          'opacity-0 translate-y-10': !shouldDisplay,
+          'opacity-0': !shouldDisplay,
         }
       )}
     >

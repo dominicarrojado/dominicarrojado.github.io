@@ -51,7 +51,7 @@ export default function ScrollDownButton() {
     <div
       className={cn(
         'absolute bottom-0 left-0 w-full z-10 text-center',
-        'transform transition duration-1000 delay-1750',
+        'transform transition duration-700',
         'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { HTMLProps, TransitionEvent, useRef, useState } from 'react';
+import { HTMLProps, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useMounted } from '../lib/custom-hooks';
 import { checkShouldAnimate } from '../lib/transition-group';
@@ -29,13 +29,7 @@ export type Props = {
 
 export default function PostContent({ postData }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [animationDone, setAnimationDone] = useState(false);
   const shouldDisplay = useMounted();
-  const onTransitionEnd = (e: TransitionEvent<HTMLElement>) => {
-    if (e.propertyName === 'opacity') {
-      setAnimationDone(true);
-    }
-  };
 
   return (
     <Transition in={shouldDisplay} nodeRef={sectionRef} timeout={0}>
@@ -43,16 +37,10 @@ export default function PostContent({ postData }: Props) {
         <Section
           ref={sectionRef}
           className={cn(
-            'transform transition-transform-opacity duration-1000',
+            'transform transition-transform-opacity duration-700',
             'motion-reduce:transition-none',
-            {
-              [animationDone ? 'delay-2500' : 'delay-1500']: true,
-              [checkShouldAnimate(state)
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-10']: true,
-            }
+            checkShouldAnimate(state) ? 'opacity-100' : 'opacity-0'
           )}
-          onTransitionEnd={onTransitionEnd}
           data-testid="section"
         >
           <AdUnit

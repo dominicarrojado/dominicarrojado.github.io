@@ -10,9 +10,7 @@ config.disabled = true; // disable react-transitions-group transitions
 describe('<HeroSub />', () => {
   const renderComponent = (props: Props, isMounted = false) => {
     // mock to prevent window.matchMedia not a func error
-    jest
-      .spyOn(customHooks, 'useScrollOpacityEffect')
-      .mockReturnValue(1);
+    jest.spyOn(customHooks, 'useScrollOpacityEffect').mockReturnValue(1);
 
     // mock to prevent re-render
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(isMounted);
@@ -53,12 +51,6 @@ describe('<HeroSub />', () => {
         renderComponent({ title, description });
       });
 
-      it('should NOT display container', () => {
-        const containerEl = screen.queryByTestId('container');
-
-        expect(containerEl).not.toHaveClass('translate-y-0');
-      });
-
       it('should NOT display title', () => {
         const titleEl = screen.queryByText(title);
 
@@ -75,12 +67,6 @@ describe('<HeroSub />', () => {
     describe('isMounted is true', () => {
       beforeEach(() => {
         renderComponent({ title, description }, true);
-      });
-
-      it('should display container', () => {
-        const containerEl = screen.queryByTestId('container');
-
-        expect(containerEl).toHaveClass('translate-y-0');
       });
 
       it('should display title', () => {

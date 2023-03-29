@@ -119,7 +119,7 @@ describe('<SubscribeButton />', () => {
     fireEventTransitionEnd(subscribeLabelEl, 'opacity');
 
     expect(subscribeLabelEl).not.toHaveClass('opacity-0');
-    expect(subscribeLabelEl).toHaveClass('duration-200');
+    expect(subscribeLabelEl).toHaveClass('duration-300');
   });
 
   it('should have expected class on transition end (other prop name)', () => {
