@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import cn from 'classnames';
-import HeroMainBackground from './heroMainBackground';
-import HeroMainSection from './heroMainSection';
+import HeroBackground from './heroBackground';
+import HeroSection from './heroSection';
 import UnsubscribeForm from './unsubscribeForm';
 import UnsubscribeSuccess from './unsubscribeSuccess';
 
@@ -10,15 +9,13 @@ export default function UnsubscribeSection() {
   const onSuccess = () => setIsSuccess(true);
 
   return (
-    <HeroMainSection>
-      <HeroMainBackground />
-      <div className={cn('p-4', 'sm:p-0')}>
-        {!isSuccess ? (
-          <UnsubscribeForm onSuccess={onSuccess} />
-        ) : (
-          <UnsubscribeSuccess />
-        )}
-      </div>
-    </HeroMainSection>
+    <HeroSection>
+      <HeroBackground />
+      {!isSuccess ? (
+        <UnsubscribeForm onSuccess={onSuccess} />
+      ) : (
+        <UnsubscribeSuccess />
+      )}
+    </HeroSection>
   );
 }

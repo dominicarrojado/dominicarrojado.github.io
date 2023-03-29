@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { useWindowLoaded } from '../lib/custom-hooks';
 
-export default function HeroMainBackground() {
+export default function HeroBackground() {
   const shouldDisplay = useWindowLoaded();
 
   return (
@@ -16,7 +16,6 @@ export default function HeroMainBackground() {
         }
       )}
       style={{ backgroundImage: "url('/images/bg/pattern.png')" }}
-      data-testid="background"
     />
   );
 }

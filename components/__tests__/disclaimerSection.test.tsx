@@ -6,7 +6,7 @@ describe('<DisclaimerSection />', () => {
     render(<DisclaimerSection />);
   });
 
-  test('should have expected anchors', () => {
+  it('should have expected anchors', () => {
     const disclaimerEmail = 'disclaimer@dominicarrojado.com';
     const projectsAnchorEl = screen.queryByText('Projects');
     const emailAnchorEl = screen.queryByText(disclaimerEmail);

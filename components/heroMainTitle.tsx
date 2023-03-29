@@ -21,7 +21,6 @@ export default function HeroMainTitle() {
             ['opacity-0 translate-y-full']: !shouldDisplay,
           }
         )}
-        data-testid="title"
       >
         Guides, Tips and Tricks to Web Development
       </h1>

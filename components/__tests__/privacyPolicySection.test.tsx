@@ -6,7 +6,7 @@ describe('<PrivacyPolicySection />', () => {
     render(<PrivacyPolicySection />);
   });
 
-  test('should have expected anchors', () => {
+  it('should have expected anchors', () => {
     const privacyEmail = 'privacy@dominicarrojado.com';
     const homeAnchorEl = screen.queryByText('dominicarrojado.com');
     const projectsAnchorEls = screen.queryAllByText('Projects');
@@ -171,7 +171,7 @@ describe('<PrivacyPolicySection />', () => {
     );
   });
 
-  test('should have expected updated date', () => {
+  it('should have expected updated date', () => {
     const dateEl = screen.queryByText(
       'This document was last updated on March 11, 2023'
     );

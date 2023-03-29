@@ -1,6 +1,4 @@
-import React, { Fragment } from 'react';
-import { Transition } from '@headlessui/react';
-import { useMounted } from '../lib/custom-hooks';
+import React from 'react';
 import { useUnsubscribe } from '../lib/api-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
@@ -14,13 +12,12 @@ import ModalContent from './modalContent';
 import ButtonLoader from './buttonLoader';
 import ErrorText from './errorText';
 import { FetchState, GoogleAnalyticsEvent } from '../lib/types';
-import { MAIN_TITLE, MODAL_TRANSITION_PROPS } from '../lib/constants';
+import { MAIN_TITLE } from '../lib/constants';
 
 export type Props = { onSuccess: () => void };
 
 export default function UnsubscribeForm({ onSuccess }: Props) {
   const inputEmailRef = React.useRef<HTMLInputElement>(null);
-  const shouldDisplay = useMounted();
   const [fetchState, unsubscribe] = useUnsubscribe();
   const isLoading = fetchState === FetchState.LOADING;
   const btnText = 'Confirm';
@@ -42,37 +39,33 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
   };
 
   return (
-    <Transition {...MODAL_TRANSITION_PROPS} show={shouldDisplay} as={Fragment}>
-      <ModalDialog>
-        <ModalContent>
-          <form onSubmit={formOnSubmit}>
-            <ModalTitle>Unsubscribe</ModalTitle>
-            <ModalDescription>
-              To unsubscribe, please enter your email in the form below and
-              confirm. Thank you for your interest in my content.
-            </ModalDescription>
-            <InputGroup>
-              <Input
-                ref={inputEmailRef}
-                type="email"
-                autoComplete="email"
-                placeholder="Email address"
-                disabled={isLoading}
-                required
-              />
-              <Button type="submit" disabled={isLoading}>
-                {isLoading && <ButtonLoader />}
-                {btnText}
-              </Button>
-            </InputGroup>
-            {fetchState === FetchState.ERROR && (
-              <ErrorText>
-                Oops! Something went wrong. Please try again.
-              </ErrorText>
-            )}
-          </form>
-        </ModalContent>
-      </ModalDialog>
-    </Transition>
+    <ModalDialog>
+      <ModalContent>
+        <form onSubmit={formOnSubmit}>
+          <ModalTitle>Unsubscribe</ModalTitle>
+          <ModalDescription>
+            To unsubscribe, please enter your email in the form below and
+            confirm. Thank you for your interest in my content.
+          </ModalDescription>
+          <InputGroup>
+            <Input
+              ref={inputEmailRef}
+              type="email"
+              autoComplete="email"
+              placeholder="Email address"
+              disabled={isLoading}
+              required
+            />
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <ButtonLoader />}
+              {btnText}
+            </Button>
+          </InputGroup>
+          {fetchState === FetchState.ERROR && (
+            <ErrorText>Oops! Something went wrong. Please try again.</ErrorText>
+          )}
+        </form>
+      </ModalContent>
+    </ModalDialog>
   );
 }

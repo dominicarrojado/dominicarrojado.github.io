@@ -2,7 +2,11 @@ import cn from 'classnames';
 import { useMounted } from '../lib/custom-hooks';
 import SvgLessThan from './svgLessThan';
 
-export default function HeroMainLogoPart({ isLeft }: { isLeft?: boolean }) {
+export type Props = {
+  isLeft?: boolean;
+};
+
+export default function HeroMainLogoPart({ isLeft }: Props) {
   const shouldDisplay = useMounted();
 
   return (
@@ -24,7 +28,6 @@ export default function HeroMainLogoPart({ isLeft }: { isLeft?: boolean }) {
           ['-translate-x-3']: !shouldDisplay && !isLeft,
         }
       )}
-      data-testid="logo-part"
     />
   );
 }

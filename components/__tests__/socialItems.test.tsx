@@ -1,5 +1,4 @@
-import { fireEvent, render, screen, act } from '@testing-library/react';
-import Window from '../../modules/Window';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { getFakeWord } from '../../lib/test-helpers';
 import { SOCIAL_LINKS } from '../../lib/constants';
 import * as ga from '../../lib/google-analytics';
