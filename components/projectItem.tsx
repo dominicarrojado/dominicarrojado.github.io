@@ -1,6 +1,5 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
-import LazyLoad from 'react-lazyload';
 import { Transition } from 'react-transition-group';
 import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
 import Window from '../modules/Window';
@@ -191,14 +190,13 @@ function ImageContainer({
         className="relative inline-flex min-w-11 min-h-24"
       >
         {!isImgLoaded && <ImageLoader />}
-        <LazyLoad height={imageHeight} once>
-          <img
-            {...imgCommonProps}
-            src={imageUrl}
-            alt={`Screenshot of ${title}`}
-            onLoad={imgOnLoad}
-          />
-        </LazyLoad>
+        <img
+          {...imgCommonProps}
+          src={imageUrl}
+          alt={`Screenshot of ${title}`}
+          onLoad={imgOnLoad}
+          loading="lazy"
+        />
         <Transition
           in={shouldDisplayGifImg}
           nodeRef={imgRef}

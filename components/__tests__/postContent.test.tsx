@@ -1,5 +1,4 @@
 import { render, screen, act } from '@testing-library/react';
-import { forceVisible } from 'react-lazyload';
 import {
   getFakeDate,
   getFakeSentence,
@@ -233,7 +232,6 @@ describe('<PostContent />', () => {
 
     it('should display section on mount', () => {
       renderComponent({ postData }, true);
-      forceVisible();
 
       const sectionEl = screen.queryByTestId('section');
 

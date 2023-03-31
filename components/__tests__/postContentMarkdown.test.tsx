@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { forceVisible } from 'react-lazyload';
 import {
   getFakeDirectoryPath,
   getFakeSentence,
@@ -10,7 +9,6 @@ import {
   GoogleAdSenseUnit,
   GoogleAdSenseUnitFormat,
   GoogleAdSenseUnitLayout,
-  Route,
 } from '../../lib/types';
 import PostContentMarkdown, { Props } from '../postContentMarkdown';
 
@@ -77,28 +75,16 @@ describe('<PostContentMarkdown />', () => {
   });
 
   describe('image elements', () => {
-    it('should NOT render image by default', () => {
+    it('should render image', () => {
       const imgSrc = getFakeUrl();
       const imgAlt = getFakeSentence();
 
       renderComponent({ content: `![${imgAlt}](${imgSrc})` });
-
-      const imgEl = screen.queryByAltText(imgAlt);
-
-      expect(imgEl).not.toBeInTheDocument();
-    });
-
-    it('should render image on lazy load', () => {
-      const imgSrc = getFakeUrl();
-      const imgAlt = getFakeSentence();
-
-      renderComponent({ content: `![${imgAlt}](${imgSrc})` });
-
-      forceVisible();
 
       const imgEl = screen.queryByAltText(imgAlt);
 
       expect(imgEl?.tagName).toBe('IMG');
+      expect(imgEl).toHaveAttribute('loading', 'lazy');
     });
 
     it('should NOT be a descendant of <p>', () => {
@@ -106,8 +92,6 @@ describe('<PostContentMarkdown />', () => {
       const imgAlt = getFakeSentence();
 
       renderComponent({ content: `![${imgAlt}](${imgSrc})` });
-
-      forceVisible();
 
       const imgEl = screen.queryByAltText(imgAlt);
 

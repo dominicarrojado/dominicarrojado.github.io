@@ -5,7 +5,6 @@ import {
   waitFor,
   fireEvent,
 } from '@testing-library/react';
-import { forceVisible } from 'react-lazyload';
 import { config } from 'react-transition-group';
 import Window from '../../modules/Window';
 import {
@@ -88,21 +87,14 @@ describe('<ProjectItem />', () => {
       expect(descEl).toBeInTheDocument();
     });
 
-    it('should NOT render the image by default', () => {
-      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
-
-      expect(imgEl).not.toBeInTheDocument();
-    });
-
-    it('should render the image on lazy load', () => {
-      forceVisible();
-
+    it('should render the image', () => {
       const { imageWidth, imageHeight } = project;
       const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
 
       expect(imgEl).toHaveAttribute('src', project.imageUrl);
       expect(imgEl).toHaveAttribute('width', `${imageWidth}`);
       expect(imgEl).toHaveAttribute('height', `${imageHeight}`);
+      expect(imgEl).toHaveAttribute('loading', 'lazy');
 
       // .toHaveStyle() not working properly with aspectRatio
       expect(imgEl?.style.aspectRatio).toBe(`${imageWidth} / ${imageHeight}`);
@@ -155,18 +147,11 @@ describe('<ProjectItem />', () => {
       expect(descEl).toBeInTheDocument();
     });
 
-    it('should NOT render the image by default', () => {
-      const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
-
-      expect(imgEl).not.toBeInTheDocument();
-    });
-
-    it('should render the image on lazy load', () => {
-      forceVisible();
-
+    it('should render the image', () => {
       const imgEl = screen.queryByAltText(`Screenshot of ${project.title}`);
 
       expect(imgEl).toHaveAttribute('src', project.imageUrl);
+      expect(imgEl).toHaveAttribute('loading', 'lazy');
     });
 
     it('should render the links', () => {
@@ -195,7 +180,6 @@ describe('<ProjectItem />', () => {
       const project = createProject(getFakeBoolean());
 
       renderComponent({ project, headingLevel: 2 });
-      forceVisible();
 
       const titleEl = screen.queryByText(project.title);
 
@@ -206,7 +190,6 @@ describe('<ProjectItem />', () => {
       const project = createProject(getFakeBoolean());
 
       renderComponent({ project, headingLevel: 3 });
-      forceVisible();
 
       const titleEl = screen.queryByText(project.title);
 
@@ -226,7 +209,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
     });
 
     afterEach(() => {
@@ -281,7 +263,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
 
       const gifEl = screen.queryByAltText(`GIF of ${project.title}`);
 
@@ -297,7 +278,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
 
       const tooltipEl = screen.queryByText('Downloading GIF...');
 
@@ -358,7 +338,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
 
       // set isImgLoaded to "true"
       const imgEl = screen.queryByAltText(
@@ -490,7 +469,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
 
       // set isImgLoaded to "true"
       const imgEl = screen.queryByAltText(
@@ -538,7 +516,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-      forceVisible();
 
       act(() => {
         Window.emit('scroll');
@@ -556,8 +533,6 @@ describe('<ProjectItem />', () => {
         project,
         headingLevel: getRandomHeadingLevel(),
       });
-
-      forceVisible();
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue(null);
 

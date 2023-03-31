@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { forceVisible } from 'react-lazyload';
 import { getRandomPostId } from '../../../lib/test-helpers';
 import * as customHooks from '../../../lib/custom-hooks';
 import * as HeroSub from '../../../components/heroSub';
@@ -76,8 +75,6 @@ describe('<PostIndex />', () => {
     }
 
     render(<PostIndex postData={postData} />);
-
-    forceVisible();
 
     expect(heroSubSpy).toBeCalledTimes(1);
     expect(heroSubSpy).toBeCalledWith(

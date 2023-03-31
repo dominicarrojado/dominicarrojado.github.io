@@ -3,7 +3,6 @@ import cn from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import remarkGfm from 'remark-gfm';
-import LazyLoad from 'react-lazyload';
 // @ts-ignore: using an old rehype-highlight version that has no declaration file
 import rehypeHighlight from 'rehype-highlight';
 import Content from './content';
@@ -63,11 +62,7 @@ function PostContentMarkdown({ content }: Props) {
           img: ({ node, ...props }) => {
             const altText = props.alt as string;
 
-            return (
-              <LazyLoad once>
-                <img {...props} alt={altText} />
-              </LazyLoad>
-            );
+            return <img {...props} alt={altText} loading="lazy" />;
           },
           hr: () => (
             <AdUnit
