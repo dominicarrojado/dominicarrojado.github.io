@@ -3,7 +3,7 @@ title: 'Different ways to use the useRef hook in React'
 date: '2023-04-07'
 excerpt: "Learn about the various use cases of React's useRef hook"
 category: 'technology'
-videoUrl: ''
+videoUrl: 'https://youtu.be/RLwE5R5ZSuQ'
 ---
 
 ## Introduction
@@ -48,15 +48,15 @@ Here's an example of a component that will increment a counter every second, and
 import { useRef, useState, useEffect } from 'react';
 
 function MyComponent() {
-  const intervalId = useRef(0);
+  const intervalIdRef = useRef(0);
   const [counter, setCounter] = useState(0);
 
   const stopInterval = () => {
-    window.clearInterval(intervalId.current);
+    window.clearInterval(intervalIdRef.current);
   };
 
   useEffect(() => {
-    intervalId.current = window.setInterval(() => {
+    intervalIdRef.current = window.setInterval(() => {
       setCounter((prevCounter) => prevCounter + 1);
     }, 1000);
 
@@ -167,13 +167,19 @@ import React, { useRef, useState } from 'react';
 
 function MyComponent() {
   const previousPositionRef = useRef({ x: 0, y: 0 });
-  const initialPosition = useRef({ x: 0, y: 0 });
+  const initialPositionRef = useRef({ x: 0, y: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: MouseEvent) => {
     setPosition({
-      x: previousPositionRef.current.x + e.clientX - initialPosition.current.x,
-      y: previousPositionRef.current.y + e.clientY - initialPosition.current.y,
+      x:
+        previousPositionRef.current.x +
+        e.clientX -
+        initialPositionRef.current.x,
+      y:
+        previousPositionRef.current.y +
+        e.clientY -
+        initialPositionRef.current.y,
     });
   };
 
@@ -184,7 +190,7 @@ function MyComponent() {
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     previousPositionRef.current = position;
-    initialPosition.current = {
+    initialPositionRef.current = {
       x: e.clientX,
       y: e.clientY,
     };
@@ -229,6 +235,10 @@ function MyComponent() {
     // TODO: do something with these two values
   }, [firstData]);
 
+  useEffect(() => {
+    secondDataRef.current = secondData;
+  }, [secondData]);
+
   return (
     <div>
       <input
@@ -239,15 +249,14 @@ function MyComponent() {
       <input
         type="text"
         value={secondData}
-        onChange={(e) => {
-          secondDataRef.current = e.target.value;
-          setSecondData(e.target.value);
-        }}
+        onChange={(e) => setSecondData(e.target.value)}
       />
     </div>
   );
 }
 ```
+
+Here you might notice that I'm updating the value of `secondDataRef` in a separate `useEffect` hook using `secondData` as the dependency. This is another way to ensure that the value of `secondDataRef` is always up-to-date instead of creating a separate setState function for `secondData`.
 
 While you could technically just log `secondData` in the `useEffect` hook, doing so would give you a lint warning because `secondData` is not a dependency of the hook, and there may be times when its value is not updated. By using `useRef`, you can ensure that the value of `secondData` is always up-to-date before the `useEffect` hook runs.
 
