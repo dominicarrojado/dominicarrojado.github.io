@@ -1,11 +1,11 @@
 import { ReactNode, useRef } from 'react';
 import cn from 'classnames';
-import { Tooltip as ReakitTooltip, TooltipStateReturn } from 'reakit/Tooltip';
+import { Tooltip as AriakitTooltip, TooltipState } from 'ariakit/tooltip';
 import { checkShouldAnimate } from '../lib/transition-group';
 import Transition from './transition';
 
 export type Props = {
-  tooltip: TooltipStateReturn;
+  tooltip: TooltipState;
   children: ReactNode;
   className?: string;
 };
@@ -18,12 +18,12 @@ export default function Tooltip({ tooltip, children, className }: Props) {
   const isLeft = tooltip.placement.includes('left');
 
   return (
-    <Transition in={tooltip.visible} nodeRef={containerRef} timeout={100}>
+    <Transition in={tooltip.open} nodeRef={containerRef} timeout={100}>
       {(state) => {
         const shouldDisplay = checkShouldAnimate(state);
 
         return (
-          <ReakitTooltip {...tooltip}>
+          <AriakitTooltip state={tooltip}>
             <div
               ref={containerRef}
               className={cn(
@@ -44,7 +44,7 @@ export default function Tooltip({ tooltip, children, className }: Props) {
             >
               {children}
             </div>
-          </ReakitTooltip>
+          </AriakitTooltip>
         );
       }}
     </Transition>

@@ -240,18 +240,12 @@ describe('<ProjectItem />', () => {
   describe('GIF logic', () => {
     const windowHeightOrig = window.innerHeight;
     const scrollYOrig = window.scrollY;
-    const requestAnimationFrameOrig = window.requestAnimationFrame;
-
-    beforeEach(() => {
-      window.requestAnimationFrame = jest.fn((callback: any) => callback());
-    });
 
     afterEach(() => {
       jest.restoreAllMocks();
 
       setReadOnlyProperty(window, 'innerHeight', windowHeightOrig);
       setReadOnlyProperty(window, 'scrollY', scrollYOrig);
-      window.requestAnimationFrame = requestAnimationFrameOrig;
     });
 
     it('should NOT display GIF by default', () => {
@@ -390,7 +384,9 @@ describe('<ProjectItem />', () => {
 
       onCancelMock({ durationMs: cancelDurationMs, progress: cancelProgress });
 
-      expect(screen.queryByText(downloadProgress)).not.toBeInTheDocument();
+      await waitFor(() =>
+        expect(screen.queryByText(downloadProgress)).not.toBeInTheDocument()
+      );
 
       // expect to track GIF download cancel
       const projectTitle = project.title;
@@ -480,6 +476,7 @@ describe('<ProjectItem />', () => {
       // set isImgInView to "true"
       act(() => {
         Window.emit('scroll');
+        jest.runOnlyPendingTimers();
       });
 
       expect(startDownloadGifMock).not.toBeCalled();
@@ -496,7 +493,7 @@ describe('<ProjectItem />', () => {
         cancelDownloadGif: cancelDownloadGifMock,
       });
 
-      setReadOnlyProperty(window, 'scrollY', 1);
+      setReadOnlyProperty(window, 'scrollY', 0);
       setReadOnlyProperty(window, 'innerHeight', 2);
 
       jest.spyOn(hooks, 'getRefValue').mockReturnValue({
@@ -519,6 +516,7 @@ describe('<ProjectItem />', () => {
 
       act(() => {
         Window.emit('scroll');
+        jest.runOnlyPendingTimers();
       });
 
       await waitFor(() => expect(startDownloadGifMock).not.toBeCalled());
@@ -538,6 +536,7 @@ describe('<ProjectItem />', () => {
 
       act(() => {
         Window.emit('scroll');
+        jest.runOnlyPendingTimers();
       });
 
       expect(container).toBeInTheDocument();

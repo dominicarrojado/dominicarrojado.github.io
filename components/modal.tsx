@@ -1,7 +1,7 @@
 import React, { Fragment, ReactNode } from 'react';
 import { Transition } from '@headlessui/react';
 import cn from 'classnames';
-import { Dialog, DialogStateReturn } from 'reakit/Dialog';
+import { Dialog, DialogState } from 'ariakit/dialog';
 import ModalCloseButton from './modalCloseButton';
 import ModalContent from './modalContent';
 import ModalDialog from './modalDialog';
@@ -9,7 +9,7 @@ import ModalTitle from './modalTitle';
 import { MODAL_TRANSITION_PROPS } from '../lib/constants';
 
 type Props = {
-  dialog: DialogStateReturn;
+  dialog: DialogState;
   title: string;
   tabIndex?: number;
   children: ReactNode;
@@ -24,13 +24,9 @@ export default function Modal({
   afterEnter,
 }: Props) {
   return (
-    <Transition.Root
-      show={dialog.visible}
-      as={Fragment}
-      afterEnter={afterEnter}
-    >
+    <Transition.Root show={dialog.open} as={Fragment} afterEnter={afterEnter}>
       <Dialog
-        {...dialog}
+        state={dialog}
         tabIndex={tabIndex}
         aria-label={title}
         className="relative z-50"

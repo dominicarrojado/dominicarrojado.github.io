@@ -15,6 +15,7 @@ import {
   Social,
   SocialName,
   Testimonial,
+  TooltipPlacement,
 } from './types';
 
 export const SITE_NAME = 'Dominic Arrojado';
@@ -603,3 +604,6 @@ export const MODAL_TRANSITION_PROPS = {
 
 export const DIALOG_NAMES = Object.values(DialogName);
 export const DIALOG_NAMES_LENGTH = DIALOG_NAMES.length;
+
+export const TOOLTIP_PLACEMENTS = Object.values(TooltipPlacement);
+export const TOOLTIP_PLACEMENTS_LENGTH = TOOLTIP_PLACEMENTS.length;

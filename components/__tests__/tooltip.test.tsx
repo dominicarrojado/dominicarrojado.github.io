@@ -1,5 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence, getFakeWord } from '../../lib/test-helpers';
+import {
+  getFakeSentence,
+  getFakeWord,
+  getTooltipStateMock,
+} from '../../lib/test-helpers';
+import { TOOLTIP_PLACEMENTS } from '../../lib/constants';
 import Tooltip, { Props } from '../tooltip';
 
 describe('<Tooltip />', () => {
@@ -11,7 +16,7 @@ describe('<Tooltip />', () => {
     const text = getFakeSentence();
 
     renderComponent({
-      tooltip: { placement: 'top', visible: false } as any,
+      tooltip: getTooltipStateMock({ open: false }),
       children: text,
     });
 
@@ -20,10 +25,9 @@ describe('<Tooltip />', () => {
 
   it('should display on visible true', () => {
     const text = getFakeSentence();
-    const className = getFakeWord();
 
     renderComponent({
-      tooltip: { placement: 'top', visible: true } as any,
+      tooltip: getTooltipStateMock({ open: true }),
       children: text,
     });
 
@@ -31,11 +35,14 @@ describe('<Tooltip />', () => {
   });
 
   it('should render text', () => {
-    placements.forEach((placement) => {
+    TOOLTIP_PLACEMENTS.forEach((placement) => {
       const text = getFakeSentence();
 
       const component = renderComponent({
-        tooltip: { placement, visible: true } as any,
+        tooltip: getTooltipStateMock({
+          placement: placement as any,
+          open: true,
+        }),
         children: text,
       });
 
@@ -51,7 +58,7 @@ describe('<Tooltip />', () => {
 
     renderComponent({
       className,
-      tooltip: { placement: 'top', visible: true } as any,
+      tooltip: getTooltipStateMock({ open: true }),
       children: text,
     });
 

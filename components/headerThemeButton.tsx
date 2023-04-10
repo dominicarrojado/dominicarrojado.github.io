@@ -1,8 +1,8 @@
 import { TransitionEvent, useRef, useState } from 'react';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
-import { Button } from 'reakit/Button';
-import { Checkbox } from 'reakit/Checkbox';
+import { Button } from 'ariakit/button';
+import { Checkbox } from 'ariakit/checkbox';
 import { useDarkModeEnabled, useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { checkShouldAnimate } from '../lib/transition-group';

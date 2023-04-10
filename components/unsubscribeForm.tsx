@@ -52,6 +52,7 @@ export default function UnsubscribeForm({ onSuccess }: Props) {
               ref={inputEmailRef}
               type="email"
               autoComplete="email"
+              name="email"
               placeholder="Email address"
               disabled={isLoading}
               required

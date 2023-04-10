@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as ReakitButton, ButtonProps } from 'reakit/Button';
+import { Button as ReakitButton, ButtonProps } from 'ariakit/button';
 import cn from 'classnames';
 
 export type Props = ButtonProps;

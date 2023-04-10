@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogStateReturn } from 'reakit/Dialog';
+import { DialogState } from 'ariakit/dialog';
 import { useSubmitSubscribeRequest } from '../lib/api-hooks';
 import { getRefValue } from '../lib/hooks';
 import Button from './button';
@@ -12,7 +12,7 @@ import InputGroup from './inputGroup';
 import { FetchState } from '../lib/types';
 
 export type Props = {
-  dialog: DialogStateReturn;
+  dialog: DialogState;
   onSuccess: (email: string) => void;
 };
 
@@ -53,6 +53,7 @@ export default function ModalSubscribe({ dialog, onSuccess }: Props) {
             ref={inputEmailRef}
             type="email"
             autoComplete="email"
+            name="email"
             placeholder="Email address"
             disabled={isLoading}
             required

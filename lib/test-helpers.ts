@@ -2,7 +2,7 @@ import { fireEvent, Screen } from '@testing-library/react';
 import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
-import { DialogStateReturn } from 'reakit/Dialog';
+import { DialogState } from 'ariakit/dialog';
 import { Nullish, Route, StoreContextType } from './types';
 import {
   DIALOG_NAMES,
@@ -17,7 +17,10 @@ import {
   ROUTES_LENGTH,
   SOCIAL_LINKS,
   SOCIAL_LINKS_LENGTH,
+  TOOLTIP_PLACEMENTS,
+  TOOLTIP_PLACEMENTS_LENGTH,
 } from './constants';
+import { TooltipState } from 'ariakit';
 
 type GetFakeNumber = {
   (max?: number): number;
@@ -134,6 +137,10 @@ export function getRandomSocialLink() {
   return SOCIAL_LINKS[getFakeNumber(SOCIAL_LINKS_LENGTH - 1)];
 }
 
+export function getRandomTooltipPlacement() {
+  return TOOLTIP_PLACEMENTS[getFakeNumber(TOOLTIP_PLACEMENTS_LENGTH - 1)];
+}
+
 export function getMatchMediaMock(
   customResponse = {} as Partial<MediaQueryList>
 ) {
@@ -153,14 +160,23 @@ export function getMatchMediaMock(
   );
 }
 
-export function getDialogStateMock(
-  customData = {} as Partial<DialogStateReturn>
-) {
+export function getDialogStateMock(customData = {} as Partial<DialogState>) {
   return {
-    visible: getFakeBoolean(),
+    disclosureRef: { current: null },
+    open: getFakeBoolean(),
     hide: jest.fn(),
+    toggle: jest.fn(),
     ...customData,
-  } as DialogStateReturn;
+  } as DialogState;
+}
+
+export function getTooltipStateMock(customData = {} as Partial<TooltipState>) {
+  return {
+    placement: getRandomTooltipPlacement(),
+    open: getFakeBoolean(),
+    popoverRef: { current: null },
+    ...customData,
+  } as TooltipState;
 }
 
 export function getStoreContextMock(

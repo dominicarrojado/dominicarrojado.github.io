@@ -16,7 +16,7 @@ describe('<ModalSubscribe />', () => {
   describe('content', () => {
     beforeEach(() => {
       renderComponent({
-        dialog: { ...getDialogStateMock(), visible: true },
+        dialog: { ...getDialogStateMock(), open: true },
         onSuccess: jest.fn(),
       });
     });
@@ -66,7 +66,7 @@ describe('<ModalSubscribe />', () => {
       });
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: jest.fn(),
     });
 
@@ -74,7 +74,7 @@ describe('<ModalSubscribe />', () => {
 
     const inputEl = screen.queryByPlaceholderText('Email address');
 
-    expect(inputEl).toHaveFocus();
+    return waitFor(() => expect(inputEl).toHaveFocus());
   });
 
   it('should call API on submit', () => {
@@ -85,7 +85,7 @@ describe('<ModalSubscribe />', () => {
       .mockReturnValue([FetchState.DEFAULT, submitSubscribeRequestMock]);
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: jest.fn(),
     });
 
@@ -112,7 +112,7 @@ describe('<ModalSubscribe />', () => {
     const onSuccessMock = jest.fn();
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: onSuccessMock,
     });
 
@@ -142,7 +142,7 @@ describe('<ModalSubscribe />', () => {
     const onSuccessMock = jest.fn();
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: onSuccessMock,
     });
 
@@ -166,7 +166,7 @@ describe('<ModalSubscribe />', () => {
       .mockReturnValue([FetchState.LOADING, jest.fn()]);
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: jest.fn(),
     });
 
@@ -181,7 +181,7 @@ describe('<ModalSubscribe />', () => {
       .mockReturnValue([FetchState.ERROR, jest.fn()]);
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), visible: true },
+      dialog: { ...getDialogStateMock(), open: true },
       onSuccess: jest.fn(),
     });
 

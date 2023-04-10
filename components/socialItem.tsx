@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import cn from 'classnames';
-import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
+import { useTooltipState, TooltipAnchor } from 'ariakit/tooltip';
 import AnchorLink, { Props as AnchorLinkProps } from './anchorLink';
 import Tooltip from './tooltip';
 import { Social } from '../lib/types';
@@ -12,16 +12,15 @@ export type Props = AnchorLinkProps & {
 export default function SocialItem({ social, ...props }: Props) {
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const tooltip = useTooltipState({
-    baseId: `tooltip-${social.name}`,
     animated: 300,
     placement: 'top',
   });
 
   return (
     <li>
-      <TooltipReference
-        {...tooltip}
+      <TooltipAnchor
         {...props}
+        state={tooltip}
         as={AnchorLink}
         ref={anchorRef}
         href={social.url}
@@ -42,7 +41,7 @@ export default function SocialItem({ social, ...props }: Props) {
         })}
 
         <Tooltip tooltip={tooltip}>{social.title}</Tooltip>
-      </TooltipReference>
+      </TooltipAnchor>
     </li>
   );
 }

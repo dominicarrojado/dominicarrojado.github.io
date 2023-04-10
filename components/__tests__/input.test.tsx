@@ -6,7 +6,7 @@ describe('<Input />', () => {
   const renderComponent = (props: Props) => render(<Input {...props} />);
 
   it('should have expected tagName', () => {
-    const { container } = renderComponent({});
+    const { container } = renderComponent({ name: getFakeWord() });
     const inputEl = container.firstElementChild;
 
     expect(inputEl?.tagName).toBe('INPUT');
@@ -14,7 +14,7 @@ describe('<Input />', () => {
 
   it('should have accept type prop', () => {
     const type = 'text';
-    const { container } = renderComponent({ type });
+    const { container } = renderComponent({ type, name: getFakeWord() });
     const inputEl = container.firstElementChild;
 
     expect(inputEl).toHaveAttribute('type', type);
@@ -22,7 +22,7 @@ describe('<Input />', () => {
 
   it('should have accept className prop', () => {
     const className = getFakeWord();
-    const { container } = renderComponent({ className });
+    const { container } = renderComponent({ className, name: getFakeWord() });
     const inputEl = container.firstElementChild;
 
     expect(inputEl).toHaveClass(className);

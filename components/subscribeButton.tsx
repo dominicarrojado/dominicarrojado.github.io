@@ -1,6 +1,6 @@
 import { TransitionEvent, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { DialogDisclosure, useDialogState } from 'reakit/Dialog';
+import { DialogDisclosure, useDialogState } from 'ariakit/dialog';
 import { useMounted, useUpdateVisibleDialogs } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import ModalSubscribe from './modalSubscribe';
@@ -13,7 +13,6 @@ export default function SubscribeButton() {
   const isMountedRef = useRef(false);
   const shouldDisplay = useMounted();
   const dialogSubscribe = useDialogState({
-    baseId: 'dialog-subscribe',
     animated: 300,
   });
   const dialogSubscribeHide = () => {
@@ -25,12 +24,11 @@ export default function SubscribeButton() {
       buttonText: text,
     });
   };
-  const dialogSubscribeVisible = dialogSubscribe.visible;
+  const dialogSubscribeVisible = dialogSubscribe.open;
   const dialogSubscribeSuccess = useDialogState({
-    baseId: 'dialog-subscribe-success',
     animated: 300,
   });
-  const dialogSubscribeSuccessVisible = dialogSubscribeSuccess.visible;
+  const dialogSubscribeSuccessVisible = dialogSubscribeSuccess.open;
   const updateVisibleDialogs = useUpdateVisibleDialogs();
   const [animationDone, setAnimationDone] = useState(false);
   const [email, setEmail] = useState('');
@@ -81,7 +79,7 @@ export default function SubscribeButton() {
   return (
     <>
       <DialogDisclosure
-        {...dialogSubscribe}
+        state={dialogSubscribe}
         className={cn(
           'group text-gray-400 outline-none',
           'dark:text-gray-300',

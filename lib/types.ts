@@ -116,6 +116,13 @@ export enum FetchState {
   ERROR = 'ERROR',
 }
 
+export enum TooltipPlacement {
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+
 export type Nullish<T> = T | null | undefined;
 
 export type ProjectLink = {

@@ -1,12 +1,12 @@
 import React, { forwardRef, ForwardedRef } from 'react';
-import { Input as ReakitInput, InputProps } from 'reakit/Input';
+import { FormInput, FormInputProps } from 'ariakit/form';
 import cn from 'classnames';
 
-export type Props = InputProps;
+export type Props = FormInputProps;
 
 const Input = forwardRef(
   ({ className, ...props }: Props, ref: ForwardedRef<HTMLInputElement>) => (
-    <ReakitInput
+    <FormInput
       {...props}
       ref={ref}
       className={cn(

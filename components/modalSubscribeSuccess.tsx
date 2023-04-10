@@ -1,10 +1,10 @@
 import React from 'react';
-import { DialogStateReturn } from 'reakit/Dialog';
+import { DialogState } from 'ariakit/dialog';
 import Modal from './modal';
 import ModalDescription from './modalDescription';
 
 type Props = {
-  dialog: DialogStateReturn;
+  dialog: DialogState;
   email: string;
 };
 

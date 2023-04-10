@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import cn from 'classnames';
-import { useDialogState } from 'reakit/Dialog';
+import { useDialogState } from 'ariakit/dialog';
 import {
   useDialogOffsetWidth,
   useUpdateVisibleDialogs,
@@ -16,10 +16,9 @@ import { MENU_ITEMS_LENGTH } from '../lib/constants';
 
 export default function Header() {
   const dialog = useDialogState({
-    baseId: 'dialog-menu',
     animated: MENU_ITEMS_LENGTH * 75 + 100,
   });
-  const dialogVisible = dialog.visible;
+  const dialogVisible = dialog.open;
   const updateVisibleDialogs = useUpdateVisibleDialogs();
   const dialogOffsetWidth = useDialogOffsetWidth();
 

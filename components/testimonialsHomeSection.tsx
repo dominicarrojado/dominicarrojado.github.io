@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
-import { Button } from 'reakit/Button';
-import { VisuallyHidden } from 'reakit/VisuallyHidden';
+import { Button } from 'ariakit/button';
+import { VisuallyHidden } from 'ariakit/visually-hidden';
 import { useWindowSize } from '../lib/custom-hooks';
 import { getRefValue, useStateRef } from '../lib/hooks';
 import { getTouchEventData } from '../lib/dom';

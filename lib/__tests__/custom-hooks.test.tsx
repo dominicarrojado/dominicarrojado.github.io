@@ -27,6 +27,7 @@ import {
   useDialogOffsetWidth,
   useWindowSize,
 } from '../custom-hooks';
+import { waitFor } from '@testing-library/react';
 
 describe('hooks utilities', () => {
   const initiateWrapper = (value: StoreContextType) => {
@@ -42,20 +43,10 @@ describe('hooks utilities', () => {
   };
 
   describe('useMounted()', () => {
-    const requestAnimationFrameOrig = window.requestAnimationFrame;
-
-    beforeEach(() => {
-      window.requestAnimationFrame = jest.fn((callback: any) => callback());
-    });
-
-    afterEach(() => {
-      window.requestAnimationFrame = requestAnimationFrameOrig;
-    });
-
     it('should return true on mount', () => {
       const hook = renderHook(() => useMounted());
 
-      expect(hook.result.current).toBe(true);
+      return waitFor(() => expect(hook.result.current).toBe(true));
     });
   });
 

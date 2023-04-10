@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
-import { Button } from 'reakit/Button';
+import { Button } from 'ariakit/button';
 import SvgChevronRight from './svgChevronRight';
 
 export type Props = HTMLAttributes<HTMLButtonElement> & {

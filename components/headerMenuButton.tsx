@@ -1,7 +1,7 @@
 import { TransitionEvent, useRef, useState } from 'react';
 import cn from 'classnames';
 import { SwitchTransition } from 'react-transition-group';
-import { DialogDisclosure, DialogStateReturn } from 'reakit/Dialog';
+import { DialogDisclosure, DialogState } from 'ariakit/dialog';
 import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { checkShouldAnimate } from '../lib/transition-group';
@@ -9,11 +9,11 @@ import Transition from './transition';
 import { GoogleAnalyticsEvent } from '../lib/types';
 
 export type Props = {
-  dialog: DialogStateReturn;
+  dialog: DialogState;
 };
 
 export default function HeaderMenuButton({ dialog }: Props) {
-  const isMenuOpen = dialog.visible;
+  const isMenuOpen = dialog.open;
   const textRef = useRef<HTMLDivElement>(null);
   const stacks = Array.from(Array(3).keys());
   const shouldDisplay = useMounted();

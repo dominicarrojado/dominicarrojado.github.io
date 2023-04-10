@@ -1,7 +1,7 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Transition } from 'react-transition-group';
-import { useTooltipState, TooltipReference } from 'reakit/Tooltip';
+import { useTooltipState, TooltipAnchor } from 'ariakit/tooltip';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
@@ -259,7 +259,6 @@ function GifLoader({
     [title]
   );
   const tooltip = useTooltipState({
-    baseId: `tooltip-${projectId}`,
     animated: 300,
     placement: 'left',
   });
@@ -277,8 +276,8 @@ function GifLoader({
         unmountOnExit
       >
         {(state) => (
-          <TooltipReference
-            {...tooltip}
+          <TooltipAnchor
+            state={tooltip}
             ref={containerRef}
             className={cn(
               'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
@@ -310,7 +309,7 @@ function GifLoader({
             >
               {progress}
             </div>
-          </TooltipReference>
+          </TooltipAnchor>
         )}
       </Transition>
       <Tooltip tooltip={tooltip} className="mr-3">
