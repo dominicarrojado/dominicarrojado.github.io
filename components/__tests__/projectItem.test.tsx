@@ -5,7 +5,6 @@ import {
   waitFor,
   fireEvent,
 } from '@testing-library/react';
-import { config } from 'react-transition-group';
 import Window from '../../modules/Window';
 import {
   getFakeBoolean,
@@ -23,8 +22,6 @@ import * as ga from '../../lib/google-analytics';
 import ProjectItem, { Props } from '../projectItem';
 
 jest.useFakeTimers();
-
-config.disabled = true; // disable react-transitions-group transitions
 
 describe('<ProjectItem />', () => {
   const renderComponent = (props: Props) => {
@@ -260,7 +257,7 @@ describe('<ProjectItem />', () => {
 
       const gifEl = screen.queryByAltText(`GIF of ${project.title}`);
 
-      expect(gifEl).not.toBeInTheDocument();
+      expect(gifEl).toHaveClass('opacity-0');
     });
 
     it('should NOT display Downloading GIF by default', () => {
@@ -275,7 +272,7 @@ describe('<ProjectItem />', () => {
 
       const tooltipEl = screen.queryByText('Downloading GIF...');
 
-      expect(tooltipEl).toHaveClass('opacity-0');
+      expect(tooltipEl).not.toBeInTheDocument();
     });
 
     it('should download GIF if project is in view', async () => {

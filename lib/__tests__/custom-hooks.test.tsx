@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
+import { waitFor } from '@testing-library/react';
 import axios from 'axios';
 import Window from '../../modules/Window';
 import DarkMode from '../../modules/DarkMode';
@@ -8,14 +8,10 @@ import {
   getFakeNumber,
   getFakeSentence,
   getMatchMediaMock,
-  getRandomDialogNames,
   setReadOnlyProperty,
 } from '../test-helpers';
-import { StoreContextType } from '../../lib/types';
-import { StoreContext } from '../store';
 import * as axiosHelpers from '../axios';
 import * as hooks from '../hooks';
-import * as dom from '../dom';
 import {
   useDarkModeEnabled,
   useDownloadGif,
@@ -23,25 +19,10 @@ import {
   useMotionSafe,
   useScrollOpacityEffect,
   useWindowLoaded,
-  useUpdateVisibleDialogs,
-  useDialogOffsetWidth,
   useWindowSize,
 } from '../custom-hooks';
-import { waitFor } from '@testing-library/react';
 
 describe('hooks utilities', () => {
-  const initiateWrapper = (value: StoreContextType) => {
-    return function StoreContextProvider({
-      children,
-    }: {
-      children: ReactNode;
-    }) {
-      return (
-        <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
-      );
-    };
-  };
-
   describe('useMounted()', () => {
     it('should return true on mount', () => {
       const hook = renderHook(() => useMounted());
@@ -581,80 +562,6 @@ describe('hooks utilities', () => {
       expect(() => {
         cancelDownloadGif();
       }).not.toThrow();
-    });
-  });
-
-  describe('useUpdateVisibleDialogs()', () => {
-    it('should update visible dialogs if visible', () => {
-      const setVisibleDialogsMock = jest.fn();
-
-      const wrapper = initiateWrapper({
-        visibleDialogs: [],
-        setVisibleDialogs: (fn: any) => setVisibleDialogsMock(fn([])),
-      });
-      const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
-      const updateVisibleDialogs = hook.result.current;
-      const randomDialogName = getRandomDialogNames();
-
-      act(() => {
-        updateVisibleDialogs(randomDialogName, true);
-      });
-
-      expect(setVisibleDialogsMock).toBeCalledTimes(1);
-      expect(setVisibleDialogsMock).toBeCalledWith([randomDialogName]);
-    });
-
-    it('should update visible dialogs if NOT visible', () => {
-      const setVisibleDialogsMock = jest.fn();
-
-      const randomDialogName = getRandomDialogNames();
-
-      const wrapper = initiateWrapper({
-        visibleDialogs: [],
-        setVisibleDialogs: (fn: any) =>
-          setVisibleDialogsMock(fn([randomDialogName])),
-      });
-      const hook = renderHook(() => useUpdateVisibleDialogs(), { wrapper });
-      const updateVisibleDialogs = hook.result.current;
-
-      act(() => {
-        updateVisibleDialogs(randomDialogName, false);
-      });
-
-      expect(setVisibleDialogsMock).toBeCalledTimes(1);
-      expect(setVisibleDialogsMock).toBeCalledWith([]);
-    });
-  });
-
-  describe('useDialogOffsetWidth()', () => {
-    afterEach(() => {
-      jest.restoreAllMocks();
-    });
-
-    it('should return zero if no visible dialogs', () => {
-      const wrapper = initiateWrapper({
-        visibleDialogs: [],
-        setVisibleDialogs: jest.fn(),
-      });
-      const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
-      const dialogOffsetWidth = hook.result.current;
-
-      expect(dialogOffsetWidth).toBe(0);
-    });
-
-    it('should return scroll width if there are visible dialogs', () => {
-      const scrollWidth = getFakeNumber({ min: 1 });
-
-      jest.spyOn(dom, 'getScrollWidth').mockReturnValue(scrollWidth);
-
-      const wrapper = initiateWrapper({
-        visibleDialogs: [getRandomDialogNames()],
-        setVisibleDialogs: jest.fn(),
-      });
-      const hook = renderHook(() => useDialogOffsetWidth(), { wrapper });
-      const dialogOffsetWidth = hook.result.current;
-
-      expect(dialogOffsetWidth).toBe(scrollWidth);
     });
   });
 });

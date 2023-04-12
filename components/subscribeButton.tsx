@@ -1,12 +1,12 @@
-import { TransitionEvent, useEffect, useRef, useState } from 'react';
+import { TransitionEvent, useRef, useState } from 'react';
 import cn from 'classnames';
 import { DialogDisclosure, useDialogState } from 'ariakit/dialog';
-import { useMounted, useUpdateVisibleDialogs } from '../lib/custom-hooks';
+import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import ModalSubscribe from './modalSubscribe';
 import ModalSubscribeSuccess from './modalSubscribeSuccess';
 import SvgBell from './svgBell';
-import { DialogName, GoogleAnalyticsEvent } from '../lib/types';
+import { GoogleAnalyticsEvent } from '../lib/types';
 import { MAIN_TITLE } from '../lib/constants';
 
 export default function SubscribeButton() {
@@ -24,12 +24,9 @@ export default function SubscribeButton() {
       buttonText: text,
     });
   };
-  const dialogSubscribeVisible = dialogSubscribe.open;
   const dialogSubscribeSuccess = useDialogState({
     animated: 300,
   });
-  const dialogSubscribeSuccessVisible = dialogSubscribeSuccess.open;
-  const updateVisibleDialogs = useUpdateVisibleDialogs();
   const [animationDone, setAnimationDone] = useState(false);
   const [email, setEmail] = useState('');
   const text = 'Subscribe';
@@ -58,23 +55,6 @@ export default function SubscribeButton() {
       buttonText: text,
     });
   };
-
-  useEffect(() => {
-    updateVisibleDialogs(DialogName.SUBSCRIBE, dialogSubscribeVisible);
-
-    isMountedRef.current = true;
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogSubscribeVisible]);
-
-  useEffect(() => {
-    updateVisibleDialogs(
-      DialogName.SUBSCRIBE_SUCCESS,
-      dialogSubscribeSuccessVisible
-    );
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogSubscribeSuccessVisible]);
 
   return (
     <>

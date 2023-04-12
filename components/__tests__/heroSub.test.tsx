@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { config } from 'react-transition-group';
 import { getFakeSentence, getFakeSentences } from '../../lib/test-helpers';
 import * as customHooks from '../../lib/custom-hooks';
 import HeroSub, { Props } from '../heroSub';
-
-config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeroSub />', () => {
   const renderComponent = (props: Props) => render(<HeroSub {...props} />);

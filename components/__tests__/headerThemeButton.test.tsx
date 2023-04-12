@@ -1,16 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { config } from 'react-transition-group';
-import {
-  fireEventTransitionEnd,
-  getFakeBoolean,
-  getFakeWord,
-} from '../../lib/test-helpers';
+import { fireEventTransitionEnd, getFakeBoolean } from '../../lib/test-helpers';
 import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
-import * as transitionUtils from '../../lib/transition-group';
 import HeaderThemeButton from '../headerThemeButton';
-
-config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeaderThemeButton />', () => {
   const renderComponent = () => render(<HeaderThemeButton />);
@@ -74,7 +66,7 @@ describe('<HeaderThemeButton />', () => {
     expect(btnEl).toHaveTextContent('Dark');
   });
 
-  it('should have expected class on transition end (opacity)', () => {
+  it('should be hidden by default', () => {
     jest.spyOn(customHooks, 'useDarkModeEnabled').mockReturnValue({
       isDarkModeReady: true,
       isDarkModeEnabled: true,
@@ -86,15 +78,12 @@ describe('<HeaderThemeButton />', () => {
     const btnLabelEl = screen.queryByText('Dark') as HTMLDivElement;
     const iconEl = btnLabelEl.previousElementSibling;
 
-    fireEventTransitionEnd(btnLabelEl, 'opacity');
-
-    expect(btnLabelEl).toHaveClass('duration-200');
-    expect(btnLabelEl).not.toHaveClass('opacity-0');
-    expect(iconEl).toHaveClass('duration-200');
-    expect(iconEl).not.toHaveClass('opacity-0');
+    expect(btnLabelEl).toHaveClass('opacity-0');
+    expect(iconEl).toHaveClass('opacity-0');
   });
 
-  it('should have expected class on transition end (other prop name)', () => {
+  it('should NOT be hidden on mount', () => {
+    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
     jest.spyOn(customHooks, 'useDarkModeEnabled').mockReturnValue({
       isDarkModeReady: true,
       isDarkModeEnabled: false,
@@ -106,30 +95,10 @@ describe('<HeaderThemeButton />', () => {
     const btnLabelEl = screen.queryByText('Light') as HTMLDivElement;
     const iconEl = btnLabelEl.previousElementSibling;
 
-    fireEventTransitionEnd(btnLabelEl, getFakeWord());
-
-    expect(btnLabelEl).toHaveClass('opacity-0 duration-700');
-    expect(iconEl).toHaveClass('opacity-0 duration-700');
-  });
-
-  it('should have expected class on transition end (opacity) and transition switch', () => {
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
-    jest.spyOn(transitionUtils, 'checkShouldAnimate').mockReturnValue(false);
-    jest.spyOn(customHooks, 'useDarkModeEnabled').mockReturnValue({
-      isDarkModeReady: true,
-      isDarkModeEnabled: true,
-      toggleDarkMode: jest.fn(),
-    });
-
-    renderComponent();
-
-    const btnLabelEl = screen.queryByText('Dark') as HTMLDivElement;
-    const iconEl = btnLabelEl.previousElementSibling;
-
     fireEventTransitionEnd(btnLabelEl, 'opacity');
 
-    expect(btnLabelEl).toHaveClass('opacity-0 duration-200');
-    expect(iconEl).toHaveClass('opacity-0 duration-200');
+    expect(btnLabelEl).not.toHaveClass('opacity-0');
+    expect(iconEl).not.toHaveClass('opacity-0');
   });
 
   it('should track click (dark)', () => {

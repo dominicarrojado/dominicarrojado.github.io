@@ -1,11 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import { useDialogOffsetWidth } from '../lib/custom-hooks';
+import { SCROLLBAR_WIDTH_CSS_VAR } from '../lib/constants';
 import SubscribeButton from './subscribeButton';
 
 function FooterFloating() {
-  const dialogOffsetWidth = useDialogOffsetWidth();
-
   return (
     <footer
       className={cn('fixed flex items-center justify-end bottom-0 w-full z-50')}
@@ -17,7 +15,7 @@ function FooterFloating() {
           'md:bottom-5 md:right-5',
           'lg:bottom-8 lg:right-8'
         )}
-        style={{ paddingRight: `${dialogOffsetWidth}px` }}
+        style={{ paddingRight: `var(${SCROLLBAR_WIDTH_CSS_VAR}, 0)` }}
       >
         <SubscribeButton />
       </div>

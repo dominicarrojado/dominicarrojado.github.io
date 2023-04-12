@@ -3,10 +3,8 @@ import faker from 'faker';
 import fs from 'fs';
 import path from 'path';
 import { DialogState } from 'ariakit/dialog';
-import { Nullish, Route, StoreContextType } from './types';
+import { Nullish, Route } from './types';
 import {
-  DIALOG_NAMES,
-  DIALOG_NAMES_LENGTH,
   GOOGLE_ADSENSE_UNITS,
   GOOGLE_ADSENSE_UNITS_LENGTH,
   GOOGLE_ADSENSE_UNIT_FORMATS,
@@ -129,10 +127,6 @@ export function getRandomGoogleAdsenseUnitLayout() {
   ];
 }
 
-export function getRandomDialogNames() {
-  return DIALOG_NAMES[getFakeNumber(DIALOG_NAMES_LENGTH - 1)];
-}
-
 export function getRandomSocialLink() {
   return SOCIAL_LINKS[getFakeNumber(SOCIAL_LINKS_LENGTH - 1)];
 }
@@ -177,16 +171,6 @@ export function getTooltipStateMock(customData = {} as Partial<TooltipState>) {
     popoverRef: { current: null },
     ...customData,
   } as TooltipState;
-}
-
-export function getStoreContextMock(
-  customData = {} as Partial<StoreContextType>
-) {
-  return {
-    visibleDialogs: [],
-    setVisibleDialogs: jest.fn(),
-    ...customData,
-  };
 }
 
 export function getFakeBoolean() {

@@ -96,12 +96,6 @@ export enum ExternalUrl {
   MICROSOFT_CLARITY_FAQ = 'https://docs.microsoft.com/en-us/clarity/faq#privacy',
 }
 
-export enum DialogName {
-  MENU = 'menu',
-  SUBSCRIBE = 'subscribe',
-  SUBSCRIBE_SUCCESS = 'subscribe-success',
-}
-
 export enum ApiEndpoint {
   SUBSCRIPTION_REQUESTS = '/subscription-requests',
   SUBSCRIPTION_REQUEST_VERIFY = '/subscription-requests/:id/verify',
@@ -174,9 +168,4 @@ export type Testimonial = {
   jobTitle: string;
   companyName: string;
   quote: string;
-};
-
-export type StoreContextType = {
-  visibleDialogs: Array<string>;
-  setVisibleDialogs: Dispatch<SetStateAction<Array<string>>>;
 };

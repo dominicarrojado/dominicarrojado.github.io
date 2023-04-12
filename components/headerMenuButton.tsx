@@ -1,11 +1,8 @@
-import { TransitionEvent, useRef, useState } from 'react';
+import { TransitionEvent, useState } from 'react';
 import cn from 'classnames';
-import { SwitchTransition } from 'react-transition-group';
 import { DialogDisclosure, DialogState } from 'ariakit/dialog';
 import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
-import { checkShouldAnimate } from '../lib/transition-group';
-import Transition from './transition';
 import { GoogleAnalyticsEvent } from '../lib/types';
 
 export type Props = {
@@ -14,7 +11,6 @@ export type Props = {
 
 export default function HeaderMenuButton({ dialog }: Props) {
   const isMenuOpen = dialog.open;
-  const textRef = useRef<HTMLDivElement>(null);
   const stacks = Array.from(Array(3).keys());
   const shouldDisplay = useMounted();
   const [animationDone, setAnimationDone] = useState(false);
@@ -86,40 +82,23 @@ export default function HeaderMenuButton({ dialog }: Props) {
           />
         );
       })}
-      <SwitchTransition>
-        <Transition key={text} nodeRef={textRef} timeout={300}>
-          {(state) => (
-            <div
-              ref={textRef}
-              className={cn(
-                'mt-1.5 text-gray-400 text-3xs font-normal uppercase select-none',
-                'dark:text-gray-300',
-                'transform transition-transform-opacity-color group-hover:text-gray-500',
-                'motion-reduce:transition-none',
-                'dark:group-hover:text-gray-100',
-                'md:mt-2 md:text-2xs',
-                'xl:text-xs',
-                !animationDone
-                  ? {
-                      'duration-700': true,
-                      [shouldDisplay
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 -translate-y-3']: true,
-                    }
-                  : {
-                      'duration-200': true,
-                      [checkShouldAnimate(state)
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 -translate-y-3']: true,
-                    }
-              )}
-              onTransitionEnd={!animationDone ? onTransitionEnd : undefined}
-            >
-              {text}
-            </div>
-          )}
-        </Transition>
-      </SwitchTransition>
+      <div
+        className={cn(
+          'mt-1.5 text-gray-400 text-3xs font-normal uppercase select-none',
+          'dark:text-gray-300',
+          'transform transition-transform-opacity-color duration-700 group-hover:text-gray-500',
+          'motion-reduce:transition-none',
+          'dark:group-hover:text-gray-100',
+          'md:mt-2 md:text-2xs',
+          'xl:text-xs',
+          shouldDisplay
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 -translate-y-3'
+        )}
+        onTransitionEnd={!animationDone ? onTransitionEnd : undefined}
+      >
+        {text}
+      </div>
     </DialogDisclosure>
   );
 }

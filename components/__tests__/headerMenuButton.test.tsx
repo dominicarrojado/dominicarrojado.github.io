@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { config } from 'react-transition-group';
 import {
   fireEventTransitionEnd,
   getDialogStateMock,
@@ -10,10 +9,7 @@ import {
 import * as nextRouter from 'next/router';
 import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
-import * as transitionUtils from '../../lib/transition-group';
 import HeaderMenuButton, { Props } from '../headerMenuButton';
-
-config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeaderMenuButton />', () => {
   const windowHeightOrig = window.innerHeight;
@@ -120,8 +116,6 @@ describe('<HeaderMenuButton />', () => {
   });
 
   it('should have expected class on transition end (opacity) and transition switch', () => {
-    jest.spyOn(transitionUtils, 'checkShouldAnimate').mockReturnValue(false);
-
     renderComponent({
       dialog: { ...getDialogStateMock(), open: false },
     });

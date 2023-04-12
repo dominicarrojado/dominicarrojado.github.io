@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { config } from 'react-transition-group';
 import { getFakeBoolean, getFakeSentence } from '../../lib/test-helpers';
 import HeroSection, { Props } from '../heroSection';
-
-config.disabled = true; // disable react-transitions-group transitions
 
 describe('<HeroSection />', () => {
   const renderComponent = ({ children, ...props }: Props) =>

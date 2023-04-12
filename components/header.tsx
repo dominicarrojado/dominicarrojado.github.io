@@ -1,32 +1,17 @@
-import { useEffect } from 'react';
 import cn from 'classnames';
 import { useDialogState } from 'ariakit/dialog';
-import {
-  useDialogOffsetWidth,
-  useUpdateVisibleDialogs,
-} from '../lib/custom-hooks';
+import { SCROLLBAR_WIDTH_CSS_VAR } from '../lib/constants';
 import HeaderProgressBar from './headerProgressBar';
 import HeaderThemeButton from './headerThemeButton';
 import HeaderLogo from './headerLogo';
 import HeaderMenuButton from './headerMenuButton';
 import HeaderMenu from './headerMenu';
 import SkipToMainContentAnchor from './skipToMainContentAnchor';
-import { DialogName } from '../lib/types';
-import { MENU_ITEMS_LENGTH } from '../lib/constants';
 
 export default function Header() {
   const dialog = useDialogState({
-    animated: MENU_ITEMS_LENGTH * 75 + 100,
+    animated: 500,
   });
-  const dialogVisible = dialog.open;
-  const updateVisibleDialogs = useUpdateVisibleDialogs();
-  const dialogOffsetWidth = useDialogOffsetWidth();
-
-  useEffect(() => {
-    updateVisibleDialogs(DialogName.MENU, dialogVisible);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogVisible]);
 
   return (
     <>
@@ -41,7 +26,7 @@ export default function Header() {
             'md:top-5 md:right-5 md:gap-5',
             'lg:top-8 lg:right-8 lg:gap-6'
           )}
-          style={{ paddingRight: `${dialogOffsetWidth}px` }}
+          style={{ paddingRight: `var(${SCROLLBAR_WIDTH_CSS_VAR}, 0)` }}
           data-testid="header-buttons"
         >
           <HeaderThemeButton />

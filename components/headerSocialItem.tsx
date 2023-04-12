@@ -38,7 +38,7 @@ export default function HeaderSocialItem({
       )}
       style={
         shouldDisplay
-          ? { transitionDelay: `${(idx + 1) * 75 + 300}ms` }
+          ? { transitionDelay: `${(idx + 1) * 75 + 100}ms` }
           : undefined
       }
     >

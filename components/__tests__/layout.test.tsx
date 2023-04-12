@@ -1,11 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import {
-  getFakeSentence,
-  getRandomRoute,
-  getStoreContextMock,
-} from '../../lib/test-helpers';
-import { StoreContext } from '../../lib/store';
-import { StoreContextType } from '../../lib/types';
+import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
 import * as nextRouter from 'next/router';
 import * as customHooks from '../../lib/custom-hooks';
 import * as Header from '../header';
@@ -13,16 +7,8 @@ import * as Footer from '../footer';
 import Layout, { Props } from '../layout';
 
 describe('<Layout />', () => {
-  const renderComponent = ({
-    storeContext,
-    children,
-    ...props
-  }: Props & { storeContext?: StoreContextType }) =>
-    render(
-      <StoreContext.Provider value={getStoreContextMock(storeContext)}>
-        <Layout {...props}>{children}</Layout>
-      </StoreContext.Provider>
-    );
+  const renderComponent = ({ children, ...props }: Props) =>
+    render(<Layout {...props}>{children}</Layout>);
 
   beforeEach(() => {
     jest

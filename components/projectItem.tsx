@@ -1,12 +1,10 @@
-import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { Transition } from 'react-transition-group';
 import { useTooltipState, TooltipAnchor } from 'ariakit/tooltip';
 import Window from '../modules/Window';
 import { trackEvent } from '../lib/google-analytics';
 import { getRefValue } from '../lib/hooks';
 import { useDownloadGif, useMotionSafe, useMounted } from '../lib/custom-hooks';
-import { checkShouldAnimate } from '../lib/transition-group';
 import SvgStar from './svgStar';
 import TextArrowLink from './textArrowLink';
 import Spinner from './spinner';
@@ -197,36 +195,19 @@ function ImageContainer({
           onLoad={imgOnLoad}
           loading="lazy"
         />
-        <Transition
-          in={shouldDisplayGifImg}
-          nodeRef={imgRef}
-          timeout={300}
-          mountOnEnter
-          unmountOnExit
-        >
-          {(state) => (
-            <img
-              ref={imgRef}
-              src={gifData}
-              alt={`GIF of ${title}`}
-              className={cn(
-                'absolute top-0 left-0 w-full h-full z-20',
-                'transition-opacity duration-300',
-                'motion-reduce:transition-none',
-                {
-                  [checkShouldAnimate(state) ? 'opacity-100' : 'opacity-0']:
-                    true,
-                }
-              )}
-              draggable={false}
-            />
+        <img
+          ref={imgRef}
+          src={gifData}
+          alt={`GIF of ${title}`}
+          className={cn(
+            'absolute top-0 left-0 w-full h-full z-20',
+            'transition-opacity duration-300',
+            'motion-reduce:transition-none',
+            shouldDisplayGifImg ? 'opacity-100' : 'opacity-0'
           )}
-        </Transition>
-        <GifLoader
-          shouldDisplay={shouldDisplayGifLoader}
-          progress={gifProgress}
-          title={title}
+          draggable={false}
         />
+        {shouldDisplayGifLoader && <GifLoader progress={gifProgress} />}
       </div>
     </div>
   );
@@ -245,73 +226,45 @@ function ImageLoader() {
   );
 }
 
-function GifLoader({
-  shouldDisplay,
-  progress,
-  title,
-}: {
-  shouldDisplay: boolean;
-  progress: number;
-  title: string;
-}) {
-  const projectId = useMemo(
-    () => title.toLowerCase().replace(/[ :.]/g, '-'),
-    [title]
-  );
+function GifLoader({ progress }: { progress: number }) {
   const tooltip = useTooltipState({
     animated: 300,
     placement: 'left',
   });
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMounted = useMounted();
   const text = 'Downloading GIF...';
 
   return (
     <>
-      <Transition
-        in={isMounted && shouldDisplay}
-        nodeRef={containerRef}
-        timeout={300}
-        mountOnEnter
-        unmountOnExit
-      >
-        {(state) => (
-          <TooltipAnchor
-            state={tooltip}
-            ref={containerRef}
-            className={cn(
-              'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
-              'transition-opacity duration-300',
-              'motion-reduce:transition-none',
-              'sm:top-4 sm:right-4',
-              {
-                [checkShouldAnimate(state) ? 'opacity-100' : 'opacity-0']: true,
-              }
-            )}
-            data-testid="gif-loader"
-          >
-            <Spinner
-              className={cn(
-                'w-7 h-7 border-2',
-                'transition-opacity duration-700',
-                'motion-reduce:transition-none',
-                'sm:w-9 sm:h-9',
-                'md:w-11 md:h-11 md:border-4'
-              )}
-              color="#ffffff"
-            />
-            <div
-              className={cn(
-                'absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs',
-                'sm:text-sm',
-                'md:text-base'
-              )}
-            >
-              {progress}
-            </div>
-          </TooltipAnchor>
+      <TooltipAnchor
+        state={tooltip}
+        ref={containerRef}
+        className={cn(
+          'absolute top-3 right-3 bg-black bg-opacity-60 rounded-full p-1 z-30',
+          'sm:top-4 sm:right-4'
         )}
-      </Transition>
+        data-testid="gif-loader"
+      >
+        <Spinner
+          className={cn(
+            'w-7 h-7 border-2',
+            'transition-opacity duration-700',
+            'motion-reduce:transition-none',
+            'sm:w-9 sm:h-9',
+            'md:w-11 md:h-11 md:border-4'
+          )}
+          color="#ffffff"
+        />
+        <div
+          className={cn(
+            'absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs',
+            'sm:text-sm',
+            'md:text-base'
+          )}
+        >
+          {progress}
+        </div>
+      </TooltipAnchor>
       <Tooltip tooltip={tooltip} className="mr-3">
         {text}
       </Tooltip>

@@ -4,26 +4,14 @@ import {
   fireEventTransitionEnd,
   getFakeEmail,
   getFakeWord,
-  getStoreContextMock,
 } from '../../lib/test-helpers';
-import { StoreContext } from '../../lib/store';
-import { StoreContextType } from '../../lib/types';
 import * as customHooks from '../../lib/custom-hooks';
 import * as ga from '../../lib/google-analytics';
 import * as ModalSubscribe from '../modalSubscribe';
 import SubscribeButton from '../subscribeButton';
 
 describe('<SubscribeButton />', () => {
-  const renderComponent = ({
-    storeContext,
-  }: {
-    storeContext?: StoreContextType;
-  }) =>
-    render(
-      <StoreContext.Provider value={getStoreContextMock(storeContext)}>
-        <SubscribeButton />
-      </StoreContext.Provider>
-    );
+  const renderComponent = () => render(<SubscribeButton />);
 
   afterEach(() => {
     jest.restoreAllMocks();
