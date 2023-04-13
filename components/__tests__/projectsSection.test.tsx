@@ -1,8 +1,17 @@
 import { render, screen } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import * as ProjectItem from '../projectItem';
-import { PROJECTS } from '../../lib/constants';
+import { PROJECTS } from '@/lib/constants';
 import ProjectsSection from '../projectsSection';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('../projectItem', () => ({
+  __esModule: true,
+  ...jest.requireActual('../projectItem'),
+}));
 
 describe('<ProjectsSection />', () => {
   const renderComponent = () => {

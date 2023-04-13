@@ -4,11 +4,24 @@ import {
   fireEventTransitionEnd,
   getFakeEmail,
   getFakeWord,
-} from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
-import * as ga from '../../lib/google-analytics';
+} from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
+import * as ga from '@/lib/google-analytics';
 import * as ModalSubscribe from '../modalSubscribe';
 import SubscribeButton from '../subscribeButton';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
+jest.mock('../modalSubscribe', () => ({
+  __esModule: true,
+  ...jest.requireActual('../modalSubscribe'),
+}));
 
 describe('<SubscribeButton />', () => {
   const renderComponent = () => render(<SubscribeButton />);
@@ -18,7 +31,7 @@ describe('<SubscribeButton />', () => {
   });
 
   it('should display subscribe modal on click', async () => {
-    renderComponent({});
+    renderComponent();
 
     const btnEl = screen.queryByText('Subscribe') as HTMLDivElement;
     const modalLabelText = 'Stay up to date';
@@ -38,7 +51,7 @@ describe('<SubscribeButton />', () => {
   it('should display subscribe modal on click', async () => {
     const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
-    renderComponent({});
+    renderComponent();
 
     const labelText = 'Subscribe';
     const btnEl = screen.queryByText(labelText) as HTMLDivElement;
@@ -67,7 +80,7 @@ describe('<SubscribeButton />', () => {
   it('should hide subscribe modal on close click', async () => {
     const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
-    renderComponent({});
+    renderComponent();
 
     const labelText = 'Subscribe';
     const subscribeLabelEl = screen.queryByText(labelText) as HTMLDivElement;
@@ -100,7 +113,7 @@ describe('<SubscribeButton />', () => {
   it('should have expected class on transition end (opacity)', () => {
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(false);
 
-    renderComponent({});
+    renderComponent();
 
     const subscribeLabelEl = screen.queryByText('Subscribe') as HTMLDivElement;
 
@@ -113,7 +126,7 @@ describe('<SubscribeButton />', () => {
   it('should have expected class on transition end (other prop name)', () => {
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(false);
 
-    renderComponent({});
+    renderComponent();
 
     const subscribeLabelEl = screen.queryByText('Subscribe') as HTMLDivElement;
 
@@ -125,7 +138,7 @@ describe('<SubscribeButton />', () => {
   it('should track on success', async () => {
     const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
-    let onSuccessMock = (email: string) => {};
+    let onSuccessMock = (_email: string) => {};
 
     jest
       .spyOn(ModalSubscribe, 'default')
@@ -134,7 +147,7 @@ describe('<SubscribeButton />', () => {
         return <></>;
       });
 
-    renderComponent({});
+    renderComponent();
 
     const email = getFakeEmail();
 

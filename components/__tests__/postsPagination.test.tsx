@@ -1,8 +1,13 @@
 import { act, render, screen } from '@testing-library/react';
-import { getFakeNumber } from '../../lib/test-helpers';
-import Window from '../../modules/Window';
-import * as customHooks from '../../lib/custom-hooks';
+import { getFakeNumber } from '@/lib/test-helpers';
+import Window from '@/modules/Window';
+import * as customHooks from '@/lib/custom-hooks';
 import PostsPagination, { Props } from '../postsPagination';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<PostsPagination />', () => {
   const renderComponent = (props: Props) => {

@@ -6,10 +6,15 @@ import {
   getFakeUrl,
   getFakeUuid,
   getFakeWord,
-} from '../../lib/test-helpers';
+} from '@/lib/test-helpers';
 import * as PostItem from '../postItem';
-import { Post } from '../../lib/types';
+import { Post } from '@/lib/types';
 import PostsHomeSection from '../postsHomeSection';
+
+jest.mock('../postItem', () => ({
+  __esModule: true,
+  ...jest.requireActual('../postItem'),
+}));
 
 describe('<PostsHomeSection />', () => {
   const latestPosts = [

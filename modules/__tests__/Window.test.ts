@@ -1,4 +1,4 @@
-import { setReadOnlyProperty } from '../../lib/test-helpers';
+import { setReadOnlyProperty } from '@/lib/test-helpers';
 import Window from '../Window';
 
 describe('Window module', () => {

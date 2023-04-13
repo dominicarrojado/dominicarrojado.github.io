@@ -1,7 +1,16 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
-import * as HeroSub from '../../components/heroSub';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroSub from '@/components/heroSub';
 import Custom404 from '../404.page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroSub', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroSub'),
+}));
 
 describe('<Custom404 />', () => {
   afterEach(() => {

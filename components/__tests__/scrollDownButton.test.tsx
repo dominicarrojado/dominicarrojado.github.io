@@ -1,8 +1,17 @@
 import { fireEvent, render, screen, act } from '@testing-library/react';
-import Window from '../../modules/Window';
-import * as imports from '../../lib/imports';
-import * as ga from '../../lib/google-analytics';
+import Window from '@/modules/Window';
+import * as imports from '@/lib/imports';
+import * as ga from '@/lib/google-analytics';
 import ScrollDownButton from '../scrollDownButton';
+
+jest.mock('@/lib/imports', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/imports'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 
 describe('<ScrollDownButton />', () => {
   const renderComponent = () => render(<ScrollDownButton />);

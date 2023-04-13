@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence } from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
+import { getFakeSentence } from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
 import HeroSubTitle, { Props } from '../heroSubTitle';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<HeroSubTitle />', () => {
   const renderComponent = ({ children }: Props) =>

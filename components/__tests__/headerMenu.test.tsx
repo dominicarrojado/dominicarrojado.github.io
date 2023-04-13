@@ -1,5 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
-import { getDialogStateMock } from '../../lib/test-helpers';
+import { getDialogStateMock } from '@/lib/test-helpers';
 import HeaderMenu, { Props } from '../headerMenu';
 
 jest.useFakeTimers();

@@ -1,9 +1,18 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { getFakeEmail } from '../../lib/test-helpers';
-import { FetchState } from '../../lib/types';
-import * as customHooks from '../../lib/custom-hooks';
-import * as apiHooks from '../../lib/api-hooks';
+import { getFakeEmail } from '@/lib/test-helpers';
+import { FetchState } from '@/lib/types';
+import * as customHooks from '@/lib/custom-hooks';
+import * as apiHooks from '@/lib/api-hooks';
 import UnsubscribeForm, { Props } from '../unsubscribeForm';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/api-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/api-hooks'),
+}));
 
 describe('<UnsubscribeForm />', () => {
   const renderComponent = (props: Props) =>

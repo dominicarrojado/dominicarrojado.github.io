@@ -1,12 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { NextSeo } from 'next-seo';
-import { getMetaTitle, getRouteCanonical } from '../../lib/meta';
-import { getAllPostIds, getPostData } from '../../lib/posts';
-import HeroSub from '../../components/heroSub';
-import AdUnitScript from '../../components/adUnitScript';
-import PostContent from '../../components/postContent';
-import { PostData, Route } from '../../lib/types';
 import { useMemo } from 'react';
+import { getMetaTitle, getRouteCanonical } from '@/lib/meta';
+import { getAllPostIds, getPostData } from '@/lib/posts';
+import HeroSub from '@/components/heroSub';
+import AdUnitScript from '@/components/adUnitScript';
+import PostContent from '@/components/postContent';
+import { PostData, Route } from '@/lib/types';
 
 export default function Post({ postData }: { postData: PostData }) {
   const postId = postData.id;

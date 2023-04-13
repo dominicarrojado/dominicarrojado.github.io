@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { FONTS } from '../../lib/constants';
+import { FONTS } from '@/lib/constants';
 import * as Head from 'next/head';
 import FontPreLoader from '../fontPreLoader';
 

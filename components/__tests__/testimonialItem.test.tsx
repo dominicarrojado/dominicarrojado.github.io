@@ -4,7 +4,7 @@ import {
   getFakeJobTitle,
   getFakeName,
   getFakeSentences,
-} from '../../lib/test-helpers';
+} from '@/lib/test-helpers';
 import TestimonialItem from '../testimonialItem';
 
 describe('<TestimonialItem />', () => {

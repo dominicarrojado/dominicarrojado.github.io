@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeString } from '../../lib/test-helpers';
+import { getFakeString } from '@/lib/test-helpers';
 import ErrorText, { Props } from '../errorText';
 
 describe('<ErrorText />', () => {

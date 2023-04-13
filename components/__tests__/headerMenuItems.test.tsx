@@ -1,8 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { getFakeBoolean, getFakeNumber } from '../../lib/test-helpers';
-import { MENU_ITEMS, MENU_ITEMS_LENGTH } from '../../lib/constants';
-import * as NextLink from '../nextLink';
+import { getFakeBoolean, getFakeNumber } from '@/lib/test-helpers';
+import { MENU_ITEMS, MENU_ITEMS_LENGTH } from '@/lib/constants';
+import * as NextLink from '@/components/nextLink';
 import HeaderMenuItems, { Props } from '../headerMenuItems';
+
+jest.mock('@/components/nextLink', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/nextLink'),
+}));
 
 describe('<HeaderMenuItems />', () => {
   const renderComponent = (props: Props) =>

@@ -4,8 +4,8 @@ import {
   getRandomGoogleAdSenseUnit,
   getRandomGoogleAdSenseUnitFormat,
   getRandomGoogleAdsenseUnitLayout,
-} from '../../lib/test-helpers';
-import { GOOGLE_ADSENSE_CLIENT_ID } from '../../lib/constants';
+} from '@/lib/test-helpers';
+import { GOOGLE_ADSENSE_CLIENT_ID } from '@/lib/constants';
 import AdUnit, { Props } from '../adUnit';
 
 describe('<AdUnit />', () => {

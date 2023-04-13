@@ -1,8 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { getFakeWord } from '../../lib/test-helpers';
-import { SOCIAL_LINKS } from '../../lib/constants';
-import * as ga from '../../lib/google-analytics';
+import { getFakeWord } from '@/lib/test-helpers';
+import { SOCIAL_LINKS } from '@/lib/constants';
+import * as ga from '@/lib/google-analytics';
 import SocialItems, { Props } from '../socialItems';
+
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 
 describe('<SocialItems />', () => {
   const renderComponent = (props: Props) => render(<SocialItems {...props} />);

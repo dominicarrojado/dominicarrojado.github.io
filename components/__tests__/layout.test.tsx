@@ -1,10 +1,23 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence, getRandomRoute } from '../../lib/test-helpers';
+import { getFakeSentence, getRandomRoute } from '@/lib/test-helpers';
 import * as nextRouter from 'next/router';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import * as Header from '../header';
 import * as Footer from '../footer';
 import Layout, { Props } from '../layout';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('../header', () => ({
+  __esModule: true,
+  ...jest.requireActual('../header'),
+}));
+jest.mock('../footer', () => ({
+  __esModule: true,
+  ...jest.requireActual('../footer'),
+}));
 
 describe('<Layout />', () => {
   const renderComponent = ({ children, ...props }: Props) =>

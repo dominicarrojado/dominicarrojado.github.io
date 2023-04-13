@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeDate, getFakeWord, getMonthName } from '../../lib/test-helpers';
+import { getFakeDate, getFakeWord, getMonthName } from '@/lib/test-helpers';
 import DateText from '../dateText';
 
 describe('<DateText />', () => {

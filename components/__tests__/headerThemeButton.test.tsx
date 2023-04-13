@@ -1,8 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { fireEventTransitionEnd, getFakeBoolean } from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
-import * as ga from '../../lib/google-analytics';
+import { fireEventTransitionEnd, getFakeBoolean } from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
+import * as ga from '@/lib/google-analytics';
 import HeaderThemeButton from '../headerThemeButton';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 
 describe('<HeaderThemeButton />', () => {
   const renderComponent = () => render(<HeaderThemeButton />);

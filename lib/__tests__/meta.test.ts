@@ -1,9 +1,6 @@
-import {
-  getFakeSentence,
-  getRandomRouteExceptHome,
-} from '../../lib/test-helpers';
-import { Route } from '../../lib/types';
-import { MAIN_TITLE, MAIN_URL } from '../../lib/constants';
+import { getFakeSentence, getRandomRouteExceptHome } from '@/lib/test-helpers';
+import { Route } from '@/lib/types';
+import { MAIN_TITLE, MAIN_URL } from '@/lib/constants';
 import { getMetaTitle, getRouteCanonical } from '../meta';
 
 describe('meta utilities', () => {

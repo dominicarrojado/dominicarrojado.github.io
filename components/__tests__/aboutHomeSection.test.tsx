@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { queryByTextIgnoreHTML } from '../../lib/test-helpers';
+import { queryByTextIgnoreHTML } from '@/lib/test-helpers';
 import AboutHomeSection from '../aboutHomeSection';
 
 describe('<AboutHomeSection />', () => {

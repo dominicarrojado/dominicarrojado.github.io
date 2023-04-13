@@ -5,7 +5,7 @@ import {
   waitFor,
   fireEvent,
 } from '@testing-library/react';
-import Window from '../../modules/Window';
+import Window from '@/modules/Window';
 import {
   getFakeBoolean,
   getFakeDirectoryPath,
@@ -15,12 +15,24 @@ import {
   getFakeSentences,
   getFakeUrl,
   setReadOnlyProperty,
-} from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
-import * as hooks from '../../lib/hooks';
-import * as ga from '../../lib/google-analytics';
+} from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
+import * as hooks from '@/lib/hooks';
+import * as ga from '@/lib/google-analytics';
 import ProjectItem, { Props } from '../projectItem';
 
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/hooks'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 jest.useFakeTimers();
 
 describe('<ProjectItem />', () => {

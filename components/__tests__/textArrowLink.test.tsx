@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ReactNode } from 'react';
-import { getFakeSentence } from '../../lib/test-helpers';
+import { getFakeSentence } from '@/lib/test-helpers';
 import TextArrowLink from '../textArrowLink';
 
 describe('<TextArrowLink />', () => {

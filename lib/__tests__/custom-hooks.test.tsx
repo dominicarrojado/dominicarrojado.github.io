@@ -1,8 +1,7 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import { waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import Window from '../../modules/Window';
-import DarkMode from '../../modules/DarkMode';
+import Window from '@/modules/Window';
+import DarkMode from '@/modules/DarkMode';
 import {
   getFakeBoolean,
   getFakeNumber,
@@ -21,6 +20,15 @@ import {
   useWindowLoaded,
   useWindowSize,
 } from '../custom-hooks';
+
+jest.mock('../axios', () => ({
+  __esModule: true,
+  ...jest.requireActual('../axios'),
+}));
+jest.mock('../hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('../hooks'),
+}));
 
 describe('hooks utilities', () => {
   describe('useMounted()', () => {
@@ -192,9 +200,7 @@ describe('hooks utilities', () => {
     });
 
     it('should return true if matches is true', () => {
-      const matchMediaMock = jest.fn(
-        () => ({ matches: true, addEventListener: jest.fn() } as any)
-      );
+      const matchMediaMock = getMatchMediaMock({ matches: true });
 
       window.matchMedia = matchMediaMock;
 
@@ -208,9 +214,7 @@ describe('hooks utilities', () => {
     });
 
     it('should return false if matches is false', () => {
-      const matchMediaMock = jest.fn(
-        () => ({ matches: false, addEventListener: jest.fn() } as any)
-      );
+      const matchMediaMock = getMatchMediaMock({ matches: false });
 
       window.matchMedia = matchMediaMock;
 
@@ -427,6 +431,36 @@ describe('hooks utilities', () => {
       expect(onProgressMock).toBeCalledTimes(1);
       expect(onProgressMock).toBeCalledWith(
         Math.round((progressEvent.loaded / progressEvent.total) * 100)
+      );
+    });
+
+    it('should call onProgress (total is undefined)', async () => {
+      const progressEvent = { loaded: 33, total: undefined };
+
+      jest
+        .spyOn(axios, 'get')
+        .mockImplementation(async (_url, { onDownloadProgress }: any) => {
+          onDownloadProgress(progressEvent);
+        });
+
+      const onProgressMock = jest.fn();
+      const hook = renderHook(() =>
+        useDownloadGif({
+          url: 'test.gif',
+          onStart: jest.fn(),
+          onProgress: onProgressMock,
+          onSuccess: jest.fn(),
+          onCancel: jest.fn(),
+          onError: jest.fn(),
+        })
+      );
+      const { startDownloadGif } = hook.result.current;
+
+      await startDownloadGif();
+
+      expect(onProgressMock).toBeCalledTimes(1);
+      expect(onProgressMock).toBeCalledWith(
+        Math.round((progressEvent.loaded / 0) * 100)
       );
     });
 

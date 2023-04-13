@@ -4,12 +4,12 @@ import {
   getFakeSentence,
   getFakeUrl,
   getRandomRouteExceptHome,
-} from '../../lib/test-helpers';
+} from '@/lib/test-helpers';
 import {
   GoogleAdSenseUnit,
   GoogleAdSenseUnitFormat,
   GoogleAdSenseUnitLayout,
-} from '../../lib/types';
+} from '@/lib/types';
 import PostContentMarkdown, { Props } from '../postContentMarkdown';
 
 describe('<PostContentMarkdown />', () => {

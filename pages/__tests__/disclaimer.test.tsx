@@ -1,8 +1,21 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
-import * as HeroSub from '../../components/heroSub';
-import * as DisclaimerSection from '../../components/disclaimerSection';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroSub from '@/components/heroSub';
+import * as DisclaimerSection from '@/components/disclaimerSection';
 import Disclaimer from '../disclaimer.page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroSub', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroSub'),
+}));
+jest.mock('@/components/disclaimerSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/disclaimerSection'),
+}));
 
 describe('<Disclaimer />', () => {
   afterEach(() => {

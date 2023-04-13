@@ -1,9 +1,22 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../../lib/custom-hooks';
-import * as HeroSub from '../../../components/heroSub';
-import * as PostsSection from '../../../components/postsSection';
-import { Post } from '../../../lib/types';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroSub from '@/components/heroSub';
+import * as PostsSection from '@/components/postsSection';
+import { Post } from '@/lib/types';
 import Posts, { getStaticProps } from '../index.page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroSub', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroSub'),
+}));
+jest.mock('@/components/postsSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/postsSection'),
+}));
 
 describe('<Posts />', () => {
   afterEach(() => {

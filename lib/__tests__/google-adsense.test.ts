@@ -2,6 +2,11 @@ import { getFakeSentence } from '../test-helpers';
 import * as locationHelpers from '../location';
 import { displayAd } from '../google-adsense';
 
+jest.mock('../location', () => ({
+  __esModule: true,
+  ...jest.requireActual('../location'),
+}));
+
 describe('google-adsense utilities', () => {
   describe('displayAd()', () => {
     const adsByGoogleOrig = window.adsbygoogle;

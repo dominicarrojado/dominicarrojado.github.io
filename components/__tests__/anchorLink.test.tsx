@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence } from '../../lib/test-helpers';
+import { getFakeSentence } from '@/lib/test-helpers';
 import AnchorLink from '../anchorLink';
 
 describe('<AnchorLink />', () => {

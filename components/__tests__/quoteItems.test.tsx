@@ -1,8 +1,12 @@
 import { act, render, screen } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
-import { QUOTES } from '../../lib/constants';
+import * as customHooks from '@/lib/custom-hooks';
+import { QUOTES } from '@/lib/constants';
 import QuoteItems from '../quoteItems';
 
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 jest.useFakeTimers();
 
 describe('<QuoteItems />', () => {

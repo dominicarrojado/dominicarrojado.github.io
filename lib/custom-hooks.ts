@@ -186,7 +186,9 @@ export function useDownloadGif({
         responseType: 'arraybuffer',
         cancelToken: getRefValue(axiosSourceRef).token,
         onDownloadProgress: (e) => {
-          progress = Math.round((e.loaded / e.total) * 100);
+          const progressTotal = e.total || 0;
+
+          progress = Math.round((e.loaded / progressTotal) * 100);
           onProgress(progress);
         },
       });

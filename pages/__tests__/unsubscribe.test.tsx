@@ -1,6 +1,11 @@
 import { render } from '@testing-library/react';
-import * as UnsubscribeSection from '../../components/unsubscribeSection';
+import * as UnsubscribeSection from '@/components/unsubscribeSection';
 import Unsubscribe from '../unsubscribe.page';
+
+jest.mock('@/components/unsubscribeSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/unsubscribeSection'),
+}));
 
 describe('<Unsubscribe />', () => {
   afterEach(() => {

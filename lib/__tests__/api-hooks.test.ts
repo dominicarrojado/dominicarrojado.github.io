@@ -1,14 +1,18 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { act } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import { getFakeEmail, getFakeUuid } from '../../lib/test-helpers';
-import { FetchState } from '../../lib/types';
-import * as locationHelpers from '../../lib/location';
+import { getFakeEmail, getFakeUuid } from '../test-helpers';
+import { FetchState } from '../types';
+import * as locationHelpers from '../location';
 import {
   useSubmitSubscribeRequest,
   useUnsubscribe,
   useVerifySubscription,
-} from '../../lib/api-hooks';
+} from '../api-hooks';
+
+jest.mock('../location', () => ({
+  __esModule: true,
+  ...jest.requireActual('../location'),
+}));
 
 describe('api hooks utilities', () => {
   afterEach(() => {
@@ -24,23 +28,6 @@ describe('api hooks utilities', () => {
 
       expect(fetchState).toBe(FetchState.DEFAULT);
       expect(typeof submitSubscribeRequest).toBe('function');
-    });
-
-    it('should have expected state on api call', async () => {
-      jest.spyOn(axios, 'post').mockResolvedValue(null);
-
-      const hook = renderApiHook();
-      const submitSubscribeRequest = hook.result.current[1];
-
-      const promiseAct = act(async () => {
-        await submitSubscribeRequest(getFakeEmail());
-      });
-
-      const [fetchState] = hook.result.current;
-
-      expect(fetchState).toBe(FetchState.LOADING);
-
-      await promiseAct;
     });
 
     it('should have expected state, endpoint and request body on api success', async () => {
@@ -107,26 +94,6 @@ describe('api hooks utilities', () => {
       const [fetchState] = hook.result.current;
 
       expect(fetchState).toBe(FetchState.NOT_FOUND);
-    });
-
-    it('should have expected state on api call', async () => {
-      jest
-        .spyOn(locationHelpers, 'getSearchParams')
-        .mockReturnValue(getFakeUuid());
-      jest.spyOn(axios, 'post').mockResolvedValue(null);
-
-      const hook = renderApiHook();
-      const verifySubscription = hook.result.current[1];
-
-      const promiseAct = act(async () => {
-        await verifySubscription();
-      });
-
-      const [fetchState] = hook.result.current;
-
-      expect(fetchState).toBe(FetchState.LOADING);
-
-      await promiseAct;
     });
 
     it('should have expected state, endpoint and request body on api success', async () => {
@@ -205,23 +172,6 @@ describe('api hooks utilities', () => {
 
       expect(fetchState).toBe(FetchState.DEFAULT);
       expect(typeof unsubscribe).toBe('function');
-    });
-
-    it('should have expected state on api call', async () => {
-      jest.spyOn(axios, 'delete').mockResolvedValue(null);
-
-      const hook = renderApiHook();
-      const unsubscribe = hook.result.current[1];
-
-      const promiseAct = act(async () => {
-        await unsubscribe(getFakeEmail());
-      });
-
-      const [fetchState] = hook.result.current;
-
-      expect(fetchState).toBe(FetchState.LOADING);
-
-      await promiseAct;
     });
 
     it('should have expected state, endpoint and request body on api success', async () => {

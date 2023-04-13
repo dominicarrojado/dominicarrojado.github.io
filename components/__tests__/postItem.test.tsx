@@ -9,8 +9,8 @@ import {
   getFakeUuid,
   getFakeWord,
   getMonthName,
-} from '../../lib/test-helpers';
-import { Post } from '../../lib/types';
+} from '@/lib/test-helpers';
+import { Post } from '@/lib/types';
 import PostItem from '../postItem';
 
 describe('<PostItem />', () => {

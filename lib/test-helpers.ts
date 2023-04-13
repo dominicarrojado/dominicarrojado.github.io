@@ -1,5 +1,5 @@
 import { fireEvent, Screen } from '@testing-library/react';
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import fs from 'fs';
 import path from 'path';
 import { DialogState } from 'ariakit/dialog';
@@ -19,11 +19,6 @@ import {
   TOOLTIP_PLACEMENTS_LENGTH,
 } from './constants';
 import { TooltipState } from 'ariakit';
-
-type GetFakeNumber = {
-  (max?: number): number;
-  (options?: { min?: number; max?: number; precision?: number }): number;
-};
 
 export function setReadOnlyProperty<
   O extends Record<string, any>,
@@ -197,8 +192,16 @@ export function getFakeColor() {
   return faker.internet.color();
 }
 
-export function getFakeNumber<T = GetFakeNumber>(data?: T) {
-  return faker.datatype.number(data as any);
+export function getFakeNumber(
+  data?:
+    | number
+    | {
+        min?: number;
+        max?: number;
+        precision?: number;
+      }
+) {
+  return faker.datatype.number(data);
 }
 
 export function getFakeDirectoryPath() {
@@ -233,7 +236,7 @@ export function getFakeDate() {
 }
 
 export function getFakeName() {
-  return faker.name.findName();
+  return faker.name.fullName();
 }
 
 export function getFakeJobTitle() {

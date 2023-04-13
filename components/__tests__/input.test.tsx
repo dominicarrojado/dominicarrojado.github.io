@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { getFakeWord } from '../../lib/test-helpers';
+import { getFakeWord } from '@/lib/test-helpers';
 import Input, { Props } from '../input';
 
 describe('<Input />', () => {

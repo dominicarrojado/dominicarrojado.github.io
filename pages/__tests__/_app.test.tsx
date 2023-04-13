@@ -4,15 +4,36 @@ import {
   getFakeJson,
   getFakeSentence,
   getRandomRoute,
-} from '../../lib/test-helpers';
-import Events from '../../modules/Events';
+} from '@/lib/test-helpers';
+import Events from '@/modules/Events';
 import * as nextRouter from 'next/router';
-import * as ga from '../../lib/google-analytics';
-import * as SeoTags from '../../components/seoTags';
-import * as FontPreLoader from '../../components/fontPreLoader';
-import * as TagManager from '../../components/tagManager';
-import * as Layout from '../../components/layout';
+import * as ga from '@/lib/google-analytics';
+import * as SeoTags from '@/components/seoTags';
+import * as FontPreLoader from '@/components/fontPreLoader';
+import * as TagManager from '@/components/tagManager';
+import * as Layout from '@/components/layout';
 import App from '../_app.page';
+
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
+jest.mock('@/components/seoTags', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/seoTags'),
+}));
+jest.mock('@/components/fontPreLoader', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/fontPreLoader'),
+}));
+jest.mock('@/components/tagManager', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/tagManager'),
+}));
+jest.mock('@/components/layout', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/layout'),
+}));
 
 describe('<App />', () => {
   const matchMediaOrig = window.matchMedia; // DarkMode module uses window.matchMedia

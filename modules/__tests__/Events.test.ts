@@ -1,4 +1,4 @@
-import { getFakeDomainWord, getFakeWord } from '../../lib/test-helpers';
+import { getFakeDomainWord, getFakeWord } from '@/lib/test-helpers';
 import Events from '../Events';
 
 describe('Events module', () => {

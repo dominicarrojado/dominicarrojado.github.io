@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import { getFakeBoolean, getFakeSentence } from '../../lib/test-helpers';
+import { getFakeBoolean, getFakeSentence } from '@/lib/test-helpers';
 import ButtonArrowLink from '../buttonArrowLink';
 
 describe('<ButtonArrowLink />', () => {

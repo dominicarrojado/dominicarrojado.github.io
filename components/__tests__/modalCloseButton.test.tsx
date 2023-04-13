@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { getFakeWord } from '../../lib/test-helpers';
+import { getFakeWord } from '@/lib/test-helpers';
 import ModalCloseButton, { Props } from '../modalCloseButton';
 
 describe('<ModalCloseButton />', () => {

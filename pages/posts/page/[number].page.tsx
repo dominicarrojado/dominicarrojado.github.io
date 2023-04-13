@@ -3,10 +3,10 @@ import {
   getAllPostsLastPage,
   getAllPostPages,
   getAllPostsData,
-} from '../../../lib/posts';
+} from '@/lib/posts';
+import { Route } from '@/lib/types';
+import { POSTS_PER_PAGE } from '@/lib/constants';
 import PostsIndex, { Props as PostsProps } from '../index.page';
-import { Route } from '../../../lib/types';
-import { POSTS_PER_PAGE } from '../../../lib/constants';
 
 type Props = PostsProps;
 

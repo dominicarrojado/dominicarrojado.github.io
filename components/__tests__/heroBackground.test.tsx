@@ -1,6 +1,11 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import HeroBackground from '../heroBackground';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<HeroBackground />', () => {
   const renderComponent = () => render(<HeroBackground />);

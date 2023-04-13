@@ -4,6 +4,15 @@ import * as UnsubscribeForm from '../unsubscribeForm';
 import * as UnsubscribeSuccess from '../unsubscribeSuccess';
 import UnsubscribeSection from '../unsubscribeSection';
 
+jest.mock('../unsubscribeForm', () => ({
+  __esModule: true,
+  ...jest.requireActual('../unsubscribeForm'),
+}));
+jest.mock('../unsubscribeSuccess', () => ({
+  __esModule: true,
+  ...jest.requireActual('../unsubscribeSuccess'),
+}));
+
 describe('<UnsubscribeSection />', () => {
   const renderComponent = () => render(<UnsubscribeSection />);
 

@@ -1,13 +1,13 @@
 import { GetStaticProps } from 'next';
 import { useMemo } from 'react';
 import { NextSeo } from 'next-seo';
-import { getMetaTitle, getRouteCanonical } from '../../lib/meta';
-import { getAllPostsLastPage, getAllPostsData } from '../../lib/posts';
-import HeroSub from '../../components/heroSub';
-import AdUnitScript from '../../components/adUnitScript';
-import PostsSection from '../../components/postsSection';
-import { Post, Route } from '../../lib/types';
-import { POSTS_PER_PAGE } from '../../lib/constants';
+import { getMetaTitle, getRouteCanonical } from '@/lib/meta';
+import { getAllPostsLastPage, getAllPostsData } from '@/lib/posts';
+import HeroSub from '@/components/heroSub';
+import AdUnitScript from '@/components/adUnitScript';
+import PostsSection from '@/components/postsSection';
+import { Post, Route } from '@/lib/types';
+import { POSTS_PER_PAGE } from '@/lib/constants';
 
 export type Props = {
   posts: Array<Post>;

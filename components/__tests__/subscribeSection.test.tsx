@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { FetchState } from '../../lib/types';
-import * as apiHooks from '../../lib/api-hooks';
+import { FetchState } from '@/lib/types';
+import * as apiHooks from '@/lib/api-hooks';
 import SubscribeSection from '../subscribeSection';
+
+jest.mock('@/lib/api-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/api-hooks'),
+}));
 
 describe('<SubscribeSection />', () => {
   const renderComponent = () => render(<SubscribeSection />);

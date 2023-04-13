@@ -3,8 +3,8 @@ import {
   getFakeSentence,
   getFakeWord,
   getTooltipStateMock,
-} from '../../lib/test-helpers';
-import { TOOLTIP_PLACEMENTS } from '../../lib/constants';
+} from '@/lib/test-helpers';
+import { TOOLTIP_PLACEMENTS } from '@/lib/constants';
 import Tooltip, { Props } from '../tooltip';
 
 describe('<Tooltip />', () => {

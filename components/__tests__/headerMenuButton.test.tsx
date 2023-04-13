@@ -5,11 +5,20 @@ import {
   getFakeWord,
   getRandomRoute,
   setReadOnlyProperty,
-} from '../../lib/test-helpers';
+} from '@/lib/test-helpers';
 import * as nextRouter from 'next/router';
-import * as customHooks from '../../lib/custom-hooks';
-import * as ga from '../../lib/google-analytics';
+import * as customHooks from '@/lib/custom-hooks';
+import * as ga from '@/lib/google-analytics';
 import HeaderMenuButton, { Props } from '../headerMenuButton';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 
 describe('<HeaderMenuButton />', () => {
   const windowHeightOrig = window.innerHeight;

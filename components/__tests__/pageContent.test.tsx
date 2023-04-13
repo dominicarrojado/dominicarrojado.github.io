@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentences, getFakeWord } from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
+import { getFakeSentences, getFakeWord } from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
 import PageContent, { Props } from '../pageContent';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<PageContent />', () => {
   const renderComponent = ({ children, ...props }: Props) => {

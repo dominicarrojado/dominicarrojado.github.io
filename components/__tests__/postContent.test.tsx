@@ -8,10 +8,15 @@ import {
   getFakeWord,
   getMonthName,
   queryByTextIgnoreHTML,
-} from '../../lib/test-helpers';
-import { Post, PostData } from '../../lib/types';
-import * as customHooks from '../../lib/custom-hooks';
+} from '@/lib/test-helpers';
+import { Post, PostData } from '@/lib/types';
+import * as customHooks from '@/lib/custom-hooks';
 import PostContent, { Props } from '../postContent';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<PostContent />', () => {
   const renderComponent = (props: Props, isMounted = false) => {

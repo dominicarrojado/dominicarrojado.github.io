@@ -1,10 +1,23 @@
 import { render } from '@testing-library/react';
-import { getRandomPostId } from '../../../lib/test-helpers';
-import * as customHooks from '../../../lib/custom-hooks';
-import * as HeroSub from '../../../components/heroSub';
-import * as PostContent from '../../../components/postContent';
-import { PostData } from '../../../lib/types';
+import { getRandomPostId } from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroSub from '@/components/heroSub';
+import * as PostContent from '@/components/postContent';
+import { PostData } from '@/lib/types';
 import PostIndex, { getStaticPaths, getStaticProps } from '../[id].page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroSub', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroSub'),
+}));
+jest.mock('@/components/postContent', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/postContent'),
+}));
 
 describe('<PostIndex />', () => {
   afterEach(() => {

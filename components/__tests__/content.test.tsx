@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import { getFakeSentences, getFakeWord } from '../../lib/test-helpers';
+import { getFakeSentences, getFakeWord } from '@/lib/test-helpers';
 import Content from '../content';
 
 describe('<Content />', () => {

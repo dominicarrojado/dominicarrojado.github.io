@@ -3,6 +3,11 @@ import { Router } from 'next/router';
 import * as HeadlessTransition from '../headlessTransition';
 import HeaderProgressBar from '../headerProgressBar';
 
+jest.mock('../headlessTransition', () => ({
+  __esModule: true,
+  ...jest.requireActual('../headlessTransition'),
+}));
+
 describe('<HeaderProgressBar />', () => {
   const renderComponent = () => render(<HeaderProgressBar />);
 

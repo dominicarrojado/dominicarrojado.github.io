@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence, getFakeWord } from '../../lib/test-helpers';
+import { getFakeSentence, getFakeWord } from '@/lib/test-helpers';
 import Section from '../section';
 
 describe('<Section />', () => {

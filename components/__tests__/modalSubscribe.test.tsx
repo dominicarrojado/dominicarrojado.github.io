@@ -1,9 +1,18 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { getDialogStateMock, getFakeEmail } from '../../lib/test-helpers';
-import { FetchState } from '../../lib/types';
-import * as apiHooks from '../../lib/api-hooks';
+import { getDialogStateMock, getFakeEmail } from '@/lib/test-helpers';
+import { FetchState } from '@/lib/types';
+import * as apiHooks from '@/lib/api-hooks';
 import * as Modal from '../modal';
 import ModalSubscribe, { Props } from '../modalSubscribe';
+
+jest.mock('@/lib/api-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/api-hooks'),
+}));
+jest.mock('../modal', () => ({
+  __esModule: true,
+  ...jest.requireActual('../modal'),
+}));
 
 describe('<ModalSubscribe />', () => {
   const renderComponent = (props: Props) =>

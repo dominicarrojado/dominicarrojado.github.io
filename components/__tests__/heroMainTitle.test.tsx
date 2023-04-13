@@ -1,6 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import HeroMainTitle from '../heroMainTitle';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<HeroMainTitle />', () => {
   const renderComponent = () => render(<HeroMainTitle />);

@@ -3,9 +3,14 @@ import {
   getFakeBoolean,
   getFakeNumber,
   getRandomSocialLink,
-} from '../../lib/test-helpers';
-import * as ga from '../../lib/google-analytics';
+} from '@/lib/test-helpers';
+import * as ga from '@/lib/google-analytics';
 import HeaderSocialItem, { Props } from '../headerSocialItem';
+
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
 
 describe('<HeaderSocialItem />', () => {
   const renderComponent = (props: Props) =>

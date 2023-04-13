@@ -1,9 +1,18 @@
 import { render } from '@testing-library/react';
-import { getFakeNumber } from '../../../../lib/test-helpers';
-import { getAllPostsLastPage } from '../../../../lib/posts';
-import * as customHooks from '../../../../lib/custom-hooks';
-import * as Posts from '../../index.page';
+import { getFakeNumber } from '@/lib/test-helpers';
+import { getAllPostsLastPage } from '@/lib/posts';
+import * as customHooks from '@/lib/custom-hooks';
+import * as Posts from '@/pages/posts/index.page';
 import PostsPage, { getStaticPaths, getStaticProps } from '../[number].page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/pages/posts/index.page', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/pages/posts/index.page'),
+}));
 
 describe('<PostsPage />', () => {
   afterEach(() => {

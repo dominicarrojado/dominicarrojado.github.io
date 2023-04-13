@@ -1,11 +1,28 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { getFakeNumber, setReadOnlyProperty } from '../../lib/test-helpers';
-import { TESTIMONIALS, TESTIMONIALS_LENGTH } from '../../lib/constants';
-import * as hooks from '../../lib/hooks';
-import * as customHooks from '../../lib/custom-hooks';
-import * as ga from '../../lib/google-analytics';
+import { getFakeNumber, setReadOnlyProperty } from '@/lib/test-helpers';
+import { TESTIMONIALS, TESTIMONIALS_LENGTH } from '@/lib/constants';
+import * as hooks from '@/lib/hooks';
+import * as customHooks from '@/lib/custom-hooks';
+import * as ga from '@/lib/google-analytics';
 import * as TestimonialItem from '../testimonialItem';
 import TestimonialsHomeSection from '../testimonialsHomeSection';
+
+jest.mock('@/lib/hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/hooks'),
+}));
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/lib/google-analytics', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/google-analytics'),
+}));
+jest.mock('../testimonialItem', () => ({
+  __esModule: true,
+  ...jest.requireActual('../testimonialItem'),
+}));
 
 describe('<TestimonialsHomeSection />', () => {
   const renderComponent = () => {

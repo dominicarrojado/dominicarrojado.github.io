@@ -1,15 +1,24 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import Window from '../../modules/Window';
+import Window from '@/modules/Window';
 import {
   getFakeNumber,
   getRandomRoute,
   setReadOnlyProperty,
-} from '../../lib/test-helpers';
-import { Route } from '../../lib/types';
+} from '@/lib/test-helpers';
+import { Route } from '@/lib/types';
 import * as nextRouter from 'next/router';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import * as NextLink from '../nextLink';
 import HeaderLogo, { Props } from '../headerLogo';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('../nextLink', () => ({
+  __esModule: true,
+  ...jest.requireActual('../nextLink'),
+}));
 
 describe('<HeaderLogo />', () => {
   const windowHeightOrig = window.innerHeight;

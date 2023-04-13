@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeColor, getFakeWord } from '../../lib/test-helpers';
+import { getFakeColor, getFakeWord } from '@/lib/test-helpers';
 import Spinner from '../spinner';
 
 describe('<Spinner />', () => {

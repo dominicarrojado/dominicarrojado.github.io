@@ -1,8 +1,21 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
-import * as HeroSub from '../../components/heroSub';
-import * as AboutSection from '../../components/aboutSection';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroSub from '@/components/heroSub';
+import * as AboutSection from '@/components/aboutSection';
 import About from '../about.page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroSub', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroSub'),
+}));
+jest.mock('@/components/aboutSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/aboutSection'),
+}));
 
 describe('<About />', () => {
   afterEach(() => {

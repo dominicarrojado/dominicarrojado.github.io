@@ -1,6 +1,11 @@
 import { render, waitFor } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import HeroMainLogoPart, { Props } from '../heroMainLogoPart';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<HeroMainLogoPart />', () => {
   const renderComponent = (props: Props) =>

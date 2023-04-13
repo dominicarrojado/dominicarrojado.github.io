@@ -17,7 +17,7 @@ export default function NextLink({
   }
 
   return (
-    <Link href={href} passHref={passHref}>
+    <Link href={href} passHref={passHref} legacyBehavior>
       {React.cloneElement(child, props)}
     </Link>
   );

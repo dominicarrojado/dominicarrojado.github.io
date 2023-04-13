@@ -7,13 +7,26 @@ import {
   getFakeUrl,
   getFakeUuid,
   getFakeWord,
-} from '../../lib/test-helpers';
-import * as customHooks from '../../lib/custom-hooks';
+} from '@/lib/test-helpers';
+import * as customHooks from '@/lib/custom-hooks';
 import * as PostItem from '../postItem';
 import * as PostsPagination from '../postsPagination';
-import { Post } from '../../lib/types';
-import { POSTS_PER_PAGE } from '../../lib/constants';
+import { Post } from '@/lib/types';
+import { POSTS_PER_PAGE } from '@/lib/constants';
 import PostsSection, { Props } from '../postsSection';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('../postItem', () => ({
+  __esModule: true,
+  ...jest.requireActual('../postItem'),
+}));
+jest.mock('../postsPagination', () => ({
+  __esModule: true,
+  ...jest.requireActual('../postsPagination'),
+}));
 
 describe('<PostsSection />', () => {
   const renderComponent = (props: Props) => {

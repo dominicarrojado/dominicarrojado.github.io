@@ -1,13 +1,38 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
-import * as HeroMain from '../../components/heroMain';
-import * as AboutHomeSection from '../../components/aboutHomeSection';
-import * as ProjectsHomeSection from '../../components/projectsHomeSection';
-import * as PostsHomeSection from '../../components/postsHomeSection';
-import * as TestimonialsHomeSection from '../../components/testimonialsHomeSection';
-import { Post } from '../../lib/types';
-import { POSTS_PER_PAGE } from '../../lib/constants';
+import * as customHooks from '@/lib/custom-hooks';
+import * as HeroMain from '@/components/heroMain';
+import * as AboutHomeSection from '@/components/aboutHomeSection';
+import * as ProjectsHomeSection from '@/components/projectsHomeSection';
+import * as PostsHomeSection from '@/components/postsHomeSection';
+import * as TestimonialsHomeSection from '@/components/testimonialsHomeSection';
+import { Post } from '@/lib/types';
+import { POSTS_PER_PAGE } from '@/lib/constants';
 import Home, { getStaticProps } from '../index.page';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('@/components/heroMain', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/heroMain'),
+}));
+jest.mock('@/components/aboutHomeSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/aboutHomeSection'),
+}));
+jest.mock('@/components/projectsHomeSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/projectsHomeSection'),
+}));
+jest.mock('@/components/postsHomeSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/postsHomeSection'),
+}));
+jest.mock('@/components/testimonialsHomeSection', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/components/testimonialsHomeSection'),
+}));
 
 describe('<Home />', () => {
   afterEach(() => {

@@ -1,6 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import UnsubscribeSuccess from '../unsubscribeSuccess';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
 
 describe('<UnsubscribeSuccess />', () => {
   const renderComponent = () => render(<UnsubscribeSuccess />);

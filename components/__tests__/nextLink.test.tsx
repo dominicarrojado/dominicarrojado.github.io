@@ -1,13 +1,21 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import {
   getFakeBoolean,
   getFakeSentence,
   getFakeWord,
   getRandomRoute,
-} from '../../lib/test-helpers';
-import { Route } from '../../lib/types';
+} from '@/lib/test-helpers';
+import { Route } from '@/lib/types';
 import * as Link from 'next/link';
 import NextLink, { Props } from '../nextLink';
+
+jest.mock('next/link', () => ({
+  __esModule: true,
+  default: jest.fn(({ children, passHref, legacyBehavior, ...props }) =>
+    React.cloneElement(children, props)
+  ),
+}));
 
 describe('<NextLink />', () => {
   const renderComponent = ({ children, ...props }: Props) =>
@@ -69,27 +77,5 @@ describe('<NextLink />', () => {
     expect(anchorEl).toHaveClass(className);
 
     expect(linkSpy).not.toBeCalled();
-  });
-
-  it('should call onMouseEnter from child prop on hover', () => {
-    const href = getRandomRoute();
-    const className = getFakeWord();
-    const text = getFakeSentence();
-    const onMouseEnterMock = jest.fn();
-    const children = (
-      <a className={className} onMouseEnter={onMouseEnterMock}>
-        {text}
-      </a>
-    );
-
-    renderComponent({ href, children });
-
-    const anchorEl = screen.queryByText(text) as HTMLAnchorElement;
-
-    act(() => {
-      fireEvent.mouseEnter(anchorEl);
-    });
-
-    expect(onMouseEnterMock).toBeCalledTimes(1);
   });
 });

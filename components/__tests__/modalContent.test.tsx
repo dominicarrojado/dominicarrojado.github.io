@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeSentence } from '../../lib/test-helpers';
+import { getFakeSentence } from '@/lib/test-helpers';
 import ModalContent, { Props } from '../modalContent';
 
 describe('<ModalContent />', () => {

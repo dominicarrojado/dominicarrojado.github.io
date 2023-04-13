@@ -1,9 +1,26 @@
 import { render } from '@testing-library/react';
-import * as customHooks from '../../lib/custom-hooks';
+import * as customHooks from '@/lib/custom-hooks';
 import * as HeroBackground from '../heroBackground';
 import * as HeroMainLogo from '../heroMainLogo';
 import * as ScrollDownButton from '../scrollDownButton';
 import HeroMain from '../heroMain';
+
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+jest.mock('../heroBackground', () => ({
+  __esModule: true,
+  ...jest.requireActual('../heroBackground'),
+}));
+jest.mock('../heroMainLogo', () => ({
+  __esModule: true,
+  ...jest.requireActual('../heroMainLogo'),
+}));
+jest.mock('../scrollDownButton', () => ({
+  __esModule: true,
+  ...jest.requireActual('../scrollDownButton'),
+}));
 
 describe('<HeroMain />', () => {
   const renderComponent = () => render(<HeroMain />);
