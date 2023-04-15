@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../lib/date';
 
-function DateText({
+export default function DateText({
   dateString,
   className,
 }: {
@@ -13,5 +13,3 @@ function DateText({
     </time>
   );
 }
-
-export default DateText;

@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo';
 import HeroSub from '../components/heroSub';
 
-function Custom404() {
+export default function Custom404() {
   const title = '404 - Page Not Found';
 
   return (
@@ -15,5 +15,3 @@ function Custom404() {
     </>
   );
 }
-
-export default Custom404;

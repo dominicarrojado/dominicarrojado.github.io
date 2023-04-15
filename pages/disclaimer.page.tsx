@@ -5,7 +5,7 @@ import HeroSub from '../components/heroSub';
 import DisclaimerSection from '../components/disclaimerSection';
 import { Route } from '../lib/types';
 
-function Disclaimer() {
+export default function Disclaimer() {
   const metaUrl = useMemo(() => getRouteCanonical(Route.DISCLAIMER), []);
   const title = 'Disclaimer';
   const desc =
@@ -24,5 +24,3 @@ function Disclaimer() {
     </>
   );
 }
-
-export default Disclaimer;

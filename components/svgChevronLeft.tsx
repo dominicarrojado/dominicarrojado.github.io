@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
-function SvgChevronLeft(props: SVGProps<SVGSVGElement>) {
+export default function SvgChevronLeft(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 320 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgChevronLeft(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgChevronLeft;

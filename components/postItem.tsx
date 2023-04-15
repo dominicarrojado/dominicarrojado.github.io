@@ -5,7 +5,7 @@ import ButtonArrowLink from './buttonArrowLink';
 import NextLink from './nextLink';
 import { Post, Route } from '../lib/types';
 
-function PostItem({
+export default function PostItem({
   post,
   headingLevel,
   className,
@@ -80,5 +80,3 @@ function PostItem({
     </li>
   );
 }
-
-export default PostItem;

@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { SCROLLBAR_WIDTH_CSS_VAR } from '../lib/constants';
 import SubscribeButton from './subscribeButton';
 
-function FooterFloating() {
+export default function FooterFloating() {
   return (
     <footer
       className={cn('fixed flex items-center justify-end bottom-0 w-full z-40')}
@@ -22,5 +22,3 @@ function FooterFloating() {
     </footer>
   );
 }
-
-export default FooterFloating;

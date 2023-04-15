@@ -2,7 +2,11 @@ import cn from 'classnames';
 import SvgQuote from './svgQuote';
 import { Testimonial } from '../lib/types';
 
-function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
+type Props = {
+  testimonial: Testimonial;
+};
+
+export default function TestimonialItem({ testimonial }: Props) {
   return (
     <li
       className={cn(
@@ -61,5 +65,3 @@ function TestimonialItem({ testimonial }: { testimonial: Testimonial }) {
     </li>
   );
 }
-
-export default TestimonialItem;

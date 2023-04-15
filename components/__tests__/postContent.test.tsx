@@ -50,7 +50,7 @@ describe('<PostContent />', () => {
         excerpt: getFakeSentences(),
         videoUrl: getFakeUrl(),
       },
-    } as PostData as PostData & {
+    } as PostData & {
       previousPost: Post;
       nextPost: Post;
     });

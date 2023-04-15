@@ -5,7 +5,7 @@ import HeroSub from '../components/heroSub';
 import AboutSection from '../components/aboutSection';
 import { Route } from '../lib/types';
 
-function About() {
+export default function About() {
   const metaUrl = useMemo(() => getRouteCanonical(Route.ABOUT), []);
   const title = 'About Me';
   const desc =
@@ -24,5 +24,3 @@ function About() {
     </>
   );
 }
-
-export default About;

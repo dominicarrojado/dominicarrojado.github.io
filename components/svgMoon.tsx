@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgMoon(props: SVGProps<SVGSVGElement>) {
+export default function SvgMoon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 512 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgMoon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgMoon;

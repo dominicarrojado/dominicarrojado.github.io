@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgMousePointer(props: SVGProps<SVGSVGElement>) {
+export default function SvgMousePointer(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 320 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgMousePointer(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgMousePointer;

@@ -7,7 +7,11 @@ import PostItem from './postItem';
 import NextLink from './nextLink';
 import { Post, Route } from '../lib/types';
 
-function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
+type Props = {
+  latestPosts: Array<Post>;
+};
+
+export default function PostsHomeSection({ latestPosts }: Props) {
   return (
     <Section id="posts" className="bg-gray-100 dark:bg-gray-750">
       <SectionTitle>Blog</SectionTitle>
@@ -41,5 +45,3 @@ function PostsHomeSection({ latestPosts }: { latestPosts: Array<Post> }) {
     </Section>
   );
 }
-
-export default PostsHomeSection;

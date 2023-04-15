@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgLogo(props: SVGProps<SVGSVGElement>) {
+export default function SvgLogo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 25750 29700" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgLogo(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgLogo;

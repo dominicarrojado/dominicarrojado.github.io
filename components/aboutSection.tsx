@@ -5,7 +5,7 @@ import PageContent from './pageContent';
 import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 
-function AboutSection() {
+export default function AboutSection() {
   return (
     <Section>
       <PageContent>
@@ -98,5 +98,3 @@ function AboutSection() {
     </Section>
   );
 }
-
-export default AboutSection;

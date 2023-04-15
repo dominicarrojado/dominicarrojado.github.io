@@ -1,7 +1,9 @@
 import cn from 'classnames';
 import { ReactNode } from 'react';
 
-function SectionTitle({ children }: { children: ReactNode }) {
+type Props = { children: ReactNode };
+
+export default function SectionTitle({ children }: Props) {
   return (
     <h2
       className={cn(
@@ -15,5 +17,3 @@ function SectionTitle({ children }: { children: ReactNode }) {
     </h2>
   );
 }
-
-export default SectionTitle;

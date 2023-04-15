@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
-function SvgQuote(props: SVGProps<SVGSVGElement>) {
+export default function SvgQuote(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 512 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgQuote(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgQuote;

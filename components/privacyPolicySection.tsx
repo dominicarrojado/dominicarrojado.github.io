@@ -6,7 +6,7 @@ import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 import { PRIVACY_EMAIL } from '../lib/constants';
 
-function PrivacyPolicySection() {
+export default function PrivacyPolicySection() {
   return (
     <Section>
       <PageContent>
@@ -480,5 +480,3 @@ function PrivacyPolicySection() {
     </Section>
   );
 }
-
-export default PrivacyPolicySection;

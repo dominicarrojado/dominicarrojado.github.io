@@ -5,7 +5,7 @@ import HeroSub from '../components/heroSub';
 import PrivacyPolicySection from '../components/privacyPolicySection';
 import { Route } from '../lib/types';
 
-function PrivacyPolicy() {
+export default function PrivacyPolicy() {
   const metaUrl = useMemo(() => getRouteCanonical(Route.PRIVACY_POLICY), []);
   const title = 'Privacy Policy';
   const desc = 'Find what you need to know about your privacy';
@@ -23,5 +23,3 @@ function PrivacyPolicy() {
     </>
   );
 }
-
-export default PrivacyPolicy;

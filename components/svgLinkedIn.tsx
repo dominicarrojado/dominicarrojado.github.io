@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgLinkedIn(props: SVGProps<SVGSVGElement>) {
+export default function SvgLinkedIn(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 448 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgLinkedIn(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgLinkedIn;

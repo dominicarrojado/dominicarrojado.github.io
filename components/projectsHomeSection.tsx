@@ -8,7 +8,7 @@ import NextLink from './nextLink';
 import { Route } from '../lib/types';
 import { BEST_PROJECTS } from '../lib/constants';
 
-function ProjectsHomeSection() {
+export default function ProjectsHomeSection() {
   return (
     <Section id="projects">
       <SectionTitle>Featured Projects</SectionTitle>
@@ -31,5 +31,3 @@ function ProjectsHomeSection() {
     </Section>
   );
 }
-
-export default ProjectsHomeSection;

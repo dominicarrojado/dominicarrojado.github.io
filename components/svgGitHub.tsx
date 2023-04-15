@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgGitHub(props: SVGProps<SVGSVGElement>) {
+export default function SvgGitHub(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 496 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgGitHub(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgGitHub;

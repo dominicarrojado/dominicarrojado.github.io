@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgYouTube(props: SVGProps<SVGSVGElement>) {
+export default function SvgYouTube(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 576 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgYouTube(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgYouTube;

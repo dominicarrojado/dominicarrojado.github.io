@@ -10,7 +10,7 @@ import Layout from '../components/layout';
 import '../styles/global.css';
 import { GoogleAnalyticsEvent, Route } from '../lib/types';
 
-function App({ Component, pageProps, router }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const routerEvents = router.events;
 
   useEffect(() => {
@@ -41,5 +41,3 @@ function App({ Component, pageProps, router }: AppProps) {
     </>
   );
 }
-
-export default App;

@@ -4,7 +4,7 @@ import Section from './section';
 import ProjectItem from './projectItem';
 import { PROJECTS } from '../lib/constants';
 
-function ProjectsSection() {
+export default function ProjectsSection() {
   const shouldDisplay = useMounted();
 
   return (
@@ -31,5 +31,3 @@ function ProjectsSection() {
     </Section>
   );
 }
-
-export default ProjectsSection;

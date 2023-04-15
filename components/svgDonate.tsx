@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgDonate(props: SVGProps<SVGSVGElement>) {
+export default function SvgDonate(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 512 512" role="img" {...props}>
       <path
@@ -10,5 +10,3 @@ function SvgDonate(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgDonate;

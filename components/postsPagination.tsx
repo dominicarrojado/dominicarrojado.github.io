@@ -1,11 +1,9 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { getPaginationItems } from '../lib/pagination';
 import { useMounted } from '../lib/custom-hooks';
-import AnchorLink from './anchorLink';
-import SvgChevronLeft from './svgChevronLeft';
-import SvgChevronRight from './svgChevronRight';
-import NextLink from './nextLink';
+import PaginationArrow from './paginationArrow';
+import PaginationItem from './paginationItem';
 import { Route } from '../lib/types';
 import { PAGINATION_MAX_LENGTH } from '../lib/constants';
 
@@ -75,99 +73,4 @@ export default function PostsPagination({ currentPage, lastPage }: Props) {
       </ul>
     </nav>
   );
-}
-
-function PaginationArrow({
-  isPrevious,
-  href,
-}: {
-  isPrevious?: boolean;
-  href?: string;
-}) {
-  const withHref = typeof href === 'string';
-  const className = cn(
-    'group inline-flex py-3 px-3',
-    'sm:px-4',
-    'md:py-4 md:px-5'
-  );
-  const iconClassName = cn(
-    'w-2 h-2 opacity-60',
-    'sm:w-2.5 sm:h-2.5',
-    'md:w-3 md:h-3',
-    'xl:w-3.5 xl:h-3.5',
-    withHref
-      ? cn(
-          'transition transform duration-300',
-          'motion-reduce:transition-none',
-          'group-hover:opacity-100',
-          isPrevious
-            ? 'group-hover:-translate-x-1.5'
-            : 'group-hover:translate-x-1.5'
-        )
-      : undefined
-  );
-  const icon = isPrevious ? (
-    <>
-      <span className="sr-only">Previous</span>
-      <SvgChevronLeft className={iconClassName} />
-    </>
-  ) : (
-    <>
-      <span className="sr-only">Next</span>
-      <SvgChevronRight className={iconClassName} />
-    </>
-  );
-  let body;
-
-  if (!withHref) {
-    body = <span className={cn(className, 'opacity-40')}>{icon}</span>;
-  } else {
-    body = (
-      <NextLink href={href} passHref>
-        <a className={className}>{icon}</a>
-      </NextLink>
-    );
-  }
-
-  return <li>{body}</li>;
-}
-
-function PaginationItem({
-  children,
-  href,
-  isCurrent,
-}: {
-  children: ReactNode;
-  isCurrent?: boolean;
-  href?: string;
-}) {
-  const className = cn(
-    'group py-2 px-3',
-    'sm:px-4',
-    'md:py-3 md:px-5',
-    isCurrent
-      ? 'text-gray-900 pointer-events-none text-gray-700 bg-gray-100 shadow-md dark:text-white dark:bg-gray-750'
-      : 'opacity-75'
-  );
-
-  if (!href) {
-    return <span className={className}>{children}</span>;
-  } else {
-    return (
-      <NextLink href={href} passHref>
-        <AnchorLink
-          className={cn(
-            className,
-            'transition-colors',
-            'motion-reduce:transition-none',
-            'hover:text-gray-700 hover:bg-gray-100 hover:opacity-100',
-            'dark:hover:text-white dark:hover:bg-gray-750'
-          )}
-          aria-current={isCurrent ? 'page' : undefined}
-        >
-          {children}
-        </AnchorLink>
-      </NextLink>
-    );
-  }
 }

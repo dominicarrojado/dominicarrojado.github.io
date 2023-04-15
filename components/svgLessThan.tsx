@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-function SvgLessThan(props: SVGProps<SVGSVGElement>) {
+export default function SvgLessThan(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 20.19 20.85" role="img" {...props}>
       <g fill="currentColor">
@@ -9,5 +9,3 @@ function SvgLessThan(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default SvgLessThan;

@@ -5,7 +5,7 @@ import HeroSub from '../components/heroSub';
 import ProjectsSection from '../components/projectsSection';
 import { Route } from '../lib/types';
 
-function Projects() {
+export default function Projects() {
   const metaUrl = useMemo(() => getRouteCanonical(Route.PROJECTS), []);
   const title = 'Featured Projects';
   const desc = "A selection of projects I've done so far";
@@ -23,5 +23,3 @@ function Projects() {
     </>
   );
 }
-
-export default Projects;

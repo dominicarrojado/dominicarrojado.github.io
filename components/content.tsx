@@ -1,7 +1,11 @@
 import cn from 'classnames';
 import { HTMLProps } from 'react';
 
-function Content({ className, children, ...props }: HTMLProps<HTMLElement>) {
+export default function Content({
+  className,
+  children,
+  ...props
+}: HTMLProps<HTMLElement>) {
   return (
     <article
       className={cn(
@@ -19,5 +23,3 @@ function Content({ className, children, ...props }: HTMLProps<HTMLElement>) {
     </article>
   );
 }
-
-export default Content;

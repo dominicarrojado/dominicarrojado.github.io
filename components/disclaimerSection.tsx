@@ -5,7 +5,7 @@ import NextLink from './nextLink';
 import { ExternalUrl, Route } from '../lib/types';
 import { DISCLAIMER_EMAIL } from '../lib/constants';
 
-function DisclaimerSection() {
+export default function DisclaimerSection() {
   return (
     <Section>
       <PageContent>
@@ -73,5 +73,3 @@ function DisclaimerSection() {
     </Section>
   );
 }
-
-export default DisclaimerSection;

@@ -1,4 +1,4 @@
-import { TransitionEvent, useRef, useState } from 'react';
+import { TransitionEvent, useState } from 'react';
 import cn from 'classnames';
 import { DialogDisclosure, useDialogState } from 'ariakit/dialog';
 import { useMounted } from '../lib/custom-hooks';
@@ -10,7 +10,6 @@ import { GoogleAnalyticsEvent } from '../lib/types';
 import { MAIN_TITLE } from '../lib/constants';
 
 export default function SubscribeButton() {
-  const isMountedRef = useRef(false);
   const shouldDisplay = useMounted();
   const dialogSubscribe = useDialogState({
     animated: 300,
