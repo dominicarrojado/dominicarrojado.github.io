@@ -6,7 +6,7 @@ import SubscribeButton from './subscribeButton';
 function FooterFloating() {
   return (
     <footer
-      className={cn('fixed flex items-center justify-end bottom-0 w-full z-50')}
+      className={cn('fixed flex items-center justify-end bottom-0 w-full z-40')}
     >
       <div
         className={cn(

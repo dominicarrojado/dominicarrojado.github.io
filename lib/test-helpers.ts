@@ -244,7 +244,7 @@ export function getFakeJobTitle() {
 }
 
 export function getFakeCompanyName() {
-  return faker.company.companyName();
+  return faker.company.name();
 }
 
 export function getFakeJson() {

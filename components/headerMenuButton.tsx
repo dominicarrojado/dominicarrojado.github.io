@@ -1,19 +1,22 @@
 import { TransitionEvent, useState } from 'react';
 import cn from 'classnames';
-import { DialogDisclosure, DialogState } from 'ariakit/dialog';
+import { DialogDisclosure, DialogDismiss, DialogState } from 'ariakit/dialog';
 import { useMounted } from '../lib/custom-hooks';
 import { trackEvent } from '../lib/google-analytics';
 import { GoogleAnalyticsEvent } from '../lib/types';
 
 export type Props = {
   dialog: DialogState;
+  isDisclosure: boolean;
 };
 
-export default function HeaderMenuButton({ dialog }: Props) {
+export default function HeaderMenuButton({ dialog, isDisclosure }: Props) {
   const isMenuOpen = dialog.open;
   const stacks = Array.from(Array(3).keys());
   const shouldDisplay = useMounted();
-  const [animationDone, setAnimationDone] = useState(false);
+  const [animationDone, setAnimationDone] = useState(
+    isDisclosure ? false : true
+  );
   const text = !isMenuOpen ? 'Menu' : 'Close';
   const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
     if (e.propertyName === 'opacity') {
@@ -27,9 +30,10 @@ export default function HeaderMenuButton({ dialog }: Props) {
       linkText: text,
     });
   };
+  const Wrapper = isDisclosure ? DialogDisclosure : DialogDismiss;
 
   return (
-    <DialogDisclosure
+    <Wrapper
       state={dialog}
       className={cn(
         'group flex items-center flex-col min-w-8 outline-none',
@@ -99,6 +103,6 @@ export default function HeaderMenuButton({ dialog }: Props) {
       >
         {text}
       </div>
-    </DialogDisclosure>
+    </Wrapper>
   );
 }

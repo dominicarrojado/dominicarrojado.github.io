@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <>
       <HeaderProgressBar />
-      <header className={cn('fixed flex items-center top-0 w-full z-50')}>
+      <header className={cn('fixed flex items-center top-0 w-full z-40')}>
         <SkipToMainContentAnchor />
         <HeaderLogo onClick={dialog.hide} />
         <div
@@ -30,7 +30,7 @@ export default function Header() {
           data-testid="header-buttons"
         >
           <HeaderThemeButton />
-          <HeaderMenuButton dialog={dialog} />
+          <HeaderMenuButton dialog={dialog} isDisclosure />
         </div>
       </header>
       <HeaderMenu dialog={dialog} />

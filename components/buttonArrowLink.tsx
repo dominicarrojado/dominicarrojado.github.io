@@ -10,7 +10,7 @@ export type Props = HTMLAttributes<HTMLButtonElement> & {
 
 const ButtonArrowLink = forwardRef(
   (
-    { children, as = 'button', withIcon = true, ...props }: Props,
+    { children, as: As = 'button', withIcon = true, ...props }: Props,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const combinedProps = {
@@ -42,10 +42,10 @@ const ButtonArrowLink = forwardRef(
       </>
     );
 
-    if (as === 'button') {
+    if (As === 'button') {
       return <Button {...combinedProps}>{body}</Button>;
     } else {
-      return <span {...combinedProps}>{body}</span>;
+      return <As {...combinedProps}>{body}</As>;
     }
   }
 );

@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import {
   fireEventTransitionEnd,
   getDialogStateMock,
+  getFakeBoolean,
   getFakeWord,
   getRandomRoute,
   setReadOnlyProperty,
@@ -42,6 +43,7 @@ describe('<HeaderMenuButton />', () => {
   it('should have expected tag and attribute', () => {
     const { container } = renderComponent({
       dialog: getDialogStateMock(),
+      isDisclosure: getFakeBoolean(),
     });
 
     const btnEl = screen.queryByLabelText('Toggle menu');
@@ -54,6 +56,7 @@ describe('<HeaderMenuButton />', () => {
   it('should have expected class by default', () => {
     renderComponent({
       dialog: getDialogStateMock(),
+      isDisclosure: true,
     });
 
     const menuStackEls = screen.queryAllByTestId('menu-stack');
@@ -70,7 +73,8 @@ describe('<HeaderMenuButton />', () => {
     jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), open: false },
+      dialog: getDialogStateMock({ open: false }),
+      isDisclosure: true,
     });
 
     const menuStackEls = screen.queryAllByTestId('menu-stack');
@@ -88,7 +92,8 @@ describe('<HeaderMenuButton />', () => {
 
   it('should have expected class on transition end (opacity)', () => {
     renderComponent({
-      dialog: { ...getDialogStateMock(), open: false },
+      dialog: getDialogStateMock({ open: false }),
+      isDisclosure: true,
     });
 
     const menuLabelEl = screen.queryByText('Menu') as HTMLDivElement;
@@ -107,7 +112,8 @@ describe('<HeaderMenuButton />', () => {
 
   it('should have expected class on transition end (other prop name)', () => {
     renderComponent({
-      dialog: { ...getDialogStateMock(), open: true },
+      dialog: getDialogStateMock({ open: true }),
+      isDisclosure: true,
     });
 
     const menuLabelEl = screen.queryByText('Close') as HTMLDivElement;
@@ -126,7 +132,8 @@ describe('<HeaderMenuButton />', () => {
 
   it('should have expected class on transition end (opacity) and transition switch', () => {
     renderComponent({
-      dialog: { ...getDialogStateMock(), open: false },
+      dialog: getDialogStateMock({ open: false }),
+      isDisclosure: true,
     });
 
     const menuLabelEl = screen.queryByText('Menu') as HTMLDivElement;
@@ -143,11 +150,27 @@ describe('<HeaderMenuButton />', () => {
     });
   });
 
+  it('should have expected class if isDisclosure is false', () => {
+    renderComponent({
+      dialog: getDialogStateMock(),
+      isDisclosure: false,
+    });
+
+    const menuStackEls = screen.queryAllByTestId('menu-stack');
+
+    expect(menuStackEls).toHaveLength(3);
+
+    menuStackEls.forEach((stackEl) => {
+      expect(stackEl).toHaveClass('duration-200');
+    });
+  });
+
   it('should track click', () => {
     const trackEventSpy = jest.spyOn(ga, 'trackEvent');
 
     renderComponent({
-      dialog: { ...getDialogStateMock(), open: false },
+      dialog: getDialogStateMock({ open: false }),
+      isDisclosure: getFakeBoolean(),
     });
 
     const btnText = 'Menu';
