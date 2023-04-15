@@ -185,6 +185,11 @@
     @apply w-full;
   }
 
+  #cookieBanner {
+    @apply right-20;
+    @apply z-40;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     p a,
     p a::after,
