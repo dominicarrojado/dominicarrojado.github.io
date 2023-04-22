@@ -354,7 +354,7 @@ Try playing around with the buttons in the `Pagination` component to see how it 
 
 ## Pagination logic
 
-It's time to figure out the logic for the page numbers in the pagination. We need to create a function that would generate an array of page numbers that would be displayed in our `Pagination` component. The function would accept three arguments: the `currentPage`, the `lastPage` and the `maxLength`. The function would return an array of page numbers and the length of the array must not exceed the `maxLength`. To keep things simple and easy to understand, let's use `7` as the `maxLength` for all the examples.
+It's time to figure out the logic for the page numbers in the pagination. We need to create a function that would generate an array of page numbers that would be displayed in our `Pagination` component. The function would accept three arguments: the `currentPage`, the `lastPage` and the `maxLength`. The function would return an array of page numbers and the length of the array must not exceed the `maxLength`. For this solution, `maxLength` should be always be an odd number because it would be easier to calculate the page numbers before and after the `currentPage`. For example, if `maxLength` is `7`, we can have 3 page numbers before the `currentPage` and 3 page numbers after the `currentPage`. To keep things simple and easy to understand, let's use `7` as our `maxLength` for all the examples.
 
 For example, we have `1` as our `currentPage` and `5` as our `lastPage`. The function should return: `[1, 2, 3, 4, 5]`. The result array consists of the `currentPage`, the `lastPage` and the numbers in between them. The length of the result array is `5` which is less than `7` (the maximum of items our result array can have).
 
