@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { Dialog, DialogState } from 'ariakit/dialog';
+import { SCROLLBAR_WIDTH_CSS_VAR } from '@/lib/constants';
 import HeaderMenuButton from './headerMenuButton';
 import HeaderMenuItems from './headerMenuItems';
 import HeaderSocialItems from './headerSocialItems';
@@ -45,6 +46,7 @@ export default function HeaderMenu({ dialog }: Props) {
             'md:top-5 md:right-5 md:gap-5',
             'lg:top-8 lg:right-8 lg:gap-6'
           )}
+          style={{ paddingRight: `var(${SCROLLBAR_WIDTH_CSS_VAR}, 0)` }}
         >
           <HeaderMenuButton
             dialog={{ ...dialog, open: shouldDisplayMenu }}
