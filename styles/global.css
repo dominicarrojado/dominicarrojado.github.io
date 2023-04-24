@@ -186,7 +186,7 @@
   }
 
   #cookieBanner {
-    @apply right-20;
+    @apply right-20 md:right-auto;
     @apply z-40;
   }
 
