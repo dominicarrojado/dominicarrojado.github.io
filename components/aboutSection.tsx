@@ -34,7 +34,7 @@ export default function AboutSection() {
           <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
             PropertyGuru Finance
           </AnchorLink>{' '}
-          as a Senior Software Engineer.{' '}
+          as a Lead Engineer.{' '}
           <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
             PropertyGuru Finance
           </AnchorLink>{' '}

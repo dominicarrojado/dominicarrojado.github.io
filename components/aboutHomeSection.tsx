@@ -29,7 +29,7 @@ export default function AboutHomeSection() {
           <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
             PropertyGuru Finance
           </AnchorLink>{' '}
-          as a Senior Software Engineer.
+          as a Lead Engineer.
         </SectionContent>
         <div className="mt-12 text-center">
           <NextLink href={Route.ABOUT} passHref>
