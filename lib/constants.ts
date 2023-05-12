@@ -468,6 +468,13 @@ export const SOCIAL_LINKS_LENGTH = SOCIAL_LINKS.length;
 export const TESTIMONIALS_SUCCESS_SWIPE_DIFF = 40;
 export const TESTIMONIALS: Array<Testimonial> = [
   {
+    name: 'Manav Kamboj',
+    jobTitle: 'Chief Technology Officer',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      'Dom has been a great and consistent performer with the FinTech team for years. He has lead multiple front-end initiatives that have reduced day-to-day work for other team members. He has displayed great ownership in delivering multiple FinTech projects. He is known for his positive can-do attitude, maintaining high code quality, quickness with code reviews and collaboration with stakeholders.',
+  },
+  {
     name: 'Chirag Goel',
     jobTitle: 'Senior Engineering Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
@@ -529,6 +536,13 @@ export const TESTIMONIALS: Array<Testimonial> = [
     companyName: 'Razer Inc.',
     quote:
       "He's a really good software engineer. His analytical skill is really very good, he can solve difficult business problems by recommending technical solutions while looking at the business case and discussing with the stakeholders.",
+  },
+  {
+    name: 'Gertrude Mendoza-Banaag',
+    jobTitle: 'Senior Software Engineer',
+    companyName: 'Razer Inc.',
+    quote:
+      "I had the pleasure of working with Dominic and he consistently demonstrated a high level of proficiency in front-end development and was able to deliver high-quality work on time and with attention to detail. What stood out to me the most was Dominic's ability to think creatively and proactively offer solutions to complex problems.",
   },
   {
     name: 'Jixiang Li',
