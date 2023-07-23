@@ -173,7 +173,7 @@ describe('<PrivacyPolicySection />', () => {
 
   it('should have expected updated date', () => {
     const dateEl = screen.queryByText(
-      'This document was last updated on March 11, 2023'
+      'This document was last updated on 24 July 2023'
     );
 
     expect(dateEl).toBeInTheDocument();

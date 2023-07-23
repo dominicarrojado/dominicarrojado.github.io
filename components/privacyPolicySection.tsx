@@ -251,10 +251,15 @@ export default function PrivacyPolicySection() {
         <h2>Subscription and unsubscribe process</h2>
         <p>
           We offer a subscription service to keep our users informed about our
-          latest updates, news, and special offers. If you choose to subscribe,
-          we will collect your email address and send you periodic emails. By
-          subscribing to our emails, you consent to the collection and use of
-          your personal information as described in our Privacy Policy.
+          latest updates, news, and special offers. By subscribing to our
+          emails, you consent to the collection and use of your personal
+          information as described in our Privacy Policy.
+        </p>
+        <p>
+          Additionally, please note that by subscribing to our emails for free,
+          you agree that we may occasionally include advertisements from other
+          brands within the emails. These advertisements may be relevant to our
+          content and aim to provide you with valuable offers and information.
         </p>
         <p>
           If you no longer wish to receive our emails, you may unsubscribe at
@@ -263,16 +268,16 @@ export default function PrivacyPolicySection() {
           <NextLink href={Route.UNSUBSCRIBE}>
             <a>unsubscribe page</a>
           </NextLink>{' '}
-          to request removal from our subscription list. However, please note
-          that we may still retain your email address in our records for legal
-          and administrative purposes, such as to comply with our legal
+          to request removal from our subscription list. However, please be
+          aware that we may still retain your email address in our records for
+          legal and administrative purposes, such as to comply with our legal
           obligations, resolve disputes, and enforce our agreements.
         </p>
         <p>
-          If you would like us to delete your email address from our records,
-          you may contact us to make a request. We will process your request as
-          soon as practicable, subject to our legal and administrative
-          requirements.
+          If you would like us to delete your email address from our records
+          entirely, you may contact us to make a request. We will process your
+          request as soon as practicable, subject to our legal and
+          administrative requirements.
         </p>
         <h2>The rights of users</h2>
         <p>
@@ -474,7 +479,7 @@ export default function PrivacyPolicySection() {
             'xl:mt-24'
           )}
         >
-          This document was last updated on March 11, 2023
+          This document was last updated on 24 July 2023
         </div>
       </PageContent>
     </Section>
