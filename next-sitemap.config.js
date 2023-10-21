@@ -199,8 +199,12 @@ module.exports = {
       ),
       await config.transform(
         config,
-        '/japan-visa-appointment-booking-system-notifications/unsubscribe'
+        '/japan-visa-appointment-booking-system-notifications/unsubscribe/'
       ),
+
+      // sg alerts
+      await config.transform(config, '/sg-alerts/'),
+      await config.transform(config, '/sg-alerts/settings/'),
 
       // blog examples
       await config.transform(config, '/mjml-sample-edm/'),
