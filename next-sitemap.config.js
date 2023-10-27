@@ -206,6 +206,7 @@ module.exports = {
       await config.transform(config, '/sg-alerts/'),
       await config.transform(config, '/sg-alerts/settings/'),
       await config.transform(config, '/sg-alerts/about/'),
+      await config.transform(config, '/sg-alerts/how-it-works/'),
       await config.transform(
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
