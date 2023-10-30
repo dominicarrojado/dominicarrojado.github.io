@@ -211,6 +211,13 @@ module.exports = {
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
       ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
+      await config.transform(config, '/sg-alerts/topics/cebu-pacific-flights/'),
+      await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
 
       // blog examples
       await config.transform(config, '/mjml-sample-edm/'),
