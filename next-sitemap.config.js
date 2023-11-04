@@ -216,8 +216,15 @@ module.exports = {
         '/sg-alerts/topics/singapore-airlines-flights/'
       ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
-      await config.transform(config, '/sg-alerts/topics/cebu-pacific-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
+
+      // ph alerts
+      await config.transform(config, '/ph-alerts/'),
+      await config.transform(config, '/ph-alerts/settings/'),
+      await config.transform(config, '/ph-alerts/about/'),
+      await config.transform(config, '/ph-alerts/how-it-works/'),
+      await config.transform(config, '/ph-alerts/topics/cebu-pacific-flights/'),
+      await config.transform(config, '/ph-alerts/topics/jetstar-flights/'),
 
       // blog examples
       await config.transform(config, '/mjml-sample-edm/'),
