@@ -70,6 +70,25 @@ export const GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH =
 
 export const PROJECTS: Array<Project> = [
   {
+    title: '🇸🇬 SG Alerts',
+    description:
+      'A notification service that monitors websites and sends email notifications when there are new updates.',
+    links: [
+      {
+        title: 'View 🇸🇬 SG Alerts',
+        url: '/sg-alerts/',
+      },
+      {
+        title: 'View 🇵🇭 PH Alerts',
+        url: '/ph-alerts/',
+      },
+    ],
+    imageUrl: '/images/projects/sg-alerts.png',
+    imageWidth: 1728,
+    imageHeight: 1080,
+    gifUrl: '/images/projects/sg-alerts.gif',
+  },
+  {
     title: 'THX Spatial Audio',
     description:
       'Web-based desktop application that delivers advanced 7.1 surround sound with pinpoint positional accuracy to make your game come alive.',
