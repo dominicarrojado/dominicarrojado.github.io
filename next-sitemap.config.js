@@ -217,6 +217,10 @@ module.exports = {
       ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/cdc-practical-lesson-slots/'
+      ),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
