@@ -221,6 +221,7 @@ module.exports = {
         config,
         '/sg-alerts/topics/cdc-practical-lesson-slots/'
       ),
+      await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
