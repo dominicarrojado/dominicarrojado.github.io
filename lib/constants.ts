@@ -450,7 +450,7 @@ export const SOCIAL_LINKS: Array<Social> = [
     name: SocialName.DONATE,
     title: 'Show your support and donate!',
     subtitle: 'Donate',
-    url: ExternalUrl.PERSONAL_PAYPAL,
+    url: `${Route.DONATE}/`,
     icon: SvgDonate,
   },
   {

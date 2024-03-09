@@ -13,6 +13,7 @@ export enum Route {
   POSTS_PAGE = '/posts/page',
   PRIVACY_POLICY = '/privacy-policy',
   DISCLAIMER = '/disclaimer',
+  DONATE = '/donate',
   SUBSCRIBE = '/subscribe',
   UNSUBSCRIBE = '/unsubscribe',
 }
@@ -62,6 +63,11 @@ export enum GoogleAdSenseUnitFormat {
   FLUID = 'fluid',
 }
 
+export enum InternalUrl {
+  SG_ALERTS = '/sg-alerts/',
+  PH_ALERTS = '/ph-alerts/',
+}
+
 export enum ExternalUrl {
   PERSONAL_PAYPAL = 'https://www.paypal.com/paypalme/DominicArrojado',
   PERSONAL_YOUTUBE = 'https://www.youtube.com/channel/UCWwV__qrzg5BYCSwO91Xhxg/videos?view=0&sort=dd',
@@ -94,6 +100,7 @@ export enum ExternalUrl {
   MICROSOFT = 'https://www.microsoft.com/',
   MICROSOFT_CLARITY = 'https://clarity.microsoft.com/',
   MICROSOFT_CLARITY_FAQ = 'https://docs.microsoft.com/en-us/clarity/faq#privacy',
+  DBS_PAYLAH = 'https://www.dbs.com.sg/personal/deposits/pay-with-ease/dbs-paylah',
 }
 
 export enum ApiEndpoint {
