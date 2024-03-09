@@ -19,7 +19,7 @@ describe('<HeaderMenuItems />', () => {
     MENU_ITEMS.forEach((menu) => {
       const anchorEl = screen.queryByText(menu.title);
 
-      expect(anchorEl).toHaveAttribute('href', menu.path);
+      expect(anchorEl?.getAttribute('href')?.startsWith(menu.path)).toBe(true);
       expect(anchorEl).not.toHaveAttribute('target');
       expect(anchorEl).not.toHaveAttribute('rel');
     });

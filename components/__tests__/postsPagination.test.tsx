@@ -38,7 +38,7 @@ describe('<PostsPagination />', () => {
         expect(anchorEl.tagName).toBe('A');
         expect(anchorEl).toHaveAttribute(
           'href',
-          `/posts/page/${pageItem.page}`
+          `/posts/page/${pageItem.page}/`
         );
         expect(anchorEl).not.toHaveAttribute('target');
         expect(anchorEl).not.toHaveAttribute('rel');

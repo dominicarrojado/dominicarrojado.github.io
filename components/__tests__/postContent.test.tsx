@@ -121,7 +121,7 @@ describe('<PostContent />', () => {
       const anchorEl = textEl?.closest('a');
       const helperEl = textEl?.nextElementSibling;
 
-      expect(anchorEl).toHaveAttribute('href', `/posts/${previousPost.id}`);
+      expect(anchorEl).toHaveAttribute('href', `/posts/${previousPost.id}/`);
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
       expect(helperEl?.innerHTML).toBe('Previous Post');
@@ -133,7 +133,7 @@ describe('<PostContent />', () => {
       const anchorEl = textEl?.closest('a');
       const helperEl = textEl?.nextElementSibling;
 
-      expect(anchorEl).toHaveAttribute('href', `/posts/${nextPost.id}`);
+      expect(anchorEl).toHaveAttribute('href', `/posts/${nextPost.id}/`);
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
       expect(helperEl?.innerHTML).toBe('Next Post');
@@ -143,7 +143,7 @@ describe('<PostContent />', () => {
       const anchorEl = screen.queryByText('See Latest Posts');
 
       expect(anchorEl?.tagName).toBe('A');
-      expect(anchorEl).toHaveAttribute('href', '/posts');
+      expect(anchorEl).toHaveAttribute('href', '/posts/');
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
     });
@@ -188,7 +188,7 @@ describe('<PostContent />', () => {
       const anchorEl = textEl?.closest('a');
       const helperEl = textEl?.nextElementSibling;
 
-      expect(anchorEl).toHaveAttribute('href', `/posts/${nextPost.id}`);
+      expect(anchorEl).toHaveAttribute('href', `/posts/${nextPost.id}/`);
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
       expect(helperEl?.innerHTML).toBe('Next Post');
@@ -211,7 +211,7 @@ describe('<PostContent />', () => {
       const anchorEl = textEl?.closest('a');
       const helperEl = textEl?.nextElementSibling;
 
-      expect(anchorEl).toHaveAttribute('href', `/posts/${previousPost.id}`);
+      expect(anchorEl).toHaveAttribute('href', `/posts/${previousPost.id}/`);
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
       expect(helperEl?.innerHTML).toBe('Previous Post');

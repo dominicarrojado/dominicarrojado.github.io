@@ -42,7 +42,7 @@ describe('<PostItem />', () => {
       const titleEl = screen.queryByText(post.title);
       const anchorEl = titleEl?.closest('a') as HTMLAnchorElement;
 
-      expect(anchorEl).toHaveAttribute('href', `/posts/${post.id}`);
+      expect(anchorEl).toHaveAttribute('href', `/posts/${post.id}/`);
       expect(anchorEl).not.toHaveAttribute('rel');
       expect(anchorEl).not.toHaveAttribute('target');
     });

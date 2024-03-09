@@ -13,7 +13,7 @@ export default function NextLink({
   const child = React.Children.only(children);
 
   if (href.startsWith(Route.POSTS)) {
-    return React.cloneElement(child, { ...props, href });
+    return React.cloneElement(child, { ...props, href: `${href}/` });
   }
 
   return (

@@ -40,7 +40,7 @@ describe('<PostContentMarkdown />', () => {
       const anchorEl = screen.queryByText(anchorText);
 
       expect(anchorEl?.tagName).toBe('A');
-      expect(anchorEl).toHaveAttribute('href', anchorHref);
+      expect(anchorEl?.getAttribute('href')?.startsWith(anchorHref)).toBe(true);
       expect(anchorEl).not.toHaveAttribute('target');
       expect(anchorEl).not.toHaveAttribute('rel');
     });

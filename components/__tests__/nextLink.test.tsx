@@ -73,7 +73,7 @@ describe('<NextLink />', () => {
 
     const anchorEl = screen.queryByText(text) as HTMLAnchorElement;
 
-    expect(anchorEl).toHaveAttribute('href', href);
+    expect(anchorEl).toHaveAttribute('href', `${href}/`);
     expect(anchorEl).toHaveClass(className);
 
     expect(linkSpy).not.toBeCalled();

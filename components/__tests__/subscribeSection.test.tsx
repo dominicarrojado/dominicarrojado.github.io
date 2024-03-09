@@ -59,7 +59,7 @@ describe('<SubscribeSection />', () => {
     expect(titleEl?.tagName).toBe('H5');
     expect(descEl?.tagName).toBe('P');
     expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute('href', '/posts');
+    expect(anchorEl).toHaveAttribute('href', '/posts/');
     expect(anchorEl).not.toHaveAttribute('rel');
     expect(anchorEl).not.toHaveAttribute('target');
   });

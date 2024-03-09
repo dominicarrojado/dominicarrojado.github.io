@@ -82,7 +82,7 @@ describe('<PostsHomeSection />', () => {
     const anchorEl = screen.queryByText('See More Posts');
 
     expect(anchorEl?.tagName).toBe('A');
-    expect(anchorEl).toHaveAttribute('href', '/posts/page/2');
+    expect(anchorEl).toHaveAttribute('href', '/posts/page/2/');
     expect(anchorEl).not.toHaveAttribute('rel');
     expect(anchorEl).not.toHaveAttribute('target');
   });
