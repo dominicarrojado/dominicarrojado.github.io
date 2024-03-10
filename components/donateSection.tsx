@@ -28,7 +28,7 @@ export default function DonateSection() {
         <p>
           If you'd like to support my work with a donation, I would be very
           grateful. Every donation will be sincerely appreciated and will go a
-          long way. Thank you very much for your support! 🙏
+          long way. Thank you very much for your support ~
         </p>
         <div
           className={cn(
