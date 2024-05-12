@@ -201,7 +201,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://www.justqwerk.com/sign-in',
+        url: 'https://www.qwerk-app.com/sign-in',
       },
       {
         title: 'View Website',
