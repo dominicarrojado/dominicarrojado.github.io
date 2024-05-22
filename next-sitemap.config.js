@@ -207,21 +207,35 @@ module.exports = {
       await config.transform(config, '/sg-alerts/settings/'),
       await config.transform(config, '/sg-alerts/about/'),
       await config.transform(config, '/sg-alerts/how-it-works/'),
+      await config.transform(config, '/sg-alerts/donate/'),
       await config.transform(
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
       ),
       await config.transform(
         config,
+        '/sg-alerts/topics/cdc-practical-lesson-slots/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/cdc-appointment-slots/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/fixed-deposit-rates/'),
+      await config.transform(
+        config,
         '/sg-alerts/topics/singapore-airlines-flights/'
       ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
+      await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
       await config.transform(
         config,
-        '/sg-alerts/topics/cdc-practical-lesson-slots/'
+        '/sg-alerts/topics/ssdc-appointment-slots/'
       ),
-      await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/bbdc-appointment-slots/'
+      ),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
