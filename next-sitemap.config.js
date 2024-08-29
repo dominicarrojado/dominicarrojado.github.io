@@ -208,6 +208,13 @@ module.exports = {
       await config.transform(config, '/sg-alerts/about/'),
       await config.transform(config, '/sg-alerts/how-it-works/'),
       await config.transform(config, '/sg-alerts/donate/'),
+      await config.transform(config, '/sg-alerts/categories/driving/'),
+      await config.transform(config, '/sg-alerts/categories/japan-visa/'),
+      await config.transform(config, '/sg-alerts/categories/travel/'),
+      await config.transform(config, '/sg-alerts/categories/money/'),
+      await config.transform(config, '/sg-alerts/categories/dining/'),
+      await config.transform(config, '/sg-alerts/categories/events/'),
+      await config.transform(config, '/sg-alerts/categories/entertainment/'),
       await config.transform(
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
