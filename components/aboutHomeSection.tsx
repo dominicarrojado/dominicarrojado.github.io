@@ -20,9 +20,10 @@ export default function AboutHomeSection() {
           <AnchorLink href={ExternalUrl.PERSONAL_YOUTUBE} isExternal>
             videos
           </AnchorLink>{' '}
-          to share my knowledge and learnings in my web development experiences.
-          It is my passion to translate design into code with great attention to
-          details and solve complicated problems with simple solutions.
+          to share my knowledge and learnings from my web development
+          experiences. It is my passion to translate design into code with great
+          attention to details and solve complicated problems with simple
+          solutions.
         </SectionContent>
         <SectionContent>
           I'm currently based in Singapore and working at{' '}

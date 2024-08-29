@@ -15,7 +15,7 @@ describe('<AboutHomeSection />', () => {
 
   it('should have expected content', () => {
     const content1 =
-      'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences. It is my passion to translate design into code with great attention to details and solve complicated problems with simple solutions.';
+      'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings from my web development experiences. It is my passion to translate design into code with great attention to details and solve complicated problems with simple solutions.';
     const content2 =
       "I'm currently based in Singapore and working at PropertyGuru Finance as a Lead Engineer.";
 

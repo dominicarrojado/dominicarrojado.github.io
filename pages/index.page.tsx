@@ -15,7 +15,7 @@ export default function Home({ latestPosts }: { latestPosts: Array<Post> }) {
     <>
       <NextSeo
         title={getMetaTitle('Guides, Tips and Tricks to Web Development')}
-        description="My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences."
+        description="My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings from my web development experiences."
       />
       <HeroMain />
       <AboutHomeSection />

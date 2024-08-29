@@ -20,7 +20,7 @@ import {
 export const SITE_NAME = 'Dominic Arrojado';
 export const MAIN_TITLE = 'Dominic Arrojado';
 export const MAIN_DESC =
-  'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings in my web development experiences.';
+  'My name is Dominic Arrojado. I write tech blogs and create videos to share my knowledge and learnings from my web development experiences.';
 export const MAIN_AUTHOR = 'Dominic Arrojado';
 export const MAIN_URL = 'https://dominicarrojado.com';
 export const PERSONAL_EMAIL = 'dominicarrojado@gmail.com';

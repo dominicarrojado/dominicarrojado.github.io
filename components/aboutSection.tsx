@@ -87,11 +87,11 @@ export default function AboutSection() {
           <AnchorLink href={ExternalUrl.PERSONAL_YOUTUBE} isExternal>
             videos
           </AnchorLink>{' '}
-          to share my knowledge and learnings in my web development experiences.
-          I guess it's just part of being a developer that when you gain much
-          experience, you eventually want to share it. That's how our community
-          will keep growing. Let's see where this goes and hopefully it will
-          benefit and help some of you folks out here!
+          to share my knowledge and learnings from my web development
+          experiences. I guess it's just part of being a developer that when you
+          gain much experience, you eventually want to share it. That's how our
+          community will keep growing. Let's see where this goes and hopefully
+          it will benefit and help some of you folks out there!
         </p>
         <p>That's all for now. Thank you for your time ~</p>
       </PageContent>
