@@ -70,6 +70,21 @@ export const GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH =
 
 export const PROJECTS: Array<Project> = [
   {
+    title: 'Travel Domination',
+    description:
+      "A travel blog with insightful travel guides and itineraries written by OpenAI's Generative model.",
+    links: [
+      {
+        title: 'View Blog',
+        url: 'https://travel-domination.vercel.app/',
+      },
+    ],
+    imageUrl: '/images/projects/travel-domination-web-app.png',
+    imageWidth: 1728,
+    imageHeight: 1080,
+    gifUrl: '/images/projects/travel-domination-web-app.gif',
+  },
+  {
     title: '🇸🇬 SG Alerts',
     description:
       'A notification service that monitors websites and sends email notifications when there are new updates.',
