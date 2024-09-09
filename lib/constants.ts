@@ -517,7 +517,7 @@ export const TESTIMONIALS: Array<Testimonial> = [
   },
   {
     name: 'Janice Lim',
-    jobTitle: 'Principle Product Manager',
+    jobTitle: 'Principal Product Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such an engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
@@ -531,21 +531,21 @@ export const TESTIMONIALS: Array<Testimonial> = [
   },
   {
     name: 'Lucie Liew',
-    jobTitle: 'Senior Product Designer',
+    jobTitle: 'Design Lead',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       'Dom is knowledgeable, driven, sharp and humble. I admire the passion he has for his craft and willingness to share knowledge. Some examples are, giving good UX suggestions and sharing useful knowledge with the team. We worked together closely for the development of financial tools and the collaboration was seamless and smooth.',
   },
   {
     name: 'Lakshmi Bhandaram',
-    jobTitle: 'Product Manager (Growth)',
+    jobTitle: 'Senior Product Manager (Growth)',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       'In the few interactions I had with Dom, I can say that he has a lot of enthusiasm to learn new things, takes initiative and is very knowledgeable too. He not only voluntarily picked up a few growth tasks when he had time but also always contributed to making the team do better by providing his inputs wherever he sees scope for improvement.',
   },
   {
     name: 'Abhina Sathyan',
-    jobTitle: 'Software Engineer',
+    jobTitle: 'Senior Software Engineer',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       'Dominic has been a great colleague to work with. He is very much detail-oriented and is fast in execution of tasks. He helps a lot with code reviews and provides useful tips and suggestions. He is very proactive and always ready to help. I really appreciate his sharing sessions. He is also very knowledgeable and is always eager to learn more.',
