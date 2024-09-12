@@ -15,7 +15,7 @@ export default function HeroSubTitle({ children }: Props) {
     <div ref={titleRef} className="overflow-hidden py-2" style={{ opacity }}>
       <h1
         className={cn(
-          'text-3xl font-bold text-white leading-tight',
+          'text-3xl font-bold leading-tight text-white',
           'transform transition duration-700',
           'motion-reduce:transition-none',
           'sm:text-4xl',
@@ -24,8 +24,8 @@ export default function HeroSubTitle({ children }: Props) {
           'xl:text-7xl',
           {
             [shouldDisplay
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-full']: true,
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-full opacity-0']: true,
           }
         )}
       >

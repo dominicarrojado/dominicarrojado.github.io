@@ -7,7 +7,7 @@ export default function ModalTitle({ children }: Props) {
   return (
     <h5
       className={cn(
-        'font-bold text-lg',
+        'text-lg font-bold',
         'sm:text-xl',
         'md:text-2xl',
         'xl:text-3xl'

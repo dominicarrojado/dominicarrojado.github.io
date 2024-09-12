@@ -7,10 +7,10 @@ export default function Section({ className, children, ...props }: Props) {
   return (
     <section
       className={cn(
-        'pt-16 pb-20 px-6',
-        'sm:pt-20 sm:pb-24 sm:px-8',
-        'md:pt-24 md:pb-28 lg:px-10',
-        'xl:pt-28 xl:pb-32',
+        'px-6 pb-20 pt-16',
+        'sm:px-8 sm:pb-24 sm:pt-20',
+        'md:pb-28 md:pt-24 lg:px-10',
+        'xl:pb-32 xl:pt-28',
         className
       )}
       {...props}

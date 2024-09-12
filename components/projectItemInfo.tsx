@@ -28,9 +28,9 @@ export default function ProjectItemInfo({
   return (
     <div
       className={cn(
-        'w-full mt-8 text-center',
+        'mt-8 w-full text-center',
         'md:mt-10',
-        'lg:w-2/6 lg:mt-0 lg:pl-10 lg:text-left',
+        'lg:mt-0 lg:w-2/6 lg:pl-10 lg:text-left',
         'xl:px-14'
       )}
     >

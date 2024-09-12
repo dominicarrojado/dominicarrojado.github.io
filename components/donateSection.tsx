@@ -32,20 +32,20 @@ export default function DonateSection() {
         </p>
         <div
           className={cn(
-            'flex flex-col gap-10 mt-10',
+            'mt-10 flex flex-col gap-10',
             'md:mt-20 md:flex-row md:justify-center md:gap-20'
           )}
         >
           <figure className="!m-0">
             <img
-              className="w-72 h-auto mx-auto shadow-3xl aspect-square"
+              className="mx-auto aspect-square h-auto w-72 shadow-3xl"
               src="/images/donate/paylah.jpg"
               alt="DBS PayLah! QR code"
               width="540"
               height="540"
               draggable="false"
             />
-            <figcaption className="text-gray-400 text-center">
+            <figcaption className="text-center text-gray-400">
               Scan the QR Code with{' '}
               <AnchorLink href={ExternalUrl.DBS_PAYLAH} isExternal>
                 DBS PayLah!
@@ -62,7 +62,7 @@ export default function DonateSection() {
             <figure className="!m-0">
               <img
                 className={cn(
-                  'w-72 h-auto mx-auto shadow-3xl aspect-square bg-white p-10'
+                  'mx-auto aspect-square h-auto w-72 bg-white p-10 shadow-3xl'
                 )}
                 src="/images/donate/paypal.svg"
                 alt="PayPal"
@@ -70,7 +70,7 @@ export default function DonateSection() {
                 height="60"
                 draggable="false"
               />
-              <figcaption className="text-gray-400 text-center">
+              <figcaption className="text-center text-gray-400">
                 Click to donate via PayPal <br />
                 (For International Supporters)
               </figcaption>

@@ -6,11 +6,11 @@ import SubscribeButton from './subscribeButton';
 export default function FooterFloating() {
   return (
     <footer
-      className={cn('fixed flex items-center justify-end bottom-0 w-full z-40')}
+      className={cn('fixed bottom-0 z-40 flex w-full items-center justify-end')}
     >
       <div
         className={cn(
-          'absolute bottom-3.5 right-3.5 flex items-end gap-3 ml-auto',
+          'absolute bottom-3.5 right-3.5 ml-auto flex items-end gap-3',
           'sm:bottom-4 sm:right-4',
           'md:bottom-5 md:right-5',
           'lg:bottom-8 lg:right-8'

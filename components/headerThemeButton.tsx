@@ -45,7 +45,7 @@ function ThemeButtonChildren({
       as={Button}
       checked={isDarkModeEnabled}
       className={cn(
-        'group group flex items-center flex-col min-w-8 text-gray-400 outline-none',
+        'group flex min-w-8 flex-col items-center text-gray-400 outline-none',
         'dark:text-gray-300',
         'md:min-w-9',
         'xl:min-w-10',
@@ -55,7 +55,7 @@ function ThemeButtonChildren({
       aria-label="Switch between dark and light mode"
       onChange={btnOnClick}
     >
-      <div className="flex items-center flex-col">
+      <div className="flex flex-col items-center">
         <div
           className={cn(
             iconStyle,
@@ -63,22 +63,22 @@ function ThemeButtonChildren({
             'transform transition-transform-opacity-color duration-700',
             'motion-reduce:transition-none',
             shouldDisplay
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-2'
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-2 opacity-0'
           )}
         >
           <Icon className="absolute inset-0 m-auto" />
         </div>
         <div
           className={cn(
-            'mt-1 text-3xs font-normal uppercase select-none',
+            'mt-1 select-none text-3xs font-normal uppercase',
             'transform transition-transform-opacity-color duration-700',
             'motion-reduce:transition-none',
             'md:text-2xs',
             'xl:text-xs',
             shouldDisplay
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 -translate-y-3'
+              ? 'translate-y-0 opacity-100'
+              : '-translate-y-3 opacity-0'
           )}
         >
           {text}

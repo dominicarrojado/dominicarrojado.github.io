@@ -7,8 +7,8 @@ export default function SkipToMainContentAnchor() {
       href={`#${MAIN_ELEMENT_ID}`}
       tabIndex={0}
       className={cn(
-        'absolute -top-96 -left-96 w-px h-px text-center text-white overflow-hidden -z-50',
-        'focus:top-4 focus:inset-x-0 focus:m-auto focus:w-44 focus:h-auto focus:z-50',
+        'absolute -left-96 -top-96 -z-50 h-px w-px overflow-hidden text-center text-white',
+        'focus:inset-x-0 focus:top-4 focus:z-50 focus:m-auto focus:h-auto focus:w-44',
         'focus:sm:w-52',
         'focus:xl:w-56'
       )}

@@ -9,11 +9,11 @@ const QuoteItem = forwardRef(
     <li
       ref={ref}
       className={cn(
-        'absolute top-0 left-0 w-full',
+        'absolute left-0 top-0 w-full',
         'transition-opacity duration-1000',
         'motion-reduce:transition-none',
         {
-          'opacity-0 pointer-events-none': !isActive,
+          'pointer-events-none opacity-0': !isActive,
         }
       )}
     >

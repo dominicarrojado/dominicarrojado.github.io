@@ -11,7 +11,7 @@ const Input = forwardRef(
       ref={ref}
       className={cn(
         className,
-        'block w-full rounded-none border py-2 px-4 border-gray-300 text-black outline-none placeholder:text-gray-400',
+        'block w-full rounded-none border border-gray-300 px-4 py-2 text-black outline-none placeholder:text-gray-400',
         'transition-colors focus:border-black focus:ring-1 focus:ring-black',
         'motion-reduce:transition-none',
         'disabled:opacity-40',

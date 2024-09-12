@@ -24,7 +24,7 @@ export default function SocialItems({ className }: Props) {
   return (
     <ul
       className={cn(
-        'max-w-full mt-10 flex flex-wrap justify-center',
+        'mt-10 flex max-w-full flex-wrap justify-center',
         className
       )}
     >

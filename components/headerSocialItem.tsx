@@ -32,8 +32,8 @@ export default function HeaderSocialItem({
         'sm:w-auto',
         {
           [!shouldDisplay
-            ? 'opacity-0 transition-transform translate-y-1/2 duration-300'
-            : 'opacity-100 transition translate-y-0 duration-500']: true,
+            ? 'translate-y-1/2 opacity-0 transition-transform duration-300'
+            : 'translate-y-0 opacity-100 transition duration-500']: true,
         }
       )}
       style={
@@ -47,11 +47,11 @@ export default function HeaderSocialItem({
         title={social.title}
         aria-label={social.title}
         className={cn(
-          'group flex flex-col items-center py-3 px-2 text-gray-300 outline-none',
+          'group flex flex-col items-center px-2 py-3 text-gray-300 outline-none',
           'transition-colors hover:text-white focus-visible:text-white',
           'motion-reduce:transition-none',
           'sm:px-4',
-          'md:py-4 md:px-6'
+          'md:px-6 md:py-4'
         )}
         onClick={onClick}
         isExternal

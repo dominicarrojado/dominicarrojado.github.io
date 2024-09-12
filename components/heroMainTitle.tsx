@@ -18,7 +18,7 @@ export default function HeroMainTitle() {
           'md:mt-3 md:text-2xl',
           'xl:mt-4 xl:text-3xl',
           {
-            ['opacity-0 translate-y-full']: !shouldDisplay,
+            ['translate-y-full opacity-0']: !shouldDisplay,
           }
         )}
       >

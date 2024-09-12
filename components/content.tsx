@@ -9,7 +9,7 @@ export default function Content({
   return (
     <article
       className={cn(
-        'w-11/12 max-w-screen-3xl mx-auto prose dark:prose-dark',
+        'prose mx-auto w-11/12 max-w-screen-3xl dark:prose-dark',
         'sm:prose-lg',
         'lg:w-5/6',
         'xl:prose-xl',

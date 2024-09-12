@@ -5,7 +5,7 @@ export type Props = { children: ReactNode };
 
 export default function InputGroup({ children }: Props) {
   return (
-    <div className={cn('flex flex-col gap-4 mt-6', 'sm:flex-row')}>
+    <div className={cn('mt-6 flex flex-col gap-4', 'sm:flex-row')}>
       {children}
     </div>
   );

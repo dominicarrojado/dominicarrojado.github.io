@@ -8,7 +8,7 @@ export default function HeaderSocialItems({ shouldDisplay }: Props) {
   return (
     <ul
       className={cn(
-        'flex flex-wrap transform -translate-x-7',
+        'flex -translate-x-7 transform flex-wrap',
         'sm:-translate-x-5',
         'md:-translate-x-6'
       )}

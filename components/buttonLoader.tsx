@@ -6,10 +6,10 @@ export default function ButtonLoader() {
   return (
     <SvgLoader
       className={cn(
-        'animate-spin -ml-1 mr-3 w-3.5 h-3.5 text-white',
+        '-ml-1 mr-3 h-3.5 w-3.5 animate-spin text-white',
         'dark:text-black',
-        'sm:w-4 sm:h-4',
-        'xl:w-5 xl:h-5'
+        'sm:h-4 sm:w-4',
+        'xl:h-5 xl:w-5'
       )}
       aria-label="Loading"
     />

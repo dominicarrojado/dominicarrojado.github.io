@@ -33,7 +33,7 @@ export default function PostsPagination({ currentPage, lastPage }: Props) {
     >
       <ul
         className={cn(
-          'flex items-center justify-center gap-0 mt-8 cursor-default',
+          'mt-8 flex cursor-default items-center justify-center gap-0',
           'sm:mt-12 sm:gap-2',
           'md:mt-16',
           'xl:mt-20'

@@ -7,9 +7,9 @@ export default function HeroBackground() {
   return (
     <div
       className={cn(
-        'absolute top-0 left-0 w-full h-full bg-repeat bg-center invert-[.1]',
+        'absolute left-0 top-0 h-full w-full bg-center bg-repeat invert-[.1]',
         'dark:invert-0',
-        'motion-safe:animate-slide transition-opacity duration-1250',
+        'transition-opacity duration-1250 motion-safe:animate-slide',
         'motion-reduce:transition-none',
         {
           ['opacity-0']: !shouldDisplay,

@@ -24,7 +24,7 @@ export default function SocialItem({ social, ...props }: Props) {
         as={AnchorLink}
         ref={anchorRef}
         href={social.url}
-        className={cn('group inline-flex p-3 cursor-pointer', 'sm:p-4')}
+        className={cn('group inline-flex cursor-pointer p-3', 'sm:p-4')}
         aria-label={social.title}
         isExternal
       >

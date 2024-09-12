@@ -9,10 +9,10 @@ export default function Button({ children, ...props }: Props) {
     <ReakitButton
       {...props}
       className={cn(
-        'inline-flex items-center justify-center px-4 py-2 bg-gray-650 text-white font-normal select-none',
+        'inline-flex select-none items-center justify-center bg-gray-650 px-4 py-2 font-normal text-white',
         'disabled:opacity-30',
         'dark:bg-gray-200 dark:text-black',
-        'transform transition-opacity-color hover:opacity-90 active:opacity-100 active:bg-black',
+        'transform transition-opacity-color hover:opacity-90 active:bg-black active:opacity-100',
         'motion-reduce:transition-none',
         'dark:active:bg-white',
         'sm:px-8 sm:py-3'

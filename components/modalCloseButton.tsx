@@ -10,7 +10,7 @@ export default function ModalCloseButton({ className, ...props }: Props) {
       {...props}
       className={cn(
         className,
-        'flex flex-col items-center justify-center text-gray-400 select-none',
+        'flex select-none flex-col items-center justify-center text-gray-400',
         'transition-colors hover:text-gray-900',
         'motion-reduce:transition-none',
         'dark:hover:text-gray-100'

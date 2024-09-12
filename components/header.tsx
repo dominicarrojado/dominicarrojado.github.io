@@ -16,15 +16,15 @@ export default function Header() {
   return (
     <>
       <HeaderProgressBar />
-      <header className={cn('fixed flex items-center top-0 w-full z-40')}>
+      <header className={cn('fixed top-0 z-40 flex w-full items-center')}>
         <SkipToMainContentAnchor />
         <HeaderLogo onClick={dialog.hide} />
         <div
           className={cn(
-            'absolute top-3.5 right-3.5 flex items-end gap-3 ml-auto',
-            'sm:top-4 sm:right-4 sm:gap-4',
-            'md:top-5 md:right-5 md:gap-5',
-            'lg:top-8 lg:right-8 lg:gap-6'
+            'absolute right-3.5 top-3.5 ml-auto flex items-end gap-3',
+            'sm:right-4 sm:top-4 sm:gap-4',
+            'md:right-5 md:top-5 md:gap-5',
+            'lg:right-8 lg:top-8 lg:gap-6'
           )}
           style={{ paddingRight: `var(${SCROLLBAR_WIDTH_CSS_VAR}, 0)` }}
           data-testid="header-buttons"

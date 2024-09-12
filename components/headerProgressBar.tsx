@@ -30,13 +30,13 @@ export default function HeaderProgressBar() {
       leaveFrom="translate-y-0"
       leaveTo="-translate-y-2"
       className={cn(
-        'fixed top-0 left-0 flex w-full h-1.5 overflow-hidden z-50',
+        'fixed left-0 top-0 z-50 flex h-1.5 w-full overflow-hidden',
         'transition-transform duration-300 motion-reduce:transition-none'
       )}
     >
       <div
         className={cn(
-          'w-full flex flex-col justify-center overflow-hidden bg-gray-600',
+          'flex w-full flex-col justify-center overflow-hidden bg-gray-600',
           'bg-[length:1rem_1rem]',
           'motion-safe:animate-stripes'
         )}

@@ -134,10 +134,10 @@ export default function ProjectItemImage({
   }, [isMotionSafe, isImgInView, gifData]);
 
   return (
-    <div className={cn('flex justify-center items-center w-full', 'lg:w-4/6')}>
+    <div className={cn('flex w-full items-center justify-center', 'lg:w-4/6')}>
       <div
         ref={containerRef}
-        className="relative inline-flex min-w-11 min-h-24"
+        className="relative inline-flex min-h-24 min-w-11"
       >
         {!isImgLoaded && <ProjectItemImageLoader />}
         <img
@@ -152,7 +152,7 @@ export default function ProjectItemImage({
           src={gifData}
           alt={`GIF of ${title}`}
           className={cn(
-            'absolute top-0 left-0 w-full h-full z-20',
+            'absolute left-0 top-0 z-20 h-full w-full',
             'transition-opacity duration-300',
             'motion-reduce:transition-none',
             shouldDisplayGifImg ? 'opacity-100' : 'opacity-0'

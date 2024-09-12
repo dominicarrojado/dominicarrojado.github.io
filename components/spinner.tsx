@@ -6,7 +6,7 @@ export default function Spinner({ className, color }: Props) {
   return (
     <div
       className={cn(
-        'border-transparent rounded-full',
+        'rounded-full border-transparent',
         'animate-spin',
         className
       )}

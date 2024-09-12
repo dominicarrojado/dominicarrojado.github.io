@@ -29,8 +29,8 @@ export default function PaginationItem({ children, href, isCurrent }: Props) {
             className,
             'transition-colors',
             'motion-reduce:transition-none',
-            'hover:text-gray-700 hover:bg-gray-100 hover:opacity-100',
-            'dark:hover:text-white dark:hover:bg-gray-750'
+            'hover:bg-gray-100 hover:text-gray-700 hover:opacity-100',
+            'dark:hover:bg-gray-750 dark:hover:text-white'
           )}
           aria-current={isCurrent ? 'page' : undefined}
         >

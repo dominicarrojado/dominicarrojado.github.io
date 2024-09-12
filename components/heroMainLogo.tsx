@@ -14,14 +14,14 @@ export default function HeroMainLogo() {
       <HeroMainLogoPart isLeft />
       <SvgLogo
         className={cn(
-          'w-40 h-40 text-white',
+          'h-40 w-40 text-white',
           'transform transition-transform-opacity duration-1250',
           'motion-reduce:transition-none',
-          'sm:w-60 sm:h-60',
-          'md:w-80 md:h-80',
-          'xl:w-96 xl:h-96',
+          'sm:h-60 sm:w-60',
+          'md:h-80 md:w-80',
+          'xl:h-96 xl:w-96',
           {
-            ['opacity-0 -translate-y-4']: !shouldDisplay,
+            ['-translate-y-4 opacity-0']: !shouldDisplay,
           }
         )}
         role="img"

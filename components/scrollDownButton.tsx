@@ -50,7 +50,7 @@ export default function ScrollDownButton() {
   return (
     <div
       className={cn(
-        'absolute bottom-0 left-0 w-full z-10 text-center',
+        'absolute bottom-0 left-0 z-10 w-full text-center',
         'transform transition duration-700',
         'motion-reduce:transition-none',
         {
@@ -68,7 +68,7 @@ export default function ScrollDownButton() {
       >
         <div
           className={cn(
-            'relative inline-flex pt-1 pb-0.5 text-gray-400 text-2xs select-none',
+            'relative inline-flex select-none pb-0.5 pt-1 text-2xs text-gray-400',
             'transform transition duration-300 group-hover:translate-y-0.5 group-hover:text-white',
             'motion-reduce:transition-none',
             'md:mb-1 md:text-sm md:group-hover:translate-y-1',
@@ -76,23 +76,23 @@ export default function ScrollDownButton() {
           )}
         >
           {text}
-          <div className="absolute bottom-0 right-0 z-0 w-full h-px bg-white bg-opacity-20 pointer-events-none" />
+          <div className="pointer-events-none absolute bottom-0 right-0 z-0 h-px w-full bg-white bg-opacity-20" />
           <div
             className={cn(
-              'absolute bottom-0 right-0 w-0 h-px bg-white z-10 pointer-events-none',
-              'transition-width duration-500 group-hover:right-auto group-hover:left-0 group-hover:w-full',
+              'pointer-events-none absolute bottom-0 right-0 z-10 h-px w-0 bg-white',
+              'transition-width duration-500 group-hover:left-0 group-hover:right-auto group-hover:w-full',
               'motion-reduce:transition-none'
             )}
           />
         </div>
         <SvgArrowDown
           className={cn(
-            'inline-flex mt-2 w-2 h-2 text-gray-500',
+            'mt-2 inline-flex h-2 w-2 text-gray-500',
             'dark:text-gray-600',
-            'motion-safe:animate-bounce transition-colors duration-300 group-hover:text-gray-300',
+            'transition-colors duration-300 group-hover:text-gray-300 motion-safe:animate-bounce',
             'motion-reduce:transition-none',
-            'md:w-3 md:h-3',
-            'xl:w-4 xl:h-4'
+            'md:h-3 md:w-3',
+            'xl:h-4 xl:w-4'
           )}
         />
       </a>

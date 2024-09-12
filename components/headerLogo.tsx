@@ -43,14 +43,14 @@ export default function HeaderLogo(props: Props) {
     <NextLink href={Route.HOME}>
       <a
         className={cn(
-          'absolute top-3.5 left-3.5 flex shadow-3xl border border-white bg-gray-750 bg-opacity-90 p-1.5 z-50',
-          'transform transition ease-in-out duration-500 hover:shadow-md hover:bg-opacity-100',
+          'absolute left-3.5 top-3.5 z-50 flex border border-white bg-gray-750 bg-opacity-90 p-1.5 shadow-3xl',
+          'transform transition duration-500 ease-in-out hover:bg-opacity-100 hover:shadow-md',
           'motion-reduce:transition-none',
-          'sm:top-4 sm:left-4',
-          'md:top-5 md:left-5 md:border-2',
-          'lg:top-8 lg:left-8',
+          'sm:left-4 sm:top-4',
+          'md:left-5 md:top-5 md:border-2',
+          'lg:left-8 lg:top-8',
           {
-            ['opacity-0 -translate-y-full']: !shouldDisplay,
+            ['-translate-y-full opacity-0']: !shouldDisplay,
           }
         )}
         onClick={onClick}
@@ -60,11 +60,11 @@ export default function HeaderLogo(props: Props) {
       >
         <SvgLogo
           className={cn(
-            'w-7 h-7 text-white',
+            'h-7 w-7 text-white',
             'transition-colors duration-300',
-            'sm:w-8 sm:h-8',
-            'md:w-10 md:h-10',
-            'xl:w-11 xl:h-11'
+            'sm:h-8 sm:w-8',
+            'md:h-10 md:w-10',
+            'xl:h-11 xl:w-11'
           )}
         />
       </a>

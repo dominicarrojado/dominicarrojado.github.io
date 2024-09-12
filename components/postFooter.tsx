@@ -12,7 +12,7 @@ export type Props = {
 
 export default function PostFooter({ previousPost, nextPost }: Props) {
   return (
-    <div className={cn('w-11/12 max-w-screen-3xl mx-auto', 'lg:w-5/6')}>
+    <div className={cn('mx-auto w-11/12 max-w-screen-3xl', 'lg:w-5/6')}>
       <p className="mt-16 text-gray-400">
         Found an issue with this post?{' '}
         <AnchorLink
@@ -23,7 +23,7 @@ export default function PostFooter({ previousPost, nextPost }: Props) {
         </AnchorLink>
         .
       </p>
-      <div className="mt-24 flex justify-between items-center">
+      <div className="mt-24 flex items-center justify-between">
         {previousPost && (
           <PostLink
             href={`${Route.POSTS}/${previousPost.id}`}

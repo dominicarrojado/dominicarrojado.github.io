@@ -21,7 +21,7 @@ export default function PostsHomeSection({ latestPosts }: Props) {
       </SectionContent>
       <ul
         className={cn(
-          'flex flex-col max-w-screen-3xl mx-auto mt-8',
+          'mx-auto mt-8 flex max-w-screen-3xl flex-col',
           'sm:mt-10',
           'lg:mt-12'
         )}

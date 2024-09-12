@@ -40,7 +40,7 @@ export default function QuoteItems() {
   return (
     <ul
       className={cn(
-        'relative text-center overflow-hidden',
+        'relative overflow-hidden text-center',
         'motion-reduce:transition-none',
         'sm:text-lg',
         'xl:text-xl',

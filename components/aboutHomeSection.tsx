@@ -9,7 +9,7 @@ import { ExternalUrl, Route } from '../lib/types';
 export default function AboutHomeSection() {
   return (
     <Section id="about" className="bg-gray-100 dark:bg-gray-750">
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         <SectionTitle>About Me</SectionTitle>
         <SectionContent>
           My name is Dominic Arrojado. I write{' '}

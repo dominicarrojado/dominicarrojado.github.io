@@ -14,7 +14,7 @@ export default function ProjectsHomeSection() {
       <SectionTitle>Featured Projects</SectionTitle>
       <SectionContent>A selection of projects I've done so far.</SectionContent>
       <ul
-        className={cn('max-w-screen-3xl mx-auto mt-8', 'sm:mt-10', 'lg:mt-12')}
+        className={cn('mx-auto mt-8 max-w-screen-3xl', 'sm:mt-10', 'lg:mt-12')}
         data-testid="projects-list"
       >
         {BEST_PROJECTS.map((project, idx) => (

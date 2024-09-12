@@ -177,7 +177,7 @@ export default function TestimonialsHomeSection() {
           <ul
             ref={listRef}
             className={cn(
-              'relative mt-8 flex flex-row items-center cursor-grab active:cursor-grabbing select-none',
+              'relative mt-8 flex cursor-grab select-none flex-row items-center active:cursor-grabbing',
               'transform transition-transform ease-out',
               'motion-reduce:transition-none',
               'sm:mt-10',
@@ -195,19 +195,19 @@ export default function TestimonialsHomeSection() {
             ))}
           </ul>
           <div
-            className="flex justify-center items-center mt-8"
+            className="mt-8 flex items-center justify-center"
             data-testid="indicators"
           >
             {indicators.map((idx) => (
               <Button
                 key={idx}
                 className={cn(
-                  'w-1 h-1 ml-1 first:ml-0 rounded-full cursor-pointer',
+                  'ml-1 h-1 w-1 cursor-pointer rounded-full first:ml-0',
                   'transition-colors',
                   'motion-reduce:transition-none',
-                  'md:w-1.5 md:h-1.5',
-                  'lg:w-2 lg:h-2 lg:ml-1.5',
-                  'xl:w-2.5 xl:h-2.5 xl:ml-2',
+                  'md:h-1.5 md:w-1.5',
+                  'lg:ml-1.5 lg:h-2 lg:w-2',
+                  'xl:ml-2 xl:h-2.5 xl:w-2.5',
                   idx === swipeIdx
                     ? 'bg-gray-400 dark:bg-gray-300'
                     : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400'
@@ -221,8 +221,8 @@ export default function TestimonialsHomeSection() {
         </div>
         <small
           className={cn(
-            'absolute top-5 right-16 flex items-center border border-transparent bg-white py-2 px-3 shadow-lg select-none pointer-events-none',
-            'dark:bg-gray-650 dark:border-gray-400 dark:border-opacity-20',
+            'pointer-events-none absolute right-16 top-5 flex select-none items-center border border-transparent bg-white px-3 py-2 shadow-lg',
+            'dark:border-gray-400 dark:border-opacity-20 dark:bg-gray-650',
             'transform transition-transform-opacity duration-700',
             'motion-reduce:transition-none',
             'md:right-20',
@@ -233,7 +233,7 @@ export default function TestimonialsHomeSection() {
           )}
         >
           <TipIcon
-            className={cn('w-3 h-3 mr-2 animate-pulse', 'md:w-4 md:h-4')}
+            className={cn('mr-2 h-3 w-3 animate-pulse', 'md:h-4 md:w-4')}
           />
           Swipe to See More
         </small>

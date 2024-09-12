@@ -28,7 +28,7 @@ export default function PostItem({
   return (
     <li
       className={cn(
-        'mt-4 first:mt-0 select-none',
+        'mt-4 select-none first:mt-0',
         'sm:mt-6',
         'md:mt-8',
         'xl:mt-10',
@@ -39,7 +39,7 @@ export default function PostItem({
       <NextLink href={`${Route.POSTS}/${post.id}`}>
         <a
           className={cn(
-            'group flex w-full shadow-md py-6 px-4',
+            'group flex w-full px-4 py-6 shadow-md',
             'transition-shadow duration-300 hover:shadow-xl',
             'motion-reduce:transition-none',
             'sm:px-6',
@@ -48,17 +48,17 @@ export default function PostItem({
             anchorClassName
           )}
         >
-          <article className="flex flex-col w-full">
-            <div className="flex justify-between items-center">
+          <article className="flex w-full flex-col">
+            <div className="flex items-center justify-between">
               <DateText
                 dateString={post.date}
                 className={cn('text-xs', 'md:text-sm')}
               />
               <div
                 className={cn(
-                  'rounded py-0.5 px-1.5 bg-gray-200 text-2xs capitalize',
+                  'rounded bg-gray-200 px-1.5 py-0.5 text-2xs capitalize',
                   'dark:bg-gray-600',
-                  'md:py-1 md:px-2 md:text-xs',
+                  'md:px-2 md:py-1 md:text-xs',
                   'xl:text-sm'
                 )}
               >

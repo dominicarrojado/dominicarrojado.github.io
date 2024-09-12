@@ -68,19 +68,19 @@ export default function SubscribeButton() {
         onClick={btnOnClick}
         aria-label={text}
       >
-        <div className="flex items-center flex-col">
+        <div className="flex flex-col items-center">
           <div
             className={cn(
-              'relative w-5 h-5',
+              'relative h-5 w-5',
               'transform transition-transform-opacity-color',
               'motion-reduce:transition-none',
-              'md:w-7 md:h-7',
+              'md:h-7 md:w-7',
               !animationDone
                 ? {
                     'duration-700': true,
                     [shouldDisplay
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 -translate-y-2']: true,
+                      ? 'translate-y-0 opacity-100'
+                      : '-translate-y-2 opacity-0']: true,
                   }
                 : 'duration-300'
             )}
@@ -89,7 +89,7 @@ export default function SubscribeButton() {
           </div>
           <div
             className={cn(
-              'mt-2 text-3xs font-normal uppercase select-none',
+              'mt-2 select-none text-3xs font-normal uppercase',
               'transform transition-transform-opacity-color',
               'motion-reduce:transition-none',
               'md:text-2xs',
@@ -98,8 +98,8 @@ export default function SubscribeButton() {
                 ? {
                     'duration-700': true,
                     [shouldDisplay
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-3']: true,
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-3 opacity-0']: true,
                   }
                 : 'duration-300'
             )}

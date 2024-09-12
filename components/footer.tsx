@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer
       className={cn(
-        'py-20 px-6 bg-gray-100 dark:bg-gray-850 overflow-hidden',
+        'overflow-hidden bg-gray-100 px-6 py-20 dark:bg-gray-850',
         'lg:overflow-auto'
       )}
       data-testid="footer"

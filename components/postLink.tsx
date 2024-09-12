@@ -45,17 +45,17 @@ export default function PostLink({ title, href, isPrevious, ...props }: Props) {
         </div>
         <Icon
           className={cn(
-            'absolute top-0 bottom-0 m-auto shrink-0 w-2 h-2 text-black opacity-30',
+            'absolute bottom-0 top-0 m-auto h-2 w-2 shrink-0 text-black opacity-30',
             'dark:text-white',
             'transform transition-transform-opacity duration-300 group-hover:opacity-100',
             'motion-reduce:transition-none',
-            'sm:w-2.5 sm:h-2.5',
-            'md:w-3 md:h-3',
-            'xl:w-3.5 xl:h-3.5',
+            'sm:h-2.5 sm:w-2.5',
+            'md:h-3 md:w-3',
+            'xl:h-3.5 xl:w-3.5',
             {
               [isPrevious
-                ? '-left-5 sm:-left-7 xl:-left-8 group-hover:-translate-x-1.5'
-                : '-right-5 sm:-right-7 xl:-right-8 group-hover:translate-x-1.5']:
+                ? '-left-5 group-hover:-translate-x-1.5 sm:-left-7 xl:-left-8'
+                : '-right-5 group-hover:translate-x-1.5 sm:-right-7 xl:-right-8']:
                 true,
             }
           )}

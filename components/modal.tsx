@@ -55,7 +55,7 @@ export default function Modal({
             <Transition.Child {...MODAL_TRANSITION_PROPS} as={Fragment}>
               <ModalDialog>
                 <ModalContent>
-                  <div className="flex justify-between items-start">
+                  <div className="flex items-start justify-between">
                     <ModalTitle>{title}</ModalTitle>
                     <ModalCloseButton onClick={dialog.hide} />
                   </div>

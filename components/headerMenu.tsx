@@ -33,18 +33,18 @@ export default function HeaderMenu({ dialog }: Props) {
         'data-testid': 'menu-background',
       }}
       className={cn('fixed inset-0 z-40 overflow-y-auto overflow-x-hidden', {
-        'w-0 h-0 pointer-events-none': !dialogVisible,
+        'pointer-events-none h-0 w-0': !dialogVisible,
       })}
       aria-label="Menu"
       data-testid="menu-container"
     >
-      <div className={cn('fixed flex items-center top-1 w-full z-50')}>
+      <div className={cn('fixed top-1 z-50 flex w-full items-center')}>
         <div
           className={cn(
-            'absolute top-3.5 right-3.5 flex items-end gap-3 ml-auto',
-            'sm:top-4 sm:right-4 sm:gap-4',
-            'md:top-5 md:right-5 md:gap-5',
-            'lg:top-8 lg:right-8 lg:gap-6'
+            'absolute right-3.5 top-3.5 ml-auto flex items-end gap-3',
+            'sm:right-4 sm:top-4 sm:gap-4',
+            'md:right-5 md:top-5 md:gap-5',
+            'lg:right-8 lg:top-8 lg:gap-6'
           )}
           style={{ paddingRight: `var(${SCROLLBAR_WIDTH_CSS_VAR}, 0)` }}
         >
@@ -54,7 +54,7 @@ export default function HeaderMenu({ dialog }: Props) {
           />
         </div>
       </div>
-      <div className="flex justify-center items-center min-h-full">
+      <div className="flex min-h-full items-center justify-center">
         <div className={cn('py-10 pl-8', 'sm:pl-0')}>
           <HeaderMenuItems
             shouldDisplay={shouldDisplayMenu}

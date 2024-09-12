@@ -21,8 +21,8 @@ export default function HeroSubDescription({ children }: Props) {
           'xl:text-2xl',
           {
             [shouldDisplay
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-full']: true,
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-full opacity-0']: true,
           }
         )}
       >

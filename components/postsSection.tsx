@@ -28,7 +28,7 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
         adSlot={GoogleAdSenseUnit.POSTS_HEADER}
         adFormat={GoogleAdSenseUnitFormat.AUTO}
         className={cn(
-          'max-w-screen-3xl -mt-8 mx-auto pb-8',
+          'mx-auto -mt-8 max-w-screen-3xl pb-8',
           'motion-reduce:transition-none',
           'sm:-mt-10 sm:pb-10',
           'md:-mt-12 md:pb-12',
@@ -37,7 +37,7 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
         )}
       />
       <ul
-        className="relative flex flex-col max-w-screen-3xl mx-auto"
+        className="relative mx-auto flex max-w-screen-3xl flex-col"
         data-testid="posts-list"
       >
         {posts.map((post, idx) => (
@@ -58,7 +58,7 @@ export default function PostsSection({ posts, currentPage, lastPage }: Props) {
         adSlot={GoogleAdSenseUnit.POSTS_FOOTER}
         adFormat={GoogleAdSenseUnitFormat.AUTO}
         className={cn(
-          'max-w-screen-3xl -mb-8 mx-auto pt-8',
+          'mx-auto -mb-8 max-w-screen-3xl pt-8',
           'motion-reduce:transition-none',
           'sm:-mb-10 sm:pt-10',
           'md:-mb-12 md:pt-12',

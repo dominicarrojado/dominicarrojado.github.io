@@ -10,20 +10,20 @@ export default function TestimonialItem({ testimonial }: Props) {
   return (
     <li
       className={cn(
-        'group w-full flex shrink-0 px-3',
+        'group flex w-full shrink-0 px-3',
         'xs:w-11/12',
         'sm:w-5/6',
         'md:w-7/12',
         'lg:w-1/2',
         'xl:w-1/3',
-        'transform transition-transform duration-300 even:rotate-1 odd:-rotate-1 hover:rotate-0',
+        'transform transition-transform duration-300 odd:-rotate-1 even:rotate-1 hover:rotate-0',
         'motion-reduce:transition-none',
         'md:px-5'
       )}
     >
       <figure
         className={cn(
-          'border rounded-lg shadow-md overflow-hidden',
+          'overflow-hidden rounded-lg border shadow-md',
           'dark:border-gray-400 dark:border-opacity-30',
           'transition-shadow hover:shadow-xl',
           'motion-reduce:transition-none'
@@ -39,12 +39,12 @@ export default function TestimonialItem({ testimonial }: Props) {
         >
           <SvgQuote
             className={cn(
-              'w-6 h-6 mt-2 mb-2 text-gray-300',
+              'mb-2 mt-2 h-6 w-6 text-gray-300',
               'dark:text-gray-400 dark:text-opacity-40',
-              'transform -translate-y-1.5',
-              'sm:w-7 sm:h-7',
-              'md:w-8 md:h-8 md:-translate-y-2',
-              'xl:w-9 xl:h-9 xl:-translate-y-2.5'
+              '-translate-y-1.5 transform',
+              'sm:h-7 sm:w-7',
+              'md:h-8 md:w-8 md:-translate-y-2',
+              'xl:h-9 xl:w-9 xl:-translate-y-2.5'
             )}
           />
           {testimonial.quote}

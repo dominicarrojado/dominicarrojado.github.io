@@ -25,7 +25,7 @@ function AdUnit({ adSlot, adFormat, adLayout, className }: Props) {
     <div className={className}>
       <ins
         className={cn(
-          'adsbygoogle block max-w-[1200px] mx-auto',
+          'adsbygoogle mx-auto block max-w-[1200px]',
           styles.adunit
         )}
         data-ad-client={GOOGLE_ADSENSE_CLIENT_ID}

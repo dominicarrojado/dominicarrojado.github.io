@@ -20,7 +20,7 @@ export default function ProjectItem({
   return (
     <li
       className={cn(
-        'flex flex-col items-center mt-16 first:mt-0',
+        'mt-16 flex flex-col items-center first:mt-0',
         'sm:mt-24',
         'lg:mt-48 lg:flex-row',
         'xl:mt-52',

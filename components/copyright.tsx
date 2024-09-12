@@ -10,7 +10,7 @@ export default function Copyright() {
   return (
     <p
       className={cn(
-        'mt-4 text-gray-400 text-sm text-center',
+        'mt-4 text-center text-sm text-gray-400',
         'sm:text-base',
         'lg:mt-10',
         'xl:text-lg'
@@ -19,7 +19,7 @@ export default function Copyright() {
       <span className="font-normal">
         ©{currentYear} {MAIN_TITLE}
       </span>{' '}
-      <span className="block mt-1 sm:hidden" />
+      <span className="mt-1 block sm:hidden" />
       <span className="hidden sm:inline">·</span>{' '}
       <NextLink href={Route.PRIVACY_POLICY}>
         <a>Privacy Policy</a>

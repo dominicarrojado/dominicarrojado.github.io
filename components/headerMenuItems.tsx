@@ -14,15 +14,15 @@ export default function HeaderMenuItems({ shouldDisplay, closeMenu }: Props) {
         <li
           key={idx}
           className={cn(
-            'flex mb-8',
+            'mb-8 flex',
             'transform',
             'motion-reduce:transition-none',
             'sm:mb-10',
             'xl:mb-12',
             {
               [!shouldDisplay
-                ? 'opacity-0 transition-transform translate-x-1/3 duration-300'
-                : 'opacity-100 transition translate-x-0 duration-700']: true,
+                ? 'translate-x-1/3 opacity-0 transition-transform duration-300'
+                : 'translate-x-0 opacity-100 transition duration-700']: true,
             }
           )}
           style={
@@ -34,7 +34,7 @@ export default function HeaderMenuItems({ shouldDisplay, closeMenu }: Props) {
           <NextLink href={item.path}>
             <a
               className={cn(
-                'group relative pb-2 text-3xl text-gray-300 select-none outline-none',
+                'group relative select-none pb-2 text-3xl text-gray-300 outline-none',
                 'transition-colors duration-300 hover:text-white focus-visible:text-white',
                 'motion-reduce:transition-none',
                 'sm:text-4xl',
@@ -44,13 +44,13 @@ export default function HeaderMenuItems({ shouldDisplay, closeMenu }: Props) {
               onClick={closeMenu}
             >
               {item.title}
-              <div className="absolute bottom-0 right-0 w-full h-px bg-white bg-opacity-20 z-0 pointer-events-none" />
+              <div className="pointer-events-none absolute bottom-0 right-0 z-0 h-px w-full bg-white bg-opacity-20" />
               <div
                 className={cn(
-                  'absolute bottom-0 right-0 z-10 w-0 h-px bg-white pointer-events-none',
-                  'transition-width duration-300 group-hover:right-auto group-hover:left-0 group-hover:w-full',
+                  'pointer-events-none absolute bottom-0 right-0 z-10 h-px w-0 bg-white',
+                  'transition-width duration-300 group-hover:left-0 group-hover:right-auto group-hover:w-full',
                   'motion-reduce:transition-none',
-                  'group-focus-visible:right-auto group-focus-visible:left-0 group-focus-visible:w-full'
+                  'group-focus-visible:left-0 group-focus-visible:right-auto group-focus-visible:w-full'
                 )}
               />
             </a>
