@@ -50,6 +50,3 @@ jobs:
 
       - name: Build
         run: yarn build
-
-      - name: Generate static files
-        run: yarn export

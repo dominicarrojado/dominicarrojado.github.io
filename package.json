@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "export": "next export",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "deploy": "gh-pages -d out"
