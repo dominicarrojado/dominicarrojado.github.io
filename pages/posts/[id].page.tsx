@@ -18,7 +18,7 @@ export default function Post({ postData }: { postData: PostData }) {
       ),
     [postId]
   );
-  const metaModifiedTime = useMemo(() => `${postDate}T14:00:00Z`, []);
+  const metaModifiedTime = useMemo(() => `${postDate}T14:00:00Z`, [postDate]);
 
   return (
     <>
