@@ -46,7 +46,6 @@ yarn test:watch
 
 ```bash
 yarn build
-yarn export
 ```
 
 2. The `out` directory can be served by any static hosting service or CDN.
