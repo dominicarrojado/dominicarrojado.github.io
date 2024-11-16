@@ -215,6 +215,7 @@ module.exports = {
       await config.transform(config, '/sg-alerts/categories/dining/'),
       await config.transform(config, '/sg-alerts/categories/events/'),
       await config.transform(config, '/sg-alerts/categories/entertainment/'),
+      await config.transform(config, '/sg-alerts/categories/theme-parks/'),
       await config.transform(
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
@@ -242,6 +243,14 @@ module.exports = {
       await config.transform(
         config,
         '/sg-alerts/topics/bbdc-appointment-slots/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/tokyo-disneyland-attraction-updates/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/tokyo-disneysea-attraction-updates/'
       ),
 
       // ph alerts
