@@ -7,11 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -49,27 +47,31 @@ jobs:
         uses: codecov/codecov-action@v4
 
       - name: Build
+        id: build
         run: yarn build
 
       - name: Move 404 page to root directory
         run: mv ./out/404/index.html ./out/404.html
 
-      - name: Deploy
-        run: |
-          git config --global user.name $user_name
-          git config --global user.email $user_email
-          git remote set-url origin https://${github_token}@github.com/${repository}
-          yarn deploy
-        env:
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
-          repository: ${{ github.repository }}
+      - name: Create .nojekyll file
+        run: touch ./out/.nojekyll
 
-      - name: Merge gh-pages -> main
-        uses: devmasx/merge-branch@v1.4.0
+      - name: Upload artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          type: now
-          from_branch: gh-pages
-          target_branch: main
-          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+          path: ./out
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
