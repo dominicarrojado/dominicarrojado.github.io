@@ -209,6 +209,18 @@ module.exports = {
       await config.transform(config, '/sg-alerts/how-it-works/'),
       await config.transform(config, '/sg-alerts/donate/'),
       await config.transform(config, '/sg-alerts/categories/driving/'),
+      await config.transform(
+        config,
+        '/sg-alerts/categories/driving/comfortdelgro-driving-centre/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/categories/driving/singapore-safety-driving-centre/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/categories/driving/bukit-batok-driving-centre/'
+      ),
       await config.transform(config, '/sg-alerts/categories/japan-visa/'),
       await config.transform(config, '/sg-alerts/categories/travel/'),
       await config.transform(config, '/sg-alerts/categories/money/'),
