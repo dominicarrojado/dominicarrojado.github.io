@@ -238,6 +238,18 @@ module.exports = {
       ),
       await config.transform(
         config,
+        '/sg-alerts/topics/cdc-class-2-practical-lesson-slots/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/cdc-class-2a-practical-lesson-slots/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/cdc-class-2b-practical-lesson-slots/'
+      ),
+      await config.transform(
+        config,
         '/sg-alerts/topics/cdc-practical-test-slots/'
       ),
       await config.transform(
