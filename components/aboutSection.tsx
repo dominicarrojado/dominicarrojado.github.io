@@ -31,19 +31,19 @@ export default function AboutSection() {
         </p>
         <p>
           I'm currently based in Singapore and working at{' '}
-          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
-            PropertyGuru Finance
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU} isExternal>
+            PropertyGuru
           </AnchorLink>{' '}
           as a Lead Engineer.{' '}
-          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
-            PropertyGuru Finance
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU} isExternal>
+            PropertyGuru
           </AnchorLink>{' '}
-          is a financial technology (<em>fintech</em>) arm within{' '}
+          is the flagship property technology product of{' '}
           <AnchorLink href={ExternalUrl.PROPERTY_GURU_GROUP} isExternal>
             PropertyGuru Group
           </AnchorLink>{' '}
-          - Southeast Asia's pioneering and most trusted property technology
-          company.
+          - helping Southeast Asia make confident property decisions through
+          relevant content, actionable insights and world-class service.
         </p>
         <p>
           I'm originally from the Philippines and found an opportunity to move

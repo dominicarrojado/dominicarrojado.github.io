@@ -87,7 +87,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: '🇸🇬 SG Alerts',
     description:
-      'A notification service that monitors websites and sends email notifications when there are new updates.',
+      'A free notification service with over 10,000 subscribers and over 40 topics to choose from. It sends Telegram or email notifications when there are new updates from the respective topic.',
     links: [
       {
         title: 'View 🇸🇬 SG Alerts',
@@ -102,6 +102,7 @@ export const PROJECTS: Array<Project> = [
     imageWidth: 1728,
     imageHeight: 1080,
     gifUrl: '/images/projects/sg-alerts.gif',
+    isBest: true,
   },
   {
     title: 'THX Spatial Audio',
@@ -509,6 +510,13 @@ export const TESTIMONIALS: Array<Testimonial> = [
       'Dom has been a great and consistent performer with the FinTech team for years. He has lead multiple front-end initiatives that have reduced day-to-day work for other team members. He has displayed great ownership in delivering multiple FinTech projects. He is known for his positive can-do attitude, maintaining high code quality, quickness with code reviews and collaboration with stakeholders.',
   },
   {
+    name: 'Vinay Ashok',
+    jobTitle: 'Head of Engineering',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      "Dom's technical leadership has been the driving force behind numerous successful initiatives. His commitment to excellence is reflected in everything he does. He has earned the respect of his colleagues and stakeholders with his dedication to quality and user experience.",
+  },
+  {
     name: 'Chirag Goel',
     jobTitle: 'Senior Engineering Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
@@ -517,14 +525,14 @@ export const TESTIMONIALS: Array<Testimonial> = [
   },
   {
     name: 'Janice Lim',
-    jobTitle: 'Principal Product Manager',
+    jobTitle: 'Head of Product',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such an engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
   },
   {
     name: 'Rangana Chandrasena',
-    jobTitle: 'UI Design Lead',
+    jobTitle: 'Senior Manager of Creative',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       'Dom is fast and responsive for designer requests and super flexible for refinements. His attention to detail and work quality is solid. This helped a lot to build flawless products and features at a great speed. I work with him a lot and found it really easy to collaborate for pixel perfect designs.',
@@ -538,10 +546,10 @@ export const TESTIMONIALS: Array<Testimonial> = [
   },
   {
     name: 'Lakshmi Bhandaram',
-    jobTitle: 'Senior Product Manager (Growth)',
+    jobTitle: 'Senior Product Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
-      'In the few interactions I had with Dom, I can say that he has a lot of enthusiasm to learn new things, takes initiative and is very knowledgeable too. He not only voluntarily picked up a few growth tasks when he had time but also always contributed to making the team do better by providing his inputs wherever he sees scope for improvement.',
+      "Dom upholds exceptionally high standards in streamlining front-end development. He demonstrated remarkable attention to detail and efficiency. He is undoubtedly an asset to any project or team. I'm looking forward to more successful collaboration in the years ahead.",
   },
   {
     name: 'Abhina Sathyan',

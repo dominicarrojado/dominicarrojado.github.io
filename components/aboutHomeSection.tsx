@@ -27,8 +27,8 @@ export default function AboutHomeSection() {
         </SectionContent>
         <SectionContent>
           I'm currently based in Singapore and working at{' '}
-          <AnchorLink href={ExternalUrl.PROPERTY_GURU_FINANCE} isExternal>
-            PropertyGuru Finance
+          <AnchorLink href={ExternalUrl.PROPERTY_GURU} isExternal>
+            PropertyGuru
           </AnchorLink>{' '}
           as a Lead Engineer.
         </SectionContent>

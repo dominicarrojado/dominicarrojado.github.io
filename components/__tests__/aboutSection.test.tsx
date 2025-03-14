@@ -49,7 +49,7 @@ describe('<AboutSection />', () => {
     pgfAnchorEls.forEach((pgfAnchorEl) => {
       expect(pgfAnchorEl).toHaveAttribute(
         'href',
-        'https://www.propertyguru.com.sg/mortgage'
+        'https://www.propertyguru.com.sg'
       );
     });
 
