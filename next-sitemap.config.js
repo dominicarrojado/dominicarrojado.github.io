@@ -250,6 +250,10 @@ module.exports = {
       ),
       await config.transform(
         config,
+        '/sg-alerts/topics/cdc-simulator-course-slots/'
+      ),
+      await config.transform(
+        config,
         '/sg-alerts/topics/cdc-practical-test-slots/'
       ),
       await config.transform(
