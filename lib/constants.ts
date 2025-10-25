@@ -87,7 +87,7 @@ export const PROJECTS: Array<Project> = [
   {
     title: '🇸🇬 SG Alerts',
     description:
-      'A free notification service with over 10,000 subscribers and over 40 topics to choose from. It sends Telegram or email notifications when there are new updates from the respective topic.',
+      'A free notification service with over 15,000 subscribers and over 20 topics to choose from. It sends Telegram or email notifications when there are new updates from the respective topic.',
     links: [
       {
         title: 'View 🇸🇬 SG Alerts',
@@ -507,7 +507,7 @@ export const TESTIMONIALS: Array<Testimonial> = [
     jobTitle: 'Chief Technology Officer',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
-      'Dom has been a great and consistent performer with the FinTech team for years. He has lead multiple front-end initiatives that have reduced day-to-day work for other team members. He has displayed great ownership in delivering multiple FinTech projects. He is known for his positive can-do attitude, maintaining high code quality, quickness with code reviews and collaboration with stakeholders.',
+      'Dom has been a great and consistent performer with the team for years. He has lead multiple front-end initiatives that have reduced day-to-day work for other team members. He has displayed great ownership in delivering multiple projects. He is known for his positive can-do attitude, maintaining high code quality, quickness with code reviews and collaboration with stakeholders.',
   },
   {
     name: 'Vinay Ashok',
@@ -517,18 +517,31 @@ export const TESTIMONIALS: Array<Testimonial> = [
       "Dom's technical leadership has been the driving force behind numerous successful initiatives. His commitment to excellence is reflected in everything he does. He has earned the respect of his colleagues and stakeholders with his dedication to quality and user experience.",
   },
   {
-    name: 'Chirag Goel',
-    jobTitle: 'Senior Engineering Manager',
-    companyName: 'PropertyGuru Pte. Ltd.',
-    quote:
-      'Thanks for leading and supporting the team and also addressing critical issues. Thanks for your great work, very well-coordinated and delivered before time. Good work on finding efficient ways of doing recurring things. Together we made some good progress in the FinTech business and reached several milestones. I look forward to more amazing things!',
-  },
-  {
     name: 'Janice Lim',
     jobTitle: 'Head of Product',
     companyName: 'PropertyGuru Pte. Ltd.',
     quote:
       "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such an engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
+  },
+  {
+    name: 'Shivam Mishra',
+    jobTitle: 'Senior Technical Program Manager',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      'I wanted to take some time out to emphasize how wonderful it has been to work with you. I only write such notes when I am super impressed with someone. Your thoroughness, ownership skills, clarity and delivery commitment has been top notch. Your proactive approach has been a key to successful delivery of multiple projects.',
+  },
+  {
+    name: 'Soo Ling Tee',
+    jobTitle: 'Senior Developer',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote: "You're one of the best tech leads I've ever worked with.",
+  },
+  {
+    name: 'Hanric Wong',
+    jobTitle: 'Engineering Manager',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      'Thanks for always owning project delivery and addressing any dependencies when needed. You always pay great attention to detail and proactively fix issues and improve code quality when necessary. Keep up the great work!',
   },
   {
     name: 'Rangana Chandrasena',
