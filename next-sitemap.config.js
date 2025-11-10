@@ -288,6 +288,7 @@ module.exports = {
         config,
         '/sg-alerts/topics/tokyo-disneysea-attraction-updates/'
       ),
+      await config.transform(config, '/sg-alerts/topics/toto-snowballs/'),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
