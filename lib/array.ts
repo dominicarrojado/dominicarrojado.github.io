@@ -7,7 +7,7 @@ export function sortArrayByKeys<T>(
   };
 
   array.sort((a: any, b: any) => {
-    for (let key in sortBy) {
+    for (const key in sortBy) {
       const valueA = transformIgnoreCase(a[key]);
       const valueB = transformIgnoreCase(b[key]);
 

@@ -36,7 +36,7 @@ export default function HeaderLogo(props: Props) {
       Window.off('scroll', onScroll);
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   return (
