@@ -217,7 +217,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://www.qwerk-app.com/sign-in',
+        url: 'https://qwerk.au.meteorapp.com/join-team',
       },
       {
         title: 'View Website',
