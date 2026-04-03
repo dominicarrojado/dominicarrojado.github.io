@@ -23,7 +23,7 @@ describe('<PrivacyPolicySection />', () => {
     const githubAnchorEl = screen.queryByText('GitHub');
     const githubPagesPolicyAnchorEl = screen.queryAllByText('here')[0];
     const meteorAnchorEl = screen.queryByText('Meteor');
-    const meteorCloudAnchorEl = screen.queryAllByText('Meteor Cloud')[1];
+    const meteorCloudAnchorEl = screen.queryAllByText('Galaxy Cloud')[0];
     const meteorCloudPolicyAnchorEl = screen.queryAllByText('here')[1];
     const googleAnchorEls = screen.queryAllByText('Google');
     const googleAnalyticsAnchorEl =
@@ -100,12 +100,12 @@ describe('<PrivacyPolicySection />', () => {
 
     expect(meteorCloudAnchorEl).toHaveAttribute(
       'href',
-      'https://www.meteor.com/cloud'
+      'https://galaxycloud.app'
     );
 
     expect(meteorCloudPolicyAnchorEl).toHaveAttribute(
       'href',
-      'https://cloud-guide.meteor.com/security.html'
+      'https://galaxycloud.app/legal/privacy-policy'
     );
 
     expect(googleAnchorEls.length).toBe(3);

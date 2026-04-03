@@ -217,7 +217,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://qwerk.au.meteorapp.com/join-team',
+        url: 'https://qwerk.sandbox.galaxycloud.app/join-team',
       },
       {
         title: 'View Website',
@@ -252,7 +252,7 @@ export const PROJECTS: Array<Project> = [
     links: [
       {
         title: 'View Web App',
-        url: 'https://food-republic-capsule-surprise.meteorapp.com/',
+        url: 'https://food-republic-capsule-surprise.sandbox.galaxycloud.app',
       },
     ],
     imageUrl: '/images/projects/food-republic-capsule-surprise-web-app.png',

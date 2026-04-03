@@ -59,10 +59,10 @@ export default function PrivacyPolicySection() {
           </AnchorLink>{' '}
           are hosted on{' '}
           <AnchorLink href={ExternalUrl.METEOR_CLOUD} isExternal>
-            Meteor Cloud
+            Galaxy Cloud
           </AnchorLink>{' '}
-          under the domain <code>meteorapp.com</code>. You can refer to their
-          policy{' '}
+          under the domain <code>sandbox.galaxycloud.app</code>. You can refer
+          to their policy{' '}
           <AnchorLink href={ExternalUrl.METEOR_CLOUD_PRIVACY_POLICY} isExternal>
             here
           </AnchorLink>
