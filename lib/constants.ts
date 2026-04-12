@@ -140,8 +140,8 @@ export const PROJECTS: Array<Project> = [
       'A module of Razer Synapse recreated on the web that allows you to create various lighting effects and synchronize across multiple devices, while allowing you to follow the exact placement of your devices on your desktop.',
     links: [
       {
-        title: 'Watch Demo',
-        url: 'https://youtu.be/kFBe_wSwIMQ',
+        title: 'View Web App',
+        url: 'https://razer-chroma-studio-web.pages.dev/',
       },
     ],
     imageUrl: '/images/projects/razer-chroma-studio-web-app.png',
