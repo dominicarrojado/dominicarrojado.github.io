@@ -6,6 +6,7 @@ import { Project } from '../lib/types';
 
 export type Props = {
   project: Project;
+  id?: string;
   className?: string;
   style?: CSSProperties;
   headingLevel: 2 | 3;
@@ -13,12 +14,14 @@ export type Props = {
 
 export default function ProjectItem({
   project,
+  id,
   className,
   style,
   headingLevel,
 }: Props) {
   return (
     <li
+      id={id}
       className={cn(
         'mt-16 flex flex-col items-center first:mt-0',
         'sm:mt-24',

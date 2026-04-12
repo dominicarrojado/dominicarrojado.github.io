@@ -71,6 +71,7 @@ export const GOOGLE_ADSENSE_UNIT_LAYOUTS_LENGTH =
 export const PROJECTS: Array<Project> = [
   {
     title: 'Travel Domination',
+    id: 'travel-domination',
     description:
       "A travel blog with insightful travel guides and itineraries written by OpenAI's Generative model.",
     links: [
@@ -86,6 +87,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: '🇸🇬 SG Alerts',
+    id: 'sg-alerts',
     description:
       'A free notification service with over 15,000 subscribers and over 20 topics to choose from. It sends Telegram or email notifications when there are new updates from the respective topic.',
     links: [
@@ -106,6 +108,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'THX Spatial Audio',
+    id: 'thx-spatial-audio',
     description:
       'Web-based desktop application that delivers advanced 7.1 surround sound with pinpoint positional accuracy to make your game come alive.',
     links: [
@@ -121,6 +124,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer Training Mode: Virus Edition',
+    id: 'razer-training-mode-virus-edition',
     description:
       'Whack-a-mole mini-game where you whack viruses instead of moles.',
     links: [
@@ -136,6 +140,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer Chroma Studio Web',
+    id: 'razer-chroma-studio-web',
     description:
       'A module of Razer Synapse recreated on the web that allows you to create various lighting effects and synchronize across multiple devices, while allowing you to follow the exact placement of your devices on your desktop.',
     links: [
@@ -152,6 +157,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer Streamer Companion App',
+    id: 'razer-streamer-companion-app',
     description:
       'Web-based desktop application where you can create unique audience interactions with supported Razer hardware.',
     links: [
@@ -167,6 +173,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer 7.1 Surround Sound',
+    id: 'razer-7-1-surround-sound',
     description:
       'Web-based desktop application for superior positional audio and a lifelike gaming experience.',
     links: [
@@ -182,6 +189,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer Developer Portal',
+    id: 'razer-developer-portal',
     description:
       'A portal for third-party developers to manage their projects that uses Razer ID API.',
     links: [
@@ -197,6 +205,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Razer ID',
+    id: 'razer-id',
     description:
       'Profile management and authentication service tool for all Razer services. Built for web, desktop and mobile.',
     links: [
@@ -212,6 +221,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Qwerk',
+    id: 'qwerk',
     description:
       'Project management + chat tool for productivity. It has notes and a timer feature as well.',
     links: [
@@ -232,6 +242,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Maybank: FC Barcelona',
+    id: 'maybank-fc-barcelona',
     description:
       "Website for Maybank to introduce its FC Barcelona Visa Signature Card. Maybank is one of the world's most valuable bank brands.",
     links: [
@@ -247,6 +258,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Food Republic: Capsule Surprise',
+    id: 'food-republic-capsule-surprise',
     description:
       "A classic game for Food Republic's Wisma Atria reopening. Food Republic is a food court chain run by the BreadTalk Group based in Singapore.",
     links: [
@@ -262,6 +274,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: "Aptamil: Build Your Baby's Foundation to be One Step Ahead",
+    id: 'aptamil-build-your-baby-s-foundation-to-be-one-step-ahead',
     description:
       'Campaign for Aptamil to promote the 2 key pillars of foundation: natural defences and brain development.',
     links: [
@@ -278,6 +291,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Kronenbourg 1664',
+    id: 'kronenbourg-1664',
     description:
       'Website for the most sold French beer in the world and the market leader for high-end premium beers.',
     links: [
@@ -293,6 +307,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Singtel: Data x Infinity',
+    id: 'singtel-data-x-infinity',
     description:
       "Web app for Singtel's event promoting new mobile data add-on. Singtel is one of the four major telcos operating in  Singapore",
     links: [
@@ -312,6 +327,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'CNB: Anti Drug Abuse Campaign',
+    id: 'cnb-anti-drug-abuse-campaign',
     description:
       'Campaign that aims to raise awareness and support for the anti-drug cause in Singapore.',
     links: [
@@ -331,6 +347,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Hashtag Interactive',
+    id: 'hashtag-interactive',
     description:
       'Website for a boutique digital marketing agency that is optimized for a digital-centric world.',
     links: [
@@ -346,6 +363,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'To My Valentine',
+    id: 'to-my-valentine',
     description:
       "Valentine's day card app that lets you send cute e-cards to your special someone.",
     links: [
@@ -362,6 +380,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Holly Jolly Memory Game',
+    id: 'holly-jolly-memory-game',
     description:
       'Simon-inspired memory game for Christmas by Hashtag Interactive.',
     links: [
@@ -379,6 +398,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'Welcome to Hashtag!',
+    id: 'welcome-to-hashtag',
     description:
       'HTML email template to welcome new Hashtag Interactive clients.',
     links: [
@@ -394,6 +414,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'M1 Email Templates',
+    id: 'm1-email-templates',
     description:
       'HTML email templates for M1, one of the four major telcos operating in  Singapore.',
     links: [
@@ -421,6 +442,7 @@ export const PROJECTS: Array<Project> = [
   },
   {
     title: 'AXA Email Templates',
+    id: 'axa-email-templates',
     description:
       "HTML email templates for AXA, one of the world's leading insurance companies.",
     links: [

@@ -133,6 +133,7 @@ export type ProjectLink = {
 
 export type Project = {
   title: string;
+  id: string;
   description: string;
   links: Array<ProjectLink>;
   imageUrl: string;
