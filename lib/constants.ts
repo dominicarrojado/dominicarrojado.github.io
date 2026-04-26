@@ -107,6 +107,24 @@ export const PROJECTS: Array<Project> = [
     isBest: true,
   },
   {
+    title: 'PropertyGuru Finance Digital Mortgage Application',
+    id: 'pg-finance-digital-mortgage-application',
+    description:
+      'Allows customers to self-serve and complete the bank application via a guided step-by-step form, upload any supporting documents and provide signatures digitally.',
+    links: [
+      {
+        title: 'View Web App',
+        url: 'https://pg-finance-digital-mortgage-application.pages.dev/#/home',
+      },
+    ],
+    imageUrl:
+      '/images/projects/propertyguru-finance-digital-mortgage-application-web-app.png',
+    imageWidth: 1814,
+    imageHeight: 1133,
+    gifUrl:
+      '/images/projects/propertyguru-finance-digital-mortgage-application-web-app.gif',
+  },
+  {
     title: 'THX Spatial Audio',
     id: 'thx-spatial-audio',
     description:
