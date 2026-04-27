@@ -564,6 +564,13 @@ export const TESTIMONIALS: Array<Testimonial> = [
       "Having worked with many teams of engineers, very rarely do I encounter engineers like Dom who demonstrate the perfect blend of skills, creativity, and initiative. I'm extremely fortunate to have such an engineer on the team. It has not only made my job easier, but we've also ended up with better end products - seamless collaboration, great exchange of ideas, quick and precise execution.",
   },
   {
+    name: 'Vishnu Vennavaram',
+    jobTitle: 'Senior Engineering Manager',
+    companyName: 'PropertyGuru Pte. Ltd.',
+    quote:
+      "Your dedication to sharing info and keeping projects on track is truly appreciated! It's clear why everyone speaks so highly of you - you handle everything with such grace and clarity.",
+  },
+  {
     name: 'Shivam Mishra',
     jobTitle: 'Senior Technical Program Manager',
     companyName: 'PropertyGuru Pte. Ltd.',
