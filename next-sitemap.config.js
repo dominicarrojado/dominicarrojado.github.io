@@ -265,6 +265,314 @@ module.exports = {
         config,
         '/sg-alerts/topics/singapore-airlines-flights/'
       ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/kuala-lumpur/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/penang/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/phuket/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/jakarta/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/medan/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/ho-chi-minh-city/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/denpasar-bali/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/surabaya/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/hong-kong/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/phnom-penh/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/mumbai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/da-nang/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/manila/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/hanoi/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/chennai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/yangon/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/cebu/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/bangkok/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/siem-reap/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/kolkata/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/shenzhen/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/bengaluru/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/guangzhou/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/ahmedabad/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/taipei/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/xiamen/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/bandar-seri-begawan/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/beijing/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/chongqing/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/hangzhou/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/chengdu/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/hyderabad/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/darwin/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/kochi/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/delhi/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/shanghai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/seoul/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/colombo/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/dhaka/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/cairns/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/perth/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/busan/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/kathmandu/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/osaka/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/nagoya/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/male/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/sydney/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/brisbane/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/melbourne/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/adelaide/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/tokyo/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/fukuoka/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/istanbul/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/johannesburg/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/dubai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/sapporo/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/frankfurt/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/brussels/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/barcelona/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/san-francisco/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/los-angeles/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/milan/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/london/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/paris/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/munich/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/zurich/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/manchester/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/seattle/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/rome/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/auckland/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/copenhagen/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/amsterdam/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/christchurch/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/cape-town/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/new-york/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/houston/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/riyadh/'
+      ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
