@@ -3,6 +3,7 @@
 module.exports = {
   siteUrl: 'https://dominicarrojado.com',
   generateRobotsTxt: true,
+  outDir: './out',
   exclude: ['/subscribe'],
   additionalPaths: async (config) => {
     const configNoTrailingSlash = {
