@@ -574,6 +574,67 @@ module.exports = {
         config,
         '/sg-alerts/topics/singapore-airlines-flights/riyadh/'
       ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/kuala-lumpur/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/penang/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/langkawi/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/ipoh/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/phuket/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/jakarta/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/bangkok/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/kota-kinabalu/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/denpasar-bali/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/ho-chi-minh-city/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/taipei/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/manila/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/chennai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/chiang-mai/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/perth/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/guangzhou/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/hong-kong/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/seoul/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/macau/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/osaka/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/tiruchirappalli/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/sydney/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/jeju/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/tokyo/'),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
