@@ -635,6 +635,7 @@ module.exports = {
       await config.transform(config, '/sg-alerts/topics/scoot-flights/sydney/'),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/jeju/'),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/tokyo/'),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/clark/'),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
