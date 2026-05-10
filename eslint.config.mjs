@@ -10,6 +10,27 @@ const eslintConfig = defineConfig([
   {
     rules: {
       '@next/next/no-img-element': 'off',
+      '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+      curly: ['error', 'all'],
+      'no-duplicate-imports': 'error',
+      'no-nested-ternary': 'error',
+      'object-shorthand': ['error', 'always'],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "CallExpression[callee.property.name='then']",
+          message: 'Avoid .then() - use async/await with try/catch instead.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='catch']",
+          message: 'Avoid .catch() - use async/await with try/catch instead.',
+        },
+      ],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'prefer-arrow-callback': 'error',
+      'no-promise-executor-return': 'error',
+      'no-var': 'error',
+      'prefer-const': 'error',
       'react/no-unescaped-entities': ['error', { forbid: ['>', '}'] }],
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-require-imports': 'off',
