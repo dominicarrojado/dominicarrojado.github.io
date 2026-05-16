@@ -194,6 +194,6 @@ If you're ready to commit your changes in git, you can create a `.gitignore` fil
 .DS_Store
 ```
 
-That's it! You now have a local development setup for MJML framework and start building email templates. I hope this was helpful and please don't forget to share. For the [next post](/posts/building-an-email-template-with-mjml-framework/), it's all about building an email template using MJML framework and it will utilize this setup. So you're interested, please go ahead and check it out.
+That's it! You now have a local development setup for MJML framework and can start building email templates. I hope this was helpful and please don't forget to share. For the [next post](/posts/building-an-email-template-with-mjml-framework/), it's all about building an email template using MJML framework and it will utilize this setup. So if you're interested, please go ahead and check it out.
 
 Cheers ~

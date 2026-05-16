@@ -83,9 +83,9 @@ And update the `src/index.css` too:
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -517,7 +517,7 @@ import Accordion from '../Accordion';
 describe('<Accordion />', () => {});
 ```
 
-`describe` creates a block that groups together several related tests. So ideally the description should be describing what we are testing, for this case I used the component name. Feel free to rename it according to your preference. `describe` is one of Jest's global functions, so with the setup of Create React App, we don't need to specifically import these global functions in our code, we can just directly use them.
+`describe` creates a block that groups together several related tests. So ideally the description should be describing what we are testing, in this case I used the component name. Feel free to rename it according to your preference. `describe` is one of Jest's global functions, so with the setup of Create React App, we don't need to specifically import these global functions in our code, we can just directly use them.
 
 Next we can add a test case inside the `describe` block:
 

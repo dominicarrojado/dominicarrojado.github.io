@@ -6,7 +6,7 @@ category: 'personal'
 videoUrl: ''
 ---
 
-Everyone of us has a turning point in life where our paths are divided and we need to choose just one. A turning point is a critical time in your life where big decisions could lead to big change, both at work and in life.
+Every one of us has a turning point in life where our paths are divided and we need to choose just one. A turning point is a critical time in your life where big decisions could lead to big change, both at work and in life.
 
 My first turning point was when I was in my 1st year of high school. I was addicted to playing computer games. Every day, I looked forward to the end of classes so I could head straight to the computer shop. I didn't even bother changing out of my school uniform at times. When I had assignments, I asked my mom to do them for me. It was a norm for us since grade school. Somehow she was okay with this and didn't scold me for asking her to do so. During exams, I would hardly or never study at all. Nevertheless, I was blessed to still be the top 4 in my class (but the credit goes to my mom). I was pretty content with this and didn't think much about it.
 

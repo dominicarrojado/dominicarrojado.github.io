@@ -24,7 +24,7 @@ export default function AboutSection() {
         </figure>
         <p>
           My name is Dominic Arrojado and it is my passion to translate design
-          into code with great attention to details and solve complicated
+          into code with great attention to detail and solve complicated
           problems with simple solutions. I'm a web developer specializing in
           both front-end and back-end development. I'm experienced in developing
           small to large web applications.

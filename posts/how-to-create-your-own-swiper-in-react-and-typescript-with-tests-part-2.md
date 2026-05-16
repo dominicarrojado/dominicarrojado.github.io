@@ -36,7 +36,7 @@ describe('<SwiperItem />', () => {});
 
 Aside from importing the component that we will test, we also imported the type `Props`. You'll get to see later why.
 
-`describe` is one of Jest's global functions, so with the setup of Create React App, we don't need to specifically import these global functions in our code, we can just directly use them. `describe` creates a block that groups together several related tests. So ideally the description should be describing what we are testing, for this case I used the component name. Feel free to rename it according to your preference.
+`describe` is one of Jest's global functions, so with the setup of Create React App, we don't need to specifically import these global functions in our code, we can just directly use them. `describe` creates a block that groups together several related tests. So ideally the description should be describing what we are testing, in this case I used the component name. Feel free to rename it according to your preference.
 
 Next we can add a test case inside the `describe` block:
 
@@ -281,7 +281,7 @@ Before we move into writing the code for the test case. We need to create a help
 export function setReadOnlyProperty<
   O extends Record<string, any>,
   K extends keyof O,
-  V extends any
+  V extends any,
 >(object: O, property: K, value: V) {
   Object.defineProperty(object, property, {
     value,
@@ -321,7 +321,7 @@ import { setReadOnlyProperty } from '../../lib/test-helpers';
 
 Here, we generated a random number using `faker` for the `containerWidth` (note that it should be minimum of `1` to make our test case reliable) then multiplied it by the number of images we have for the `containerScrollWidth`.
 
-Then, we used `screen.queryAllByRole()` to query an array of elements that has a role of `list`, elements declared as `<ul>` automatically gets an role of `list`. We couldn't use `screen.queryByRole()` because we have another `<ul>` which is the list element that contains our indicators. In case you need it, you can check ther [list of roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques#roles) you could use for this query other than `list` for your future test cases.
+Then, we used `screen.queryAllByRole()` to query an array of elements that has a role of `list`, elements declared as `<ul>` automatically gets an role of `list`. We couldn't use `screen.queryByRole()` because we have another `<ul>` which is the list element that contains our indicators. In case you need it, you can check the [list of roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques#roles) you could use for this query other than `list` for your future test cases.
 
 After getting the list element, we then override its `offsetWidth` and `containerScrollWidth`.
 
@@ -618,7 +618,7 @@ Next, let's verify that the current "active" indicator is the first indicator si
 ...
 ```
 
-Yes, that's how simple it is!
+That's how simple it is!
 
 Now, we need to verify that once we click on the second indicator, it should display the second image. But before that, let's first verify the second indicator is not "active" with the following code:
 
