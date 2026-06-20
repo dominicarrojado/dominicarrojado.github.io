@@ -666,6 +666,8 @@ module.exports = {
       await config.transform(config, '/ph-alerts/settings/'),
       await config.transform(config, '/ph-alerts/about/'),
       await config.transform(config, '/ph-alerts/how-it-works/'),
+      await config.transform(config, '/ph-alerts/categories/travel/'),
+      await config.transform(config, '/ph-alerts/categories/exam-results/'),
       await config.transform(config, '/ph-alerts/topics/cebu-pacific-flights/'),
       await config.transform(config, '/ph-alerts/topics/jetstar-flights/'),
 
