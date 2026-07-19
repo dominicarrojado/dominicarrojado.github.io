@@ -62,8 +62,16 @@ if (fs.existsSync(skillsDir)) {
 
   skillFolders.forEach((folder) => {
     const skillFilePath = path.join(skillsDir, folder, 'SKILL.md');
+    let localFailed = false;
+
+    function logLocalFail(message) {
+      console.error(`\x1b[31mFAIL: ${message}\x1b[0m`);
+      localFailed = true;
+      failed = true;
+    }
+
     if (!fs.existsSync(skillFilePath)) {
-      logFail(`Skill folder "${folder}" is missing a "SKILL.md" file.`);
+      logLocalFail(`Skill folder "${folder}" is missing a "SKILL.md" file.`);
       return;
     }
 
@@ -73,24 +81,24 @@ if (fs.existsSync(skillsDir)) {
       const data = parsed.data;
 
       if (!data.name) {
-        logFail(`Skill "${folder}/SKILL.md" is missing "name" in frontmatter.`);
+        logLocalFail(`Skill "${folder}/SKILL.md" is missing "name" in frontmatter.`);
       } else if (data.name !== folder) {
-        logFail(
+        logLocalFail(
           `Skill name "${data.name}" in frontmatter does not match folder name "${folder}".`
         );
       }
 
       if (!data.description) {
-        logFail(
+        logLocalFail(
           `Skill "${folder}/SKILL.md" is missing "description" in frontmatter.`
         );
       }
 
-      if (!failed) {
+      if (!localFailed) {
         logPass(`Skill "${folder}" verified successfully.`);
       }
     } catch (err) {
-      logFail(`Error parsing skill "${folder}/SKILL.md": ${err.message}`);
+      logLocalFail(`Error parsing skill "${folder}/SKILL.md": ${err.message}`);
     }
   });
 } else {

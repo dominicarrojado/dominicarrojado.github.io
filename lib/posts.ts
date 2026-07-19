@@ -6,10 +6,20 @@ import { POSTS_PER_PAGE } from './constants';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-function getPostFiles() {
+export function getPostFiles() {
   return fs
     .readdirSync(postsDirectory)
-    .filter((fileName) => fileName.endsWith('.md') && fileName !== 'GEMINI.md');
+    .filter((fileName) => {
+      if (!fileName.endsWith('.md')) {
+        return false;
+      }
+
+      // Ignore uppercase system/agent files (e.g. GEMINI.md, CLAUDE.md, COPILOT.md, AGENTS.md)
+      const baseName = fileName.replace(/\.md$/, '');
+      const isSystemFile = /^[A-Z0-9_-]+$/.test(baseName);
+
+      return !isSystemFile;
+    });
 }
 
 export function getAllPostsData() {
