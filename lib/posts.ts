@@ -6,9 +6,15 @@ import { POSTS_PER_PAGE } from './constants';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
+function getPostFiles() {
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((fileName) => fileName.endsWith('.md') && fileName !== 'GEMINI.md');
+}
+
 export function getAllPostsData() {
   // get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
   const posts = fileNames.map((fileName) => {
     // remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
@@ -30,13 +36,13 @@ export function getAllPostsData() {
 }
 
 export function getAllPostsLastPage() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
 
   return Math.ceil(fileNames.length / POSTS_PER_PAGE);
 }
 
 export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
 
   return fileNames.map((fileName) => ({
     params: {
