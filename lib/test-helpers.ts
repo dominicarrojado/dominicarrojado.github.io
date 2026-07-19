@@ -1,9 +1,8 @@
 import { fireEvent, Screen } from '@testing-library/react';
 import { faker } from '@faker-js/faker';
-import fs from 'fs';
-import path from 'path';
 import { DialogState } from 'ariakit/dialog';
 import { Nullish, Route } from './types';
+import { getPostFiles } from './posts';
 import {
   GOOGLE_ADSENSE_UNITS,
   GOOGLE_ADSENSE_UNITS_LENGTH,
@@ -23,7 +22,7 @@ import { TooltipState } from 'ariakit';
 export function setReadOnlyProperty<
   O extends Record<string, any>,
   K extends keyof O,
-  V extends any
+  V extends any,
 >(object: O, property: K, value: V) {
   Object.defineProperty(object, property, {
     value,
@@ -94,8 +93,7 @@ export function getRandomRouteExceptHome(): Exclude<Route, Route.HOME> {
 }
 
 export function getRandomPostId() {
-  const postsDirectory = path.join(process.cwd(), 'posts');
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
   const posts = fileNames.map((fileName) => {
     // remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
@@ -145,7 +143,7 @@ export function getMatchMediaMock(
         addListener: jest.fn(),
         removeListener: jest.fn(),
         ...customResponse,
-      } as MediaQueryList)
+      }) as MediaQueryList
   );
 }
 

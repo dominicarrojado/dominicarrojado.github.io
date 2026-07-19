@@ -6,9 +6,25 @@ import { POSTS_PER_PAGE } from './constants';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
+export function getPostFiles() {
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((fileName) => {
+      if (!fileName.endsWith('.md')) {
+        return false;
+      }
+
+      // Ignore uppercase system/agent files (e.g. GEMINI.md, CLAUDE.md, COPILOT.md, AGENTS.md)
+      const baseName = fileName.replace(/\.md$/, '');
+      const isSystemFile = /^[A-Z0-9_-]+$/.test(baseName);
+
+      return !isSystemFile;
+    });
+}
+
 export function getAllPostsData() {
   // get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
   const posts = fileNames.map((fileName) => {
     // remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
@@ -30,13 +46,13 @@ export function getAllPostsData() {
 }
 
 export function getAllPostsLastPage() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
 
   return Math.ceil(fileNames.length / POSTS_PER_PAGE);
 }
 
 export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
 
   return fileNames.map((fileName) => ({
     params: {
