@@ -1,7 +1,5 @@
 import { fireEvent, Screen } from '@testing-library/react';
 import { faker } from '@faker-js/faker';
-import fs from 'fs';
-import path from 'path';
 import { DialogState } from 'ariakit/dialog';
 import { Nullish, Route } from './types';
 import { getPostFiles } from './posts';
