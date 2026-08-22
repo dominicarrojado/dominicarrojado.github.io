@@ -42,7 +42,7 @@ describe('<App />', () => {
   };
 
   beforeEach(() => {
-    window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+    window.matchMedia = jest.fn(() => ({ matches: false }) as MediaQueryList);
 
     jest
       .spyOn(nextRouter, 'useRouter')

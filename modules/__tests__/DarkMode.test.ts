@@ -4,7 +4,7 @@ describe('DarkMode module', () => {
   const matchMediaOrig = window.matchMedia;
 
   beforeEach(() => {
-    window.matchMedia = jest.fn(() => ({ matches: false } as MediaQueryList));
+    window.matchMedia = jest.fn(() => ({ matches: false }) as MediaQueryList);
   });
 
   afterEach(() => {
@@ -35,7 +35,7 @@ describe('DarkMode module', () => {
       (query) =>
         ({
           matches: query === '(prefers-color-scheme: dark)',
-        } as MediaQueryList)
+        }) as MediaQueryList
     );
 
     DarkMode.init();

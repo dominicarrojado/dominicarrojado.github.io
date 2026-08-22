@@ -50,10 +50,10 @@ describe('<PostContent />', () => {
         excerpt: getFakeSentences(),
         videoUrl: getFakeUrl(),
       },
-    } as PostData & {
+    }) as PostData & {
       previousPost: Post;
       nextPost: Post;
-    });
+    };
 
   describe('all props defined', () => {
     const postData = generatePostData();

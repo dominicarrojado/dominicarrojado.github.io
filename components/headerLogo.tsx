@@ -35,8 +35,6 @@ export default function HeaderLogo(props: Props) {
     return () => {
       Window.off('scroll', onScroll);
     };
-
-     
   }, []);
 
   return (

@@ -171,7 +171,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col justify-center items-center min-h-screen py-16">
+      <main className="flex min-h-screen flex-col items-center justify-center py-16">
         <h1 className="text-center text-6xl">
           Welcome to{' '}
           <a
@@ -184,15 +184,15 @@ const Home: NextPage = () => {
 
         <p className="my-16 text-center text-2xl">
           Get started by editing{' '}
-          <code className="rounded bg-slate-50 p-3 text-lg font-mono">
+          <code className="font-mono rounded bg-slate-50 p-3 text-lg">
             pages/index.tsx
           </code>
         </p>
 
-        <div className="flex flex-col flex-wrap justify-center items-center max-w-full sm:flex-row sm:max-w-2xl">
+        <div className="flex max-w-full flex-col flex-wrap items-center justify-center sm:max-w-2xl sm:flex-row">
           <a
             href="https://nextjs.org/docs"
-            className="max-w-[300px] m-4 p-6 text-left text-inherit border border-slate-200 rounded-lg transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="m-4 max-w-[300px] rounded-lg border border-slate-200 p-6 text-left text-inherit transition-colors hover:border-blue-600 hover:text-blue-600"
           >
             <h2 className="mb-4 text-2xl">Documentation &rarr;</h2>
             <p className="text-xl">
@@ -202,7 +202,7 @@ const Home: NextPage = () => {
 
           <a
             href="https://nextjs.org/learn"
-            className="max-w-[300px] m-4 p-6 text-left text-inherit border border-slate-200 rounded-lg transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="m-4 max-w-[300px] rounded-lg border border-slate-200 p-6 text-left text-inherit transition-colors hover:border-blue-600 hover:text-blue-600"
           >
             <h2 className="mb-4 text-2xl">Learn &rarr;</h2>
             <p className="text-xl">
@@ -212,7 +212,7 @@ const Home: NextPage = () => {
 
           <a
             href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="max-w-[300px] m-4 p-6 text-left text-inherit border border-slate-200 rounded-lg transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="m-4 max-w-[300px] rounded-lg border border-slate-200 p-6 text-left text-inherit transition-colors hover:border-blue-600 hover:text-blue-600"
           >
             <h2 className="mb-4 text-2xl">Examples &rarr;</h2>
             <p className="text-xl">
@@ -222,7 +222,7 @@ const Home: NextPage = () => {
 
           <a
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="max-w-[300px] m-4 p-6 text-left text-inherit border border-slate-200 rounded-lg transition-colors hover:border-blue-600 hover:text-blue-600"
+            className="m-4 max-w-[300px] rounded-lg border border-slate-200 p-6 text-left text-inherit transition-colors hover:border-blue-600 hover:text-blue-600"
           >
             <h2 className="mb-4 text-2xl">Deploy &rarr;</h2>
             <p className="text-xl">
@@ -232,15 +232,15 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer className="flex flex-1 justify-center items-center py-8 border-t border-slate-200">
+      <footer className="flex flex-1 items-center justify-center border-t border-slate-200 py-8">
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-grow justify-center items-center"
+          className="flex flex-grow items-center justify-center"
         >
           Powered by{' '}
-          <span className="h-[1em] ml-2">
+          <span className="ml-2 h-[1em]">
             <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
