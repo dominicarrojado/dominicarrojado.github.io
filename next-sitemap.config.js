@@ -660,6 +660,11 @@ module.exports = {
         '/sg-alerts/topics/tokyo-disneysea-attraction-updates/'
       ),
       await config.transform(config, '/sg-alerts/topics/toto-snowballs/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/golden-village-movies/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/shaw-theatres-movies/'),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
