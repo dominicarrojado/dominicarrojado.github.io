@@ -1,0 +1,53 @@
+name: OpenCode Verification
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - '.opencode/**'
+      - 'opencode.json'
+      - 'scripts/validate-opencode.js'
+      - '.github/workflows/opencode-verify.yml'
+  pull_request:
+    branches: [develop]
+    paths:
+      - '.opencode/**'
+      - 'opencode.json'
+      - 'scripts/validate-opencode.js'
+      - '.github/workflows/opencode-verify.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run OpenCode Verification
+        run: node scripts/validate-opencode.js

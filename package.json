@@ -10,7 +10,8 @@
     "lint": "eslint",
     "postbuild": "next-sitemap",
     "test": "jest --coverage",
-    "test:watch": "jest --coverage --watch"
+    "test:watch": "jest --coverage --watch",
+    "validate:opencode": "node scripts/validate-opencode.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
