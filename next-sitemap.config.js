@@ -229,6 +229,7 @@ module.exports = {
       await config.transform(config, '/sg-alerts/categories/events/'),
       await config.transform(config, '/sg-alerts/categories/entertainment/'),
       await config.transform(config, '/sg-alerts/categories/theme-parks/'),
+      await config.transform(config, '/sg-alerts/categories/sports/'),
       await config.transform(
         config,
         '/sg-alerts/topics/japan-visa-appointment-slots/'
@@ -574,6 +575,10 @@ module.exports = {
         config,
         '/sg-alerts/topics/singapore-airlines-flights/riyadh/'
       ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/singapore-airlines-flights/madrid/'
+      ),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/'),
       await config.transform(
         config,
@@ -636,6 +641,36 @@ module.exports = {
       await config.transform(config, '/sg-alerts/topics/scoot-flights/jeju/'),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/tokyo/'),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/clark/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/surabaya/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/yogyakarta/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/hat-yai/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/hangzhou/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/hanoi/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/phu-quoc/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/okinawa/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/da-nang/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/scoot-flights/vienna/'),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
@@ -660,6 +695,18 @@ module.exports = {
         '/sg-alerts/topics/tokyo-disneysea-attraction-updates/'
       ),
       await config.transform(config, '/sg-alerts/topics/toto-snowballs/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/badminton-court-slots-our-tampines-hub/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/badminton-court-slots-heartbeat-bedok/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/badminton-court-slots-pasir-ris/'
+      ),
       await config.transform(
         config,
         '/sg-alerts/topics/golden-village-movies/'
