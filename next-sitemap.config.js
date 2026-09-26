@@ -712,6 +712,25 @@ module.exports = {
         '/sg-alerts/topics/golden-village-movies/'
       ),
       await config.transform(config, '/sg-alerts/topics/shaw-theatres-movies/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/burnt-ends-table-reservation-slots/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/community-blood-drives/'
+      ),
+      await config.transform(config, '/sg-alerts/topics/cdc-announcements/'),
+      await config.transform(config, '/sg-alerts/topics/ssdc-announcements/'),
+      await config.transform(config, '/sg-alerts/topics/bbdc-announcements/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/trip-com-travel-deals/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/traveloka-travel-deals/'
+      ),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
