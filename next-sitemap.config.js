@@ -736,6 +736,71 @@ module.exports = {
         config,
         '/sg-alerts/topics/traveloka-travel-deals/'
       ),
+      await config.transform(config, '/sg-alerts/topics/miles-credit-cards/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/standard-chartered-visa-infinite/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/citi-prestige/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/american-express-singapore-airlines-krisflyer-ascend/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/dbs-altitude/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/krisflyer-uob/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/citi-premiermiles/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/standard-chartered-journey/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/ocbc-90n/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/dbs-vantage/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/hsbc-travelone/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/american-express-singapore-airlines-krisflyer/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/ocbc-voyage/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/uob-prvi-miles/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/maybank-horizon/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/hsbc-visa-infinite/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/miles-credit-cards/standard-chartered-priority-visa-infinite/'
+      ),
 
       // ph alerts
       await config.transform(config, '/ph-alerts/'),
