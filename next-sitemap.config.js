@@ -676,6 +676,14 @@ module.exports = {
         '/sg-alerts/topics/scoot-flights/thiruvananthapuram/'
       ),
       await config.transform(config, '/sg-alerts/topics/scoot-flights/cebu/'),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/qingdao/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/nanjing/'
+      ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
