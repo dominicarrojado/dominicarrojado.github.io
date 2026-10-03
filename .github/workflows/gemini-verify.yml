@@ -9,6 +9,7 @@ on:
       - '.github/workflows/gemini-verify.yml'
   pull_request:
     branches: [develop]
+    types: [opened, synchronize, reopened, ready_for_review, unlabeled]
     paths:
       - '.gemini/**'
       - 'scripts/validate-gemini.js'
@@ -16,8 +17,13 @@ on:
 
 jobs:
   verify:
+    if: >-
+      github.event_name != 'pull_request' || (
+        !github.event.pull_request.draft &&
+        !contains(github.event.pull_request.labels.*.name, 'copilot-loop') &&
+        (github.event.action != 'unlabeled' || github.event.label.name == 'copilot-loop')
+      )
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
