@@ -692,6 +692,14 @@ module.exports = {
         config,
         '/sg-alerts/topics/scoot-flights/tokyo-haneda/'
       ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/melbourne/'
+      ),
+      await config.transform(
+        config,
+        '/sg-alerts/topics/scoot-flights/sapporo/'
+      ),
       await config.transform(config, '/sg-alerts/topics/jetstar-flights/'),
       await config.transform(config, '/sg-alerts/topics/coe-bidding-results/'),
       await config.transform(config, '/sg-alerts/topics/ktm-train-tickets/'),
