@@ -28,7 +28,7 @@ Let's get started!
 | 25 Jan 2024       | Passed the Final Theory Test (FTT)  |
 | 6 Mar 2024        | Warm-up and first TP test (failed)  |
 | 15 Apr 2024       | Warm-up and second TP test (passed) |
-| 17 Apr 2024       | License appeared on SingPass        |
+| 17 Apr 2024       | License appeared on Singpass        |
 | 24 Apr 2024       | Collected the physical license      |
 
 In total, it took 6 months and 14 days from registering to my second TP test, with 25 practical lessons.
@@ -105,7 +105,7 @@ The tester asked me to follow to the 2nd floor and sit outside the office. After
 My timeline after that:
 
 - **16 April 2024:** applied online for my license
-- **17 April 2024:** my license showed up on SingPass, one working day later
+- **17 April 2024:** my license showed up on Singpass, one working day later
 - **18 April 2024:** I received my refund of S$490.49, about 3 working days after the test
 - **23 April 2024:** the physical license was delivered, but I wasn't home
 - **24 April 2024:** I collected it from the nearest SingPost branch
