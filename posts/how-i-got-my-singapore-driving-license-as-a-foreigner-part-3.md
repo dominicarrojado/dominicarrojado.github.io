@@ -118,7 +118,7 @@ These were the lessons I enjoyed most, because they felt closest to the real tes
 - When changing lanes, maintain your speed and don't slow down. Stay in your lane while you look for a gap
 - Stay behind the yellow box and the pedestrian crossing
 - At a green light with no right arrow, inch forward and watch for incoming traffic (especially motorbikes) before you turn
-- On bends or humps, change to 2nd gear. Always check your speed. Don't go beyond 50 km/h
+- On bends or humps, change to 2nd gear. Always check your speed and follow the posted speed limit. The test routes I drove were mostly 50 km/h roads
 - At a stop sign or white line, always stop before turning. If you don't, it's an immediate failure. Change to 1st gear after stopping
 - If you forget whether to turn right or do a U-turn, check the sign. If it says KPE or an expressway, don't go there. Or just ask the tester again
 - When you exit the circuit onto the main road, the tester may ask you to do a U-turn right away

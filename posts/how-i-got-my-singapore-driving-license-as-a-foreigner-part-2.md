@@ -48,7 +48,7 @@ My first lesson started around 10am. It was mostly knowledge transfer about the 
 - Adjust the mirror so that you only see about a quarter of the car. The horizontal line should be slightly above the middle
 - To start the car (if it's keyless), press the clutch all the way then press the button
 - Gears: 1 is for moving off, 2 to 4 are for driving, 5 is overdrive and R is reverse. Neutral is the middle position
-- The maximum speed is 20 km/h inside the circuit and 50 km/h on Singapore roads
+- The maximum speed is 20 km/h inside the circuit. On the roads, the speed limit depends on the road, so always follow the posted speed limit signs. In my lessons and the test routes, I mostly stayed within 50 km/h
 - Check your mirrors every 5 to 10 seconds
 - Signalling isn't just for turning or changing lanes. You also signal when you are moving off
 - Don't use the horn. Let your instructor handle it
