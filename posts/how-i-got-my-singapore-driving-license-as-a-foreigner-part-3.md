@@ -125,8 +125,7 @@ These were the lessons I enjoyed most, because they felt closest to the real tes
 - Don't get confused by the traffic light when doing a U-turn on a wider kerb. That light is for the straight lane
 - Double the usual distance on a wet road. It doesn't have to be raining for the road to be less grippy
 - When you are turning right on the 2nd lane, stay on the 2nd lane
-- If you forget to check your blind spots, don't do a late check. It costs you more points
-- An early or late blind spot check costs 6 points, while a missed check costs 4 points. So if you miss it, just take the 4 points
+- Always check your blind spots before you move off, change lane or turn. In my notes, an early or late check cost 6 points while a missed check cost 4 points, but safety comes first. The habit matters more than the points
 - Bus lanes have hours (when I learned it was 7:30am to 9:30am and 5pm to 8pm). Check the signs
 - When you change gear, keep checking the road ahead every now and then, especially when you are looking at the side mirrors
 
@@ -140,7 +139,7 @@ Lesson 18 was a final evaluation, a review of all the previous subjects. After t
 
 - Before moving off, remember to release the handbrake. Always check your blind spots before moving off
 - Signal and change gear first, before adjusting the side mirrors, because you will often forget
-- If you forgot to reset the side mirrors, don't make it obvious. Wait for the next parking so you can reset them
+- If you forgot to reset the side mirrors, reset them at the next safe opportunity, like the next parking
 - Slope: find the biting point first before you press the accelerator
 - When you come out of the car park and you are near a cone or kerb, wait until your shoulder passes before turning the steering wheel
 - When the tester is panicking because of time, just stay calm and check for safety
@@ -185,7 +184,7 @@ The things I remember:
 - The older the car the faster it uses oil. Remember this when you buy a car
 - Tyre age is printed on the side as a four-digit code. For example, 2813 means week 28 of 2013
 - Check the tread depth with the tread marker. Check that the tyres aren't flat. Pump air at a petrol station and if it's still flat, there might be a cut
-- You also learn how to change a tyre with a jack. The key points are to loosen the nuts before lifting the car and to tighten them only after the car is back on the ground
+- You also learn how to change a tyre with a jack. The key points I noted are to loosen the nuts slightly before lifting the car and to tighten them fully only after the car is back on the ground. Practise it with the instructor, and always do it on level ground
 
 If you can, book the VPC on the same day as the LDCS or a lesson, so you don't waste a trip to CDC Ubi. I had a lesson that morning and the VPC at 10:20am.
 
