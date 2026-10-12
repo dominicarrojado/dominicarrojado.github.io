@@ -350,7 +350,7 @@ Let's start with the actual values of the first graph. That would be `200`, `300
 
 Once we get the highest positive value, we can divide each value with the highest positive value.
 
-In order, it would be: `200 / 700`, `300 / 700`, `700 / 700` and `500 / 700`. We will get: `0.29`, `0.43`, `1` and `0.71`. To convert them into percentages, we just have to multiply them by `100` and we will get: `29%`, `43%`, `100%`, and `71%`.
+In order, it would be: `200 / 700`, `300 / 700`, `700 / 700` and `500 / 700`. We will get: `0.29`, `0.43`, `1` and `0.71`. To convert them into percentages, we just have to multiply them by `100` and we will get: `29%`, `43%`, `100%` and `71%`.
 
 I think this is a good start for us to update our React app code with this logic in mind, open `src/App.tsx` and update our `App` component to provide data to our bar graph with the following code:
 
@@ -531,7 +531,7 @@ Not quite what we expected because our current logic doesn't handle negative val
 
 ---
 
-Let us recall the observation we had for the expected second graph. The sum of the highest positive value and the highest negative value (by absolute) becomes 100% and the rest of the bars will be based on that. We already know how to get the highest value, now we just need to check if the value is positive or negative, and store them separately depending on the [number sign](<https://en.wikipedia.org/wiki/Sign_(mathematics)>). Let's do that first and update our `BarGraph` component in `src/components/BarGraph.tsx`:
+Let us recall the observation we had for the expected second graph. The sum of the highest positive value and the highest negative value (by absolute) becomes 100% and the rest of the bars will be based on that. We already know how to get the highest value, now we just need to check if the value is positive or negative and store them separately depending on the [number sign](<https://en.wikipedia.org/wiki/Sign_(mathematics)>). Let's do that first and update our `BarGraph` component in `src/components/BarGraph.tsx`:
 
 ```tsx
 ...

@@ -45,8 +45,7 @@ export default function ModalSubscribe({ dialog, onSuccess }: Props) {
     >
       <form onSubmit={formOnSubmit}>
         <ModalDescription>
-          Get notified when I publish something new, and unsubscribe at any
-          time.
+          Get notified when I publish something new and unsubscribe at any time.
         </ModalDescription>
         <InputGroup>
           <Input

@@ -93,7 +93,7 @@ describe('<OtpInput />', () => {
 });
 ```
 
-So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from Testing Library, and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as the role. To learn more about queries in the Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
+So after rendering the component, we need to do our checks afterwards. We basically can check that the number of input boxes is the same as the `valueLength`. To query all the input boxes, it is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from Testing Library and in our case we can use `.queryAllByRole('textbox')`, which returns an array of elements that have `textbox` as the role. To learn more about queries in the Testing Library, you can go [here](https://testing-library.com/docs/queries/about).
 
 ```tsx
 ...
@@ -118,7 +118,7 @@ describe('<OtpInput />', () => {
 
 ---
 
-Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query, and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of the matcher methods provided by the `jest` library. While you can check this [documentation](https://github.com/testing-library/jest-dom#custom-matchers) for the custom matcher methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
+Okay, now we have an array of input elements. It is now possible to do the checks by executing one of Jest's global functions called the `expect()` method and pass the element or elements returned by the query and run what we call a matcher method `.toHaveLength()` which checks the length of the array is equal to the argument passed. This is one of the matcher methods provided by the `jest` library. While you can check this [documentation](https://github.com/testing-library/jest-dom#custom-matchers) for the custom matcher methods which are specific to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
 
 ```tsx
 ...
@@ -405,7 +405,7 @@ describe('<OtpInput />', () => {
 
 Since our previous test case already checks the `onChange` logic during deletion, here we just have to check that the previous element was not in focus when we trigger a keydown event with a key of `Backspace` and the `target` during the event had a `value`.
 
-Alright, once you save the changes, and check the terminal, line `106` is removed from the uncovered lines. Sweet!
+Alright, once you save the changes and check the terminal, line `106` is removed from the uncovered lines. Sweet!
 
 ---
 

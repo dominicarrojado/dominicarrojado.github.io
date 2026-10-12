@@ -154,7 +154,7 @@ If you open your Docker Desktop, you'll see our `nest-docker` image in the "Imag
 
 Now that we have an image, we can run that image and see if our application is running correctly.
 
-A container is a normal operating system process except that this process is isolated and has its own file system, its own networking, and its own isolated process tree separate from the host.
+A container is a normal operating system process except that this process is isolated and has its own file system, its own networking and its own isolated process tree separate from the host.
 
 To run an image inside of a container, we use the `docker run` command. Let's start our image and make sure it is running correctly. Execute the following command in your terminal.
 
@@ -174,7 +174,7 @@ Now we have successfully containerized our application.
 
 ## Multi-stage builds
 
-Currently, we only containerized our application for **production**. But how about for (local) **development**? [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds) are the way to go. With multi-stage builds, we can use multiple `FROM` statements in our Dockerfile. Each `FROM` instruction can use a different base, and each of them begins a new stage of the build.
+Currently, we only containerized our application for **production**. But how about for (local) **development**? [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds) are the way to go. With multi-stage builds, we can use multiple `FROM` statements in our Dockerfile. Each `FROM` instruction can use a different base and each of them begins a new stage of the build.
 
 Let's update our `Dockerfile` with the following code:
 
@@ -315,7 +315,7 @@ After successfully logging in, do a right-click on the "Servers" located at the 
 
 ![Screenshot of register server in pgAdmin4](/images/posts/local-development-setup-for-nestjs-projects-with-postgresql/pgadmin4-register-server.png)
 
-Hit "Save" and if there was no error means that our pgAdmin4 was able to connect to our PostgreSQL database successfully. The "Nest Docker" would be added under the "Servers", and you can go through that to see and interact with the database. Here's how you can go to the tables: `Servers` -> `Nest Docker` -> `postgres` -> `Schemas` -> `public` -> `Tables`.
+Hit "Save" and if there was no error means that our pgAdmin4 was able to connect to our PostgreSQL database successfully. The "Nest Docker" would be added under the "Servers" and you can go through that to see and interact with the database. Here's how you can go to the tables: `Servers` -> `Nest Docker` -> `postgres` -> `Schemas` -> `public` -> `Tables`.
 
 ---
 
@@ -759,7 +759,7 @@ Lastly, update the `package.json` to add new scripts and utilize these new Docke
 
 In the changes, we added `--runInBand` parameter to the scripts `test`, `test:watch` and `test:cov` found in `package.json`. This is done so we can run all tests serially for end-to-end testing that interacts with a database in docker compose, we don't want two or more test cases running in parallel where there's only 1 database as it might affect expected test results.
 
-Also, with the `-f` option, we are able to use a second configuration file along with the original `docker-compose.yml`. For `docker-compose:test` and `docker-compose:test:cov`, we have a special option `--exit-code-from`, that's because we don't want the services in the Docker Compose to keep running even after completing all the tests, so we should ideally exit from `app`, which is the name of our Nest application container in the `docker-compose.yml`, and stop all the services.
+Also, with the `-f` option, we are able to use a second configuration file along with the original `docker-compose.yml`. For `docker-compose:test` and `docker-compose:test:cov`, we have a special option `--exit-code-from`, that's because we don't want the services in the Docker Compose to keep running even after completing all the tests, so we should ideally exit from `app`, which is the name of our Nest application container in the `docker-compose.yml` and stop all the services.
 
 ---
 

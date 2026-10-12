@@ -33,6 +33,8 @@ Let's get started!
 
 In total, it took 6 months and 14 days from registering to my second TP test, with 25 practical lessons.
 
+---
+
 ## Warm-up and TP test day
 
 Before the TP test, you have a warm-up session. This is how both sessions work at CDC Ubi:
@@ -80,6 +82,8 @@ My second test was about 6 weeks later, so I took 2 more lessons right before it
 - When the car is almost straight in the lot during a directional change, check behind once more before you fully reverse
 - For vertical parking, if the car is already slanted, go straight first. It gives more space against the kerb before you straighten the car
 
+---
+
 ## Second attempt: 15 April 2024 (passed)
 
 This time it was a Monday. I did the warm-up then the TP test. The order may differ from one test to another, but this is what I got:
@@ -109,6 +113,8 @@ My timeline after that:
 - **18 April 2024:** I received my refund of S$490.49, about 3 working days after the test
 - **23 April 2024:** the physical license was delivered, but I wasn't home
 - **24 April 2024:** I collected it from the nearest SingPost branch
+
+---
 
 ## What it cost in this part
 

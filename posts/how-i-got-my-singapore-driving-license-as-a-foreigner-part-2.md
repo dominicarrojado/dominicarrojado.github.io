@@ -35,6 +35,8 @@ Each lesson was about 1 hour 40 minutes. I mostly booked weekday mornings at 8:3
 | 11  | 23 Dec 2023 | U-turns                                    | Module 2, subject 18    |
 | 12  | 29 Dec 2023 | Review of Module 2, directional change     | Module 2, subject 19    |
 
+---
+
 ## Module 1: Getting to know the car (lessons 1 to 5)
 
 ### Lesson 1: The basics
@@ -90,6 +92,8 @@ By lesson 5, I was learning how to handle junctions with traffic lights:
 - My weaknesses at this point were checking blind spots and stopping at zebra crossings. Don't brake too early
 
 At the end of this lesson, I finished Module 1 in my booklet.
+
+---
 
 ## Module 2: Courses and driving outside (lessons 6 to 12)
 
@@ -174,6 +178,8 @@ In lesson 8, I was told that my weakness was the clutch and changing gears. Here
 ### Directional change (lesson 12)
 
 In my 12th lesson, I reviewed all of Module 2. The last topic was getting my first taste of the directional change, which is a type of turning around in a narrow road or car park. It's part of Module 3, so I'll cover it in Part 3.
+
+---
 
 ## The simulator course
 

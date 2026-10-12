@@ -38,7 +38,7 @@ describe('<ModalSubscribe />', () => {
 
     it('should have expected description', () => {
       const descEl = screen.queryByText(
-        'Get notified when I publish something new, and unsubscribe at any time.'
+        'Get notified when I publish something new and unsubscribe at any time.'
       );
 
       expect(descEl?.tagName).toBe('P');

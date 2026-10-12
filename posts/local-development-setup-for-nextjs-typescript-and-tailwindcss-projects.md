@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/2Zb93oc0068'
 
 ## Introduction
 
-[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching, and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to [GitHub Pages](https://pages.github.com/) whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository) and this will be automated using [GitHub Actions](https://github.com/features/actions). This setup will also involve extensions and libraries that help us write our code efficiently.
+[Next.js](https://reactjs.org/) is a [React](https://reactjs.org/) framework that gives you the best developer experience with all the features you need for production: hybrid static and server rendering, [TypeScript](https://www.typescriptlang.org/) support, smart bundling, route pre-fetching and more. This is a guide on how to set up a local development for Next.js projects with TypeScript support and [TailwindCSS](https://tailwindcss.com/). TailwindCSS is a utility-first CSS framework to rapidly build modern websites without ever leaving your HTML. Along with the setup, we'll configure [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for writing component and unit tests. Of course, this setup wouldn't be complete without a [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipeline that helps to deploy our code to [GitHub Pages](https://pages.github.com/) whenever we push changes to our [repository](https://en.wikipedia.org/wiki/Repository) and this will be automated using [GitHub Actions](https://github.com/features/actions). This setup will also involve extensions and libraries that help us write our code efficiently.
 
 ## Skip
 
@@ -126,7 +126,7 @@ Alright, once the changes are done. That should make our Prettier work.
 
 ## Set up TailwindCSS
 
-To configure Tailwind manually, first install `tailwindcss` and its peer dependencies via yarn, and then run the init command to generate both `tailwind.config.js` and `postcss.config.js`.
+To configure Tailwind manually, first install `tailwindcss` and its peer dependencies via yarn and then run the init command to generate both `tailwind.config.js` and `postcss.config.js`.
 
 ```bash
 yarn add --dev tailwindcss postcss autoprefixer
@@ -316,7 +316,7 @@ module.exports = createJestConfig(customJestConfig);
 Under the hood, `next/jest` is automatically configuring Jest for you, including:
 
 - Setting up `transform` using [SWC](https://nextjs.org/docs/advanced-features/compiler)
-- Auto mocking stylesheets (`.css`, `.module.css`, and their scss variants) and image imports
+- Auto mocking stylesheets (`.css`, `.module.css` and their scss variants) and image imports
 - Loading `.env` (and all variants) into `process.env`
 - Ignoring `node_modules` from test resolving and transforms
 - Ignoring `.next` from test resolving
@@ -386,7 +386,7 @@ Then rename the following files inside the `pages` folder to have a file extensi
 - `pages/index.tsx` -> `pages/index.page.tsx` (required)
 - `pages/__tests__/index.page.test.tsx` -> `pages/__tests__/index.page.test.tsx` (optional, but just for convention)
 
-Without this config, Next.js assumes every tsx/ts/jsx/js file in the `pages` directory is a page or API route, and may expose unintended routes vulnerable to denial of service attacks, or throw an error when building the production bundle.
+Without this config, Next.js assumes every tsx/ts/jsx/js file in the `pages` directory is a page or API route and may expose unintended routes vulnerable to denial of service attacks, or throw an error when building the production bundle.
 
 Since you've renamed the `Home` page component, you'll have to update the code in `pages/__tests__/index.page.test.tsx` to fix the import:
 
@@ -401,7 +401,7 @@ import Home from '../index.page';
 
 ## Set up GitHub Actions CI/CD workflow and automatically deploy to GitHub Pages
 
-GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub, optionally runs the files through a build process, and publishes a website. You can host your site on GitHub's `github.io` domain or your own custom domain. It's free to use as long as your repository is set to _public_.
+GitHub Pages is a static site hosting service that takes HTML, CSS and JavaScript files straight from a repository on GitHub, optionally runs the files through a build process and publishes a website. You can host your site on GitHub's `github.io` domain or your own custom domain. It's free to use as long as your repository is set to _public_.
 
 With GitHub Actions, it's easier than ever to bring CI/CD directly into your workflow right from your repository.
 
@@ -489,7 +489,7 @@ const Home: NextPage = () => {
 
 ---
 
-Now, create a file `.github/workflows/ci.yml` so we can configure a workflow for GitHub Actions. Workflow files use [YAML](https://yaml.org/) syntax, and must have either a `.yml` or `.yaml` file extension. If you're new to YAML and want to learn more, see "[Learn YAML in Y minutes](https://learnxinyminutes.com/docs/yaml/)". We must store workflow files in the `.github/workflows` directory of our repository. Let's add the following code for our workflow:
+Now, create a file `.github/workflows/ci.yml` so we can configure a workflow for GitHub Actions. Workflow files use [YAML](https://yaml.org/) syntax and must have either a `.yml` or `.yaml` file extension. If you're new to YAML and want to learn more, see "[Learn YAML in Y minutes](https://learnxinyminutes.com/docs/yaml/)". We must store workflow files in the `.github/workflows` directory of our repository. Let's add the following code for our workflow:
 
 ```yml
 name: CI/CD

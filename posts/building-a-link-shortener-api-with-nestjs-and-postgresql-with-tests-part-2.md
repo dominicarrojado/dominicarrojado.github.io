@@ -51,7 +51,7 @@ export async function createNestApplication({
 }
 ```
 
-The `Test` class from `@nestjs/testing` provides an application execution context that essentially mocks the full Nest runtime, but gives you hooks that make it easy to manage class instances, including mocking and overriding. The `Test` class has a `createTestingModule()` method that takes a module metadata object as its argument (the same object you pass to the `@Module()` decorator). This method returns a `TestingModule` instance which in turn provides a few methods. For unit tests, the important one is the `compile()` method. This method bootstraps a module with its dependencies (similar to the way an application is bootstrapped in the conventional `main.ts` file using `NestFactory.create()`), and returns a module that is ready for testing. Do note that if we want to test the validation errors we will need to call `useGlobalPipes()` after creating the Nest application.
+The `Test` class from `@nestjs/testing` provides an application execution context that essentially mocks the full Nest runtime, but gives you hooks that make it easy to manage class instances, including mocking and overriding. The `Test` class has a `createTestingModule()` method that takes a module metadata object as its argument (the same object you pass to the `@Module()` decorator). This method returns a `TestingModule` instance which in turn provides a few methods. For unit tests, the important one is the `compile()` method. This method bootstraps a module with its dependencies (similar to the way an application is bootstrapped in the conventional `main.ts` file using `NestFactory.create()`) and returns a module that is ready for testing. Do note that if we want to test the validation errors we will need to call `useGlobalPipes()` after creating the Nest application.
 
 We won't be doing [unit testing](https://docs.nestjs.com/fundamentals/testing#unit-testing) which involves mocking and overriding. What I like to do is write [end-to-end tests](https://docs.nestjs.com/fundamentals/testing#end-to-end-testing) because it covers the interaction of classes and modules at a more aggregate level - closer to the kind of interaction that end-users will have with the production system. As an application grows, it becomes hard to manually test the end-to-end behavior of each API endpoint. Automated end-to-end tests help us ensure that the overall behavior of the system is correct and meets project requirements.
 
@@ -554,7 +554,7 @@ app_1      |       ✓ should NOT accept invalid id (13 ms)
 app_1      |       ✓ should handle not found (11 ms)
 ```
 
-For the last test case of this feature, let's create a link directly to the database (using `createLinkItem()` function), get the `id` of it, call the API with that and expect a successful response, and as an additional check, we will also verify from the database directly whether the link is deleted. Let's update the code with the following:
+For the last test case of this feature, let's create a link directly to the database (using `createLinkItem()` function), get the `id` of it, call the API with that and expect a successful response and as an additional check, we will also verify from the database directly whether the link is deleted. Let's update the code with the following:
 
 ```ts
 ...
@@ -796,7 +796,7 @@ app_1      | PASS src/wildcard/wildcard.spec.ts (16.214 s)
 app_1      | PASS src/links/links.spec.ts (17.044 s)
 ```
 
-Great, we are down to the very last test case. Try it on your own again, I'll explain here in text what you need to do, first create a link by making a direct call to the database, then simulate a GET request to the API with the link's `name`, and check that the expected status code should be `301` and that it is redirecting to the URL, you can check `res.headers.location` for this.
+Great, we are down to the very last test case. Try it on your own again, I'll explain here in text what you need to do, first create a link by making a direct call to the database, then simulate a GET request to the API with the link's `name` and check that the expected status code should be `301` and that it is redirecting to the URL, you can check `res.headers.location` for this.
 
 Go ahead and try it ~
 
