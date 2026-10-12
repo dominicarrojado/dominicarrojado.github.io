@@ -210,7 +210,7 @@ I booked mine for 6 March 2024, which was around 6 weeks after my FTT. I did rev
 
 ## What it cost in this part
 
-All amounts are in Singapore dollars (S$) and include GST, taken from my own spreadsheet. The lesson rates changed in 2024, so there are two sets of rates this time:
+All amounts are in Singapore dollars (S$) and include GST, taken from my own spreadsheet. The lesson rates changed in 2024, so there are two sets of rates this time. According to my spreadsheet, lessons up to 28 February 2024 were charged at the 2023 rate, and lessons from 2 March 2024 were charged at the 2024 rate:
 
 | Item                                   | S$ each |
 | -------------------------------------- | ------- |

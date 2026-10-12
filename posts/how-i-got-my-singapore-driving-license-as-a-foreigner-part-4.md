@@ -143,7 +143,7 @@ Here is every fee from the spreadsheet, grouped by category:
 
 On top of that, I paid S$25 for the PDL separately, which brings the whole thing to **S$3,422.71**. The 25 lessons worked out to about S$86 each, including the One Team fee.
 
-For the record, I topped up a total of S$3,888.20 into my CDC account over time. The refund of S$490.49 I got back on 18 April 2024 was my unused balance.
+The S$490.49 refund I received on 18 April 2024 was my unused CDC balance, so it isn't counted in the totals above.
 
 ## What I'd tell you if you're starting out
 
