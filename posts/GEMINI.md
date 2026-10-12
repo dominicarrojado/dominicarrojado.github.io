@@ -4,7 +4,7 @@ All blog posts are authored in Markdown with Front-Matter metadata under the `po
 
 ## Editorial Style Guide
 
-1. **Voice and Tone:** Casual, warm, and highly encouraging. Address the reader as a peer developer.
+1. **Voice and Tone:** Casual, warm and highly encouraging. Address the reader as a peer developer.
 2. **Signature Phrases:** Weave in natural, upbeat transitions like:
    - `"Alright, here we go ~"`
    - `"Let's get started!"`
@@ -16,6 +16,7 @@ All blog posts are authored in Markdown with Front-Matter metadata under the `po
    - Include a relative link pointing to the live demo of the feature (if applicable).
 5. **Headings:** The post title is rendered from front-matter. Therefore, the markdown body MUST start with Level-2 Headings (`##`) or lower. Never use Level-1 Headings (`#`) in the content.
 6. **Paragraph Spacing:** Ensure one blank line between paragraphs and headings to preserve parser consistency.
+7. **No Comma Before "and":** Never put a comma before "and" in prose (write `apples and oranges`, not the `, and` form). This applies to lists and to sentences joined by "and". Fenced code and inline code are exempt.
 
 ## Front-Matter Schema
 
