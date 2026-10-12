@@ -126,12 +126,11 @@ This is where it started to feel like real driving. Here are the habits I picked
 
 ### Gear changes (lesson 7)
 
-If you keep mixing up the gears like I did, this helped me:
+If you keep mixing up the gears like I did, these tips helped me. Your instructor will show you the exact movements for your car:
 
-- Gear 1 and 2: push the gear stick to the left and relax your hand
-- Gear 2 to 3: push the stick forward and it slides to gear 3
-- Gear 3 to 4: push the stick backwards. Going down from 4 to 3 is the opposite
-- Gear 3 down to 2: push towards the left
+- The gear pattern is printed on the gear knob and it can differ slightly from car to car. Check it before you drive
+- Keep your hand relaxed on the gear stick. Don't force it. Let it slide through the middle (neutral) position into the next gear
+- Practise the shifts while the car is stationary (clutch pressed) until your hand knows where each gear is, then ask your instructor to check your technique
 
 ### Filter lanes (lesson 8)
 
