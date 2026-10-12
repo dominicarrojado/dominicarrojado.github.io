@@ -131,7 +131,7 @@ These were the lessons I enjoyed most, because they felt closest to the real tes
 
 ### Emergency brake (lessons 16 and 17)
 
-The emergency brake is only done inside the circuit when there's no car following behind. The tester hits the dashboard hard and you must brake first, then press the clutch. Do this quickly until you hear the tyres screech. It's okay if the engine dies. Turn on the engine again, change to 1st gear, signal and check your blind spots before moving off.
+In the circuit, the emergency brake exercise is only done when it's safe, with no car following behind. The tester signals by hitting the dashboard, and you react right away by braking firmly first, then pressing the clutch. Your instructor will teach and supervise this, so don't try it on your own. If the engine dies, restart it, change to 1st gear, signal and check your blind spots before moving off.
 
 ### Final evaluation and revision (lessons 18 to 23)
 
