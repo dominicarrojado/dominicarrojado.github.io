@@ -89,19 +89,20 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme('colors.gray.500'),
+            color: theme('colors.gray.700'),
+            fontWeight: theme('fontWeight.normal'),
             fontSize: theme('fontSize.base'),
             lineHeight: theme('lineHeight.6'),
             a: {
-              color: theme('colors.gray.500'),
-              fontWeight: theme('fontWeight.light'),
+              color: theme('colors.gray.700'),
+              fontWeight: theme('fontWeight.normal'),
               textDecoration: 'none',
               '&:hover': {
                 color: theme('colors.black'),
               },
             },
             strong: {
-              fontWeight: theme('fontWeight.normal'),
+              fontWeight: theme('fontWeight.medium'),
             },
             h2: {
               color: theme('colors.gray.800'),
@@ -150,7 +151,7 @@ module.exports = {
               },
             },
             blockquote: {
-              color: theme('colors.gray.500'),
+              color: theme('colors.gray.700'),
               fontWeight: theme('fontWeight.normal'),
             },
           },
@@ -178,14 +179,17 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.300'),
+            fontWeight: theme('fontWeight.light'),
             a: {
               color: theme('colors.gray.300'),
+              fontWeight: theme('fontWeight.light'),
               '&:hover': {
                 color: theme('colors.white'),
               },
             },
             strong: {
               color: theme('colors.gray.300'),
+              fontWeight: theme('fontWeight.normal'),
             },
             h2: {
               color: theme('colors.gray.100'),
