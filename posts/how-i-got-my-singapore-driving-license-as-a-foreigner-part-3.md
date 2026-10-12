@@ -131,7 +131,7 @@ These were the lessons I enjoyed most, because they felt closest to the real tes
 
 ### Emergency brake (lessons 16 and 17)
 
-In the circuit, the emergency brake exercise is only done when it's safe, with no car following behind. The tester signals by hitting the dashboard, and you react right away by braking firmly first, then pressing the clutch. Your instructor will teach and supervise this, so don't try it on your own. If the engine dies, restart it, change to 1st gear, signal and check your blind spots before moving off.
+In the circuit, the emergency brake exercise is only done when it's safe, with no car following behind. The tester signals by hitting the dashboard. You react right away by braking firmly first, then pressing the clutch. Your instructor will teach and supervise this, so don't try it on your own. If the engine dies, restart it, change to 1st gear, signal and check your blind spots before moving off.
 
 ### Final evaluation and revision (lessons 18 to 23)
 
@@ -184,7 +184,7 @@ The things I remember:
 - The older the car the faster it uses oil. Remember this when you buy a car
 - Tyre age is printed on the side as a four-digit code. For example, 2813 means week 28 of 2013
 - Check the tread depth with the tread marker. Check that the tyres aren't flat. Pump air at a petrol station and if it's still flat, there might be a cut
-- You also learn how to change a tyre with a jack. The key points I noted are to loosen the nuts slightly before lifting the car and to tighten them fully only after the car is back on the ground. Practise it with the instructor, and always do it on level ground
+- You also learn how to change a tyre with a jack. The key points I noted are to loosen the nuts slightly before lifting the car and to tighten them fully only after the car is back on the ground. Practise it with the instructor. Always do it on level ground
 
 If you can, book the VPC on the same day as the LDCS or a lesson, so you don't waste a trip to CDC Ubi. I had a lesson that morning and the VPC at 10:20am.
 
@@ -210,7 +210,7 @@ I booked mine for 6 March 2024, which was around 6 weeks after my FTT. I did rev
 
 ## What it cost in this part
 
-All amounts are in Singapore dollars (S$) and include GST, taken from my own spreadsheet. The lesson rates changed in 2024, so there are two sets of rates this time. According to my spreadsheet, lessons up to 28 February 2024 were charged at the 2023 rate, and lessons from 2 March 2024 were charged at the 2024 rate:
+All amounts are in Singapore dollars (S$) and include GST, taken from my own spreadsheet. The lesson rates changed in 2024, so there are two sets of rates this time. According to my spreadsheet, lessons up to 28 February 2024 were charged at the 2023 rate. Lessons from 2 March 2024 were charged at the 2024 rate:
 
 | Item                                   | S$ each |
 | -------------------------------------- | ------- |
