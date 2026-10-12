@@ -1,6 +1,6 @@
 ---
 title: 'How I Got My Singapore Driving License as a Foreigner (Part 3): Module 3 and the Extras'
-date: '2026-10-14'
+date: '2026-10-12'
 excerpt: 'Parking, directional change and test routes in Module 3, plus the VPC, LDCS and Final Theory Test you need before booking the TP test and what they cost.'
 category: 'personal'
 videoUrl: ''

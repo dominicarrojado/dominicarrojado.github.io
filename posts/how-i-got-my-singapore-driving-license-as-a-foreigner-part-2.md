@@ -1,6 +1,6 @@
 ---
 title: 'How I Got My Singapore Driving License as a Foreigner (Part 2): Modules 1 and 2'
-date: '2026-10-13'
+date: '2026-10-12'
 excerpt: 'My first 12 practical lessons at ComfortDelGro Driving Centre, from the clutch and gears to lane changes, junctions and U-turns, plus the simulator course and what it cost.'
 category: 'personal'
 videoUrl: ''

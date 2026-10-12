@@ -39,7 +39,7 @@ Before you can sit behind the wheel for a real lesson, you need to clear a few t
 4. Pass the Basic Theory Test (BTT)
 5. Get your Provisional Driving License (PDL)
 
-I did all of this in about 5 weeks, then had my first practical lesson on 20 November 2023.
+I registered on 1 October 2023 and passed the Basic Theory Test on 8 November 2023. After that, I got my PDL straight away and had my first practical lesson on 20 November 2023.
 
 ## Step 1: Register with CDC (1 October 2023)
 

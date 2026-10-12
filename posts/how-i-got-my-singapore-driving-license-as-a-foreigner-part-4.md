@@ -1,6 +1,6 @@
 ---
 title: 'How I Got My Singapore Driving License as a Foreigner (Part 4): The TP Tests and Getting the License'
-date: '2026-10-15'
+date: '2026-10-12'
 excerpt: 'My warm-up and Traffic Police test day, the first attempt I failed, the second I passed, how I got the physical license and the full cost from start to finish.'
 category: 'personal'
 videoUrl: ''
