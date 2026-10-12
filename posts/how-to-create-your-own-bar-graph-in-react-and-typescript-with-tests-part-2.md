@@ -122,7 +122,7 @@ describe('<BarItem />', () => {
 
 ---
 
-So now that our component has been rendered, we need to verify if the props we passed have been received from the component and render the component as expected. To do that, let's first query for our main element which is the `bar-item`. It is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from the Testing Library, and in our case we can use `.queryByTestId('bar-item')`, which returns the `bar-item` element based on its `data-testid` attribute. To learn more about queries in the Testing Library, you can read more about them [here](https://testing-library.com/docs/queries/about).
+So now that our component has been rendered, we need to verify if the props we passed have been received from the component and render the component as expected. To do that, let's first query for our main element which is the `bar-item`. It is advisable to use [`screen`](https://testing-library.com/docs/queries/about/#screen) methods from the Testing Library and in our case we can use `.queryByTestId('bar-item')`, which returns the `bar-item` element based on its `data-testid` attribute. To learn more about queries in the Testing Library, you can read more about them [here](https://testing-library.com/docs/queries/about).
 
 ```tsx
 ...

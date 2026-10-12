@@ -415,7 +415,7 @@ export function useStateRef<S>(
 }
 ```
 
-I use these utility functions a lot in my projects and it is extremely helpful when writing tests to achieve `100%` coverage, especially those components that use `RefObject` for elements. If you're new to TypeScript, you might be wondering what is this `C` or `S` around the code? It can be any letter by the way or word if you would like, and it is called [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html), it makes our utility function here accept the type defined when the `RefObject` or the state is passed because it can have any type. Using Generics, our function here would be able to return the same type.
+I use these utility functions a lot in my projects and it is extremely helpful when writing tests to achieve `100%` coverage, especially those components that use `RefObject` for elements. If you're new to TypeScript, you might be wondering what is this `C` or `S` around the code? It can be any letter by the way or word if you would like and it is called [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html), it makes our utility function here accept the type defined when the `RefObject` or the state is passed because it can have any type. Using Generics, our function here would be able to return the same type.
 
 ```tsx
 // let's say we set the initial value with a type of `number` in `useRef`
@@ -659,7 +659,7 @@ Okay, we're not done yet though. You might have already noticed it while testing
 
 ## Prevent swiping on both ends
 
-To fix the problem, we need to understand the problem. We already know that we use `offsetX` to move the container of the image, and that it shouldn't move beyond the images. So we need to know the value of the far most left `offsetX` value and the far most right `offsetX` value. The far most left is easy, we start with 0 for `offsetX` to display the first image, there's no image before the first image, so that is already the first end. So what is the far most right `offsetX` value? That would be the width of the container. Let's name the far most left `offsetX` value to be `maxOffsetX` while the far most right `offsetX` value to be `minOffsetX`.
+To fix the problem, we need to understand the problem. We already know that we use `offsetX` to move the container of the image and that it shouldn't move beyond the images. So we need to know the value of the far most left `offsetX` value and the far most right `offsetX` value. The far most left is easy, we start with 0 for `offsetX` to display the first image, there's no image before the first image, so that is already the first end. So what is the far most right `offsetX` value? That would be the width of the container. Let's name the far most left `offsetX` value to be `maxOffsetX` while the far most right `offsetX` value to be `minOffsetX`.
 
 To get into coding, let's declare the `useRef` for the container element in `/src/components/Swiper.tsx` so we could get its `offsetWidth`:
 
@@ -820,7 +820,7 @@ It's a little bit abrupt right now. So let's try adding some [CSS transitions](h
 }
 ```
 
-Alright, and let's update `src/container/Swiper.tsx` to make use of this transition style:
+Alright, let's update `src/container/Swiper.tsx` to make use of this transition style:
 
 ```tsx
 import React, { useState, useRef } from 'react';

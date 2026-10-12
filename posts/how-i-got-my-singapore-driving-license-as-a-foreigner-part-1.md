@@ -41,6 +41,8 @@ Before you can sit behind the wheel for a real lesson, you need to clear a few t
 
 I registered on 1 October 2023 and passed the Basic Theory Test on 8 November 2023. After that, I got my PDL straight away and had my first practical lesson on 20 November 2023.
 
+---
+
 ## Step 1: Register with CDC (1 October 2023)
 
 I registered an account at CDC Ubi for Class 3 (manual car) and topped up my account with S$500 so I could pay for the next steps.
@@ -73,6 +75,8 @@ These are the notes I took from the trainer:
 - Hold the steering wheel at 10 and 2 o'clock (or 9 and 3), with your arms bent at about 120 degrees
 
 Don't worry if you can't remember all of these yet. You'll hear them again during your lessons.
+
+---
 
 ## Step 4: Basic Theory Test (November 2023)
 
@@ -107,6 +111,8 @@ After I passed the BTT, I could apply for my Provisional Driving License right a
 About 5 minutes after passing, the page showed that I was eligible to apply for an ePDL, since I had already passed the eyesight test and the BTT. I paid the S$25 fee and it displayed a page with my PDL expiry.
 
 Make sure you print it or save the PDF on your phone. Your instructors will ask for it before every lesson.
+
+---
 
 ## Booking your practical lessons
 

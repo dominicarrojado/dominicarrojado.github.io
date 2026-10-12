@@ -158,7 +158,7 @@ So in the code above, we generated a random lorem ipsum sentence using `faker` a
 
 After rendering the component, we queried for the element by using a method from Testing Library called [`screen`](https://testing-library.com/docs/queries/about/#screen), you can pass a [`queryOptions`](https://testing-library.com/docs/queries/about/#queryoptions) object with the query type. See the [documentation](https://testing-library.com/docs/queries/about/) for each query type to see available options such as [ByText API](https://testing-library.com/docs/queries/bytext).
 
-After getting the element, we did an assertion by using the `expect()` method and passing the element's tag name as the argument, and running the matcher method [`.toBe()`](https://jestjs.io/docs/expect#tobevalue) which compares primitive values or to check referential identity of object instances.
+After getting the element, we did an assertion by using the `expect()` method and passing the element's tag name as the argument and running the matcher method [`.toBe()`](https://jestjs.io/docs/expect#tobevalue) which compares primitive values or to check referential identity of object instances.
 
 ---
 

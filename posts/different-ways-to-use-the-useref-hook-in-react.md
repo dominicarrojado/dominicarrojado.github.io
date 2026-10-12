@@ -42,7 +42,7 @@ function MyComponent() {
 
 You can also store different kinds of data inside a ref. This is useful when you want to use a value that's not needed for rendering, like storing an interval ID.
 
-Here's an example of a component that will increment a counter every second, and you can stop the interval with a click of a button:
+Here's an example of a component that will increment a counter every second and you can stop the interval with a click of a button:
 
 ```tsx
 import { useRef, useState, useEffect } from 'react';
@@ -158,7 +158,7 @@ function MyComponent() {
 
 ## More complex examples
 
-While the examples we've seen so far are simple, `useRef` can also be used for more complex use cases. For instance, you might need to allow the user to drag a box around the screen. In this case, you can use `useRef` to store the initial position of the mouse when the user clicks on the box, and then use it to calculate the new position of the box as the user moves the mouse.
+While the examples we've seen so far are simple, `useRef` can also be used for more complex use cases. For instance, you might need to allow the user to drag a box around the screen. In this case, you can use `useRef` to store the initial position of the mouse when the user clicks on the box and then use it to calculate the new position of the box as the user moves the mouse.
 
 Here's an example of a component that lets you drag a box around:
 
@@ -258,7 +258,7 @@ function MyComponent() {
 
 Here you might notice that I'm updating the value of `secondDataRef` in a separate `useEffect` hook using `secondData` as the dependency. This is another way to ensure that the value of `secondDataRef` is always up-to-date instead of creating a separate setState function for `secondData`.
 
-While you could technically just log `secondData` in the `useEffect` hook, doing so would give you a lint warning because `secondData` is not a dependency of the hook, and there may be times when its value is not updated. By using `useRef`, you can ensure that the value of `secondData` is always up-to-date before the `useEffect` hook runs.
+While you could technically just log `secondData` in the `useEffect` hook, doing so would give you a lint warning because `secondData` is not a dependency of the hook and there may be times when its value is not updated. By using `useRef`, you can ensure that the value of `secondData` is always up-to-date before the `useEffect` hook runs.
 
 Also while I'm just logging the values of the two inputs in the `useEffect` hook, you could do something more complex with them. For instance, you could make an [API](https://developer.mozilla.org/en-US/docs/Glossary/API) call using the values of the two inputs but only call the API when the first input changes.
 

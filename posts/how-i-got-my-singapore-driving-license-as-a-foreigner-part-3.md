@@ -43,6 +43,8 @@ The extras fit around these lessons:
 | 22 Jan 2024 | Final Theory Test (FTT) internal evaluation  |
 | 25 Jan 2024 | Final Theory Test (FTT)                      |
 
+---
+
 ## Module 3: Parking, directional change and test routes
 
 ### Watch the videos first
@@ -145,6 +147,8 @@ Lesson 18 was a final evaluation, a review of all the previous subjects. After t
 - When the tester is panicking because of time, just stay calm and check for safety
 - Don't think too long when changing lanes. If you really can't, the tester will ask you to go straight
 
+---
+
 ## The three extras before the TP test
 
 You need to finish these before you can book the TP test, so do them early. I booked the VPC and the LDCS after my 12th lesson. Book the FTT as early as you can too.
@@ -197,6 +201,8 @@ The FTT is almost the same as the BTT, with 50 questions and 50 minutes:
 - The result shows immediately. Green means pass and red means fail
 
 I took the FTT internal evaluation on 22 January and the actual test on 25 January 2024. I scored 46/50.
+
+---
 
 ## Booking your TP test
 

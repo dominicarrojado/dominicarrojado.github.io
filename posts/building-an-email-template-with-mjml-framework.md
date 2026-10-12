@@ -146,7 +146,7 @@ Next, let's add the `<mj-group>` tag inside the `<mj-section>` tag. This tag pre
 </mjml>
 ```
 
-Then, let's add the `<mj-column>` tag inside the `<mj-group>` tag. This tag enables us to horizontally organize the content within our sections. Column width should be expressed in percentage to be responsive, if not defined will be 100% divided by the number of its siblings. Every single column has to contain something because they are responsive containers, and will be vertically stacked on a mobile view but in this case it won't because of its parent `<mj-group>` preventing it.
+Then, let's add the `<mj-column>` tag inside the `<mj-group>` tag. This tag enables us to horizontally organize the content within our sections. Column width should be expressed in percentage to be responsive, if not defined will be 100% divided by the number of its siblings. Every single column has to contain something because they are responsive containers and will be vertically stacked on a mobile view but in this case it won't because of its parent `<mj-group>` preventing it.
 
 ```html
 <mjml>

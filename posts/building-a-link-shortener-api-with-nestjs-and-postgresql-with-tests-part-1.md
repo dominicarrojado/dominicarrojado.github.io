@@ -8,7 +8,7 @@ videoUrl: 'https://youtu.be/c81MhWCuHbI'
 
 ## Introduction
 
-I started a server-side application late of 2020 which was my way of sharpening my back-end development skills on the side as I have been focused more on the front-end development in my recent jobs. It was built using [Express.js](https://expressjs.com/) which is a fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org/en/). But because of its unopinionated nature, there were a couple of things I had to set up and configure on my own such as [TypeScript](https://www.typescriptlang.org/). Although that might be a benefit for most cases, there are definitely some pitfalls as well such as not knowing what are some of the best practices when it comes to building server-side applications. You have to do your research and keep yourself up-to-date. The difficulties of those I've mentioned became more obvious when I came across [NestJS](https://nestjs.com/), it is a progressive Node.js framework for building efficient, reliable and scalable server-side applications. NestJS is in fact built on top of Express. I took up a course to learn more about NestJS and how to build applications on top of it and I really liked it. It is extensible, versatile and progressive. It takes advantage of the latest JavaScript features, bringing design patterns and mature solutions to the Node.js world. I can't help but think how my server-side application could have been better in many ways if I built it using NestJS from the start. I wanted to improve my skills in NestJS by building something I have not done before, and that is a [URL](https://en.wikipedia.org/wiki/URL) shortener application. That is what I'm going to share with you in this post, so let's go ahead and start learning and building it together!
+I started a server-side application late of 2020 which was my way of sharpening my back-end development skills on the side as I have been focused more on the front-end development in my recent jobs. It was built using [Express.js](https://expressjs.com/) which is a fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org/en/). But because of its unopinionated nature, there were a couple of things I had to set up and configure on my own such as [TypeScript](https://www.typescriptlang.org/). Although that might be a benefit for most cases, there are definitely some pitfalls as well such as not knowing what are some of the best practices when it comes to building server-side applications. You have to do your research and keep yourself up-to-date. The difficulties of those I've mentioned became more obvious when I came across [NestJS](https://nestjs.com/), it is a progressive Node.js framework for building efficient, reliable and scalable server-side applications. NestJS is in fact built on top of Express. I took up a course to learn more about NestJS and how to build applications on top of it and I really liked it. It is extensible, versatile and progressive. It takes advantage of the latest JavaScript features, bringing design patterns and mature solutions to the Node.js world. I can't help but think how my server-side application could have been better in many ways if I built it using NestJS from the start. I wanted to improve my skills in NestJS by building something I have not done before and that is a [URL](https://en.wikipedia.org/wiki/URL) shortener application. That is what I'm going to share with you in this post, so let's go ahead and start learning and building it together!
 
 ## Prerequisites
 
@@ -88,7 +88,7 @@ export class AppModule {}
 
 Since we're going to be working with links for our URL shortener API, we need a module for it. A (feature) module in Nest simply organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries. This helps us manage complexity and develop with [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, especially as the size of the application and/or team grows.
 
-In Nest, modules are singletons by default, and thus you can share the same instance of any provider between multiple modules effortlessly. That's awesome because we can share features between modules without duplicating the code in another module.
+In Nest, modules are singletons by default and thus you can share the same instance of any provider between multiple modules effortlessly. That's awesome because we can share features between modules without duplicating the code in another module.
 
 To create a module for links. In the root folder of our project, you can simply run this Nest CLI command in your OS terminal:
 
@@ -114,9 +114,9 @@ A command parameter `--no-spec` was added to prevent Nest CLI default behavior o
 
 ## Create LinksService
 
-Services are responsible for business logics, such as data storage and retrieval, and are designed to be used by a controller. Service is a good candidate to be defined as a provider.
+Services are responsible for business logics, such as data storage and retrieval and are designed to be used by a controller. Service is a good candidate to be defined as a provider.
 
-But what is a provider? From Nest documentation, providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers, and so on. The main idea of a provider is that it can be injected as dependency; this means objects can create various relationships with each other, and the function of "wiring up" instances of objects can largely be delegated to the Nest runtime system.
+But what is a provider? From Nest documentation, providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers and so on. The main idea of a provider is that it can be injected as dependency; this means objects can create various relationships with each other and the function of "wiring up" instances of objects can largely be delegated to the Nest runtime system.
 
 To create a service for links. In the root folder of our project, you can simply run this Nest CLI command in your OS terminal:
 
@@ -166,7 +166,7 @@ Since database tables consist of columns, your entities must consist of columns 
 
 ## Active Record vs. Data Mapper patterns
 
-In TypeORM you can use both the Active Record and the Data Mapper patterns. Using the Active Record approach, you define all your query methods inside the model itself, and you save, remove, and load objects using model methods. Simply said, the Active Record pattern is an approach to access your database within your models. Using the Data Mapper approach, you define all your query methods in separate classes called "repositories", and you save, remove, and load objects using repositories. In data mapper your entities are very dumb - they just define their properties and may have some "dummy" methods. Simply said, data mapper is an approach to access your database within repositories instead of models. You can read more about them in detail [here](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
+In TypeORM you can use both the Active Record and the Data Mapper patterns. Using the Active Record approach, you define all your query methods inside the model itself and you save, remove and load objects using model methods. Simply said, the Active Record pattern is an approach to access your database within your models. Using the Data Mapper approach, you define all your query methods in separate classes called "repositories" and you save, remove and load objects using repositories. In data mapper your entities are very dumb - they just define their properties and may have some "dummy" methods. Simply said, data mapper is an approach to access your database within repositories instead of models. You can read more about them in detail [here](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
 
 We'll be using the **Data Mapper** approach as it is cleaner and more organized that way which results in a more maintainable code, which is more effective in larger applications.
 
@@ -556,7 +556,7 @@ export class WildcardController {
 }
 ```
 
-Let's again open our Postman API client. Do a `GET` request to `http://localhost:3000/longestintheworld`, it should return a status of `200 OK` and return you some HTML code. That means our URL shortener application is doing what it is intended to do. You can also try it on your browser, visit `http://localhost:3000/longestintheworld`, and you'll get redirected to `https://llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk/`.
+Let's again open our Postman API client. Do a `GET` request to `http://localhost:3000/longestintheworld`, it should return a status of `200 OK` and return you some HTML code. That means our URL shortener application is doing what it is intended to do. You can also try it on your browser, visit `http://localhost:3000/longestintheworld` and you'll get redirected to `https://llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk/`.
 
 You might be wondering why not just use the `AppController` from earlier? That's because if we create the controller there (e.g. `Get('/:name')`), it will take precedence against all GET requests from other controllers. For example, a GET request to `/links` will be routed to the `AppController` instead of the `LinksController` which is not ideal. That's why we had to create `WildcardController` instead so that it will be created and handle routes only after other controllers first.
 
@@ -664,7 +664,7 @@ export class LinksController {
 }
 ```
 
-You can open your Postman API client, repeat the steps previously for creating a link, and remember to get the `id` as we'll need it later. Then do a `UPDATE` request to `http://localhost:3000/links/:id`, do replace `:id` with the `id` you got from creating a link or from getting all the links, with a JSON object containing `name` and `url`:
+You can open your Postman API client, repeat the steps previously for creating a link and remember to get the `id` as we'll need it later. Then do a `UPDATE` request to `http://localhost:3000/links/:id`, do replace `:id` with the `id` you got from creating a link or from getting all the links, with a JSON object containing `name` and `url`:
 
 ```json
 {
