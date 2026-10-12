@@ -149,7 +149,7 @@ For the record, I topped up a total of S$3,888.20 into my CDC account over time.
 
 - Book your lessons and the extras early. The VPC, LDCS and FTT can stop you from booking the TP test if you leave them late
 - Watch the lesson videos online before each lesson, so you can spend your time practising
-- Practise the 1, 2, 3 checks (rear mirror, side mirror, blind spot) until it becomes a habit
+- Practise the 1, 2, 3 checks (rear mirror, side mirror, blind spot) until they become a habit
 - Don't steer when the car isn't moving. Don't rush
 - Keep calm. Failing the first time isn't the end. Learn from the mistakes the tester explains and try again
 - Revision lessons after a failed test are optional. You can rebook the next TP test on the same day
