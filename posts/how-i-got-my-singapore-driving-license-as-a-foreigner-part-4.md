@@ -119,9 +119,9 @@ My timeline after that:
 Getting the license isn't the end. A few things I'd tell you from my own experience:
 
 - **Renewal:** my license is valid for 5 years. I haven't needed to renew it yet. Check the [Singapore Police Force](https://www.police.gov.sg/) website for the current renewal process before yours expires
-- **Keep practising:** for months, an instructor was sitting beside me every time I drove. Driving alone for the first time feels very different and you can feel anxious. Skills also fade quickly if you don't use them. I only started renting cars to drive on my own in May 2025, more than a year after I got my license. I wish I had started earlier
+- **Keep practising:** for months, an instructor was sitting beside me every time I drove. Driving alone for the first time feels very different and you can feel anxious. Skills also fade quickly if you don't use them. I don't own a car, so for the first year I could only practise in my father-in-law's car. I didn't want to bother him too often. After one year, I no longer had to display the P-plate. I was also finally eligible to rent a car through a rental service like GetGo. That is when I started renting cars to practise on my own, in May 2025
 - **Don't do your first drives alone:** ask someone experienced to sit beside you until you feel confident. A close relative or friend who drives works well. A professional works too. During my first lesson, I was told I could book a few more lessons with CDC after getting my license to practise real-life scenarios like expressways and parking
-- **Start small:** short, hourly car rentals are a low-pressure way to practise
+- **Start small:** short, hourly car rentals are a low-pressure way to practise. Check the rental company's requirements first. Some require you to have held your license for a certain period
 - **Keep your eyes on the road:** a lesson I learned the hard way. When I heard a sound at the back of the car while slowing down, I turned my head right away and almost hit another car. Keep watching the road while you slow down. Only check the noise once you have come to a stop in a safe place, like a parking lot or the side of a quiet road
 
 ---
