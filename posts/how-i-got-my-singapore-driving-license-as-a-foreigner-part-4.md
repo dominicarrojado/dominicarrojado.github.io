@@ -119,7 +119,7 @@ My timeline after that:
 Getting the license isn't the end. A few things I'd tell you from my own experience:
 
 - **Renewal:** my license is valid for 5 years. I haven't needed to renew it yet. Check the [Singapore Police Force](https://www.police.gov.sg/) website for the current renewal process before yours expires
-- **Keep practising:** for months, an instructor was sitting beside me every time I drove. Driving alone for the first time feels very different and it can be anxious. Skills also fade quickly if you don't use them. I only started renting cars to drive on my own in May 2025, more than a year after I got my license. I wish I had started earlier
+- **Keep practising:** for months, an instructor was sitting beside me every time I drove. Driving alone for the first time feels very different and you can feel anxious. Skills also fade quickly if you don't use them. I only started renting cars to drive on my own in May 2025, more than a year after I got my license. I wish I had started earlier
 - **Don't do your first drives alone:** ask someone experienced to sit beside you until you feel confident. A close relative or friend who drives works well. A professional works too. During my first lesson, I was told I could book a few more lessons with CDC after getting my license to practise real-life scenarios like expressways and parking
 - **Start small:** short, hourly car rentals are a low-pressure way to practise. My first one-hour rental cost S$7.09
 - **Stop before you check:** a lesson I learned the hard way. When I heard a sound at the back of the car while slowing down and turned my head right away, I almost hit another car. Come to a full stop first, then check
