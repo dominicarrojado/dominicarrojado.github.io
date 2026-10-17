@@ -6,6 +6,7 @@ function AdUnitScript() {
   return (
     <Script
       async
+      strategy="lazyOnload"
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADSENSE_CLIENT_ID}`}
       crossOrigin="anonymous"
     />
