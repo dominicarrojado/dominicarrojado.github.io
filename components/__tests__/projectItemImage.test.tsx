@@ -1,8 +1,21 @@
 import { render, screen } from '@testing-library/react';
+import * as customHooks from '@/lib/custom-hooks';
 import ProjectItemImage from '../projectItemImage';
 
+jest.mock('@/lib/custom-hooks', () => ({
+  __esModule: true,
+  ...jest.requireActual('@/lib/custom-hooks'),
+}));
+
 describe('<ProjectItemImage />', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should serve webp source with png fallback and async decoding', () => {
+    // mock to prevent window.matchMedia not a func error
+    jest.spyOn(customHooks, 'useMotionSafe').mockReturnValue(false);
+
     const { container } = render(
       <ProjectItemImage
         imageUrl="/images/projects/sample.png"
