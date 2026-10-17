@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import * as customHooks from '@/lib/custom-hooks';
 import * as HeroMainLogoPart from '../heroMainLogoPart';
 import HeroMainLogo from '../heroMainLogo';
@@ -38,23 +38,12 @@ describe('<HeroMainLogo />', () => {
     expect(heroMainLogoPartSpy).toHaveBeenNthCalledWith(2, {}, {});
   });
 
-  it('should be hidden if NOT mounted', () => {
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(false);
-
+  it('should be visible without waiting for mount and animate in', () => {
     renderComponent();
 
     const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
 
-    expect(logoEl).toHaveClass('opacity-0');
-  });
-
-  it('should NOT be hidden if mounted', () => {
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
-
-    renderComponent();
-
-    const logoEl = screen.queryByLabelText('Dominic Arrojado logo');
-
-    return waitFor(() => expect(logoEl).not.toHaveClass('opacity-0'));
+    expect(logoEl).not.toHaveClass('opacity-0');
+    expect(logoEl).toHaveClass('motion-safe:animate-hero-logo-in');
   });
 });

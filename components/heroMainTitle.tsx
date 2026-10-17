@@ -1,10 +1,9 @@
 import { useRef } from 'react';
 import cn from 'classnames';
-import { useMounted, useScrollOpacityEffect } from '../lib/custom-hooks';
+import { useScrollOpacityEffect } from '../lib/custom-hooks';
 
 export default function HeroMainTitle() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const shouldDisplay = useMounted();
   const opacity = useScrollOpacityEffect(titleRef);
 
   return (
@@ -12,14 +11,10 @@ export default function HeroMainTitle() {
       <h1
         className={cn(
           'mt-2 px-4 text-base font-light text-white',
-          'transform transition duration-700',
-          'motion-reduce:transition-none',
+          'motion-safe:animate-hero-title-in',
           'sm:text-lg',
           'md:mt-3 md:text-2xl',
-          'xl:mt-4 xl:text-3xl',
-          {
-            ['translate-y-full opacity-0']: !shouldDisplay,
-          }
+          'xl:mt-4 xl:text-3xl'
         )}
       >
         Guides, Tips and Tricks to Web Development

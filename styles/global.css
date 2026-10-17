@@ -105,7 +105,7 @@
   body,
   button,
   input {
-    @apply text-gray-500;
+    @apply text-gray-600;
     @apply font-light;
     @apply text-base sm:text-lg xl:text-xl;
     @apply tracking-px;

@@ -5,7 +5,8 @@ export default function ProjectItemHighlight() {
   return (
     <div
       className={cn(
-        'mt-1 flex select-none items-center justify-center text-xs font-normal uppercase text-yellow-400',
+        'mt-1 flex select-none items-center justify-center text-xs font-normal uppercase text-yellow-700',
+        'dark:text-yellow-400',
         'md:text-sm',
         'lg:justify-start'
       )}

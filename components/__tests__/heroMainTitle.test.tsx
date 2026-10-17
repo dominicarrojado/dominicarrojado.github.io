@@ -29,21 +29,7 @@ describe('<HeroMainTitle />', () => {
     expect(titleEl?.tagName).toBe('H1');
   });
 
-  it('should be hidden if NOT mounted', () => {
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(false);
-
-    renderComponent();
-
-    const titleEl = screen.queryByText(
-      'Guides, Tips and Tricks to Web Development'
-    );
-
-    expect(titleEl).toHaveClass('opacity-0');
-  });
-
-  it('should NOT be hidden if mounted', () => {
-    jest.spyOn(customHooks, 'useMounted').mockReturnValue(true);
-
+  it('should be visible without waiting for mount and animate in', () => {
     renderComponent();
 
     const titleEl = screen.queryByText(
@@ -51,5 +37,6 @@ describe('<HeroMainTitle />', () => {
     );
 
     expect(titleEl).not.toHaveClass('opacity-0');
+    expect(titleEl).toHaveClass('motion-safe:animate-hero-title-in');
   });
 });

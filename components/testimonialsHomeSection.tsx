@@ -202,12 +202,13 @@ export default function TestimonialsHomeSection() {
               <Button
                 key={idx}
                 className={cn(
-                  'ml-1 h-1 w-1 cursor-pointer rounded-full first:ml-0',
+                  // dot is the content box; padding grows the hit area to 24px
+                  'box-content h-1 w-1 cursor-pointer rounded-full bg-clip-content p-2.5',
                   'transition-colors',
                   'motion-reduce:transition-none',
-                  'md:h-1.5 md:w-1.5',
-                  'lg:ml-1.5 lg:h-2 lg:w-2',
-                  'xl:ml-2 xl:h-2.5 xl:w-2.5',
+                  'md:h-1.5 md:w-1.5 md:p-[9px]',
+                  'lg:h-2 lg:w-2 lg:p-2',
+                  'xl:h-2.5 xl:w-2.5 xl:p-[7px]',
                   idx === swipeIdx
                     ? 'bg-gray-400 dark:bg-gray-300'
                     : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400'

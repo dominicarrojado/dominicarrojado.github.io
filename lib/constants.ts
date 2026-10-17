@@ -39,16 +39,8 @@ export const META_IMAGE_TYPE = 'image/png';
 
 export const API_URL = 'https://api.dominicarrojado.com';
 
-export const FONTS = [
-  'Roboto-Light',
-  'Roboto-LightItalic',
-  'Roboto-Regular',
-  'Roboto-Italic',
-  'Roboto-Medium',
-  'Roboto-MediumItalic',
-  'Roboto-Bold',
-  'Roboto-BoldItalic',
-];
+// preloaded fonts: only weights used above the fold, others load on demand via @font-face
+export const FONTS = ['Roboto-Light', 'Roboto-Regular'];
 
 export const SCREEN_LG = 1024;
 

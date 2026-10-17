@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { getRefValue } from '../lib/hooks';
-import { useMounted, useWindowLoaded } from '../lib/custom-hooks';
+import { useWindowLoaded } from '../lib/custom-hooks';
 import { getMoveTo } from '../lib/imports';
 import { trackEvent } from '../lib/google-analytics';
 import SvgArrowDown from './svgArrowDown';
@@ -11,7 +11,6 @@ import { SCROLL_DOWN_DURATION } from '../lib/constants';
 export default function ScrollDownButton() {
   const text = 'Scroll Down';
   const btnRef = useRef<HTMLAnchorElement>(null);
-  const shouldDisplay = useMounted();
   const shouldImportLib = useWindowLoaded();
   const btnOnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.currentTarget.blur();
@@ -51,12 +50,7 @@ export default function ScrollDownButton() {
     <div
       className={cn(
         'absolute bottom-0 left-0 z-10 w-full text-center',
-        'transform transition duration-700',
-        'motion-reduce:transition-none',
-        {
-          ['opacity-0']: !shouldDisplay,
-          ['-translate-y-3']: !shouldDisplay,
-        }
+        'motion-safe:animate-hero-scroll-in'
       )}
       data-testid="scroll-down-btn"
     >

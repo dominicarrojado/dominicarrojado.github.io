@@ -68,6 +68,13 @@ module.exports = {
       },
       animation: {
         slide: 'slide 200s linear infinite',
+        'hero-background':
+          'hero-background-in 1250ms ease both, slide 200s linear infinite',
+        'hero-logo-in': 'hero-logo-in 1250ms ease both',
+        'hero-logo-part-left-in': 'hero-logo-part-in 1250ms ease both',
+        'hero-logo-part-right-in': 'hero-logo-part-in-reverse 1250ms ease both',
+        'hero-title-in': 'hero-title-in 700ms ease both',
+        'hero-scroll-in': 'hero-scroll-in 700ms ease both',
         spin: 'spin 1s ease infinite',
         stripes: 'stripes 1s linear infinite',
       },
@@ -84,6 +91,26 @@ module.exports = {
           '0%': {
             'background-position-x': '1rem',
           },
+        },
+        // hero entrance animations are CSS-only so the hero is visible in the
+        // server-rendered HTML and does not wait for hydration (LCP)
+        'hero-background-in': {
+          '0%': { opacity: '0' },
+        },
+        'hero-logo-in': {
+          '0%': { opacity: '0', translate: '0 -1rem' },
+        },
+        'hero-logo-part-in': {
+          '0%': { opacity: '0', translate: '0.75rem 0' },
+        },
+        'hero-logo-part-in-reverse': {
+          '0%': { opacity: '0', translate: '-0.75rem 0' },
+        },
+        'hero-title-in': {
+          '0%': { opacity: '0', translate: '0 100%' },
+        },
+        'hero-scroll-in': {
+          '0%': { opacity: '0', translate: '0 -0.75rem' },
         },
       },
       typography: (theme) => ({
