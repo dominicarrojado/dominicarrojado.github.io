@@ -10,7 +10,8 @@ export default function Copyright() {
   return (
     <p
       className={cn(
-        'mt-4 text-center text-sm text-gray-400',
+        'mt-4 text-center text-sm text-gray-600',
+        'dark:text-gray-400',
         'sm:text-base',
         'lg:mt-10',
         'xl:text-lg'

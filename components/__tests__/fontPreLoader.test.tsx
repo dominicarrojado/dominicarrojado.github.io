@@ -23,7 +23,6 @@ describe('<FontPreLoader />', () => {
     const linkEls = document.querySelectorAll('link');
     const fontHrefMap = FONTS.reduce((map: Record<string, any>, font) => {
       map[`${origin}/fonts/${font}.woff2`] = true;
-      map[`${origin}/fonts/${font}.woff`] = true;
 
       return map;
     }, {});
@@ -34,11 +33,7 @@ describe('<FontPreLoader />', () => {
       expect(linkEl).toHaveAttribute('rel', 'preload');
       expect(linkEl).toHaveAttribute('as', 'font');
 
-      if (href.endsWith('woff2')) {
-        expect(linkEl).toHaveAttribute('type', 'font/woff2');
-      } else {
-        expect(linkEl).toHaveAttribute('type', 'font/woff');
-      }
+      expect(linkEl).toHaveAttribute('type', 'font/woff2');
 
       expect(linkEl).toHaveAttribute('crossOrigin', 'anonymous');
 

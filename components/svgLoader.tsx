@@ -2,7 +2,7 @@ import { SVGProps } from 'react';
 
 export default function SvgLoader(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" role="img" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <circle
         className="opacity-25"
         cx="12"

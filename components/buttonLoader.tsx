@@ -11,6 +11,8 @@ export default function ButtonLoader() {
         'sm:h-4 sm:w-4',
         'xl:h-5 xl:w-5'
       )}
+      role="img"
+      aria-hidden="false"
       aria-label="Loading"
     />
   );

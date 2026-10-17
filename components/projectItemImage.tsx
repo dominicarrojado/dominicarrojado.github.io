@@ -140,13 +140,20 @@ export default function ProjectItemImage({
         className="relative inline-flex min-h-24 min-w-11"
       >
         {!isImgLoaded && <ProjectItemImageLoader />}
-        <img
-          {...imgCommonProps}
-          src={imageUrl}
-          alt={`Screenshot of ${title}`}
-          onLoad={imgOnLoad}
-          loading="lazy"
-        />
+        <picture>
+          <source
+            srcSet={imageUrl.replace(/\.png$/, '.webp')}
+            type="image/webp"
+          />
+          <img
+            {...imgCommonProps}
+            src={imageUrl}
+            alt={`Screenshot of ${title}`}
+            onLoad={imgOnLoad}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <img
           ref={imgRef}
           src={gifData}
